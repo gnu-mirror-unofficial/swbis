@@ -1,0 +1,187 @@
+<html>
+<pre>
+ host
+  hostname low08-11
+  os_name Linux
+  os_release 2.4.18-14
+  os_version "\#1 Wed Sep 4 13:35:50 EDT 2002"
+  machine_type i686
+  distribution
+   layout_version 1.0
+   dfiles Red_Hat_Linux
+   pfiles pfiles
+   tag .
+   control_directory rpm2html-1.7-8
+   title Translates an RPM database and dependency information into HTML.
+   description "The rpm2html utility automatically generates web pages that describe a
+set of RPM packages.  The goals of rpm2html are to identify the
+dependencies between various packages, and to find the package(s) that
+will provide the resources needed to install a given package.
+Rpm2html analyzes the provides and requires of the given set of RPMs,
+and then shows the dependency cross-references using hypertext links.
+Rpm2html can now dump the metadata associated with RPM files into
+standard RDF files.
+
+Install rpm2html if you want a utility for translating information
+from an RPM database into HTML."
+   revision 1.7
+   release 8
+   number ""
+   copyright W3C Copyright (BSD like).
+   architecture i386
+   url http://rufus.w3.org/linux/rpm2html/
+   create_time 1029335392
+   rpm_buildarchs linux
+   rpm_default_prefix /
+   rpmversion 4.1
+   create_time 1067873230
+   gnu_tar_format_options --posix -b1
+   tar_format_emulation_options -b1 --posix
+   tar_format_emulation_utility gnutar
+   uuid baaa2b3f-735d-4da1-8002-b509230bf6a2
+   md5sum &lt;md5sum
+   sha1sum &lt;sha1sum
+   adjunct_md5sum &lt;adjunct_md5sum
+   vendor
+    tag Red_Hat,_Inc.
+    title Red Hat, Inc.
+    qualifier seller
+   vendor
+    tag Red Hat, Inc. &lt;http://bugzilla.redhat.com/bugzilla&gt;
+    title Red Hat, Inc. &lt;http://bugzilla.redhat.com/bugzilla&gt;
+    qualifier packager
+   category
+    tag rpm_group
+    title Applications/System
+   product
+    tag rpm2html
+    control_directory rpm2html
+    vendor_tag Red_Hat,_Inc.
+    source_package rpm2html-1.7.tar.gz
+    all_patches rpm2html.libxml2.patch
+    directory /
+    build_host stripples.devel.redhat.com
+    build_root /
+    all_filesets sources build_control patches
+    all_filesets sources build_control patches
+    fileset
+     tag sources
+     control_directory sources
+     title Sources (pristine sources)
+     size 149543
+    fileset
+     tag build_control
+     control_directory build_control
+     title Build_control (RPM spec file)
+     change_log "1029362400 Wed Aug 14 18:00:00 2002
+Jeff Johnson &lt;jbj@redhat.com&gt; 1.7-8
+- initial port to rpm-4.1.
+"
+     change_log "1010008800 Wed Jan  2 17:00:00 2002
+Florian La Roche &lt;Florian.LaRoche@redhat.de&gt;
+- rebuild against new libs
+- update config.guess and config.sub for IA64
+"
+     change_log "996012000 Tue Jul 24 18:00:00 2001
+Daniel Veillard &lt;veillard@redhat.com&gt;
+- upgraded to 1.7
+- cleaned up a potential problem with libxml2
+- fixed BuildPrereqs
+"
+     change_log "995493600 Wed Jul 18 18:00:00 2001
+Daniel Veillard &lt;veillard@redhat.com&gt;
+- upgraded to version 1.6
+- removed the mysql support, this is too specific
+"
+     change_log "994802400 Tue Jul 10 18:00:00 2001
+Elliot Lee &lt;sopwith@redhat.com&gt;
+- Rebuild against rpm-4.0.3-0.65
+- Use %{?_smp_mflags}
+"
+     change_log "993852000 Fri Jun 29 18:00:00 2001
+Jeff Johnson &lt;jbj@redhat.com&gt;
+- rebuild against rpm-4.0.3-0.54.
+"
+     change_log "990655200 Wed May 23 18:00:00 2001
+Jeff Johnson &lt;jbj@redhat.com&gt;
+- rebuild against rpm-4.0.3-0.26.
+"
+     change_log "977868000 Tue Dec 26 17:00:00 2000
+Jeff Johnson &lt;jbj@redhat.com&gt;
+- build against rpm-4.0.2-0.9.
+"
+     change_log "976658400 Tue Dec 12 17:00:00 2000
+Jeff Johnson &lt;jbj@redhat.com&gt;
+- rebuild to remove 0777 directories.
+"
+     change_log "973202400 Thu Nov  2 17:00:00 2000
+Jeff Johnson &lt;jbj@redhat.com&gt;
+- update to 1.5.
+- enable mysql support by default.
+"
+     change_log "965426400 Fri Aug  4 18:00:00 2000
+Jeff Johnson &lt;jbj@redhat.com&gt;
+- remove exec permissions on data files.
+"
+     change_log "963525600 Thu Jul 13 18:00:00 2000
+Prospector &lt;bugzilla@redhat.com&gt;
+- automatic rebuild
+"
+     change_log "961711200 Thu Jun 22 18:00:00 2000
+Jeff Johnson &lt;jbj@redhat.com&gt;
+- update to 1.4.
+"
+     change_log "961538400 Tue Jun 20 18:00:00 2000
+Jeff Johnson &lt;jbj@redhat.com&gt;
+- coagulate rpm310/rpm40 patch into one.
+- better autoconf tests.
+"
+     change_log "961452000 Mon Jun 19 18:00:00 2000
+Jeff Johnson &lt;jbj@redhat.com&gt;
+- rebuild against rpm-4.0-0.40 (needs -ldb-3.1).
+"
+     change_log "959896800 Thu Jun  1 18:00:00 2000
+Matt Wilson &lt;msw@redhat.com&gt;
+- use _mandir macros
+- build against new librpm to get correct libbz2 deps
+"
+     change_log "958255200 Sat May 13 18:00:00 2000
+Jeff Johnson &lt;jbj@redhat.com&gt;
+- use rpm-3.1 API (hack).
+"
+     change_log "950652000 Tue Feb 15 17:00:00 2000
+Jeff Johnson &lt;jbj@redhat.com&gt;
+- fix filename lossage with rpm-3.0.4.
+"
+     change_log "949960800 Mon Feb  7 17:00:00 2000
+Jeff Johnson &lt;jbj@redhat.com&gt;
+- compress man pages.
+"
+     change_log "938296800 Sat Sep 25 18:00:00 1999
+Jeff Johnson &lt;jbj@redhat.com&gt;
+- recompile with rpm-3.0.3-1.
+"
+     change_log "934495200 Thu Aug 12 18:00:00 1999
+Jeff Johnson &lt;jbj@redhat.com&gt;
+- move to Red Hat 6.1 distribution.
+"
+     change_log "932594400 Wed Jul 21 18:00:00 1999
+Tim Powers &lt;timp@redhat.com&gt;
+- rebuilt for 6.1
+"
+     change_log "923695200 Fri Apr  9 18:00:00 1999
+Jeff Johnson &lt;jbj@redhat.com&gt;
+- update to 1.2.
+"
+     change_log "923090400 Fri Apr  2 17:00:00 1999
+Jeff Johnson &lt;jbj@redhat.com&gt;
+- repackage for Red Hat 6.0.
+"
+     size 4694
+    fileset
+     tag patches
+     control_directory patches
+     title Patches (patches on the pristine sources)
+     size 2347
+</pre>
+</html>

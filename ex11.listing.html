@@ -1,0 +1,203 @@
+<html>
+<pre>
+debug> swinstall[22676]: logger_pid is 22677
+swinstall: SWBIS_TARGET_BEGINS for @low04:/mnt/test
+debug> swinstall[22676]: No fork required for source control script
+debug> swinstall[22676]: run audit: start setup_xformat
+debug> swinstall[22676]: using dynamic mem
+debug> swinstall[22676]: swutility : record_pid [22698]
+debug> swinstall[22676]: waiting on target script pid
+debug> swinstall[22698]: Executing : /usr/bin/ssh -T -T -A low04 'PATH=`getconf PATH` sh -s'
+debug> swinstall[22699]: swc_write_target_copy_script : source_type []
+debug> swinstall[22699]: swc_write_target_copy_script : retval = [0]
+debug> swinstall[22676]: wait() on target script succeeded.
+debug> swinstall[22676]: target control message: 125 target script started: 74321
+debug> swinstall[22676]: remote script pid: 74321
+swinstall: SW_SESSION_BEGINS on target host low04.lowland.com at line 5: 
++ opt_preview=
++ umask 022
++ blocksize=5120
++ xtarget=/mnt/test
+pwd
+++ pwd
++ wcwd=/root
++ test -f /mnt/test -o -p /mnt/test -o -b /mnt/test -o -c /mnt/test
++ cd /mnt/test
++ sw_retval=0
++ test /mnt/test = .
++ test 0 '!=' 0
++ cd /root
++ sw_retval=1
++ test 1 = 0
++ cd /mnt/test
++ sw_retval=0
++ swexec_status=0
++ export swexec_status
++ swexec_status=0
++ catalogbasepath=var/lib/swbis/catalog/gzip/gzip/1.3.3
++ umask 0077
++ d=0
++ catpath=var/lib/swbis/catalog/gzip/gzip/1.3.3/0
++ test -d var/lib/swbis/catalog/gzip/gzip/1.3.3/0
++ d=1
++ catpath=var/lib/swbis/catalog/gzip/gzip/1.3.3/1
++ test -d var/lib/swbis/catalog/gzip/gzip/1.3.3/1
++ d=0
++ catpath=var/lib/swbis/catalog/gzip/gzip/1.3.3/0
++ mkdir -p var/lib/swbis/catalog/gzip/gzip/1.3.3/0
++ echo 128 catalog path determined: var/lib/swbis/catalog/gzip/gzip/1.3.3/0
++ sh -s
+debug> swinstall[22676]: catalog control message: 128 catalog path determined: var/lib/swbis/catalog/gzip/gzip/1.3.3/0
+swinstall: SWI_TASK_BEGINS on target host low04.lowland.com: get utsnames
+swinstall: SWI_ATTRIBUTE on target host low04.lowland.com: machine_type=i386
+swinstall: SWI_ATTRIBUTE on target host low04.lowland.com: os_name=FreeBSD
+swinstall: SWI_ATTRIBUTE on target host low04.lowland.com: os_release=5.1-RELEASE
+swinstall: SWI_ATTRIBUTE on target host low04.lowland.com: os_version=FreeBSD 5.1-RELEASE #0: Thu Jun 5 02:55:42 GMT 2003 root@wv1u.btc.adaptec.com:/usr/obj/usr/src/sys/GENERIC
+swinstall: SWI_TASK_ENDS on target host low04.lowland.com: status=0
++ sw_retval=0
++ '[' '' ']'
+hostname
+++ hostname
++ echo 'swinstall: SW_ANALYSIS_BEGINS on target host low04.lowland.com at line 73: '
+swinstall: SW_ANALYSIS_BEGINS on target host low04.lowland.com at line 73: 
++ sh -s
+swinstall: SWI_TASK_BEGINS on target host low04.lowland.com: Finish Analysis Phase
+1+0 records in
+1+0 records out
+512 bytes transferred in 0.000062 secs (8259552 bytes/sec)
+swinstall: SWI_TASK_ENDS on target host low04.lowland.com: status=0
++ sw_retval=0
++ '[' '' = '' ']'
+hostname
+++ hostname
++ echo 'swinstall: SW_ANALYSIS_ENDS on target host low04.lowland.com: status=0'
+swinstall: SW_ANALYSIS_ENDS on target host low04.lowland.com: status=0
++ sh -s
+304:get utsnames
+315:machine_type=i386
+315:os_name=FreeBSD
+315:os_release=5.1-RELEASE
+315:os_version=FreeBSD 5.1-RELEASE #0: Thu Jun 5 02:55:42 GMT 2003 root@wv1u.btc.adaptec.com:/usr/obj/usr/src/sys/GENERIC
+305:0
+52:'
+52:
+304:Finish Analysis Phase
+305:0
+swinstall: SWI_TASK_BEGINS on target host low04.lowland.com: Install catalog.tar and vendor_tag
+import2/catalog.tar
+61+0 records in
+61+0 records out
+vendor_tag
+31232 bytes transferred in 0.003651 secs (8554594 bytes/sec)
+swinstall: SWI_TASK_ENDS on target host low04.lowland.com: status=0
++ sh -s
+swinstall: SWI_TASK_BEGINS on target host low04.lowland.com: Load signatures
+5+0 records in
+5+0 records out
+2560 bytes transferred in 0.000093 secs (27531842 bytes/sec)
+import2/catalog.tar.sig
+swinstall: SWI_TASK_ENDS on target host low04.lowland.com: status=0
+hostname
+++ hostname
++ echo 'swinstall: SW_EXECUTION_BEGINS on target host low04.lowland.com at line 91: '
+swinstall: SW_EXECUTION_BEGINS on target host low04.lowland.com at line 91: 
++ sh -s
+swinstall: -rwxr-xr-x root/root     63488 2002-06-23 13:44:40 bin/gunzip
+swinstall: -rwxr-xr-x root/root         0 2002-06-23 13:44:40 bin/gzip link to ./bin/gunzip
+swinstall: -rwxr-xr-x root/root         0 2002-06-23 13:44:40 bin/zcat link to ./bin/gunzip
+swinstall: lrwxrwxrwx root/root         0 2002-06-23 13:44:39 usr/bin/gunzip -> ../../bin/gunzip
+swinstall: -rwxr-xr-x root/root      3666 2002-06-23 13:44:38 usr/bin/gzexe
+swinstall: lrwxrwxrwx root/root         0 2002-06-23 13:44:39 usr/bin/gzip -> ../../bin/gzip
+swinstall: -rwxr-xr-x root/root      2003 2002-06-23 13:44:38 usr/bin/zcmp
+swinstall: -rwxr-xr-x root/root         0 2002-06-23 13:44:38 usr/bin/zdiff link to ./usr/bin/zcmp
+swinstall: -rwxr-xr-x root/root      3029 2002-06-23 13:44:38 usr/bin/zegrep
+swinstall: -rwxr-xr-x root/root         0 2002-06-23 13:44:38 usr/bin/zfgrep link to ./usr/bin/zegrep
+swinstall: -rwxr-xr-x root/root      1016 2002-06-23 13:44:38 usr/bin/zforce
+swinstall: -rwxr-xr-x root/root         0 2002-06-23 13:44:38 usr/bin/zgrep link to ./usr/bin/zegrep
+swinstall: -rwxr-xr-x root/root        41 2002-06-23 13:44:39 usr/bin/zless
+swinstall: -rwxr-xr-x root/root      1878 2002-06-23 13:44:39 usr/bin/zmore
+swinstall: -rwxr-xr-x root/root      3431 2002-06-23 13:44:39 usr/bin/znew
+swinstall: drwxr-xr-x root/root         0 2002-06-23 13:44:40 usr/share/doc/gzip-1.3.3/
+swinstall: -r--r--r-- root/root        98 1999-10-08 02:41:25 usr/share/doc/gzip-1.3.3/AUTHORS
+swinstall: -rw-r--r-- root/root     40179 2002-03-08 20:03:50 usr/share/doc/gzip-1.3.3/ChangeLog
+swinstall: SWI_TASK_BEGINS on target host low04.lowland.com: Load fileset
+swinstall: -r--r--r-- root/root     11941 2002-03-08 19:38:15 usr/share/doc/gzip-1.3.3/NEWS
+swinstall: -r--r--r-- root/root      7448 2001-09-26 19:01:31 usr/share/doc/gzip-1.3.3/README
+bin/gunzip
+swinstall: -r--r--r-- root/root     13034 1999-02-02 18:33:40 usr/share/doc/gzip-1.3.3/THANKS
+swinstall: -r--r--r-- root/root      3594 2001-11-03 19:18:01 usr/share/doc/gzip-1.3.3/TODO
+swinstall: -rw-r--r-- root/root      6258 2002-06-23 13:44:39 usr/share/info/gzip.info.gz
+swinstall: -rw-r--r-- root/root        45 2002-06-23 13:44:39 usr/share/man/man1/gunzip.1.gz
+swinstall: -rw-r--r-- root/root       724 2002-06-23 13:44:39 usr/share/man/man1/gzexe.1.gz
+swinstall: -rw-r--r-- root/root      6013 2002-06-23 13:44:39 usr/share/man/man1/gzip.1.gz
+swinstall: -rw-r--r-- root/root        43 2002-06-23 13:44:39 usr/share/man/man1/zcat.1.gz
+swinstall: -rw-r--r-- root/root        44 2002-06-23 13:44:39 usr/share/man/man1/zcmp.1.gz
+swinstall: -rw-r--r-- root/root       429 2002-06-23 13:44:39 usr/share/man/man1/zdiff.1.gz
+swinstall: -rw-r--r-- root/root       387 2002-06-23 13:44:39 usr/share/man/man1/zforce.1.gz
+swinstall: -rw-r--r-- root/root       536 2002-06-23 13:44:39 usr/share/man/man1/zgrep.1.gz
+swinstall: -rw-r--r-- root/root       366 2002-06-23 13:44:39 usr/share/man/man1/zless.1.gz
+swinstall: -rw-r--r-- root/root      1825 2002-06-23 13:44:39 usr/share/man/man1/zmore.1.gz
+swinstall: -rw-r--r-- root/root       552 2002-06-23 13:44:39 usr/share/man/man1/znew.1.gz
+bin/gzip
+bin/zcat
+usr/bin/gunzip
+usr/bin/gzexe
+usr/bin/gzip
+usr/bin/zcmp
+usr/bin/zdiff
+usr/bin/zegrep
+usr/bin/zfgrep
+usr/bin/zforce
+usr/bin/zgrep
+usr/bin/zless
+usr/bin/zmore
+usr/bin/znew
+usr/share/doc/gzip-1.3.3/
+usr/share/doc/gzip-1.3.3/AUTHORS
+usr/share/doc/gzip-1.3.3/ChangeLog
+usr/share/doc/gzip-1.3.3/NEWS
+usr/share/doc/gzip-1.3.3/README
+usr/share/doc/gzip-1.3.3/THANKS
+usr/share/doc/gzip-1.3.3/TODO
+usr/share/info/gzip.info.gz
+usr/share/man/man1/gunzip.1.gz
+usr/share/man/man1/gzexe.1.gz
+usr/share/man/man1/gzip.1.gz
+usr/share/man/man1/zcat.1.gz
+usr/share/man/man1/zcmp.1.gz
+usr/share/man/man1/zdiff.1.gz
+usr/share/man/man1/zforce.1.gz
+usr/share/man/man1/zgrep.1.gz
+usr/share/man/man1/zless.1.gz
+usr/share/man/man1/zmore.1.gz
+usr/share/man/man1/znew.1.gz
+498+1 records in
+498+1 records out
+255060 bytes transferred in 0.089559 secs (2847960 bytes/sec)
+swinstall: SWI_TASK_ENDS on target host low04.lowland.com: status=0
++ sw_retval=0
++ sh -s
+swinstall: SWI_TASK_BEGINS on target host low04.lowland.com: empty trailer task
+1+0 records in
+1+0 records out
+512 bytes transferred in 0.000066 secs (7752649 bytes/sec)
+swinstall: SWI_TASK_ENDS on target host low04.lowland.com: status=0
+hostname
+++ hostname
++ echo 'swinstall: SW_EXECUTION_ENDS on target host low04.lowland.com at line 95: status=0'
+swinstall: SW_EXECUTION_ENDS on target host low04.lowland.com at line 95: status=0
++ '[' '' ']'
++ sleep 0
+hostname
+++ hostname
++ echo 'swinstall: SW_SESSION_ENDS on target host low04.lowland.com at line 102: status=0'
+swinstall: SW_SESSION_ENDS on target host low04.lowland.com at line 102: status=0
++ exit 0
+swinstall: SWBIS_TARGET_ENDS for @low04:/mnt/test: status=0
+debug> swinstall[22676]: Finished processing targets
+debug> swinstall[22676]: exiting at swinstall.c:4238 with value 0
+swinstall: SWI_NORMAL_EXIT: status=0
+debug> swinstall[22676]: waitpid() on logger_pid [22677]
+debug> swinstall[22676]: finished waitpid() on logger_pid [22677]
+</html>
+</pre>

@@ -1,0 +1,160 @@
+<HTML>
+<HEAD>
+<TITLE>swign(1)</TITLE>
+<STYLE>
+<!--
+i {color:#000080}
+-->
+</STYLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<H1>swign(1)</H1>
+<h3>Contents</h3><ul>
+<li><a href="#NAME">NAME</a>
+<li><a href="#SYNOPSIS">SYNOPSIS</a>
+<li><a href="#DESCRIPTION">DESCRIPTION</a>
+<li><a href="#OPTIONS">OPTIONS</a>
+<li><a href="#EXTERNAL EFFECTS">EXTERNAL EFFECTS</a>
+<li><a href="#TESTING">TESTING</a>
+<li><a href="#ENVIRONMENT">ENVIRONMENT</a>
+<li><a href="#RETURN VALUE">RETURN VALUE</a>
+<li><a href="#FILES">FILES</a>
+<li><a href="#SEE ALSO">SEE ALSO</a>
+<li><a href="#IDENTIFICATION">IDENTIFICATION</a>
+<li><a href="#BUGS">BUGS</a>
+</ul><pre>
+</pre><h3><a name="NAME"><b>NAME</b></a></h3><pre>       swign -- Tar archive signing utility for source distributions.
+</pre><h3><a name="SYNOPSIS"><b>SYNOPSIS</b></a></h3><pre>       <b>swign</b> [options] [-u gpg-name] [--homedir=gpg-homedir] @-
+
+       <b>swign</b> -S [options] [-u gpg-name] [--homedir=gpg-homedir]
+</pre><h3><a name="DESCRIPTION"><b>DESCRIPTION</b></a></h3><pre>       <b>swign</b>  loads  a signed metadata catalog file into the current directory
+       and then, using GNU tar and the  distribution  file  list,  writes  the
+       archive  to stdout.  The contents of the archive is the contents of the
+       current directory &quot;.&quot;.  The pathnames in the archive  are  prefixed  by
+       the directory name of &quot;.&quot;.  The owner and group of all the files in the
+       emitted archive are specified by the PSF file and command line options.
+
+       If  a  PSF is provided using the -s option then the specified ownership
+       must be consistent with the <a href=swign_1.html>swign(1)</a> command line  options  for  owner-
+       ships  otherwise  the  signature won't be good.  The default ownerships
+       for all the files are the current user's owner and group.   If  the  -o
+       (or  -g) option is used with a empty string for the option arg then the
+       file ownerships of the source files are used.  This script assumes  GNU
+       tar is installed.
+
+       After  writing  the ./catalog/ file and before writing the archive, the
+       file list stored in ./catalog/dfiles/files is compared to  the  current
+       directory contents, if any difference is found the archive is not writ-
+       ten and error returned.
+
+</pre><h3><a name="OPTIONS"><b>OPTIONS</b></a></h3><pre>       <b>--help</b>
+              show help.
+
+
+       <b>--psf</b>
+              show the PSF to stdout, and then exit.
+
+
+       <b>-u, --local-user name</b>
+              Use name as the user ID to sign.
+
+
+       <b>--homedir=DIR</b>
+              Set the name of the home directory to  DIR.   If  not  specified
+              then use &quot;~/.gnupg&quot;.
+
+
+       <b>-s, --source=FILE</b>
+              Specify  a  PSF or '-' for stdin.  If this is not given then the
+              internally generated PSF is used.
+
+
+       <b>-T, --show-names-only</b>
+              show some info (for help and debugging) and exit.
+
+
+       <b>-t, --run-sanity-check</b>
+              Instead  of  writing  stdout,  write  the  archive  to  ../pack-
+              ageDirName.swigntest.tar.gz and run some sanity tests.
+
+
+       <b>-S, --sign-this</b>
+              Write  the  ./catalog/  file containing the digest and signature
+              into &quot;.&quot; and then exit without writing the archive to stdout.
+
+
+       <b>-D, --with-checksig FILE</b>
+              Include the checksig vendor control script sourced from FILE.
+
+
+       <b>-o, --owner OWNER</b>
+              Specify owner.  Use an empty string &quot;&quot;  to  specify  the  source
+              file owner.
+
+
+       <b>-g, --group GROUP</b>
+              Specify  group.   Use  an  empty string &quot;&quot; to specify the source
+              file group.
+
+
+       <b>-x formatGROUP</b>
+              Specify the archive format.  Must  be  one  of  the  formats  of
+              swpackage.
+
+
+       <b>@-</b>
+              Target, only supported target is standard output.
+
+</pre><h3><a name="EXTERNAL EFFECTS"><b>EXTERNAL EFFECTS</b></a></h3><pre>       The program will remove and replace a file in &quot;.&quot; named ./catalog/.
+       When  using  the  '-t'  option  an  archive file is written to ../pack-
+       ageDirName.swigntest.tar.gz
+
+</pre><h3><a name="TESTING"><b>TESTING</b></a></h3><pre>       After running successfully with options <b>-S</b>  and <b>-D FILE</b>  the  following
+       should be true (report no error).
+
+                 swverify --checksig .
+
+
+
+
+
+
+       Similarly,
+
+                 swign -u gpgname @- | swverify --checksig -
+
+
+       If  a checksig script is included then you should unpack the package at
+       a new location and run  swverify --checksig &quot;.&quot; in the new location.
+
+       Swign can be used to sign any directory using the  file  ownerships  of
+       the  source files.  The following commands act as a test of swpackage's
+       ability to generate an archive identical to  GNU  tar.   (Note:  check-
+       sig.sh is found in ./bin of the source distribution.)
+
+              swign -D $HOME/checksig.sh -u &quot;Test User&quot; -o &quot;&quot; -g &quot;&quot; -S;
+              swverify -d @.
+
+
+</pre><h3><a name="ENVIRONMENT"><b>ENVIRONMENT</b></a></h3><pre>       The  environment  variable  SWPACKAGEPASSFD  sets  the  passphrase file
+       descriptor.
+
+</pre><h3><a name="RETURN VALUE"><b>RETURN VALUE</b></a></h3><pre>       0 on success, non-zero on failure.
+</pre><h3><a name="FILES"><b>FILES</b></a></h3><pre>        &lt;<i>path</i>&gt;/<b>catalog</b>/
+</pre><h3><a name="SEE ALSO"><b>SEE ALSO</b></a></h3><pre>       <a href=swpackage_8.html>swpackage(8)</a>, gpg
+</pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        <a href=swign_1.html>swign(1)</a>: The source directory signing utility of the swbis project.
+        Author: J. Lowe <a href="mailto:jhlowe@acm.org">jhlowe@acm.org</a>
+        Version: 0.406
+        Date: 2004-09-01
+        Copying: GNU Free Documentation License
+
+
+</pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       Use of the '-o USER -g GROUP'  is  dependent  on  the  vendor  checksig
+       script.  The default file ownership policies of this program are suited
+       to packaged products where file user and group  ownerships  are  not  a
+       critical feature.
+
+
+
+                                                                      <a href=swign_1.html>swign(1)</a>
+</pre><hr><a href="../index.html">[ Index ]</a> <a href="javascript:history.back()"> [ Back ]</a></body></html>

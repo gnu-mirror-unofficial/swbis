@@ -1,0 +1,101 @@
+<HTML>
+<HEAD>
+<TITLE>swbis(7)</TITLE>
+<STYLE>
+<!--
+i {color:#000080}
+-->
+</STYLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<H1>swbis(7)</H1>
+<h3>Contents</h3><ul>
+<li><a href="#NAME">NAME</a>
+<li><a href="#SYNOPSIS">SYNOPSIS</a>
+<li><a href="#DESCRIPTION">DESCRIPTION</a>
+<li><a href="#COPYING">COPYING</a>
+<li><a href="#APPLICABLE STANDARDS">APPLICABLE STANDARDS</a>
+<li><a href="#SEE ALSO">SEE ALSO</a>
+<li><a href="#IDENTIFICATION">IDENTIFICATION</a>
+<li><a href="#BUGS">BUGS</a>
+</ul><pre>
+</pre><h3><a name="NAME"><b>NAME</b></a></h3><pre>       swbis -- POSIX packaging
+
+
+</pre><h3><a name="SYNOPSIS"><b>SYNOPSIS</b></a></h3><pre>       <i>&lt;sw</i><b>_</b><i>utility&gt;</i> [options] [software_selections] [@targets]
+       <i>&lt;swbis</i><b>_</b><i>utility&gt;</i>
+
+</pre><h3><a name="DESCRIPTION"><b>DESCRIPTION</b></a></h3><pre>       <b>swbis</b>  is the project name of an free implementation of the Posix soft-
+       ware administration command set.  It provides capabilities and features
+       that  are a compatible subset of, or extension to ISO/IEC 15068-2:1999.
+
+       As implementation extensions, <b>swbis</b> supports creation and  verification
+       of  signed  archives.  Signature creation and verification use the file
+       system utility /usr/bin/gpg.
+
+       Other implementation features include network copy and  install  opera-
+       tions  performed  by  direct  use  of  the  ssh  client  program  (e.g.
+       /usr/bin/ssh) with extension capability for multi-hop  ssh  connections
+       (e.g. through a firewall).
+
+   <b>sw_utilities</b>
+       Utilities specified by ISO 15068-2:1999 include the following:
+
+          o  swpackage --  Package a signed software distribution.
+
+          o  swcopy -- Copy a distribution from host to host.
+
+          o  swverify -- Verify a software distribution signature.
+
+          o  swinstall -- Install a software distribution.
+
+
+   <b>swbis_utilities</b>
+       Utilities unique to swbis.
+
+          o  swign
+
+                 Create  a signed distribution of the contents of a directory.
+                 Uses swpackage, gpg and GNU tar.
+
+          o  libexec/swbis/swbistar
+
+                 Archive writing (creation) utility, useful for testing.
+
+          o  libexec/swbis/swbisparse
+
+                 Stand-alone parser of Posix Metadata files, useful for  test-
+                 ing.
+
+          o  libexec/swbis/arf2arf
+
+                 Archive decoder/checker, Used by swverify.
+
+          o  libexec/swbis/lxpsf
+
+                 Archive  translator,  used  by  the  swpackage --2posixformat
+                 operation.
+
+</pre><h3><a name="COPYING"><b>COPYING</b></a></h3><pre>       Swbis is a copyrighted work.  Non-copyright holders may  use  and  make
+       copies under the terms of the GNU GPL.
+
+</pre><h3><a name="APPLICABLE STANDARDS"><b>APPLICABLE STANDARDS</b></a></h3><pre>       IEEE   Std   1387.2-1995  (ISO  15068-2:1999),  Open  Group  CAE  C701.
+       <a href="http://www.opengroup.org/publications/catalog/c701.htm">http://www.opengroup.org/publications/catalog/c701.htm</a>
+
+</pre><h3><a name="SEE ALSO"><b>SEE ALSO</b></a></h3><pre>        <a href=sw_5.html>sw(5)</a>, <a href=swpackage_8.html>swpackage(8)</a>, <a href=swbisparse_8.html>swbisparse(8)</a>, <a href=swign_1.html>swign(1)</a>, <a href=swverify_8.html>swverify(8)</a>, <a href=swcopy_8.html>swcopy(8)</a>
+        .../libexec/swbis/lxpsf
+        .../libexec/swbis/arf2arf
+        .../libexec/swbis/swbisparse
+        .../libexec/swbis/swbistar
+
+</pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        The swbis project.
+        Author: Jim Lowe   Email: jhlowe at acm.org
+        Version: 0.406
+        Date: 2004-09-01
+
+</pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       Many, but not listed here. See other man pages.
+
+
+
+                                                                      <a href=swbis_7.html>swbis(7)</a>
+</pre><hr><a href="../index.html">[ Index ]</a> <a href="javascript:history.back()"> [ Back ]</a></body></html>

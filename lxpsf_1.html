@@ -1,0 +1,70 @@
+<HTML>
+<HEAD>
+<TITLE>LXPSF(1)</TITLE>
+<STYLE>
+<!--
+i {color:#000080}
+-->
+</STYLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<H1>LXPSF(1)</H1>
+<h3>Contents</h3><ul>
+<li><a href="#NAME">NAME</a>
+<li><a href="#SYNOPSIS">SYNOPSIS</a>
+<li><a href="#DESCRIPTION">DESCRIPTION</a>
+<ul><li><a href="#Options"><font size=-1>Options</font></a>
+</ul><li><a href="#FILES">FILES</a>
+<li><a href="#RELATED STANDARDS">RELATED STANDARDS</a>
+<li><a href="#SEE ALSO">SEE ALSO</a>
+<li><a href="#BUGS">BUGS</a>
+</ul><pre>
+</pre><h3><a name="NAME"><b>NAME</b></a></h3><pre>       lxpsf - Translate package to a portable Unix format with a PSF.
+</pre><h3><a name="SYNOPSIS"><b>SYNOPSIS</b></a></h3><pre>       <b>lxpsf</b> [options] [package_file]
+</pre><h3><a name="DESCRIPTION"><b>DESCRIPTION</b></a></h3><pre>       <b>Lxpsf</b>  reads the input package and writes a tar or cpio archive to std-
+       out, depending on the native (or  encapsulated)  format  of  the  input
+       package.   The  output  layout  has  a  single  leading directory named
+       according to the name, version, and release attributes.
+
+       The first regular file is ``PSF'', and is a Posix.7.2 software  defini-
+       tion  file  containing the package metadata.  Subsequent files are con-
+       trol data represented as files; and, the  files  of  the  distribution.
+       The  output  is  designed so the <a href=swpackage_8.html>swpackage(8)</a> utility is able to form a
+       Posix.7.2 package from the installed output.
+
+       Currently, only RPM format is supported.
+
+
+   <a name="Options"><b>Options</b></a>
+       <b>-p</b> <i>,--psf-only</i>
+              Write only the psf file to stdout.
+
+       <b>-A</b> <i>,--psf-form1</i>
+              The (current) PSF form. (currently the arg has no effect).
+
+       <b>-H</b> <i>format</i>
+              Force the specified format.  The choices  are  currently  (only)
+              <i>ustar</i>.
+
+       <b>-x</b> <i>,--use-recursive-fileset</i>
+              Use  &quot;file *&quot; instead of individual file definitions in the PSF.
+
+       <b>-r</b> <i>,--no-leading-path</i>
+              use &quot;.&quot; as the leading archive path.
+
+       <b>-o</b> <i>,--info-only</i>
+              Write the INFO file for the rpm archive to stdout.
+
+       <b>-D</b> <i>,debug-level</i>=TYPE
+              Always set to &quot;link&quot;
+</pre><h3><a name="FILES"><b>FILES</b></a></h3><pre>       none
+</pre><h3><a name="RELATED STANDARDS"><b>RELATED STANDARDS</b></a></h3><pre>       POSIX.1, POSIX.7.2 (IEEE 1387.2), XDSA C701
+</pre><h3><a name="SEE ALSO"><b>SEE ALSO</b></a></h3><pre>       sw_parse()
+</pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       Probably many. A de-facto conversion policy is intimated in the PSF  by
+       this program.
+
+
+
+
+                                                                      <a href=LXPSF_1.html>LXPSF(1)</a>
+</pre><hr><a href="../index.html">[ Index ]</a> <a href="javascript:history.back()"> [ Back ]</a></body></html>

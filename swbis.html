@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<HTML>
+<HEAD>
+<TITLE>Swbis - GNU Project - Free Software Foundation (FSF)</TITLE>
+<LINK REV="made"HREF="mailto:webmasters@www.gnu.org">
+<META NAME="keywords" CONTENT="swbis">
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#1F00FF" ALINK="#FF0000" VLINK="#9900DD">
+<H3>Swbis</H3>
+<A HREF="/graphics/agnuhead.html"><IMG SRC="/graphics/gnu-head-sm.jpg"
+ALT=" [image of the Head of a GNU] "
+WIDTH="129" HEIGHT="122"></A>
+
+<P>
+<HR>
+
+<P>
+
+<H4>Table of Contents</H4>
+<UL>
+  <LI><A HREF="#introduction" NAME="TOCintroduction">Introduction</A>
+  <LI><A HREF="#downloading" NAME="TOCdownloading">Get the Software</A>
+  <LI><A HREF="#documentation" NAME="TOCdocumentation">Documentation</A>
+</UL>
+
+<P>
+<HR>
+
+<P>
+<H4><A HREF="#TOCintroduction" NAME="introduction">Introduction to Swbis</A></H4>
+
+<P>
+The swbis project is a from-scratch implementation of the POSIX spec
+IEEE Std 1387.2-1995 which describes a format and utilities for
+software packaging.  The scope of the POSIX spec includes a package
+format, meta-data file format, and utilities for package creation,
+installation, query, listing, and verification.
+
+<P>
+The swbis implementation has extensions for package authentication using
+GPG signatures and strong cryptographic digests which are contained in the
+package meta-data as separate ascii text files.
+GNU Privacy Guard is used by swpackage and swverify for signature creation
+and verification.
+
+<P>
+Other features of the swbis implementation are: direct use of
+the ssh client for remote host operations, GNU tar format
+compatibility, and, no new utility or program requirements for remote
+installation beyond POSIX compatible GNU utilities that are probably
+already present on all GNU and GNU/Linux hosts.
+
+<P>
+The swbis implementation can also install RPM packages or translate
+an RPM package to a POSIX package in tar format with a single leading
+directory.  (Currently, swinstall does not execute installation control
+scripts).
+
+<P>
+The programs supplied with this package are:
+<P><UL>
+<LI><B>swpackage</B> - Create packages.
+<LI><B>swcopy</B> - Copy packages, either in archive or directory form.
+<LI><B>swinstall</B> - Install packages.
+<LI><B>swverify</B> - Verify packages using the embedded GPG signature.
+<LI><B>swign</B> - Create a signed package of an entire source tree.
+</UL>
+
+
+<H4><A HREF="#TOCdownloading" NAME="downloading">Downloading Swbis</A></H4>
+
+<P>
+GNU Swbis releases can be found at SourceForge 
+<A HREF="http://sourceforge.net/projects/swbis/">here</A>. 
+
+<P>
+<H4><A HREF="#TOCdocumentation" NAME="documentation">Documentation</A></H4>
+
+<P>
+The manual is available online <A HREF="/software/swbis/manual/swbis.html">here</A>
+
+<HR>
+
+<P>
+If you have found a bug in Swbis contact us to the e-mail address
+<A
+HREF="http://lists.gnu.org/mailman/listinfo/bug-swbis/">bug-swbis@gnu.org</A>
+Or if you think that hasn't worked use the contact information found
+<A HREF="http://directory.fsf.org/GNU/swbis.html">here</A>. 
+
+
+Return to <A HREF="/home.html">GNU's home page</A>.
+
+<P>
+Please send FSF &amp; GNU inquiries &amp; questions to
+
+
+<A HREF="mailto:gnu@gnu.org"><EM>gnu@gnu.org</EM></A>.
+There are also <A HREF="/home.html">other ways to contact</A> the FSF.
+
+<P>
+Please send comments on these web pages to
+<A HREF="mailto:webmasters@www.gnu.org"><EM>webmasters@www.gnu.org</EM></A>,
+send other questions to
+<A HREF="mailto:gnu@gnu.org"><EM>gnu@gnu.org</EM></A>.
+
+<P>
+Copyright &copy; 2004 Free Software Foundation, Inc.,
+59 Temple Place - Suite 330, Boston, MA  02111,  USA
+
+<P>
+Verbatim copying and distribution of this entire article is
+permitted in any medium, provided this notice is preserved.
+
+<P>
+Updated:
+$Id: swbis.html,v 1.1 2004/10/06 03:32:43 jhlowe Exp $
+<HR>
+</BODY>
+</HTML>
+

@@ -1226,6 +1226,9 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <!-- DEBUG: print_menu("SEE ALSO") -->
 <!-- TROFF INPUT: .PP -->
+<p>info swbis
+<!-- TROFF INPUT: .PP -->
+
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
@@ -1233,7 +1236,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
      <!-- TROFF INPUT: .fi -->
      
 </pre>
-<!--  -->
+   <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .SH "IDENTIFICATION" -->
 <div class="node">
@@ -1248,10 +1251,10 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <!-- DEBUG: print_menu("IDENTIFICATION") -->
 <!-- TROFF INPUT: .PP -->
-<p>swverify(8): The verification utility of the swbis project. 
+<p>swverify: The verification utility of the swbis project. 
  Author: J. Lowe jhlowe@acm.org
- Version: 0.406
- Date: 2004-09-01
+ Version: 0.443
+ Date: 2004-05-05
  Copying: GNU Free Documentation License
 <!-- TROFF INPUT: .SH "BUGS" -->
 
@@ -1276,10 +1279,16 @@ form of the package depends on many factors not immediately obvious, among them 
 tar header uname and gname, and whether they are preserved by the reading utility,
 and whether these names are in the system database files
 /etc/passwd and /etc/group, and if so, whether they assign the same uid/gid as
-the package, and whether the file system orders directory entries according to
-order of entry creation. 
-<!-- TROFF INPUT: ...\" created by instant / docbook-to-man, Sat 09 Oct 2004, 18:13 -->
-<!-- ...\" created by instant / docbook-to-man, Sat 09 Oct 2004, 18:13 -->
+the package. 
+<!-- TROFF INPUT: .PP -->
+
+   <p>Verification of the directory form of a distribution (i.e. the installed tarball
+leading path directory) such as running 'swverify -d @.' after running 'swign -S'
+will fail if the order of directory entries is not compatible with
+traditional Unix file system directory entry ordering.  This incompatibility may be present in
+the Ext3, reiserFS, and DarwinOS et.al file systems. 
+<!-- TROFF INPUT: ...\" created by instant / docbook-to-man, Sun 08 May 2005, 11:51 -->
+<!-- ...\" created by instant / docbook-to-man, Sun 08 May 2005, 11:51 -->
 
 </body></html>
 

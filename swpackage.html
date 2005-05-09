@@ -249,7 +249,10 @@ Reads software<tt>_</tt>selections from FILE. (Not implemented).
 
 <!--  -->
 <blockquote>
-Preview the package in the form of a file list.  The target is not written. 
+Preview the package.  Perform all the packaging operations except
+writing the target.  In verbose level 1, nothing is written.  Higher
+verbose levels write information on stdout.  Error and warning messages
+are written to stderr for verbose levels 1 and higher. 
 <!-- TROFF INPUT: .RE -->
 
    </blockquote>
@@ -306,16 +309,16 @@ This option can be given multiple times with increasing effect.
      level 0: silent on stdout and stderr (not implemented). 
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
-     level 1: fatal and warning messages to stderr. 
+     level 1: fatal and warning messages. 
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
--v   level 2: level 1 plus trailer message to stderr. 
+-v   level 2: level 1 plus file list and trailer message. 
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
--vv  level 3: level 2 plus file list to stderr. 
+-vv  level 3: level 2 verbose tar-like listing. 
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
--vvv level 4: level 3 plus progress messages to stderr. 
+-vvv level 4: level 3 extra verbose tar listing. 
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
 <!-- TROFF INPUT: .RE -->
@@ -466,8 +469,8 @@ The signer program is not run and no password is required.
 <!--  -->
 <blockquote>
 Recognized SIGNERs are GPG, PGP2.6, and PGP5. 
-swverify(8) only supports GPG, however, other types can
-be verified manually using the options of swverify(8) and
+swverify only supports GPG, however, other types can
+be verified manually using the options of swverify and
 command line utilities. 
 <!-- TROFF INPUT: .RE -->
 
@@ -607,7 +610,7 @@ this option is given.
 
 <!--  -->
 <blockquote>
-FORMAT is one of ustar (default), gnutar, newc, crc, odc. 
+FORMAT is one of:
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
 <!-- TROFF INPUT: .PP -->
@@ -615,15 +618,24 @@ FORMAT is one of ustar (default), gnutar, newc, crc, odc.
      <!-- TROFF INPUT: .nf -->
 <!--  -->
 <pre class="example">           ustar   is the POSIX.1 tar format capable of storing
-                    pathnames up to 255 characters in length.
-                    Identical to GNU tar --posix -b1 for 99 char pathnames
-           bsdpax3 Identical to pax v3.0, ustar format with option -b 512.
-           gnutar  Identical to GNU tar version 1.13 and later with
+                   pathnames up to 255 characters in length.
+                   Identical to GNU tar 1.15.1 --format=ustar
+                   This is the default format but may be changed by
+                   the options files.
+           ustar0  is a different POSIX.1 tar personality.
+                   Identical to GNU tar 1.13.25 --posix -b1 for 99 char pathnames
+                   Has different rendering of device numbers for non-device files,
+                   but otherwise identical to 'ustar'
+           gnu     Identical to GNU tar version 1.15.1 --format=gnu
+           oldgnu  Identical to GNU tar version 1.13 and later with
                        block size set to 1. i.e. with option -b1.
+                   Also identical to GNU tar 1.15.1 --format=oldgnu
+           gnutar  same as oldgnu, oldgnu preferred.
            pax     Extended header tar (Not implemented).
            odc     Posix.1 cpio (magic 070707).
            newc    cpio format (magic 070701).
-           crc     cpio format (magic 070702). <span class="roman">
+           crc     cpio format (magic 070702).
+           bsdpax3 Identical to pax v3.0, ustar format with option -b 512.<span class="roman">
           <!-- TROFF INPUT: .fi -->
           
      </pre>
@@ -634,7 +646,7 @@ FORMAT is one of ustar (default), gnutar, newc, crc, odc.
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<!-- WARNING: man/man8/swpackage.8:282:%%new font B started without closing previous font R -->
+<!-- WARNING: man/man8/swpackage.8:294:%%new font B started without closing previous font R -->
 <p></span><b>-W create-time=TIME</b>
 <!-- TROFF INPUT: .RS -->
 
@@ -1026,7 +1038,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 </ul>
 
 <!-- TROFF INPUT: .PP -->
-<p>swpackage(8) does not perform verification of the embedded
+<p>swpackage does not perform verification of the embedded
 cryptographic signature, although, a description is included here
 for completness. 
 <!-- TROFF INPUT: .SS "Overview" -->
@@ -1044,7 +1056,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#SIGNATURE-VERIFICATION">SIGNATURE VERI
 <p>Verification requires verifying the payload section md5 and sha1 message digests and then verifying the
 signature.  Naturally, it is required that the signed data include the payload messages digests. 
 See
-swverify(8). 
+swverify. 
 <!-- TROFF INPUT: .SS "Manual Verification" -->
 
 <div class="node">
@@ -1061,10 +1073,10 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#SIGNATURE-VERIFICATION">SIGNATURE VERI
 <p>Verification requires re-creating the signed and digested byte streams from the archive file. 
 This is not possible using any known extant tar reading utility because of a lack of ability to
 write selected archive members to stdout instead of installing in the file system; however, the
-swverify(8) utility can be used to write these bytes streams to stdout
+swverify utility can be used to write these bytes streams to stdout
 allowing manual inspection and verification. 
 See
-swverify(8). 
+swverify. 
 <!-- TROFF INPUT: .SS "Manual Verification Using Standard Tools" -->
 
 <div class="node">
@@ -1099,7 +1111,7 @@ Success depends on the following factors:
 <!-- TROFF INPUT: .PP -->
 <p>Recreating the signed and digested byte streams is then accomplished using GNU tar and the file list stored in
 
-<!-- WARNING: man/man8/swpackage.8:488:%%new font I started without closing previous font R -->
+<!-- WARNING: man/man8/swpackage.8:500:%%new font I started without closing previous font R -->
 <p>the \&lt;</span><i>path</i>\&gt;/catalog/dfiles/files attribute file as follows:
 <!-- TROFF INPUT: .PP -->
 
@@ -1194,15 +1206,15 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 </ul>
 
 <!-- TROFF INPUT: .PP -->
-<p>The input file is a called a product specification file or PSF.  It contains information to
-direct swpackage(8) and information that is package meta-data [that is merely transferred unchanged
+<p>The input file is called a product specification file or PSF.  It contains information to
+direct swpackage and information that is package meta-data [that is merely transferred unchanged
 into the global INDEX file]. 
 <!-- TROFF INPUT: .PP -->
 
    <p>A PSF may contain object keywords, attributes (keyword/value pairs) and Extended Definitions (described below). 
-An object keyword connotes a logical object or software structure supported by the standard.  An object keyword
-does not have a value field after it, as it contains attributes and Extended Definitions. 
-An attribute keyword conotes an attribute (i.e. keyword/value pair) and always has a value. 
+An object keyword connotes a logical object (i.e. software structure) supported by the standard.  An object keyword
+does not have a value field after it, as it contains Attributes and Extended Definitions. 
+An attribute keyword conotes an attribute which is always in the form of a keyword/value pair. 
 <!-- TROFF INPUT: .PP -->
 
    <p>Attribute keywords not recognized by the standard are allowed and are transferred into the INDEX file. 
@@ -1212,10 +1224,10 @@ Extended Definitions are translated [by swpackage] into object keywords (objects
 attributes recognized by the standard. 
 <!-- TROFF INPUT: .PP -->
 
-   <p>Comments in a PSF are not transferred into the INDEX file by the swbis implementation of swpackage(8). 
+   <p>Comments in a PSF are not transferred into the INDEX file by the swbis implementation of swpackage. 
 <!-- TROFF INPUT: .PP -->
 
-<!-- WARNING: man/man8/swpackage.8:550:%%new font B started without closing previous font R -->
+<!-- WARNING: man/man8/swpackage.8:562:%%new font B started without closing previous font R -->
 <p>The file syntax is the same as a <b>INDEX</b>, or <b>INFO</b> file. 
 A PSF may contain all objects defined by the standard as well as extended definitions. 
 <!-- TROFF INPUT: .br -->
@@ -1227,7 +1239,7 @@ A PSF may contain all objects defined by the standard as well as extended defini
 XDSA C701 http://www.opengroup.org/publications/catalog/c701.htm, or
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
-sw(5) manual page. 
+sw manual page. 
 <!-- TROFF INPUT: .SS "EXTENDED DEFINITIONS" -->
 
 <div class="node">
@@ -1295,7 +1307,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#SWPACKAGE-INPUT-FILE-FORMAT">SWPACKAGE
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .PP -->
-<!-- WARNING: man/man8/swpackage.8:598:%%new font I started without closing previous font R -->
+<!-- WARNING: man/man8/swpackage.8:610:%%new font I started without closing previous font R -->
 <p>The </span><i>source</i> attribute defines the location in vendor's development system
 where the swpackage utility will find the script.  The keyword is the value of the
 <i>tag</i> attribute
@@ -1331,7 +1343,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#SWPACKAGE-INPUT-FILE-FORMAT">SWPACKAGE
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .PP -->
-<!-- WARNING: man/man8/swpackage.8:616:%%new font I started without closing previous font R -->
+<!-- WARNING: man/man8/swpackage.8:628:%%new font I started without closing previous font R -->
 <p>Applies the </span><i>source</i> attribute as the directory under which
 the subsequently listed files are located.  If
 <i>destination</i> is defined it will be used as a prefix to the
@@ -1369,7 +1381,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#SWPACKAGE-INPUT-FILE-FORMAT">SWPACKAGE
 <!-- TROFF INPUT: .PP -->
 <p>Specifies every file in current source directory.
 
-<!-- WARNING: man/man8/swpackage.8:635:%%new font I started without closing previous font R -->
+<!-- WARNING: man/man8/swpackage.8:647:%%new font I started without closing previous font R -->
 <p>The </span><i>directory</i> extended definition must be used before the recursive specification. 
 <!-- TROFF INPUT: .SS "o  Explicit File Definition" -->
 
@@ -1399,7 +1411,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#SWPACKAGE-INPUT-FILE-FORMAT">SWPACKAGE
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .PP -->
-<!-- WARNING: man/man8/swpackage.8:647:%%new font B started without closing previous font R -->
+<!-- WARNING: man/man8/swpackage.8:659:%%new font B started without closing previous font R -->
 <p></span><b>source</b>
 <!-- TROFF INPUT: .RS -->
 
@@ -1409,7 +1421,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#SWPACKAGE-INPUT-FILE-FORMAT">SWPACKAGE
      <!-- TROFF INPUT: .PP -->
 <p><i>source</i> defines the pathname of the file to be used as the source of file data
 and/or attributes. 
-If it is a relative path, then swpackage(8) searches for this file relative to the
+If it is a relative path, then swpackage searches for this file relative to the
 the source argument of the <b>directory</b> keyword, if set. 
 If <b>directory</b> keyword is not set then the search is relative to the
 current working directory of the swpackage utility's invocation. 
@@ -1522,7 +1534,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#SWPACKAGE-INPUT-FILE-FORMAT">SWPACKAGE
 These attributes will apply where the file attributes were not specified explicitly in a
 file definition.
 
-<!-- WARNING: man/man8/swpackage.8:717:%%new font B started without closing previous font R -->
+<!-- WARNING: man/man8/swpackage.8:729:%%new font B started without closing previous font R -->
 <p>Subsequent </span><b>file</b><tt>_</tt><b>permissions</b> definitions
 simply replace previous definitions (resetting all the options). 
 <!-- TROFF INPUT: .PP -->
@@ -1594,7 +1606,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#SWPACKAGE-INPUT-FILE-FORMAT">SWPACKAGE
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .PP -->
-<!-- WARNING: man/man8/swpackage.8:750:%%new font I started without closing previous font R -->
+<!-- WARNING: man/man8/swpackage.8:762:%%new font I started without closing previous font R -->
 <p>The contents of </span><i>filename</i> may be more definitions for files. 
 The syntax of the included file is PSF syntax. 
 <!-- TROFF INPUT: .br -->
@@ -1784,7 +1796,7 @@ It is transfered into the installed<tt>_</tt>software catalog (not as a path nam
 If this attribute exists there should also be a
 <b>vendor</b> object in the PSF in the distribution object that has this tag. 
 This attribute is assigned the value of RPMTAG<tt>_</tt>RELEASE by
-swpackage(8) when translating an RPM. 
+swpackage when translating an RPM. 
 In this capacity it serves to distinguish products with the same revision and tag from the same or
 different vendor.  It most closely maps to the RPMTAG<tt>_</tt>RELEASE or "debian<tt>_</tt>revision" attributes. 
 <!-- TROFF INPUT: .RE -->
@@ -2114,19 +2126,30 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- TROFF INPUT: .PP -->
 <p>The output format is either one of two formats specified in POSIX.1 (ISO/IEC 9945-1)
 which are tar (header magic=ustar) or cpio (header magic=070707). 
-The default format of the swbis implementation is 'ustar'. 
+The default format of the swbis implementation is "ustar". 
 The POSIX spec under specifies definitions for some of the ustar header fields. 
-The "personality" of the default swbis ustar format mimics, for pathnames less than
+The personality of the default swbis ustar format mimics GNU tar 1.15.1 and is designed
+to be compliant to POSIX.1. 
+The personality of the "ustar0" format mimics, for pathnames less than
 99 octets,  GNU tar 1.13.25 using the "-b1 --posix" options. 
 This bit-for-bit sameness does not exist for pathnames greater than 99 chars as swbis
-follows the POSIX spec and GNU tar 1.13.25 does not. 
+follows the POSIX spec and GNU tar 1.13.25 does not.  The "ustar0" ustar personality is
+deprecated.  It is only slightly different from 'ustar' in how device number fields are
+filled (with spaces, zeros or NULs) for non-device files. 
 <!-- TROFF INPUT: .PP -->
 
    <p>In addition the swbis implementation
-supports several other tar and cpio variants including bit-for-bit mimicry of GNU tar (1.13.25) gnutar
-format which uses a non-standard name split and file type (type 'L');  also supported is the
+supports several other tar variants including bit-for-bit mimicry of GNU tar (1.13.25) default
+format which uses a non-standard name split and file type (type 'L').  This format is known as '--format=oldgnu'. 
+Also supported is the gnu format of GNU tar 1.15.1 specified by '--format=gnu'
+<!-- TROFF INPUT: .PP -->
+
+   <p>The defacto cpio formats are also supported. 
 "new ASCII" (sometimes called SVR4 cpio) and "crc" cpio formats with header magic "070701" and "070702"
-respectively.  Support for "pax Interchange Format" (Extended header tar) described in IEEE 1003.1-2001
+respectively. 
+<!-- TROFF INPUT: .PP -->
+
+   <p>Support for "pax Interchange Format" (Extended header tar) described in IEEE 1003.1-2001
 under the "pax" manual page is planned. 
 <!-- TROFF INPUT: .PP -->
 
@@ -2171,7 +2194,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- DEBUG: print_menu("SIDE EFFECTS") -->
 <p>No temporary files are used in the package generation process. 
 When using the default target of stdout (directed to /dev/null), there
-are no file system side effects from swpackage(8).  GNU Privacy Guard (gpg)
+are no file system side effects from swpackage.  GNU Privacy Guard (gpg)
 may alter its keys when invoked for package signing. 
 <!-- TROFF INPUT: .SH "ENVIRONMENT" -->
 
@@ -2268,7 +2291,10 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <!-- DEBUG: print_menu("SEE ALSO") -->
 <!-- TROFF INPUT: .PP -->
-<p>sw(5), swpackage(5), swbisparse(8), swign(1), swverify(8)
+<p>info swbis
+<!-- TROFF INPUT: .PP -->
+
+   <p>sw(5), swpackage(5), swbisparse(8), swign(1), swverify(8)
 <!-- TROFF INPUT: .SH "IDENTIFICATION" -->
 
 <div class="node">
@@ -2284,8 +2310,8 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- DEBUG: print_menu("IDENTIFICATION") -->
 <p>swpackage(8): The packaging utility of the swbis project. 
  Author: Jim Lowe   Email: jhlowe at acm.org
- Version: swbis 0.406
- Date: 2004-09-01
+ Version: swbis 0.443
+ Date: 2005-05-05
  Copying: GNU Free Documentation License
 <!-- TROFF INPUT: .SH "BUGS" -->
 
@@ -2305,8 +2331,8 @@ The --dir="" does not do what one would expect sometimes.
 The output stream content is unaffected by the blocksize, that is the last write
 may be short write. 
 Signing is broken for cpio format archives. 
-<!-- TROFF INPUT: ...\" created by instant / docbook-to-man, Sat 09 Oct 2004, 18:13 -->
-<!-- ...\" created by instant / docbook-to-man, Sat 09 Oct 2004, 18:13 -->
+<!-- TROFF INPUT: ...\" created by instant / docbook-to-man, Sat 07 May 2005, 16:50 -->
+<!-- ...\" created by instant / docbook-to-man, Sat 07 May 2005, 16:50 -->
 
 </body></html>
 

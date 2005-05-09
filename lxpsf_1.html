@@ -16,6 +16,7 @@ i {color:#000080}
 <ul><li><a href="#Options"><font size=-1>Options</font></a>
 </ul><li><a href="#FILES">FILES</a>
 <li><a href="#RELATED STANDARDS">RELATED STANDARDS</a>
+<li><a href="#IDENTIFICATION">IDENTIFICATION</a>
 <li><a href="#SEE ALSO">SEE ALSO</a>
 <li><a href="#BUGS">BUGS</a>
 </ul><pre>
@@ -40,14 +41,19 @@ i {color:#000080}
               Write only the psf file to stdout.
 
        <b>-A</b> <i>,--psf-form1</i>
-              The (current) PSF form. (currently the arg has no effect).
+              A PSF form for RPM translation.
+
+       <b>-A</b> <i>,--psf-form2</i>
+              A second PSF form for RPM translation.
+
 
        <b>-H</b> <i>format</i>
-              Force the specified format.  The choices  are  currently  (only)
-              <i>ustar</i>.
+              Force the specified format.  The  choices  are  currently
+              (only) <i>ustar</i>.
 
        <b>-x</b> <i>,--use-recursive-fileset</i>
-              Use  &quot;file *&quot; instead of individual file definitions in the PSF.
+              Use  &quot;file  *&quot;  instead of individual file definitions in
+              the PSF.
 
        <b>-r</b> <i>,--no-leading-path</i>
               use &quot;.&quot; as the leading archive path.
@@ -59,9 +65,12 @@ i {color:#000080}
               Always set to &quot;link&quot;
 </pre><h3><a name="FILES"><b>FILES</b></a></h3><pre>       none
 </pre><h3><a name="RELATED STANDARDS"><b>RELATED STANDARDS</b></a></h3><pre>       POSIX.1, POSIX.7.2 (IEEE 1387.2), XDSA C701
+</pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        The RPM translation program of the swbis project.
+        DATE: 2005-05-05
+        Revision: 0.444
 </pre><h3><a name="SEE ALSO"><b>SEE ALSO</b></a></h3><pre>       sw_parse()
-</pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       Probably many. A de-facto conversion policy is intimated in the PSF  by
-       this program.
+</pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       Probably many. A de-facto conversion policy is intimated in  the
+       PSF by this program.
 
 
 

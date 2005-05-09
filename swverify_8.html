@@ -465,12 +465,15 @@ i {color:#000080}
 </pre><h3><a name="FILES"><b>FILES</b></a></h3><pre>       None
 
 </pre><h3><a name="APPLICABLE STANDARDS"><b>APPLICABLE STANDARDS</b></a></h3><pre>       IEEE Std 1387.2-1995 (ISO/IEC 15068-2:1999), Open Group CAE C701.
-</pre><h3><a name="SEE ALSO"><b>SEE ALSO</b></a></h3><pre>       <a href=sw_5.html>sw(5)</a>, <a href=swign_1.html>swign(1)</a>, <a href=swpackage_8.html>swpackage(8)</a>, <a href=gpg_1.html>gpg(1)</a>, libexec/swbis/arf2arf
+</pre><h3><a name="SEE ALSO"><b>SEE ALSO</b></a></h3><pre>       info swbis
 
-</pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        <a href=swverify_8.html>swverify(8)</a>: The verification utility of the swbis project.
+
+       <a href=sw_5.html>sw(5)</a>, <a href=swign_1.html>swign(1)</a>, <a href=swpackage_8.html>swpackage(8)</a>, <a href=gpg_1.html>gpg(1)</a>, libexec/swbis/arf2arf
+
+</pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        swverify: The verification utility of the swbis project.
         Author: J. Lowe <a href="mailto:jhlowe@acm.org">jhlowe@acm.org</a>
-        Version: 0.406
-        Date: 2004-09-01
+        Version: 0.443
+        Date: 2004-05-05
         Copying: GNU Free Documentation License
 </pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       The signature file's archive header (or data) is not part of the signed
        data  therefore  it  may be subject to undetectable tampering, however,
@@ -483,8 +486,14 @@ i {color:#000080}
        uname and gname, and whether they are preserved by the reading utility,
        and  whether  these  names are in the system database files /etc/passwd
        and /etc/group, and if so, whether they assign the same uid/gid as  the
-       package, and whether the file system orders directory entries according
-       to order of entry creation.
+       package.
+
+       Verification  of  the  directory  form  of  a  distribution  (i.e.  the
+       installed tarball leading path directory) such as running 'swverify  -d
+       @.'  after  running  'swign  -S'  will  fail  if the order of directory
+       entries is not compatible with traditional Unix file  system  directory
+       entry ordering.  This incompatibility may be present in the Ext3, reis-
+       erFS, and DarwinOS et.al file systems.
 
 
 

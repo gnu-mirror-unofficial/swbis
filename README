@@ -1,0 +1,793 @@
+
+                 swbis - Software Administration
+                 --------------------------------
+                     Version 0.446  (May 2005)
+
+    Copyright (C) 2003,2004,2005  Jim Lowe
+    All rights reserved.
+
+    swbis is distributed under the terms of the GNU General Public License
+    and comes with NO WARRANTY to the extent permitted by law.
+    See the file named COPYING for details.
+
+    Portions are from other GNU packages and used without permission:
+    Copyright (C) 1985-2000 Free Software Foundation, Inc.
+
+    The sha1 message digest code is used without permission:
+    Copyright (C) 2000, 2001 Scott G. Miller
+
+    The progress meter and atomicio routines were copied from OpenSSH
+    without permission and are copyrighted by the following persons:
+    Copyright (c) 2003 Nils Nordman.  All rights reserved.
+    Copyright (c) 1995,1999 Theo de Raadt.  All rights reserved.
+    Copyright (c) 1998 Todd C. Miller <Todd.Miller@courtesan.com>
+    Copyright (c) 1995 Tatu Ylonen <ylo@cs.hut.fi>, Espoo, Finland
+    See the file named progressmeter/LICENCE for details.
+
+
+    General
+    -------
+    swbis is a GNU package
+    
+    The official home page is
+    http://www.gnu.org/software/swbis
+
+    Please send bug reports to <bug-swbis@gnu.org>
+    
+    This version and prior versions are found at SourceForge
+    http://www.sourceforge.net/projects/swbis
+    
+    The entry in the FSF/UNESCO Free Software Directory is
+    http://directory.fsf.org/GNU/swbis.html
+
+
+    Introduction
+    ------------
+
+    The swbis project is a free and from-scratch GPL'ed implementation of
+    IEEE 1387.2-1995 Std (Part 2: Software Administration) which describes
+    a format and utilities for software packaging.  [The IEEE standard is
+    superseded by ISO/IEC 15068-2,1999, and is almost identical to the Open
+    Group spec CAE C701 which is available on the Open Group(tm) web site.]
+
+    The swbis project provides features similar to other packaging systems
+    such as utilities for package creation, installation, and verification.
+    The implementation of these features are, however, unique in that
+    swbis is 1) non-intrusive to current packaging practice, 2) completely
+    orthogonal to the GNU toolset, 3) makes no new requirements on system
+    provisioning, and 4) is completely network transparent.
+    
+    It achieves the first because a POSIX package is a tar archive, and,
+    swbis is general and flexible enough so that a swbis package can look
+    just like a free software source tarball.  When packaging a directory,
+    such as a source directory, swbis provides a tool to generate a GPG
+    signed tar archive using GNU tar, avoiding use of new tools.
+    Secondly, it is orthogonal with existing tools for verification and
+    file loading, namely gpg and tar which swbis uses directly.  Thirdly,
+    swbis can install and copy packages to all existing GNU/Linux, BSD,
+    and Unix hosts whether or not swbis is installed on that host.  Swbis
+    achieves this by relying on the POSIX shell's capability to read
+    commands and data on the same standard input stream.  Lastly, network
+    transparency is achieved because the process interface is a Unix
+    pipe, namely standard input, whose location can easily be generalized
+    by a remote shell client program such as ssh.
+    
+    * ISO/Posix Utilities:
+
+       swcopy - Distribution copying utility.
+    
+             * Supports multiple ssh-hops to remote target or source.       
+             * Uses ssh, sh, dd, and choice of pax, tar, star, or gtar.
+             * Does not have to be installed on the target host.
+             * target or source host may be any POSIX.2 conforming host.
+             * Supports remote-source to remote-target copies.
+    
+       swpackage -  Packages files according to a PSF file.
+    
+             * Complete implementation of Extended Definitions.
+             * Stand-alone operation, no use of temporary files.
+             * Output format is bit-for-bit identical to GNU tar.
+             * Supports creation of GPG embedded signature, and sha1,
+               md5sum digests of the package payload section.
+            
+       swverify -  Authenticates a signed package.
+    
+             * Authenticates packages signed by swpackage.
+             * Verifies installed software (partially implemented).
+             * Authenticates the GPG signature in the installed software.
+
+       swinstall  -  Install a posix package.  (alpha as of 2004-02-15)
+                 
+             * 'swinstall' does not have to be installed on the target host.
+             * The target or source host may be any POSIX.2 conforming host.
+             * creates an installed software catalog where the GPG signature
+               can be verified using 'gpg'
+             * Uses ssh for remote connections.
+             * Supports multiple ssh-hops to remote target or source.
+             * Uses tar (or pax) to install the files.
+             * Supports full error monitoring during control script execution
+               and records exit status and installation states.
+    
+    
+    * Non-ISO/Posix (Ad Hoc) Utilities:
+
+        swign  -  Produces signed tar archives using GNU tar and
+                  swpackage and gpg as supporting tools.  This utility is
+                  useful for creating signed source tarballs.
+            
+        lxpsf  -  The first step translator for RPM packages.  It translates
+                  an RPM into a tar archive containing a PSF file which
+                  further directs translation to a Posix package by 'swpackage'.
+    
+        arf2arf   -  Internal Library utility to extract and verify the signed
+                     and digested byte streams.
+
+    
+    How to install
+    --------------
+    See the file INSTALL.
+
+    
+    For the really impatient
+    ------------------------
+    swbis installs completely within the ``--prefix'' option arg
+    hence this should work without being root:
+          CFLAGS=-O2 ./configure --prefix=`pwd`/tmp --with-self-rpm  && \
+               make && make install
+    
+    All of the installed files are under ./tmp, try  ``find tmp''.
+    
+    Now make a POSIX package:
+            tmp/bin/swpackage -s PSF.bin.map2 | tar tvf - 
+    
+    Now try signing a package and verifying it:
+            echo Iforgot | 
+            tmp/bin/swpackage \
+                    --passfile=- \
+                    --gpg-path=`pwd`/var/gnupg \
+                    --gpg-name="Test User" \
+                    --sign \
+                    -s PSF.bin.map2 |
+            tmp/bin/swverify
+
+    
+    Tested Platforms:
+    ----------------
+    Note: all tests assume gcc, GNU make, GNU tar-1.13.25, GNU gpg 1.0.7
+    (or GNU gpg 1.2.x), sha1sum, md5sum and/or openssl.
+    GNU tar 1.14 and 1.15.x are supported for most of the regression
+    tests. 
+    
+    The tests also requires a file system that orders directory entries
+    the way Unix file systems always have in the past, an example being
+    the Linux Ext2 file system.  File systems that deviate in this regard
+    may include Ext3, NTFS, ReiserFS, among others.
+    
+               T |                                          sh testbuild0 -. 
+               E |                                       make testall -.   |
+               S | (md5,sha1, 008,009,030)                make test -.  |  |  
+               T |                                                   |  |  |
+                 | (test029)                  make swigntest5 -.     |  |  | 
+               N | (test028)               make swigntest4 -.  |     |  |  |                              
+               A | (test027)            make swigntest3 -.  |  |     |  |  |   
+               M | (test026)         make swigntest2 -.  |  |  |     |  |  |
+               E |                make swigntest1 -.  |  |  |  |     |  |  |
+                                                   |  |  |  |  |     |  |  |
+        Compiles?/with no effort?_.                |  |  |  |  |     |  |  | 
+                                  |                |  |  |  |  |     |  |  |
+       Platform                   | Test Result:  P=PASS  x=FAIL -=n/a
+    ----------------------------------------------------------------
+    FreeBSD/x86/5.1                    Yes/Yes   | P  P  P  P  P     P  P  P
+    FreeBSD/x86/4.9exp                 Yes/Yes   | P  P  P  P  P     P  P  P
+    NetBSD/x86/1.6.1                   Yes/Yes   | P  P  P  P  P     P  P  x
+    OpenBSD/x86/3.4                    Yes/Yes   | x  x  x  x  x     P  x  x
+    GNU/Linux/x86/rh4.1                No/No     | -  -  -  -  -     -  -  -
+    GNU/Linux/x86/rh5.2                Yes/No    | x  P  x  P  P     P  x  x
+    GNU/Linux/x86/rh6.2                Yes/Yes   | P  P  P  P  P     P  P  P
+    GNU/Linux/x86/rh7.1                Yes/Yes   | P  P  P  P  P     P  P  P
+    GNU/Linux/x86/rh8.0                Yes/Yes   | P  P  P  P  P     P  P  P
+    GNU/Linux/x86/rh9.0                Yes/Yes   | P  P  P  P  P     P  P  P
+    GNU/Linux/x86/KKOPPIX-3.2          Yes/Yes   | P  P  P  P  P     P  P  P
+    GNU/Linux/x86/Debian2.2            Yes/Yes   | P  P  P  P  P     P  P  P
+    GNU/Linux/Alpha/Debian3.0          Yes/Yes   | P  P  P  P  P     P  P  P
+    GNU/Linux/amd64/SuSE-SLES8         Yes/Yes   | P  P  P  P  P     P  P  P
+    GNU/Linux/amd64/Fedora Release 3   Yes/Yes   | x  x  x  x  x     P  x  x
+    DarwinOSX/powerpc/6.8(Unix NFS)    Yes/Yes   | P  P  P  P  P     P  P  P
+    DarwinOSX/powerpc/6.8(Native FS)   Yes/Yes   | x  x  P  x  x     P  x  x
+    SunOS/Sun4uSparc/5.9               Yes/Yes   | P  P  P  P  P     P  P  P
+    SunOS/x86/5.9                      Yes/Yes   | P  P  P  P  P     P  P  P
+
+    
+    Self-Contained Qualification Test:
+    -----------------------------------
+           sh bin/testbuild0
+    
+    See INSTALL for further details about building and testing
+    on non-GNU/Linux platforms.
+
+   
+    Documentation
+    -------------
+    Info Document: Try   info swbis
+    Manual pages:  sw(5), swcopy(8), swpackage(5), swpackage(8)
+                   swverify(8), swign(1)
+
+    
+    Useful Command Invocations
+    --------------------------
+    Translate a RPM to a tar archive with a single leading
+    directory and install it in the current directory:
+    
+            swpackage --unrpm <yourRPM | tar xpf -
+            
+    Verbosely preview a RPM translation using swinstall:
+    
+            swinstall -p -x verbose=9 --allow-rpm <any_rpm  
+    
+    Write a tar listing to stdout, no disk files are modified:
+    
+            swpackage -x verbose=3 -p -s yourPSF
+    
+    Verify the signature of a POSIX tar archive:    
+    
+            swverify -d @- <yourPOSIXpackage.tar.gz
+                    -or-
+            swverify -d @/absolut/path/yourPOSIXpackage.tar.gz
+    
+    Sign a package and verify using the enclosed test keys: 
+            echo Iforgot | 
+            swpackage \
+                    --passfile=- \
+                    --gpg-path=`pwd`/var/gnupg \
+                    --gpg-name="Test User" \
+                    --sign \
+                    -s PSF.bin.map2 |
+            swverify
+    
+    
+    Location of Sources
+    ---------------------
+    The top level POSIX commands are in ./swprogs
+    Support code for all utilities is in ./swsupplib
+    Support code for swpackage is in ./swstructlib/src
+    Documentation sources are in ./doc/source
+
+    
+    How to build
+    ------------
+    See the file INSTALL.
+   
+ 
+    To enable very verbose debugging messages
+    -----------------------------------------
+    Edit ./include/debug_config.h to enable 
+    verbose messages in the sub-system of your choice,
+    then compile from scratch.
+
+    
+    Editing Your Configuration
+    --------------------------
+      Edit the configuration files: swbisdefaults and swdefaults.
+         Usually:
+
+            /usr/lib/swbis/swbisdefaults
+            /usr/lib/swbis/swdefaults
+            $(HOME)/.swbis/swbisdefaults
+            $(HOME)/.swbis/swdefaults
+            
+    * Show where they are by doing this:
+
+           swinstall --show-options-files
+    
+    * Show the options to stdout.
+
+            swinstall --show-options
+    
+    * Select your tar reading utility
+
+    Users of GNU/Linux systems might find the default utility, pax,
+    especially annoying or even non-existent.  Therefore, editing
+    the /usr/lib/swbis/swbisdefaults file might be in order:
+    
+            swbis_local_pax_write_command  = tar
+            swbis_remote_pax_write_command = tar
+            swbis_local_pax_read_command   = tar
+            swbis_remote_pax_read_command  = tar
+    
+    
+    Select your shell
+
+    Use in networks where there are only GNU/Linux and BSD systems
+    may allow these changes to /usr/lib/swbis/swbisdefaults.  These
+    changes will likely break operation on Sun Solaris hosts (as
+    well as other non GNU hosts) since use of 'getconf' is needed to
+    locate the POSIX shell.  These changes, however, simplify the
+    command invoked on the remote host and eliminates the requirement
+    for a Bourne-like shell as the shell for the login user's account.
+
+           swbis_no_getconf       = true # true or false
+           swbis_shell_command    = bash # {sh|bash|posix|ash|ksh}
+   
+ 
+    SSH Oddities and Observations
+    -----------------------------
+    Problems were observed when running swinstall on a SunOS host
+    (SunOS sparc-solaris1 5.9) using the Sun ssh client (Sun_SSH_1.0)
+    The problem only affected installs to remote hosts and seemed to
+    go away if an openssh ssh client was used instead of Sun's.
+    
+    
+    The OpenSSH [On GNU/Linux] Dropping Data when data is pumped too fast Bug.
+    ----------------------------------------------------------------------
+    When using swinstall and a 2-hop target, for example:
+    
+            swinstall @ host1@@host2:/tmp/mnt/test
+    
+    and host1 is a GNU/Linux host [host1 had only one NIC in this test],
+    in certain rare instances (possibly when the package contains
+    a large file  >1Mb) the installation will be truncated and
+    swinstall will end with an error.  This bug has not been seen
+    when host1 was FreeBSD-5.1 even on the identical hardware and
+    identical version of OpenSSH.
+    
+    *  Evidences that the bug is in OpenSSH (or Linux kernel) and not swbis.
+    
+    If you have a package that fails a 2-hop install but succeeds on a
+    simple 1-hop or local install, then:
+    
+    Try the 2-hop install with the following swinstall options:
+    
+            --burst-adjust=SIZE
+                            This is the number of bytes pumped
+                            between the delay specified by
+                            --pump-delay1.  The default is 72000.
+                            This was chosen because the OpenSSH
+                            "rcvd adjust" size is about this same
+                            value.  This association is a complete
+                            guess (and shot in the dark).
+    
+            --pump-delay1=NANOSECONDS
+                            Adds a NANOSECONDS delay every SIZE
+                            bytes specified by --burst-adjust.
+                            The default is 10111000 for multi-hop
+                            targets and no delay for single/no hop
+                            targets. 
+                            (999999999 = 1 second)
+    
+            --ssh-options=1
+                            Uses ssh protocol 1 instead of 
+                            defacto (local configuration default)
+                            which is probably 2
+                                    
+    Use of these options *may* mask the bug.  The bug can be reliably
+    masked or exposed depending on the options above, although,  even
+    when it appears the bug has been masked, it may fail ~1% of the
+    time.  Likewise, if the bug is repeatedly evident (swinstall fails
+    many times in a row) it may rarely disappear allowing swinstall
+    to succeed one time out of many failed attempts.
+
+    Note: The option swbis_enforce_file_md5 must be "false" in order
+            for the delay to be applied.
+    
+    Additionally, others applications such as "GNU tramp" have had the
+    same problem: Google Search:
+            "Connection drops data if it sent too quickly"
+    http://lists.gnu.org/archive/html/emacs-devel/2003-02/msg00064.html
+    
+    Also, the bug has never been produced when the middle (intermediate)
+    host was a FreeBSD 5.1 system,  for these tests, GNU/Linux and
+    FreeBSD 5.1 are on the same machine running identical versions of
+    OpenSSH (OpenSSH_3.8p1), Kernel version 2.4.26 2.4.18 and
+    2.4.9 kernel versions have exibited the bug.
+    
+    Also the bug has never been produced using --ssh-options=1
+    (protocol version 1) even at full speed with no delay.
+            
+    Also, the bug has never been reproduced for a single hop remote or
+    non-remote install.
+    
+    Also, the bug is not produced by the byte pumping done in
+    swcopy, even at full speed, only by the file data byte pump in
+    swinstall.
+    
+    Could the bug be in swinstall ?
+    Well... Probably not, But anything is possible and I am still
+    looking for a way to deterministically mask the bug using
+    portable interface semantics rather than timing delays (which
+    never work in general).
+    
+            Howto reproduce the Bug
+            -----------------------
+    
+            Here is an example package that trips the Bug on my hardware
+            and network:
+    
+            drwxr-x---  2 jhl other  0   Jun 10 22:44 catalog
+            -rw-r-----  1 jhl other  425 Jun 10 22:44 catalog/INDEX
+            drwxr-x---  2 jhl other  0   Jun 10 22:44 catalog/dfiles
+            -rw-r-----  1 jhl other  65  Jun 10 22:44 catalog/dfiles/INFO
+            drwxr-x---  2 jhl other  0   Jun 10 22:44 catalog/apsf
+            drwxr-x---  2 jhl other  0   Jun 10 22:44 catalog/apsf/pfiles
+            -rw-r-----  1 jhl other  65  Jun 10 22:44 catalog/apsf/pfiles/INFO
+            drwxr-x---  2 jhl other  0   Jun 10 22:44 catalog/apsf/run
+            -rw-r-----  1 jhl other  466 Jun 10 22:44 catalog/apsf/run/INFO
+            drwxr-x---  2 jhl other  0   Jun 10 22:44 apsf
+            drwxr-x---  2 jhl other  0   Jun 10 22:44 apsf/run
+            -rw-r--r--  1 jhl other  4197376 Jun 10 11:37 apsf/run/eatme/bugme
+            -rw-r--r--  1 jhl other  1536 Jun  9 16:06 apsf/run/eatme/psfme
+    
+    
+            Here's howto make the test package.
+            Note: you must make the data files /tmp/zero4mb and
+                    /tmp/zero2 yourself.
+    
+            (cat <<EOF
+            distribution
+            product
+            tag apsf
+            revision 0.1
+            fileset
+            tag run
+            directory . /
+            file /tmp/zero4mb /eatme/bugme
+            file /tmp/zero2 /eatme/psfme
+    EOF
+    ) | swpackage -s - @- | swinstall -s - \
+                    --ssh-options=2vv \
+                    --show-progress \
+                    --burst-adjust=50000 \
+                    --pump-delay1=90000 \
+                    -x verbose=10 \
+                    @jhl@192.168.99.6@@jhl@192.168.99.8:/tmp/jhl/mnt/test
+    
+    
+    Runtime Prerequisites
+    ---------------------
+    *  Target Host Requirements (where a package is installed):
+        - A swbis installation is *not* required.
+        - An RPM installation is *not* required, even if installing RPMs.
+        - A User account such as "root", the login shell should be
+          a Bourne shell, not necessarily the POSIX shell.  (Note:
+          specific use of options allow the login shell to be other
+          (e.g. csh) without breaking remote operations.)
+        - A POSIX shell: such as bash or ksh (pdksh-5.2.14). Note: 
+          FreeBSD's and Solaris' /bin/sh are not POSIX enough, data
+          corruption may occur if used.  On these hosts, a POSIX shell
+          must be specified by use of command line options or defaults
+          file configuration.  By default, the POSIX shell is located by
+          by the PATH variable returned by getconf. If your system does
+          not have getconf(1) then you must specify the shell with the
+          --shell-command option.
+        - POSIX Utilities: getconf, dd, mkdir, rmdir, test, sleep,
+          read, echo.  (Note: getconf is not required if
+          specific options are used).
+        - Archive reading utility: One of tar, pax, gtar or star.
+          (pax is default, others must be selected by command line
+          option or defaults file configuration).
+        - sshd or rshd remote connection server, ssh is the default,
+          rsh does not seem to work in all cases especially for multi-hop
+          targets .
+        - gpg, md5sum, sha1sum (sha1sum is Optional), although required for
+          package authentication.
+    
+    * Management Host Requirements (e.g. where swinstall is invoked):
+        - A swbis installation because you need the swinstall binary.
+        - RPM shared libraries. (If installing an RPM, and if the
+          --with-self-rpm configure option not used at build).
+        - gzip, bzip2 depending on the package.
+        - ssh is required for remote installation/copying.
+          An openssh ssh client is recommended.  This can be
+          specified by command line and defaults file options.
+        - gpg (Optional), although required for package authentication.
+    
+    * Development Host Requirements (Package building)
+        - A swbis installation (swpackage).
+        - /usr/bin/gpg (Required for package signing).
+        - /usr/bin/uuidgen (Recommended).
+        - If using the swign utility, GNU tar 1.13.25,1.14, or 1.15.x
+           is required.
+
+    
+    Requirements for Running all the Tests.
+    --------------------------------------
+        - bash, md5sum, sha1sum, openssl, GNU tar 1.13.25,1.15.x
+          gpg (GnuPG) 1.0.7, 1.2.x, and a Unix or Ext2 file system.
+   
+ 
+    Current Capabilities - What can swbis be used for now?
+    ----------------------------------------------------
+    
+        - Translating RPMs to POSIX format and installing it
+          over a network to a host where neither RPM nor swbis
+          is installed.
+    
+        - Creating a runtime package in a vendor neutral format.
+    
+        - Creating a source tar archive with an embedded GPG
+          signature that does not alter the source package structure
+          or format.
+            ** i.e  Signed Source Tar Archive Packages ** 
+    
+        - Copying directories or files to/from any Unix host with no
+          new tools required on the remote hosts.
+    
+        - Installing a vendor neutral runtime package on any Unix host
+          [with control scripts? not yet] with no new tools required on
+          the remote hosts.  (This utility is at alpha release level).
+    
+    Features of the POSIX Standard
+    ------------------------------
+    
+        - Uses existing data formats: tar and cpio.
+    
+        - Package metadata is contained in ascii text files.
+    
+        - The package generation spec file supports explicit
+          overriding of file attributes, ability to specify a
+          different source filename from the name appearing in the
+          package, the ability to specify all files in a directory,
+          among others.
+   
+        - Supports multiple products in a single distribution file.
+    
+        - Supports selection of products based on based on architecture
+          and system identification attributes.
+    
+        - Allows run-time packages to have control directories and 
+          a leading package directory.  This can be useful for ISVs who
+          wish to support manual installation by unpacking with tar
+          and execution of a custom setup script.
+  
+        - Supports a rich set of control scripts.
+ 
+        - Explicitly allows for additional vendor attributes
+          and additional vendor specific control files.
+
+        - Specifies an interface for copying and installing to
+          remote hosts.
+    
+    Features of the swbis implementation
+    ------------------------------------
+            
+        (All of these are implemented unless stated otherwise.)
+    
+        - Non-root users are able to invoke root installs on
+          remote hosts via ssh authentication.
+    
+        - Network transparent copying and installation.
+          (To swbis, local and remote installs are the same.)
+    
+        - No new target requirements.  Relies on a POSIX shell and
+          a minimal set of POSIX utilities. (swbis is not required
+          on the target remote host.)
+    
+        - Supports multiple host-to-host hops to a target host.
+            
+        - Network connection is made by direct use of ssh or rsh.
+    
+        - 'swpackage' writes an archive to STDOUT, and makes no temporary
+          copy of the package.
+    
+        - 'swpackage' supports nil ("") control directories which
+          allows a traditional source tar archive to be cast as a POSIX
+          package with no change to existing file layout, and allows a
+          run-time package to have a form that is directly installable
+          using tar [similar to slackware packages].
+
+        - Supports a md5sum attribute for storage files.
+    
+        - Supports cryptographic authentication (Package signing) by
+          use of Vendor Defined attributes consisting of a control file 
+          containing a signature of the catalog section, and control files
+          containing a md5 and sha1 digest of the storage section.
+    
+        - Multiple signature control files are supported to accommodate
+          upstream and downstream signers.
+    
+        - All package signatures are transferred (by swinstall) into
+          the installed software catalog where they can be verified
+          directly by 'gpg' alone.  That is, the signature is valid
+          throughout the package life-cycle, and can be verified by
+          'gpg' at every point in the life-cycle.
+
+        - swpackage mimics GNU tar formats bit-for-bit which forms a
+          basis for internal testing; and, allows verification of the GPG
+          signature and archive md5 digest (of the unpacked signed package)
+          using GNU tar and gpg [under some circumstances and with
+          constraints].
+    
+    Development Language
+    --------------------
+        swbis is written in ANSI C and C++.
+        Some utilities are portable Posix shell and utilities.
+        The swpackage utility is the only C++ program, all other
+        programs should not use C++.  The parts of swpackage that are
+        written in object-oriented (late dispatch of virtual functions)
+        C++ are limited to the package compiler section.  Many of the
+        C++ opjects are wrappers around C objects and do not employ
+        polymorphism. Since swpackage is complete, no new C++ is
+        needed for this project.
+    
+    
+    How to create an archive of the current directory.
+    --------------------------------------------------
+        There are many way to do this.  The quickest way
+        that does not require writing a PSF is :
+          
+           find . -path './catalog' -prune -o -print |
+           swpackage -Wfiles-from=- -Wdir=`basename $PWD` | 
+           pax -v
+    
+      
+        Here's a way using a short PSF.
+     
+        echo -e -n "distribution\n\
+                    product\n\
+                    tag p\n\
+                    control_directory \"\"\n\
+                    fileset\n\
+                    tag f\n\
+                    control_directory \"\"\n\
+                    directory .\n\
+                    file *\n\
+                    exclude catalog\n" | 
+                    swpackage -Wdir=`basename $PWD` -s - @-  | pax -v
+    
+    
+    How to create the signed archive
+    --------------------------------
+    
+          Using GNU tar to emit the serial archive.
+          -----------------------------------------
+            An implementation extension script, swign(8), exists 
+            to make it easy to sign your source archive. 
+            Just change directory to your source package directory
+            and run it.  (This requires GNU tar).
+    
+            Run:
+                    $ cd yourpackage-directory
+                    $ swign -u yourGPGIdentity @- | swverify --checksig
+    
+            See manual pages swign(1), and swpackage(8)
+    
+          Using swpackage(8) to emit the serial archive.
+          -----------------------------------------
+            Here is an example minimal PSF and swpackage invocation that
+            will emit a signed tar archive. (GNU tar not required).
+     
+            (
+            cat  <<-"//EOF"
+            distribution
+            product
+            tag source_product
+            control_directory ""
+            fileset
+            tag source_files
+            control_directory ""
+            file_permissions -o root -g root
+            directory .
+            file *
+            exclude catalog
+            //EOF
+            ) | swpackage -Wfiles -Wsign -Wdir=test123 -s - @- |
+            swverify --checksig
+    
+    
+    How to authenticate a signed archive.
+    -------------------------------------
+            
+        Using GNU tar to create the signed/digested bytes streams
+        ---------------------------------------------------------
+            Note: Verifying in this way is fragile.  It depends on
+                  many things, and has many constraints that limit 
+                  its usefulness.  Namely the owner/group has to
+                  be known and the same for all files, Symlinks
+                  do not have their file times preserved therfore
+                  break the digest reproducability.  It verifies the 
+                  byte streams but not the package file itself which
+                  may contain extra (trojan) files.  Also, different
+                  uid/uname (gig/gname) assignments among different
+                  flavors of U*ix will make it difficult to verify
+                  in this way.
+    
+            Step 1: Verify the GPG signature
+            Step 2: Verify the payload digests. (Only if step 1 succeeds)
+    
+            * Step 1: Verify the GPG signature 
+    
+               Look at following attributes in $dirname/catalog/INDEX and
+               use their values in the tar command.
+                 Examples:
+                    owner root
+                    group root
+                    tar_format_emulation_options -b1 --posix
+                    tar_format_emulation_utility gnutar
+    
+            <-- shell program: cut here.    
+               #!/bin/sh
+               # Verify the signature
+               # export dirname=swbis-0.261
+               tar cf - --owner=root \
+                    --group=root \
+                    --exclude=${dirname}/catalog/dfiles/signature \
+                    --posix -b1 \
+                    ${dirname}/catalog |
+                    gpg --verify ${dirname}/catalog/dfiles/signature - 
+            <-- shell program: cut here.    
+    
+            * Step 2: Verify the payload digests.
+    
+            <-- shell program: cut here.    
+               #!/bin/sh
+               # Verify the md5sum
+               # export dirname=swbis-0.261
+               grep -v ${dirname}/catalog  ${dirname}/catalog/dfiles/files |
+               tar cf - \
+                    -b1 --posix \
+                    --owner=root \
+                    --group=root \
+                    --files-from=- --no-recursion | md5sum
+               cat ${dirname}/catalog/dfiles/md5sum
+            <-- shell program: cut here.    
+    
+               If the package contains Symlinks then the md5sum won't match.
+               In this case you can verify the "adjunct_md5sum" and verify the
+               symlinks manually yourself.
+    
+            <-- shell program: cut here.    
+               #!/bin/sh
+               # Verify the adjunct_md5sum
+               # export dirname=swbis-0.261
+               grep -v ${dirname}/catalog  ${dirname}/catalog/dfiles/files | \
+             (while read file; do \
+                    if [ ! -h $file ]; then echo $file; fi done;)| \
+                    tar cf - -b1 --posix --owner=root --group=root \
+                    --files-from=- --no-recursion | md5sum
+               cat ${dirname}/catalog/dfiles/adjunct_md5sum
+            <-- shell program: cut here.    
+    
+            If *both* Steps succeed, the byte streams are authentic, however,
+            the serial archive file remains suspect until you verify there 
+            are no extra files in the archive that installed outside
+            of <dirname> and no files in ./dirname that are not in the file
+            list <dirname>/catalog/dfiles/files.
+    
+        Using swbis to create the signed/digested bytes streams
+        -----------------------------------------------------
+            Note:  arf2arf does not install the archive.  The steps below are 
+                   essentially what swverify does internally.
+    
+            * Step 1: Verify the GPG signature
+    
+            <-- shell program: cut here.    
+             #!/bin/sh
+             # export dirname=swbis-0.261
+             /usr/lib/swbis/arf2arf -d -C < ${dirname}.tar.gz \
+                            2>~/erasemelater 1>/dev/null && \
+             /usr/lib/swbis/arf2arf -C < ${dirname}.tar.gz |
+                    gpg --verify ~/erasemelater -
+            <-- shell program: cut here.    
+    
+            * Step 2: Verify the payload digests. (Only if step 1 succeeds)
+    
+              You should see pairs of identical md5 (or sha1) digests.
+              arf2arf writes the attribute file contents to stderr and
+              md5sum (sha1sum) writes the calculated digest to stdout.      
+    
+            <-- shell program: cut here.    
+             #!/bin/sh
+             # export dirname=swbis-0.261
+             /usr/lib/swbis/arf2arf -d -S <${dirname}.tar.gz | md5sum
+             /usr/lib/swbis/arf2arf --sha1 -d -S <${dirname}.tar.gz | sha1sum
+            <-- shell program: cut here.    
+      
+                    You can then inspect or install the authenticated byte
+                    stream using tar or pax or cpio.  For example:
+                    /usr/lib/swbis/arf2arf -S <${dirname}.tar.gz | pax
+             
+        Using swverify to authenticate the package
+        ------------------------------------------
+            # This is the easiest way.
+            swverify --checksig  < swbis-0.261.tar.gz 
+    
+End of README

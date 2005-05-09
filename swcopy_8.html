@@ -40,8 +40,8 @@ i {color:#000080}
        to a target archive directory.  Neither swcopy  nor  any  component  of
        swbis  is  required  on  the target host, however, the target host must
        look like a Unix system at the shell and  command-line  utility  level.
-       Remote  network connections are made by <a href=ssh_1.html>ssh(1)</a>.  Ssh is the default but
-       rsh can be selected by a command line option.
+       Remote network connections are made by ssh.  Ssh is the default but rsh
+       can be selected by a command line option.
 
        Before and during data transfer to  the  target,  the  distribution  is
        audited.   Package  auditing  includes parsing the INDEX and INFO meta-
@@ -356,13 +356,13 @@ i {color:#000080}
 
 
 </pre><h3><a name="TARGET COPYING RULES"><b>TARGET COPYING RULES</b></a></h3><pre>       Currently, file permissions and ownerships are not copied. 'swcopy'  is
-       not  intended to be used in the way of <a href=cp_1.html>cp(1)</a> or <a href=scp_1.html>scp(1)</a>, although it can
-       be if forced.  Non-existing directories in a  target  are  created.   A
-       source directory cannot be renamed (although a regular file can be).  A
-       single source file is specified for one or more  targets.   The  syntax
-       does not support multiple source files.  A portable character string in
-       the target spec is assumed to be a hostname unless  it  begins  with  a
-       slash '/' or a colon ':'.
+       not  intended to be used in the way of cp or scp, although it can be if
+       forced.  Non-existing directories in a target are  created.   A  source
+       directory cannot be renamed (although a regular file can be).  A single
+       source file is specified for one or more targets.  The syntax does  not
+       support multiple source files.  A portable character string in the tar-
+       get spec is assumed to be a hostname unless it begins with a slash  '/'
+       or a colon ':'.
 
    <a name="Rules"><b>Rules</b></a>
        If  a  target  directory  on the host does not exist it will be created
@@ -523,7 +523,7 @@ i {color:#000080}
        This command can be controlled by the  --shell-command  option  or  the
        swbis_shell_command  defaults file option.  Permitted values are &quot;bash&quot;
        (/bin/bash -s), &quot;sh&quot; (/bin/sh  -s),  &quot;ksh&quot;  (/bin/ksh  -s)  or  &quot;posix&quot;
-       ('PATH=`getconf  PATH`  sh  -s').   The  default is &quot;posix&quot;.  <a href=swcopy_8.html>swcopy(8)</a>
+       ('PATH=`getconf  PATH`  sh  -s').   The  default  is  &quot;posix&quot;.   swcopy
        requires the POSIX capability of reading commands on stdin according to
        the  specification  described  in IEEE Std 1003.1, 2003 Ed.; sh -shell,
        Section STDIN.  This requirement accommodates reading of shell  program
@@ -551,11 +551,13 @@ i {color:#000080}
 
 
 </pre><h3><a name="APPLICABLE STANDARDS"><b>APPLICABLE STANDARDS</b></a></h3><pre>       ISO/IEC 15068-2:1999, Open Group CAE C701
-</pre><h3><a name="SEE ALSO"><b>SEE ALSO</b></a></h3><pre>       <a href=sw_5.html>sw(5)</a>, <a href=swbisparse_8.html>swbisparse(8)</a>, <a href=swign_1.html>swign(1)</a>, <a href=swverify_8.html>swverify(8)</a>
+</pre><h3><a name="SEE ALSO"><b>SEE ALSO</b></a></h3><pre>       info swbis
+
+       <a href=sw_5.html>sw(5)</a>, <a href=swbisparse_8.html>swbisparse(8)</a>, <a href=swign_1.html>swign(1)</a>, <a href=swverify_8.html>swverify(8)</a>
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        <a href=swcopy_8.html>swcopy(8)</a>: The archive copying utility of the swbis project.
         Author: Jim Lowe   Email: jhlowe at acm.org
-        Version: 0.406
-        Date: 2004-09-01
+        Version: 0.443
+        Date: 2005-05-05
         Copying: GNU Free Documentation License
 </pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       Swcopy is subject to breakage if a user's account  on  an  intermediate
        (or  terminal)  host in a target spec is not configured to use a Bourne

@@ -23,9 +23,7 @@ i {color:#000080}
 </pre><h3><a name="NAME"><b>NAME</b></a></h3><pre>       swbisparse -- Read and parse POSIX.7.2 metadata.
 
 
-</pre><h3><a name="SYNOPSIS"><b>SYNOPSIS</b></a></h3><pre>       <b>swbisparse</b> {-o,--info|-i,--index|-p,--psf} [-b] [-n] [-l <i>level</i>] [<i>file</i>]
-
-
+</pre><h3><a name="SYNOPSIS"><b>SYNOPSIS</b></a></h3><pre>       <b>swbisparse</b> {--installed|-o,--info|-i,--index|-p,--psf} [-b] [-n] [-l <i>level</i>] [<i>file</i>]
 
        <b>swbisparse</b> {-d,--decode} [<i>package</i><b>_</b><i>file</i>]
 
@@ -76,16 +74,21 @@ i {color:#000080}
        objects  as is commonly the practice for PSF files written for Hewlett-
        Packard's SD-UX equipped systems.  The <b>end</b> keyword can appear  in  PSF,
        INDEX  and INFO files, however, it will merely be scanned and the token
-       discarded.   Another  incompatibility  is  based   on   this   parser's
-       termination  of  an  object  definition  by the first extended keyword.
-       This restriction may not exist in the SD-UX grammar because the  object
-       is bracketed by the nesting of <b>end</b> keywords and not by the existence of
+       discarded.  Another incompatibility is based on this parser's  termina-
+       tion  of  an  object  definition  by  the first extended keyword.  This
+       restriction may not exist in the SD-UX grammar because  the  object  is
+       bracketed  by  the  nesting of <b>end</b> keywords and not by the existence of
        the first object or extended keyword.
 
-</pre><h3><a name="OPTIONS"><b>OPTIONS</b></a></h3><pre>       <b>-o</b>     Parse an INFO file.
+</pre><h3><a name="OPTIONS"><b>OPTIONS</b></a></h3><pre>       <b>--info</b>
+       <b>-o</b>     Parse an INFO file.
 
+       <b>--installed</b>     Parse the installed software catalog file INSTALLED.
+
+       <b>--psf</b>
        <b>-p</b>     Parse a PSF file.
 
+       <b>--index</b>
        <b>-i</b>     Parse an INDEX file.
 
        <b>-b</b>     Beautify by indention and emit a file
@@ -107,8 +110,8 @@ i {color:#000080}
 </pre><h3><a name="SEE ALSO"><b>SEE ALSO</b></a></h3><pre>       <a href=sw_parse_5.html>sw_parse(5)</a>
 
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        Author: J. Lowe
-        Version: 0.406
-        Date: 2004-09-01
+        Version: 0.443
+        Date: 2005-05-05
         Copying: GNU Free Documentation License v1.1
 
 

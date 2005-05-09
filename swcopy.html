@@ -184,7 +184,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 archive directory.  Neither swcopy nor any component of swbis is required
 on the target host, however, the target host must look like a Unix system at
 the shell and command-line utility level.  Remote network connections are made
-by ssh(1).  Ssh is the default but rsh can be selected by a command line
+by ssh.  Ssh is the default but rsh can be selected by a command line
 option. 
 <!-- TROFF INPUT: .PP -->
 
@@ -1004,7 +1004,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <!-- TROFF INPUT: .PP -->
 <p>Currently, file permissions and ownerships are not copied. 'swcopy' is not
-intended to be used in the way of cp(1) or scp(1), although it can be if forced. 
+intended to be used in the way of cp or scp, although it can be if forced. 
 Non-existing directories in a target are created.  A source
 directory cannot be renamed (although a regular file can be). 
 A single source file is specified for one or more targets.  The
@@ -1410,7 +1410,7 @@ This command can be controlled by the --shell-command option or the
 swbis<tt>_</tt>shell<tt>_</tt>command defaults file option. 
 Permitted values are "bash" (/bin/bash -s), "sh" (/bin/sh -s), "ksh" (/bin/ksh -s) or
 "posix" ('PATH=`getconf PATH` sh -s').  The default is "posix". 
-swcopy(8) requires the POSIX capability of reading commands on stdin
+swcopy requires the POSIX capability of reading commands on stdin
 according to the specification described in IEEE Std 1003.1, 2003 Ed.; sh -shell,
 Section STDIN.  This requirement accommodates reading of shell program code and
 data on STDIN.  This capability may not be present in some /bin/sh shells. 
@@ -1490,7 +1490,10 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <!-- DEBUG: print_menu("SEE ALSO") -->
 <!-- TROFF INPUT: .PP -->
-<p>sw(5), swbisparse(8), swign(1), swverify(8)
+<p>info swbis
+<!-- TROFF INPUT: .PP -->
+
+   <p>sw(5), swbisparse(8), swign(1), swverify(8)
 <!-- TROFF INPUT: .SH "IDENTIFICATION" -->
 
 <div class="node">
@@ -1506,8 +1509,8 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- DEBUG: print_menu("IDENTIFICATION") -->
 <p>swcopy(8): The archive copying utility of the swbis project. 
  Author: Jim Lowe   Email: jhlowe at acm.org
- Version: 0.406
- Date: 2004-09-01
+ Version: 0.443
+ Date: 2005-05-05
  Copying: GNU Free Documentation License
 <!-- TROFF INPUT: .SH "BUGS" -->
 
@@ -1550,8 +1553,8 @@ recommended).
 Swcopy does not support using the cpio utility since its archive writing
 interface is unlike pax and tar, although, future support is possible for
 archive reading. 
-<!-- TROFF INPUT: ...\" created by instant / docbook-to-man, Sat 09 Oct 2004, 18:13 -->
-<!-- ...\" created by instant / docbook-to-man, Sat 09 Oct 2004, 18:13 -->
+<!-- TROFF INPUT: ...\" created by instant / docbook-to-man, Sat 07 May 2005, 16:50 -->
+<!-- ...\" created by instant / docbook-to-man, Sat 07 May 2005, 16:50 -->
 
 </body></html>
 

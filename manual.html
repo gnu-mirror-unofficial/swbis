@@ -8,13 +8,13 @@
 <link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <!--
 This manual is for swbis
-(version 0.411, 03 October 2004),
+(version 0.446, 08 May 2005),
 which is a implementation of the POSIX System Administration -- Part 2: Software Administration
 conforming to IEEE Std 1387.2-1995 (ISO/IEC 15068-2) and Open Group CAE C701.
 Currently, not all of the standard is implemented.  There are extensions for package authentication.
 Extensions to the standard are indicated as such in this document.
 
-Copyright (C) 2004 James H. Lowe, Jr.
+Copyright (C) 2005 James H. Lowe, Jr.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -52,13 +52,13 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#dir">(dir)</a>
 <h2 class="unnumbered">swbis</h2>
 
 <p>This manual is for swbis
-(version 0.411, 03 October 2004),
+(version 0.443, 04 May 2005),
 which is a implementation of the POSIX System Administration &ndash; Part 2: Software Administration
 conforming to IEEE Std 1387.2-1995 (ISO/IEC 15068-2) and Open Group CAE C701. 
 Currently, not all of the standard is implemented.  There are extensions for package authentication. 
 Extensions to the standard are indicated as such in this document.
 
-   <p>Copyright &copy; 2004 James H. Lowe, Jr.
+   <p>Copyright &copy; 2005 James H. Lowe, Jr.
 
    <blockquote>
 Permission is granted to copy, distribute and/or modify this document
@@ -359,9 +359,11 @@ the ./catalog/ directory which contains the package metadata,
 GPG signature and digests which are stored as separate regular files,
 and as ascii text of course.
 
-   <p><span class="command">swinstall</span> is usable though missing lots of POSIX capability, including
-control script (postinstall) execution. It can install RPM packages on/to hosts
-that do not have <span class="command">rpm</span>.
+   <p><span class="command">swinstall</span> is usable though missing some Posix features.  Control script
+execution is implemented for checkinstall, preinstall, and postinstall. 
+Dependency checks are not implemented.  Only packages with one product and one fileset
+are supported.  <span class="command">swinstall</span> can install RPM packages on/to hosts that have neither
+<span class="command">rpm</span> nor <span class="command">swinstall</span>.
 
    <p><span class="command">swcopy</span> is usable though missing lots of POSIX capability. 
 It can be used to translate an RPM to a POSIX package with a leading path. 
@@ -1160,19 +1162,22 @@ OPTIONS
 	      Reads software_selections from FILE. (Not implemented).
 
        -p
-	      Preview the package in the form of a file list.  The  target  is
-	      not written.
+	      Preview the  package.   Perform  all  the	 packaging  operations
+	      except writing the target.  In verbose level 1, nothing is writ-
+	      ten.  Higher verbose levels write information on stdout.	 Error
+	      and  warning messages are written to stderr for verbose levels 1
+	      and higher.
 
 
        -s PSF
 	      Specify the PSF file, "-" is standard input.
 
        -x option=value
-	      Specify  the extended option overriding the defaults file value.
+	      Specify the extended option overriding the defaults file	value.
 
        -X FILE
-	      Specify the extended options  filename,  FILE,   overriding  the
-	      default  filenames.  This option may be given more then once. If
+	      Specify  the  extended  options  filename, FILE,	overriding the
+	      default filenames.  This option may be given more then once.  If
 	      the resulting specified value is an empty string then reading of
 	      any options file is disabled.
 
@@ -1181,10 +1186,10 @@ OPTIONS
 	      verbose=2.   This	 option	 can  be  given	 multiple  times  with
 	      increasing effect.
 		   level 0: silent on stdout and stderr (not implemented).
-		   level 1: fatal and warning messages to stderr.
-	      -v   level 2: level 1 plus trailer message to stderr.
-	      -vv  level 3: level 2 plus file list to stderr.
-	      -vvv level 4: level 3 plus progress messages to stderr.
+		   level 1: fatal and warning messages.
+	      -v   level 2: level 1 plus file list and trailer message.
+	      -vv  level 3: level 2 verbose tar-like listing.
+	      -vvv level 4: level 3 extra verbose tar listing.
 
        -b BYTES
 	      Set blocksize to BYTES number of bytes (octets).	The default is
@@ -1199,51 +1204,51 @@ OPTIONS
        -W option[,option,...]
 	      Specify the implementation extension option.
 	      Syntax: -W option[=option_argument[,option...]
-	      Options may be separated by a comma.  The implementation	exten-
-	      sion  options  may also be given individually using the '--long-
+	      Options  may be separated by a comma.  The implementation exten-
+	      sion options may also be given individually using	 the  '--long-
 	      option[=option_arg]' syntax.
 
        -W cksum
 	      Compute posix cksum of the individual files.
 
        -W file-digests -W digests
-	      Compute md5 digests of the individual  files.   (-W  digests  is
+	      Compute  md5  digests  of	 the individual files.	(-W digests is
 	      deprecated, use -W file-digests).
 
        -W files
 	      Store the distribution file list in .../dfiles/files.
 
        -W dir=NAME
-	      Use  NAME	 as the leading path in a distribution and also as the
+	      Use NAME as the leading path in a distribution and also  as  the
 	      value of the distribution.control_directory and distribution.tag
 	      attribute (if not set).  May be set to an empty string to elimi-
 	      nate stray leading "./".
 
        -W sign
-	      Compute the md5sum, sha1sum and adjunct_md5sum digests and  sign
+	      Compute  the md5sum, sha1sum and adjunct_md5sum digests and sign
 	      the package.
 
        -W dummy-sign
-	      Same  as	-W sign except use a dummy signature.  The signer pro-
+	      Same as -W sign except use a dummy signature.  The  signer  pro-
 	      gram is not run and no password is required.
 
        -W signer-pgm=SIGNER
-	      Recognized SIGNERs are GPG, PGP2.6, and PGP5.  swverify(8)  only
-	      supports	GPG,  however,	other  types  can be verified manually
-	      using the options of swverify(8) and command line utilities.
+	      Recognized  SIGNERs  are	GPG,  PGP2.6, and PGP5.	 swverify only
+	      supports GPG, however, other  types  can	be  verified  manually
+	      using the options of swverify and command line utilities.
 
        -W archive-digests
-	      Compute the md5sum, sha1sum  and	adjunct_md5sum	digests.   See
-	      sw(5)  for  info on the digest and signed data input files.  The
+	      Compute  the  md5sum,  sha1sum  and adjunct_md5sum digests.  See
+	      sw(5) for info on the digest and signed data input  files.   The
 	      sha1sum and md5sum attributes have identical input streams.
 
        -W no-sha1
-	      Do not compute the sha1 digest even  if  directed	 to  by	 other
-	      options.	 (Deprecated:  There  is  limited  reason  to use this
+	      Do  not  compute	the  sha1  digest even if directed to by other
+	      options.	(Deprecated: There  is	limited	 reason	 to  use  this
 	      option).
 
        -W signed-file
-	      Write only the signed data to the specified target  but  do  not
+	      Write  only  the	signed data to the specified target but do not
 	      sign.  (Deprecated: There is limited reason to use this option).
 
        -W gpg-name=NAME
@@ -1260,35 +1265,44 @@ OPTIONS
 	      Not implemented.
 
        -W source=FILE
-	      Use  serial archive located at FILE as the source instead of the
-	      file system.  The files referred by the PSF are taken  from  the
+	      Use serial archive located at FILE as the source instead of  the
+	      file  system.   The files referred by the PSF are taken from the
 	      serial archive and not the file system.
 
        -W numeric-owner
-	      Same  as GNU tar option.	Emitted archive has only uid and gids.
+	      Same as GNU tar option.  Emitted archive has only uid and	 gids.
 
        -W absolute-names
-	      Same as GNU tar option.  Leading slash '/' are  always  stripped
+	      Same  as	GNU tar option.	 Leading slash '/' are always stripped
 	      unless this option is given.
 
        -W format=FORMAT
-	      FORMAT is one of ustar (default), gnutar, newc, crc, odc.
+	      FORMAT is one of:
 
 	       ustar   is the POSIX.1 tar format capable of storing
-			pathnames up to 255 characters in length.
-			Identical to GNU tar --posix -b1 for 99 char pathnames
-	       bsdpax3 Identical to pax v3.0, ustar format with option -b 512.
-	       gnutar  Identical to GNU tar version 1.13 and later with
+		       pathnames up to 255 characters in length.
+		       Identical to GNU tar 1.15.1 --format=ustar
+		       This is the default format but may be changed by
+		       the options files.
+	       ustar0  is a different POSIX.1 tar personality.
+		       Identical to GNU tar 1.13.25 --posix -b1 for 99 char pathnames
+		       Has different rendering of device numbers for non-device files,
+		       but otherwise identical to 'ustar'
+	       gnu     Identical to GNU tar version 1.15.1 --format=gnu
+	       oldgnu  Identical to GNU tar version 1.13 and later with
 			   block size set to 1. i.e. with option -b1.
+		       Also identical to GNU tar 1.15.1 --format=oldgnu
+	       gnutar  same as oldgnu, oldgnu preferred.
 	       pax     Extended header tar (Not implemented).
 	       odc     Posix.1 cpio (magic 070707).
 	       newc    cpio format (magic 070701).
 	       crc     cpio format (magic 070702).
+	       bsdpax3 Identical to pax v3.0, ustar format with option -b 512.
 
 
        -W create-time=TIME
 	      Applies to catalog files and the create_time attribute.  TIME is
-	      the seconds since the Unix Epoch.	 You must use this  option  to
+	      the  seconds  since the Unix Epoch.  You must use this option to
 	      make output reproducible by different invocations.
 
        -W list-psf
@@ -1297,9 +1311,9 @@ OPTIONS
 
 
        -W 2posixformat
-	      Read a package on standard input and write a  POSIX  package  on
-	      standard	output.	 Requires the .../libexec/swbis/lxpsf program.
-	      Supported formats are any supported format of lxpsf.   Identical
+	      Read  a  package	on standard input and write a POSIX package on
+	      standard output.	Requires the .../libexec/swbis/lxpsf  program.
+	      Supported	 formats are any supported format of lxpsf.  Identical
 	      to:
 	      /swbis/lxpsf --psf-form2 -H ustar | swpackage -Wsource=- -s@PSF
 
@@ -1307,22 +1321,22 @@ OPTIONS
 	      Read the passphrase on file descriptor N.
 
        -W passfile=FILE
-	      Read  the passphrase from FILE in the file system.  Setting FILE
-	      to /dev/tty resets (i.e unsets) all passphrase directives,  thus
+	      Read the passphrase from FILE in the file system.	 Setting  FILE
+	      to  /dev/tty resets (i.e unsets) all passphrase directives, thus
 	      establishing the default action, reading from the terminal.
 
        -W dir-owner=OWNER
-	      Set  the owner of the leading directory archive member to OWNER.
+	      Set the owner of the leading directory archive member to	OWNER.
 	      If the option arg is "", then the owner is the owner of the cur-
 	      rent directory.
 
        -W dir-group=OWNER
-	      Set  the group of the leading directory archive member to OWNER.
+	      Set the group of the leading directory archive member to	OWNER.
 	      If the option arg is "", then the owner is the owner of the cur-
 	      rent directory.
 
        -W dir-modep=MODE
-	      Set  the	file permissions mode of the leading directory archive
+	      Set the file permissions mode of the leading  directory  archive
 	      member to MODE.
 
        -W catalog-owner=OWNER
@@ -1332,7 +1346,7 @@ OPTIONS
 	      Set the group of the catalog section to GROUP.
 
        -W files-from=NAME
-	      Read a list of  files  from  file	 NAME.	 Directories  are  not
+	      Read  a  list  of	 files	from  file  NAME.  Directories are not
 	      descended recursively.
 
        -W show-options-files
@@ -1350,12 +1364,12 @@ OPTIONS
 	      alog section.
 
 EXTENDED OPTIONS
-       These  extended	options can be specified on the command line using the
+       These extended options can be specified on the command line  using  the
        -x option or from the defaults file, swdefaults.
 
    Posix
-       Shown below is an actual portion of a defaults file which show  default
-       values.	 These options are set in the /usr/lib/swbis/swdefaults or the
+       Shown  below is an actual portion of a defaults file which show default
+       values.	These options are set in the /usr/lib/swbis/swdefaults or  the
        ~/.swdefaults file.
 
 
@@ -1376,7 +1390,7 @@ EXTENDED OPTIONS
        These extended options can be specified on the command line using -Wop-
        tion=optionarg or --option=optionarg syntax.
 
-       These  options  are  set	 in  the  /usr/lib/swbis/swbisdefaults	or the
+       These options  are  set	in  the	 /usr/lib/swbis/swbisdefaults  or  the
        ~/.swbis/swbisdefaults file.
 
 
@@ -1400,52 +1414,51 @@ PACKAGE SIGNING
 
    Description
        Package signing is accomplished by including, as a package attribute, a
-       detached	 signature in the package metadata (the catalog section of the
-       package).  The signed data is the catalog section of the	 package  (see
-       sw(5)  for  a description) excluding the signature files archive header
-       and data.  The package leading directory	 that  does  not  contain  the
-       /catalog/  directory  in its name is not included in the signed stream.
-       The signed stream is terminated by two (2) null tar blocks  (which  are
-       not  in	the actual package file).  The storage section (or payload) of
-       the package is included in the signed data by  computing	 its  md5  and
-       sha1  message  digests  and  storing these as attributes in the catalog
+       detached signature in the package metadata (the catalog section of  the
+       package).   The	signed data is the catalog section of the package (see
+       sw(5) for a description) excluding the signature files  archive	header
+       and  data.   The	 package  leading  directory that does not contain the
+       /catalog/ directory in its name is not included in the  signed  stream.
+       The  signed  stream is terminated by two (2) null tar blocks (which are
+       not in the actual package file).	 The storage section (or  payload)  of
+       the  package  is	 included  in the signed data by computing its md5 and
+       sha1 message digests and storing these as  attributes  in  the  catalog
        section.
 
    Signature Generation
-       The signature is generated by the file system  signing  utility.	  Cur-
-       rently,	swpackage  supports GPG PGP-2.6 and PGP-5.  The default is GPG
-       but can be selected using the -Wsigner-pgm command line option and  the
-       swpackage.swbis_signer_pgm  defaults file option.  The options and pro-
-       gram can the displayed with the -Wshow-signer-pgm option.  The  options
-       in  each	 case produce a detached ascii-armored signature.  The maximum
+       The  signature  is  generated by the file system signing utility.  Cur-
+       rently, swpackage supports GPG PGP-2.6 and PGP-5.  The default  is  GPG
+       but  can be selected using the -Wsigner-pgm command line option and the
+       swpackage.swbis_signer_pgm defaults file option.	 The options and  pro-
+       gram  can the displayed with the -Wshow-signer-pgm option.  The options
+       in each case produce a detached ascii-armored signature.	  The  maximum
        length for the ascii armored file is 1023 bytes.
 
    Passphrase Handling
-       The passphrase is read by the swpackage utility from the	 process  con-
+       The  passphrase	is read by the swpackage utility from the process con-
        trolling terminal or stdin if there is no controlling terminal.	A sep-
-       arate dedicated process reads the passphrase which may  be  up  to  239
+       arate  dedicated	 process  reads	 the passphrase which may be up to 239
        characters in length.  It is immediately written into a Unix pipe, read
        by the signer program on file descriptor three (fd=3), its memory loca-
        tion wiped, and the dedicated process exited.
 
 SIGNATURE VERIFICATION
-       swpackage(8)  does  not	perform	 verification  of the embedded crypto-
-       graphic signature, although, a description is included  here  for  com-
-       pletness.
+       swpackage does not perform verification of the  embedded	 cryptographic
+       signature, although, a description is included here for completness.
 
    Overview
        Verification  requires  verifying the payload section md5 and sha1 mes-
        sage digests and	 then  verifying  the  signature.   Naturally,	it  is
        required	 that  the  signed  data include the payload messages digests.
-       See swverify(8).
+       See swverify.
 
    Manual Verification
        Verification requires re-creating the signed and digested byte  streams
        from the archive file.  This is not possible using any known extant tar
        reading utility because of a lack of ability to write selected  archive
        members	to  stdout  instead of installing in the file system; however,
-       the swverify(8) utility can be used to write  these  bytes  streams  to
-       stdout allowing manual inspection and verification.  See swverify(8).
+       the swverify utility can be used to write these bytes streams to stdout
+       allowing manual inspection and verification.  See swverify.
 
    Manual Verification Using Standard Tools
        Verification  using standard GNU/Linux tools is possible if the archive
@@ -1500,17 +1513,17 @@ SIGNATURE VERIFICATION
        INFO file information.
 
 SWPACKAGE INPUT FILE FORMAT
-       The  input  file	 is  a called a product specification file or PSF.  It
-       contains information to direct swpackage(8)  and	 information  that  is
-       package meta-data [that is merely transferred unchanged into the global
-       INDEX file].
+       The  input file is called a product specification file or PSF.  It con-
+       tains information to direct swpackage and information that  is  package
+       meta-data  [that	 is merely transferred unchanged into the global INDEX
+       file].
 
        A PSF may contain object keywords, attributes (keyword/value pairs) and
        Extended	 Definitions  (described below).  An object keyword connotes a
-       logical object or software structure supported  by  the	standard.   An
+       logical object (i.e. software structure) supported by the standard.  An
        object  keyword	does  not  have a value field after it, as it contains
-       attributes and Extended Definitions.  An attribute keyword  conotes  an
-       attribute (i.e. keyword/value pair) and always has a value.
+       Attributes and Extended Definitions.  An attribute keyword  conotes  an
+       attribute which is always in the form of a keyword/value pair.
 
        Attribute  keywords  not recognized by the standard are allowed and are
        transferred into the INDEX file.	 Object keywords not recognized by the
@@ -1520,7 +1533,7 @@ SWPACKAGE INPUT FILE FORMAT
        object keywords (objects) and attributes recognized by the standard.
 
        Comments in a PSF are not transferred into the INDEX file by the	 swbis
-       implementation of swpackage(8).
+       implementation of swpackage.
 
        The  file  syntax is the same as a INDEX, or INFO file.	A PSF may con-
        tain all objects defined by the standard as well	 as  extended  defini-
@@ -1528,7 +1541,7 @@ SWPACKAGE INPUT FILE FORMAT
 
        For additional information see
        XDSA C701 http://www.opengroup.org/publications/catalog/c701.htm, or
-       sw(5) manual page.
+       sw manual page.
 
    EXTENDED DEFINITIONS
        A  Product Specification File (PSF) can contain Extended Definitions in
@@ -1603,7 +1616,7 @@ SWPACKAGE INPUT FILE FORMAT
 
 	      source defines the pathname of the file to be used as the source
 	      of file data and/or attributes.  If it is a relative path,  then
-	      swpackage(8)  searches  for this file relative to the the source
+	      swpackage	 searches  for	this  file  relative to the the source
 	      argument of the directory keyword, if set.  If directory keyword
 	      is  not  set  then the search is relative to the current working
 	      directory of the swpackage utility's invocation.
@@ -1766,10 +1779,10 @@ SWPACKAGE INPUT FILE FORMAT
 	      (not  as a path name component) by swinstall.  If this attribute
 	      exists there should also be a vendor object in the  PSF  in  the
 	      distribution  object  that  has  this  tag.   This  attribute is
-	      assigned the value of RPMTAG_RELEASE by swpackage(8) when trans-
-	      lating  an RPM.  In this capacity it serves to distinguish prod-
-	      ucts with the same revision and tag from the same	 or  different
-	      vendor.	 It   most  closely  maps  to  the  RPMTAG_RELEASE  or
+	      assigned the value of RPMTAG_RELEASE by swpackage when translat-
+	      ing  an RPM.  In this capacity it serves to distinguish products
+	      with the same revision and tag from the same or  different  ven-
+	      dor.    It   most	  closely   maps   to  the  RPMTAG_RELEASE  or
 	      "debian_revision" attributes.
 
    o Fileset Attributes
@@ -1945,49 +1958,58 @@ SWPACKAGE OUTPUT FORMAT
        The output format is either one of two  formats	specified  in  POSIX.1
        (ISO/IEC	 9945-1)  which	 are  tar (header magic=ustar) or cpio (header
        magic=070707).  The default  format  of	the  swbis  implementation  is
-       'ustar'.	  The  POSIX  spec under specifies definitions for some of the
-       ustar header fields.  The "personality" of the default swbis ustar for-
-       mat  mimics,  for pathnames less than 99 octets,	 GNU tar 1.13.25 using
-       the "-b1 --posix" options.  This bit-for-bit sameness  does  not	 exist
-       for pathnames greater than 99 chars as swbis follows the POSIX spec and
-       GNU tar 1.13.25 does not.
+       "ustar".	  The  POSIX  spec under specifies definitions for some of the
+       ustar header fields.  The personality of the default swbis ustar format
+       mimics  GNU tar 1.15.1 and is designed to be compliant to POSIX.1.  The
+       personality of the "ustar0" format mimics, for pathnames less  than  99
+       octets,	 GNU  tar  1.13.25 using the "-b1 --posix" options.  This bit-
+       for-bit sameness does not exist for pathnames greater than 99 chars  as
+       swbis  follows  the  POSIX  spec	 and  GNU  tar	1.13.25 does not.  The
+       "ustar0" ustar personality is deprecated.  It is only slightly  differ-
+       ent  from  'ustar' in how device number fields are filled (with spaces,
+       zeros or NULs) for non-device files.
 
-       In addition the swbis implementation supports  several  other  tar  and
-       cpio variants including bit-for-bit mimicry of GNU tar (1.13.25) gnutar
-       format which uses a non-standard name split and file type  (type	 'L');
-       also  supported	is  the	 "new  ASCII" (sometimes called SVR4 cpio) and
-       "crc" cpio formats with header  magic  "070701"	and  "070702"  respec-
-       tively.	 Support  for  "pax  Interchange Format" (Extended header tar)
-       described in IEEE 1003.1-2001 under the "pax" manual page is planned.
+       In addition the swbis implementation supports several other  tar	 vari-
+       ants  including bit-for-bit mimicry of GNU tar (1.13.25) default format
+       which uses a non-standard name split and file type  (type  'L').	  This
+       format is known as '--format=oldgnu'.  Also supported is the gnu format
+       of GNU tar 1.15.1 specified by '--format=gnu'
 
-       The entirety of the output byte stream is a single valid	 file  of  one
+       The defacto cpio formats are also supported.   "new  ASCII"  (sometimes
+       called SVR4 cpio) and "crc" cpio formats with header magic "070701" and
+       "070702" respectively.
+
+       Support for "pax Interchange Format" (Extended header tar) described in
+       IEEE 1003.1-2001 under the "pax" manual page is planned.
+
+       The  entirety  of  the output byte stream is a single valid file of one
        the formats mentioned above.
 
        The swbis implementation writes its output to stdout.  The default out-
        put block size is 10240 bytes.  The last block is not padded and there-
-       fore  the  last write(2) may be a short write.  The selected block size
+       fore the last write(2) may be a short write.  The selected  block  size
        does not affect the output file contents.
 
-       The swbis implementation is biased, in terms of capability and  default
-       settings,  to the tar format.  Package signing is only supported in tar
+       The  swbis implementation is biased, in terms of capability and default
+       settings, to the tar format.  Package signing is only supported in  tar
        format.
 
 RETURN VALUE
-       0 on success, 1 on error and target medium not modified, 2 on error  if
+       0  on success, 1 on error and target medium not modified, 2 on error if
        target medium modified.
 
 SIDE EFFECTS
-	No  temporary  files are used in the package generation process.  When
-       using the default target of stdout (directed to /dev/null),  there  are
-       no file system side effects from swpackage(8).  GNU Privacy Guard (gpg)
+	No temporary files are used in the package generation  process.	  When
+       using  the  default target of stdout (directed to /dev/null), there are
+       no file system side effects from swpackage.  GNU	 Privacy  Guard	 (gpg)
        may alter its keys when invoked for package signing.
 
 ENVIRONMENT
-       The environment	variable  SWPACKAGEPASSFD  sets	 the  passphrase  file
+       The  environment	 variable  SWPACKAGEPASSFD  sets  the  passphrase file
        descriptor (See option -Wpassphrase-fd).
 
 REQUISITE UTILITIES
-       Swpackage  does	not  use any archive writing utilities, it has its own
+       Swpackage does not use any archive writing utilities, it	 has  its  own
        code to generate archives.
        Package signing uses one of the following:
 	/usr/bin/gpg
@@ -2008,20 +2030,22 @@ APPLICABLE STANDARDS
        ISO/IEC 15068-2:1999, Open Group CAE C701.
 
 SEE ALSO
+       info swbis
+
        sw(5), swpackage(5), swbisparse(8), swign(1), swverify(8)
 
 IDENTIFICATION
 	swpackage(8): The packaging utility of the swbis project.
 	Author: Jim Lowe   Email: jhlowe at acm.org
-	Version: swbis 0.406
-	Date: 2004-09-01
+	Version: swbis 0.443
+	Date: 2005-05-05
 	Copying: GNU Free Documentation License
 
 BUGS
-       A comment after an object keyword is wrongly not allowed	 by  this  PSF
+       A  comment  after  an object keyword is wrongly not allowed by this PSF
        parser.	The --dir="" does not do what one would expect sometimes.  The
-       output stream content is unaffected by the blocksize, that is the  last
-       write  may be short write.  Signing is broken for cpio format archives.
+       output  stream content is unaffected by the blocksize, that is the last
+       write may be short write.  Signing is broken for cpio format  archives.
 
 
 
@@ -2053,28 +2077,39 @@ SYNOPSIS
 
 
 DESCRIPTION
-       As  of  2004-04-03 swinstall is usable at an alpha release level.  Con-
-       trol script execution is not yet implemented.  Software selections  are
-       not  implemented.   Only	 distributions	with  one (1) product are sup-
-       ported, and all filesets are installed.
+       As of 2004-04-03 swinstall is usable at an alpha release level.
 
-       swinstall installs a POSIX distribution from a source archive to a tar-
-       get  directory.	 Neither  swinstall(8)	nor  any component of swbis is
-       required on the target host, however, the target host must look like  a
-       Unix  system  at	 the  shell  and command-line utility level and have a
-       posix shell.  Remote network connections are made by  ssh(1).   Ssh  is
-       the default but rsh can be selected by a command line option.
+       As  of  2005-05-03  swinstall  is usable at an alpha release level with
+       additional newly implemented features for checkinstall, preinstall, and
+       postinstall  execution.	Fileset state and script exit status recording
+       are also newly implemented.  Dependency	checks	are  not  implemented.
+       Software	 selections  are not implemented.  Only distributions with one
+       (1) product and one (1) fileset are supported.  At this time,  symlink,
+       hard  links,  directory, and device files are not supported unless they
+       appear in the storage section in which  case  they  will	 be  installed
+       using  the local system archive reading utility, either 'tar' or 'pax'.
+       (The Posix spec does not require non-regular  files  to	exist  in  the
+       storage section).
+
+       swinstall installs a Posix distribution from a source archive to a tar-
+       get directory.  A Posix distribution is a  package,  typically  a  com-
+       pressed	tarball	 with  metadata	 files	in the prescribed file layout.
+       Neither swinstall nor any component of swbis is required on the	target
+       host,  however,	the  target  host  must look like a Unix system at the
+       shell and command-line utility level and have a	posix  shell.	Remote
+       network connections are made by ssh.  Ssh is the default but rsh can be
+       selected by a command line option.
 
        By default and with no external influences (i.e. swdefaults file) swin-
-       stall will read an archive on stdin and install all products and	 file-
+       stall  will read an archive on stdin and install all products and file-
        sets of package in "/" directory on the target host.  An alternate root
-       may be specified using the  target  syntax.   The  distribution	source
-       directory  (swbis  default: stdin) is selectable via the defaults file,
+       may  be	specified  using  the  target syntax.  The distribution source
+       directory (swbis default: stdin) is selectable via the  defaults	 file,
        therefore it should be specified in uncontrolled environments.
 
-       swinstall operates on  cpio or tar archives.  swinstall	supports  cpio
-       archives	 by  first translating to tar format, therefore, to reduce the
-       data transformations performed by swinstall, vendors are encouraged  to
+       swinstall  operates  on	cpio or tar archives.  swinstall supports cpio
+       archives by first translating to tar format, therefore, to  reduce  the
+       data  transformations performed by swinstall, vendors are encouraged to
        deliver products in tar format.
 
 OPTIONS
@@ -2084,8 +2119,8 @@ OPTIONS
 
        -p
 
-	      Preview  the operation.  Depending on the verbose level informa-
-	      tion is written to stdout.  The target is not modified  although
+	      Preview the operation.  Depending on the verbose level  informa-
+	      tion  is written to stdout.  The target is not modified although
 	      a remote connection is established.
 
 
@@ -2097,7 +2132,7 @@ OPTIONS
        -s SOURCE
 
 	      Specify the source file SOURCE, "-" is standard input.  The syn-
-	      tax is the same as for a target.	SOURCE may be an archive  file
+	      tax  is the same as for a target.	 SOURCE may be an archive file
 	      or stdin.
 
        -t targetfile
@@ -2106,12 +2141,12 @@ OPTIONS
 
        -x option=value
 
-	      Specify  the extended option overriding the defaults file value.
+	      Specify the extended option overriding the defaults file	value.
 
        -X FILE
 
-	      Specify the extended options  filename,  FILE,   overriding  the
-	      default  filenames.  This option may be given more then once. If
+	      Specify  the  extended  options  filename, FILE,	overriding the
+	      default filenames.  This option may be given more then once.  If
 	      the resulting specified value is an empty string then reading of
 	      any options file is disabled.
 
@@ -2142,16 +2177,16 @@ OPTIONS
 
 	      Specify the implementation extension option.
 	      Syntax: -W option[=option_argument[,option...]
-	      Options  may be separated by a comma.  The implementation exten-
-	      sion options may also be given individually using	 the  '--long-
+	      Options may be separated by a comma.  The implementation	exten-
+	      sion  options  may also be given individually using the '--long-
 	      option[=option_arg]' syntax.
 
        -W preview-tar-file=FILE
 
 	      This  is	a  testing/development	option.	  Writes  the  fileset
-	      archive to FILE.	This is the same data stream that  would  have
+	      archive  to  FILE.  This is the same data stream that would have
 	      been loaded on the target.  This option should only be used with
-	      the '-p' option.	The output sent to FILE is a tar  archive  but
+	      the  '-p'	 option.  The output sent to FILE is a tar archive but
 	      without trailer blocks.
 
        -W remote-shell=NAME
@@ -2159,16 +2194,16 @@ OPTIONS
 
 	      Defaults File Option: swbis_remote_shell_client
 
-	      This  is	the remote connection client program on the management
-	      (originating host).  The path NAME may be an absolute path  (not
-	      located  in $PATH).  The basename of NAME is used for intermedi-
+	      This is the remote connection client program on  the  management
+	      (originating  host).  The path NAME may be an absolute path (not
+	      located in $PATH).  The basename of NAME is used for  intermedi-
 	      ate hops.	 Supported shells are "ssh" and "rsh".	The default is
 	      "ssh".
 
        -W quiet-progress
 
-	      Defaults	File Option: swbis_quiet_progress_bar Disable progress
-	      bar, which is active for verbose levels 2 and higher (i.e.  -v).
+	      Defaults File Option: swbis_quiet_progress_bar Disable  progress
+	      bar,  which is active for verbose levels 2 and higher (i.e. -v).
 
        -W show-options-files
 	      Show the complete list of options files and if they are found.
@@ -2178,7 +2213,7 @@ OPTIONS
 	      line options.
 
        -W pax-command={tar|pax|star|gtar}
-	      Set the  portable	 archive  command  for	all  operations.   The
+	      Set  the	portable  archive  command  for	 all  operations.  The
 	      default is "pax".
 
        -W pax-read-command={tar|pax|star|gtar}
@@ -2187,17 +2222,17 @@ OPTIONS
        -W remote-pax-read-command={tar|pax|star|gtar}
 	      Defaults File Option: swbis_remote_pax_read_command
 	      Set the read command for remote hosts.  This is the command that
-	      runs on the target (e.g. pax -r, tar xpf	-).   The  default  is
+	      runs  on	the  target  (e.g. pax -r, tar xpf -).	The default is
 	      "pax".
 
        -W local-pax-read-command={tar|pax|star|gtar}
 	      Defaults File Option: swbis_local_pax_read_command
-	      Set  the read command for local hosts.  This is the command that
-	      runs on the target (e.g. pax -r, tar xpf	-).   The  default  is
+	      Set the read command for local hosts.  This is the command  that
+	      runs  on	the  target  (e.g. pax -r, tar xpf -).	The default is
 	      "pax".
 
        -W pax-write-command={tar|pax|star|gtar|swbistar}
-	      Set  the	write command for local and remote hosts.  This is the
+	      Set the write command for local and remote hosts.	 This  is  the
 	      command that runs on the target (e.g. pax -w, tar cf -).
 
        -W remote-pax-write-command={tar|pax|star|gtar|swbistar}
@@ -2206,14 +2241,14 @@ OPTIONS
 
        -W local-pax-write-command={tar|pax|star|gtar|swbistar}
 	      Defaults File Option: swbis_local_pax_write_command
-	      Set the portable archive write command  for  local  host	opera-
-	      tions.   This  is	 the command that runs on the source (e.g. pax
+	      Set  the	portable  archive  write command for local host opera-
+	      tions.  This is the command that runs on the  source  (e.g.  pax
 	      -w, tar cf -).  The default is "pax".
 
        -W remote-pax-write-command={tar|pax|star|gtar|swbistar}
 	      Defaults File Option: swbis_remote_pax_write_command
-	      Set the portable archive write command for  remote  host	opera-
-	      tions.   This  is	 the command that runs on the source (e.g. pax
+	      Set  the	portable  archive write command for remote host opera-
+	      tions.  This is the command that runs on the  source  (e.g.  pax
 	      -w, tar cf -).  The default is "pax".
 
        -W no-defaults
@@ -2221,23 +2256,23 @@ OPTIONS
 
        -W no-remote-kill
 	      Defaults File Option: swbis_no_remote_kill
-	      Disables the use of a second remote connection to tear down  the
-	      first  in	 the  event of SIGINT or SIGTERM or SIGPIPE.  Only has
-	      effect if the number of ssh hops is greater than	1.   A	single
-	      host  remote connection (ssh hop = 1) never uses a second remote
+	      Disables	the use of a second remote connection to tear down the
+	      first in the event of SIGINT or SIGTERM or  SIGPIPE.   Only  has
+	      effect  if  the  number of ssh hops is greater than 1.  A single
+	      host remote connection (ssh hop = 1) never uses a second	remote
 	      connection.
 
        -W no-getconf
 	      Defaults File Option: swbis_no_getconf
-	      Makes the remote command be '/bin/sh -s' instead of the  default
+	      Makes  the remote command be '/bin/sh -s' instead of the default
 	      'PATH=`getconf PATH` sh -s'.
 
        -W shell-command=NAME
 	      Defaults File Option: swbis_shell_command
-	      This  is	the interactive shell on the target host.  NAME may be
-	      one of "bash", "sh", "ksh"  or "posix" and specifies the	remote
-	      command  run  by	the  remote  shell.  "posix" is 'PATH=`getconf
-	      PATH` sh -s', "bash" is "/bin/bash -s", "sh"  is	"/bin/sh  -s",
+	      This is the interactive shell on the target host.	 NAME  may  be
+	      one  of "bash", "sh", "ksh"  or "posix" and specifies the remote
+	      command run by the  remote  shell.   "posix"  is	'PATH=`getconf
+	      PATH`  sh	 -s',  "bash" is "/bin/bash -s", "sh" is "/bin/sh -s",
 	      and "ksh" is "ksh -s".  The default is "posix".
 
        -W use-getconf
@@ -2245,50 +2280,50 @@ OPTIONS
 
        -W allow-rpm
 	      Defaults File Option: swbis_allow_rpm
-	      Enable  automatic	 detection,  translation  to POSIX format, and
+	      Enable automatic detection, translation  to  Posix  format,  and
 	      installation of RPMs.
 
        -W pump-delay1=NANOSECONDS
-	      Adds a NANOSECONDS delay	(999999999  nanoseconds	 ~  1  second)
-	      every  ADJSIZE  bytes  in	 the  file data byte pump.  A delay of
-	      10111000 nanoseconds (~1/100th second) is	 added	for  2-hop  or
+	      Adds  a  NANOSECONDS  delay  (999999999  nanoseconds ~ 1 second)
+	      every ADJSIZE bytes in the file data  byte  pump.	  A  delay  of
+	      10111000	nanoseconds  (~1/100th	second)	 is added for 2-hop or
 	      greater target (i.e more than 1 remote host in the target spec).
-	      This is a work around for a bug in  OpenSSH  [or	Linux  kernel]
-	      that  is seen for multi-hop installs where the intermediate host
-	      is a Linux kernel.  If 2-hop install fails, try  it  again,  you
-	      may  get	lucky,	or,  increase this delay, or, use ssh protocol
-	      version 1 by using ''--ssh-options=1'', or try a	2-hop  install
-	      where  the  middle host is BSD.  For more information about this
+	      This  is	a  work	 around for a bug in OpenSSH [or Linux kernel]
+	      that is seen for multi-hop installs where the intermediate  host
+	      is  a  Linux  kernel.  If 2-hop install fails, try it again, you
+	      may get lucky, or, increase this delay,  or,  use	 ssh  protocol
+	      version  1  by using ''--ssh-options=1'', or try a 2-hop install
+	      where the middle host is BSD.  For more information  about  this
 	      bug see the README file from the source distribution.
 
        -W burst-adjust=ADJSIZE
-	      ADJSIZE is the pumped data size, in bytes, between the  NANOSEC-
-	      ONDS  delays.  This is a work around for a bug in OpenSSH or the
-	      Linux kernel that is  seen  for  multi-hop  installs  where  the
-	      intermediate  host  is a Linux kernel.  The default is 72000 for
-	      2-hops or greater, and zero (0 disables delay)  for  single  hop
+	      ADJSIZE  is the pumped data size, in bytes, between the NANOSEC-
+	      ONDS delays.  This is a work around for a bug in OpenSSH or  the
+	      Linux  kernel  that  is  seen  for  multi-hop installs where the
+	      intermediate host is a Linux kernel.  The default is  72000  for
+	      2-hops  or  greater,  and zero (0 disables delay) for single hop
 	      and localhost installs.
 
        -W ssh-options=OPTIONS
-	      ssh  client  program options.  For example -W ssh-options=1 sets
+	      ssh client program options.  For example -W  ssh-options=1  sets
 	      the '-1' ssh client option which specifies protocol version 1.
 
        software_selections
 
-	      Refer to the software objects (products, filesets) on  which  to
-	      be  operated.  (Not  implemented).   The	implementation defined
+	      Refer  to	 the software objects (products, filesets) on which to
+	      be operated.  (Not  implemented).	  The  implementation  defined
 	      behavior for no selections is to operate on the entire distribu-
 	      tion.
 
 
        target
 
-	      Refers  to the software_collection where the software selections
-	      are to be applied.  Allows specification of  host	 and  pathname
-	      where  the  software  collection is located.  A target that con-
-	      tains only one part is assumed  to  be  a	 hostname.   To	 force
-	      interpretation  as  a  path,  use a absolute path or prefix with
-	      ':'.
+	      Refers to the software_collection where the software  selections
+	      are  to  be  applied.  Allows specification of host and pathname
+	      where the software collection is to be located.  A  target  that
+	      contains	only  one  part is assumed to be a hostname.  To force
+	      interpretation as a path, use an absolute path  or  prefix  with
+	      ':'.  The default target path for 'swinstall' is always '/'.
 
 	       Source and Target Specification and Logic
 
@@ -2368,24 +2403,45 @@ OPTIONS
 
 
 INSTALLED SOFTWARE CATALOG
-       ** As of 2004-02-12 the form and features  of  the  catalog  are	 under
+       **  As  of  2004-02-12  the  form and features of the catalog are under
        active development. **
 
        The form or format of an installed software catalog is not specified by
-       the ISO/IEC spec although it does specify  an  interface	 to  it	 (e.g.
+       the  ISO/IEC  spec  although  it	 does specify an interface to it (e.g.
        swlist utility) and operations on it.
 
-       This  implementation  creates  a	 de-facto  installed  software catalog
-       rooted at the file system path specified by the value of	 the  extended
-       option  installed_software_catalog.  The catalog is a file system hier-
-       archy containing regular files and directories with special  and	 mean-
-       ingful names.
+       This implementation  creates  a	de-facto  installed  software  catalog
+       rooted  at  the	file  system  path  specified  by  the	value  of  the
+       'installed_software_catalog' extended option.  The catalog  is  a  file
+       system hierarchy containing regular files and directories.
+
+   CATALOG FILE LAYOUT
+	&lt;path>/
+	&lt;path>/&lt;ISC>/
+	&lt;path>/&lt;ISC>/&lt;bundle>/
+	&lt;path>/&lt;ISC>/&lt;bundle>/&lt;product>/
+	&lt;path>/&lt;ISC>/&lt;bundle>/&lt;product>/&lt;pr>/
+	&lt;path>/&lt;ISC>/&lt;bundle>/&lt;product>/&lt;pr>/&lt;seqence_number>/
+	&lt;path>/&lt;ISC>/&lt;bundle>/&lt;product>/&lt;pr>/&lt;sequence_number>/export/
+	&lt;path>/&lt;ISC>/&lt;bundle>/&lt;product>/&lt;pr>/&lt;sequence_number>/export/catalog.tar
+	&lt;path>/&lt;ISC>/&lt;bundle>/&lt;product>/&lt;pr>/&lt;sequence_number>/export/catalog.tar.sig
+	&lt;path>/&lt;ISC>/&lt;bundle>/&lt;product>/&lt;pr>/&lt;sequence_number>/export/catalog.tar.sig&lt;N>
+	&lt;path>/&lt;ISC>/&lt;bundle>/&lt;product>/&lt;pr>/&lt;sequence_number>/INSTALLED
+	&lt;path>/&lt;ISC>/&lt;bundle>/&lt;product>/&lt;pr>/&lt;sequence_number>/control.sh
+	&lt;path>/&lt;ISC>/&lt;bundle>/&lt;product>/&lt;pr>/&lt;sequence_number>/session_options
+	&lt;path>/&lt;ISC>/&lt;bundle>/&lt;product>/&lt;pr>/&lt;sequence_number>/vendor_tag
+
+
+       &lt;path>  is  the target path.  &lt;ISC> is the value of the installed_soft-
+       ware_cataglog extended option.  &lt;bundle> and &lt;product> are  bundle  and
+       product	tags.	If  there is no bundle in the distribution the product
+       tag is used.  &lt;pr> is the product revision.  Other items are  explained
+       below.
 
    CATALOG LOCATION
        /&lt;path>/
        /&lt;path>/&lt;installed_software_catalog>/
        /&lt;path>/&lt;installed_software_catalog>/...
-
 
 
        * Root or Alternate Root
@@ -2394,14 +2450,12 @@ INSTALLED SOFTWARE CATALOG
        &lt;path>/	is  the target path specified in the target syntax. By default
        "/".
 
-
        * Catalog Relative Root Directory
        /&lt;path>/
        /&lt;path>/&lt;installed_software_catalog>/
 
        &lt;installed_software_catalog>/ is the value of the  extended  option  by
        the same name.  By default "var/lib/swbis/catalog".
-
 
    PACKAGE CATALOG RELATIVE ROOT
        /&lt;{bundle|prod}.tag>/&lt;prod.tag>/&lt;prod.revision>/...
@@ -2413,8 +2467,6 @@ INSTALLED SOFTWARE CATALOG
 	/bundle/product/product_revision
 
 
-
-
    CATALOG SEQUENCE NUMBER
 	/&lt;sequence_number>/
 	/&lt;sequence_number>/...
@@ -2423,38 +2475,66 @@ INSTALLED SOFTWARE CATALOG
        sequence_number	is  a decimal integer starting with '0'.  It is chosen
        by swinstall to be unique at the time of installation.
 
-   CATALOG IMPORT STRUCTURE
-	/import2/
-	/import2/...
-	/import2/catalog.tar
-	/import2/catalog.tar.sig
-	/import2/catalog.tar.sig2
-		      ...
-	/import2/catalog.tar.sigN
-
-
-       The /import2/ is a file system directory and its name is	 constant  for
-       all   packages	and  is	 unique	 to  the  swbis	 implementation.   The
-       /import2/catalog.tar file is the signed file from the  POSIX  distribu-
-       tion.  The /import2/catalog.tar.sig file is the signature file from the
-       distribution.  If there is more than one signature, then it is the last
-       one.   /import2/catalog.tar.sig2	 is  the  next	to last signature, and
-       /import2/catalog.tar.sigN is the first one, where N is the total number
-       of signatures.
-
-
    CATALOG CONTENTS
        &lt;sequence_number>/
-	&lt;sequence_number>/import2/
-	&lt;sequence_number>/import2/catalog.tar
-	&lt;sequence_number>/import2/catalog.tar.sig
-	&lt;sequence_number>/INDEX
-	&lt;sequence_number>/options
+	&lt;sequence_number>/export/
+	&lt;sequence_number>/export/catalog.tar
+	&lt;sequence_number>/export/catalog.tar.sig
+	&lt;sequence_number>/INSTALLED
+	&lt;sequence_number>/control.sh
+	&lt;sequence_number>/session_options
 	&lt;sequence_number>/vendor_tag
-	&lt;sequence_number>/location
-	&lt;sequence_number>/qualifier
-	&lt;sequence_number>/architecture
 
+
+       The export directory
+	export/
+	export/...
+	export/catalog.tar
+	export/catalog.tar.sig
+	export/catalog.tar.sig2
+		      ...
+	export/catalog.tar.sigN
+
+
+       The export/ is a file system directory and its name is constant for all
+       packages	 and  is unique to the swbis implementation.  The export/cata-
+       log.tar file is the signed  file	 from  the  Posix  distribution.   The
+       export/catalog.tar.sig  file  is	 the signature file from the distribu-
+       tion.  If there is more than one signature, then it is  the  last  one.
+       export/catalog.tar.sig2 is the next to last signature, and export/cata-
+       log.tar.sigN is the first one, where N is the total  number  of	signa-
+       tures.
+
+       INSTALLED -- The state metadata file
+	&lt;sequence_number>/INSTALLED
+
+
+       The  INSTALLED file is similar to an INDEX file in its grammar and syn-
+       tax.  Unlike an INDEX file, it may  contain  control_file  definitions.
+       The  INSTALLED  file stores the control script return codes and fileset
+       installation state.  It is updated several times during	the  operation
+       of  'swinstall'.	  It  can  be parsed using  libexec/swbisparse and the
+       '--installed' option.
+
+       control.sh -- The master control script
+	&lt;sequence_number>/control.sh
+	 SYNOPSIS: control.sh tag_spec script_tag
+
+
+       The control.sh file is a Posix shell script that is automatically  gen-
+       erated by swinstall.  It provides a common interface for control script
+       execution.  Its primary purpose is to set  up  the  script's  execution
+       environment  and	 map  script tags to the control script pathnames.  It
+       assumes that 'export/catalog.tar' is unpacked in export/.
+
+       session_options -- The extended options
+	&lt;sequence_number>/session_options
+
+
+       This file contains the extended options in a form that may be  executed
+       by the shell '.' (dot) command.	It is automatically generated by swin-
+       stall.  The value of the SW_SESSION_OPTIONS environment variable is the
+       absolute pathname of the this file.
 
    EXAMPLE CATALOG ENTRY
        Below  is  an  example  entry  of  the catalog created by swbis version
@@ -2463,10 +2543,13 @@ INSTALLED SOFTWARE CATALOG
        is 'foobare', the product tag is 'foobare-doc', and the	product	 revi-
        sion attribute is '0.902'.
 
-       /mnt/test/var/lib/swbis/catalog/foobare/foobare-doc/0.902/0/import2
-       /mnt/test/var/lib/swbis/catalog/foobare/foobare-doc/0.902/0/import2/catalog.tar
-       /mnt/test/var/lib/swbis/catalog/foobare/foobare-doc/0.902/0/import2/catalog.tar.sig
+       /mnt/test/var/lib/swbis/catalog/foobare/foobare-doc/0.902/0/export
+       /mnt/test/var/lib/swbis/catalog/foobare/foobare-doc/0.902/0/export/catalog.tar
+       /mnt/test/var/lib/swbis/catalog/foobare/foobare-doc/0.902/0/export/catalog.tar.sig
+       /mnt/test/var/lib/swbis/catalog/foobare/foobare-doc/0.902/0/INSTALLED
+       /mnt/test/var/lib/swbis/catalog/foobare/foobare-doc/0.902/0/control.sh
        /mnt/test/var/lib/swbis/catalog/foobare/foobare-doc/0.902/0/vendor_tag
+       /mnt/test/var/lib/swbis/catalog/foobare/foobare-doc/0.902/0/session_options
 
 
        Although	 swinstall  does  not depend on the file name as this accommo-
@@ -2491,8 +2574,8 @@ IMPLEMENTATION EXTENSIONS
 
    RPM Translation
        RPM (RedHat Package Manager) format packages  are  installed  by	 first
-       translating  to	an equivalent ISO/IEEE file layout in POSIX tar format
-       and then installing as a POSIX package.	This translation and detection
+       translating  to	an equivalent ISO/IEEE file layout in Posix tar format
+       and then installing as a Posix package.	This translation and detection
        is  transparent to the user if the ''--allow-rpm'' option is set in the
        command line args or the	 swbis_allow_rpm  is  set  to  "true"  by  the
        defaults files, otherwise an error occurs.
@@ -2569,6 +2652,8 @@ EXTENDED OPTIONS
 	 swinstall.swbis_enforce_file_md5=false # true or false
 	 swinstall.swbis_allow_rpm=false # true or false
 	 swinstall.swbis_remote_shell_client=ssh
+	 swinstall.swbis_install_volatile=true
+	 swinstall.swbis_volatile_newname=     #empty string, e.g. ".rpmnew"
 
 
 RETURN VALUE
@@ -2579,32 +2664,31 @@ NOTES
 	Multiple ssh-hops is an implementation extension.
 
 REQUISITE UTILITIES
-       swinstall(8) requires a Posix shell accessible by the remote shell com-
+       swinstall  requires  a  Posix shell accessible by the remote shell com-
        mand.  This is the remote command run by ssh (or rsh)  for  all	opera-
        tions.  This command can be controlled by the --shell-command option or
        the swbis_shell_command defaults file  option.	Permitted  values  are
        "bash"  (/bin/bash  -s) or "sh" (/bin/sh -s) or "posix" ('PATH=`getconf
-       PATH` sh -s').	The default is	"posix".   swinstall(8)	 requires  the
-       POSIX capability of reading commands on stdin according to the specifi-
-       cation described in IEEE Std  1003.1,  2003  Ed.;  sh  -shell,  Section
-       STDIN.  This requirement accommodates reading of shell program code and
-       data on STDIN.  This capability may not	be  present  in	 some  /bin/sh
-       shells.	 The  "/bin/sh"	 on  FreeBSD-5.1 may be broken in this regard,
-       hence ''--shell-command=bash'' should be used for BSD hosts.  The  pub-
-       lic domain Korn shell (pdksh-5.2.14) seems to work OK, that is, it com-
-       plies by luck or intent with the POSIX capability of reading  data  and
-       code on stdin.
+       PATH` sh -s').	The default is "posix".	 swinstall requires the	 Posix
+       capability  of reading commands on stdin according to the specification
+       described in IEEE Std 1003.1, 2003 Ed.; sh -shell, Section STDIN.  This
+       requirement  accommodates  reading  of  shell  program code and data on
+       STDIN.  This capability may not be present in some /bin/sh shells.  The
+       "/bin/sh" on FreeBSD-5.1 may be broken in this regard, hence ''--shell-
+       command=bash'' should be used for BSD hosts.  The  public  domain  Korn
+       shell  (pdksh-5.2.14) seems to work OK, that is, it complies by luck or
+       intent with the Posix capability of reading data and code on stdin.
 
-       If  the	--no-getconf  option  is set or the swinstall.swbis_no_getconf
+       If the --no-getconf option is  set  or  the  swinstall.swbis_no_getconf
        defaults option is "true" then the remote command is '/bin/sh -s'.  Use
        of the no-getconf option is needed for communication with user accounts
-       on remote machines whose login shell is not a Bourne shell  (e.g.  csh)
+       on  remote  machines whose login shell is not a Bourne shell (e.g. csh)
        such as root on some default BSD installations.	Other *nix systems may
-       require use of getconf because their /bin/sh is	broken	or  not	 Posix
+       require	use  of	 getconf  because their /bin/sh is broken or not Posix
        enough (e.g. Sun platforms).  Still other systems may not have getconf.
 
        Other utilities required to be in $PATH on the remote host are: dd, pax
-       (or  tar|star|gtar), hostname, mkdir, expr, echo, test, sleep, read (if
+       (or tar|star|gtar), hostname, mkdir, expr, echo, test, sleep, read  (if
        not builtin).
 
 FILES
@@ -2618,32 +2702,31 @@ APPLICABLE STANDARDS
        ISO/IEC 15068-2:1999, Open Group CAE C701
 
 SEE ALSO
+       info swbis
+
        swcopy(8), sw(5), swbisparse(8), swign(1), swverify(8)
 
 IDENTIFICATION
 	swinstall(8): The installation utility of the swbis project.
 	Author: Jim Lowe   Email: jhlowe at acm.org
-	Version: 0.406
-	Date: 2004-09-01
+	Version: 0.443
+	Date: 2005-05-05
 	Copying: GNU Free Documentation License
 
 BUGS
-       swinstall(8)is subject to breakage if a user's account on an intermedi-
-       ate  (or	 terminal)  host  in  a target spec is not configured to use a
-       Bourne compatible shell. (This breakage may be eliminated by use of the
-       --no-getconf option as explained above.)
+       swinstall is subject to breakage if a user's account on an intermediate
+       (or terminal) host in a target spec is not configured to use  a	Bourne
+       compatible  shell. (This breakage may be eliminated by use of the --no-
+       getconf option as explained above.)
 
-       A  multiple  ssh	 hop source spec  (more than 1 remote host involved in
+       A multiple ssh hop source spec  (more than 1 remote  host  involved  in
        the source transfer) upon a SIGINT may result in sshd and ssh processes
-       being  left  on	on the intermediate host(s), this despite, swinstall's
+       being left on on the intermediate host(s),  this	 despite,  swinstall's
        action of sending a SIGTERM to the remote script's parent process.
 
-       swinstall(8) does not currently implement Software Selections  nor  the
-       events  of the Selection and Analysis Phases nor dependency copying nor
-       fileset state transitions nor control script  execution	(e.g.  postin-
-       stall).	 The  Execution	 (copying)  phase  is done on all products and
-       filesets.  by the utility selected in .../swbisdefaults which is pax(1)
-       by default.
+       swinstall does not currently implement Software Selections, not fileset
+       dependencies, and much more.  Only packages with one  product  and  one
+       fileset are supported.
 
 
 
@@ -2677,8 +2760,8 @@ DESCRIPTION
        to a target archive directory.  Neither swcopy  nor  any	 component  of
        swbis  is  required  on	the target host, however, the target host must
        look like a Unix system at the shell and	 command-line  utility	level.
-       Remote  network connections are made by ssh(1).	Ssh is the default but
-       rsh can be selected by a command line option.
+       Remote network connections are made by ssh.  Ssh is the default but rsh
+       can be selected by a command line option.
 
        Before and during data transfer to  the	target,	 the  distribution  is
        audited.	  Package  auditing  includes parsing the INDEX and INFO meta-
@@ -2997,13 +3080,13 @@ OPTIONS
 
 TARGET COPYING RULES
        Currently, file permissions and ownerships are not copied. 'swcopy'  is
-       not  intended to be used in the way of cp(1) or scp(1), although it can
-       be if forced.  Non-existing directories in a  target  are  created.   A
-       source directory cannot be renamed (although a regular file can be).  A
-       single source file is specified for one or more	targets.   The	syntax
-       does not support multiple source files.	A portable character string in
-       the target spec is assumed to be a hostname unless  it  begins  with  a
-       slash '/' or a colon ':'.
+       not  intended to be used in the way of cp or scp, although it can be if
+       forced.	Non-existing directories in a target are  created.   A	source
+       directory cannot be renamed (although a regular file can be).  A single
+       source file is specified for one or more targets.  The syntax does  not
+       support multiple source files.  A portable character string in the tar-
+       get spec is assumed to be a hostname unless it begins with a slash  '/'
+       or a colon ':'.
 
    Rules
        If  a  target  directory	 on the host does not exist it will be created
@@ -3174,7 +3257,7 @@ REQUISITE UTILITIES
        This command can be controlled by the  --shell-command  option  or  the
        swbis_shell_command  defaults file option.  Permitted values are "bash"
        (/bin/bash -s), "sh" (/bin/sh  -s),  "ksh"  (/bin/ksh  -s)  or  "posix"
-       ('PATH=`getconf	PATH`  sh  -s').   The	default is "posix".  swcopy(8)
+       ('PATH=`getconf	PATH`  sh  -s').   The	default	 is  "posix".	swcopy
        requires the POSIX capability of reading commands on stdin according to
        the  specification  described  in IEEE Std 1003.1, 2003 Ed.; sh -shell,
        Section STDIN.  This requirement accommodates reading of shell  program
@@ -3208,13 +3291,15 @@ APPLICABLE STANDARDS
        ISO/IEC 15068-2:1999, Open Group CAE C701
 
 SEE ALSO
+       info swbis
+
        sw(5), swbisparse(8), swign(1), swverify(8)
 
 IDENTIFICATION
 	swcopy(8): The archive copying utility of the swbis project.
 	Author: Jim Lowe   Email: jhlowe at acm.org
-	Version: 0.406
-	Date: 2004-09-01
+	Version: 0.443
+	Date: 2005-05-05
 	Copying: GNU Free Documentation License
 
 BUGS
@@ -3720,14 +3805,17 @@ APPLICABLE STANDARDS
        IEEE Std 1387.2-1995 (ISO/IEC 15068-2:1999), Open Group CAE C701.
 
 SEE ALSO
+       info swbis
+
+
        sw(5), swign(1), swpackage(8), gpg(1), libexec/swbis/arf2arf
 
 
 IDENTIFICATION
-	swverify(8): The verification utility of the swbis project.
+	swverify: The verification utility of the swbis project.
 	Author: J. Lowe jhlowe@acm.org
-	Version: 0.406
-	Date: 2004-09-01
+	Version: 0.443
+	Date: 2004-05-05
 	Copying: GNU Free Documentation License
 
 BUGS
@@ -3780,12 +3868,12 @@ DESCRIPTION
        emitted archive are specified by the PSF file and command line options.
 
        If  a  PSF is provided using the -s option then the specified ownership
-       must be consistent with the swign(1) command line  options  for	owner-
-       ships  otherwise	 the  signature won't be good.	The default ownerships
-       for all the files are the current user's owner and group.   If  the  -o
-       (or  -g) option is used with a empty string for the option arg then the
-       file ownerships of the source files are used.  This script assumes  GNU
-       tar is installed.
+       must be consistent with the 'swign' command line options for ownerships
+       otherwise  the signature will not be valid.  The default ownerships for
+       all the files are the current user's owner and group.  If  the  -o  (or
+       -g) option is used with a empty string for the option arg then the file
+       ownerships of the source files are used.	 This script assumes  GNU  tar
+       is installed.
 
        After  writing  the ./catalog/ file and before writing the archive, the
        file list stored in ./catalog/dfiles/files is compared to  the  current
@@ -3900,13 +3988,15 @@ FILES
 	&lt;path>/catalog/
 
 SEE ALSO
+       info swbis
+
        swpackage(8), gpg
 
 IDENTIFICATION
 	swign(1): The source directory signing utility of the swbis project.
 	Author: J. Lowe jhlowe@acm.org
-	Version: 0.406
-	Date: 2004-09-01
+	Version: 0.443
+	Date: 2004-05-05
 	Copying: GNU Free Documentation License
 
 
@@ -4021,79 +4111,88 @@ SWPACKAGE OUTPUT FORMAT
        The  output  format  is	either one of two formats specified in POSIX.1
        (ISO/IEC 9945-1) which are tar (header  magic=ustar)  or	 cpio  (header
        magic=070707).	The  default  format  of  the  swbis implementation is
-       'ustar'.	 The POSIX spec under specifies definitions for	 some  of  the
-       ustar header fields.  The "personality" of the default swbis ustar for-
-       mat mimics, for pathnames less than 99 octets,  GNU tar	1.13.25	 using
-       the  "-b1  --posix"  options.  This bit-for-bit sameness does not exist
-       for pathnames greater than 99 chars as swbis follows the POSIX spec and
-       GNU tar 1.13.25 does not.
+       "ustar".	 The POSIX spec under specifies definitions for	 some  of  the
+       ustar header fields.  The personality of the default swbis ustar format
+       mimics GNU tar 1.15.1 and is designed to be compliant to POSIX.1.   The
+       personality  of	the "ustar0" format mimics, for pathnames less than 99
+       octets,	GNU tar 1.13.25 using the "-b1 --posix"	 options.   This  bit-
+       for-bit	sameness does not exist for pathnames greater than 99 chars as
+       swbis follows the POSIX	spec  and  GNU	tar  1.13.25  does  not.   The
+       "ustar0"	 ustar personality is deprecated.  It is only slightly differ-
+       ent from 'ustar' in how device number fields are filled	(with  spaces,
+       zeros or NULs) for non-device files.
 
-       In  addition  the  swbis	 implementation supports several other tar and
-       cpio variants including bit-for-bit mimicry of GNU tar (1.13.25) gnutar
-       format  which  uses a non-standard name split and file type (type 'L');
-       also supported is the "new ASCII"  (sometimes  called  SVR4  cpio)  and
-       "crc"  cpio  formats  with  header  magic "070701" and "070702" respec-
-       tively.	Support for "pax Interchange  Format"  (Extended  header  tar)
-       described in IEEE 1003.1-2001 under the "pax" manual page is planned.
+       In  addition  the swbis implementation supports several other tar vari-
+       ants including bit-for-bit mimicry of GNU tar (1.13.25) default	format
+       which  uses  a  non-standard name split and file type (type 'L').  This
+       format is known as '--format=oldgnu'.  Also supported is the gnu format
+       of GNU tar 1.15.1 specified by '--format=gnu'
 
-       The  entirety  of  the output byte stream is a single valid file of one
+       The  defacto  cpio  formats are also supported.	"new ASCII" (sometimes
+       called SVR4 cpio) and "crc" cpio formats with header magic "070701" and
+       "070702" respectively.
+
+       Support for "pax Interchange Format" (Extended header tar) described in
+       IEEE 1003.1-2001 under the "pax" manual page is planned.
+
+       The entirety of the output byte stream is a single valid	 file  of  one
        the formats mentioned above.
 
        The swbis implementation writes its output to stdout.  The default out-
        put block size is 10240 bytes.  The last block is not padded and there-
-       fore the last write(2) may be a short write.  The selected  block  size
+       fore  the  last write(2) may be a short write.  The selected block size
        does not affect the output file contents.
 
-       The  swbis implementation is biased, in terms of capability and default
-       settings, to the tar format.  Package signing is only supported in  tar
+       The swbis implementation is biased, in terms of capability and  default
+       settings,  to the tar format.  Package signing is only supported in tar
        format.
 
 SWPACKAGE INPUT FILE FORMAT
-       The  input  file	 is  a called a product specification file or PSF.  It
-       contains information to direct swpackage(8)  and	 information  that  is
-       package meta-data [that is merely transferred unchanged into the global
-       INDEX file].
+       The input file is called a product specification file or PSF.  It  con-
+       tains  information  to direct swpackage and information that is package
+       meta-data [that is merely transferred unchanged into the	 global	 INDEX
+       file].
 
        A PSF may contain object keywords, attributes (keyword/value pairs) and
-       Extended	 Definitions  (described below).  An object keyword connotes a
-       logical object or software structure supported  by  the	standard.   An
-       object  keyword	does  not  have a value field after it, as it contains
-       attributes and Extended Definitions.  An attribute keyword  conotes  an
-       attribute (i.e. keyword/value pair) and always has a value.
+       Extended Definitions (described below).	An object keyword  connotes  a
+       logical object (i.e. software structure) supported by the standard.  An
+       object keyword does not have a value field after	 it,  as  it  contains
+       Attributes  and	Extended Definitions.  An attribute keyword conotes an
+       attribute which is always in the form of a keyword/value pair.
 
-       Attribute  keywords  not recognized by the standard are allowed and are
+       Attribute keywords not recognized by the standard are allowed  and  are
        transferred into the INDEX file.	 Object keywords not recognized by the
-       standard	 are not allowed and will generate an error.  Extended Defini-
-       tions may only appear in a PSF (never in a INDEX	 or  INFO  created  by
-       swpackage).   Extended  Definitions  are translated [by swpackage] into
+       standard are not allowed and will generate an error.  Extended  Defini-
+       tions  may  only	 appear	 in a PSF (never in a INDEX or INFO created by
+       swpackage).  Extended Definitions are translated	 [by  swpackage]  into
        object keywords (objects) and attributes recognized by the standard.
 
-       Comments in a PSF are not transferred into the INDEX file by the	 swbis
-       implementation of swpackage(8).
+       Comments	 in a PSF are not transferred into the INDEX file by the swbis
+       implementation of swpackage.
 
-       The  file  syntax  is  the  same	 as  a INDEX, or INFO file.  A PSF may
-       contain all objects defined by the standard as well as extended defini-
+       The file syntax is the same as a INDEX, or INFO file.  A PSF  may  con-
+       tain  all  objects  defined by the standard as well as extended defini-
        tions.
 
        For additional information see
        XDSA C701 http://www.opengroup.org/publications/catalog/c701.htm, or
-       sw(5) manual page.
+       sw manual page.
 
    EXTENDED DEFINITIONS
-       A  Product Specification File (PSF) can contain Extended Definitions in
-       the fileset, product or bundle software definitions.  They  would  have
-       the  same  level	 or containment relationship as a file or control_file
+       A Product Specification File (PSF) can contain Extended Definitions  in
+       the  fileset,  product or bundle software definitions.  They would have
+       the same level or containment relationship as a	file  or  control_file
        definition in the same contaning object.
 
-       Extended Definitions represent a minimal, expressive form for  specify-
-       ing  files and file attributes.	Their use in a PSF is optional in that
+       Extended	 Definitions represent a minimal, expressive form for specify-
+       ing files and file attributes.  Their use in a PSF is optional in  that
        an equivalent PSF can be constructed without using them, however, their
        use is encouraged for the sake of brevity and orthogonality.
 
-       The  swbis implementation requires that no [ordinary] attributes appear
+       The swbis implementation requires that no [ordinary] attributes	appear
        after Extended Definitions in the containing object, and, requires that
-       Extended	 Definitions  appear before logically contained objects.  That
-       is, the parser uses the next object keyword to  syntacticly  and	 logi-
+       Extended Definitions appear before logically contained  objects.	  That
+       is,  the	 parser	 uses the next object keyword to syntacticly and logi-
        cally terminate the current object even if the current object has logi-
        cally contained objects.
 
@@ -4115,12 +4214,12 @@ SWPACKAGE INPUT FILE FORMAT
 	    control_file  source  [path]
 
 
-       The source attribute defines the location in vendor's development  sys-
-       tem  where  the swpackage utility will find the script.	The keyword is
-       the value of the tag attribute and tells the utilities when to  execute
+       The  source attribute defines the location in vendor's development sys-
+       tem where the swpackage utility will find the script.  The  keyword  is
+       the  value of the tag attribute and tells the utilities when to execute
        the script.  The path attribute is optional and specifies the file name
-       in the packages distribution  relative  to  the	control_directory  for
-       software	 containing  the script. If not given the tag value is used as
+       in  the	packages  distribution	relative  to the control_directory for
+       software containing the script. If not given the tag value is  used  as
        the filename.
 
    o  Directory Mapping
@@ -4128,18 +4227,18 @@ SWPACKAGE INPUT FILE FORMAT
 
 
 
-       Applies the source attribute as the directory under  which  the	subse-
-       quently listed files are located.  If destination is defined it will be
-       used as a prefix to the path (implied) file definition.	source is typ-
-       ically  a  temporary or build location and dest is its unrealized abso-
-       lute pathname destination.
+       Applies	 the  source  attribute	 as  the  directory  under  which  the
+       subsequently listed files are located.  If destination  is  defined  it
+       will be used as a prefix to the path (implied) file definition.	source
+       is typically a temporary or build location and dest is  its  unrealized
+       absolute pathname destination.
 
    o  Recursive File Definition
 	 file *
 
 
 
-       Specifies every	file  in  current  source  directory.	The  directory
+       Specifies  every	 file  in  current  source  directory.	 The directory
        extended definition must be used before the recursive specification.
 
    o  Explicit File Definition
@@ -4151,42 +4250,42 @@ SWPACKAGE INPUT FILE FORMAT
 
 
 	      source defines the pathname of the file to be used as the source
-	      of file data and/or attributes.  If it is a relative path,  then
-	      swpackage(8)  searches  for this file relative to the the source
+	      of  file data and/or attributes.	If it is a relative path, then
+	      swpackage searches for this file	relative  to  the  the	source
 	      argument of the directory keyword, if set.  If directory keyword
-	      is  not  set  then the search is relative to the current working
+	      is not set then the search is relative to	 the  current  working
 	      directory of the swpackage utility's invocation.
 
-	      All attributes for the  destination  file	 are  taken  from  the
+	      All  attributes  for  the	 destination  file  are taken from the
 	      source file, unless a file_permissions keyword is active, or the
-	      -m, -o, or -g options are also included in the  file  specifica-
+	      -m,  -o,	or -g options are also included in the file specifica-
 	      tion.
 
        path
 
 	      path defines the destination path where the file will be created
-	      or installed.  If it is a relative path,	then  the  destination
-	      path  of the of the directory keyword must be active and will be
-	      used as the path prefix.	If path is not specified  then	source
-	      is  used	as the value of path and directory mapping applied (if
+	      or  installed.   If  it is a relative path, then the destination
+	      path of the of the directory keyword must be active and will  be
+	      used  as	the path prefix.  If path is not specified then source
+	      is used as the value of path and directory mapping  applied  (if
 	      active).
 
        -t type
 
-	      type may one of 'd' (directory), or  'h'	(hard  link),  or  's'
+	      type  may	 one  of  'd' (directory), or  'h' (hard link), or 's'
 	      (symbolic link).
 
 	      -t d  Create a directory.
 	      If path is not specified source is used as the path attribute.
 
 	      -t h  Create a hard link.
-	      path  and	 source are specified.	source is used as the value of
-	      the link_source attribute, and path is the  value	 of  the  path
+	      path and source are specified.  source is used as the  value  of
+	      the  link_source	attribute,  and	 path is the value of the path
 	      attribute.
 
 	      -t s  Create a symbolic link.
-	      path  and	 source are specified.	source is used as the value of
-	      the link_source attribute, and path is the  value	 of  the  path
+	      path and source are specified.  source is used as the  value  of
+	      the  link_source	attribute,  and	 path is the value of the path
 	      attribute.
 
        -m mode
@@ -4198,12 +4297,12 @@ SWPACKAGE INPUT FILE FORMAT
 
 
 
-       Applies	to  subsequently  listed file definitions in a fileset.	 These
-       attributes will apply where the	file  attributes  were	not  specified
-       explicitly  in  a file definition.  Subsequent file_permissions defini-
-       tions simply replace previous definitions (resetting all the  options).
+       Applies to subsequently listed file definitions in  a  fileset.	 These
+       attributes  will	 apply	where  the  file attributes were not specified
+       explicitly in a file definition.	 Subsequent  file_permissions  defini-
+       tions  simply replace previous definitions (resetting all the options).
 
-       To  reset  the  file_permission state (i.e. turn it off) use one of the
+       To reset the file_permission state (i.e. turn it off) use  one  of  the
        following:
 	   file_permissions ""
 	    or the preferred way is
@@ -4225,57 +4324,57 @@ SWPACKAGE INPUT FILE FORMAT
        of the included file is PSF syntax.
 
    SWBIS PSF CONVENTIONS
-       This  section  describes attribute usage and conventions imposed by the
-       swbis implementation.  Not all attributes are listed here.  Those  that
+       This section describes attribute usage and conventions imposed  by  the
+       swbis  implementation.  Not all attributes are listed here.  Those that
        are have important effects or particular interest.
 
    o Distribution Attributes
-       The  standard  defines a limited set of attributes for the distribution
-       object.	An expanded set is suggested by the informative annex  however
-       a  conforming  implementation  is not required act on them.  The reason
+       The standard defines a limited set of attributes for  the  distribution
+       object.	 An expanded set is suggested by the informative annex however
+       a conforming implementation is not required act on  them.   The	reason
        for this is a distribution may be acted upon by a conforming utility in
-       such  a	way  that  attributes of the distribution become invalid.  For
-       this reason, some attributes that refer	to  an	entire	"package"  [in
+       such a way that attributes of the  distribution	become	invalid.   For
+       this  reason,  some  attributes	that  refer to an entire "package" [in
        other package managers] are referred from the product object and attain
-       their broadened scope by the vendor's convention that  their  distribu-
+       their  broadened	 scope by the vendor's convention that their distribu-
        tion contains just one product.
 
        For example, the package NAME and VERSION are referred from the product
-       tag and revision, not the  distribution's.   This  convention  supports
-       multiple	 products  in  a distribution and is consistent with the stan-
+       tag  and	 revision,  not	 the distribution's.  This convention supports
+       multiple products in a distribution and is consistent  with  the	 stan-
        dard.
 
        tag
 
-	      tag is the short, file system friendly, name  of	the  distribu-
-	      tion.   Providing	 a  distribution  tag  is optional.  The swbis
-	      implementation will use this as the [constant] leading  path  if
+	      tag  is  the  short, file system friendly, name of the distribu-
+	      tion.  Providing a distribution  tag  is	optional.   The	 swbis
+	      implementation  will  use this as the [constant] leading path if
 	      there is no distribution.control_directory attribute.  A distri-
 	      bution tag attribute and swpackage's response to it is an imple-
-	      mentation	 extension.  The leading package path can also be con-
+	      mentation extension.  The leading package path can also be  con-
 	      trolled with the ''-W dir'' option.
 
 
        control_directory
 
-	      control_directory, in a distribution  object,  is	 the  constant
-	      leading  package path.  Providing this attribute is optional.  A
+	      control_directory,  in  a	 distribution  object, is the constant
+	      leading package path.  Providing this attribute is optional.   A
 	      distribution   control_directory	 attribute   and   swpackage's
-	      response	to  it	is  an	implementation extension.  The leading
-	      package path can also be controlled with the ''-W dir''  option.
-	      This  attribute  will  be generated by swpackage if not set in a
+	      response to it is	 an  implementation  extension.	  The  leading
+	      package  path can also be controlled with the ''-W dir'' option.
+	      This attribute will be generated by swpackage if not  set	 in  a
 	      PSF.
 
 
    o Bundle Attributes
-       A bundle defines a collection of products whether or not the  distribu-
+       A  bundle defines a collection of products whether or not the distribu-
        tion has all the products present.
 
        tag
 
-	      tag  is  the  short,  file  system friendly, name of the bundle.
-	      This value is used by the swbis implementation as	 a  path  name
-	      component	 in  the  installed  software  catalog.	  If it is not
+	      tag is the short, file system  friendly,	name  of  the  bundle.
+	      This  value  is  used by the swbis implementation as a path name
+	      component in the installed  software  catalog.   If  it  is  not
 	      present the product tag is used.
 
 
@@ -4284,22 +4383,22 @@ SWPACKAGE INPUT FILE FORMAT
 
        tag
 
-	      tag is the short, file system friendly,  name  of	 the  product.
-	      This  value  is  used by the swbis implementation as a path name
-	      component in the installed software catalog.   It	 is  required.
-	      The  swbis  implementation uses it in a way that is analogous to
+	      tag  is  the  short,  file system friendly, name of the product.
+	      This value is used by the swbis implementation as	 a  path  name
+	      component	 in  the  installed software catalog.  It is required.
+	      The swbis implementation uses it in a way that is	 analogous  to
 	      the RPMTAG_NAME attribute.
 
        control_directory
 
-	      Is the directory name in the distribution under which the	 prod-
-	      uct  contents  are  located.   This  value  has no affect on the
-	      installed software catalog.  If it is not given in  a  PSF  then
+	      Is  the directory name in the distribution under which the prod-
+	      uct contents are located.	 This  value  has  no  affect  on  the
+	      installed	 software  catalog.   If it is not given in a PSF then
 	      the tag is used.
 
        revision
 
-	      Is  the  product	revision.   It	should not contain a "RELEASE"
+	      Is the product revision.	It  should  not	 contain  a  "RELEASE"
 	      attribute part or other version suffix modifiers.	 This value is
 	      used by the swbis implementation as a path name component in the
 	      installed software catalog.  It is required by swinstall.
@@ -4308,17 +4407,17 @@ SWPACKAGE INPUT FILE FORMAT
        vendor_tag
 
 	      This is a short identifying name of the vendor that supplied the
-	      product.	 This  attribute  is  optional.	  This attribute value
-	      should strive to be unique among all vendors.  It is one of  the
-	      version  distinguishing attributes of a product specified by the
-	      standard.	 It is transfered into the installed_software  catalog
-	      (not  as a path name component) by swinstall.  If this attribute
-	      exists there should also be a vendor object in the  PSF  in  the
-	      distribution  object  that  has  this  tag.   This  attribute is
-	      assigned the value of RPMTAG_RELEASE by swpackage(8) when trans-
-	      lating  an RPM.  In this capacity it serves to distinguish prod-
-	      ucts with the same revision and tag from the same	 or  different
-	      vendor.	 It   most  closely  maps  to  the  RPMTAG_RELEASE  or
+	      product.	This attribute	is  optional.	This  attribute	 value
+	      should  strive to be unique among all vendors.  It is one of the
+	      version distinguishing attributes of a product specified by  the
+	      standard.	  It is transfered into the installed_software catalog
+	      (not as a path name component) by swinstall.  If this  attribute
+	      exists  there  should  also be a vendor object in the PSF in the
+	      distribution object  that	 has  this  tag.   This	 attribute  is
+	      assigned the value of RPMTAG_RELEASE by swpackage when translat-
+	      ing an RPM.  In this capacity it serves to distinguish  products
+	      with  the	 same revision and tag from the same or different ven-
+	      dor.   It	 most  closely	 maps	to   the   RPMTAG_RELEASE   or
 	      "debian_revision" attributes.
 
    o Fileset Attributes
@@ -4331,14 +4430,14 @@ SWPACKAGE INPUT FILE FORMAT
 
        control_directory
 
-	      Is  the  directory  name	in the product under which the fileset
+	      Is the directory name in the product  under  which  the  fileset
 	      contents are located.  This value has no affect on the installed
-	      software	catalog.   If it is not given in a PSF then the tag is
+	      software catalog.	 If it is not given in a PSF then the  tag  is
 	      used.
 
    o Example Source Package PSF
-       This PSF packages every file is current directory. It uses nil  control
-       directories  so	the  package  structure	 does not change relative to a
+       This  PSF packages every file is current directory. It uses nil control
+       directories so the package structure does  not  change  relative	 to  a
        vanilla tarball.
 
 
@@ -4363,12 +4462,12 @@ SWPACKAGE INPUT FILE FORMAT
 
 
    o Example Runtime (Binary) Package PSF
-       This is a sample PSF for a runtime package.  It implies multiple	 prod-
-       ucts  (e.g.  sub-packages)  using the bundle.contents attribute.	 Since
-       the bundle and product tags exist in a un-regulated namespace  and  are
+       This  is a sample PSF for a runtime package.  It implies multiple prod-
+       ucts (e.g. sub-packages) using the  bundle.contents  attribute.	 Since
+       the  bundle  and product tags exist in a un-regulated namespace and are
        seen by end users they should be carefully chosen.   Note that the bun-
-       dle and product have the same tag which may force downstream  users  to
-       disambiguate  using  software  selection	 syntax	 such as fooit,bv=* or
+       dle  and	 product have the same tag which may force downstream users to
+       disambiguate using software selection  syntax  such  as	fooit,bv=*  or
        fooit,pv=* .
 
 
@@ -4410,19 +4509,20 @@ SWPACKAGE INPUT FILE FORMAT
 
 
 APPLICABLE STANDARDS
-       POSIX.1, IEEE Std 1387.2-1995 (Identical	 to  ISO  15068-2:1999),  Open
+       POSIX.1,	 IEEE  Std  1387.2-1995	 (Identical to ISO 15068-2:1999), Open
        Group CAE C701.
 
 SEE ALSO
 	XDSA C701 http://www.opengroup.org/publications/catalog/c701.htm
+	info swbis
 	sw(5)
 	swpackage(8)
 	swbisparse(1) -- An implementation extension parser utility.
 
 IDENTIFICATION
 	Copyright (C) 2004 Jim Lowe
-	Version: swbis 0.406
-	Date: 2004-09-01
+	Version: swbis 0.443
+	Date: 2005-05-05
 	Copying Terms: GNU Free Documentation License
 
 BUGS
@@ -4586,8 +4686,7 @@ SOFTWARE DEFINITIONS
        The  host  definition  was attested to only in the informative annex of
        the standard.  An implementation may chose to define this class.
 
-       A host object can contain distributions, installed_software objects  in
-       the form of software definitions.
+       A host object can contain a distribution, or installed_software object.
 
 
    Distribution Definition
@@ -4656,8 +4755,7 @@ SOFTWARE DEFINITIONS
 
 
        A  software  object can be listed (written to stdout) in the form of an
-       INDEX file by the swlist utility.  This definition  is  used  for  that
-       purpose.
+       INDEX file by the swlist utility.
 
 
    Media Definition
@@ -4678,9 +4776,9 @@ SOFTWARE DEFINITIONS
 	  url	      url	    Empty string  # impl.
 
 
-       The tag attribute is required.  A INDEX and PSF files can contain  ven-
-       dor  definitions.  The qualifier attribute value may be one of: seller,
-       author, packager, maintainer.  A distribution may have  more  than  one
+       The  tag attribute is required.	A INDEX and PSF files can contain ven-
+       dor definitions.	 The qualifier attribute value may be one of:  seller,
+       author,	packager,  maintainer.	 A distribution may have more than one
        vendor definition.
 
 
@@ -4711,11 +4809,11 @@ SOFTWARE DEFINITIONS
 	  is_patch     is_patch	       false		    # C701
 
 
-       The  tag	 and  contents attributes are required in INDEX and PSF files.
-       The size attribute is not allowed in either file. The value of size  is
-       generated  dynamically.	 An  INDEX  file  will	contain	 a instance_id
-       attribute.  Bundle  definitions	for  distributions  will  not  contain
-       either  the  location or qualifier, installed_software objects may con-
+       The tag and contents attributes are required in INDEX  and  PSF	files.
+       The  size attribute is not allowed in either file. The value of size is
+       generated dynamically.	An  INDEX  file	 will  contain	a  instance_id
+       attribute.   Bundle  definitions	 for  distributions  will  not contain
+       either the location or qualifier, installed_software objects  may  con-
        tain these attributes.
 
 
@@ -4758,10 +4856,10 @@ SOFTWARE DEFINITIONS
 	  change_log	    change_log	      None	 # impl.
 
 
-       The tag	and  control_directory	attributes  are	 required.   The  size
+       The  tag	 and  control_directory	 attributes  are  required.   The size
        attribute is not allowed in either file. The value of size is generated
-       dynamically.  An INDEX file will contain a  instance_id	attribute.   A
-       product	object	can  contain control_files, files, and, subproducts in
+       dynamically.   An  INDEX	 file will contain a instance_id attribute.  A
+       product object can contain control_files, files,	 and,  subproducts  in
        the form of software definitions.
 
 
@@ -4773,8 +4871,8 @@ SOFTWARE DEFINITIONS
 	  revision	revision       Empty string	# C701
 
 
-       The Category definition describes attributes of	products  and  bundles
-       related	to  its category. If is_patch is "true" then category.tag must
+       The  Category  definition  describes attributes of products and bundles
+       related to its category. If is_patch is "true" then  category.tag  must
        equal "patch".
 
 
@@ -4826,9 +4924,9 @@ SOFTWARE DEFINITIONS
 	  superseded_by	   superseded_by       None	    # C701
 
 
-       The tag and control_directory attributes are required.	A  PSF	should
-       not   contain  the  location,  media_sequence_number,  size,  or	 state
-       attributes.  A fileset object can contain control_files, files, in  the
+       The  tag	 and  control_directory attributes are required.  A PSF should
+       not  contain  the  location,  media_sequence_number,  size,  or	 state
+       attributes.   A fileset object can contain control_files, files, in the
        form of software definitions.
 
 
@@ -4860,9 +4958,9 @@ SOFTWARE DEFINITIONS
 	  rpm_fileflags	  rpm_fileflags	  empty string	  # impl.
 
 
-       A  PSF  must  contain source attribute.	A source  attribute in an INFO
+       A PSF must contain source attribute.  A source  attribute  in  an  INFO
        will be ignored.	 A PSF should not contain the cksum, compressed_cksum,
-       compressed_size,	   compression_state,	 compression_type,   or	  size
+       compressed_size,	  compression_state,   compression_type,    or	  size
        attributes.
 
 
@@ -4883,25 +4981,23 @@ SOFTWARE DEFINITIONS
 
 
        A control_file defines a control script such as those listed below (see
-       Extended	 Control  File	Definitions) or an attribute stored as a file.
-       In addition to control scripts listed below are install to load	files,
-       and remove to unload files.
+       Extended Control File Definitions) or an attribute stored as a file.
 
 EXTENDED DEFINITIONS
-       A  Product Specification File (PSF) can contain Extended Definitions in
-       the fileset, product or bundle software definitions.  They  would  have
-       the  same  level	 or containment relationship as a file or control_file
+       A Product Specification File (PSF) can contain Extended Definitions  in
+       the  fileset,  product or bundle software definitions.  They would have
+       the same level or containment relationship as a	file  or  control_file
        definition in the same contaning object.
 
-       Extended Definitions represent a minimal, expressive form for  specify-
-       ing  files and file attributes.	Their use in a PSF is optional in that
+       Extended	 Definitions represent a minimal, expressive form for specify-
+       ing files and file attributes.  Their use in a PSF is optional in  that
        an equivalent PSF can be constructed without using them, however, their
        use is encouraged for the sake of brevity and orthogonality.
 
-       The  swbis implementation requires that no [ordinary] attributes appear
+       The swbis implementation requires that no [ordinary] attributes	appear
        after Extended Definitions in the containing object, and, requires that
-       Extended	 Definitions  appear before logically contained objects.  That
-       is, the parser uses the next object keyword to  syntacticly  and	 logi-
+       Extended Definitions appear before logically contained  objects.	  That
+       is,  the	 parser	 uses the next object keyword to syntacticly and logi-
        cally terminate the current object even if the current object has logi-
        cally contained objects.
 
@@ -4923,12 +5019,12 @@ EXTENDED DEFINITIONS
 	    control_file  source  [path]
 
 
-       The source attribute defines the location in vendor's development  sys-
-       tem  where  the swpackage utility will find the script.	The keyword is
-       the value of the tag attribute and tells the utilities when to  execute
+       The  source attribute defines the location in vendor's development sys-
+       tem where the swpackage utility will find the script.  The  keyword  is
+       the  value of the tag attribute and tells the utilities when to execute
        the script.  The path attribute is optional and specifies the file name
-       in the packages distribution  relative  to  the	control_directory  for
-       software	 containing  the script. If not given the tag value is used as
+       in  the	packages  distribution	relative  to the control_directory for
+       software containing the script. If not given the tag value is  used  as
        the filename.
 
    o  Directory Mapping
@@ -4936,10 +5032,10 @@ EXTENDED DEFINITIONS
 
 
 
-       Applies the source attribute as the directory under  which  the	subse-
+       Applies	the  source  attribute as the directory under which the subse-
        quently listed files are located.  If destination is defined it will be
        used as a prefix to the path (implied) file definition.	source is typ-
-       ically  a  temporary or build location and dest is its unrealized abso-
+       ically a temporary or build location and dest is its  unrealized	 abso-
        lute pathname destination.
 
    o  Recursive File Definition
@@ -4947,7 +5043,7 @@ EXTENDED DEFINITIONS
 
 
 
-       Specifies every	file  in  current  source  directory.	The  directory
+       Specifies  every	 file  in  current  source  directory.	 The directory
        extended definition must be used before the recursive specification.
 
    o  Explicit File Definition
@@ -4959,42 +5055,42 @@ EXTENDED DEFINITIONS
 
 
 	      source defines the pathname of the file to be used as the source
-	      of file data and/or attributes.  If it is a relative path,  then
-	      swpackage(8)  searches  for this file relative to the the source
+	      of  file data and/or attributes.	If it is a relative path, then
+	      swpackage searches for this file	relative  to  the  the	source
 	      argument of the directory keyword, if set.  If directory keyword
-	      is  not  set  then the search is relative to the current working
+	      is not set then the search is relative to	 the  current  working
 	      directory of the swpackage utility's invocation.
 
-	      All attributes for the  destination  file	 are  taken  from  the
+	      All  attributes  for  the	 destination  file  are taken from the
 	      source file, unless a file_permissions keyword is active, or the
-	      -m, -o, or -g options are also included in the  file  specifica-
+	      -m,  -o,	or -g options are also included in the file specifica-
 	      tion.
 
        path
 
 	      path defines the destination path where the file will be created
-	      or installed.  If it is a relative path,	then  the  destination
-	      path  of the of the directory keyword must be active and will be
-	      used as the path prefix.	If path is not specified  then	source
-	      is  used	as the value of path and directory mapping applied (if
+	      or  installed.   If  it is a relative path, then the destination
+	      path of the of the directory keyword must be active and will  be
+	      used  as	the path prefix.  If path is not specified then source
+	      is used as the value of path and directory mapping  applied  (if
 	      active).
 
        -t type
 
-	      type may one of 'd' (directory), or  'h'	(hard  link),  or  's'
+	      type  may	 one  of  'd' (directory), or  'h' (hard link), or 's'
 	      (symbolic link).
 
 	      -t d  Create a directory.
 	      If path is not specified source is used as the path attribute.
 
 	      -t h  Create a hard link.
-	      path  and	 source are specified.	source is used as the value of
-	      the link_source attribute, and path is the  value	 of  the  path
+	      path and source are specified.  source is used as the  value  of
+	      the  link_source	attribute,  and	 path is the value of the path
 	      attribute.
 
 	      -t s  Create a symbolic link.
-	      path  and	 source are specified.	source is used as the value of
-	      the link_source attribute, and path is the  value	 of  the  path
+	      path and source are specified.  source is used as the  value  of
+	      the  link_source	attribute,  and	 path is the value of the path
 	      attribute.
 
        -m mode
@@ -5006,12 +5102,12 @@ EXTENDED DEFINITIONS
 
 
 
-       Applies	to  subsequently  listed file definitions in a fileset.	 These
-       attributes will apply where the	file  attributes  were	not  specified
-       explicitly  in  a file definition.  Subsequent file_permissions defini-
-       tions simply replace previous definitions (resetting all the  options).
+       Applies to subsequently listed file definitions in  a  fileset.	 These
+       attributes  will	 apply	where  the  file attributes were not specified
+       explicitly in a file definition.	 Subsequent  file_permissions  defini-
+       tions  simply replace previous definitions (resetting all the options).
 
-       To  reset  the  file_permission state (i.e. turn it off) use one of the
+       To reset the file_permission state (i.e. turn it off) use  one  of  the
        following:
 	   file_permissions ""
 	    or the preferred way is
@@ -5033,23 +5129,23 @@ EXTENDED DEFINITIONS
        of the included file is PSF syntax.
 
 VENDOR KEYWORDS
-       A  software  definition	file (INFO, INDEX or psf) may contain keywords
-       not recognized by the standard.	Such keywords will  be	parsed	as  an
-       attribute  keyword,  that  is  as an attribute of the containing object
+       A software definition file (INFO, INDEX or psf)	may  contain  keywords
+       not  recognized	by  the	 standard.  Such keywords will be parsed as an
+       attribute keyword, that is as an attribute  of  the  containing	object
        (keyword) software definition.
 
 PACKAGE SECURITY
-       The Package Security Attributes are distribution attributes  stored  as
-       separate	 files.	  They are implementation extensions.  They consist of
+       The  Package  Security Attributes are distribution attributes stored as
+       separate files.	They are implementation extensions.  They  consist  of
        archive digests, catalog signature, catalog signature header, and indi-
        vidual file md5 digests.
 
 
    Archive Digests
        md5sum and sha1sum are the md5 and sha1 digests (ascii representations)
-       of the leading package directories that do not have the	catalog	 path-
-       name  component followed by the software file storage structure portion
-       of the uncompressed serial access package file  including  all  archive
+       of  the	leading package directories that do not have the catalog path-
+       name component followed by the software file storage structure  portion
+       of  the	uncompressed  serial access package file including all archive
        format trailer blocks.
 
 	      &lt;path>/catalog/&lt;dfiles>/md5sum
@@ -5057,67 +5153,67 @@ PACKAGE SECURITY
 
 
    Adjunct Md5 Digest
-       adjunct_md5sum  is the same as the md5sum excluding symbolic links.  If
+       adjunct_md5sum is the same as the md5sum excluding symbolic links.   If
        a package does not contain symbolic links the md5sum and adjunct_md5sum
        will be identical.
 
 	      &lt;path>/catalog/&lt;dfiles>/adjunct_md5sum
 
 
-       Explanation:  This attribute is called 'adjunct' because it is a digest
+       Explanation: This attribute is called 'adjunct' because it is a	digest
        of a subset of the files in the package.	 It exists to facilitate veri-
-       fying  file integrity of the directory form of a package in an environ-
-       ment where the modification time of symbolic link files	are  not  pre-
-       served  from the serial archive by the tar utility or operating system.
-       The ability to verify even the adjunct_md5sum from the  directory  form
-       of  the	package	 is  dependent	on  the tar creating utility and other
+       fying file integrity of the directory form of a package in an  environ-
+       ment  where  the	 modification time of symbolic link files are not pre-
+       served from the serial archive by the tar utility or operating  system.
+       The  ability  to verify even the adjunct_md5sum from the directory form
+       of the package is dependent on  the  tar	 creating  utility  and	 other
        attributes of a POSIX.2 environment.
 
    Catalog Signature Header
-       The sig_header file is a ustar header that is identical bit-for-bit  to
-       the  ustar header of the signature file.	 It always precedes the signa-
+       The  sig_header file is a ustar header that is identical bit-for-bit to
+       the ustar header of the signature file.	It always precedes the	signa-
        ture file archive members.
 
 	      &lt;path>/catalog/&lt;dfiles>/sig_header
 
 
        The sig_header protects the tar header of the signature files from tam-
-       pering.	 This is required because neither the signature file bytes nor
+       pering.	This is required because neither the signature file bytes  nor
        the signature tar header are included in the signed data.
 
    Catalog Signature
-       The signature protects the metadata section of the archive.   The  con-
-       tents  of  payload  section  are	 only included in the form of a cryto-
-       graphic digest.	The sha1 digest is preferred over the md5  digest  for
-       technical  reasons.   If the metadata section does not contain the pay-
-       load section digests then there is no way to verify  the	 payload  from
+       The  signature  protects the metadata section of the archive.  The con-
+       tents of payload section are only included in  the  form	 of  a	cryto-
+       graphic	digest.	  The sha1 digest is preferred over the md5 digest for
+       technical reasons.  If the metadata section does not contain  the  pay-
+       load  section  digests  then there is no way to verify the payload from
        the signature.
 
 
 	      &lt;path>/catalog/&lt;dfiles>/signature
 
 
-       The  signed  data is the exported catalog structure of the uncompressed
-       serial archive package file up to but not including the first  byte  of
-       the  software  file storage structure followed by two (2) 512 byte null
+       The signed data is the exported catalog structure of  the  uncompressed
+       serial  archive	package file up to but not including the first byte of
+       the software file storage structure followed by two (2) 512  byte  null
        blocks if tar format, and no trailer bytes if not tar format.  The sig-
        nature file archive member itself is not included in the signed stream,
        it is intended that the &lt;path>/catalog/&lt;dfiles>/md5sum file is included
        in the signed stream.
 
-       The  signature  file is ASCII armored.  The last printable character of
+       The signature file is ASCII armored.  The last printable	 character  of
        the signature is followed by one or more newline characters (0x0A) fol-
-       lowed  by  one  or more NUL characters (0x00).  The total length of the
-       file must match the file size  specified	 in  the  size	field  of  the
-       sig_header  file.   The	ustar header of every signature archive member
-       shall be identical to the sig_header file.  The padded size  is	prede-
-       termined	 [by  swpackage]  and  currently  set to be 1024 octets.  This
+       lowed by one or more NUL characters (0x00).  The total  length  of  the
+       file  must  match  the  file  size  specified  in the size field of the
+       sig_header file.	 The ustar header of every  signature  archive	member
+       shall  be  identical to the sig_header file.  The padded size is prede-
+       termined [by swpackage] and currently set  to  be  1024	octets.	  This
        means the armored sig file has a length limitation of 1023 octets.
 
-       If multiple signature  archive  members	exist  they  must  follow  one
-       another	in  the archive with no other intervening files; and, the same
-       sig_header file is the ustar header for all the signature archive  mem-
-       bers.   A  signature  archive  member, whether alone or one of many, is
+       If  multiple  signature	archive	 members  exist	 they  must follow one
+       another in the archive with no other intervening files; and,  the  same
+       sig_header  file is the ustar header for all the signature archive mem-
+       bers.  A signature archive member, whether alone or  one	 of  many,  is
        never part of the signed data stream.
 
    File Md5 Digest
@@ -5126,61 +5222,61 @@ PACKAGE SECURITY
        Each file has a md5 digest in the metadata.
 
 SOFTWARE DEFINITION FILES
-       The metadata files, INDEX, INFO and PSF, contain information about  the
+       The  metadata files, INDEX, INFO and PSF, contain information about the
        software in the form of software definitions.  The INDEX and INFO files
        appear in a package directory structure.	 They are automatically gener-
-       ated  by the 'swpackage' command.  The location in the directory struc-
-       ture indicates the higher level object to which	their  data  pertains.
+       ated by the 'swpackage' command.	 The location in the directory	struc-
+       ture  indicates	the  higher level object to which their data pertains.
        The PSF file does not appear in the package.  It is created by a person
-       or program and it directs the action of the swpackage(8)	 utility.   It
-       is vendor internal data unless released by the vendor.
+       or  program  and it directs the action of the swpackage utility.	 It is
+       vendor internal data unless released by the vendor.
 
-       The  files  contain  keywords  (and values) to represent the attributes
-       defined in the standard.	 There are three (3) different keyword	types:
-       object,	attribute, and, extended. The object keyword type has no value
-       and there are eleven (11) of these corresponding to the Software	 Defi-
+       The files contain keywords (and values)	to  represent  the  attributes
+       defined	in the standard.  There are three (3) different keyword types:
+       object, attribute, and, extended. The object keyword type has no	 value
+       and  there are eleven (11) of these corresponding to the Software Defi-
        nitions defined above: installed_software, distribution, media, bundle,
        vendor, category, product, subproduct, fileset, control_file, file.
 
-       Each object keyword is followed by and newline and  attributes  in  the
-       form  of	 keyword/value	pairs.	 Whitespace  separates the keyword and
-       value.  Whitespace outside of a quoted value  is	 not  significant.   A
-       quoted  value can span multiple lines.  An object keyword with its list
-       of attribute keywords (and values)  forms  a  Software  Definition.   A
-       Software	 Definition  is	 terminated  by the start of the next Software
-       Definition.  Extended  keywords	(meaning  Extended  Definitions)  only
+       Each  object  keyword  is followed by and newline and attributes in the
+       form of keyword/value pairs.   Whitespace  separates  the  keyword  and
+       value.	Whitespace  outside  of	 a quoted value is not significant.  A
+       quoted value can span multiple lines.  An object keyword with its  list
+       of  attribute  keywords	(and  values)  forms a Software Definition.  A
+       Software Definition is terminated by the start  of  the	next  Software
+       Definition.   Extended  keywords	 (meaning  Extended  Definitions) only
        appear in a PSF file.
 
-       The  order   of objects (i.e Software Definitions) is significant and a
+       The order  of objects (i.e Software Definitions) is significant	and  a
        containment  hierarchy is determined according to parser's grammar.
 
    Additional Syntax Rules
-	  o  A '#' (pound) character designates	 a  comment.   A  comment  may
+	  o  A	'#'  (pound)  character	 designates  a comment.	 A comment may
 	     begin a line or appear at the end of a single line containing the
 	     keyword/value pair.
 
-	  o  A value may be quoted by the '"' (double quote)  character;  and,
-	     multi-line	 values	 must be quoted.  Trailing white space from an
+	  o  A	value  may be quoted by the '"' (double quote) character; and,
+	     multi-line values must be quoted.	Trailing white space  from  an
 	     unquoted value will be removed.
 
-	  o  The order of attributes is not  significant  although  the	 INDEX
-	     file  grammar  requires the layout_version attribute appear first
+	  o  The  order	 of  attributes	 is not significant although the INDEX
+	     file grammar requires the layout_version attribute	 appear	 first
 	     in distribution or installed software object.
 
-	  o  The ", #, and, \ characters must be escaped with a backslash  (\)
+	  o  The  ", #, and, \ characters must be escaped with a backslash (\)
 	     in a quoted value.
 
-	  o  If	 a value begins with a &lt; (less than), the value is interpreted
-	     as a filename whose contents will be treated as  a	 quoted	 value
-	     although  the  storage  of the attribute will be in the form of a
-	     control file (i.e. a separate file	 in  the  control  directory).
-	     For  INDEX	 files, the filename is relative to the control direc-
-	     tory in which this attribute is contained.	 For  PSF  files,  the
-	     filename is a path on the host.
+	  o  If a value begins with a &lt; (less than), the value is  interpreted
+	     as	 a  filename  whose contents will be treated as a quoted value
+	     although the storage of the attribute will be in the  form	 of  a
+	     control  file  (i.e.  a  separate file in the control directory).
+	     For  INDEX	 files,	 the  filename	is  relative  to  the  control
+	     directory	in  which this attribute is contained.	For PSF files,
+	     the filename is a path on the host.
 
    Software Definition File Grammar
-       A  PSF  may  contain  all Software Definitions.	An INDEX file does not
-       contain control_file, or file definitions. An INFO file	contains  only
+       A PSF may contain all Software Definitions.  An	INDEX  file  does  not
+       contain	control_file,  or file definitions. An INFO file contains only
        control_file, and file definitions.
 
 
@@ -5434,57 +5530,57 @@ EXAMPLE PACKAGE
 
 
 SWBIS PSF CONVENTIONS
-       This  section  describes attribute usage and conventions imposed by the
-       swbis implementation.  Not all attributes are listed here.  Those  that
+       This section describes attribute usage and conventions imposed  by  the
+       swbis  implementation.  Not all attributes are listed here.  Those that
        are have important effects or particular interest.
 
    o Distribution Attributes
-       The  standard  defines a limited set of attributes for the distribution
-       object.	An expanded set is suggested by the informative annex  however
-       a  conforming  implementation  is not required act on them.  The reason
+       The standard defines a limited set of attributes for  the  distribution
+       object.	 An expanded set is suggested by the informative annex however
+       a conforming implementation is not required act on  them.   The	reason
        for this is a distribution may be acted upon by a conforming utility in
-       such  a	way  that  attributes of the distribution become invalid.  For
-       this reason, some attributes that refer	to  an	entire	"package"  [in
+       such a way that attributes of the  distribution	become	invalid.   For
+       this  reason,  some  attributes	that  refer to an entire "package" [in
        other package managers] are referred from the product object and attain
-       their broadened scope by the vendor's convention that  their  distribu-
+       their  broadened	 scope by the vendor's convention that their distribu-
        tion contains just one product.
 
        For example, the package NAME and VERSION are referred from the product
-       tag and revision, not the  distribution's.   This  convention  supports
-       multiple	 products  in  a distribution and is consistent with the stan-
+       tag  and	 revision,  not	 the distribution's.  This convention supports
+       multiple products in a distribution and is consistent  with  the	 stan-
        dard.
 
        tag
 
-	      tag is the short, file system friendly, name  of	the  distribu-
-	      tion.   Providing	 a  distribution  tag  is optional.  The swbis
-	      implementation will use this as the [constant] leading  path  if
+	      tag  is  the  short, file system friendly, name of the distribu-
+	      tion.  Providing a distribution  tag  is	optional.   The	 swbis
+	      implementation  will  use this as the [constant] leading path if
 	      there is no distribution.control_directory attribute.  A distri-
 	      bution tag attribute and swpackage's response to it is an imple-
-	      mentation	 extension.  The leading package path can also be con-
+	      mentation extension.  The leading package path can also be  con-
 	      trolled with the ''-W dir'' option.
 
 
        control_directory
 
-	      control_directory, in a distribution  object,  is	 the  constant
-	      leading  package path.  Providing this attribute is optional.  A
+	      control_directory,  in  a	 distribution  object, is the constant
+	      leading package path.  Providing this attribute is optional.   A
 	      distribution   control_directory	 attribute   and   swpackage's
-	      response	to  it	is  an	implementation extension.  The leading
-	      package path can also be controlled with the ''-W dir''  option.
-	      This  attribute  will  be generated by swpackage if not set in a
+	      response to it is	 an  implementation  extension.	  The  leading
+	      package  path can also be controlled with the ''-W dir'' option.
+	      This attribute will be generated by swpackage if not  set	 in  a
 	      PSF.
 
 
    o Bundle Attributes
-       A bundle defines a collection of products whether or not the  distribu-
+       A  bundle defines a collection of products whether or not the distribu-
        tion has all the products present.
 
        tag
 
-	      tag  is  the  short,  file  system friendly, name of the bundle.
-	      This value is used by the swbis implementation as	 a  path  name
-	      component	 in  the  installed  software  catalog.	  If it is not
+	      tag is the short, file system  friendly,	name  of  the  bundle.
+	      This  value  is  used by the swbis implementation as a path name
+	      component in the installed  software  catalog.   If  it  is  not
 	      present the product tag is used.
 
 
@@ -5493,22 +5589,22 @@ SWBIS PSF CONVENTIONS
 
        tag
 
-	      tag is the short, file system friendly,  name  of	 the  product.
-	      This  value  is  used by the swbis implementation as a path name
-	      component in the installed software catalog.   It	 is  required.
-	      The  swbis  implementation uses it in a way that is analogous to
+	      tag  is  the  short,  file system friendly, name of the product.
+	      This value is used by the swbis implementation as	 a  path  name
+	      component	 in  the  installed software catalog.  It is required.
+	      The swbis implementation uses it in a way that is	 analogous  to
 	      the RPMTAG_NAME attribute.
 
        control_directory
 
-	      Is the directory name in the distribution under which the	 prod-
-	      uct  contents  are  located.   This  value  has no affect on the
-	      installed software catalog.  If it is not given in  a  PSF  then
+	      Is  the directory name in the distribution under which the prod-
+	      uct contents are located.	 This  value  has  no  affect  on  the
+	      installed	 software  catalog.   If it is not given in a PSF then
 	      the tag is used.
 
        revision
 
-	      Is  the  product	revision.   It	should not contain a "RELEASE"
+	      Is the product revision.	It  should  not	 contain  a  "RELEASE"
 	      attribute part or other version suffix modifiers.	 This value is
 	      used by the swbis implementation as a path name component in the
 	      installed software catalog.  It is required by swinstall.
@@ -5517,17 +5613,17 @@ SWBIS PSF CONVENTIONS
        vendor_tag
 
 	      This is a short identifying name of the vendor that supplied the
-	      product.	 This  attribute  is  optional.	  This attribute value
-	      should strive to be unique among all vendors.  It is one of  the
-	      version  distinguishing attributes of a product specified by the
-	      standard.	 It is transfered into the installed_software  catalog
-	      (not  as a path name component) by swinstall.  If this attribute
-	      exists there should also be a vendor object in the  PSF  in  the
-	      distribution  object  that  has  this  tag.   This  attribute is
-	      assigned the value of RPMTAG_RELEASE by swpackage(8) when trans-
-	      lating  an RPM.  In this capacity it serves to distinguish prod-
-	      ucts with the same revision and tag from the same	 or  different
-	      vendor.	 It   most  closely  maps  to  the  RPMTAG_RELEASE  or
+	      product.	This attribute	is  optional.	This  attribute	 value
+	      should  strive to be unique among all vendors.  It is one of the
+	      version distinguishing attributes of a product specified by  the
+	      standard.	  It is transfered into the installed_software catalog
+	      (not as a path name component) by swinstall.  If this  attribute
+	      exists  there  should  also be a vendor object in the PSF in the
+	      distribution object  that	 has  this  tag.   This	 attribute  is
+	      assigned the value of RPMTAG_RELEASE by swpackage when translat-
+	      ing an RPM.  In this capacity it serves to distinguish  products
+	      with  the	 same revision and tag from the same or different ven-
+	      dor.   It	 most  closely	 maps	to   the   RPMTAG_RELEASE   or
 	      "debian_revision" attributes.
 
    o Fileset Attributes
@@ -5540,14 +5636,14 @@ SWBIS PSF CONVENTIONS
 
        control_directory
 
-	      Is  the  directory  name	in the product under which the fileset
+	      Is the directory name in the product  under  which  the  fileset
 	      contents are located.  This value has no affect on the installed
-	      software	catalog.   If it is not given in a PSF then the tag is
+	      software catalog.	 If it is not given in a PSF then the  tag  is
 	      used.
 
    o Example Source Package PSF
-       This PSF packages every file is current directory. It uses nil  control
-       directories  so	the  package  structure	 does not change relative to a
+       This  PSF packages every file is current directory. It uses nil control
+       directories so the package structure does  not  change  relative	 to  a
        vanilla tarball.
 
 
@@ -5572,12 +5668,12 @@ SWBIS PSF CONVENTIONS
 
 
    o Example Runtime (Binary) Package PSF
-       This is a sample PSF for a runtime package.  It implies multiple	 prod-
-       ucts  (e.g.  sub-packages)  using the bundle.contents attribute.	 Since
-       the bundle and product tags exist in a un-regulated namespace  and  are
+       This  is a sample PSF for a runtime package.  It implies multiple prod-
+       ucts (e.g. sub-packages) using the  bundle.contents  attribute.	 Since
+       the  bundle  and product tags exist in a un-regulated namespace and are
        seen by end users they should be carefully chosen.   Note that the bun-
-       dle and product have the same tag which may force downstream  users  to
-       disambiguate  using  software  selection	 syntax	 such as fooit,bv=* or
+       dle  and	 product have the same tag which may force downstream users to
+       disambiguate using software selection  syntax  such  as	fooit,bv=*  or
        fooit,pv=* .
 
 
@@ -5618,7 +5714,7 @@ SWBIS PSF CONVENTIONS
 
 
 APPLICABLE STANDARDS
-       IEEE Std 1387.2-1995 (Identical to ISO 15068-2:1999),  Open  Group  CAE
+       IEEE  Std  1387.2-1995  (Identical to ISO 15068-2:1999), Open Group CAE
        C701.
 
 SEE ALSO
@@ -5632,8 +5728,8 @@ SEE ALSO
 
 IDENTIFICATION
 	Copyright (C) 2003 Jim Lowe
-	Version: 0.406
-	Date: 2004-09-01
+	Version: 0.443
+	Date: 2005-05-05
 	Copying Terms: GNU Free Documentation License
 
 BUGS
@@ -5902,6 +5998,8 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Configuring-swbis">Configuring swbis</
 #swinstall.swbis_enforce_file_md5		= false
 #swinstall.swbis_allow_rpm			= false
 #swinstall.swbis_remote_shell_client		= ssh
+#swinstall.swbis_install_volatile		= true
+#swinstall.swbis_volatile_newname		= ""     # e.g. ".rpmnew"
 
 #swpackage.swbis_cksum				= "false"   # true or false
 #swpackage.swbis_file_digests			= "true"   # true or false
@@ -6040,17 +6138,22 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <ul class="menu">
 <li><a accesskey="1" href="sw.html#SWBIS-PSF-CONVENTIONS">Swbis Packaging Conventions</a>: <li><a accesskey="2" href="swpackage.html#SAMPLE-PRODUCT-SPEC-FILES">PSF Examples</a>: </ul>
 
-<p>Currently, <span class="command">swpackage</span> does not enforce the requirements for
-meta-data that other utilities might need, such as the revision attribute. 
+<p>Currently, <span class="command">swpackage</span> does not enforce requirements for
+revision and name meta-data that other the 'swinstall' might need. 
 Therefore you should perform a test install of your package. The preview '-p' option
 of <span class="command">swinstall</span> internally simulates most of the install operation
 but does not alter the file system.  The example below previews the package
 on standard input.
 <pre class="example">             swinstall -p -x verbose=6 -s - &lt; your_package
 </pre>
+   <p>Other restrictions of the swbis implementation are the default values for
+the 'dfiles' and 'pfiles' attributes (which are 'dfiles' and 'pfiles') must
+be used for minimal layout packages, i.e. packages that have the product and fileset
+control directories specified as empty strings (i.e have a minimal package layout).
+
    <p>The input file to <span class="command">swpackage</span>is a called a Product Specification File
 or PSF. 
-It contains information to direct swpackage(8) and information that is
+It contains information to direct <span class="command">swpackage</span> and information that is
 package meta-data [that is merely transferred unchanged into the global
 INDEX file].
 
@@ -6069,7 +6172,7 @@ by swpackage).  Extended Definitions are translated [by swpackage] into
 object keywords (objects) and attributes recognized by the standard.
 
    <p>Comments in a PSF are not transferred into the INDEX file by the
-swbis implementation of swpackage(8).
+swbis implementation of <span class="command">swpackage</span>.
 
    <p>The file syntax is the same as a INDEX, or INFO file. 
 See <a href="sw.html#SOFTWARE-DEFINITION-FILES">(swbis_sw)SOFTWARE DEFINITION FILES</a>.
@@ -6118,7 +6221,8 @@ distributions you need <span class="command">gpg</span>.
 <span class="command">sh</span>, <span class="command">bash</span>, <span class="command">getconf</span>, <span class="command">dd</span>, <span class="command">tar</span>,
 <span class="command">hostname</span>, <span class="command">mkdir</span>, <span class="command">expr</span>, <span class="command">echo</span>, <span class="command">test</span>, <span class="command">sleep</span>.
 
-   <p>Installation to remote hosts does not require swbis to be installed there.
+   <p>Installation of packages on remote hosts (i.e. using swinstall with a remote host target)
+does not require swbis to be installed there.
 
    <p>The <span class="command">swverify</span> and <span class="command">swign</span> commands are shell scripts which may have additional
 requirements.
@@ -6126,12 +6230,12 @@ requirements.
    <p>Here are the technical details about requirements for <span class="command">swinstall</span>, the same
 apply to <span class="command">swcopy</span>:
 
-   <p>swinstall(8) requires a Posix shell accessible by the remote shell command. 
+   <p><span class="command">swinstall</span> requires a Posix shell accessible by the remote shell command. 
 This is the remote command run by ssh (or rsh)  for  all  operations. 
 This command can be controlled by the &ndash;shell-command option or
 the swbis_shell_command defaults file  option.   Permitted  values  are
 "bash"  (/bin/bash  -s) or "sh" (/bin/sh -s) or "posix" ('PATH=`getconf
-PATH` sh -s').   The default is  "posix".   swinstall(8)  requires  the
+PATH` sh -s').   The default is  "posix".   <span class="command">swinstall</span>  requires  the
 POSIX capability of reading commands on stdin according to the specification
 described in IEEE Std  1003.1,  2003  Ed.;  sh  -shell,  Section STDIN.
 

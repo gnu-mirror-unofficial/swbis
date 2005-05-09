@@ -286,10 +286,8 @@ is not attested to in the posix normative references.
    <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .PP -->
-<p>In this layout a single product and fileset have
-
-<!-- WARNING: man/man5/sw.5:138:%%new font I started without closing previous font R -->
-<p></span><i>control</i><tt>_</tt><i>directory</i> attributes specified as an empty string. 
+<!-- WARNING: man/man5/sw.5:137:%%new font I started without closing previous font R -->
+<p>In this layout a single product and fileset have </span><i>control</i><tt>_</tt><i>directory</i> attributes specified as an empty string. 
 <!-- TROFF INPUT: .SS "Distribution Files" -->
 
 <div class="node">
@@ -312,8 +310,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#SOFTWARE-PACKAGING-LAYOUT">SOFTWARE PA
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <p>&lt;<i>dfiles</i>&gt;
-is the value of the
-<i>dfiles</i> attribute and the default value is "dfiles". 
+is the value of the <i>dfiles</i> attribute and the default value is "dfiles". 
 This directory can store an INDEX file or INFO file pertaining to the distribution. 
 It can also store an attribute of
 the distribution as a separate file where file name is the name of the attribute and the file contents the value. 
@@ -339,8 +336,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#SOFTWARE-PACKAGING-LAYOUT">SOFTWARE PA
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <p>&lt;<i>pfiles</i>&gt;
-is the value of the
-<i>pfiles</i> attribute and the default value is "pfiles". 
+is the value of the <i>pfiles</i> attribute and the default value is "pfiles". 
 This directory can store an INFO file pertaining to the product control<tt>_</tt>files,  control scripts defined in the INFO file, and all
 other vendor-defined control<tt>_</tt>files. 
 It can also store an attribute of
@@ -383,10 +379,8 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#SOFTWARE-PACKAGING-LAYOUT">SOFTWARE PA
 <!-- TROFF INPUT: .PP -->
 <p>The
 &lt;<i>prod</i><tt>_</tt><i>dir</i>&gt;/&lt;<i>fileset</i><tt>_</tt><i>dir</i>&gt;
-names are the values of the
-<i>control</i><tt>_</tt><i>directory</i> attribute for the product and fileset respectively.  The
-default value is the value of the
-<i>tag</i> attribute. 
+names are the values of the <i>control</i><tt>_</tt><i>directory</i> attribute for the product and fileset respectively.  The
+default value is the value of the <i>tag</i> attribute. 
 &lt;<i>prod</i><tt>_</tt><i>dir</i>&gt; must be unique within a distribution and
 &lt;<i>fileset</i><tt>_</tt><i>dir</i>&gt; must be unique within a product. 
 <!-- TROFF INPUT: .SS "File Storage " -->
@@ -481,11 +475,9 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#SOFTWARE-DEFINITIONS">SOFTWARE DEFINIT
 may chose to define this class. 
 <!-- TROFF INPUT: .PP -->
 
-   <p>A host object can contain
-
-<!-- WARNING: man/man5/sw.5:216:%%new font I started without closing previous font R -->
-<p></span><i>distributions</i>,
-<i>installed</i><tt>_</tt><i>software</i> objects in the form of software definitions.
+<!-- WARNING: man/man5/sw.5:210:%%new font I started without closing previous font R -->
+<p>A host object can contain a </span><i>distribution</i>,
+or <i>installed</i><tt>_</tt><i>software</i> object.
 
 <!-- TROFF INPUT: .SS "Distribution Definition" -->
 <div class="node">
@@ -513,17 +505,15 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#SOFTWARE-DEFINITIONS">SOFTWARE DEFINIT
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .PP -->
-<!-- WARNING: man/man5/sw.5:231:%%new font I started without closing previous font R -->
+<!-- WARNING: man/man5/sw.5:225:%%new font I started without closing previous font R -->
 <p>The </span><i>path</i> attribute is not in a PSF nor INDEX files. 
 A PSF does not contain a <i>uuid</i> attribute. 
 An INDEX file will contain a <i>layout</i><tt>_</tt><i>version</i> attribute as
 the first attribute. 
 <!-- TROFF INPUT: .PP -->
 
-   <p>A distribution object can contain
-<i>bundles</i>,
-<i>products</i>, and,
-<i>media</i> in the form of software definitions. 
+   <p>A distribution object can contain <i>bundles</i>, <i>products</i>,
+and, <i>media</i> in the form of software definitions. 
 <!-- TROFF INPUT: .PP -->
 
    <p>The following attributes are recognized as valuable by the Informative Annex of POSIX.7.2. 
@@ -571,14 +561,13 @@ the first attribute.
    <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .PP -->
-<!-- WARNING: man/man5/sw.5:276:%%new font I started without closing previous font R -->
+<!-- WARNING: man/man5/sw.5:268:%%new font I started without closing previous font R -->
 <p>The </span><i>url</i> attribute is the universal record locator of
 the <i>packager</i> qualified vendor. 
 The <i>control</i><tt>_</tt><i>directory</i> attribute in the
 distribution object appears as the &lt;<i>path</i>&gt;
 leading directory path in the a serial archive package. 
-The <i>owner</i>,
-<i>group</i>, and
+The <i>owner</i>, <i>group</i>, and
 <i>mode</i> attributes control the file attributes of the leading path. 
 The <i>signature</i>,
 <i>sig</i><tt>_</tt><i>header</i>,
@@ -613,14 +602,11 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#SOFTWARE-DEFINITIONS">SOFTWARE DEFINIT
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .PP -->
-<p>A software object can be listed (written to stdout) in the form of an INDEX file by the
-
-<!-- WARNING: man/man5/sw.5:303:%%new font I started without closing previous font R -->
-<p></span><i>swlist</i> utility. 
-This definition is used for that purpose.
+<p>A software object can be listed (written to stdout) in the form of an INDEX
+file by the swlist utility.
 
 <!-- TROFF INPUT: .SS "Media Definition" -->
-<div class="node">
+<p></span><div class="node">
 <p><hr>
 <a name="Media-Definition"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Vendor-Definition">Vendor Definition</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#Installed_003ctt_003e_005f_003c_002ftt_003esoftware-Definition">Installed&lt;tt&gt;_&lt;/tt&gt;software Definition</a>,
@@ -641,7 +627,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#SOFTWARE-DEFINITIONS">SOFTWARE DEFINIT
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .PP -->
-<!-- WARNING: man/man5/sw.5:314:%%new font I started without closing previous font R -->
+<!-- WARNING: man/man5/sw.5:304:%%new font I started without closing previous font R -->
 <p>An INDEX file must contain the </span><i>sequence</i><tt>_</tt><i>number</i> attribute if
 the distribution spans multiple media.
 
@@ -671,7 +657,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#SOFTWARE-DEFINITIONS">SOFTWARE DEFINIT
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .PP -->
-<!-- WARNING: man/man5/sw.5:329:%%new font I started without closing previous font R -->
+<!-- WARNING: man/man5/sw.5:319:%%new font I started without closing previous font R -->
 <p>The </span><i>tag</i> attribute is required. 
 A INDEX and PSF files can contain vendor definitions. 
 The <b>qualifier</b> attribute value may be one of:
@@ -725,11 +711,9 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#SOFTWARE-DEFINITIONS">SOFTWARE DEFINIT
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .PP -->
-<!-- WARNING: man/man5/sw.5:368:%%new font I started without closing previous font R -->
+<!-- WARNING: man/man5/sw.5:358:%%new font I started without closing previous font R -->
 <p>The </span><i>tag</i> and <i>contents</i> attributes are required in INDEX and PSF files. 
-The
-<i>size</i> attribute is not allowed in either file. The value of
-<i>size</i> is generated dynamically. 
+The <i>size</i> attribute is not allowed in either file. The value of <i>size</i> is generated dynamically. 
 An INDEX file will contain a <i>instance</i><tt>_</tt><i>id</i> attribute. 
 Bundle definitions for distributions will not contain either the
 <i>location</i> or
@@ -792,7 +776,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#SOFTWARE-DEFINITIONS">SOFTWARE DEFINIT
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .PP -->
-<!-- WARNING: man/man5/sw.5:420:%%new font I started without closing previous font R -->
+<!-- WARNING: man/man5/sw.5:408:%%new font I started without closing previous font R -->
 <p>The </span><i>tag</i> and <i>control</i><tt>_</tt><i>directory</i> attributes are required. 
 The
 <i>size</i> attribute is not allowed in either file. The value of
@@ -830,7 +814,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#SOFTWARE-DEFINITIONS">SOFTWARE DEFINIT
 <!-- TROFF INPUT: .PP -->
 <p>The Category definition describes attributes of products and bundles related
 
-<!-- WARNING: man/man5/sw.5:442:%%new font I started without closing previous font R -->
+<!-- WARNING: man/man5/sw.5:430:%%new font I started without closing previous font R -->
 <p>to its category. If </span><i>is</i><tt>_</tt><i>patch</i> is "true" then category.tag
 must equal "patch".
 
@@ -864,7 +848,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#SOFTWARE-DEFINITIONS">SOFTWARE DEFINIT
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .PP -->
-<!-- WARNING: man/man5/sw.5:461:%%new font I started without closing previous font R -->
+<!-- WARNING: man/man5/sw.5:449:%%new font I started without closing previous font R -->
 <p>The </span><i>tag</i> and <i>contents</i> attributes are required.
 
 <!-- TROFF INPUT: .SS "Fileset Definition" -->
@@ -916,7 +900,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#SOFTWARE-DEFINITIONS">SOFTWARE DEFINIT
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .PP -->
-<!-- WARNING: man/man5/sw.5:498:%%new font I started without closing previous font R -->
+<!-- WARNING: man/man5/sw.5:486:%%new font I started without closing previous font R -->
 <p>The </span><i>tag</i> and <i>control</i><tt>_</tt><i>directory</i> attributes are required.  A PSF should not contain the
 <i>location</i>,
 <i>media</i><tt>_</tt><i>sequence</i><tt>_</tt><i>number</i>,
@@ -972,7 +956,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#SOFTWARE-DEFINITIONS">SOFTWARE DEFINIT
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .PP -->
-<!-- WARNING: man/man5/sw.5:539:%%new font I started without closing previous font R -->
+<!-- WARNING: man/man5/sw.5:527:%%new font I started without closing previous font R -->
 <p>A PSF must contain </span><i>source</i> attribute. 
 A <i>source</i>  attribute in an INFO will be
 ignored. 
@@ -1019,13 +1003,10 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#SOFTWARE-DEFINITIONS">SOFTWARE DEFINIT
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .PP -->
 <p>A control</span><tt>_</tt><span class="roman">file defines a control script such as those listed below (see Extended Control File Definitions)
-or an attribute stored as a file.  In addition to control scripts listed below are
-
-<!-- WARNING: man/man5/sw.5:572:%%new font B started without closing previous font R -->
-<p></span><b>install</b> to load files, and <b>remove</b> to unload files. 
+or an attribute stored as a file. 
 <!-- TROFF INPUT: .SH "EXTENDED DEFINITIONS" -->
 
-<div class="node">
+   <p></span><div class="node">
 <p><hr>
 <a name="EXTENDED-DEFINITIONS"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#VENDOR-KEYWORDS">VENDOR KEYWORDS</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#SOFTWARE-DEFINITIONS">SOFTWARE DEFINITIONS</a>,
@@ -1049,7 +1030,9 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <!-- TROFF INPUT: .PP -->
 <p>A Product Specification File (PSF) can contain Extended Definitions in the
-<b>fileset</b>, <b>product</b> or <b>bundle</b> software definitions.  They would have the same level or containment
+
+<!-- WARNING: man/man5/sw.5:563:%%new font B started without closing previous font R -->
+<p><b>fileset</b>, <b>product</b> or <b>bundle</b> software definitions.  They would have the same level or containment
 relationship as a
 <b>file</b> or
 <b>control</b><tt>_</tt><b>file</b> definition in the same contaning object. 
@@ -1102,7 +1085,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#EXTENDED-DEFINITIONS">EXTENDED DEFINIT
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .PP -->
-<!-- WARNING: man/man5/sw.5:612:%%new font I started without closing previous font R -->
+<!-- WARNING: man/man5/sw.5:599:%%new font I started without closing previous font R -->
 <p>The </span><i>source</i> attribute defines the location in vendor's development system
 where the swpackage utility will find the script.  The keyword is the value of the
 <i>tag</i> attribute
@@ -1138,7 +1121,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#EXTENDED-DEFINITIONS">EXTENDED DEFINIT
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .PP -->
-<!-- WARNING: man/man5/sw.5:630:%%new font I started without closing previous font R -->
+<!-- WARNING: man/man5/sw.5:617:%%new font I started without closing previous font R -->
 <p>Applies the </span><i>source</i> attribute as the directory under which
 the subsequently listed files are located.  If
 <i>destination</i> is defined it will be used as a prefix to the
@@ -1176,7 +1159,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#EXTENDED-DEFINITIONS">EXTENDED DEFINIT
 <!-- TROFF INPUT: .PP -->
 <p>Specifies every file in current source directory.
 
-<!-- WARNING: man/man5/sw.5:649:%%new font I started without closing previous font R -->
+<!-- WARNING: man/man5/sw.5:636:%%new font I started without closing previous font R -->
 <p>The </span><i>directory</i> extended definition must be used before the recursive specification. 
 <!-- TROFF INPUT: .SS "o  Explicit File Definition" -->
 
@@ -1206,7 +1189,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#EXTENDED-DEFINITIONS">EXTENDED DEFINIT
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .PP -->
-<!-- WARNING: man/man5/sw.5:661:%%new font B started without closing previous font R -->
+<!-- WARNING: man/man5/sw.5:648:%%new font B started without closing previous font R -->
 <p></span><b>source</b>
 <!-- TROFF INPUT: .RS -->
 
@@ -1216,7 +1199,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#EXTENDED-DEFINITIONS">EXTENDED DEFINIT
      <!-- TROFF INPUT: .PP -->
 <p><i>source</i> defines the pathname of the file to be used as the source of file data
 and/or attributes. 
-If it is a relative path, then swpackage(8) searches for this file relative to the
+If it is a relative path, then swpackage searches for this file relative to the
 the source argument of the <b>directory</b> keyword, if set. 
 If <b>directory</b> keyword is not set then the search is relative to the
 current working directory of the swpackage utility's invocation. 
@@ -1329,7 +1312,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#EXTENDED-DEFINITIONS">EXTENDED DEFINIT
 These attributes will apply where the file attributes were not specified explicitly in a
 file definition.
 
-<!-- WARNING: man/man5/sw.5:731:%%new font B started without closing previous font R -->
+<!-- WARNING: man/man5/sw.5:718:%%new font B started without closing previous font R -->
 <p>Subsequent </span><b>file</b><tt>_</tt><b>permissions</b> definitions
 simply replace previous definitions (resetting all the options). 
 <!-- TROFF INPUT: .PP -->
@@ -1400,7 +1383,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#EXTENDED-DEFINITIONS">EXTENDED DEFINIT
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .PP -->
-<!-- WARNING: man/man5/sw.5:764:%%new font I started without closing previous font R -->
+<!-- WARNING: man/man5/sw.5:751:%%new font I started without closing previous font R -->
 <p>The contents of </span><i>filename</i> may be more definitions for files. 
 The syntax of the included file is PSF syntax. 
 <!-- TROFF INPUT: .br -->
@@ -1419,8 +1402,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <!-- DEBUG: print_menu("VENDOR KEYWORDS") -->
 <!-- TROFF INPUT: .PP -->
-<p>A software definition file (INFO, INDEX or psf) may contain keywords not recognized by the
-standard. 
+<p>A software definition file (INFO, INDEX or psf) may contain keywords not recognized by the standard. 
 Such keywords will be parsed as an attribute keyword, that is as an attribute of the
 containing object (keyword) software definition. 
 <!-- TROFF INPUT: .SH "PACKAGE SECURITY" -->
@@ -1490,7 +1472,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#PACKAGE-SECURITY">PACKAGE SECURITY</a>
 <h4 class="subsection">1.7.2 Adjunct Md5 Digest</h4>
 
 <!-- TROFF INPUT: .PP -->
-<!-- WARNING: man/man5/sw.5:793:%%new font I started without closing previous font R -->
+<!-- WARNING: man/man5/sw.5:779:%%new font I started without closing previous font R -->
 <p><i>adjunct</i><tt>_</tt><i>md5sum</i> is the same as the
 <i>md5sum</i> excluding symbolic links. 
 If a package does not contain symbolic links the
@@ -1514,7 +1496,7 @@ It exists to facilitate verifying file integrity of the directory form of a pack
 in an environment where the modification time of symbolic link files are not preserved from the serial
 archive by the tar utility or operating system.
 
-<!-- WARNING: man/man5/sw.5:809:%%new font I started without closing previous font R -->
+<!-- WARNING: man/man5/sw.5:795:%%new font I started without closing previous font R -->
 <p>The ability to verify even the </span><i>adjunct</i><tt>_</tt><i>md5sum</i> from
 the directory form of the package is dependent on the tar creating utility and
 other attributes of a POSIX.2 environment. 
@@ -1545,10 +1527,8 @@ file archive members.
    <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .PP -->
-<p>The
-
-<!-- WARNING: man/man5/sw.5:824:%%new font I started without closing previous font R -->
-<p></span><i>sig</i><tt>_</tt><i>header</i> protects the tar header of the signature files from tampering. 
+<!-- WARNING: man/man5/sw.5:809:%%new font I started without closing previous font R -->
+<p>The </span><i>sig</i><tt>_</tt><i>header</i> protects the tar header of the signature files from tampering. 
 This is required because neither the signature file bytes nor the signature tar header are
 included in the signed data. 
 <!-- TROFF INPUT: .SS "Catalog Signature" -->
@@ -1580,7 +1560,7 @@ payload from the signature.
    <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .PP -->
-<!-- WARNING: man/man5/sw.5:840:%%new font I started without closing previous font R -->
+<!-- WARNING: man/man5/sw.5:825:%%new font I started without closing previous font R -->
 <p>The signed data is the </span><i>exported catalog structure</i> of the uncompressed serial archive package file
 up to but not including the first byte of the <i>software file storage structure</i> followed by two (2) 512 byte null blocks if tar format, and no trailer bytes if not tar format. 
 The signature file archive member itself is not included in the signed stream, it is intended that the
@@ -1653,7 +1633,7 @@ The location in the directory structure indicates the higher level object
 to which their data pertains. 
 The PSF file does not appear in the package. 
 It is created by a person or program and it directs
-the action of the swpackage(8) utility. 
+the action of the swpackage utility. 
 It is vendor internal data unless released by the vendor. 
 <!-- TROFF INPUT: .PP -->
 
@@ -1674,8 +1654,8 @@ eleven (11) of these corresponding to the Software Definitions defined above:
 
    <p>Each object keyword is followed by and newline and attributes in the form of keyword/value pairs.  Whitespace separates the keyword and
 value.  Whitespace outside of a quoted value is not significant. 
-A quoted value can span multiple lines.  An object keyword with its list of attribute keywords (and values) forms a
-<i>Software Definition</i>. 
+A quoted value can span multiple lines.  An object keyword with its list of attribute keywords (and values)
+forms a <i>Software Definition</i>. 
 A <i>Software Definition</i> is terminated by the start of the next <i>Software Definition</i>. 
 Extended keywords (meaning Extended Definitions) only appear in a PSF file. 
 <!-- TROFF INPUT: .PP -->
@@ -1702,8 +1682,8 @@ end of a single line containing the keyword/value pair.
 Trailing white space from an unquoted value will be removed. 
 <!-- TROFF INPUT: .IP "   \(bu" 6 -->
 
-   <p>The order of attributes is not significant although the INDEX file grammar requires the
-<i>layout</i><tt>_</tt><i>version</i> attribute appear first in
+   <p>The order of attributes is not significant although the INDEX file grammar requires the <i>layout</i><tt>_</tt><i>version</i> attribute
+appear first in
 distribution or installed software object. 
 <!-- TROFF INPUT: .IP "   \(bu" 6 -->
 
@@ -1727,8 +1707,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#SOFTWARE-DEFINITION-FILES">SOFTWARE DE
 <h4 class="subsection">1.8.2 Software Definition File Grammar</h4>
 
 <!-- TROFF INPUT: .PP -->
-<p>A PSF may contain all
-<i>Software Definitions</i>.  An INDEX file does not contain
+<p>A PSF may contain all <i>Software Definitions</i>.  An INDEX file does not contain
 <b>control</b><tt>_</tt><b>file</b>,
 or
 <b>file</b> definitions. An INFO file contains only
@@ -2297,7 +2276,7 @@ It is transfered into the installed<tt>_</tt>software catalog (not as a path nam
 If this attribute exists there should also be a
 <b>vendor</b> object in the PSF in the distribution object that has this tag. 
 This attribute is assigned the value of RPMTAG<tt>_</tt>RELEASE by
-swpackage(8) when translating an RPM. 
+swpackage when translating an RPM. 
 In this capacity it serves to distinguish products with the same revision and tag from the same or
 different vendor.  It most closely maps to the RPMTAG<tt>_</tt>RELEASE or "debian<tt>_</tt>revision" attributes. 
 <!-- TROFF INPUT: .RE -->
@@ -2506,8 +2485,8 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <!-- DEBUG: print_menu("IDENTIFICATION") -->
 <p>Copyright (C) 2003 Jim Lowe
- Version: 0.406
- Date: 2004-09-01
+ Version: 0.443
+ Date: 2005-05-05
  Copying Terms: GNU Free Documentation License
 <!-- TROFF INPUT: .SH "BUGS" -->
 
@@ -2523,8 +2502,8 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- DEBUG: print_menu("BUGS") -->
 <!-- TROFF INPUT: .PP -->
 <p>None
-<!-- TROFF INPUT: ...\" created by instant / docbook-to-man, Sat 09 Oct 2004, 18:13 -->
-<!-- ...\" created by instant / docbook-to-man, Sat 09 Oct 2004, 18:13 -->
+<!-- TROFF INPUT: ...\" created by instant / docbook-to-man, Sat 07 May 2005, 16:50 -->
+<!-- ...\" created by instant / docbook-to-man, Sat 07 May 2005, 16:50 -->
 
 </body></html>
 

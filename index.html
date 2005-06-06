@@ -19,6 +19,7 @@ WIDTH="129" HEIGHT="122"></A>
 <H4>Table of Contents</H4>
 <UL>
   <LI><A HREF="#introduction" NAME="TOCintroduction">Introduction</A>
+  <LI><A HREF="#releases" NAME="TOCreleases">Releases</A>
   <LI><A HREF="#downloading" NAME="TOCdownloading">Get the Software</A>
   <LI><A HREF="#documentation" NAME="TOCdocumentation">Documentation</A>
 </UL>
@@ -53,8 +54,48 @@ already present on all GNU and GNU/Linux hosts.
 <P>
 The swbis implementation can also install RPM packages or translate
 an RPM package to a POSIX package in tar format with a single leading
-directory.  (Currently, swinstall does not execute installation control
-scripts).
+directory.
+
+<P>
+The package installer, swinstall, supports checkinstall preinsetall, and postinstall
+script execution.  It uses tar for file loading.  It creates a de-facto installed
+software catalog using directories and text files that stores and preserves the package
+GPG signature in a form that can be later verified using the 'gpg' utility.
+
+<h4><a href="#TOCreleases" name="releases">Releases</a></h4>
+
+<table frame="box" rules="groups" width="95%" cellpadding="10%">
+<colgroup span="1">
+</colgroup>
+<colgroup span="1">
+</colgroup>
+<colgroup span="1">
+</colgroup>
+<thead class="header">
+ <tr> 
+  <th>Date</th>
+  <th>Version</th>
+  <th>Download</th>
+  <th>Information</th>
+ </tr>
+</thead>
+<tbody>
+ <tr>
+ <td>2005-05-09</td>
+ <td>0.446</td> 
+  <td><a href="http://prdownloads.sourceforge.net/swbis/swbis-0.446.tar.gz?download">swbis-0.446.tar.gz</a></td>
+  <td><p>Major feature enhancements. Now supports control script execution
+  </td>
+ </tr>
+ <tr>
+ <td>2005-05-22</td>
+ <td>0.455</td> 
+  <td><a href="http://prdownloads.sourceforge.net/swbis/swbis-0.455.tar.gz?download">swbis-0.455.tar.gz</a></td>
+  <td><p>Minor bug fixes.  Compilation and build fixes for non-GNU/Linux platforms.
+  </td>
+ </tr>
+</tbody>
+</table>
 
 <P>
 The programs supplied with this package are:
@@ -118,7 +159,7 @@ permitted in any medium, provided this notice is preserved.
 
 <P>
 Updated:
-$Id: index.html,v 1.2 2005/05/09 03:15:26 jhlowe Exp $
+$Id: index.html,v 1.3 2005/06/06 02:43:10 jhlowe Exp $
 <HR>
 </BODY>
 </HTML>

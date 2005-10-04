@@ -7,7 +7,7 @@ i {color:#000080}
 -->
 </STYLE>
 </HEAD>
-<BODY BGCOLOR="#ffffff">
+<BODY BGCOLOR="#f0f0f0">
 <H1>swcopy(8)</H1>
 <h3>Contents</h3><ul>
 <li><a href="#NAME">NAME</a>
@@ -165,11 +165,16 @@ i {color:#000080}
 
        <b>-W pty</b>
 
-              Do use pseudo-tty.
+              Do  use  pseudo-tty.   The  system  Ptys  are  only used for the
+              --login feature.  A warning is emitted to stderr which says that
+              the usage may be insecure.
 
        <b>-W no-pty</b>
 
-              Do not use pseudo-tty.
+              Do not use pseudo-tty.  The system Ptys are only used by default
+              for the --login feature, otherwise they are not  used  and  this
+              option  would  have  no  effect.   If ptys are used a warning is
+              emitted to stderr which says that the usage may be insecure.
 
        <b>-W uncompress</b>
 
@@ -183,7 +188,7 @@ i {color:#000080}
        <b>-W quiet-progress</b>
 
               Defaults File Option: <b>swbis_quiet_progress_bar</b>
-              Disable  progress  bar, which is active for verbose levels 2 and
+              Disable progress bar, which is active for verbose levels  2  and
               higher (i.e. -v).
 
        <b>-W show-progress</b>
@@ -198,7 +203,7 @@ i {color:#000080}
               line options.
 
        <b>-W pax-command={tar|pax|star|gtar}</b>
-              Set  the  portable  archive  command  for  all  operations.  The
+              Set the  portable  archive  command  for  all  operations.   The
               default is &quot;pax&quot;.
 
        <b>-W pax-read-command={tar|pax|star|gtar}</b>
@@ -207,17 +212,17 @@ i {color:#000080}
        <b>-W remote-pax-read-command={tar|pax|star|gtar}</b>
               Defaults File Option: <b>swbis_remote_pax_read_command</b>
               Set the read command for remote hosts.  This is the command that
-              runs  on  the  target  (e.g. pax -r, tar xpf -).  The default is
+              runs on the target (e.g. pax -r, tar xpf  -).   The  default  is
               &quot;pax&quot;.
 
        <b>-W local-pax-read-command={tar|pax|star|gtar}</b>
               Defaults File Option: <b>swbis_local_pax_read_command</b>
-              Set the read command for local hosts.  This is the command  that
-              runs  on  the  target  (e.g. pax -r, tar xpf -).  The default is
+              Set  the read command for local hosts.  This is the command that
+              runs on the target (e.g. pax -r, tar xpf  -).   The  default  is
               &quot;pax&quot;.
 
        <b>-W pax-write-command={tar|pax|star|gtar|swbistar}</b>
-              Set the write command for local and remote hosts.  This  is  the
+              Set  the  write command for local and remote hosts.  This is the
               command that runs on the target (e.g. pax -w, tar cf -).
 
        <b>-W remote-pax-write-command={tar|pax|star|gtar|swbistar}</b>
@@ -226,14 +231,14 @@ i {color:#000080}
 
        <b>-W local-pax-write-command={tar|pax|star|gtar|swbistar}</b>
               Defaults File Option: <b>swbis_local_pax_write_command</b>
-              Set  the  portable  archive  write command for local host opera-
-              tions.  This is the command that runs on the  source  (e.g.  pax
+              Set the portable archive write command  for  local  host  opera-
+              tions.   This  is  the command that runs on the source (e.g. pax
               -w, tar cf -).  The default is &quot;pax&quot;.
 
        <b>-W remote-pax-write-command={tar|pax|star|gtar|swbistar}</b>
               Defaults File Option: <b>swbis_remote_pax_write_command</b>
-              Set  the  portable  archive write command for remote host opera-
-              tions.  This is the command that runs on the  source  (e.g.  pax
+              Set the portable archive write command for  remote  host  opera-
+              tions.   This  is  the command that runs on the source (e.g. pax
               -w, tar cf -).  The default is &quot;pax&quot;.
 
        <b>-W no-defaults</b>
@@ -241,16 +246,15 @@ i {color:#000080}
 
        <b>-W no-remote-kill</b>
               Defaults File Option: <b>swbis_no_remote_kill</b>
-              Disables  the use of a second remote connection to tear down the
-              first in the event of SIGINT or SIGTERM or  SIGPIPE.   Only  has
-              effect  if  the  number of ssh hops is greater than 1.  A single
-              host remote connection (ssh hop = 1) never uses a second  remote
+              Disables the use of a second remote connection to tear down  the
+              first  in  the  event of SIGINT or SIGTERM or SIGPIPE.  Only has
+              effect if the number of ssh hops is greater than  1.   A  single
+              host  remote connection (ssh hop = 1) never uses a second remote
               connection.
 
        <b>-W no-getconf</b>
               Defaults File Option: <b>swbis_no_getconf</b>
-              Makes  the remote command be '/bin/sh -s' instead of the default
-              'PATH=`getconf PATH` sh -s'.
+              Makes the remote command be '/bin/sh -s' instead of the default
 
        <b>-W shell-command=NAME</b>
               Defaults File Option: <b>swbis_shell_command</b>
@@ -553,11 +557,11 @@ i {color:#000080}
 </pre><h3><a name="APPLICABLE STANDARDS"><b>APPLICABLE STANDARDS</b></a></h3><pre>       ISO/IEC 15068-2:1999, Open Group CAE C701
 </pre><h3><a name="SEE ALSO"><b>SEE ALSO</b></a></h3><pre>       info swbis
 
-       <a href=sw_5.html>sw(5)</a>, <a href=swbisparse_8.html>swbisparse(8)</a>, <a href=swign_1.html>swign(1)</a>, <a href=swverify_8.html>swverify(8)</a>
-</pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        <a href=swcopy_8.html>swcopy(8)</a>: The archive copying utility of the swbis project.
+       <a href="sw_5.html">sw(5)</a>, <a href="swbisparse_1.html">swbisparse(1)</a>, <a href="swign_1.html">swign(1)</a>, <a href="swverify_8.html">swverify(8)</a>
+</pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        <a href="swcopy_8.html">swcopy(8)</a>: The archive copying utility of the swbis project.
         Author: Jim Lowe   Email: jhlowe at acm.org
-        Version: 0.443
-        Date: 2005-05-05
+        Version: 0.462
+        Date: 2005-09-25
         Copying: GNU Free Documentation License
 </pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       Swcopy is subject to breakage if a user's account  on  an  intermediate
        (or  terminal)  host in a target spec is not configured to use a Bourne
@@ -573,7 +577,7 @@ i {color:#000080}
        of the Selection and Analysis Phases nor dependency copying nor fileset
        state transitions.  The Execution (copying) phase is done on the entire
        distribution  by  the  utility  selected  in .../swbisdefaults which is
-       <a href=pax_1.html>pax(1)</a> by default.  Pax is not found on all GNU/Linux  systems.   Also,
+       <a href="pax_1.html">pax(1)</a> by default.  Pax is not found on all GNU/Linux  systems.   Also,
        the pax version shipped with some (older) GNU/Linux systems mangles the
        pathname of files whose pathname is exactly 100 octets  long.   Despite
        this  pax  is  the  the  builtin  default.   GNU tar is widely used and
@@ -587,5 +591,5 @@ i {color:#000080}
 
 
 
-                                                                     <a href=swcopy_8.html>swcopy(8)</a>
+                                                                     <a href="swcopy_8.html">swcopy(8)</a>
 </pre><hr><a href="../index.html">[ Index ]</a> <a href="javascript:history.back()"> [ Back ]</a></body></html>

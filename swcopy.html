@@ -19,89 +19,6 @@
 --></style>
 </head>
 <body>
-\. 
-<!-- TROFF INPUT: .fl			\" force out current output buffer -->
-<!-- .fl			\" force out current output buffer -->
-\\!%PB
-\\!/showpage{}def
-<!-- TROFF INPUT: ...\" the following is from Ken Flowers - it prevents dictionary overflows -->
-<!-- ...\" the following is from Ken Flowers - it prevents dictionary overflows -->
-\\!/tempdict 200 dict def tempdict begin
-<!-- TROFF INPUT: .fl			\" prolog -->
-<!-- .fl			\" prolog -->
-<!-- TROFF INPUT: .sy cat \\$1\" bring in postscript file -->
-<!-- .sy cat \\$1\" bring in postscript file -->
-<!-- TROFF INPUT: ...\" the following line matches the tempdict above -->
-<!-- ...\" the following line matches the tempdict above -->
-\\!end % tempdict %
-\\!PE
-\\!. 
-<!-- TROFF INPUT: .sp \\$2u	\" move below the image -->
-<!-- .sp \\$2u	\" move below the image -->
-<!-- TROFF INPUT: .. -->
-<!-- .. -->
-<!-- TROFF INPUT: .de pF -->
-<!-- .de pF -->
-<!-- TROFF INPUT: .ie     \\*(f1 .ds f1 \\n(.f -->
-<!-- .ie     \\*(f1 .ds f1 \\n(.f -->
-<!-- TROFF INPUT: .el .ie \\*(f2 .ds f2 \\n(.f -->
-<!-- .el .ie \\*(f2 .ds f2 \\n(.f -->
-<!-- TROFF INPUT: .el .ie \\*(f3 .ds f3 \\n(.f -->
-<!-- .el .ie \\*(f3 .ds f3 \\n(.f -->
-<!-- TROFF INPUT: .el .ie \\*(f4 .ds f4 \\n(.f -->
-<!-- .el .ie \\*(f4 .ds f4 \\n(.f -->
-<!-- TROFF INPUT: .el .tm ? font overflow -->
-<!-- .el .tm ? font overflow -->
-<!-- TROFF INPUT: .ft \\$1 -->
-<!-- .ft \\$1 -->
-<!-- TROFF INPUT: .. -->
-<!-- .. -->
-<!-- TROFF INPUT: .de fP -->
-<!-- .de fP -->
-<!-- TROFF INPUT: .ie     !\\*(f4 \{\ -->
-<!-- .ie     !\\*(f4 \@{\ -->
-<!-- TROFF INPUT: .	ft \\*(f4 -->
-<!-- .	ft \\*(f4 -->
-<!-- TROFF INPUT: .	ds f4\" -->
-<!-- .	ds f4\" -->
-'	br \}
-<!-- TROFF INPUT: .el .ie !\\*(f3 \{\ -->
-<!-- .el .ie !\\*(f3 \@{\ -->
-<!-- TROFF INPUT: .	ft \\*(f3 -->
-<!-- .	ft \\*(f3 -->
-<!-- TROFF INPUT: .	ds f3\" -->
-<!-- .	ds f3\" -->
-'	br \}
-<!-- TROFF INPUT: .el .ie !\\*(f2 \{\ -->
-<!-- .el .ie !\\*(f2 \@{\ -->
-<!-- TROFF INPUT: .	ft \\*(f2 -->
-<!-- .	ft \\*(f2 -->
-<!-- TROFF INPUT: .	ds f2\" -->
-<!-- .	ds f2\" -->
-'	br \}
-<!-- TROFF INPUT: .el .ie !\\*(f1 \{\ -->
-<!-- .el .ie !\\*(f1 \@{\ -->
-<!-- TROFF INPUT: .	ft \\*(f1 -->
-<!-- .	ft \\*(f1 -->
-<!-- TROFF INPUT: .	ds f1\" -->
-<!-- .	ds f1\" -->
-'	br \}
-<!-- TROFF INPUT: .el .tm ? font underflow -->
-<!-- .el .tm ? font underflow -->
-<!-- TROFF INPUT: .. -->
-<!-- .. -->
-<!-- TROFF INPUT: .ds f1\" -->
-
-<!-- WARNING: man/man8/swcopy.8:49:%%unrecognized define-string command: [.ds f1\"] -->
-<!-- TROFF INPUT: .ds f2\" -->
-<!-- WARNING: man/man8/swcopy.8:50:%%unrecognized define-string command: [.ds f2\"] -->
-<!-- TROFF INPUT: .ds f3\" -->
-<!-- WARNING: man/man8/swcopy.8:51:%%unrecognized define-string command: [.ds f3\"] -->
-<!-- TROFF INPUT: .ds f4\" -->
-<!-- WARNING: man/man8/swcopy.8:52:%%unrecognized define-string command: [.ds f4\"] -->
-<!-- TROFF INPUT: .ta 8n 16n 24n 32n 40n 48n 56n 64n 72n -->
-<!-- .ta 8n 16n 24n 32n 40n 48n 56n 64n 72n -->
-<!-- TROFF INPUT: .TH "swcopy" "8" -->
 <div class="node">
 <p><hr>
 <a name="Top"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#NAME">NAME</a>,
@@ -160,8 +77,8 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="example">     <b>swcopy</b> [-p] [-s <i>source</i><tt>_</tt><i>file</i>] [-f <i>file</i>] [-t <i>targetfile</i>] \\
-     [-x <i>option=value</i>] [-X <i>options</i><tt>_</tt><i>file</i>] [-W <i>option</i>] \\
+<pre class="display">     <b>swcopy</b> [&minus;p] [&minus;s <i>source</i><tt>_</tt><i>file</i>] [&minus;f <i>file</i>] [&minus;t <i>targetfile</i>] \&nbsp;<!-- /@w -->
+     [&minus;x <i>option=value</i>] [&minus;X <i>options</i><tt>_</tt><i>file</i>] [&minus;W <i>option</i>] \&nbsp;<!-- /@w -->
      [software<tt>_</tt>selections] [@target [target1...]]
      <!-- TROFF INPUT: .fi -->
      
@@ -188,7 +105,7 @@ by ssh.  Ssh is the default but rsh can be selected by a command line
 option. 
 <!-- TROFF INPUT: .PP -->
 
-   <p>Before and during data transfer to the target, the distribution is audited. 
+<p>Before and during data transfer to the target, the distribution is audited. 
 Package auditing includes parsing the INDEX and INFO meta-data files. 
 The package pathnames are checked for consistency with a valid layout. 
 <b>swcopy</b> can be made to operate on arbitrary data or
@@ -202,7 +119,7 @@ not be identical to the input file (i.e. date, filename, and other stored data
 in the compressed format will be different). 
 <!-- TROFF INPUT: .PP -->
 
-   <p><b>swcopy</b> operates on serial archives (e.g. compressed tar archives) or on file system
+<p><b>swcopy</b> operates on serial archives (e.g. compressed tar archives) or on file system
 directories.  It will attempt to preserve the form (archive or directory) and
 compression state of the source object.  An exception is "." as a target
 (See Implementation Extensions below). 
@@ -235,10 +152,10 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!--  -->
 <blockquote>
 
-        <p>Reads software<tt>_</tt>selections from FILE. (Not implemented). 
+     <p>Reads software<tt>_</tt>selections from FILE. (Not implemented). 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -248,11 +165,11 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!--  -->
 <blockquote>
 
-        <p>Preview the operation. Information is written to stdout. 
+     <p>Preview the operation. Information is written to stdout. 
 The target is not written and no remote connections are established. 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -262,12 +179,12 @@ The target is not written and no remote connections are established.
 <!--  -->
 <blockquote>
 
-        <p>Specify the source file SOURCE, "-" is standard input. 
+     <p>Specify the source file SOURCE, "&minus;" is standard input. 
 The syntax is the same as for a target. 
 SOURCE may be a directory or archive file. 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -277,10 +194,10 @@ SOURCE may be a directory or archive file.
 <!--  -->
 <blockquote>
 
-        <p>Specify a file containing a list of targets (one per line). 
+     <p>Specify a file containing a list of targets (one per line). 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -290,10 +207,10 @@ SOURCE may be a directory or archive file.
 <!--  -->
 <blockquote>
 
-        <p>Specify the extended option overriding the defaults file value. 
+     <p>Specify the extended option overriding the defaults file value. 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -303,12 +220,12 @@ SOURCE may be a directory or archive file.
 <!--  -->
 <blockquote>
 
-        <p>Specify the extended options filename, FILE,  overriding the default filenames. 
+     <p>Specify the extended options filename, FILE,  overriding the default filenames. 
 This option may be given more then once. If the resulting specified value is an empty string
 then reading of any options file is disabled. 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -318,12 +235,12 @@ then reading of any options file is disabled.
 <!--  -->
 <blockquote>
 
-        <p>Given one time it is identical to -x verbose=2. 
+     <p>Given one time it is identical to &minus;x verbose=2. 
 This option can be given multiple times with increasing effect. 
 (Implementation extension option). 
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
--v  is level 2, -vv is level 3,... etc. 
+&minus;v  is level 2, &minus;vv is level 3,... etc. 
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
     level 0: silent on stdout and stderr. 
@@ -332,28 +249,28 @@ This option can be given multiple times with increasing effect.
     level 1: fatal and warning messages to stderr. 
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
--v  level 2: level 1 plus a progress bar. 
+&minus;v  level 2: level 1 plus a progress bar. 
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
--vv level 3: level 2 plus script stderr. 
+&minus;vv level 3: level 2 plus script stderr. 
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
--vvv level 4: level 3 plus events. 
+&minus;vvv level 4: level 3 plus events. 
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
--vvvv level 5: level 4 plus events. 
+&minus;vvvv level 5: level 4 plus events. 
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
--vvvvv level 6: level 5 plus set shell -vx option. 
+&minus;vvvvv level 6: level 5 plus set shell &minus;vx option. 
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
--vvvvvv level 7 and higher: level 6 plus debugging messages. 
+&minus;vvvvvv level 7 and higher: level 6 plus debugging messages. 
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
  The progress meter is suppressed if swcopy is using stdout for data. 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -363,23 +280,23 @@ This option can be given multiple times with increasing effect.
 <!--  -->
 <blockquote>
 
-        <p>Set block size, same as &minus;&minus;block-size=N (Implementation extension option). 
+     <p>Set block size, same as &minus;&minus;block-size=N (Implementation extension option). 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<p><b>&minus;&minus;version, -V</b>
+<p><b>&minus;&minus;version, &minus;V</b>
 <!-- TROFF INPUT: .RS -->
 
 <!--  -->
 <blockquote>
 
-        <p>Show version (Implementation extension)
+     <p>Show version (Implementation extension)
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -389,10 +306,10 @@ This option can be given multiple times with increasing effect.
 <!--  -->
 <blockquote>
 
-        <p>Show help (Implementation extension)
+     <p>Show help (Implementation extension)
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -402,17 +319,17 @@ This option can be given multiple times with increasing effect.
 <!--  -->
 <blockquote>
 
-        <p>Specify the implementation extension option. 
+     <p>Specify the implementation extension option. 
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
-Syntax: -W option[=option<tt>_</tt>argument[,option...] 
+Syntax: &minus;W option[=option<tt>_</tt>argument[,option...] 
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
 Options may be separated by a comma.  The implementation extension
 options may also be given individually using the '&minus;&minus;long-option[=option<tt>_</tt>arg]' syntax. 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -422,13 +339,13 @@ options may also be given individually using the '&minus;&minus;long-option[=opt
 <!--  -->
 <blockquote>
 
-        <p>Defaults File Option: <b>swbis</b><tt>_</tt><b>no</b><tt>_</tt><b>audit</b>
+     <p>Defaults File Option: <b>swbis</b><tt>_</tt><b>no</b><tt>_</tt><b>audit</b>
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
 Do not audit the transferred file.  This allows copying of arbitrary data. 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -438,10 +355,10 @@ Do not audit the transferred file.  This allows copying of arbitrary data.
 <!--  -->
 <blockquote>
 
-        <p>Do audit the transferred file.  Useful for overriding swbisdefaults file. 
+     <p>Do audit the transferred file.  Useful for overriding swbisdefaults file. 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -451,10 +368,10 @@ Do not audit the transferred file.  This allows copying of arbitrary data.
 <!--  -->
 <blockquote>
 
-        <p>SIZE is number of octets. 
+     <p>SIZE is number of octets. 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -464,10 +381,10 @@ Do not audit the transferred file.  This allows copying of arbitrary data.
 <!--  -->
 <blockquote>
 
-        <p>Establishes a interactive shell on the (remote) target host.  Intended for debugging/verifying ssh operation. 
+     <p>Establishes a interactive shell on the (remote) target host.  Intended for debugging/verifying ssh operation. 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -477,10 +394,10 @@ Do not audit the transferred file.  This allows copying of arbitrary data.
 <!--  -->
 <blockquote>
 
-        <p>Compress output using gzip. 
+     <p>Compress output using gzip. 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -490,10 +407,10 @@ Do not audit the transferred file.  This allows copying of arbitrary data.
 <!--  -->
 <blockquote>
 
-        <p>Compress output using bzip2. 
+     <p>Compress output using bzip2. 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -503,10 +420,10 @@ Do not audit the transferred file.  This allows copying of arbitrary data.
 <!--  -->
 <blockquote>
 
-        <p>Install the source using the archive reading utility at the target. 
+     <p>Install the source using the archive reading utility at the target. 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -516,10 +433,11 @@ Do not audit the transferred file.  This allows copying of arbitrary data.
 <!--  -->
 <blockquote>
 
-        <p>Do use pseudo-tty. 
+     <p>Do use pseudo-tty.  The system Ptys are only used for the &minus;&minus;login feature. 
+A warning is emitted to stderr which says that the usage may be insecure. 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -529,10 +447,12 @@ Do not audit the transferred file.  This allows copying of arbitrary data.
 <!--  -->
 <blockquote>
 
-        <p>Do not use pseudo-tty. 
+     <p>Do not use pseudo-tty.  The system Ptys are only used by default for the &minus;&minus;login feature, otherwise they
+are not used and this option would have no effect. 
+If ptys are used a warning is emitted to stderr which says that the usage may be insecure. 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -542,10 +462,10 @@ Do not audit the transferred file.  This allows copying of arbitrary data.
 <!--  -->
 <blockquote>
 
-        <p>Write output archive that is uncompressed. 
+     <p>Write output archive that is uncompressed. 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -555,13 +475,13 @@ Do not audit the transferred file.  This allows copying of arbitrary data.
 <!--  -->
 <blockquote>
 
-        <p>Defaults File Option: <b>swbis</b><tt>_</tt><b>remote</b><tt>_</tt><b>shell</b><tt>_</tt><b>client</b>
+     <p>Defaults File Option: <b>swbis</b><tt>_</tt><b>remote</b><tt>_</tt><b>shell</b><tt>_</tt><b>client</b>
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
 Supported shells are "ssh" and "rsh", ssh is the default. 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -571,13 +491,13 @@ Supported shells are "ssh" and "rsh", ssh is the default.
 <!--  -->
 <blockquote>
 
-        <p>Defaults File Option: <b>swbis</b><tt>_</tt><b>quiet</b><tt>_</tt><b>progress</b><tt>_</tt><b>bar</b>
+     <p>Defaults File Option: <b>swbis</b><tt>_</tt><b>quiet</b><tt>_</tt><b>progress</b><tt>_</tt><b>bar</b>
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
-Disable progress bar, which is active for verbose levels 2 and higher (i.e. -v). 
+Disable progress bar, which is active for verbose levels 2 and higher (i.e. &minus;v). 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -587,10 +507,10 @@ Disable progress bar, which is active for verbose levels 2 and higher (i.e. -v).
 <!--  -->
 <blockquote>
 
-        <p>Enables progress bar.(i.e. -v). 
+     <p>Enables progress bar.(i.e. &minus;v). 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -602,7 +522,7 @@ Disable progress bar, which is active for verbose levels 2 and higher (i.e. -v).
 Show the complete list of options files and if they are found. 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -614,7 +534,7 @@ Show the complete list of options files and if they are found.
 Show the options after reading the files and parsing the command line options. 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -629,7 +549,7 @@ Set the portable archive command for all operations.
 The default is "pax". 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -641,7 +561,7 @@ The default is "pax".
 Set the read command for local and remote hosts. 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -653,18 +573,18 @@ Set the read command for local and remote hosts.
 Defaults File Option: <b>swbis</b><tt>_</tt><b>remote</b><tt>_</tt><b>pax</b><tt>_</tt><b>read</b><tt>_</tt><b>command</b>
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .RS -->
 <!--  -->
 <blockquote>
 Set the read command for remote hosts. 
-This is the command that runs on the target (e.g. pax -r, tar xpf -). 
+This is the command that runs on the target (e.g. pax &minus;r, tar xpf &minus;). 
 The default is "pax". 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -676,18 +596,18 @@ The default is "pax".
 Defaults File Option: <b>swbis</b><tt>_</tt><b>local</b><tt>_</tt><b>pax</b><tt>_</tt><b>read</b><tt>_</tt><b>command</b>
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .RS -->
 <!--  -->
 <blockquote>
 Set the read command for local hosts. 
-This is the command that runs on the target (e.g. pax -r, tar xpf -). 
+This is the command that runs on the target (e.g. pax &minus;r, tar xpf &minus;). 
 The default is "pax". 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -699,10 +619,10 @@ The default is "pax".
 <!--  -->
 <blockquote>
 Set the write command for local and remote hosts. 
-This is the command that runs on the target (e.g. pax -w, tar cf -). 
+This is the command that runs on the target (e.g. pax &minus;w, tar cf &minus;). 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -716,7 +636,7 @@ This is the command that runs on the target (e.g. pax -w, tar cf -).
 Defaults File Option: <b>swbis</b><tt>_</tt><b>remote</b><tt>_</tt><b>pax</b><tt>_</tt><b>write</b><tt>_</tt><b>command</b>
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .RS -->
@@ -725,7 +645,7 @@ Defaults File Option: <b>swbis</b><tt>_</tt><b>remote</b><tt>_</tt><b>pax</b><tt
 Set the write command for remote hosts. 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -737,18 +657,18 @@ Set the write command for remote hosts.
 Defaults File Option: <b>swbis</b><tt>_</tt><b>local</b><tt>_</tt><b>pax</b><tt>_</tt><b>write</b><tt>_</tt><b>command</b>
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .RS -->
 <!--  -->
 <blockquote>
 Set the portable archive write command for local host operations. 
-This is the command that runs on the source (e.g. pax -w, tar cf -). 
+This is the command that runs on the source (e.g. pax &minus;w, tar cf &minus;). 
 The default is "pax". 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -760,18 +680,18 @@ The default is "pax".
 Defaults File Option: <b>swbis</b><tt>_</tt><b>remote</b><tt>_</tt><b>pax</b><tt>_</tt><b>write</b><tt>_</tt><b>command</b>
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .RS -->
 <!--  -->
 <blockquote>
 Set the portable archive write command for remote host operations. 
-This is the command that runs on the source (e.g. pax -w, tar cf -). 
+This is the command that runs on the source (e.g. pax &minus;w, tar cf &minus;). 
 The default is "pax". 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -783,7 +703,7 @@ The default is "pax".
 Do not read any defaults files. 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -802,7 +722,7 @@ A single host remote connection (ssh hop = 1) never uses a
 second remote connection. 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -814,11 +734,11 @@ second remote connection.
 Defaults File Option: <b>swbis</b><tt>_</tt><b>no</b><tt>_</tt><b>getconf</b>
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
-Makes the remote command be '/bin/sh -s' instead of the default
-'PATH=`getconf PATH` sh -s'. 
+Makes the remote command be '/bin/sh &minus;s' instead of the default
+'PATH=`getconf PATH` sh &minus;s'. 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -832,12 +752,12 @@ Defaults File Option: <b>swbis</b><tt>_</tt><b>shell</b><tt>_</tt><b>command</b>
 <!-- .br -->
 NAME may be one of "bash", "sh" or "posix" and specifies the
 remote command run by the remote shell. 
-"posix" is 'PATH=`getconf PATH` sh -s', "bash" is "/bin/bash -s",
-"sh" is "/bin/sh -s", and "ksh" is "ksh -s". 
+"posix" is 'PATH=`getconf PATH` sh &minus;s', "bash" is "/bin/bash &minus;s",
+"sh" is "/bin/sh &minus;s", and "ksh" is "ksh &minus;s". 
 The default is "posix". 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -849,7 +769,7 @@ The default is "posix".
 Opposite of &minus;&minus;no-getconf. 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -864,7 +784,7 @@ Defaults File Option: <b>swbis</b><tt>_</tt><b>allow</b><tt>_</tt><b>rpm</b>
 Allows detection and translation of RPMs.  (&minus;&minus;audit must also be set.) 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -876,7 +796,7 @@ Allows detection and translation of RPMs.  (&minus;&minus;audit must also be set
 Turns on options &minus;&minus;allow-rpm and &minus;&minus;audit. 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -886,13 +806,13 @@ Turns on options &minus;&minus;allow-rpm and &minus;&minus;audit.
 <!--  -->
 <blockquote>
 
-        <p>Refer to the software objects (products, filesets)
+     <p>Refer to the software objects (products, filesets)
 on which to be operated. (Not implemented). 
 The implementation defined behavior for no selections is to operate on
 the entire distribution. 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -902,19 +822,19 @@ the entire distribution.
 <!--  -->
 <blockquote>
 
-        <p>Refers to the software<tt>_</tt>collection where the software
+     <p>Refers to the software<tt>_</tt>collection where the software
 selections are to be applied.  Allows specification of host and pathname where the software collection is located. 
 A target that contains only one part is assumed to be a hostname. 
 To force interpretation as a path, use a absolute path or prefix with ':'. 
 <!-- TROFF INPUT: .RE -->
 
-   </blockquote>
+</blockquote>
 
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="example">     Source and Target Specification and Logic
+<pre class="display">     Source and Target Specification and Logic
      
           Synopsis:
                Posix:
@@ -950,7 +870,7 @@ To force interpretation as a path, use a absolute path or prefix with ':'.
                            extension and means extract in current
                            directory.
      
-                     NOTE: A '-' indicating stdout/stdin is an
+                     NOTE: A '&minus;' indicating stdout/stdin is an
                            implementation extension.
      
                      NOTE: A ':' in the first character indicates a filename.
@@ -960,7 +880,7 @@ To force interpretation as a path, use a absolute path or prefix with ':'.
      
          Examples:
             Copy the  distribution /var/tmp/foo.tar.gz at 192.168.1.10
-                   swcopy -s /var/tmp/foo.tar.gz @192.168.1.10:/root
+                   swcopy &minus;s /var/tmp/foo.tar.gz @192.168.1.10:/root
      
      
      Implementation Extension Syntax (multi ssh-hop) :
@@ -978,14 +898,14 @@ To force interpretation as a path, use a absolute path or prefix with ':'.
          user     : PORTABLE<tt>_</tt>CHARACTER<tt>_</tt>STRING  # The user name
      
          DELIM    : '@@'   # The multi-hop delimiter.
-                  ;  <span class="roman">
+                  ;
      <!-- TROFF INPUT: .fi -->
      
 </pre>
-   <!--  -->
+<!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .SH "TARGET COPYING RULES" -->
-<p></span><div class="node">
+<div class="node">
 <p><hr>
 <a name="TARGET-COPYING-RULES"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#IMPLEMENTATION-EXTENSIONS">IMPLEMENTATION EXTENSIONS</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#OPTIONS">OPTIONS</a>,
@@ -1023,7 +943,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#TARGET-COPYING-RULES">TARGET COPYING R
 
 <!-- TROFF INPUT: .PP -->
 <p>If a target directory on the host does not exist it will be created using
-mkdir -p using the file creation mask of the originating swcopy process. 
+mkdir &minus;p using the file creation mask of the originating swcopy process. 
 A trailing slash in the target spec signifies
 that the last path component should be a directory. 
 A source spec that is a directory will be created on the target as a
@@ -1038,7 +958,7 @@ target if the last target path component is a directory or ends in
 a slash '/', otherwise,
 the target basename is the last path component of the target spec. 
 The implementation option &minus;&minus;extract biases these rules to install using
-the archive reading command (e.g.  pax -r). 
+the archive reading command (e.g.  pax &minus;r). 
 <!-- TROFF INPUT: .SS "Examples" -->
 
 <div class="node">
@@ -1054,29 +974,29 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#TARGET-COPYING-RULES">TARGET COPYING R
 <!--  -->
 <blockquote>
 
-        <p>Install a tarball in the current directory:
+     <p>Install a tarball in the current directory:
       Note: Must use stdin as source and "." as the target. 
 <!-- TROFF INPUT: .PP -->
 
      <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="example">                      swcopy &minus;&minus;no-audit -s - @. &lt; foo.tar.gz
+<pre class="display">                      swcopy &minus;&minus;no-audit &minus;s &minus; @. &lt; foo.tar.gz
           <!-- TROFF INPUT: .fi -->
           
      </pre>
-        <!--  -->
+     <!--  -->
 <!-- TROFF INPUT: .PP -->
 <p>Copy thru a firewall:
 <!-- TROFF INPUT: .PP -->
 
      <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="example">                      swcopy -s /var/tmp/foo.tar.gz \\
-                           @root@host1@@root@host2:/var/tmp<span class="roman">
+<pre class="display">                      swcopy &minus;s /var/tmp/foo.tar.gz \&nbsp;<!-- /@w -->
+                           @root@host1@@root@host2:/var/tmp
           <!-- TROFF INPUT: .fi -->
           
      </pre>
-        <!--  -->
+     <!--  -->
 <!-- TROFF INPUT: .PP -->
 <p>Copy Stdin to a remote host:
 <!-- TROFF INPUT: .br -->
@@ -1085,16 +1005,16 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#TARGET-COPYING-RULES">TARGET COPYING R
 
      <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="example">                 Unpack the archive on stdin in the directory
+<pre class="display">                 Unpack the archive on stdin in the directory
                  /a/b/c if 'c' is a directory, otherwise copy
                  the archive file to a file named 'c' in
                  directory /a/b creating it if possible and
                  overwriting if required.
-                     swcopy -s - @host1:/a/b/c</span>
+                     swcopy &minus;s &minus; @host1:/a/b/c
           <!-- TROFF INPUT: .fi -->
           
      </pre>
-        <!--  -->
+     <!--  -->
 <!-- TROFF INPUT: .PP -->
 <p>Copy Stdin to a remote host:
 <!-- TROFF INPUT: .br -->
@@ -1103,16 +1023,16 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#TARGET-COPYING-RULES">TARGET COPYING R
 
      <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="example">                 Unpack the serial archive on stdin in the
+<pre class="display">                 Unpack the serial archive on stdin in the
                  directory /a/b/c if 'c' is a directory,
                  otherwise make the directory 'c' but fail if
                  directory 'c' cannot be created.
-                     swcopy -s - @host1:/a/b/c/
-                               # Note trailing slash.<span class="roman">
+                     swcopy &minus;s &minus; @host1:/a/b/c/
+                               # Note trailing slash.
           <!-- TROFF INPUT: .fi -->
           
      </pre>
-        <!--  -->
+     <!--  -->
 <!-- TROFF INPUT: .PP -->
 <p>Copy a regular file:
 <!-- TROFF INPUT: .br -->
@@ -1121,14 +1041,14 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#TARGET-COPYING-RULES">TARGET COPYING R
 
      <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="example">                 Copy file yy to directory /aa/bb/cc/ on the
+<pre class="display">                 Copy file yy to directory /aa/bb/cc/ on the
                  remote host, creating it if required and possible.
                  If cc is a regular file then fail.
-                     swcopy -s /xx/yy @host1:/aa/bb/cc/</span>
+                     swcopy &minus;s /xx/yy @host1:/aa/bb/cc/
           <!-- TROFF INPUT: .fi -->
           
      </pre>
-        <!--  -->
+     <!--  -->
 <!-- TROFF INPUT: .PP -->
 <p>Copy a regular file thru intermediate host 'fw':
 <!-- TROFF INPUT: .br -->
@@ -1137,27 +1057,27 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#TARGET-COPYING-RULES">TARGET COPYING R
 
      <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="example">                 Copy file yy to home directory of user1 on host1
+<pre class="display">                 Copy file yy to home directory of user1 on host1
                  thru a an intermediate host fw,
-                     swcopy -s /xx/yy @fw@@user1@host1:.<span class="roman">
+                     swcopy &minus;s /xx/yy @fw@@user1@host1:.
           <!-- TROFF INPUT: .fi -->
           
      </pre>
-        <!--  -->
+     <!--  -->
 <!-- TROFF INPUT: .PP -->
 <p>Copy a regular file:
 <!-- TROFF INPUT: .PP -->
 
      <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="example">                 Copy yy into directory cc if it exists, otherwise
+<pre class="display">                 Copy yy into directory cc if it exists, otherwise
                  copy into bb renaming as cc, otherwise create cc
                  and copy as yy.
-                     swcopy -s /xx/yy @host1:/aa/bb/cc</span>
+                     swcopy &minus;s /xx/yy @host1:/aa/bb/cc
           <!-- TROFF INPUT: .fi -->
           
      </pre>
-        <!--  -->
+     <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .RE -->
 </blockquote>
@@ -1192,41 +1112,41 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#IMPLEMENTATION-EXTENSIONS">IMPLEMENTAT
 <h4 class="subsection">1.6.1 Software Specification Targets</h4>
 
 <!-- TROFF INPUT: .PP -->
-<p>A dash '-' is supported and means stdout or stdin. 
+<p>A dash '&minus;' is supported and means stdout or stdin. 
 Operations with stdout and stdin on a remote host is not supported. 
 <!-- TROFF INPUT: .PP -->
 
-   <p>A decimal '.' is supported and means the current directory. 
+<p>A decimal '.' is supported and means the current directory. 
 This is supported for remote and non-remote targets. 
 If the source is standard input, the distribution will be unpacked
-(e.g. pax -r) in the directory '.'. 
+(e.g. pax &minus;r) in the directory '.'. 
 If the source is a regular file then a regular file in '.' will be created
 with the same name. 
 <!-- TROFF INPUT: .PP -->
 
-   <p>Thus,
+<p>Thus,
 <!-- TROFF INPUT: .PP -->
 
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="example">                # swcopy -s `pwd`/myarchive.tgz @.  # Do NOT do this even
+<pre class="display">                # swcopy &minus;s `pwd`/myarchive.tgz @.  # Do NOT do this even
                                                     # though in most cases
-                                                    # swcopy is a coward.<span class="roman">
+                                                    # swcopy is a coward.
      <!-- TROFF INPUT: .fi -->
      
 </pre>
-   <!--  -->
+<!--  -->
 <!-- TROFF INPUT: .PP -->
 <p>will destroy the source file myarchive.tgz, whereas
 <!-- TROFF INPUT: .PP -->
 
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="example">                # swcopy -s - @. &lt;`pwd`/myarchive.tgz</span>
+<pre class="display">                # swcopy &minus;s &minus; @. &lt;`pwd`/myarchive.tgz
      <!-- TROFF INPUT: .fi -->
      
 </pre>
-   <!--  -->
+<!--  -->
 <!-- TROFF INPUT: .PP -->
 <p>will install it with the configured archive reading utility.
 
@@ -1244,32 +1164,32 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#IMPLEMENTATION-EXTENSIONS">IMPLEMENTAT
 <p>RPM (RedHat Package Manager) format packages are copied by first translating to
 an equivalent ISO/IEEE file layout in POSIX tar format and then copying as
 a POSIX package. 
-The RPM detection and translation occurs if the ''&minus;&minus;allow-rpm'' option is
-on (either by the command line args or defaults file) and the ''--audit'' option
-is on.  If the ''--allow-rpm'' option is not set an error occurs. 
-If the ''--audit'' is not set, the RPM is copied as arbitrary data and translation
+The RPM detection and translation occurs if the &rdquo;&minus;&minus;allow-rpm&rdquo; option is
+on (either by the command line args or defaults file) and the &rdquo;&minus;&minus;audit&rdquo; option
+is on.  If the &rdquo;&minus;&minus;allow-rpm&rdquo; option is not set an error occurs. 
+If the &rdquo;&minus;&minus;audit&rdquo; is not set, the RPM is copied as arbitrary data and translation
 does not occur. 
 <!-- TROFF INPUT: .PP -->
 
-   <p>Since translation is done on the local (management) host, RPM is not reqired on
+<p>Since translation is done on the local (management) host, RPM is not reqired on
 the remote (target) host. 
 <!-- TROFF INPUT: .PP -->
 
-   <p>The translation is (internally) equivalent to :
+<p>The translation is (internally) equivalent to :
 <!-- TROFF INPUT: .PP -->
 
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="example">        cat your-poor-poor-0.0.bin.rpm |
-        /usr/lib/swbis/lxpsf --psf-form2 -H ustar |
-        swpackage -Wsource=- -s@PSF<span class="roman">
+<pre class="display">        cat your-poor-poor-0.0.bin.rpm |
+        /usr/lib/swbis/lxpsf &minus;&minus;psf-form2 &minus;H ustar |
+        swpackage &minus;Wsource=&minus; &minus;s@PSF
      <!-- TROFF INPUT: .fi -->
      
 </pre>
-   <!--  -->
+<!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .SH "EXTENDED OPTIONS" -->
-<p></span><div class="node">
+<div class="node">
 <p><hr>
 <a name="EXTENDED-OPTIONS"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#RETURN-VALUE">RETURN VALUE</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#IMPLEMENTATION-EXTENSIONS">IMPLEMENTATION EXTENSIONS</a>,
@@ -1287,7 +1207,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 </ul>
 
 <!-- TROFF INPUT: .PP -->
-<p>Extended options can be specified on the command line using the -x option
+<p>Extended options can be specified on the command line using the &minus;x option
 or from the defaults file, swdefaults.  Shown below is an actual portion of
 a defaults file which show default values. 
 <!-- TROFF INPUT: .SS "Posix" -->
@@ -1308,11 +1228,11 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#EXTENDED-OPTIONS">EXTENDED OPTIONS</a>
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="example">        autoselect<tt>_</tt>dependencies     = false      # Not Implemented
+<pre class="display">        autoselect<tt>_</tt>dependencies     = false      # Not Implemented
         compress<tt>_</tt>files              = false      # Not Implemented
         compression<tt>_</tt>type            = none       # Not Implemented
-        distribution<tt>_</tt>source<tt>_</tt>directory   = -
-        distribution<tt>_</tt>target<tt>_</tt>directory   = -
+        distribution<tt>_</tt>source<tt>_</tt>directory   = &minus;
+        distribution<tt>_</tt>target<tt>_</tt>directory   = &minus;
         enforce<tt>_</tt>dependencies        = false       # Not Implemented
         enforce<tt>_</tt>dsa                 = false       # Not Implemented
         logfile                     = /var/lib/sw/swcopy.log #Not Implemented
@@ -1324,7 +1244,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#EXTENDED-OPTIONS">EXTENDED OPTIONS</a>
      <!-- TROFF INPUT: .fi -->
      
 </pre>
-   <!--  -->
+<!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .SS "Swbis Implementation" -->
 <div class="node">
@@ -1344,7 +1264,7 @@ file.
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="example">       swcopy.swbis<tt>_</tt>no<tt>_</tt>getconf = false # true or false
+<pre class="display">       swcopy.swbis<tt>_</tt>no<tt>_</tt>getconf = false # true or false
        swcopy.swbis<tt>_</tt>shell<tt>_</tt>command = posix # {sh|bash|posix|ksh}
        swcopy.swbis<tt>_</tt>no<tt>_</tt>remote<tt>_</tt>kill = false # true or false
        swcopy.swbis<tt>_</tt>no<tt>_</tt>audit = false # true or false
@@ -1354,14 +1274,14 @@ file.
        swcopy.swbis<tt>_</tt>local<tt>_</tt>pax<tt>_</tt>read<tt>_</tt>command=pax #{pax|tar|gtar|star}
        swcopy.swbis<tt>_</tt>remote<tt>_</tt>pax<tt>_</tt>read<tt>_</tt>command=pax #{pax|tar|gtar|star}
        swcopy.swbis<tt>_</tt>allow<tt>_</tt>rpm = false  # true or false
-       swcopy.swbis<tt>_</tt>remote<tt>_</tt>shell<tt>_</tt>client=ssh<span class="roman">
+       swcopy.swbis<tt>_</tt>remote<tt>_</tt>shell<tt>_</tt>client=ssh
      <!-- TROFF INPUT: .fi -->
      
 </pre>
-   <!--  -->
+<!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .SH "RETURN VALUE" -->
-<p></span><div class="node">
+<div class="node">
 <p><hr>
 <a name="RETURN-VALUE"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#NOTES">NOTES</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#EXTENDED-OPTIONS">EXTENDED OPTIONS</a>,
@@ -1406,35 +1326,33 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- TROFF INPUT: .PP -->
 <p>Swcopy requires a Posix shell accessible by the remote shell command. 
 This is the remote command run by ssh (or rsh) for all operations. 
-This command can be controlled by the --shell-command option or the
+This command can be controlled by the &minus;&minus;shell-command option or the
 swbis<tt>_</tt>shell<tt>_</tt>command defaults file option. 
-Permitted values are "bash" (/bin/bash -s), "sh" (/bin/sh -s), "ksh" (/bin/ksh -s) or
-"posix" ('PATH=`getconf PATH` sh -s').  The default is "posix". 
+Permitted values are "bash" (/bin/bash &minus;s), "sh" (/bin/sh &minus;s), "ksh" (/bin/ksh &minus;s) or
+"posix" ('PATH=`getconf PATH` sh &minus;s').  The default is "posix". 
 swcopy requires the POSIX capability of reading commands on stdin
-according to the specification described in IEEE Std 1003.1, 2003 Ed.; sh -shell,
+according to the specification described in IEEE Std 1003.1, 2003 Ed.; sh &minus;shell,
 Section STDIN.  This requirement accommodates reading of shell program code and
 data on STDIN.  This capability may not be present in some /bin/sh shells. 
-The "/bin/sh" on FreeBSD-5.1 is broken in this regard, hence ''--shell-command=bash''
+The "/bin/sh" on FreeBSD-5.1 is broken in this regard, hence &rdquo;&minus;&minus;shell-command=bash&rdquo;
 should be used for BSD hosts. 
 The public domain Korn shell (pdksh-5.2.14) seems to
 work OK, that is, it complies by luck or intent with the POSIX capability of
 reading data and code on stdin. 
 <!-- TROFF INPUT: .PP -->
 
-   <p>If the --no-getconf option is set or
+<p>If the &minus;&minus;no-getconf option is set or
 the swcopy.swbis<tt>_</tt>no<tt>_</tt>getconf defaults option is "true" then the
-remote command is '/bin/sh -s'. 
+remote command is '/bin/sh &minus;s'. 
 Use of the no-getconf option is needed for communication with
 user accounts on remote machines whose login shell is not a Bourne shell
 (e.g. csh) such as root on some default BSD installations. 
 Other *nix systems may require use of getconf because their /bin/sh is
-broken or not Posix enough (e.g. Sun platforms).
-
-<!-- WARNING: man/man8/swcopy.8:727:%%new font B started without closing previous font R -->
-<p>Still other systems may not have <b>getconf</b>. 
+broken or not Posix enough (e.g. Sun platforms). 
+Still other systems may not have <b>getconf</b>. 
 <!-- TROFF INPUT: .PP -->
 
-   <p>Other utilities required to be in $PATH on the remote host are:
+<p>Other utilities required to be in $PATH on the remote host are:
 dd, pax (or tar|star|gtar), mkdir, echo, test, sleep, read (if not builtin). 
 <!-- TROFF INPUT: .SH "FILES" -->
 
@@ -1453,17 +1371,17 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="example">     /usr/lib/swbis/swdefaults
+<pre class="display">     /usr/lib/swbis/swdefaults
      /usr/lib/swbis/swbisdefaults
      $HOME/.swbis/swdefaults
-     $HOME/.swbis/swbisdefaults<span class="roman">
+     $HOME/.swbis/swbisdefaults
      <!-- TROFF INPUT: .fi -->
      
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .SH "APPLICABLE STANDARDS" -->
-<p></span><div class="node">
+<div class="node">
 <p><hr>
 <a name="APPLICABLE-STANDARDS"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#SEE-ALSO">SEE ALSO</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#FILES">FILES</a>,
@@ -1493,7 +1411,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <p>info swbis
 <!-- TROFF INPUT: .PP -->
 
-   <p>sw(5), swbisparse(8), swign(1), swverify(8)
+<p>sw(5), swbisparse(1), swign(1), swverify(8)
 <!-- TROFF INPUT: .SH "IDENTIFICATION" -->
 
 <div class="node">
@@ -1509,8 +1427,8 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- DEBUG: print_menu("IDENTIFICATION") -->
 <p>swcopy(8): The archive copying utility of the swbis project. 
  Author: Jim Lowe   Email: jhlowe at acm.org
- Version: 0.443
- Date: 2005-05-05
+ Version: 0.462
+ Date: 2005-09-25
  Copying: GNU Free Documentation License
 <!-- TROFF INPUT: .SH "BUGS" -->
 
@@ -1528,16 +1446,16 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <p>Swcopy is subject to breakage if a user's account on an intermediate
 (or terminal) host in a target spec is not configured to use a Bourne
 compatible shell. (This breakage may be eliminated by use of the
---no-getconf option as explained above.) 
+&minus;&minus;no-getconf option as explained above.) 
 <!-- TROFF INPUT: .PP -->
 
-   <p>A multiple ssh hop source spec  (more than 1 remote host involved in the
+<p>A multiple ssh hop source spec  (more than 1 remote host involved in the
 source transfer) upon a SIGINT may result in sshd and ssh processes
 being left on on the intermediate host(s), this despite, swcopy's action of
 sending a SIGTERM to the remote script's parent process. 
 <!-- TROFF INPUT: .PP -->
 
-   <p>Swcopy does not currently implement Software Selections nor the events of the
+<p>Swcopy does not currently implement Software Selections nor the events of the
 Selection and Analysis Phases nor dependency copying nor fileset state
 transitions.  The Execution (copying) phase is done on the entire
 distribution by the utility selected in .../swbisdefaults which is pax(1) by
@@ -1546,15 +1464,14 @@ Also, the pax version shipped with some (older) GNU/Linux systems mangles the pa
 of files whose pathname is exactly 100 octets long. 
 Despite this pax is the the builtin default. 
 GNU tar is widely used and trusted but creates non-standard archives for long
-pathnames.  Perhaps the best compromise is to use star (with -H ustar header
+pathnames.  Perhaps the best compromise is to use star (with &minus;H ustar header
 option)  for archive creation and (GNU) tar for archive reading. 
 If your environment is 100% GNU/Linux using GNU tar is safe (GNU tar 1.13.25 is
 recommended). 
 Swcopy does not support using the cpio utility since its archive writing
 interface is unlike pax and tar, although, future support is possible for
 archive reading. 
-<!-- TROFF INPUT: ...\" created by instant / docbook-to-man, Sat 07 May 2005, 16:50 -->
-<!-- ...\" created by instant / docbook-to-man, Sat 07 May 2005, 16:50 -->
+<!-- created by instant / docbook-to-man, Mon 26 Sep 2005, 21:21 -->
 
 </body></html>
 

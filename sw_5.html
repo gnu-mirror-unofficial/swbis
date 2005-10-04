@@ -7,7 +7,7 @@ i {color:#000080}
 -->
 </STYLE>
 </HEAD>
-<BODY BGCOLOR="#ffffff">
+<BODY BGCOLOR="#f0f0f0">
 <H1>sw(5)</H1>
 <h3>Contents</h3><ul>
 <li><a href="#NAME">NAME</a>
@@ -66,8 +66,7 @@ i {color:#000080}
        nents  which  serve  to  segregate  distribution,  product  and fileset
        objects.
 
-       Shown below is an example with <a href=one _1.html>one (1)</a> product and <a href=one _1.html>one (1)</a> fileset.
-
+       Shown below is an example with <a href="one_1.html">one (1)</a> product and <a href="one_1.html">one (1)</a> fileset.
 
         &lt;<i>path</i>&gt;/
         &lt;<i>path</i>&gt;/<b>catalog</b>/
@@ -108,7 +107,6 @@ i {color:#000080}
        &lt;<i>path</i>&gt;/ is nil and, likewise to 'source' packages where &lt;<i>path</i>&gt; is typi-
        cally the package name and version.  The use of nil control directories
        is not attested to in the posix normative references.
-
 
         &lt;<i>path</i>&gt;/
         &lt;<i>path</i>&gt;/<b>catalog</b>/
@@ -527,7 +525,6 @@ i {color:#000080}
           directory  <i>source</i>  [<i>destination</i>]
 
 
-
        Applies  the  <i>source</i>  attribute as the directory under which the subse-
        quently listed files are located.  If <i>destination</i> is defined it will be
        used as a prefix to the <i>path</i> (implied) file definition.  <i>source</i> is typ-
@@ -538,13 +535,11 @@ i {color:#000080}
          file *
 
 
-
        Specifies  every  file  in  current  source  directory.   The <i>directory</i>
        extended definition must be used before the recursive specification.
 
    <b>o</b>  <b>Explicit File Definition</b>
          file [-t <i>type</i>] [-m <i>mode</i>] [-o <i>owner</i>[,<i>uid</i>]] [-g <i>group</i>[,<i>gid</i>]] [-n] [-v] source [<i>path</i>]
-
 
 
        <b>source</b>
@@ -597,7 +592,6 @@ i {color:#000080}
          file_permissions [-m <i>mode</i>] [-u <i>umask</i>] [-o [<i>owner</i>[,]][<i>uid</i>]] [-g [<i>group</i>[,]][<i>gid</i>]]
 
 
-
        Applies to subsequently listed file definitions in  a  fileset.   These
        attributes  will  apply  where  the  file attributes were not specified
        explicitly in a file definition.  Subsequent  <b>file_permissions</b>  defini-
@@ -613,12 +607,10 @@ i {color:#000080}
           exclude source
 
 
-
        Excludes a previously included file or an entire directory.
 
    <b>o</b>  <b>Including Files</b>
           include &lt;<i>filename</i>
-
 
 
        The contents of <i>filename</i> may be more definitions for files.  The syntax
@@ -640,8 +632,8 @@ i {color:#000080}
        of  the  uncompressed  serial access package file including all archive
        format trailer blocks.
 
-              &lt;<i>path</i>&gt;/catalog/&lt;<i>dfiles</i>&gt;/<b>md5sum</b>
-              &lt;<i>path</i>&gt;/catalog/&lt;<i>dfiles</i>&gt;/<b>sha1sum</b>
+              &lt;<i>path</i>&gt;/<b>catalog</b>/&lt;<i>dfiles</i>&gt;/<b>md5sum</b>
+              &lt;<i>path</i>&gt;/<b>catalog</b>/&lt;<i>dfiles</i>&gt;/<b>sha1sum</b>
 
 
    <a name="Adjunct Md5 Digest"><b>Adjunct Md5 Digest</b></a>
@@ -649,7 +641,7 @@ i {color:#000080}
        a package does not contain symbolic links the <i>md5sum</i> and <i>adjunct</i><b>_</b><i>md5sum</i>
        will be identical.
 
-              &lt;<i>path</i>&gt;/catalog/&lt;<i>dfiles</i>&gt;/<b>adjunct_md5sum</b>
+              &lt;<i>path</i>&gt;/<b>catalog</b>/&lt;<i>dfiles</i>&gt;/<b>adjunct_md5sum</b>
 
 
        Explanation: This attribute is called 'adjunct' because it is a  digest
@@ -666,7 +658,7 @@ i {color:#000080}
        the ustar header of the signature file.  It always precedes the  signa-
        ture file archive members.
 
-              &lt;<i>path</i>&gt;/catalog/&lt;<i>dfiles</i>&gt;/<b>sig_header</b>
+              &lt;<i>path</i>&gt;/<b>catalog</b>/&lt;<i>dfiles</i>&gt;/<b>sig_header</b>
 
 
        The <i>sig</i><b>_</b><i>header</i> protects the tar header of the signature files from tam-
@@ -682,15 +674,15 @@ i {color:#000080}
        the signature.
 
 
-              &lt;<i>path</i>&gt;/catalog/&lt;<i>dfiles</i>&gt;/<b>signature</b>
+              &lt;<i>path</i>&gt;/<b>catalog</b>/&lt;<i>dfiles</i>&gt;/<b>signature</b>
 
 
        The signed data is the <i>exported catalog structure</i> of  the  uncompressed
        serial  archive  package file up to but not including the first byte of
-       the <i>software file storage structure</i> followed by <a href=two _2.html>two (2)</a> 512  byte  null
+       the <i>software file storage structure</i> followed by <a href="two_2.html">two (2)</a> 512  byte  null
        blocks if tar format, and no trailer bytes if not tar format.  The sig-
        nature file archive member itself is not included in the signed stream,
-       it is intended that the &lt;<i>path</i>&gt;/catalog/&lt;<i>dfiles</i>&gt;/<b>md5sum</b> file is included
+       it is intended that the &lt;<i>path</i>&gt;/<b>catalog</b>/&lt;<i>dfiles</i>&gt;/<b>md5sum</b> file is included
        in the signed stream.
 
        The signature file is ASCII armored.  The last printable  character  of
@@ -714,15 +706,15 @@ i {color:#000080}
        Each file has a md5 digest in the metadata.
 </pre><h3><a name="SOFTWARE DEFINITION FILES"><b>SOFTWARE DEFINITION FILES</b></a></h3><pre>       The  metadata files, INDEX, INFO and PSF, contain information about the
        software in the form of <i>software definitions</i>.  The INDEX and INFO files
-       appear in a package directory structure.  They are automatically gener-
-       ated by the 'swpackage' command.  The location in the directory  struc-
-       ture  indicates  the  higher level object to which their data pertains.
-       The PSF file does not appear in the package.  It is created by a person
-       or  program  and it directs the action of the swpackage utility.  It is
-       vendor internal data unless released by the vendor.
+       appear  in  a  package  directory  structure.   They  are automatically
+       generated by the 'swpackage' command.  The location  in  the  directory
+       structure  indicates  the  higher level object to which their data per-
+       tains.  The PSF file does not appear in the package.  It is created  by
+       a person or program and it directs the action of the swpackage utility.
+       It is vendor internal data unless released by the vendor.
 
        The files contain keywords (and values)  to  represent  the  attributes
-       defined  in the standard.  There are <a href=three _3.html>three (3)</a> different keyword types:
+       defined  in the standard.  There are <a href="three_3.html">three (3)</a> different keyword types:
        object, attribute, and, extended. The object keyword type has no  value
        and  there are eleven (11) of these corresponding to the Software Defi-
        nitions defined above: <b>installed_software</b>, <b>distribution</b>, <b>media</b>, <b>bundle</b>,
@@ -741,34 +733,33 @@ i {color:#000080}
        containment  hierarchy is determined according to parser's grammar.
 
    <a name="Additional Syntax Rules"><b>Additional Syntax Rules</b></a>
-          o  A  '#'  (pound)  character  designates  a comment.  A comment may
+          �  A  '#'  (pound)  character  designates  a comment.  A comment may
              begin a line or appear at the end of a single line containing the
              keyword/value pair.
 
-          o  A  value  may be quoted by the '&quot;' (double quote) character; and,
+          �  A  value  may be quoted by the '&quot;' (double quote) character; and,
              multi-line values must be quoted.  Trailing white space  from  an
              unquoted value will be removed.
 
-          o  The  order  of  attributes  is not significant although the INDEX
+          �  The  order  of  attributes  is not significant although the INDEX
              file grammar requires the <i>layout</i><b>_</b><i>version</i> attribute  appear  first
              in distribution or installed software object.
 
-          o  The  &quot;, #, and, \ characters must be escaped with a backslash (\)
+          �  The  &quot;, #, and, \ characters must be escaped with a backslash (\)
              in a quoted value.
 
-          o  If a value begins with a &lt; (less than), the value is  interpreted
+          �  If a value begins with a &lt; (less than), the value is  interpreted
              as  a  filename  whose contents will be treated as a quoted value
              although the storage of the attribute will be in the  form  of  a
              control  file  (i.e.  a  separate file in the control directory).
-             For  INDEX  files,  the  filename  is  relative  to  the  control
-             directory  in  which this attribute is contained.  For PSF files,
-             the filename is a path on the host.
+             For INDEX files, the filename is relative to the  control  direc-
+             tory  in  which  this attribute is contained.  For PSF files, the
+             filename is a path on the host.
 
    <a name="Software Definition File Grammar"><b>Software Definition File Grammar</b></a>
        A PSF may contain all <i>Software Definitions</i>.  An  INDEX  file  does  not
        contain  <b>control_file</b>,  or <b>file</b> definitions. An INFO file contains only
        <b>control_file</b>, and <b>file</b> definitions.
-
 
             software_definition_file : INDEX
                                      | INFO
@@ -1132,7 +1123,6 @@ i {color:#000080}
        directories so the package structure does  not  change  relative  to  a
        vanilla tarball.
 
-
         distribution
           description &quot;fooit - a program from fooware
        that does everything.&quot;
@@ -1161,7 +1151,6 @@ i {color:#000080}
        dle  and  product have the same tag which may force downstream users to
        disambiguate using software selection  syntax  such  as  fooit,bv=*  or
        fooit,pv=* .
-
 
         distribution
           description &quot;fooit - a program from fooware
@@ -1201,19 +1190,19 @@ i {color:#000080}
 </pre><h3><a name="APPLICABLE STANDARDS"><b>APPLICABLE STANDARDS</b></a></h3><pre>       IEEE  Std  1387.2-1995  (Identical to ISO 15068-2:1999), Open Group CAE
        C701.
 </pre><h3><a name="SEE ALSO"><b>SEE ALSO</b></a></h3><pre>        XDSA C701 <a href="http://www.opengroup.org/publications/catalog/c701.htm">http://www.opengroup.org/publications/catalog/c701.htm</a>
-        <a href=swbisparse_1.html>swbisparse(1)</a> -- An implementation extension parser utility.
-        <a href=swcopy_8.html>swcopy(8)</a>
-        <a href=swinstall_8.html>swinstall(8)</a>
-        <a href=swpackage_5.html>swpackage(5)</a>
-        <a href=swpackage_8.html>swpackage(8)</a>
-        <a href=swverify_8.html>swverify(8)</a>
-</pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        Copyright (C) 2003 Jim Lowe
-        Version: 0.443
-        Date: 2005-05-05
+        <a href="swbisparse_1.html">swbisparse(1)</a> -- An implementation extension parser utility.
+        <a href="swcopy_8.html">swcopy(8)</a>
+        <a href="swinstall_8.html">swinstall(8)</a>
+        <a href="swpackage_5.html">swpackage(5)</a>
+        <a href="swpackage_8.html">swpackage(8)</a>
+        <a href="swverify_8.html">swverify(8)</a>
+</pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        Copyright (C) 2005 Jim Lowe
+        Version: 0.462
+        Date: 2005-09-25
         Copying Terms: GNU Free Documentation License
 </pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       None
 
 
 
-                                                                         <a href=sw_5.html>sw(5)</a>
+                                                                         <a href="sw_5.html">sw(5)</a>
 </pre><hr><a href="../index.html">[ Index ]</a> <a href="javascript:history.back()"> [ Back ]</a></body></html>

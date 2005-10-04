@@ -1,7 +1,7 @@
 
                  swbis - Software Administration
                  --------------------------------
-                     Version 0.446  (May 2005)
+                     Version 0.461  (September 2005)
 
     Copyright (C) 2003,2004,2005  Jim Lowe
     All rights reserved.
@@ -180,7 +180,7 @@
     FreeBSD/x86/5.1                    Yes/Yes   | P  P  P  P  P     P  P  P
     FreeBSD/x86/4.9exp                 Yes/Yes   | P  P  P  P  P     P  P  P
     NetBSD/x86/1.6.1                   Yes/Yes   | P  P  P  P  P     P  P  x
-    OpenBSD/x86/3.4                    Yes/Yes   | x  x  x  x  x     P  x  x
+    OpenBSD/x86/3.4                    Yes/Yes   | P  P  P  P  P     P  P  x
     GNU/Linux/x86/rh4.1                No/No     | -  -  -  -  -     -  -  -
     GNU/Linux/x86/rh5.2                Yes/No    | x  P  x  P  P     P  x  x
     GNU/Linux/x86/rh6.2                Yes/Yes   | P  P  P  P  P     P  P  P
@@ -191,13 +191,15 @@
     GNU/Linux/x86/Debian2.2            Yes/Yes   | P  P  P  P  P     P  P  P
     GNU/Linux/Alpha/Debian3.0          Yes/Yes   | P  P  P  P  P     P  P  P
     GNU/Linux/amd64/SuSE-SLES8         Yes/Yes   | P  P  P  P  P     P  P  P
-    GNU/Linux/amd64/Fedora Release 3   Yes/Yes   | x  x  x  x  x     P  x  x
+ [1]GNU/Linux/amd64/Fedora Release 3   Yes/Yes   | -  -  -  -  -     P  -  -
     DarwinOSX/powerpc/6.8(Unix NFS)    Yes/Yes   | P  P  P  P  P     P  P  P
     DarwinOSX/powerpc/6.8(Native FS)   Yes/Yes   | x  x  P  x  x     P  x  x
     SunOS/Sun4uSparc/5.9               Yes/Yes   | P  P  P  P  P     P  P  P
     SunOS/x86/5.9                      Yes/Yes   | P  P  P  P  P     P  P  P
 
-    
+    [1] requires -m32 option to get around a compiler issue.  Complete tests
+        not done.
+ 
     Self-Contained Qualification Test:
     -----------------------------------
            sh bin/testbuild0
@@ -317,18 +319,72 @@
     go away if an openssh ssh client was used instead of Sun's.
     
     
-    The OpenSSH [On GNU/Linux] Dropping Data when data is pumped too fast Bug.
-    ----------------------------------------------------------------------
-    When using swinstall and a 2-hop target, for example:
+    The OpenSSH [On a Linux Kernel] Dropping Data when data is
+    pumped too fast Bug.
+    ------------------------------------------------------------
+    To exibit this bug, disable the delay that is automatically used
+    by swinstall for multi-hop installs by using "--pump-delay1=0"
+
+    Then using swinstall and a 2-hop target where host1 is a linux
+    kernel host (preferably 2.4.x) try the swinstall script many times in
+    a row.  Be aware that the command sometimes succeeds and sometimes fails.
+
+    Here is a script to create the test package:
+	#!/bin/sh
+	dd if=/dev/zero bs=1 count=1536 of=/tmp/zero2
+	dd if=/dev/zero bs=512 count=8192 of=/tmp/zero4mb
+            (cat <<EOF
+            distribution
+            product
+            tag apsf
+            revision 0.1
+            fileset
+            tag run
+            directory . /
+            file /tmp/zero4mb /eatme/bugme
+            file /tmp/zero2 /eatme/psfme
+EOF
+) | swpackage -s - @- >/tmp/xx.tar
+	rm -f /tmp/zero4mb
+	rm -f /tmp/zero2
+  	# End of script ##############
+
+ 
+    Here is a test script to exibit the bug:
+	#!/bin/sh 
+	case "$#" in
+		3)
+			;;
+		*)
+			echo usage $0 host1 host2 delay 1>&2
+			exit 1
+			;;
+	esac
+	HOST1=$1
+	HOST2=$2
+	DELAY=$3
+	rm -fr /tmp/bugme/mnt/test
+	cat /tmp/xx.tar | swinstall -vvvv \
+		-s - \
+		--show-prog \
+                -x verbose=10 \
+		-W pump-delay1=$DELAY \
+		@jhl@${HOST1}@@jhl@${HOST2}:/tmp/bugme/mnt/test
+	ret=$?
+	echo Command exit status:$ret
+	ls -l /tmp/bugme/mnt/test/eatme
+	exit $ret
+  	# End of script ##############
+
+    where HOST1 is Linux 2.4 based system,  The problem never happens
+    if HOST1 is a BSD system,  It seems to happen less if HOST1 is a Linux 2.6.x
+    based system.  It does not seem to matter what system HOST2 is.  Making HOST2
+    (the destination system) a BSD system does not inhibit the bug.  The bug only
+    seems to be inhibited if the intermediate host is a BSD system.
     
-            swinstall @ host1@@host2:/tmp/mnt/test
-    
-    and host1 is a GNU/Linux host [host1 had only one NIC in this test],
-    in certain rare instances (possibly when the package contains
-    a large file  >1Mb) the installation will be truncated and
-    swinstall will end with an error.  This bug has not been seen
-    when host1 was FreeBSD-5.1 even on the identical hardware and
-    identical version of OpenSSH.
+    This bug has not been seen when 192.168.1.4 was FreeBSD-5.1 even on the identical
+    shared hardware and identical version of OpenSSH as a Linux 2.4 based system
+    that does exibit the bug.
     
     *  Evidences that the bug is in OpenSSH (or Linux kernel) and not swbis.
     
@@ -439,7 +495,11 @@
                     --pump-delay1=90000 \
                     -x verbose=10 \
                     @jhl@192.168.99.6@@jhl@192.168.99.8:/tmp/jhl/mnt/test
-    
+   
+
+      NOTES:
+	1) To disable the delay use "--pump-delay1=0"
+	2) multi-hop targets always have a delay added of "--pump-delay1=10111000"              
     
     Runtime Prerequisites
     ---------------------

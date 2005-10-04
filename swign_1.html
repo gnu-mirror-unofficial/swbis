@@ -7,7 +7,7 @@ i {color:#000080}
 -->
 </STYLE>
 </HEAD>
-<BODY BGCOLOR="#ffffff">
+<BODY BGCOLOR="#f0f0f0">
 <H1>swign(1)</H1>
 <h3>Contents</h3><ul>
 <li><a href="#NAME">NAME</a>
@@ -46,75 +46,59 @@ i {color:#000080}
        file list stored in ./catalog/dfiles/files is compared to  the  current
        directory contents, if any difference is found the archive is not writ-
        ten and error returned.
-
 </pre><h3><a name="OPTIONS"><b>OPTIONS</b></a></h3><pre>       <b>--help</b>
               show help.
-
 
        <b>--psf</b>
               show the PSF to stdout, and then exit.
 
-
        <b>-u, --local-user name</b>
               Use name as the user ID to sign.
-
 
        <b>--homedir=DIR</b>
               Set the name of the home directory to  DIR.   If  not  specified
               then use &quot;~/.gnupg&quot;.
 
-
        <b>-s, --source=FILE</b>
               Specify  a  PSF or '-' for stdin.  If this is not given then the
               internally generated PSF is used.
 
-
        <b>-T, --show-names-only</b>
               show some info (for help and debugging) and exit.
-
 
        <b>-t, --run-sanity-check</b>
               Instead  of  writing  stdout,  write  the  archive  to  ../pack-
               ageDirName.swigntest.tar.gz and run some sanity tests.
 
-
        <b>-S, --sign-this</b>
               Write  the  ./catalog/  file containing the digest and signature
               into &quot;.&quot; and then exit without writing the archive to stdout.
 
-
        <b>-D, --with-checksig FILE</b>
               Include the checksig vendor control script sourced from FILE.
-
 
        <b>-o, --owner OWNER</b>
               Specify owner.  Use an empty string &quot;&quot;  to  specify  the  source
               file owner.
 
-
        <b>-g, --group GROUP</b>
               Specify  group.   Use  an  empty string &quot;&quot; to specify the source
               file group.
-
 
        <b>-x format</b>
               Specify the archive format.  Must  be  one  of  the  formats  of
               swpackage.
 
-
        <b>@-</b>
               Target, only supported target is standard output.
-
 </pre><h3><a name="EXTERNAL EFFECTS"><b>EXTERNAL EFFECTS</b></a></h3><pre>       The program will remove and replace a file in &quot;.&quot; named ./catalog/.
+
        When  using  the  '-t'  option  an  archive file is written to ../pack-
        ageDirName.swigntest.tar.gz
-
 </pre><h3><a name="TESTING"><b>TESTING</b></a></h3><pre>       After running successfully with options <b>-S</b>  and <b>-D FILE</b>  the  following
        should be true (report no error).
 
                  swverify --checksig .
-
-
 
 
 
@@ -135,21 +119,18 @@ i {color:#000080}
               swign -D $HOME/checksig.sh -u &quot;Test User&quot; -o &quot;&quot; -g &quot;&quot; -S;
               swverify -d @.
 
-
 </pre><h3><a name="ENVIRONMENT"><b>ENVIRONMENT</b></a></h3><pre>       The  environment  variable  SWPACKAGEPASSFD  sets  the  passphrase file
        descriptor.
-
 </pre><h3><a name="RETURN VALUE"><b>RETURN VALUE</b></a></h3><pre>       0 on success, non-zero on failure.
-</pre><h3><a name="FILES"><b>FILES</b></a></h3><pre>        &lt;<i>path</i>&gt;/<b>catalog</b>/
+</pre><h3><a name="FILES"><b>FILES</b></a></h3><pre>         &lt;<i>path</i>&gt;/<b>catalog</b>/
 </pre><h3><a name="SEE ALSO"><b>SEE ALSO</b></a></h3><pre>       info swbis
 
-       <a href=swpackage_8.html>swpackage(8)</a>, gpg
-</pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        <a href=swign_1.html>swign(1)</a>: The source directory signing utility of the swbis project.
-        Author: J. Lowe <a href="mailto:jhlowe@acm.org">jhlowe@acm.org</a>
-        Version: 0.443
-        Date: 2005-05-05
-        Copying: GNU Free Documentation License
-
+       <a href="swpackage_8.html">swpackage(8)</a>, gpg
+</pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        <a href="swign_1.html">swign(1)</a>: The source directory signing utility of the swbis project.
+         Author: J. Lowe <a href="mailto:jhlowe@acm.org">jhlowe@acm.org</a>
+         Version: 0.462
+         Date: 2005-09-05
+         Copying: GNU Free Documentation License
 
 </pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       If a directory is signed using the '-S' option  and  has  a  file  path
        greater  than  99  chars  in length then it will be unverifiable if the
@@ -169,5 +150,5 @@ i {color:#000080}
 
 
 
-                                                                      <a href=swign_1.html>swign(1)</a>
+                                                                      <a href="swign_1.html">swign(1)</a>
 </pre><hr><a href="../index.html">[ Index ]</a> <a href="javascript:history.back()"> [ Back ]</a></body></html>

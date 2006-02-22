@@ -13,8 +13,8 @@ i {color:#000080}
 <li><a href="#NAME">NAME</a>
 <li><a href="#SYNOPSIS">SYNOPSIS</a>
 <li><a href="#SWPACKAGE OUTPUT FORMAT">SWPACKAGE OUTPUT FORMAT</a>
-<li><a href="#SWPACKAGE INPUT FILE FORMAT">SWPACKAGE INPUT FILE FORMAT</a>
-<ul><li><a href="#EXTENDED DEFINITIONS"><font size=-1>EXTENDED DEFINITIONS</font></a>
+<ul><li><a href="#SWPACKAGE INPUT FILE FORMAT"><font size=-1>SWPACKAGE INPUT FILE FORMAT</font></a>
+<li><a href="#EXTENDED DEFINITIONS"><font size=-1>EXTENDED DEFINITIONS</font></a>
 <li><a href="#SWBIS PSF CONVENTIONS"><font size=-1>SWBIS PSF CONVENTIONS</font></a>
 </ul><li><a href="#APPLICABLE STANDARDS">APPLICABLE STANDARDS</a>
 <li><a href="#SEE ALSO">SEE ALSO</a>
@@ -62,7 +62,10 @@ i {color:#000080}
        The swbis implementation is biased, in terms of capability and  default
        settings,  to the tar format.  Package signing is only supported in tar
        format.
-</pre><h3><a name="SWPACKAGE INPUT FILE FORMAT"><b>SWPACKAGE INPUT FILE FORMAT</b></a></h3><pre>       The input file is called a product specification file or PSF.  It  con-
+
+
+   <a name="SWPACKAGE INPUT FILE FORMAT"><b>SWPACKAGE INPUT FILE FORMAT</b></a>
+       The input file is called a product specification file or PSF.  It  con-
        tains  information  to direct swpackage and information that is package
        meta-data [that is merely transferred unchanged into the  global  INDEX
        file].
@@ -128,11 +131,11 @@ i {color:#000080}
             control_file  <i>source</i>  [<i>path</i>]
 
 
-       The  <i>source</i> attribute defines the location in vendor's development sys-
-       tem where the swpackage utility will find the script.  The  keyword  is
-       the  value of the <i>tag</i> attribute and tells the utilities when to execute
-       the script.  The <i>path</i> attribute is optional and specifies the file name
-       in  the  packages  distribution  relative  to the control_directory for
+       The <i>source</i> attribute defines the location in distributors's development
+       system where the swpackage utility will find the script.   The  keyword
+       is  the value of the <i>tag</i> attribute and tells the utilities when to exe-
+       cute the script.  The <i>path</i> attribute is optional and specifies the file
+       name in the packages distribution relative to the control_directory for
        software containing the script. If not given the <i>tag</i> value is  used  as
        the filename.
 
@@ -140,11 +143,11 @@ i {color:#000080}
           directory  <i>source</i>  [<i>destination</i>]
 
 
-       Applies  the  <i>source</i>  attribute as the directory under which the subse-
-       quently listed files are located.  If <i>destination</i> is defined it will be
-       used as a prefix to the <i>path</i> (implied) file definition.  <i>source</i> is typ-
-       ically a temporary or build location and <i>dest</i> is its  unrealized  abso-
-       lute pathname destination.
+       Applies   the  <i>source</i>  attribute  as  the  directory  under  which  the
+       subsequently listed files are located.  If <i>destination</i>  is  defined  it
+       will be used as a prefix to the <i>path</i> (implied) file definition.  <i>source</i>
+       is typically a temporary or build location and <i>dest</i> is  its  unrealized
+       absolute pathname destination.
 
    <b>o</b>  <b>Recursive File Definition</b>
          file *
@@ -244,8 +247,8 @@ i {color:#000080}
        such a way that attributes of the  <b>distribution</b>  become  invalid.   For
        this  reason,  some  attributes  that  refer to an entire &quot;package&quot; [in
        other package managers] are referred from the product object and attain
-       their  broadened  scope by the vendor's convention that their distribu-
-       tion contains just one <b>product</b>.
+       their  broadened  scope by the distributor's convention that their dis-
+       tribution contains just one <b>product</b>.
 
        For example, the package NAME and VERSION are referred from the product
        tag  and  revision,  not  the distribution's.  This convention supports
@@ -256,7 +259,7 @@ i {color:#000080}
 
               <i>tag</i>  is  the  short, file system friendly, name of the distribu-
               tion.  Providing a distribution  tag  is  optional.   The  swbis
-              implementation  will  use this as the [constant] leading path if
+              implementation will use this as the [single] path name prefix if
               there is no distribution.control_directory attribute.  A distri-
               bution tag attribute and swpackage's response to it is an imple-
               mentation extension.  The leading package path can also be  con-
@@ -297,12 +300,14 @@ i {color:#000080}
               The swbis implementation uses it in a way that is  analogous  to
               the RPMTAG_NAME attribute.
 
+
        <b>control_directory</b>
 
               Is  the directory name in the distribution under which the prod-
               uct contents are located.  This  value  has  no  affect  on  the
               installed  software  catalog.   If it is not given in a PSF then
               the <i>tag</i> is used.
+
 
        <b>revision</b>
 
@@ -314,18 +319,19 @@ i {color:#000080}
 
        <b>vendor_tag</b>
 
-              This is a short identifying name of the vendor that supplied the
-              product.  This attribute  is  optional.   This  attribute  value
-              should  strive to be unique among all vendors.  It is one of the
-              version distinguishing attributes of a product specified by  the
-              standard.   It is transfered into the installed_software catalog
-              (not as a path name component) by swinstall.  If this  attribute
-              exists  there  should  also be a <b>vendor</b> object in the PSF in the
-              distribution object  that  has  this  tag.   This  attribute  is
+              This  is  a  short identifying name of the distributor that sup-
+              plied the product and associates  the  <b>vendor</b>  object  from  the
+              INDEX  file.   This attribute is optional.  This attribute value
+              should strive to be unique among all distributors.  It is one of
+              the  version distinguishing attributes of a product specified by
+              the standard.  It is transfered into the installed_software cat-
+              alog  (not  as  a  path  name  component) by swinstall.  If this
+              attribute exists there should also be a <b>vendor</b> object in the PSF
+              in the distribution object that has this tag.  This attribute is
               assigned the value of RPMTAG_RELEASE by swpackage when translat-
-              ing an RPM.  In this capacity it serves to distinguish  products
-              with  the  same revision and tag from the same or different ven-
-              dor.   It  most  closely   maps   to   the   RPMTAG_RELEASE   or
+              ing  an RPM.  In this capacity it serves to distinguish products
+              with the same revision and tag from the same or  different  dis-
+              tributor.   It  most  closely  maps  to  the  RPMTAG_RELEASE  or
               &quot;debian_revision&quot; attributes.
 
    <b>o Fileset Attributes</b>
@@ -338,27 +344,36 @@ i {color:#000080}
 
        <b>control_directory</b>
 
-              Is the directory name in the product  under  which  the  fileset
+              Is  the  directory  name  in the product under which the fileset
               contents are located.  This value has no affect on the installed
-              software catalog.  If it is not given in a PSF then the  <i>tag</i>  is
+              software  catalog.   If it is not given in a PSF then the <i>tag</i> is
               used.
 
    <b>o Example Source Package PSF</b>
-       This  PSF packages every file is current directory. It uses nil control
-       directories so the package structure does  not  change  relative  to  a
+       This PSF packages every file is current directory. It uses nil  control
+       directories  so  the  package  structure  does not change relative to a
        vanilla tarball.
 
         distribution
           description &quot;fooit - a program from fooware
        that does everything.&quot;
           title &quot;fooit - a really cool program&quot;
-          LICENSE &lt; /usr/local/fooware/legalstuff/LICENSE
+          COPYING &lt; /usr/local/fooware/legalstuff/COPYING
         vendor
+          the_term_vendor_is_misleading false
           tag fooware
           title fooware Consultancy Services, Inc.
+          description &quot;&quot;
+        vendor
+          the_term_vendor_is_misleading true
+          tag myfixes1
+          title Bug fixes, Set 1
+          description &quot;a place for more detailed description&quot;
         product
           tag fooit
           control_directory &quot;&quot;
+          revision 1.0
+          vendor_tag myfixes1  # Matches the vendor object above
         fileset
            tag fooit-SOURCE
            control_directory &quot;&quot;
@@ -369,32 +384,34 @@ i {color:#000080}
 
 
    <b>o Example Runtime (Binary) Package PSF</b>
-       This  is a sample PSF for a runtime package.  It implies multiple prod-
-       ucts (e.g. sub-packages) using the  bundle.contents  attribute.   Since
-       the  bundle  and product tags exist in a un-regulated namespace and are
+       This is a sample PSF for a runtime package.  It implies multiple  prod-
+       ucts  (e.g.  sub-packages)  using the bundle.contents attribute.  Since
+       the bundle and product tags exist in a un-regulated namespace  and  are
        seen by end users they should be carefully chosen.   Note that the bun-
-       dle  and  product have the same tag which may force downstream users to
-       disambiguate using software selection  syntax  such  as  fooit,bv=*  or
+       dle and product have the same tag which may force downstream  users  to
+       disambiguate  using  software  selection  syntax  such as fooit,bv=* or
        fooit,pv=* .
 
         distribution
           description &quot;fooit - a program from fooware
        that does everything.&quot;
           title &quot;fooit - a really cool program&quot;
-          LICENSE &lt; /usr/local/fooware/legalstuff/LICENSE
+          COPYING &lt; /usr/local/fooware/legalstuff/COPYING
 
             vendor
+               the_term_vendor_is_misleading false
                tag fooware
                title fooware Consultancy Services, Inc.
-               description &quot;Provider of the patented programs
-       that do everything&quot;
+               description &quot;Provider of the programs
+        that do everything&quot;
 
             vendor
+               the_term_vendor_is_misleading true
                 tag fw0
-                title fooware Packaging Services, Inc.
-                description &quot;fooware Re-packaging service&quot;
+                title fooware fixes
+                description &quot;More fixes from the fooware users&quot;
 
-       #  Bundle definition:
+       #  Bundle definition:  Use a bundle
             bundle
                 tag fooit
                 vendor_tag fooware
@@ -402,9 +419,9 @@ i {color:#000080}
 
        #  Product definition:
             product
-                tag fooit
-                revision 1.34.56
-                vendor_tag fw0
+                tag fooit   # This is the package name
+                revision 1.0 # This is the package version
+                vendor_tag fw0 # This is a release name e.g. RPMTAG_RELEASE
                 postinstall scripts/postinstall
             fileset
                  tag fooit-RUN
@@ -413,16 +430,16 @@ i {color:#000080}
 
 
 
-</pre><h3><a name="APPLICABLE STANDARDS"><b>APPLICABLE STANDARDS</b></a></h3><pre>       POSIX.1,  IEEE  Std  1387.2-1995  (Identical to ISO 15068-2:1999), Open
+</pre><h3><a name="APPLICABLE STANDARDS"><b>APPLICABLE STANDARDS</b></a></h3><pre>       POSIX.1, IEEE Std 1387.2-1995 (Identical  to  ISO  15068-2:1999),  Open
        Group CAE C701.
 </pre><h3><a name="SEE ALSO"><b>SEE ALSO</b></a></h3><pre>        XDSA C701 <a href="http://www.opengroup.org/publications/catalog/c701.htm">http://www.opengroup.org/publications/catalog/c701.htm</a>
         info swbis
         <a href="sw_5.html">sw(5)</a>
         <a href="swpackage_8.html">swpackage(8)</a>
         <a href="swbisparse_1.html">swbisparse(1)</a> -- An implementation extension parser utility.
-</pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        Copyright (C) 2004 Jim Lowe
-        Version: swbis 0.462
-        Date: 2005-09-25
+</pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        Copyright (C) 2004,2005 Jim Lowe
+        Version: swbis 0.481
+        Date: 2006-02-15
         Copying Terms: GNU Free Documentation License
 </pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       None
 

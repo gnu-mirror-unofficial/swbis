@@ -25,8 +25,8 @@ i {color:#000080}
 <ul><li><a href="#Overview"><font size=-1>Overview</font></a>
 <li><a href="#Manual Verification"><font size=-1>Manual Verification</font></a>
 <li><a href="#Manual Verification Using Standard Tools"><font size=-1>Manual Verification Using Standard Tools</font></a>
-</ul><li><a href="#SWPACKAGE INPUT FILE FORMAT">SWPACKAGE INPUT FILE FORMAT</a>
-<ul><li><a href="#EXTENDED DEFINITIONS"><font size=-1>EXTENDED DEFINITIONS</font></a>
+<li><a href="#SWPACKAGE INPUT FILE FORMAT"><font size=-1>SWPACKAGE INPUT FILE FORMAT</font></a>
+<li><a href="#EXTENDED DEFINITIONS"><font size=-1>EXTENDED DEFINITIONS</font></a>
 <li><a href="#SWBIS PSF CONVENTIONS"><font size=-1>SWBIS PSF CONVENTIONS</font></a>
 </ul><li><a href="#SAMPLE PRODUCT SPEC FILES">SAMPLE PRODUCT SPEC FILES</a>
 <li><a href="#SWPACKAGE OUTPUT FORMAT">SWPACKAGE OUTPUT FORMAT</a>
@@ -121,10 +121,10 @@ i {color:#000080}
               Store the distribution file list in .../dfiles/files.
 
        <b>-W dir=NAME</b>
-              Use NAME as the leading path in a distribution and also  as  the
-              value of the distribution.control_directory and distribution.tag
-              attribute (if not set).  May be set to an empty string to elimi-
-              nate stray leading &quot;./&quot;.
+              Use NAME as the path name prefix of a distribution and  also  as
+              the  value  of  the distribution.control_directory and distribu-
+              tion.tag attribute (if not set).  May be set to an empty  string
+              to eliminate stray leading &quot;./&quot;.
 
        <b>-W sign</b>
               Compute  the md5sum, sha1sum and adjunct_md5sum digests and sign
@@ -374,7 +374,7 @@ i {color:#000080}
        using   GNU   tar   and  the  file  list  stored  in  the  &lt;<i>path</i>&gt;/cata-
        log/dfiles/files attribute file as follows:
 
-       In this example, the  package  has  a  constant  leading  path  called,
+       In this example, the package has a  single  path  name  prefix  called,
        <b>namedir</b>  and  the  file  owner/group  are root.  These restrictions are
        suited to source packages.
        Verify the signature:
@@ -408,7 +408,10 @@ i {color:#000080}
 
         The  symbolic link files must be verified manually by comparing to the
        INFO file information.
-</pre><h3><a name="SWPACKAGE INPUT FILE FORMAT"><b>SWPACKAGE INPUT FILE FORMAT</b></a></h3><pre>       The input file is called a product specification file or PSF.  It  con-
+
+
+   <a name="SWPACKAGE INPUT FILE FORMAT"><b>SWPACKAGE INPUT FILE FORMAT</b></a>
+       The input file is called a product specification file or PSF.  It  con-
        tains  information  to direct swpackage and information that is package
        meta-data [that is merely transferred unchanged into the  global  INDEX
        file].
@@ -474,11 +477,11 @@ i {color:#000080}
             control_file  <i>source</i>  [<i>path</i>]
 
 
-       The  <i>source</i> attribute defines the location in vendor's development sys-
-       tem where the swpackage utility will find the script.  The  keyword  is
-       the  value of the <i>tag</i> attribute and tells the utilities when to execute
-       the script.  The <i>path</i> attribute is optional and specifies the file name
-       in  the  packages  distribution  relative  to the control_directory for
+       The <i>source</i> attribute defines the location in distributors's development
+       system where the swpackage utility will find the script.   The  keyword
+       is  the value of the <i>tag</i> attribute and tells the utilities when to exe-
+       cute the script.  The <i>path</i> attribute is optional and specifies the file
+       name in the packages distribution relative to the control_directory for
        software containing the script. If not given the <i>tag</i> value is  used  as
        the filename.
 
@@ -590,8 +593,8 @@ i {color:#000080}
        such a way that attributes of the  <b>distribution</b>  become  invalid.   For
        this  reason,  some  attributes  that  refer to an entire &quot;package&quot; [in
        other package managers] are referred from the product object and attain
-       their  broadened  scope by the vendor's convention that their distribu-
-       tion contains just one <b>product</b>.
+       their  broadened  scope by the distributor's convention that their dis-
+       tribution contains just one <b>product</b>.
 
        For example, the package NAME and VERSION are referred from the product
        tag  and  revision,  not  the distribution's.  This convention supports
@@ -602,7 +605,7 @@ i {color:#000080}
 
               <i>tag</i>  is  the  short, file system friendly, name of the distribu-
               tion.  Providing a distribution  tag  is  optional.   The  swbis
-              implementation  will  use this as the [constant] leading path if
+              implementation will use this as the [single] path name prefix if
               there is no distribution.control_directory attribute.  A distri-
               bution tag attribute and swpackage's response to it is an imple-
               mentation extension.  The leading package path can also be  con-
@@ -643,12 +646,14 @@ i {color:#000080}
               The swbis implementation uses it in a way that is  analogous  to
               the RPMTAG_NAME attribute.
 
+
        <b>control_directory</b>
 
               Is  the directory name in the distribution under which the prod-
               uct contents are located.  This  value  has  no  affect  on  the
               installed  software  catalog.   If it is not given in a PSF then
               the <i>tag</i> is used.
+
 
        <b>revision</b>
 
@@ -660,18 +665,19 @@ i {color:#000080}
 
        <b>vendor_tag</b>
 
-              This is a short identifying name of the vendor that supplied the
-              product.  This attribute  is  optional.   This  attribute  value
-              should  strive to be unique among all vendors.  It is one of the
-              version distinguishing attributes of a product specified by  the
-              standard.   It is transfered into the installed_software catalog
-              (not as a path name component) by swinstall.  If this  attribute
-              exists  there  should  also be a <b>vendor</b> object in the PSF in the
-              distribution object  that  has  this  tag.   This  attribute  is
+              This  is  a  short identifying name of the distributor that sup-
+              plied the product and associates  the  <b>vendor</b>  object  from  the
+              INDEX  file.   This attribute is optional.  This attribute value
+              should strive to be unique among all distributors.  It is one of
+              the  version distinguishing attributes of a product specified by
+              the standard.  It is transfered into the installed_software cat-
+              alog  (not  as  a  path  name  component) by swinstall.  If this
+              attribute exists there should also be a <b>vendor</b> object in the PSF
+              in the distribution object that has this tag.  This attribute is
               assigned the value of RPMTAG_RELEASE by swpackage when translat-
-              ing an RPM.  In this capacity it serves to distinguish  products
-              with  the  same revision and tag from the same or different ven-
-              dor.   It  most  closely   maps   to   the   RPMTAG_RELEASE   or
+              ing  an RPM.  In this capacity it serves to distinguish products
+              with the same revision and tag from the same or  different  dis-
+              tributor.   It  most  closely  maps  to  the  RPMTAG_RELEASE  or
               &quot;debian_revision&quot; attributes.
 
    <b>o Fileset Attributes</b>
@@ -684,27 +690,36 @@ i {color:#000080}
 
        <b>control_directory</b>
 
-              Is the directory name in the product  under  which  the  fileset
+              Is  the  directory  name  in the product under which the fileset
               contents are located.  This value has no affect on the installed
-              software catalog.  If it is not given in a PSF then the  <i>tag</i>  is
+              software  catalog.   If it is not given in a PSF then the <i>tag</i> is
               used.
 
    <b>o Example Source Package PSF</b>
-       This  PSF packages every file is current directory. It uses nil control
-       directories so the package structure does  not  change  relative  to  a
+       This PSF packages every file is current directory. It uses nil  control
+       directories  so  the  package  structure  does not change relative to a
        vanilla tarball.
 
         distribution
           description &quot;fooit - a program from fooware
        that does everything.&quot;
           title &quot;fooit - a really cool program&quot;
-          LICENSE &lt; /usr/local/fooware/legalstuff/LICENSE
+          COPYING &lt; /usr/local/fooware/legalstuff/COPYING
         vendor
+          the_term_vendor_is_misleading false
           tag fooware
           title fooware Consultancy Services, Inc.
+          description &quot;&quot;
+        vendor
+          the_term_vendor_is_misleading true
+          tag myfixes1
+          title Bug fixes, Set 1
+          description &quot;a place for more detailed description&quot;
         product
           tag fooit
           control_directory &quot;&quot;
+          revision 1.0
+          vendor_tag myfixes1  # Matches the vendor object above
         fileset
            tag fooit-SOURCE
            control_directory &quot;&quot;
@@ -715,32 +730,34 @@ i {color:#000080}
 
 
    <b>o Example Runtime (Binary) Package PSF</b>
-       This  is a sample PSF for a runtime package.  It implies multiple prod-
-       ucts (e.g. sub-packages) using the  bundle.contents  attribute.   Since
-       the  bundle  and product tags exist in a un-regulated namespace and are
+       This is a sample PSF for a runtime package.  It implies multiple  prod-
+       ucts  (e.g.  sub-packages)  using the bundle.contents attribute.  Since
+       the bundle and product tags exist in a un-regulated namespace  and  are
        seen by end users they should be carefully chosen.   Note that the bun-
-       dle  and  product have the same tag which may force downstream users to
-       disambiguate using software selection  syntax  such  as  fooit,bv=*  or
+       dle and product have the same tag which may force downstream  users  to
+       disambiguate  using  software  selection  syntax  such as fooit,bv=* or
        fooit,pv=* .
 
         distribution
           description &quot;fooit - a program from fooware
        that does everything.&quot;
           title &quot;fooit - a really cool program&quot;
-          LICENSE &lt; /usr/local/fooware/legalstuff/LICENSE
+          COPYING &lt; /usr/local/fooware/legalstuff/COPYING
 
             vendor
+               the_term_vendor_is_misleading false
                tag fooware
                title fooware Consultancy Services, Inc.
-               description &quot;Provider of the patented programs
-       that do everything&quot;
+               description &quot;Provider of the programs
+        that do everything&quot;
 
             vendor
+               the_term_vendor_is_misleading true
                 tag fw0
-                title fooware Packaging Services, Inc.
-                description &quot;fooware Re-packaging service&quot;
+                title fooware fixes
+                description &quot;More fixes from the fooware users&quot;
 
-       #  Bundle definition:
+       #  Bundle definition:  Use a bundle
             bundle
                 tag fooit
                 vendor_tag fooware
@@ -748,9 +765,9 @@ i {color:#000080}
 
        #  Product definition:
             product
-                tag fooit
-                revision 1.34.56
-                vendor_tag fw0
+                tag fooit   # This is the package name
+                revision 1.0 # This is the package version
+                vendor_tag fw0 # This is a release name e.g. RPMTAG_RELEASE
                 postinstall scripts/postinstall
             fileset
                  tag fooit-RUN
@@ -759,13 +776,14 @@ i {color:#000080}
 
 
 
-</pre><h3><a name="SAMPLE PRODUCT SPEC FILES"><b>SAMPLE PRODUCT SPEC FILES</b></a></h3><pre>       This section shows two example PSF files.
+</pre><h3><a name="SAMPLE PRODUCT SPEC FILES"><b>SAMPLE PRODUCT SPEC FILES</b></a></h3><pre>       This section shows several example PSF files.
 
    <b>o</b>   <b>A minimal PSF to package all files in current directory.</b>
         distribution
         product
           tag prod
           control_directory &quot;&quot;
+          revision 1.0
         fileset
            tag files
            control_directory &quot;&quot;
@@ -774,14 +792,15 @@ i {color:#000080}
 
 
    <b>o</b>   <b>A PSF that uses directory mapping.</b>
-       This  PSF  creates a package with live system paths from source that is
-       installed in non-live temporary locations. It is modeled on  the  swbis
+       This PSF creates a package with live system paths from source  that  is
+       installed  in  non-live temporary locations. It is modeled on the swbis
        source package.
 
         distribution
         product
-          tag prod
+          tag somepackage  # this is the package name
           control_directory &quot;&quot;
+          revision 1.0  # this is the package revision
         fileset
            tag files
            control_directory &quot;&quot;
@@ -838,53 +857,53 @@ i {color:#000080}
                   find . -print |  swpackage -Wfiles-from=- -Wlist-psf
 
 
-</pre><h3><a name="SWPACKAGE OUTPUT FORMAT"><b>SWPACKAGE OUTPUT FORMAT</b></a></h3><pre>       The  output  format  is  either one of two formats specified in POSIX.1
-       (ISO/IEC 9945-1) which are tar (header  magic=ustar)  or  cpio  (header
-       magic=070707).   The  default  format  of  the  swbis implementation is
-       &quot;ustar&quot;.  The POSIX spec under specifies definitions for  some  of  the
+</pre><h3><a name="SWPACKAGE OUTPUT FORMAT"><b>SWPACKAGE OUTPUT FORMAT</b></a></h3><pre>       The output format is either one of two  formats  specified  in  POSIX.1
+       (ISO/IEC  9945-1)  which  are  tar (header magic=ustar) or cpio (header
+       magic=070707).  The default  format  of  the  swbis  implementation  is
+       &quot;ustar&quot;.   The  POSIX  spec under specifies definitions for some of the
        ustar header fields.  The personality of the default swbis ustar format
-       mimics GNU tar 1.15.1 and is designed to be compliant to POSIX.1.   The
-       personality  of  the &quot;ustar0&quot; format mimics, for pathnames less than 99
-       octets,  GNU tar 1.13.25 using the &quot;-b1 --posix&quot;  options.   This  bit-
-       for-bit  sameness does not exist for pathnames greater than 99 chars as
-       swbis follows the POSIX  spec  and  GNU  tar  1.13.25  does  not.   The
-       &quot;ustar0&quot;  ustar personality is deprecated.  It is only slightly differ-
-       ent from 'ustar' in how device number fields are filled  (with  spaces,
+       mimics  GNU tar 1.15.1 and is designed to be compliant to POSIX.1.  The
+       personality of the &quot;ustar0&quot; format mimics, for pathnames less  than  99
+       octets,   GNU  tar  1.13.25 using the &quot;-b1 --posix&quot; options.  This bit-
+       for-bit sameness does not exist for pathnames greater than 99 chars  as
+       swbis  follows  the  POSIX  spec  and  GNU  tar  1.13.25 does not.  The
+       &quot;ustar0&quot; ustar personality is deprecated.  It is only slightly  differ-
+       ent  from  'ustar' in how device number fields are filled (with spaces,
        zeros or NULs) for non-device files.
 
-       In  addition  the swbis implementation supports several other tar vari-
-       ants including bit-for-bit mimicry of GNU tar (1.13.25) default  format
-       which  uses  a  non-standard name split and file type (type 'L').  This
+       In addition the swbis implementation supports several other  tar  vari-
+       ants  including bit-for-bit mimicry of GNU tar (1.13.25) default format
+       which uses a non-standard name split and file type  (type  'L').   This
        format is known as '--format=oldgnu'.  Also supported is the gnu format
        of GNU tar 1.15.1 specified by '--format=gnu'
 
-       The  defacto  cpio  formats are also supported.  &quot;new ASCII&quot; (sometimes
+       The defacto cpio formats are also supported.   &quot;new  ASCII&quot;  (sometimes
        called SVR4 cpio) and &quot;crc&quot; cpio formats with header magic &quot;070701&quot; and
        &quot;070702&quot; respectively.
 
        Support for &quot;pax Interchange Format&quot; (Extended header tar) described in
        IEEE 1003.1-2001 under the &quot;pax&quot; manual page is planned.
 
-       The entirety of the output byte stream is a single valid  file  of  one
+       The  entirety  of  the output byte stream is a single valid file of one
        the formats mentioned above.
 
        The swbis implementation writes its output to stdout.  The default out-
        put block size is 10240 bytes.  The last block is not padded and there-
-       fore  the  last <a href="write_2.html">write(2)</a> may be a short write.  The selected block size
+       fore the last <a href="write_2.html">write(2)</a> may be a short write.  The selected  block  size
        does not affect the output file contents.
 
-       The swbis implementation is biased, in terms of capability and  default
-       settings,  to the tar format.  Package signing is only supported in tar
+       The  swbis implementation is biased, in terms of capability and default
+       settings, to the tar format.  Package signing is only supported in  tar
        format.
-</pre><h3><a name="RETURN VALUE"><b>RETURN VALUE</b></a></h3><pre>       0 on success, 1 on error and target medium not modified, 2 on error  if
+</pre><h3><a name="RETURN VALUE"><b>RETURN VALUE</b></a></h3><pre>       0  on success, 1 on error and target medium not modified, 2 on error if
        target medium modified.
-</pre><h3><a name="SIDE EFFECTS"><b>SIDE EFFECTS</b></a></h3><pre>        No  temporary  files are used in the package generation process.  When
-       using the default target of stdout (directed to /dev/null),  there  are
-       no  file  system  side effects from swpackage.  GNU Privacy Guard (gpg)
+</pre><h3><a name="SIDE EFFECTS"><b>SIDE EFFECTS</b></a></h3><pre>        No temporary files are used in the package generation  process.   When
+       using  the  default target of stdout (directed to /dev/null), there are
+       no file system side effects from swpackage.  GNU  Privacy  Guard  (gpg)
        may alter its keys when invoked for package signing.
-</pre><h3><a name="ENVIRONMENT"><b>ENVIRONMENT</b></a></h3><pre>       The environment  variable  SWPACKAGEPASSFD  sets  the  passphrase  file
+</pre><h3><a name="ENVIRONMENT"><b>ENVIRONMENT</b></a></h3><pre>       The  environment  variable  SWPACKAGEPASSFD  sets  the  passphrase file
        descriptor (See option -Wpassphrase-fd).
-</pre><h3><a name="REQUISITE UTILITIES"><b>REQUISITE UTILITIES</b></a></h3><pre>       Swpackage  does  not  use any archive writing utilities, it has its own
+</pre><h3><a name="REQUISITE UTILITIES"><b>REQUISITE UTILITIES</b></a></h3><pre>       Swpackage does not use any archive writing utilities, it  has  its  own
        code to generate archives.
        Package signing uses one of the following:
         /usr/bin/gpg
@@ -904,13 +923,13 @@ i {color:#000080}
        <a href="sw_5.html">sw(5)</a>, <a href="swpackage_5.html">swpackage(5)</a>, <a href="swbisparse_1.html">swbisparse(1)</a>, <a href="swign_1.html">swign(1)</a>, <a href="swverify_8.html">swverify(8)</a>
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        <a href="swpackage_8.html">swpackage(8)</a>: The packaging utility of the swbis project.
         Author: Jim Lowe   Email: jhlowe at acm.org
-        Version: swbis 0.462
-        Date: 2005-09-25
+        Version: swbis 0.481
+        Date: 2006-02-15
         Copying: GNU Free Documentation License
-</pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       A comment after an object keyword is wrongly not allowed  by  this  PSF
+</pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       A  comment  after  an object keyword is wrongly not allowed by this PSF
        parser.  The --dir=&quot;&quot; does not do what one would expect sometimes.  The
-       output stream content is unaffected by the blocksize, that is the  last
-       write  may be short write.  Signing is broken for cpio format archives.
+       output  stream content is unaffected by the blocksize, that is the last
+       write may be short write.  Signing is broken for cpio format  archives.
 
 
 

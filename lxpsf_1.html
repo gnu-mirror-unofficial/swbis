@@ -14,8 +14,8 @@ i {color:#000080}
 <li><a href="#SYNOPSIS">SYNOPSIS</a>
 <li><a href="#DESCRIPTION">DESCRIPTION</a>
 <ul><li><a href="#Options"><font size=-1>Options</font></a>
-</ul><li><a href="#FILES">FILES</a>
-<li><a href="#RELATED STANDARDS">RELATED STANDARDS</a>
+</ul><li><a href="#HOWTO Use with swpackage">HOWTO Use with swpackage</a>
+<li><a href="#FILES">FILES</a>
 <li><a href="#IDENTIFICATION">IDENTIFICATION</a>
 <li><a href="#SEE ALSO">SEE ALSO</a>
 <li><a href="#BUGS">BUGS</a>
@@ -27,11 +27,11 @@ i {color:#000080}
        package.   The  output  layout  has  a  single  leading directory named
        according to the name, version, and release attributes.
 
-       The first regular file is ``PSF'', and is a Posix.7.2 software  defini-
-       tion  file  containing the package metadata.  Subsequent files are con-
-       trol data represented as files; and, the  files  of  the  distribution.
-       The  output  is  designed so the <a href="swpackage_8.html">swpackage(8)</a> utility is able to form a
-       Posix.7.2 package from the installed output.
+       The first regular file is ``PSF'', and is a IEEE  1387.2-1995  (ISO/IEC
+       15068-2:1999)  Product  Specification File containing the package meta-
+       data.  Subsequent files are control data represented as files, and, the
+       files  of  the  distribution.   The output is designed so the <b>swpackage</b>
+       utility is able to form a Posix package from the installed output.
 
        Currently, only RPM format is supported.
 
@@ -63,13 +63,24 @@ i {color:#000080}
 
        <b>-D</b> <i>,debug-level</i>=TYPE
               Always set to &quot;link&quot;
-</pre><h3><a name="FILES"><b>FILES</b></a></h3><pre>       none
-</pre><h3><a name="RELATED STANDARDS"><b>RELATED STANDARDS</b></a></h3><pre>       POSIX.1, POSIX.7.2 (IEEE 1387.2), XDSA C701
+</pre><h3><a name="HOWTO Use with swpackage"><b>HOWTO Use with swpackage</b></a></h3><pre>       Either install into file system or use the <b>-W source=-</b> option of
+       GNU <b>swpackage.</b>
+
+         cat your_rpm.rpm |
+         lxpsf --format=ustar --psf-form2 |
+         (mkdir /tmp/swbis; cd /tmp/swbis &amp;&amp; tar xpf -; exit $?) &amp;&amp;
+         (cd /tmp/swbis &amp;&amp; swpackage -s PSF @- ) | tar tvf -
+
+         cat your_rpm.rpm |
+         lxpsf --format=ustar --psf-form2 |
+         swpackage -W source=- -s@PSF @- | tar tvf -
+</pre><h3><a name="FILES"><b>FILES</b></a></h3><pre><b>RELATED STANDARDS</b>
+       POSIX.1, IEEE 1387.2, XDSA C701
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        The RPM translation program of the swbis project.
-        DATE: 2005-05-05
-        Revision: 0.444
-</pre><h3><a name="SEE ALSO"><b>SEE ALSO</b></a></h3><pre>       sw_parse()
-</pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       Probably many. A de-facto conversion policy is intimated in  the
+        DATE: 2005-10-22
+        Revision: 0.470
+</pre><h3><a name="SEE ALSO"><b>SEE ALSO</b></a></h3><pre>       <a href="swbisparse_1.html">swbisparse(1)</a>, <a href="swpackage_8.html">swpackage(8)</a>
+</pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       Probably  many. A de-facto conversion policy is intimated in the
        PSF by this program.
 
 

@@ -35,7 +35,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#dir">(dir)</a>
 <li><a accesskey="3" href="#SOFTWARE-PACKAGING-LAYOUT">SOFTWARE PACKAGING LAYOUT</a>
 <li><a accesskey="4" href="#SOFTWARE-DEFINITIONS">SOFTWARE DEFINITIONS</a>
 <li><a accesskey="5" href="#EXTENDED-DEFINITIONS">EXTENDED DEFINITIONS</a>
-<li><a accesskey="6" href="#VENDOR-KEYWORDS">VENDOR KEYWORDS</a>
+<li><a accesskey="6" href="#DISTRIBUTOR-KEYWORDS">DISTRIBUTOR KEYWORDS</a>
 <li><a accesskey="7" href="#PACKAGE-SECURITY">PACKAGE SECURITY</a>
 <li><a accesskey="8" href="#SOFTWARE-DEFINITION-FILES">SOFTWARE DEFINITION FILES</a>
 <li><a accesskey="9" href="#EXAMPLE-PACKAGE">EXAMPLE PACKAGE</a>
@@ -79,7 +79,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <pre class="display">     Software Packaging Layout
      Software Definitions
      Extended Definitions
-     Vendor Keywords
+     Distributor Keywords
      Package Security
      Software Definition Files: INFO, INDEX, PSF
      Example Package
@@ -113,7 +113,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <p>A package may exist in two forms: as a directory in a file system, or a serial access tar or cpio archive file. 
 A package consists of two main sections: 1) the <i>exported catalog structure</i>,
 and, 2) the <i>software file storage structure</i>. 
-Each section may contain leading path name components which serve to segregate distribution, product and fileset objects. 
+Each section may contain path name components which serve to segregate distribution, product and fileset objects. 
 <!-- TROFF INPUT: .PP -->
 
 <p>Shown below is an example with one (1) product and one (1) fileset. 
@@ -250,7 +250,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#SOFTWARE-PACKAGING-LAYOUT">SOFTWARE PA
 <p>&lt;<i>pfiles</i>&gt;
 is the value of the <i>pfiles</i> attribute and the default value is "pfiles". 
 This directory can store an INFO file pertaining to the product control<tt>_</tt>files,  control scripts defined in the INFO file, and all
-other vendor-defined control<tt>_</tt>files. 
+other distributor-defined control<tt>_</tt>files. 
 It can also store an attribute of
 the product as a separate file. 
 <!-- TROFF INPUT: .SS "Fileset Files" -->
@@ -316,7 +316,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#SOFTWARE-PACKAGING-LAYOUT">SOFTWARE PA
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <p>The listing of control directories in the exported catalog structure is repeated and files of the
-vendor distribution appear under these directories in a location determined by the metadata. 
+distribution appear under these directories in a location determined by the metadata. 
 <!-- TROFF INPUT: .PP -->
 
 <p>The standard does not require that files that are not regular files appear in the storage section. 
@@ -463,7 +463,8 @@ and, <i>media</i> in the form of software definitions.
         mode               <i>mode</i>                           <b>0755</b>    # impl.
         signer<tt>_</tt>pgm         <i>utility</i><tt>_</tt><i>name</i>                   GPG    # impl.
         signer<tt>_</tt>pgm<tt>_</tt>version <i>version</i>                        <b>1</b>    # impl.
-        gnu<tt>_</tt>tar<tt>_</tt>format<tt>_</tt>options <i>program</i><tt>_</tt><i>options</i>            &minus;b1    # impl.
+        tar<tt>_</tt>format<tt>_</tt>emulation<tt>_</tt>options <i>program</i><tt>_</tt><i>options</i>          # impl.
+        tar<tt>_</tt>format<tt>_</tt>emulation<tt>_</tt>utility <i>software spec</i>            # impl.
      <!-- TROFF INPUT: .fi -->
      
 </pre>
@@ -476,12 +477,14 @@ The <i>control</i><tt>_</tt><i>directory</i> attribute in the
 distribution object appears as the &lt;<i>path</i>&gt;
 leading directory path in the a serial archive package. 
 The <i>owner</i>, <i>group</i>, and
-<i>mode</i> attributes control the file attributes of the leading path. 
+<i>mode</i> attributes control the file attributes of the single path name prefix. 
 The <i>signature</i>,
 <i>sig</i><tt>_</tt><i>header</i>,
 <i>md5sum</i>,
 and <i>adjunct</i><tt>_</tt><i>md5sum</i> attributes are described below and are stored as separate files in the dfiles
-directory. 
+directory. The <i>tar</i><tt>_</tt><i>format</i><tt>_</tt><i>emulation</i><tt>_</tt><i>*</i> options define
+the GNU tar version and format options that the archive file mimics, these
+attributes are used by the 'checksig' script. 
 <!-- TROFF INPUT: .SS "Installed_software Definition" -->
 
 <div class="node">
@@ -553,6 +556,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#SOFTWARE-DEFINITIONS">SOFTWARE DEFINIT
 <!-- TROFF INPUT: .nf -->
 <!--  -->
 <pre class="display">      vendor
+        the<tt>_</tt>term<tt>_</tt>vendor<tt>_</tt>is<tt>_</tt>misleading  true                  True or False  #impl
         tag         <i>tag</i>           Empty string
         title       <i>title</i>         Empty string
         description <i>description</i>   Empty string
@@ -565,7 +569,11 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#SOFTWARE-DEFINITIONS">SOFTWARE DEFINIT
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .PP -->
 <p>The <i>tag</i> attribute is required. 
-A INDEX and PSF files can contain vendor definitions. 
+The <i>the</i><tt>_</tt><i>term</i><tt>_</tt><i>vendor</i><tt>_</tt><i>is</i><tt>_</tt><i>misleading</i> is required in a PSF
+file to avert a (harmless) warning, please use it.  It exists to allow persons, for example,
+who are distributors (of existing free software) to qualify themselves away from the connotations
+of a "vendor" which has specific meaning not applicable to a free software distributor. 
+A INDEX and PSF files can contain <b>vendor</b> definitions. 
 The <b>qualifier</b> attribute value may be one of:
 <b>seller</b>,
 <b>author</b>,
@@ -907,7 +915,7 @@ or an attribute stored as a file.
 
 <div class="node">
 <p><hr>
-<a name="EXTENDED-DEFINITIONS"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#VENDOR-KEYWORDS">VENDOR KEYWORDS</a>,
+<a name="EXTENDED-DEFINITIONS"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#DISTRIBUTOR-KEYWORDS">DISTRIBUTOR KEYWORDS</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#SOFTWARE-DEFINITIONS">SOFTWARE DEFINITIONS</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <br>
@@ -981,7 +989,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#EXTENDED-DEFINITIONS">EXTENDED DEFINIT
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .PP -->
-<p>The <i>source</i> attribute defines the location in vendor's development system
+<p>The <i>source</i> attribute defines the location in distributors's development system
 where the swpackage utility will find the script.  The keyword is the value of the
 <i>tag</i> attribute
 and tells the utilities when to execute the script. 
@@ -1264,19 +1272,19 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#EXTENDED-DEFINITIONS">EXTENDED DEFINIT
 The syntax of the included file is PSF syntax. 
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
-<!-- TROFF INPUT: .SH "VENDOR KEYWORDS" -->
+<!-- TROFF INPUT: .SH "DISTRIBUTOR KEYWORDS" -->
 
 <div class="node">
 <p><hr>
-<a name="VENDOR-KEYWORDS"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#PACKAGE-SECURITY">PACKAGE SECURITY</a>,
+<a name="DISTRIBUTOR-KEYWORDS"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#PACKAGE-SECURITY">PACKAGE SECURITY</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#EXTENDED-DEFINITIONS">EXTENDED DEFINITIONS</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <br>
 </div>
 
-<h3 class="section">1.6 VENDOR KEYWORDS</h3>
+<h3 class="section">1.6 DISTRIBUTOR KEYWORDS</h3>
 
-<!-- DEBUG: print_menu("VENDOR KEYWORDS") -->
+<!-- DEBUG: print_menu("DISTRIBUTOR KEYWORDS") -->
 <!-- TROFF INPUT: .PP -->
 <p>A software definition file (INFO, INDEX or psf) may contain keywords not recognized by the standard. 
 Such keywords will be parsed as an attribute keyword, that is as an attribute of the
@@ -1286,7 +1294,7 @@ containing object (keyword) software definition.
 <div class="node">
 <p><hr>
 <a name="PACKAGE-SECURITY"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#SOFTWARE-DEFINITION-FILES">SOFTWARE DEFINITION FILES</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="#VENDOR-KEYWORDS">VENDOR KEYWORDS</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="#DISTRIBUTOR-KEYWORDS">DISTRIBUTOR KEYWORDS</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <br>
 </div>
@@ -1505,7 +1513,7 @@ to which their data pertains.
 The PSF file does not appear in the package. 
 It is created by a person or program and it directs
 the action of the swpackage utility. 
-It is vendor internal data unless released by the vendor. 
+It is internal data unless released by the distributor. 
 <!-- TROFF INPUT: .PP -->
 
 <p>The files contain keywords (and values) to represent the attributes defined in the standard.  There are three (3)
@@ -1736,6 +1744,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#EXAMPLE-PACKAGE">EXAMPLE PACKAGE</a>
         layout<tt>_</tt>version 1.0
         control<tt>_</tt>directory swm-1.0  #Implementation Extension.
         vendor
+          the<tt>_</tt>term<tt>_</tt>vendor<tt>_</tt>is<tt>_</tt>misleading  false # True or False
           tag greatsoft
           title Greatersoft Corporation
           description "Greatersoft Corporation, Inc."
@@ -1809,6 +1818,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#EXAMPLE-PACKAGE">EXAMPLE PACKAGE</a>
         media
           sequence<tt>_</tt>number 1
         vendor
+          the<tt>_</tt>term<tt>_</tt>vendor<tt>_</tt>is<tt>_</tt>misleading  false # True or False
           tag greatsoft
           title Greatersoft Corporation
           description "Greatersoft Corporation, Inc."
@@ -1993,7 +2003,7 @@ implementation is not required act on them.  The reason for this is a
 distribution may be acted upon by a conforming utility in such a way that attributes
 of the <b>distribution</b> become invalid. 
 For this reason, some attributes that refer to an entire "package" [in other package managers]
-are referred from the product object and attain their broadened scope by the vendor's
+are referred from the product object and attain their broadened scope by the distributor's
 convention that their distribution contains just one
 <b>product</b>. 
 <!-- TROFF INPUT: .PP -->
@@ -2011,7 +2021,7 @@ is consistent with the standard.
 
      <p><i>tag</i> is the short, file system friendly, name of the distribution. 
 Providing a distribution tag is optional.  The swbis implementation will use this as the
-[constant] leading path if there is no distribution.control<tt>_</tt>directory attribute. 
+[single] path name prefix if there is no distribution.control<tt>_</tt>directory attribute. 
 A distribution tag attribute and swpackage's response to it is an implementation extension. 
 The leading package path can also be controlled with the &rdquo;&minus;W dir&rdquo; option. 
 <!-- TROFF INPUT: .RE -->
@@ -2079,6 +2089,8 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#SWBIS-PSF-CONVENTIONS">SWBIS PSF CONVE
 
 <!-- TROFF INPUT: .PP -->
 <p>A <b>product</b> defines the software product. 
+<!-- TROFF INPUT: .br -->
+<!-- .br -->
 <!-- TROFF INPUT: .PP -->
 
 <p><b>tag</b>
@@ -2135,9 +2147,10 @@ installed software catalog.  It is required by swinstall.
 <!--  -->
 <blockquote>
 
-     <p>This is a short identifying name of the vendor that supplied the product. 
+     <p>This is a short identifying name of the distributor that supplied the product and
+associates the <b>vendor</b> object from the INDEX file. 
 This attribute is optional. 
-This attribute value should strive to be unique among all vendors. 
+This attribute value should strive to be unique among all distributors. 
 It is one of the version distinguishing attributes of a product specified by the standard. 
 It is transfered into the installed<tt>_</tt>software catalog (not as a path name component) by swinstall. 
 If this attribute exists there should also be a
@@ -2145,7 +2158,7 @@ If this attribute exists there should also be a
 This attribute is assigned the value of RPMTAG<tt>_</tt>RELEASE by
 swpackage when translating an RPM. 
 In this capacity it serves to distinguish products with the same revision and tag from the same or
-different vendor.  It most closely maps to the RPMTAG<tt>_</tt>RELEASE or "debian<tt>_</tt>revision" attributes. 
+different distributor.  It most closely maps to the RPMTAG<tt>_</tt>RELEASE or "debian<tt>_</tt>revision" attributes. 
 <!-- TROFF INPUT: .RE -->
 
 </blockquote>
@@ -2164,6 +2177,8 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#SWBIS-PSF-CONVENTIONS">SWBIS PSF CONVE
 
 <!-- TROFF INPUT: .PP -->
 <p>A <b>fileset</b> defines the fileset. 
+<!-- TROFF INPUT: .br -->
+<!-- .br -->
 <!-- TROFF INPUT: .PP -->
 
 <p><b>tag</b>
@@ -2219,13 +2234,22 @@ so the package structure does not change relative to a vanilla tarball.
         description "fooit &minus; a program from fooware
      that does everything."
         title "fooit &minus; a really cool program"
-        LICENSE &lt; /usr/local/fooware/legalstuff/LICENSE
+        COPYING &lt; /usr/local/fooware/legalstuff/COPYING
       vendor
+        the<tt>_</tt>term<tt>_</tt>vendor<tt>_</tt>is<tt>_</tt>misleading false
         tag fooware
         title fooware Consultancy Services, Inc.
+        description ""
+      vendor
+        the<tt>_</tt>term<tt>_</tt>vendor<tt>_</tt>is<tt>_</tt>misleading true
+        tag myfixes1
+        title Bug fixes, Set 1
+        description "a place for more detailed description"
       product
         tag fooit
         control<tt>_</tt>directory ""
+        revision 1.0
+        vendor<tt>_</tt>tag myfixes1  # Matches the vendor object above
       fileset
          tag fooit-SOURCE
          control<tt>_</tt>directory ""
@@ -2263,20 +2287,22 @@ selection syntax such as fooit,bv=* or fooit,pv=* .
         description "fooit &minus; a program from fooware
      that does everything."
         title "fooit &minus; a really cool program"
-        LICENSE &lt; /usr/local/fooware/legalstuff/LICENSE
+        COPYING &lt; /usr/local/fooware/legalstuff/COPYING
      
           vendor
+             the<tt>_</tt>term<tt>_</tt>vendor<tt>_</tt>is<tt>_</tt>misleading false
              tag fooware
              title fooware Consultancy Services, Inc.
-             description "Provider of the patented programs
-     that do everything"
+             description "Provider of the programs
+      that do everything"
      
           vendor
+             the<tt>_</tt>term<tt>_</tt>vendor<tt>_</tt>is<tt>_</tt>misleading true
               tag fw0
-              title fooware Packaging Services, Inc.
-              description "fooware Re-packaging service"
+              title fooware fixes
+              description "More fixes from the fooware users"
      
-     #  Bundle definition:
+     #  Bundle definition:  Use a bundle
           bundle
               tag fooit
               vendor<tt>_</tt>tag fooware
@@ -2284,9 +2310,9 @@ selection syntax such as fooit,bv=* or fooit,pv=* .
      
      #  Product definition:
           product
-              tag fooit
-              revision 1.34.56
-              vendor<tt>_</tt>tag fw0
+              tag fooit   # This is the package name
+              revision 1.0 # This is the package version
+              vendor<tt>_</tt>tag fw0 # This is a release name e.g. RPMTAG<tt>_</tt>RELEASE
               postinstall scripts/postinstall
           fileset
                tag fooit-RUN
@@ -2350,8 +2376,8 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <!-- DEBUG: print_menu("IDENTIFICATION") -->
 <p>Copyright (C) 2005 Jim Lowe
- Version: 0.462
- Date: 2005-09-25
+ Version: 0.481
+ Date: 2006-02-15
  Copying Terms: GNU Free Documentation License
 <!-- TROFF INPUT: .SH "BUGS" -->
 
@@ -2367,7 +2393,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- DEBUG: print_menu("BUGS") -->
 <!-- TROFF INPUT: .PP -->
 <p>None
-<!-- created by instant / docbook-to-man, Mon 26 Sep 2005, 21:21 -->
+<!-- created by instant / docbook-to-man, Sun 19 Feb 2006, 20:52 -->
 
 </body></html>
 

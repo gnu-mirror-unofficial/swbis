@@ -36,8 +36,8 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#dir">(dir)</a>
 <li><a accesskey="4" href="#OPTIONS">OPTIONS</a>
 <li><a accesskey="5" href="#POSIX-EXTENDED-OPTIONS">POSIX EXTENDED OPTIONS</a>
 <li><a accesskey="6" href="#IMPLEMENTATION-EXTENSION-OPTIONS">IMPLEMENTATION EXTENSION OPTIONS</a>
-<li><a accesskey="7" href="#VENDOR-SCRIPTS">VENDOR SCRIPTS</a>
-<li><a accesskey="8" href="#IMPLEMENTATION-EXTENSION-VENDOR-SCRIPTS">IMPLEMENTATION EXTENSION VENDOR SCRIPTS</a>
+<li><a accesskey="7" href="#DISTRIBUTOR-SCRIPTS">DISTRIBUTOR SCRIPTS</a>
+<li><a accesskey="8" href="#IMPLEMENTATION-EXTENSION-DISTRIBUTOR-SCRIPTS">IMPLEMENTATION EXTENSION DISTRIBUTOR SCRIPTS</a>
 <li><a accesskey="9" href="#VERIFYING-SIGNATURES">VERIFYING SIGNATURES</a>
 <li><a href="#EXAMPLES">EXAMPLES</a>
 <li><a href="#RETURN-VALUE">RETURN VALUE</a>
@@ -46,9 +46,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#dir">(dir)</a>
 <li><a href="#SEE-ALSO">SEE ALSO</a>
 <li><a href="#IDENTIFICATION">IDENTIFICATION</a>
 <li><a href="#BUGS">BUGS</a>
-
 </ul>
-
 <!-- TROFF INPUT: .SH "NAME" -->
 <div class="node">
 <p><hr>
@@ -63,7 +61,6 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- DEBUG: print_menu("NAME") -->
 <p>swverify <span class="roman">&mdash;</span> Verify Software
 <!-- TROFF INPUT: .SH "SYNOPSIS" -->
-
 <div class="node">
 <p><hr>
 <a name="SYNOPSIS"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#DESCRIPTION">DESCRIPTION</a>,
@@ -80,7 +77,6 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!--  -->
 <pre class="display">     Posix:
      <!-- TROFF INPUT: .fi -->
-     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -90,7 +86,6 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
      [&minus;x <i>option=value</i>]  [&minus;X <i>options</i><tt>_</tt><i>file</i>]  [&minus;W <i>option</i>] \&nbsp;<!-- /@w -->
      [software<tt>_</tt>selections]  [@targets]
      <!-- TROFF INPUT: .fi -->
-     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -98,7 +93,6 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!--  -->
 <pre class="display">     <b>swverify</b>
      <!-- TROFF INPUT: .fi -->
-     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -106,7 +100,6 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!--  -->
 <pre class="display">     <b>swverify</b> &minus;r selection [@ target]
      <!-- TROFF INPUT: .fi -->
-     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -114,7 +107,6 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!--  -->
 <pre class="display">     <b>swverify</b> &minus;d [@ target]
      <!-- TROFF INPUT: .fi -->
-     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -122,7 +114,6 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!--  -->
 <pre class="display">     <b>swverify</b> &minus;d @&minus;   # Note: special meaning for dash as stdin
      <!-- TROFF INPUT: .fi -->
-     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -130,7 +121,6 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!--  -->
 <pre class="display">     <b>swverify</b> &minus;d @.   # Note: special meaning for . as current directory
      <!-- TROFF INPUT: .fi -->
-     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -138,7 +128,6 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!--  -->
 <pre class="display">     Implementation Extension:
      <!-- TROFF INPUT: .fi -->
-     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -146,7 +135,6 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!--  -->
 <pre class="display">     <b>swverify</b> &minus;&minus;checksig [portable<tt>_</tt>archive<tt>_</tt>file]
      <!-- TROFF INPUT: .fi -->
-     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -154,7 +142,6 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!--  -->
 <pre class="display">     <b>swverify</b> &minus;&minus;checksig <i>directory</i>
      <!-- TROFF INPUT: .fi -->
-     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -162,7 +149,6 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!--  -->
 <pre class="display">     <b>swverify</b> [&minus;Wd] &minus;Wemit-signed-file [portable<tt>_</tt>archive<tt>_</tt>file]
      <!-- TROFF INPUT: .fi -->
-     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -170,7 +156,6 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!--  -->
 <pre class="display">     <b>swverify</b> [&minus;Wd] [&minus;Wsha1] &minus;Wemit-digest-file [portable<tt>_</tt>archive<tt>_</tt>file]
      <!-- TROFF INPUT: .fi -->
-     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -178,7 +163,6 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!--  -->
 <pre class="display">     <b>swverify</b> [&minus;Wd] &minus;Wget-sig-if=sigfilename [portable<tt>_</tt>archive<tt>_</tt>file]
      <!-- TROFF INPUT: .fi -->
-     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .SH "DESCRIPTION" -->
@@ -198,15 +182,13 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <b>swverify</b> utility checks the accuracy of software in distributions and installed<tt>_</tt>software. 
 If no options are given, a serial distribution on stdin is verified. 
 <!-- TROFF INPUT: .PP -->
-
-<p>Currently,
+Currently,
 <b>swverify</b> does not read the defaults files. 
 "/" is the default target for installed software. 
 Stdin is the default target for distributions. 
 The built-in value of "installed<tt>_</tt>software<tt>_</tt>catalog" is
 "var/lib/swbis/catalog". 
 <!-- TROFF INPUT: .SH "OPTIONS" -->
-
 <div class="node">
 <p><hr>
 <a name="OPTIONS"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#POSIX-EXTENDED-OPTIONS">POSIX EXTENDED OPTIONS</a>,
@@ -221,82 +203,63 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- TROFF INPUT: .PP -->
 <p><b>-d</b>
 <!-- TROFF INPUT: .RS -->
-
 <!--  -->
 <blockquote>
 Specify to operate on a distribution rather than installed software. 
 <!-- TROFF INPUT: .RE -->
-
 </blockquote>
-
 <!--  -->
-<p><b>-r</b>
+<b>-r</b>
 <!-- TROFF INPUT: .RS -->
-
 <!--  -->
 <blockquote>
 Specify to operate on installed software at the target path. 
 <!-- TROFF INPUT: .RE -->
-
 </blockquote>
-
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .PP -->
-<p><b>software</b><tt>_</tt><b>selections</b>
+<b>software</b><tt>_</tt><b>selections</b>
 <!-- TROFF INPUT: .RS -->
-
 <!--  -->
 <blockquote>
 See other man pages. 
 <!-- TROFF INPUT: .RE -->
-
 </blockquote>
-
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<p><b>targets</b>
+<b>targets</b>
 <!-- TROFF INPUT: .RS -->
-
 <!--  -->
 <blockquote>
 See other man pages. 
 Currently, only one (1) target can be specified. 
 <!-- TROFF INPUT: .RE -->
-
 </blockquote>
-
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<p><b>-x option=value</b>
+<b>-x option=value</b>
 <!-- TROFF INPUT: .RS -->
-
 <!--  -->
 <blockquote>
 Specify the extended option overriding the defaults file value. 
 This option not yet implemented. 
 <!-- TROFF INPUT: .RE -->
-
 </blockquote>
-
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<p><b>-X FILE</b>
+<b>-X FILE</b>
 <!-- TROFF INPUT: .RS -->
-
 <!--  -->
 <blockquote>
 Specify the extended options filename, FILE,  overriding the default filename. 
 This option not yet implemented. 
 <!-- TROFF INPUT: .RE -->
-
 </blockquote>
-
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<p>Other posix options not implemented. 
+Other posix options not implemented. 
 <!-- TROFF INPUT: .SH "POSIX EXTENDED OPTIONS" -->
-
 <div class="node">
 <p><hr>
 <a name="POSIX-EXTENDED-OPTIONS"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#IMPLEMENTATION-EXTENSION-OPTIONS">IMPLEMENTATION EXTENSION OPTIONS</a>,
@@ -311,10 +274,9 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- TROFF INPUT: .PP -->
 <p>Not yet implemented. 
 <!-- TROFF INPUT: .SH "IMPLEMENTATION EXTENSION OPTIONS" -->
-
 <div class="node">
 <p><hr>
-<a name="IMPLEMENTATION-EXTENSION-OPTIONS"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#VENDOR-SCRIPTS">VENDOR SCRIPTS</a>,
+<a name="IMPLEMENTATION-EXTENSION-OPTIONS"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#DISTRIBUTOR-SCRIPTS">DISTRIBUTOR SCRIPTS</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#POSIX-EXTENDED-OPTIONS">POSIX EXTENDED OPTIONS</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <br>
@@ -326,7 +288,6 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- TROFF INPUT: .PP -->
 <p><b>-W option[,option,...]</b>
 <!-- TROFF INPUT: .RS -->
-
 <!--  -->
 <blockquote>
 Specify the implementation extension option. 
@@ -337,143 +298,117 @@ Specify the implementation extension option.
 <!-- .br -->
  Options may be separated by a comma. 
 <!-- TROFF INPUT: .RE -->
-
 </blockquote>
-
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<p><b>&minus;&minus;checksig | &minus;W checksig </b>
+<b>&minus;&minus;checksig | &minus;W checksig </b>
 <!-- TROFF INPUT: .RS -->
-
 <!--  -->
 <blockquote>
 If target file is not a directory then verify archive md5 and sha1 and gpg signature directly from the file. 
 If target file is a directory, attempt to verify the signature using GNU tar and gpg and if successful
-execute the vendor extension script <b>checksig</b>.  If <b>checksig </b>does not exist then exit with failure. 
+execute the distributor extension script <b>checksig</b>.  If <b>checksig </b>does not exist then exit with failure. 
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
  FILE may be "." (current directory) or "&minus;" (standard input).  A serial archive file may be compressed
 with gzip, bzip2, or Unix compress. 
 <!-- TROFF INPUT: .RE -->
-
 </blockquote>
-
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<p><b>-W emit-signed-file | &minus;W C</b>
+<b>-W emit-signed-file | &minus;W C</b>
 <!-- TROFF INPUT: .RS -->
-
 <!--  -->
 <blockquote>
 Read archive file FILE or standard input and write the signed file
 (i.e. gpg's signed stuff) to stdout. 
 This is the catalog section of the Posix package. 
 <!-- TROFF INPUT: .RE -->
-
 </blockquote>
-
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<p><b>-W emit-digest-file | &minus;W S</b>
+<b>-W emit-digest-file | &minus;W S</b>
 <!-- TROFF INPUT: .RS -->
-
 <!--  -->
 <blockquote>
 Read archive file FILE or standard input and write the archive section of
 the file (that was used to make the md5 and sha1 message digests) to stdout. 
 This is the storage section of the Posix package. 
 <!-- TROFF INPUT: .RE -->
-
 </blockquote>
-
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<p><b>-W show-auth-files | &minus;W d</b>
+<b>-W show-auth-files | &minus;W d</b>
 <!-- TROFF INPUT: .RS -->
-
 <!--  -->
 <blockquote>
 Writes the relevent security file to stderr. 
 Applies to emit-digest-file and emit-signed-file modes. 
 <!-- TROFF INPUT: .RE -->
-
 </blockquote>
-
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<p><b>-W sig-number=N</b>
+<b>-W sig-number=N</b>
 <!-- TROFF INPUT: .RS -->
-
 <!--  -->
 <blockquote>
 Operates on the Nth signature, 0 is last, 1 is the first. 
 <!-- TROFF INPUT: .RE -->
-
 </blockquote>
-
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<p><b>-W get-sig-if=outputfile</b>
+<b>-W get-sig-if=outputfile</b>
 <!-- TROFF INPUT: .RS -->
-
 <!--  -->
 <blockquote>
 Verifies the archive digests
 by comparing to the digests in the catalog and if they match
 write the sigfile to outputfile and the signed data to stdout. 
 <!-- TROFF INPUT: .RE -->
-
 </blockquote>
-
 <!--  -->
-<!-- TROFF INPUT: .SH "VENDOR SCRIPTS" -->
+<!-- TROFF INPUT: .SH "DISTRIBUTOR SCRIPTS" -->
 <div class="node">
 <p><hr>
-<a name="VENDOR-SCRIPTS"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#IMPLEMENTATION-EXTENSION-VENDOR-SCRIPTS">IMPLEMENTATION EXTENSION VENDOR SCRIPTS</a>,
+<a name="DISTRIBUTOR-SCRIPTS"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#IMPLEMENTATION-EXTENSION-DISTRIBUTOR-SCRIPTS">IMPLEMENTATION EXTENSION DISTRIBUTOR SCRIPTS</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#IMPLEMENTATION-EXTENSION-OPTIONS">IMPLEMENTATION EXTENSION OPTIONS</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <br>
 </div>
 
-<h3 class="section">1.7 VENDOR SCRIPTS</h3>
+<h3 class="section">1.7 DISTRIBUTOR SCRIPTS</h3>
 
-<!-- DEBUG: print_menu("VENDOR SCRIPTS") -->
+<!-- DEBUG: print_menu("DISTRIBUTOR SCRIPTS") -->
 <!-- TROFF INPUT: .PP -->
-<p>swverify can execute a vendor supplied <b>fix </b> script. 
-<!-- TROFF INPUT: .PP -->
-
 <p>Not yet implemented. 
-<!-- TROFF INPUT: .SH "IMPLEMENTATION EXTENSION VENDOR SCRIPTS" -->
-
+<!-- TROFF INPUT: .SH "IMPLEMENTATION EXTENSION DISTRIBUTOR SCRIPTS" -->
 <div class="node">
 <p><hr>
-<a name="IMPLEMENTATION-EXTENSION-VENDOR-SCRIPTS"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#VERIFYING-SIGNATURES">VERIFYING SIGNATURES</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="#VENDOR-SCRIPTS">VENDOR SCRIPTS</a>,
+<a name="IMPLEMENTATION-EXTENSION-DISTRIBUTOR-SCRIPTS"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#VERIFYING-SIGNATURES">VERIFYING SIGNATURES</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="#DISTRIBUTOR-SCRIPTS">DISTRIBUTOR SCRIPTS</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <br>
 </div>
 
-<h3 class="section">1.8 IMPLEMENTATION EXTENSION VENDOR SCRIPTS</h3>
+<h3 class="section">1.8 IMPLEMENTATION EXTENSION DISTRIBUTOR SCRIPTS</h3>
 
-<!-- DEBUG: print_menu("IMPLEMENTATION EXTENSION VENDOR SCRIPTS") -->
+<!-- DEBUG: print_menu("IMPLEMENTATION EXTENSION DISTRIBUTOR SCRIPTS") -->
 <ul class="menu">
 <li><a accesskey="1" href="#checksig-_003c_003ci_003epath_003c_002fi_003e_003e_002f_003cb_003ecatalog_003c_002fb_003e_002f_003c_003ci_003edfiles_003c_002fi_003e_003e_002f_003cb_003echecksig_003c_002fb_003e">checksig &lt;<i>path</i>&gt;/<b>catalog</b>/&lt;<i>dfiles</i>&gt;/<b>checksig</b></a>
 <li><a accesskey="2" href="#Execution-Environment">Execution Environment</a>
-
 </ul>
-
 <!-- TROFF INPUT: .SS "checksig <\fIpath\fP>/\fBcatalog\fP/<\fIdfiles\fP>/\fBchecksig\fP" -->
 <div class="node">
 <p><hr>
 <a name="checksig-_003c_003ci_003epath_003c_002fi_003e_003e_002f_003cb_003ecatalog_003c_002fb_003e_002f_003c_003ci_003edfiles_003c_002fi_003e_003e_002f_003cb_003echecksig_003c_002fb_003e"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Execution-Environment">Execution Environment</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="#IMPLEMENTATION-EXTENSION-VENDOR-SCRIPTS">IMPLEMENTATION EXTENSION VENDOR SCRIPTS</a>
+Up:&nbsp;<a rel="up" accesskey="u" href="#IMPLEMENTATION-EXTENSION-DISTRIBUTOR-SCRIPTS">IMPLEMENTATION EXTENSION DISTRIBUTOR SCRIPTS</a>
 <br>
 </div>
 
 <h4 class="subsection">1.8.1 checksig &lt;<i>path</i>&gt;/<b>catalog</b>/&lt;<i>dfiles</i>&gt;/<b>checksig</b></h4>
 
 <!-- TROFF INPUT: .PP -->
-<p>A vendor may choose to provide a <b>checksig </b>script. 
+<p>A software distributor may choose to provide a <b>checksig </b>script. 
 The <b>checksig </b> script is part of the distribution object. 
 It is used to verify the directory form of a distribution  (as distinguished
 from installed<tt>_</tt>software).  The verified attributes are the same as those verified
@@ -481,13 +416,12 @@ from the archive file form with the addition of the distribution file list.
 In addition the script may chose to verify the <i>adjunct</i><tt>_</tt><i>md5sum</i> and file.md5 digests and symbolic links. 
 Due to the constraints of reproducing the archive message digests
 from the directory, which include tar utility dependence and file owner/group specification,
-this script may not be useful to all vendors. 
+this script may not be useful to all distributors. 
 <!-- TROFF INPUT: .SS "Execution Environment" -->
-
 <div class="node">
 <p><hr>
 <a name="Execution-Environment"></a>Previous:&nbsp;<a rel="previous" accesskey="p" href="#checksig-_003c_003ci_003epath_003c_002fi_003e_003e_002f_003cb_003ecatalog_003c_002fb_003e_002f_003c_003ci_003edfiles_003c_002fi_003e_003e_002f_003cb_003echecksig_003c_002fb_003e">checksig &lt;&lt;i&gt;path&lt;/i&gt;&gt;/&lt;b&gt;catalog&lt;/b&gt;/&lt;&lt;i&gt;dfiles&lt;/i&gt;&gt;/&lt;b&gt;checksig&lt;/b&gt;</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="#IMPLEMENTATION-EXTENSION-VENDOR-SCRIPTS">IMPLEMENTATION EXTENSION VENDOR SCRIPTS</a>
+Up:&nbsp;<a rel="up" accesskey="u" href="#IMPLEMENTATION-EXTENSION-DISTRIBUTOR-SCRIPTS">IMPLEMENTATION EXTENSION DISTRIBUTOR SCRIPTS</a>
 <br>
 </div>
 
@@ -496,11 +430,10 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#IMPLEMENTATION-EXTENSION-VENDOR-SCRIPT
 <p>The script should require the SW<tt>_</tt>CONTROL<tt>_</tt>TAG environment variable be set to "checksig" and if
 not exit with failure. 
 <!-- TROFF INPUT: .SH "VERIFYING SIGNATURES" -->
-
 <div class="node">
 <p><hr>
 <a name="VERIFYING-SIGNATURES"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#EXAMPLES">EXAMPLES</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="#IMPLEMENTATION-EXTENSION-VENDOR-SCRIPTS">IMPLEMENTATION EXTENSION VENDOR SCRIPTS</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="#IMPLEMENTATION-EXTENSION-DISTRIBUTOR-SCRIPTS">IMPLEMENTATION EXTENSION DISTRIBUTOR SCRIPTS</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <br>
 </div>
@@ -517,11 +450,9 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <li><a accesskey="6" href="#Create-the-digest-byte-stream-_0026minus_003bWemit_002ddigest_002dfile-mode-_002d">Create the digest byte stream &minus;Wemit-digest-file mode - </a>
 <li><a accesskey="7" href="#Create-the-signed-byte-stream-_0026minus_003bWemit_002dsigned_002dfile-mode-_002d">Create the signed byte stream &minus;Wemit-signed-file mode - </a>
 <li><a accesskey="8" href="#_0026minus_003bWget_002dsig_002dif-mode-_002d">&minus;Wget-sig-if mode - </a>
-
 </ul>
-
 <!-- TROFF INPUT: .PP -->
-<p>The design separates the payload and catalog, therefore,
+The design separates the payload and catalog, therefore,
 verification requires verifying the storage section md5 and sha1
 message digests and then verifying the signature of the catalog. 
 Naturally, it is required that the signed data include the storage
@@ -529,8 +460,7 @@ section message digests and that they match the storage sections.
 The storage section digests are stored as separate attribute files
 in the dfiles catalog directory. 
 <!-- TROFF INPUT: .PP -->
-
-<p>The
+The
 <b>checksig</b> mode checks all the security files in the package and
 is the preferred way to authenticate a package. 
 The <b>emit-signed-file</b>,
@@ -538,7 +468,6 @@ The <b>emit-signed-file</b>,
 and custom applications. 
 The <b>get-sig-if</b> is the function used by <b>checksig</b>. 
 <!-- TROFF INPUT: .SS "Verifying a POSIX distribution Archive Manually" -->
-
 <div class="node">
 <p><hr>
 <a name="Verifying-a-POSIX-distribution-Archive-Manually"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Verifying-a-POSIX-distribution-Directory-Manually">Verifying a POSIX distribution Directory Manually</a>,
@@ -554,10 +483,8 @@ the archive file (e.g. tarball) form of the distribution, that is verification
 take place on the uncompressed archive using 'gpg', GNU 'tar' and the swbis
 utility 'swverify' (or the library utility 'arf2arf'). 
 <!-- TROFF INPUT: .PP -->
-
-<p>The authentication requires the following steps:
+The authentication requires the following steps:
 <!-- TROFF INPUT: .PP -->
-
 <!-- TROFF INPUT: .nf -->
 <!--  -->
 <pre class="display">     1) Obtain the signature from the package.
@@ -570,56 +497,47 @@ utility 'swverify' (or the library utility 'arf2arf').
      5) Compare the digest message generated in step 4 to the
         authenicated digest obtained in step 3.
      <!-- TROFF INPUT: .fi -->
-     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <p>1) Obtain the signature from the package. 
 <!-- TROFF INPUT: .PP -->
-
 <!-- TROFF INPUT: .nf -->
 <!--  -->
 <pre class="display">       #!/bin/sh
        tar zxf &minus; &minus;O \\*/catalog/dfiles/signature &lt; swbis-0.460.tar.gz
      <!-- TROFF INPUT: .fi -->
-     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <p>2)  Recreate the signed data
 <!-- TROFF INPUT: .PP -->
-
 <!-- TROFF INPUT: .nf -->
 <!--  -->
 <pre class="display">       #!/bin/sh
        swverify &minus;WC &lt; swbis-0.460.tar.gz | gpg &minus;&minus;verify /dev/tty &minus;
        # Cut and paste the signature file obtained in step 1
      <!-- TROFF INPUT: .fi -->
-     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <p>3)  Obtain the message digest
 <!-- TROFF INPUT: .PP -->
-
 <!-- TROFF INPUT: .nf -->
 <!--  -->
 <pre class="display">       #!/bin/sh
        swverify &minus;WC &lt; swbis-0.460.tar.gz | tar xf &minus; &minus;O \\*/catalog/dfiles/md5sum
      <!-- TROFF INPUT: .fi -->
-     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <p>4)  Create the digested byte stream
 <!-- TROFF INPUT: .PP -->
-
 <!-- TROFF INPUT: .nf -->
 <!--  -->
 <pre class="display">       #!/bin/sh
        swverify &minus;WS &lt; swbis-0.460.tar.gz | md5sum
      <!-- TROFF INPUT: .fi -->
-     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -642,11 +560,9 @@ be noted that it is left to the user to verify that the archive
 installed no files outside of this directory as this would likely indicate
 a trojan'ed package. 
 <!-- TROFF INPUT: .PP -->
-
-<p>If authenticating on a GNU/Linux system using GNU tar it is possible
+If authenticating on a GNU/Linux system using GNU tar it is possible
 to validate the archive message digests and signature if the
 following are true:
-
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
@@ -661,21 +577,18 @@ following are true:
      7) The package was unpacked with a version of tar that
         preserves all file times.
      <!-- TROFF INPUT: .fi -->
-     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .PP -->
-<p>In this example, the package has a constant leading path called, <b>namedir</b> and
+<p>In this example, the package has a single path name prefix called, <b>namedir</b> and
 the file owner/group are root.  These restrictions are suited to
 source packages. 
 <!-- TROFF INPUT: .PP -->
-
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
-<p>Verify the signature:
+Verify the signature:
 <!-- TROFF INPUT: .PP -->
-
 <!-- TROFF INPUT: .nf -->
 <!--  -->
 <pre class="display">       #!/bin/sh
@@ -683,7 +596,6 @@ source packages.
        &minus;&minus;exclude=namedir/catalog/dfiles/signature  \&nbsp;<!-- /@w -->
        namedir/catalog | gpg &minus;&minus;verify namedir/catalog/dfiles/signature &minus;
      <!-- TROFF INPUT: .fi -->
-     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -692,35 +604,29 @@ If this fails then, try experimenting with the owner, group, and
 numeric-id options. 
 If you are unable to verify a tar byte stream using gpg(1)
 that contains the storage section message digests, then the package
-cannot be authenticated.
-
+cannot be authenticated. 
 <!-- TROFF INPUT: .PP -->
-<p>Assuming you successfully verified the catalog as shown above, now generate
+Assuming you successfully verified the catalog as shown above, now generate
 the message digest and compare it to the md5sum file attribute from
 the same byte stream that gpg(1) claims is authenticate. 
 <!-- TROFF INPUT: .PP -->
-
 <!-- TROFF INPUT: .nf -->
 <!--  -->
 <pre class="display">       #!/bin/sh
        grep &minus;v namedir/catalog  namedir/catalog/dfiles/files | \&nbsp;<!-- /@w -->
        tar cf &minus; &minus;b1 &minus;&minus;owner=root &minus;&minus;group=root \&nbsp;<!-- /@w -->
        &minus;&minus;files-from=&minus; &minus;&minus;no-recursion | md5sum
-     
        tar cf &minus; &minus;b1 &minus;&minus;owner=root &minus;&minus;group=root \&nbsp;<!-- /@w -->
        &minus;&minus;exclude=namedir/catalog/dfiles/signature  \&nbsp;<!-- /@w -->
        namedir/catalog | tar xf &minus; &minus;O  namedir/catalog/dfiles/md5sum
      <!-- TROFF INPUT: .fi -->
-     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <p>Likewise for the sha1 digest. 
 <!-- TROFF INPUT: .PP -->
-
-<p>If the package has symbolic links, Verify the adjunct<tt>_</tt>md5sum:
+If the package has symbolic links, Verify the adjunct<tt>_</tt>md5sum:
 <!-- TROFF INPUT: .PP -->
-
 <!-- TROFF INPUT: .nf -->
 <!--  -->
 <pre class="display">       #!/bin/sh
@@ -730,14 +636,12 @@ the same byte stream that gpg(1) claims is authenticate.
        &minus;&minus;files-from=&minus; &minus;&minus;no-recursion | md5sum
        cat namedir/catalog/dfiles/adjunct<tt>_</tt>md5sum
      <!-- TROFF INPUT: .fi -->
-     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <p>The symbolic link files must be verified manually by comparing to the INFO file
 information. 
 <!-- TROFF INPUT: .SS "Verifying a POSIX distribution in tar format" -->
-
 <div class="node">
 <p><hr>
 <a name="Verifying-a-POSIX-distribution-in-tar-format"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Verifying-the-directory-_0028unpacked_0029-form-of-a-Distribution">Verifying the directory (unpacked) form of a Distribution</a>,
@@ -758,7 +662,6 @@ that its data be identical to the ustar header of every signature file is
 enforced. 
 If any one of these checks fails, authentication fails. 
 <!-- TROFF INPUT: .PP -->
-
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
 <!-- TROFF INPUT: .PP -->
@@ -769,7 +672,6 @@ If any one of these checks fails, authentication fails.
              # &minus; or &minus;
         swverify &minus;d @&minus; &lt; mypackage-00.1.tar.gz
      <!-- TROFF INPUT: .fi -->
-     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -788,7 +690,6 @@ If any one of these checks fails, authentication fails.
      gpg: Good signature from "Test User (pass=Iforgot) localhost&gt;"
      Primary key fingerprint: 77BB A98E B3A2 ED4C 217E  8A25 2BF4 28AB 82D0 DDE4
      <!-- TROFF INPUT: .fi -->
-     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -805,41 +706,34 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#VERIFYING-SIGNATURES">VERIFYING SIGNAT
 
 <!-- TROFF INPUT: .PP -->
 <p>Authenticating using 'swverify' is subject to the same constraints as
-verifying manually using GNU tools because swverify implements this using GNU tools.
-
-<p>'swverify', when verifying the directory form of a distribution, attempts to
+verifying manually using GNU tools because swverify implements this using GNU tools. 
+'swverify', when verifying the directory form of a distribution, attempts to
 authenticate the exported catalog signature and if it is successful executes the
 'checksig' script found in the 'dfiles' distribution directory of the exported
 catalog.  If the 'checksig' script does not exist, authentication fails. 'swverify'
 will only attempt to run 'checksig' if it is found in the dfiles directory of
-an authenticated catalog.
-
-<p>'swverify' currently has no provision to verify the archive section (i.e. the
+an authenticated catalog. 
+'swverify' currently has no provision to verify the archive section (i.e. the
 file storage structure) of a directory form POSIX distribution besides
-execution of the vendor extension script 'checksig'.
-
-<p>If filemypackage-00.1 is a directory unpacked with a tar reading utility
+execution of the distributor extension script 'checksig'. 
+If filemypackage-00.1 is a directory unpacked with a tar reading utility
 that preserved file times then try,
-
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
 <pre class="display">        #!/bin/sh
         swverify &minus;&minus;checksig mypackage-00.1
      <!-- TROFF INPUT: .fi -->
-     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <p>or change directory into mypackage-00.1
 and use the posix syntax:
 <!-- TROFF INPUT: .PP -->
-
 <!-- TROFF INPUT: .nf -->
 <!--  -->
 <pre class="display">        swverify &minus;d @.
      <!-- TROFF INPUT: .fi -->
-     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -848,12 +742,10 @@ and use the posix syntax:
 <!--  -->
 <pre class="display">        swverify &minus;d @`pwd`/mypackage-00.1
      <!-- TROFF INPUT: .fi -->
-     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<p>Below is example output of a package with a 'checksig' script.
-
+<p>Below is example output of a package with a 'checksig' script. 
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
 <!-- TROFF INPUT: .PP -->
@@ -895,7 +787,6 @@ and use the posix syntax:
      checksig: Signature proper OK (Good)
      checksig: /usr/bin/gpg exit status : 0
      <!-- TROFF INPUT: .fi -->
-     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -920,11 +811,9 @@ catalog, however, it can use the distribution GPG signature, which
 is stored in the catalog, to authenticate the meta-data of the selected
 package. 
 <!-- TROFF INPUT: .PP -->
-
-<p>Below is an example. Note, the package is selected on the basis of its
+Below is an example. Note, the package is selected on the basis of its
 product or bundle tag. 
 <!-- TROFF INPUT: .PP -->
-
 <!-- TROFF INPUT: .nf -->
 <!--  -->
 <pre class="display">     $ swverify &minus;r your<tt>_</tt>product<tt>_</tt>tag @ /
@@ -940,7 +829,6 @@ product or bundle tag.
      swverify: Warning: file checks not implemented
      swverify: signature verification return status=0
      <!-- TROFF INPUT: .fi -->
-     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -958,14 +846,12 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#VERIFYING-SIGNATURES">VERIFYING SIGNAT
 <!-- TROFF INPUT: .PP -->
 <p>Here are some examples that verify the archive digests. 
 <!-- TROFF INPUT: .PP -->
-
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
 <pre class="display">        #!/bin/sh
         cat your-tarball | swverify &minus;Wd &minus;WS | md5sum
      <!-- TROFF INPUT: .fi -->
-     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -973,26 +859,21 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#VERIFYING-SIGNATURES">VERIFYING SIGNAT
 <p>Your should see a pair of identical digests. Use the &minus;Wsha1 option to check the
 sha1 digest in a similar manner. 
 <!-- TROFF INPUT: .PP -->
-
-<p>** IMPORTANT **
+** IMPORTANT **
 <!-- TROFF INPUT: .PP -->
-
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
-<p>This does not mean that the data is authenticate
+This does not mean that the data is authenticate
 in the sense of being attributable to a person,
 merely that the md5sum attribute and the payload byte stream match. 
 <!-- TROFF INPUT: .PP -->
-
-<p>To inspect the digested data, try:
+To inspect the digested data, try:
 <!-- TROFF INPUT: .PP -->
-
 <!-- TROFF INPUT: .nf -->
 <!--  -->
 <pre class="display">       #!/bin/sh
        cat your-tarball | swverify &minus;WS | tar tvf &minus;
      <!-- TROFF INPUT: .fi -->
-     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -1010,13 +891,11 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#VERIFYING-SIGNATURES">VERIFYING SIGNAT
 <!-- TROFF INPUT: .PP -->
 <p>Here is an example which allows inspection of the signed file. 
 <!-- TROFF INPUT: .PP -->
-
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
 <pre class="display">       cat your-tarball | swverify &minus;WC | tar tvf &minus;
      <!-- TROFF INPUT: .fi -->
-     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -1034,7 +913,6 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#VERIFYING-SIGNATURES">VERIFYING SIGNAT
 <p>This is the mode used by <b>&minus;&minus;checksig</b>. 
 Here is an example. 
 <!-- TROFF INPUT: .PP -->
-
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
@@ -1042,26 +920,22 @@ Here is an example.
        cat your-tarball | swverify &minus;Wget-sig-if=/dev/tty | \&nbsp;<!-- /@w -->
        gpg &minus;&minus;verify  /dev/tty &minus;
      <!-- TROFF INPUT: .fi -->
-     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .PP -->
 <p>Now try to copy and paste the sigfile and gpg should attempt to verify the signature. 
 <!-- TROFF INPUT: .PP -->
-
 <!-- TROFF INPUT: .RS -->
 <!--  -->
 <blockquote>
 <b>Note:  This verifies the md5 or sha1 digests before writing the signed data to stdout. 
 If the sha1 or md5 match fails then an empty file is written to stdout. 
 <!-- TROFF INPUT: .RE -->
-
 </blockquote>
-
 <!--  -->
 <!-- TROFF INPUT: .SH "EXAMPLES" -->
-<p></b><div class="node">
+</b><div class="node">
 <p><hr>
 <a name="EXAMPLES"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#RETURN-VALUE">RETURN VALUE</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#VERIFYING-SIGNATURES">VERIFYING SIGNATURES</a>,
@@ -1075,13 +949,10 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <ul class="menu">
 <li><a accesskey="1" href="#Distribution-Verification">Distribution Verification</a>
 <li><a accesskey="2" href="#Installed-Software-Verification">Installed Software Verification</a>
-
 </ul>
-
 <!-- TROFF INPUT: .PP -->
-<p>Examples of verifying distributions and installed software. 
+Examples of verifying distributions and installed software. 
 <!-- TROFF INPUT: .SS "Distribution Verification" -->
-
 <div class="node">
 <p><hr>
 <a name="Distribution-Verification"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Installed-Software-Verification">Installed Software Verification</a>,
@@ -1094,32 +965,26 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#EXAMPLES">EXAMPLES</a>
 <!-- TROFF INPUT: .PP -->
 <p>* Verify a tar archive
 <!-- TROFF INPUT: .PP -->
-
 <!-- TROFF INPUT: .nf -->
 <!--  -->
 <pre class="display">       swverify &minus;d &lt; foo-1.1.tar.gz
                 or
        swverify &minus;d @`pwd`/foo-1.1.tar.gz
-     
                Note: &minus;&minus;checksig and '&minus;d' perform the same operations.
      <!-- TROFF INPUT: .fi -->
-     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .PP -->
 <p>* Verify a unpacked distribution
 <!-- TROFF INPUT: .PP -->
-
 <!-- TROFF INPUT: .nf -->
 <!--  -->
 <pre class="display">       swverify &minus;d @`pwd`/foo-1.1
                 or
        swverify &minus;d @.
-     
                Note: &minus;&minus;checksig and '&minus;d' perform the same operations.
      <!-- TROFF INPUT: .fi -->
-     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -1136,17 +1001,14 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#EXAMPLES">EXAMPLES</a>
 <!-- TROFF INPUT: .PP -->
 <p>* Verify installed software
 <!-- TROFF INPUT: .PP -->
-
 <!-- TROFF INPUT: .nf -->
 <!--  -->
 <pre class="display">       swverify &minus;r foo.foo @/tmp/test
                 or
        swverify &minus;r foo.foo
-     
                Note: This will attempt to verify the GPG signature.
                      The posix operations are not yet implemented.
      <!-- TROFF INPUT: .fi -->
-     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -1166,7 +1028,6 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <p>Exit status of the checksig script or gpg utility for &minus;&minus;checksig directory operation. 
 0 if successful on all targets, 1 if failed on all targets, 2 if failed on some targets. 
 <!-- TROFF INPUT: .SH "FILES" -->
-
 <div class="node">
 <p><hr>
 <a name="FILES"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#APPLICABLE-STANDARDS">APPLICABLE STANDARDS</a>,
@@ -1184,7 +1045,6 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!--  -->
 <pre class="display">     None
      <!-- TROFF INPUT: .fi -->
-     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -1203,7 +1063,6 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- TROFF INPUT: .PP -->
 <p>IEEE Std 1387.2-1995 (ISO/IEC 15068-2:1999), Open Group CAE C701. 
 <!-- TROFF INPUT: .SH "SEE ALSO" -->
-
 <div class="node">
 <p><hr>
 <a name="SEE-ALSO"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#IDENTIFICATION">IDENTIFICATION</a>,
@@ -1218,13 +1077,11 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- TROFF INPUT: .PP -->
 <p>info swbis
 <!-- TROFF INPUT: .PP -->
-
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
 <pre class="display">     sw(5), swign(1), swpackage(8), gpg(1), libexec/swbis/arf2arf
      <!-- TROFF INPUT: .fi -->
-     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -1243,11 +1100,10 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- TROFF INPUT: .PP -->
 <p>swverify: The verification utility of the swbis project. 
  Author: J. Lowe jhlowe@acm.org
- Version: 0.462
- Date: 2005-09-05
+ Version: 0.481
+ Date: 2006-02-14
  Copying: GNU Free Documentation License
 <!-- TROFF INPUT: .SH "BUGS" -->
-
 <div class="node">
 <p><hr>
 <a name="BUGS"></a>Previous:&nbsp;<a rel="previous" accesskey="p" href="#IDENTIFICATION">IDENTIFICATION</a>,
@@ -1262,9 +1118,8 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <p>The signature file's archive header (or data) is not part of the signed
 data therefore it may be subject to undetectable tampering, however, swverify
 does perform sanity checks on the pathname, permissions and filetype if
-
-<!-- WARNING: man/man8/swverify.8:604:%%new font B started without closing previous font B -->
-<p>the <b>sig</b><tt>_</tt><b>header</b> file (See sw(5) manual page.) is not present
+<!-- WARNING: man/man8/swverify.8:602:%%new font B started without closing previous font B -->
+the <b>sig</b><tt>_</tt><b>header</b> file (See sw(5) manual page.) is not present
 [due to being signed by a old swpackage version], and if <b>sig</b><tt>_</tt><b>header</b> is present, swverify requires that it match the sig file header. 
 The ability to verify the unpacked directory
 form of the package depends on many factors not immediately obvious, among them are the
@@ -1273,13 +1128,12 @@ and whether these names are in the system database files
 /etc/passwd and /etc/group, and if so, whether they assign the same uid/gid as
 the package. 
 <!-- TROFF INPUT: .PP -->
-
-<p>Verification of the directory form of a distribution (i.e. the installed tarball
-leading path directory) such as running 'swverify &minus;d @.' after running 'swign &minus;S'
+Verification of the directory form of a distribution (i.e. the installed tarball
+path name prefix) such as running 'swverify &minus;d @.' after running 'swign &minus;S'
 will fail if the order of directory entries is not compatible with
 traditional Unix file system directory entry ordering.  This incompatibility may be present in
 the Ext3, reiserFS, and DarwinOS et.al file systems. 
-<!-- created by instant / docbook-to-man, Mon 26 Sep 2005, 21:21 -->
+<!-- created by instant / docbook-to-man, Sun 19 Feb 2006, 20:52 -->
 
 </body></html>
 

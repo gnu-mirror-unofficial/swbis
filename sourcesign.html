@@ -318,8 +318,6 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#PSF-Basics">PSF Basics</a>
         tag         <var>tag</var>                 #  Short name, Globally unique if possible
         title       <var>title</var>               #  Longer name
         description <var>description</var>         #  A Detailed Description
-        vendor_tag  <var>tag</var>                 #  The next upstream distributor,
-                                              #   points to another vendor object
 </pre>
    <p>The <code>tag</code> and <code>vendor_tag</code> attributes should not contain a ' ', ':','.', ',' (space, colon, comma, period).
 
@@ -336,15 +334,6 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#PSF-Basics">PSF Basics</a>
 <p>The <var>product</var>.<code>vendor_tag</code> attribute is version identifier attribute and is used to
 distinguish packages that have the same <var>product</var>.<var>tag</var> and <var>product</var>.<var>revision</var> attributes. 
 It points to a <var>vendor</var> object with a matching <var>vendor</var>.<var>tag</var> attribute.
-
-   <p>A package that is an 'upstream' package relative to GNU/Linux distributions,
-(like most GNU packages) should not have a <var>product</var>.<code>vendor_tag</code> attribute
-but may have a <var>vendor</var> object. 
-A re-distribution of a <acronym>GNU</acronym> package should have a <var>product</var>.<code>vendor_tag</code> and
-the <var>vendor</var> object it refers to.  This mechanism can be used to document
-a chain re-distributors pointing backwards to the original release.  The swbis
-<acronym>RPM</acronym> translation policy maps the <code>RPMTAG_RELEASE</code> attribute to the
-<var>product</var>.<code>vendor_tag</code> attribute.
 
 <div class="node">
 <p><hr>

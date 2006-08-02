@@ -1,0 +1,762 @@
+\input texinfo @c -*-texinfo-*-
+@comment %**start of header
+@setfilename sourcesign.info
+
+@set UPDATED 17 July 2006
+@set UPDATED-MONTH July 2006
+@set EDITION 1
+@set VERSION 1.1
+@set SWBIS_VERSION 0.496
+
+@settitle Creating and Verifying Tar Archives with Embedded GPG Signatures
+@c @setchapternewpage odd
+
+@finalout
+
+@iftex
+@syncodeindex fn cp
+@syncodeindex vr cp
+@syncodeindex tp cp
+@end iftex
+@ifinfo
+@synindex fn cp
+@synindex vr cp
+@synindex tp cp
+@end ifinfo
+@comment %**end of header
+
+@copying
+
+This manual is for the use of @acronym{GNU} Swbis (version @value{SWBIS_VERSION})
+in the creation and verification of software releases containing embedded GPG signatures.
+
+Copyright @copyright{} 2006 Jim Lowe
+
+@quotation
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the @acronym{GNU} Free Documentation License,
+Version 1.2 or any later version published by the Free Software
+Foundation; with no Invariant Sections, with the Front-Cover texts
+being ``A @acronym{GNU} Manual,'' and with the Back-Cover Texts as in
+(a) below.  A copy of the license is included in the section entitled
+``@acronym{GNU} Free Documentation License.''
+
+(a) The @acronym{FSF}'s Back-Cover Text is: ``You have freedom to copy
+and modify this @acronym{GNU} Manual, like @acronym{GNU} software.
+Copies published by the Free Software Foundation raise funds for
+@acronym{GNU} development.''
+@end quotation
+@end copying
+
+@comment @dircategory GNU organization
+@comment @direntry
+@comment * Distribute: (sourcesign).        Make tar files with embedded GPG signatures
+@comment @end direntry
+
+@ifset shorttitlepage-enabled
+@shorttitlepage Swbis -- Making Source Packages with Embedded GPG Signatures
+@end ifset
+
+@titlepage
+@title Creating Tar File Releases with Swbis
+@subtitle Making Source Packages with Embedded GPG Signatures
+@subtitle @value{UPDATED}
+
+@author by Jim Lowe
+
+@c @page
+@c @vskip 0pt plus 1filll
+@insertcopying
+@sp 2
+@c Published by the Free Software Foundation @*
+@c 51 Franklin Street, Fifth Floor @*
+@c Boston, MA  02110-1301  USA @*
+@c Printed copies are available from the Free Software Foundation.@*
+@sp 2
+@end titlepage
+
+@contents
+
+@ifnottex
+@node Top
+@top Swbis
+@insertcopying
+@end ifnottex
+
+@menu
+* Prerequisites::
+* Introduction::
+* Making Distribution Tar Files::
+* Verifying the Distribution::
+* Adding New Signatures::
+* Guidelines for GNU Source Packages::
+* Using Automake and Swbis::
+* Using CVS and Swbis::
+@end menu
+
+@node Prerequisites
+@chapter Prerequisites
+
+You will need GNU Swbis version 0.483 and GNU tar version 1.13.25, 1.14.x  or preferably 1.15.x.
+You will also need GNU Privacy Guard (@command{gpg}).
+
+@node Introduction
+@chapter Introduction
+This document explains how to create and verify
+tar archives using @acronym{GNU} Swbis using particular methods and
+policy suited for free software distribution tar files.  The primary
+motivation for using Swbis is that it can create packages with an
+embedded GPG signature.
+
+The creation method described uses @command{swign} which
+employs @command{swpackage} and @command{tar} so that the
+archive is written entirely by @command{tar}.  The packaging policy
+is designed so there are no package layout changes except for the addition
+of the meta-data directory @file{catalog}. This is accomplished by specifying the
+POSIX control directory as empty strings "" and using a implementation extension
+option to set the path name prefix to the package @var{Name}-@var{Version}.
+The @file{catalog} directory conforms to the POSIX packaging standard ISO/IEC 15068-2:1999.
+
+The verification methods described include a procedure
+that does not require any part of Swbis.  It uses @command{tar},
+@command{gpg}, and a few other GNU utilities plus a Ext2 compatible
+file system to verify the package data.
+
+@node Making Distribution Tar Files
+@chapter Making Distribution Tar Files
+
+Making a distribution tar file first requires making a input file called a
+@dfn{Product Specification File} or @acronym{PSF} for short.
+It directs @command{swpackage} on what files to package, the package structure,
+and what control directory names to use.  It also can contain meta-data (i.e. attributes)
+that are transferred into the package meta-data file named @dfn{INDEX}.
+
+Here are examples that use a internally generated @acronym{PSF} to get started quickly,
+however, it is recommended that you provide your own @acronym{PSF} according to guidelines below.
+
+@noindent
+Note that this will erase and replace a file named @file{catalog} which is the name of the
+ISO/IEC 15068-2 meta-data directory.
+
+@example
+@group
+cd somepackage-1.0
+swign -u "Your GPG Name" @@- | tar tvf -
+@end group
+@end example
+
+In this example @command{swign} generated a @acronym{PSF} since
+one was not supplied.  Here is what it used.
+
+@example
+@group
+swign --show-psf
+@end group
+@group
+distribution
+dfiles dfiles
+
+product
+title somepackage version 1.0
+description Source package for somepackage version 1.0
+tag somepackage
+revision 1.0
+control_directory ""
+fileset
+tag somepackage-sources
+control_directory ""
+file_permissions -o jhl  -g jhl
+directory .
+file *
+exclude catalog
+@end group
+@end example
+
+If you already have a @acronym{PSF} named @file{PSF}, here's how to use it with @command{swign}:
+@example
+@group
+cd somepackage-1.0
+swign -s PSF -u "Your GPG Name" @@- | tar tvf -
+@end group
+@end example
+
+The same package can be created with @command{swpackage}, however, it requires specifying more
+options and the archive is written by @command{swpackage} instead of @command{tar}, Here's how:
+
+@example
+@group
+cd somepackage-1.0
+swpackage -s PSF -gpg-name "Your GPG Name" \
+	--dir=somepackage-0.1 --sign --files @@- |
+tar tvf -
+@end group
+@end example
+
+@menu
+* PSF Basics::  Basic Information About PSFs
+* PSFs for Source Packages::   A PSF for Source Packages
+@end menu
+
+@node PSF Basics
+@section @acronym{PSF} Basics
+
+For information about @acronym{PSF}s in general,
+see the info manual on the Swbis home page, or, the @command{sw} manual page.
+This section applies to all @acronym{PSF}s.
+
+Here some basic information.  The @acronym{PSF} consists of @dfn{object keywords} and @dfn{attribute keywords}.
+The most common @dfn{object keywords} are
+@code{distribution}, 
+@code{bundle}, 
+@code{vendor}, 
+@code{product}, 
+and @code{fileset}.
+All @dfn{attribute keywords} exist in an object context and some  @dfn{attribute keywords} are used
+in several @dfn{object keywords} contexts.  To disambiguate the following notation is used: @var{object_name}.@var{attribute}.
+
+Comments are lines or parts of lines that begin with @code{#}.  Whitespace in a @acronym{PSF} is not significant.
+Objects are terminated by the next object keyword.  Unrecognized @dfn{attributes} are allowed but
+unrecognized @dfn{objects} are not allowed.
+
+The @code{tag} attribute in all objects should not contain the following
+four characters ' ', ':','.', ',' (space, colon, comma, period).
+
+@menu
+* Name-Version-Release::  Version Information
+* The Distribution Object:: The Distribution Object 
+* The Vendor Object:: The Vendor Object 
+* The vendor_tag Attribute:: The vendor_tag Attribute
+* File Ownerships:: Package File Ownerships
+@end menu
+
+@node Name-Version-Release
+@subsection Name-Version-Release
+
+Most @acronym{GNU} packages do not have a @var{Release} part, but how this is modeled in a @acronym{PSF} is described here anyway.
+The @var{Release} part is analogous to the @code{RPMTAG_RELEASE} and @var{debian_revision} attributes, hence @acronym{GNU} software
+releases do no have this part because @acronym{GNU} packages are the original 'upstream' releases relative to the packages of 
+GNU/Linux distributions.
+
+The @var{Name} becomes the @var{product}.@var{tag} attribute.
+The @var{Revision} becomes the @var{product}.@var{revision} attribute.
+The @var{Release} becomes the @var{product}.@var{vendor_tag} attribute.
+
+@node The Distribution Object
+@subsection The Distribution Object
+In most @acronym{PSF}s this object can be left empty.  An empty object
+consists of just the object keyword followed by a newline.
+Any control or package meta-data files that apply to the distribution
+can tbe included in this object. 
+
+For example:
+@example
+distribution
+  dfiles dfiles
+  AUTHORS <AUTHORS
+  COPYING <COPYING
+@end example
+sets the @var{dfiles} attribute to its default value of "dfiles".
+The @file{AUTHORS}, and @file{COPYING} will be included as individual files in
+the package directory @file{somepackage-0.1/catalog/dfiles}.
+
+@node The Vendor Object
+@subsection The Vendor Object
+Providing a @code{vendor} object is optional.
+
+
+@example
+vendor
+   the_term_vendor_is_misleading  true   #  True or False  
+   tag         @var{tag}                 #  Short name, Globally unique if possible
+   title       @var{title}               #  Longer name
+   description @var{description}         #  A Detailed Description
+@end example
+
+The @code{tag} and @code{vendor_tag} attributes should not contain a ' ', ':','.', ',' (space, colon, comma, period).
+
+@node The vendor_tag Attribute
+@subsection The vendor_tag Attribute
+
+The @var{product}.@code{vendor_tag} attribute is version identifier attribute and is used to
+distinguish packages that have the same @var{product}.@var{tag} and @var{product}.@var{revision} attributes.
+It points to a @var{vendor} object with a matching @var{vendor}.@var{tag} attribute.
+
+@node File Ownerships
+@subsection Package File Ownerships
+File permissions can be set independent of the permissions of the source files.
+The default policy for @command{swign} is to use the current owner and group.
+For reasons explained later, setting the ownerships to 0/0 for the owner and
+group is helpful.  This is done with the following line in the @acronym{PSF}.
+
+@example
+file_permissions -o 0  -g 0
+@end example
+
+The resulting ownerships are equivalent to the GNU @command{tar} options
+@code{--numeric --owner=root --group=root}.
+
+
+@node PSFs for Source Packages 
+@section @acronym{PSF}s for Source Packages
+Here is an example @acronym{PSF} for the @file{somepackage} package, version 1.0.
+@example
+@group
+distribution
+product
+title The somepackage package
+description Source package for somepackage 
+tag somepackage
+revision 1.0
+control_directory ""
+fileset
+tag somepackage-sources
+control_directory ""
+file_permissions -o 0  -g 0
+directory .
+file *
+exclude catalog
+@end group
+@end example
+
+@command{swign} version 0.483 and later has a attribute replacement feature
+for the @var{product}.@var{tag} and @var{revision} attributes.   They are
+determined from the current directory which must have the form @var{tag}-@var{revision}.
+The replacement strings are @code{%__tag} and @code{%__revision}.  Hence here is a
+file, call it @file{PSF.in}, which will work for any future revision.
+
+@example
+@group
+# PSF.in  -- 'swign' Input file
+distribution
+product
+title The somepackage package
+description Source package for somepackage 
+tag %__tag
+revision %__revision
+control_directory ""
+fileset
+tag somepackage-sources
+control_directory ""
+file_permissions -o 0  -g 0
+directory .
+file *
+exclude catalog
+@end group
+@end example
+
+Here's how to use @file{PSF.in}
+@example
+cd somepackage-1.0
+swign -s PSF.in -u "Your GPG Name" @@- | tar tvf -
+	# -or -
+cat PSF.in | swign -s - -u "Your GPG Name" @@- | tar tvf -
+@end example
+
+@node Verifying the Distribution
+@chapter Verifying the Distribution
+
+The swbis signature verification program, @command{swverify}, will verify a package in
+two forms 1) as a tar archive file, and 2) as a unpacked archive.  The distribution can also
+be verified manually using the existing GNU tools @command{tar}, @command{gpg}, @command{md5sum} and
+@command{sha1sum} and a @acronym{Ext2} compatible file system.
+Verifying a distribution requires comparing the archive digests (md5 and sha1)
+with the digests present in the authenticated GPG signed data stream.
+
+@menu
+* Verifying the Tar Archive File::
+* Verifying the Unpacked Archive::
+* Verifying Using Existing GNU Tools::
+@end menu
+
+@node Verifying the Tar Archive File
+@section Verifying the Tar Archive File
+
+The @command{swverify} verifies the package in memory without installing the package in file system.  
+If a package is signed, it will have the following files:
+@example
+<@var{path}>/catalog/
+<@var{path}>/catalog/INDEX
+...
+<@var{path}>/catalog/<@var{dfiles}>/md5sum
+<@var{path}>/catalog/<@var{dfiles}>/sha1sum
+<@var{path}>/catalog/<@var{dfiles}>/sig_header
+<@var{path}>/catalog/<@var{dfiles}>/signature
+...
+@end example
+
+For example:
+
+@example
+swverify -d  @@- <somepackage-1.0.tar.gz
+    # - or -
+swverify <somepackage-1.0.tar.gz
+@end example
+
+@node Verifying the Unpacked Archive 
+@section Verifying the Unpacked Archive
+
+The ability to verify the unpacked form is subject to several limitations, chief among them
+is the package must unpack into a single directory, verification then takes place on that directory.
+
+
+For example
+@example
+tar zxpf somepackage-1.0.tar.gz
+swverify -d  @@:somepackage-1.0
+@end example
+
+Verifying in this way requires that @command{tar} be able to re-create the exact byte stream that existed
+in the original distribution.
+
+There are many constraints on the ability to verify the unpacked archive.  These restrictions do not apply
+when verifying the archive file itself.
+Here they are:
+@itemize
+@item
+The file system must order directory entries like the Ext2 file system.  (Ext3 file systems have
+this compatibility if dir_indexes are turned off. e.g. tune2fs -O ^dir_index /dev/device).
+@item
+The package must unpack into a single directory.
+@item
+The version of GNU @command{tar} must be compatible with the @command{swpackage} version used to make the package.
+@item
+The file owners in the package are present on the system with the same ids.
+@item
+Whether the package has file names longer than 99 bytes.  (There have been intermittent deviations
+with GNU tar for certain long file names.)
+@item
+The package contains @file{checkdigest} script @file{<@var{path}>/catalog/dfiles/checkdigest}
+@item
+The package contains distribution file list @file{<@var{path}>/catalog/dfiles/files} (if the
+checkdigest script requires it, which it should).
+@end itemize
+
+@menu
+* The checkdigest script::
+@end menu
+
+@node The checkdigest script
+@subsection The @file{checkdigest} script
+
+The @code{checkdigest} script is an implementation extension verification hook.  @command{swverify} will execute it
+after verifying the @acronym{GPG} signature and @command{swverify} exits with its exit status.  It is intended
+to be a shell script that verifies the unpacked archive using existing GNU tools using the techniques described in
+the next section "Verifying Using Existing GNU Tools".
+
+The file @file{checkdigest.sh} from the swbis distribution will work for any package.
+
+To include a @code{checkdigest} script in the package, 
+add the following line to the @code{distribution} object in the @acronym{PSF}.
+@example
+	checkdigest </usr/local/opt/src/checkdigest.sh  # For Example
+@end example
+
+@node Verifying Using Existing GNU Tools
+@section Verifying Using Existing GNU Tools
+
+Verifying manually is subject to the same constraints as verifying the unpacked archive, except for
+the existence of the @file{checkdigest} script and file list file @file{catalog/dfiles/files}.
+The steps below that check the payload message digests are typically the checks the @file{checkdigest} script would perform.
+
+The first step is to unpack.
+
+@example
+rm -fr somepackage-1.0
+tar zxpf somepackage-1.0.tar.gz
+@end example
+
+The next step is try to re-create the signed byte stream and verify with @command{gpg}
+like this:
+
+@example
+tar cf - --format=ustar -b1 --numeric --owner=root --group=root \
+--exclude=catalog/dfiles/signature \
+somepackage-1.0/catalog  |
+gpg --verify somepackage-1.0/catalog/dfiles/signature -
+@end example
+
+Experimenting with the @code{--format}, @code{--numeric}, @code{--owner}, and @code{--group} options may be required
+to get a authentic byte stream.  These options depend on how the distribution was created, specifically, the
+@command{swign} @code{--format} option and the @acronym{PSF} @code{file_permissions} directive.  This is why a consistent
+file permissions policy and tar archive format are important.
+
+Next, try to re-create the payload byte streams like this:
+
+@example
+@group
+tar cf - --format=ustar -b1 --numeric --owner=root --group=root \
+--exclude=somepackage-1.0/catalog \
+--exclude=somepackage-1.0/catalog/\* somepackage-1.0 | md5sum
+@end group
+@end example
+
+Then compare this md5 to the contents of @file{somepackage-1.0/catalog/dfiles/md5sum}.  Do the same thing
+for the sha1 digest.  If the package contains a symbolic link then you will not be able to re-create these digests
+because the modification time cannot be preserved for this file type.  This may be a good reason source packages not
+contain symbolic links.
+
+@node Adding New Signatures
+@chapter Adding New Signatures
+
+If a package has a signature, the signature can be replaced or a new signature can be added keeping
+the old one.  
+
+Currently, swbis does not have a utility to make this easy, however, one is planned.  The
+@command{swinstall} and @command{swverify} command currently support multiple signatures.
+
+To replace the signature, all that is required is to replace the data part of the 
+@file{<@var{path}>/catalog/dfiles/signature} file or add a new archive member, using the same
+tar header, placing it before or after the existing signature member.
+
+The signature itself must be formatted in a particular way and have a length in bytes that matches
+its tar header, this is currently 1024 bytes.  Every signature must have the same tar header
+(i.e. same name) and this tar header is stored in the @file{<@var{path}>/catalog/dfiles/sig_header} file.
+
+Hence, to make a new signature member, take the data part of @file{<@var{path}>/catalog/dfiles/sig_header}
+(512 bytes) and append the 1024 bytes of the properly formatted signature, replace or add these 1536 bytes
+in the archive (this currently must be done by manually splitting the file into pieces, then concatenating it
+back together or by using a binary editor).
+
+Fortunately, swbis does have a utility to reproduce the signed data.  @command{gpg} and @command{dd} will
+be used to make a signature and format it like this:
+
+@example
+# First, grab the sig_header
+tar zxpf somepackage-1.0.tar.gz -O \*/catalog/dfiles/sig_header | 
+dd bs=512 count=1 of=/tmp/newsig
+
+# Now, make the new signature
+# Note:  'swverify -WC' writes the signed data to stdout
+swverify -WC <somepackage-1.0.tar.gz |
+gpg --armor -sb -o - | dd bs=1024 conv=sync count=1 >>/tmp/newsig
+@end example
+
+For example, a package with two (2) signatures looks like this:
+
+@example
+somepackage-1.0/catalog/
+somepackage-1.0/catalog/INDEX
+...
+somepackage-1.0/catalog/dfiles/sig_header
+somepackage-1.0/catalog/dfiles/signature
+somepackage-1.0/catalog/dfiles/signature
+...
+@end example
+
+Since all but the last signature is lost when unpacked, the last signature should be
+the considered the primary one.
+
+@node Guidelines for GNU Source Packages
+@chapter Guidelines for GNU Source Packages
+
+Here are itemized guidelines for GNU packages:
+@itemize
+@item
+Use GNU tar version 1.15.x, GNU swbis version 0.483 or later versions.
+@item
+Use the default @command{swign} format option @option{--format=ustar}.  This corresponds
+to tar option @option{--format=ustar}.
+@item
+Do not include symbolic or hard links in the distribution, make them when configuring if needed.
+@item
+Try not to make file names longer than 99 bytes because this will make verification of the unpacked
+directory form a little problematic until some bugs in swbis and tar are fully converged.
+@item
+Set the file ownerships in the package to numeric root/root.  Using the 
+@code{file_permissions -o 0  -g 0} directive in the @acronym{PSF} is the easiest
+way to do this.
+@item
+Do include a @file{checkdigest} script.  The file @file{./bin/checkdigest.sh} from the
+swbis distribution should work for any package.
+@end itemize
+
+Here is an example @acronym{PSF}. 
+@example
+@group
+# PSF.in  -- Example 'swign' Input file for GNU packages.
+# Occurrences of %__tag and %__revision will be replaced
+# by values determined from the name of the current directory
+# that has the form:  tag-revision
+distribution
+  # dfiles dfiles            # dfiles is the default
+  AUTHORS <./AUTHORS         # optional
+  COPYING <./COPYING         # optional
+  checkdigest <./var/checkdigest.sh  # or wherever it is on your system
+  tag %__tag-%__revision   # Optional, this will set '--dir' option of
+                             # of swpackage.
+vendor
+   the_term_vendor_is_misleading True
+   tag GNU
+   title GNU's Not Unix 
+description "The GNU Project was launched in 1984 to develop a complete UNIX-like
+operating system which is free software: free as in freedom, not price.
+See http://www.gnu.org."
+
+product
+  title GNU %__tag
+  vendor_tag GNU
+  description Source package for %__tag  # More can be added
+  tag %__tag                 # This is the package name
+  revision %__revision       # This is the package version
+  control_directory ""
+  fileset
+     tag source
+     control_directory ""
+     file_permissions -o 0  -g 0
+     directory .
+     file *
+     # exclude RCS   # Not supported yet by swign
+     # exclude CVS   # Not supported yet by swign
+     exclude catalog  # required
+@end group
+@end example
+
+Here is how to use the @acronym{PSF} to create a package with
+an embedded GPG signature. 
+
+@example
+cd somepackage-1.0
+swign -s PSF.in  -u "Your GPG name" @@- | gzip -9 >../somepackage-1.0.tar.gz
+# Then do a couple quick tests
+swverify -d @@- <../somepackage-1.0.tar.gz
+
+# If a checkdigest script was included and the file system is Ext2
+# compatible then the following should work, try it
+swverify -d @@.
+
+# For some newer file system you must use the --order-catalog option
+swverify --order-catalog -d @@.
+
+@end example
+
+To make a nearly identical package using @command{swpackage} 
+@example
+# First, the replacement macros must be processed by swign
+swign -s PSF.in --show-psf |
+swpackage -s - --gpg-name="Your GPG name" \
+--dir-owner=0 --dir-group=0 --files --sign @@- |
+gzip -9 >../somepackage-1.0.tar.gz
+@end example
+
+There are differences between @command{swign} and @command{swpackage}.  @command{swign}
+uses @command{swpackage} but uses @command{tar} to write the final archive hence it is
+more fail safe against bugs.  @command{swign} modifies the @file{./catalog/} making @file{.}
+immediately verifiable with @command{swverify} and is simpler to use.
+
+That's it.
+You now have a tar archive with one or more embedded signatures, that is created
+using @command{tar}, is verifiable with existing tools, compatible with
+current practice, and conforms to the POSIX packaging standard.
+
+@node Using Automake and Swbis
+@chapter Using Automake and Swbis
+
+This section describes an Automake target to include in the top level Makefile.am file.
+To use it, you must get your package working with Automake and able to create a distribution
+using one of the standard distribution targets such as @code{dist-gzip} that is 
+already part of Automake.
+
+This example target is called @command{dist-swbis}.
+The target is designed to be symmetric with the other standard Automake targets such as @code{dist-gzip}.
+It uses the @command{swign} program.
+The @file{PSF.in} file must use the @code{%__tag} and @code{%__revision} macros described above.
+The passphrase input options and identity is controlled by environment variables:
+SWPACKAGEPASSFD, GNUPGNAME, GNUPGHOME.
+
+@verbatim
+dist-swbis: distdir
+        (cd $(distdir) && swign -s PSF.in --name-version=$(distdir) @-) | GZIP=$(GZIP_ENV) gzip -c >$(distdir).tar.gz
+        $(sw_am__remove_distdir)
+# Provide am__remove_distdir ourselves since am__remove_distdir may be a
+# private automake variable.
+sw_am__remove_distdir = \
+  { test ! -d $(distdir) \
+      || { find $(distdir) -type d ! -perm -200 -exec chmod u+w {} ';' \
+               && rm -fr $(distdir); }; }
+@end verbatim
+
+Here is an example invocation using the environment variable controls:
+
+@example
+export SWPACKAGEPASSFD=agent; export GNUPGNAME="Your Name"; make dist-swbis
+@end example
+
+To input your passphrase from the tty, unset SWPACKAGEPASSFD or set it to "tty".
+
+The result should be a file named @file{@var{distdir}.tar.gz} that has the same layout 
+as the package produced by @code{dist-gzip} excpept this package will carry around your GPG signature
+in the additional ./catalog meta-data directory.
+
+The file should then be verified:
+@example
+swverify -d @@- <@var{distdir}.tar.gz
+@end example
+
+That's it.
+@node Using CVS and Swbis
+@chapter Using CVS and Swbis
+This section describes how to use swbis to place GPG signatures into a 
+source code management repository such as @acronym{CVS}.  The application 
+of swbis simply involves adding the @file{./catalog/} directory and its contents
+to the repository and is not specific to any particular SCM.  The files in the
+@file{./catalog/} directory are either directories or ascii text regular files.
+
+The first step is to perfectly sync-up with the repository.  Empty directories should 
+be removed and created on the fly by the Makefiles.  Stray junk files in the working directory
+and repository need to be deleted from both.
+Failure to do this will result in failed verification although the partial success can still be useful.
+(Also the RCS style file Id's used by CVS may interfere the verification of the file digests.)
+
+Step two is to initialize, add, and commit the @file{./catalog/} directory in the top level module.
+Just make the regular files empty for now.  The order does not matter. The files are:
+
+@example
+catalog/
+catalog/INDEX
+catalog/dfiles/
+catalog/dfiles/INFO
+catalog/dfiles/checkdigest
+catalog/dfiles/md5sum
+catalog/dfiles/sha1sum
+catalog/dfiles/adjunct_md5sum
+catalog/dfiles/files
+catalog/dfiles/sig_header
+catalog/dfiles/signature
+catalog/pfiles/
+catalog/pfiles/INFO
+catalog/INFO
+@end example
+
+Next, checkout the @file{./catalog/} directory.  Treat it just like any other directory except you
+will be using the @command{swign} command to generate its contents.  Then at any point of your
+choosing sign your working directory by running @command{swign} and then commit all of your changes
+to the repository including the @file{./catalog/} directory.
+
+Here's how to sign:
+@example
+make distclean;
+SWPACKAGEPASSFD=agent; GNUPGNAME="Your Name"  swign --name-version=@var{module_name-1.2.3} -s PSF.in --no-remove @@.
+@end example
+
+This @command{swign} invocation will only alter files in @file{./catalog/}.
+
+Note that the @code{--no-remove} option is required as this prevents the @acronym{SCM} control files from being deleted.
+Also, the @code{--name-version} option is required.
+
+The  @file{PSF.in} file has several specializatons.
+The @code{%__tag} and @code{%__revision} macros must be used and the @code{exclude} directive must exclude the @acronym{SCM}'s working
+directory control files.  The @file{PSF.in} file must also specify a @code{checkdigest} script as this is required to verify the
+directory form of a package.  The @file{checkdigest.sh} file from swbis version 0.496 is a working example of this script.
+
+Next, you should tag this point so it can retrieved in the future.  Now, export (to exclude the @acronym{SCM}'s control files)
+the module to a new directory and run @command{swverify} with the  @code{--scm} option (The swverify version must be
+at least 0.496).
+
+@example
+cvs export -r your_tag_name @var{module_name}
+cd @var{module_name}
+swverify -d --scm @@.
+@end example
+
+That's it.
+@bye

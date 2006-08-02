@@ -1,0 +1,85 @@
+<html lang="en">
+<head>
+<title>Verifying Using Existing GNU Tools - Creating and Verifying Tar Archives with Embedded GPG Signatures</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Creating and Verifying Tar Archives with Embedded GPG Signatures">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Verifying-the-Distribution.html#Verifying-the-Distribution" title="Verifying the Distribution">
+<link rel="prev" href="Verifying-the-Unpacked-Archive.html#Verifying-the-Unpacked-Archive" title="Verifying the Unpacked Archive">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<!--
+This manual is for the use of GNU Swbis (version 0.496)
+in the creation and verification of software releases containing embedded GPG signatures.
+
+Copyright (C) 2006 Jim Lowe
+
+     Permission is granted to copy, distribute and/or modify this
+     document under the terms of the GNU Free Documentation License,
+     Version 1.2 or any later version published by the Free Software
+     Foundation; with no Invariant Sections, with the Front-Cover texts
+     being ``A GNU Manual,'' and with the Back-Cover Texts as in (a)
+     below.  A copy of the license is included in the section entitled
+     ``GNU Free Documentation License.''
+
+     (a) The FSF's Back-Cover Text is: ``You have freedom to copy and
+     modify this GNU Manual, like GNU software.  Copies published by
+     the Free Software Foundation raise funds for GNU development.''
+   -->
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Verifying-Using-Existing-GNU-Tools"></a>Previous:&nbsp;<a rel="previous" accesskey="p" href="Verifying-the-Unpacked-Archive.html#Verifying-the-Unpacked-Archive">Verifying the Unpacked Archive</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Verifying-the-Distribution.html#Verifying-the-Distribution">Verifying the Distribution</a>
+<hr><br>
+</div>
+
+<h3 class="section">4.3 Verifying Using Existing GNU Tools</h3>
+
+<p>Verifying manually is subject to the same constraints as verifying the unpacked archive, except for
+the existence of the <span class="file">checkdigest</span> script and file list file <span class="file">catalog/dfiles/files</span>. 
+The steps below that check the payload message digests are typically the checks the <span class="file">checkdigest</span> script would perform.
+
+   <p>The first step is to unpack.
+
+<pre class="example">     rm -fr somepackage-1.0
+     tar zxpf somepackage-1.0.tar.gz
+</pre>
+   <p>The next step is try to re-create the signed byte stream and verify with <span class="command">gpg</span>
+like this:
+
+<pre class="example">     tar cf - --format=ustar -b1 --numeric --owner=root --group=root \
+     --exclude=catalog/dfiles/signature \
+     somepackage-1.0/catalog  |
+     gpg --verify somepackage-1.0/catalog/dfiles/signature -
+</pre>
+   <p>Experimenting with the <code>--format</code>, <code>--numeric</code>, <code>--owner</code>, and <code>--group</code> options may be required
+to get a authentic byte stream.  These options depend on how the distribution was created, specifically, the
+<span class="command">swign</span> <code>--format</code> option and the <acronym>PSF</acronym> <code>file_permissions</code> directive.  This is why a consistent
+file permissions policy and tar archive format are important.
+
+   <p>Next, try to re-create the payload byte streams like this:
+
+<pre class="example">     tar cf - --format=ustar -b1 --numeric --owner=root --group=root \
+     --exclude=somepackage-1.0/catalog \
+     --exclude=somepackage-1.0/catalog/\* somepackage-1.0 | md5sum
+</pre>
+   <p>Then compare this md5 to the contents of <span class="file">somepackage-1.0/catalog/dfiles/md5sum</span>.  Do the same thing
+for the sha1 digest.  If the package contains a symbolic link then you will not be able to re-create these digests
+because the modification time cannot be preserved for this file type.  This may be a good reason source packages not
+contain symbolic links.
+
+   </body></html>
+

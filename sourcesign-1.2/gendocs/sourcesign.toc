@@ -1,0 +1,19 @@
+\numchapentry{Prerequisites}{1}{Prerequisites}{1}
+\numchapentry{Introduction}{2}{Introduction}{2}
+\numchapentry{Making Distribution Tar Files}{3}{Making Distribution Tar Files}{3}
+\numsecentry{\acronym {PSF} Basics}{3.1}{PSF Basics}{3}
+\numsubsecentry{Name-Version-Release}{3.1.1}{Name-Version-Release}{4}
+\numsubsecentry{The Distribution Object}{3.1.2}{The Distribution Object}{4}
+\numsubsecentry{The Vendor Object}{3.1.3}{The Vendor Object}{4}
+\numsubsecentry{The vendor_tag Attribute}{3.1.4}{The vendor_tag Attribute}{4}
+\numsubsecentry{Package File Ownerships}{3.1.5}{File Ownerships}{5}
+\numsecentry{\acronym {PSF}s for Source Packages}{3.2}{PSFs for Source Packages}{5}
+\numchapentry{Verifying the Distribution}{4}{Verifying the Distribution}{7}
+\numsecentry{Verifying the Tar Archive File}{4.1}{Verifying the Tar Archive File}{7}
+\numsecentry{Verifying the Unpacked Archive}{4.2}{Verifying the Unpacked Archive}{7}
+\numsubsecentry{The \file {checkdigest} script}{4.2.1}{The checkdigest script}{8}
+\numsecentry{Verifying Using Existing GNU Tools}{4.3}{Verifying Using Existing GNU Tools}{8}
+\numchapentry{Adding New Signatures}{5}{Adding New Signatures}{9}
+\numchapentry{Guidelines for GNU Source Packages}{6}{Guidelines for GNU Source Packages}{10}
+\numchapentry{Using Automake and Swbis}{7}{Using Automake and Swbis}{13}
+\numchapentry{Using CVS and Swbis}{8}{Using CVS and Swbis}{14}

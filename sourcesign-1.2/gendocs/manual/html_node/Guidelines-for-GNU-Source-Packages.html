@@ -1,0 +1,138 @@
+<html lang="en">
+<head>
+<title>Guidelines for GNU Source Packages - Creating and Verifying Tar Archives with Embedded GPG Signatures</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Creating and Verifying Tar Archives with Embedded GPG Signatures">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="prev" href="Adding-New-Signatures.html#Adding-New-Signatures" title="Adding New Signatures">
+<link rel="next" href="Using-Automake-and-Swbis.html#Using-Automake-and-Swbis" title="Using Automake and Swbis">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<!--
+This manual is for the use of GNU Swbis (version 0.496)
+in the creation and verification of software releases containing embedded GPG signatures.
+
+Copyright (C) 2006 Jim Lowe
+
+     Permission is granted to copy, distribute and/or modify this
+     document under the terms of the GNU Free Documentation License,
+     Version 1.2 or any later version published by the Free Software
+     Foundation; with no Invariant Sections, with the Front-Cover texts
+     being ``A GNU Manual,'' and with the Back-Cover Texts as in (a)
+     below.  A copy of the license is included in the section entitled
+     ``GNU Free Documentation License.''
+
+     (a) The FSF's Back-Cover Text is: ``You have freedom to copy and
+     modify this GNU Manual, like GNU software.  Copies published by
+     the Free Software Foundation raise funds for GNU development.''
+   -->
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Guidelines-for-GNU-Source-Packages"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Using-Automake-and-Swbis.html#Using-Automake-and-Swbis">Using Automake and Swbis</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Adding-New-Signatures.html#Adding-New-Signatures">Adding New Signatures</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
+<hr><br>
+</div>
+
+<h2 class="chapter">6 Guidelines for GNU Source Packages</h2>
+
+<p>Here are itemized guidelines for GNU packages:
+     <ul>
+<li>Use GNU tar version 1.15.x, GNU swbis version 0.483 or later versions. 
+<li>Use the default <span class="command">swign</span> format option <span class="option">--format=ustar</span>.  This corresponds
+to tar option <span class="option">--format=ustar</span>. 
+<li>Do not include symbolic or hard links in the distribution, make them when configuring if needed. 
+<li>Try not to make file names longer than 99 bytes because this will make verification of the unpacked
+directory form a little problematic until some bugs in swbis and tar are fully converged. 
+<li>Set the file ownerships in the package to numeric root/root.  Using the
+<code>file_permissions -o 0  -g 0</code> directive in the <acronym>PSF</acronym> is the easiest
+way to do this. 
+<li>Do include a <span class="file">checkdigest</span> script.  The file <span class="file">./bin/checkdigest.sh</span> from the
+swbis distribution should work for any package. 
+</ul>
+
+   <p>Here is an example <acronym>PSF</acronym>.
+<pre class="example">     # PSF.in  -- Example 'swign' Input file for GNU packages.
+     # Occurrences of %__tag and %__revision will be replaced
+     # by values determined from the name of the current directory
+     # that has the form:  tag-revision
+     distribution
+       # dfiles dfiles            # dfiles is the default
+       AUTHORS &lt;./AUTHORS         # optional
+       COPYING &lt;./COPYING         # optional
+       checkdigest &lt;./var/checkdigest.sh  # or wherever it is on your system
+       tag %__tag-%__revision   # Optional, this will set '--dir' option of
+                                  # of swpackage.
+     vendor
+        the_term_vendor_is_misleading True
+        tag GNU
+        title GNU's Not Unix
+     description "The GNU Project was launched in 1984 to develop a complete UNIX-like
+     operating system which is free software: free as in freedom, not price.
+     See http://www.gnu.org."
+     
+     product
+       title GNU %__tag
+       vendor_tag GNU
+       description Source package for %__tag  # More can be added
+       tag %__tag                 # This is the package name
+       revision %__revision       # This is the package version
+       control_directory ""
+       fileset
+          tag source
+          control_directory ""
+          file_permissions -o 0  -g 0
+          directory .
+          file *
+          # exclude RCS   # Not supported yet by swign
+          # exclude CVS   # Not supported yet by swign
+          exclude catalog  # required
+</pre>
+   <p>Here is how to use the <acronym>PSF</acronym> to create a package with
+an embedded GPG signature.
+
+<pre class="example">     cd somepackage-1.0
+     swign -s PSF.in  -u "Your GPG name" @- | gzip -9 &gt;../somepackage-1.0.tar.gz
+     # Then do a couple quick tests
+     swverify -d @- &lt;../somepackage-1.0.tar.gz
+     
+     # If a checkdigest script was included and the file system is Ext2
+     # compatible then the following should work, try it
+     swverify -d @.
+     
+     # For some newer file system you must use the --order-catalog option
+     swverify --order-catalog -d @.
+     
+</pre>
+   <p>To make a nearly identical package using <span class="command">swpackage</span>
+<pre class="example">     # First, the replacement macros must be processed by swign
+     swign -s PSF.in --show-psf |
+     swpackage -s - --gpg-name="Your GPG name" \
+     --dir-owner=0 --dir-group=0 --files --sign @- |
+     gzip -9 &gt;../somepackage-1.0.tar.gz
+</pre>
+   <p>There are differences between <span class="command">swign</span> and <span class="command">swpackage</span>.  <span class="command">swign</span>
+uses <span class="command">swpackage</span> but uses <span class="command">tar</span> to write the final archive hence it is
+more fail safe against bugs.  <span class="command">swign</span> modifies the <span class="file">./catalog/</span> making <span class="file">.</span>
+immediately verifiable with <span class="command">swverify</span> and is simpler to use.
+
+   <p>That's it. 
+You now have a tar archive with one or more embedded signatures, that is created
+using <span class="command">tar</span>, is verifiable with existing tools, compatible with
+current practice, and conforms to the POSIX packaging standard.
+
+   </body></html>
+

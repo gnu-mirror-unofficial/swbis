@@ -1,0 +1,69 @@
+<html lang="en">
+<head>
+<title>The Distribution Object - Creating and Verifying Tar Archives with Embedded GPG Signatures</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Creating and Verifying Tar Archives with Embedded GPG Signatures">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="PSF-Basics.html#PSF-Basics" title="PSF Basics">
+<link rel="prev" href="Name_002dVersion_002dRelease.html#Name_002dVersion_002dRelease" title="Name-Version-Release">
+<link rel="next" href="The-Vendor-Object.html#The-Vendor-Object" title="The Vendor Object">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<!--
+This manual is for the use of GNU Swbis (version 0.496)
+in the creation and verification of software releases containing embedded GPG signatures.
+
+Copyright (C) 2006 Jim Lowe
+
+     Permission is granted to copy, distribute and/or modify this
+     document under the terms of the GNU Free Documentation License,
+     Version 1.2 or any later version published by the Free Software
+     Foundation; with no Invariant Sections, with the Front-Cover texts
+     being ``A GNU Manual,'' and with the Back-Cover Texts as in (a)
+     below.  A copy of the license is included in the section entitled
+     ``GNU Free Documentation License.''
+
+     (a) The FSF's Back-Cover Text is: ``You have freedom to copy and
+     modify this GNU Manual, like GNU software.  Copies published by
+     the Free Software Foundation raise funds for GNU development.''
+   -->
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="The-Distribution-Object"></a>Next:&nbsp;<a rel="next" accesskey="n" href="The-Vendor-Object.html#The-Vendor-Object">The Vendor Object</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Name_002dVersion_002dRelease.html#Name_002dVersion_002dRelease">Name-Version-Release</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="PSF-Basics.html#PSF-Basics">PSF Basics</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">3.1.2 The Distribution Object</h4>
+
+<p>In most <acronym>PSF</acronym>s this object can be left empty.  An empty object
+consists of just the object keyword followed by a newline. 
+Any control or package meta-data files that apply to the distribution
+can tbe included in this object.
+
+   <p>For example:
+<pre class="example">     distribution
+       dfiles dfiles
+       AUTHORS &lt;AUTHORS
+       COPYING &lt;COPYING
+</pre>
+   <p>sets the <var>dfiles</var> attribute to its default value of "dfiles". 
+The <span class="file">AUTHORS</span>, and <span class="file">COPYING</span> will be included as individual files in
+the package directory <span class="file">somepackage-0.1/catalog/dfiles</span>.
+
+   </body></html>
+

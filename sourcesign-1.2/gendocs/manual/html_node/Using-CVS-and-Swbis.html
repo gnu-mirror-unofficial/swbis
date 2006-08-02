@@ -1,0 +1,110 @@
+<html lang="en">
+<head>
+<title>Using CVS and Swbis - Creating and Verifying Tar Archives with Embedded GPG Signatures</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Creating and Verifying Tar Archives with Embedded GPG Signatures">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="prev" href="Using-Automake-and-Swbis.html#Using-Automake-and-Swbis" title="Using Automake and Swbis">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<!--
+This manual is for the use of GNU Swbis (version 0.496)
+in the creation and verification of software releases containing embedded GPG signatures.
+
+Copyright (C) 2006 Jim Lowe
+
+     Permission is granted to copy, distribute and/or modify this
+     document under the terms of the GNU Free Documentation License,
+     Version 1.2 or any later version published by the Free Software
+     Foundation; with no Invariant Sections, with the Front-Cover texts
+     being ``A GNU Manual,'' and with the Back-Cover Texts as in (a)
+     below.  A copy of the license is included in the section entitled
+     ``GNU Free Documentation License.''
+
+     (a) The FSF's Back-Cover Text is: ``You have freedom to copy and
+     modify this GNU Manual, like GNU software.  Copies published by
+     the Free Software Foundation raise funds for GNU development.''
+   -->
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Using-CVS-and-Swbis"></a>Previous:&nbsp;<a rel="previous" accesskey="p" href="Using-Automake-and-Swbis.html#Using-Automake-and-Swbis">Using Automake and Swbis</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
+<hr><br>
+</div>
+
+<h2 class="chapter">8 Using CVS and Swbis</h2>
+
+<p>This section describes how to use swbis to place GPG signatures into a
+source code management repository such as <acronym>CVS</acronym>.  The application
+of swbis simply involves adding the <span class="file">./catalog/</span> directory and its contents
+to the repository and is not specific to any particular SCM.  The files in the
+<span class="file">./catalog/</span> directory are either directories or ascii text regular files.
+
+   <p>The first step is to perfectly sync-up with the repository.  Empty directories should
+be removed and created on the fly by the Makefiles.  Stray junk files in the working directory
+and repository need to be deleted from both. 
+Failure to do this will result in failed verification although the partial success can still be useful. 
+(Also the RCS style file Id's used by CVS may interfere the verification of the file digests.)
+
+   <p>Step two is to initialize, add, and commit the <span class="file">./catalog/</span> directory in the top level module. 
+Just make the regular files empty for now.  The order does not matter. The files are:
+
+<pre class="example">     catalog/
+     catalog/INDEX
+     catalog/dfiles/
+     catalog/dfiles/INFO
+     catalog/dfiles/checkdigest
+     catalog/dfiles/md5sum
+     catalog/dfiles/sha1sum
+     catalog/dfiles/adjunct_md5sum
+     catalog/dfiles/files
+     catalog/dfiles/sig_header
+     catalog/dfiles/signature
+     catalog/pfiles/
+     catalog/pfiles/INFO
+     catalog/INFO
+</pre>
+   <p>Next, checkout the <span class="file">./catalog/</span> directory.  Treat it just like any other directory except you
+will be using the <span class="command">swign</span> command to generate its contents.  Then at any point of your
+choosing sign your working directory by running <span class="command">swign</span> and then commit all of your changes
+to the repository including the <span class="file">./catalog/</span> directory.
+
+   <p>Here's how to sign:
+<pre class="example">     make distclean;
+     SWPACKAGEPASSFD=agent; GNUPGNAME="Your Name"  swign --name-version=<var>module_name-1.2.3</var> -s PSF.in --no-remove @.
+</pre>
+   <p>This <span class="command">swign</span> invocation will only alter files in <span class="file">./catalog/</span>.
+
+   <p>Note that the <code>--no-remove</code> option is required as this prevents the <acronym>SCM</acronym> control files from being deleted. 
+Also, the <code>--name-version</code> option is required.
+
+   <p>The  <span class="file">PSF.in</span> file has several specializatons. 
+The <code>%__tag</code> and <code>%__revision</code> macros must be used and the <code>exclude</code> directive must exclude the <acronym>SCM</acronym>'s working
+directory control files.  The <span class="file">PSF.in</span> file must also specify a <code>checkdigest</code> script as this is required to verify the
+directory form of a package.  The <span class="file">checkdigest.sh</span> file from swbis version 0.496 is a working example of this script.
+
+   <p>Next, you should tag this point so it can retrieved in the future.  Now, export (to exclude the <acronym>SCM</acronym>'s control files)
+the module to a new directory and run <span class="command">swverify</span> with the  <code>--scm</code> option (The swverify version must be
+at least 0.496).
+
+<pre class="example">     cvs export -r your_tag_name <var>module_name</var>
+     cd <var>module_name</var>
+     swverify -d --scm @.
+</pre>
+   <p>That's it.
+
+</body></html>
+

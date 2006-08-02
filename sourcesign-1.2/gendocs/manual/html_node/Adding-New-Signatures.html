@@ -1,0 +1,97 @@
+<html lang="en">
+<head>
+<title>Adding New Signatures - Creating and Verifying Tar Archives with Embedded GPG Signatures</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Creating and Verifying Tar Archives with Embedded GPG Signatures">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="prev" href="Verifying-the-Distribution.html#Verifying-the-Distribution" title="Verifying the Distribution">
+<link rel="next" href="Guidelines-for-GNU-Source-Packages.html#Guidelines-for-GNU-Source-Packages" title="Guidelines for GNU Source Packages">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<!--
+This manual is for the use of GNU Swbis (version 0.496)
+in the creation and verification of software releases containing embedded GPG signatures.
+
+Copyright (C) 2006 Jim Lowe
+
+     Permission is granted to copy, distribute and/or modify this
+     document under the terms of the GNU Free Documentation License,
+     Version 1.2 or any later version published by the Free Software
+     Foundation; with no Invariant Sections, with the Front-Cover texts
+     being ``A GNU Manual,'' and with the Back-Cover Texts as in (a)
+     below.  A copy of the license is included in the section entitled
+     ``GNU Free Documentation License.''
+
+     (a) The FSF's Back-Cover Text is: ``You have freedom to copy and
+     modify this GNU Manual, like GNU software.  Copies published by
+     the Free Software Foundation raise funds for GNU development.''
+   -->
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Adding-New-Signatures"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Guidelines-for-GNU-Source-Packages.html#Guidelines-for-GNU-Source-Packages">Guidelines for GNU Source Packages</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Verifying-the-Distribution.html#Verifying-the-Distribution">Verifying the Distribution</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
+<hr><br>
+</div>
+
+<h2 class="chapter">5 Adding New Signatures</h2>
+
+<p>If a package has a signature, the signature can be replaced or a new signature can be added keeping
+the old one.
+
+   <p>Currently, swbis does not have a utility to make this easy, however, one is planned.  The
+<span class="command">swinstall</span> and <span class="command">swverify</span> command currently support multiple signatures.
+
+   <p>To replace the signature, all that is required is to replace the data part of the
+<span class="file">&lt;</span><var>path</var><span class="file">&gt;/catalog/dfiles/signature</span> file or add a new archive member, using the same
+tar header, placing it before or after the existing signature member.
+
+   <p>The signature itself must be formatted in a particular way and have a length in bytes that matches
+its tar header, this is currently 1024 bytes.  Every signature must have the same tar header
+(i.e. same name) and this tar header is stored in the <span class="file">&lt;</span><var>path</var><span class="file">&gt;/catalog/dfiles/sig_header</span> file.
+
+   <p>Hence, to make a new signature member, take the data part of <span class="file">&lt;</span><var>path</var><span class="file">&gt;/catalog/dfiles/sig_header</span>
+(512 bytes) and append the 1024 bytes of the properly formatted signature, replace or add these 1536 bytes
+in the archive (this currently must be done by manually splitting the file into pieces, then concatenating it
+back together or by using a binary editor).
+
+   <p>Fortunately, swbis does have a utility to reproduce the signed data.  <span class="command">gpg</span> and <span class="command">dd</span> will
+be used to make a signature and format it like this:
+
+<pre class="example">     # First, grab the sig_header
+     tar zxpf somepackage-1.0.tar.gz -O \*/catalog/dfiles/sig_header |
+     dd bs=512 count=1 of=/tmp/newsig
+     
+     # Now, make the new signature
+     # Note:  'swverify -WC' writes the signed data to stdout
+     swverify -WC &lt;somepackage-1.0.tar.gz |
+     gpg --armor -sb -o - | dd bs=1024 conv=sync count=1 &gt;&gt;/tmp/newsig
+</pre>
+   <p>For example, a package with two (2) signatures looks like this:
+
+<pre class="example">     somepackage-1.0/catalog/
+     somepackage-1.0/catalog/INDEX
+     ...
+     somepackage-1.0/catalog/dfiles/sig_header
+     somepackage-1.0/catalog/dfiles/signature
+     somepackage-1.0/catalog/dfiles/signature
+     ...
+</pre>
+   <p>Since all but the last signature is lost when unpacked, the last signature should be
+the considered the primary one.
+
+   </body></html>
+

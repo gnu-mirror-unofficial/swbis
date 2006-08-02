@@ -1,0 +1,92 @@
+<html lang="en">
+<head>
+<title>Using Automake and Swbis - Creating and Verifying Tar Archives with Embedded GPG Signatures</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Creating and Verifying Tar Archives with Embedded GPG Signatures">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="prev" href="Guidelines-for-GNU-Source-Packages.html#Guidelines-for-GNU-Source-Packages" title="Guidelines for GNU Source Packages">
+<link rel="next" href="Using-CVS-and-Swbis.html#Using-CVS-and-Swbis" title="Using CVS and Swbis">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<!--
+This manual is for the use of GNU Swbis (version 0.496)
+in the creation and verification of software releases containing embedded GPG signatures.
+
+Copyright (C) 2006 Jim Lowe
+
+     Permission is granted to copy, distribute and/or modify this
+     document under the terms of the GNU Free Documentation License,
+     Version 1.2 or any later version published by the Free Software
+     Foundation; with no Invariant Sections, with the Front-Cover texts
+     being ``A GNU Manual,'' and with the Back-Cover Texts as in (a)
+     below.  A copy of the license is included in the section entitled
+     ``GNU Free Documentation License.''
+
+     (a) The FSF's Back-Cover Text is: ``You have freedom to copy and
+     modify this GNU Manual, like GNU software.  Copies published by
+     the Free Software Foundation raise funds for GNU development.''
+   -->
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Using-Automake-and-Swbis"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Using-CVS-and-Swbis.html#Using-CVS-and-Swbis">Using CVS and Swbis</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Guidelines-for-GNU-Source-Packages.html#Guidelines-for-GNU-Source-Packages">Guidelines for GNU Source Packages</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
+<hr><br>
+</div>
+
+<h2 class="chapter">7 Using Automake and Swbis</h2>
+
+<p>This section describes an Automake target to include in the top level Makefile.am file. 
+To use it, you must get your package working with Automake and able to create a distribution
+using one of the standard distribution targets such as <code>dist-gzip</code> that is
+already part of Automake.
+
+   <p>This example target is called <span class="command">dist-swbis</span>. 
+The target is designed to be symmetric with the other standard Automake targets such as <code>dist-gzip</code>. 
+It uses the <span class="command">swign</span> program. 
+The <span class="file">PSF.in</span> file must use the <code>%__tag</code> and <code>%__revision</code> macros described above. 
+The passphrase input options and identity is controlled by environment variables:
+SWPACKAGEPASSFD, GNUPGNAME, GNUPGHOME.
+
+<pre class="verbatim">
+dist-swbis: distdir
+        (cd $(distdir) &amp;&amp; swign -s PSF.in --name-version=$(distdir) @-) | GZIP=$(GZIP_ENV) gzip -c >$(distdir).tar.gz
+        $(sw_am__remove_distdir)
+# Provide am__remove_distdir ourselves since am__remove_distdir may be a
+# private automake variable.
+sw_am__remove_distdir = \
+  { test ! -d $(distdir) \
+      || { find $(distdir) -type d ! -perm -200 -exec chmod u+w {} ';' \
+               &amp;&amp; rm -fr $(distdir); }; }
+</pre>
+
+   <p>Here is an example invocation using the environment variable controls:
+
+<pre class="example">     export SWPACKAGEPASSFD=agent; export GNUPGNAME="Your Name"; make dist-swbis
+</pre>
+   <p>To input your passphrase from the tty, unset SWPACKAGEPASSFD or set it to "tty".
+
+   <p>The result should be a file named <var>distdir</var><span class="file">.tar.gz</span> that has the same layout
+as the package produced by <code>dist-gzip</code> excpept this package will carry around your GPG signature
+in the additional ./catalog meta-data directory.
+
+   <p>The file should then be verified:
+<pre class="example">     swverify -d @- &lt;<var>distdir</var>.tar.gz
+</pre>
+   <p>That's it.
+
+   </body></html>
+

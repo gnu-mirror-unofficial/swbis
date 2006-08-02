@@ -1,0 +1,81 @@
+<html lang="en">
+<head>
+<title>PSF Basics - Creating and Verifying Tar Archives with Embedded GPG Signatures</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Creating and Verifying Tar Archives with Embedded GPG Signatures">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Making-Distribution-Tar-Files.html#Making-Distribution-Tar-Files" title="Making Distribution Tar Files">
+<link rel="next" href="PSFs-for-Source-Packages.html#PSFs-for-Source-Packages" title="PSFs for Source Packages">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<!--
+This manual is for the use of GNU Swbis (version 0.496)
+in the creation and verification of software releases containing embedded GPG signatures.
+
+Copyright (C) 2006 Jim Lowe
+
+     Permission is granted to copy, distribute and/or modify this
+     document under the terms of the GNU Free Documentation License,
+     Version 1.2 or any later version published by the Free Software
+     Foundation; with no Invariant Sections, with the Front-Cover texts
+     being ``A GNU Manual,'' and with the Back-Cover Texts as in (a)
+     below.  A copy of the license is included in the section entitled
+     ``GNU Free Documentation License.''
+
+     (a) The FSF's Back-Cover Text is: ``You have freedom to copy and
+     modify this GNU Manual, like GNU software.  Copies published by
+     the Free Software Foundation raise funds for GNU development.''
+   -->
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="PSF-Basics"></a>Next:&nbsp;<a rel="next" accesskey="n" href="PSFs-for-Source-Packages.html#PSFs-for-Source-Packages">PSFs for Source Packages</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Making-Distribution-Tar-Files.html#Making-Distribution-Tar-Files">Making Distribution Tar Files</a>
+<hr><br>
+</div>
+
+<h3 class="section">3.1 <acronym>PSF</acronym> Basics</h3>
+
+<p>For information about <acronym>PSF</acronym>s in general,
+see the info manual on the Swbis home page, or, the <span class="command">sw</span> manual page. 
+This section applies to all <acronym>PSF</acronym>s.
+
+   <p>Here some basic information.  The <acronym>PSF</acronym> consists of <dfn>object keywords</dfn> and <dfn>attribute keywords</dfn>. 
+The most common <dfn>object keywords</dfn> are
+<code>distribution</code>,
+<code>bundle</code>,
+<code>vendor</code>,
+<code>product</code>,
+and <code>fileset</code>. 
+All <dfn>attribute keywords</dfn> exist in an object context and some  <dfn>attribute keywords</dfn> are used
+in several <dfn>object keywords</dfn> contexts.  To disambiguate the following notation is used: <var>object_name</var>.<var>attribute</var>.
+
+   <p>Comments are lines or parts of lines that begin with <code>#</code>.  Whitespace in a <acronym>PSF</acronym> is not significant. 
+Objects are terminated by the next object keyword.  Unrecognized <dfn>attributes</dfn> are allowed but
+unrecognized <dfn>objects</dfn> are not allowed.
+
+   <p>The <code>tag</code> attribute in all objects should not contain the following
+four characters ' ', ':','.', ',' (space, colon, comma, period).
+
+<ul class="menu">
+<li><a accesskey="1" href="Name_002dVersion_002dRelease.html#Name_002dVersion_002dRelease">Name-Version-Release</a>:   Version Information
+<li><a accesskey="2" href="The-Distribution-Object.html#The-Distribution-Object">The Distribution Object</a>:  The Distribution Object
+<li><a accesskey="3" href="The-Vendor-Object.html#The-Vendor-Object">The Vendor Object</a>:  The Vendor Object
+<li><a accesskey="4" href="The-vendor_005ftag-Attribute.html#The-vendor_005ftag-Attribute">The vendor_tag Attribute</a>:  The vendor_tag Attribute
+<li><a accesskey="5" href="File-Ownerships.html#File-Ownerships">File Ownerships</a>:  Package File Ownerships
+</ul>
+
+   </body></html>
+

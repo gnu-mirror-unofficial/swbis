@@ -1,0 +1,64 @@
+<html lang="en">
+<head>
+<title>The Vendor Object - Creating and Verifying Tar Archives with Embedded GPG Signatures</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Creating and Verifying Tar Archives with Embedded GPG Signatures">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="PSF-Basics.html#PSF-Basics" title="PSF Basics">
+<link rel="prev" href="The-Distribution-Object.html#The-Distribution-Object" title="The Distribution Object">
+<link rel="next" href="The-vendor_005ftag-Attribute.html#The-vendor_005ftag-Attribute" title="The vendor_tag Attribute">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<!--
+This manual is for the use of GNU Swbis (version 0.496)
+in the creation and verification of software releases containing embedded GPG signatures.
+
+Copyright (C) 2006 Jim Lowe
+
+     Permission is granted to copy, distribute and/or modify this
+     document under the terms of the GNU Free Documentation License,
+     Version 1.2 or any later version published by the Free Software
+     Foundation; with no Invariant Sections, with the Front-Cover texts
+     being ``A GNU Manual,'' and with the Back-Cover Texts as in (a)
+     below.  A copy of the license is included in the section entitled
+     ``GNU Free Documentation License.''
+
+     (a) The FSF's Back-Cover Text is: ``You have freedom to copy and
+     modify this GNU Manual, like GNU software.  Copies published by
+     the Free Software Foundation raise funds for GNU development.''
+   -->
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="The-Vendor-Object"></a>Next:&nbsp;<a rel="next" accesskey="n" href="The-vendor_005ftag-Attribute.html#The-vendor_005ftag-Attribute">The vendor_tag Attribute</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="The-Distribution-Object.html#The-Distribution-Object">The Distribution Object</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="PSF-Basics.html#PSF-Basics">PSF Basics</a>
+<hr><br>
+</div>
+
+<h4 class="subsection">3.1.3 The Vendor Object</h4>
+
+<p>Providing a <code>vendor</code> object is optional.
+
+<pre class="example">     vendor
+        the_term_vendor_is_misleading  true   #  True or False
+        tag         <var>tag</var>                 #  Short name, Globally unique if possible
+        title       <var>title</var>               #  Longer name
+        description <var>description</var>         #  A Detailed Description
+</pre>
+   <p>The <code>tag</code> and <code>vendor_tag</code> attributes should not contain a ' ', ':','.', ',' (space, colon, comma, period).
+
+   </body></html>
+

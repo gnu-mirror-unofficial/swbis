@@ -1,0 +1,106 @@
+<html lang="en">
+<head>
+<title>Making Distribution Tar Files - Creating and Verifying Tar Archives with Embedded GPG Signatures</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Creating and Verifying Tar Archives with Embedded GPG Signatures">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="prev" href="Introduction.html#Introduction" title="Introduction">
+<link rel="next" href="Verifying-the-Distribution.html#Verifying-the-Distribution" title="Verifying the Distribution">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<!--
+This manual is for the use of GNU Swbis (version 0.496)
+in the creation and verification of software releases containing embedded GPG signatures.
+
+Copyright (C) 2006 Jim Lowe
+
+     Permission is granted to copy, distribute and/or modify this
+     document under the terms of the GNU Free Documentation License,
+     Version 1.2 or any later version published by the Free Software
+     Foundation; with no Invariant Sections, with the Front-Cover texts
+     being ``A GNU Manual,'' and with the Back-Cover Texts as in (a)
+     below.  A copy of the license is included in the section entitled
+     ``GNU Free Documentation License.''
+
+     (a) The FSF's Back-Cover Text is: ``You have freedom to copy and
+     modify this GNU Manual, like GNU software.  Copies published by
+     the Free Software Foundation raise funds for GNU development.''
+   -->
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Making-Distribution-Tar-Files"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Verifying-the-Distribution.html#Verifying-the-Distribution">Verifying the Distribution</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Introduction.html#Introduction">Introduction</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
+<hr><br>
+</div>
+
+<h2 class="chapter">3 Making Distribution Tar Files</h2>
+
+<p>Making a distribution tar file first requires making a input file called a
+<dfn>Product Specification File</dfn> or <acronym>PSF</acronym> for short. 
+It directs <span class="command">swpackage</span> on what files to package, the package structure,
+and what control directory names to use.  It also can contain meta-data (i.e. attributes)
+that are transferred into the package meta-data file named <dfn>INDEX</dfn>.
+
+   <p>Here are examples that use a internally generated <acronym>PSF</acronym> to get started quickly,
+however, it is recommended that you provide your own <acronym>PSF</acronym> according to guidelines below.
+
+<p class="noindent">Note that this will erase and replace a file named <span class="file">catalog</span> which is the name of the
+ISO/IEC 15068-2 meta-data directory.
+
+<pre class="example">     cd somepackage-1.0
+     swign -u "Your GPG Name" @- | tar tvf -
+</pre>
+   <p>In this example <span class="command">swign</span> generated a <acronym>PSF</acronym> since
+one was not supplied.  Here is what it used.
+
+<pre class="example">     swign --show-psf
+     distribution
+     dfiles dfiles
+     
+     product
+     title somepackage version 1.0
+     description Source package for somepackage version 1.0
+     tag somepackage
+     revision 1.0
+     control_directory ""
+     fileset
+     tag somepackage-sources
+     control_directory ""
+     file_permissions -o jhl  -g jhl
+     directory .
+     file *
+     exclude catalog
+</pre>
+   <p>If you already have a <acronym>PSF</acronym> named <span class="file">PSF</span>, here's how to use it with <span class="command">swign</span>:
+<pre class="example">     cd somepackage-1.0
+     swign -s PSF -u "Your GPG Name" @- | tar tvf -
+</pre>
+   <p>The same package can be created with <span class="command">swpackage</span>, however, it requires specifying more
+options and the archive is written by <span class="command">swpackage</span> instead of <span class="command">tar</span>, Here's how:
+
+<pre class="example">     cd somepackage-1.0
+     swpackage -s PSF -gpg-name "Your GPG Name" \
+     	--dir=somepackage-0.1 --sign --files @- |
+     tar tvf -
+</pre>
+   <ul class="menu">
+<li><a accesskey="1" href="PSF-Basics.html#PSF-Basics">PSF Basics</a>:   Basic Information About PSFs
+<li><a accesskey="2" href="PSFs-for-Source-Packages.html#PSFs-for-Source-Packages">PSFs for Source Packages</a>:    A PSF for Source Packages
+</ul>
+
+   </body></html>
+

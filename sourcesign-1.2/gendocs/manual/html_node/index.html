@@ -1,0 +1,118 @@
+<html lang="en">
+<head>
+<title>Creating and Verifying Tar Archives with Embedded GPG Signatures</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Creating and Verifying Tar Archives with Embedded GPG Signatures">
+<meta name="generator" content="makeinfo 4.7">
+<link title="Top" rel="start" href="#Top">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<!--
+This manual is for the use of GNU Swbis (version 0.496)
+in the creation and verification of software releases containing embedded GPG signatures.
+
+Copyright (C) 2006 Jim Lowe
+
+     Permission is granted to copy, distribute and/or modify this
+     document under the terms of the GNU Free Documentation License,
+     Version 1.2 or any later version published by the Free Software
+     Foundation; with no Invariant Sections, with the Front-Cover texts
+     being "A GNU Manual," and with the Back-Cover Texts as in (a)
+     below.  A copy of the license is included in the section entitled
+     "GNU Free Documentation License."
+
+     (a) The FSF's Back-Cover Text is: "You have freedom to copy and
+     modify this GNU Manual, like GNU software.  Copies published by
+     the Free Software Foundation raise funds for GNU development."
+   -->
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
+--></style>
+</head>
+<body>
+<h1 class="settitle">Creating and Verifying Tar Archives with Embedded GPG Signatures</h1>
+   <div class="contents">
+<h2>Table of Contents</h2>
+<ul>
+<li><a name="toc_Top" href="index.html#Top">Swbis</a>
+<li><a name="toc_Prerequisites" href="Prerequisites.html#Prerequisites">1 Prerequisites</a>
+<li><a name="toc_Introduction" href="Introduction.html#Introduction">2 Introduction</a>
+<li><a name="toc_Making-Distribution-Tar-Files" href="Making-Distribution-Tar-Files.html#Making-Distribution-Tar-Files">3 Making Distribution Tar Files</a>
+<ul>
+<li><a href="PSF-Basics.html#PSF-Basics">3.1 <acronym>PSF</acronym> Basics</a>
+<ul>
+<li><a href="Name_002dVersion_002dRelease.html#Name_002dVersion_002dRelease">3.1.1 Name-Version-Release</a>
+<li><a href="The-Distribution-Object.html#The-Distribution-Object">3.1.2 The Distribution Object</a>
+<li><a href="The-Vendor-Object.html#The-Vendor-Object">3.1.3 The Vendor Object</a>
+<li><a href="The-vendor_005ftag-Attribute.html#The-vendor_005ftag-Attribute">3.1.4 The vendor_tag Attribute</a>
+<li><a href="File-Ownerships.html#File-Ownerships">3.1.5 Package File Ownerships</a>
+</li></ul>
+<li><a href="PSFs-for-Source-Packages.html#PSFs-for-Source-Packages">3.2 <acronym>PSF</acronym>s for Source Packages</a>
+</li></ul>
+<li><a name="toc_Verifying-the-Distribution" href="Verifying-the-Distribution.html#Verifying-the-Distribution">4 Verifying the Distribution</a>
+<ul>
+<li><a href="Verifying-the-Tar-Archive-File.html#Verifying-the-Tar-Archive-File">4.1 Verifying the Tar Archive File</a>
+<li><a href="Verifying-the-Unpacked-Archive.html#Verifying-the-Unpacked-Archive">4.2 Verifying the Unpacked Archive</a>
+<ul>
+<li><a href="The-checkdigest-script.html#The-checkdigest-script">4.2.1 The <span class="file">checkdigest</span> script</a>
+</li></ul>
+<li><a href="Verifying-Using-Existing-GNU-Tools.html#Verifying-Using-Existing-GNU-Tools">4.3 Verifying Using Existing GNU Tools</a>
+</li></ul>
+<li><a name="toc_Adding-New-Signatures" href="Adding-New-Signatures.html#Adding-New-Signatures">5 Adding New Signatures</a>
+<li><a name="toc_Guidelines-for-GNU-Source-Packages" href="Guidelines-for-GNU-Source-Packages.html#Guidelines-for-GNU-Source-Packages">6 Guidelines for GNU Source Packages</a>
+<li><a name="toc_Using-Automake-and-Swbis" href="Using-Automake-and-Swbis.html#Using-Automake-and-Swbis">7 Using Automake and Swbis</a>
+<li><a name="toc_Using-CVS-and-Swbis" href="Using-CVS-and-Swbis.html#Using-CVS-and-Swbis">8 Using CVS and Swbis</a>
+</li></ul>
+</div>
+
+
+
+<div class="node">
+<p>
+<a name="Top"></a>Next:&nbsp;<a rel="next" accesskey="n" href="Prerequisites.html#Prerequisites">Prerequisites</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="../index.html#dir">(dir)</a>
+<hr><br>
+</div>
+
+<h2 class="unnumbered">Swbis</h2>
+
+<p>This manual is for the use of <acronym>GNU</acronym> Swbis (version 0.496)
+in the creation and verification of software releases containing embedded GPG signatures.
+
+   <p>Copyright &copy; 2006 Jim Lowe
+
+   <blockquote>
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the <acronym>GNU</acronym> Free Documentation License,
+Version 1.2 or any later version published by the Free Software
+Foundation; with no Invariant Sections, with the Front-Cover texts
+being &ldquo;A <acronym>GNU</acronym> Manual,&rdquo; and with the Back-Cover Texts as in
+(a) below.  A copy of the license is included in the section entitled
+&ldquo;<acronym>GNU</acronym> Free Documentation License.&rdquo;
+
+        <p>(a) The <acronym>FSF</acronym>'s Back-Cover Text is: &ldquo;You have freedom to copy
+and modify this <acronym>GNU</acronym> Manual, like <acronym>GNU</acronym> software. 
+Copies published by the Free Software Foundation raise funds for
+<acronym>GNU</acronym> development.&rdquo;
+</blockquote>
+
+<ul class="menu">
+<li><a accesskey="1" href="Prerequisites.html#Prerequisites">Prerequisites</a>
+<li><a accesskey="2" href="Introduction.html#Introduction">Introduction</a>
+<li><a accesskey="3" href="Making-Distribution-Tar-Files.html#Making-Distribution-Tar-Files">Making Distribution Tar Files</a>
+<li><a accesskey="4" href="Verifying-the-Distribution.html#Verifying-the-Distribution">Verifying the Distribution</a>
+<li><a accesskey="5" href="Adding-New-Signatures.html#Adding-New-Signatures">Adding New Signatures</a>
+<li><a accesskey="6" href="Guidelines-for-GNU-Source-Packages.html#Guidelines-for-GNU-Source-Packages">Guidelines for GNU Source Packages</a>
+<li><a accesskey="7" href="Using-Automake-and-Swbis.html#Using-Automake-and-Swbis">Using Automake and Swbis</a>
+<li><a accesskey="8" href="Using-CVS-and-Swbis.html#Using-CVS-and-Swbis">Using CVS and Swbis</a>
+</ul>
+
+   </body></html>
+

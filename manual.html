@@ -8,7 +8,7 @@
 <link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <!--
 This manual is for swbis
-(version 0.483, 19 Feb 2006),
+(version 0.499, 03 Aug 2006),
 which is a implementation of the POSIX System Administration - Part 2: Software Administration
 conforming to IEEE Std 1387.2-1995 (ISO/IEC 15068-2) and Open Group CAE C701.
 Currently, not all of the standard is implemented.  There are extensions for package authentication.
@@ -41,12 +41,112 @@ Copyright (C) 2005, 2006 James H. Lowe, Jr.
 --></style>
 </head>
 <body>
+<div class="contents">
+<h2>Table of Contents</h2>
+<ul>
+<li><a name="toc_Top" href="#Top">swbis</a>
+<li><a name="toc_Creating-Signed-Distributions" href="#Creating-Signed-Distributions">1 Creating Signed Distributions</a>
+<ul>
+<li><a href="#Creating-a-signed-POSIX-archive-using-_003cspan-class_003d_0022command_0022_003eswign_003c_002fspan_003e">Creating a signed POSIX archive</a>
+<li><a href="#Creating-a-signed-directory-using-_003cspan-class_003d_0022command_0022_003eswign_003c_002fspan_003e">Creating a signed directory</a>
+<li><a href="#Environment-Variables-that-direct-_003cspan-class_003d_0022command_0022_003eswign_003c_002fspan_003e">Environment Variables that direct <span class="command">swign</span></a>
+<li><a href="#Providing-a-_003cspan-class_003d_0022file_0022_003echeckdigest_003c_002fspan_003e-script">Providing a <span class="file">checkdigest</span> script</a>
+<li><a href="#Using-_003cspan-class_003d_0022command_0022_003eswign_003c_002fspan_003e-in-an-Automake-target">Using <span class="command">swign</span> in an Automake target</a>
+</li></ul>
+<li><a name="toc_Status" href="#Status">2 What features are working?</a>
+<li><a name="toc_Invoking-swbis" href="#Invoking-swbis">3 How to invoke swbis</a>
+<ul>
+<li><a href="#Target-Syntax">Target Syntax</a>
+</li></ul>
+<li><a name="toc_Copying-This-Manual" href="#Copying-This-Manual">Appendix A Copying This Manual</a>
+<ul>
+<li><a href="#GNU-Free-Documentation-License">A.1 GNU Free Documentation License</a>
+<ul>
+<li><a href="#GNU-Free-Documentation-License">A.1.1 ADDENDUM: How to use this License for your documents</a>
+</li></ul>
+</li></ul>
+<li><a name="toc_Applicable-Standards" href="#Applicable-Standards">2 Applicable Standards</a>
+<li><a name="toc_Command-Reference" href="#Command-Reference">Appendix A Command Reference</a>
+<ul>
+<li><a href="#swpackage_002e8-in-one-text-file">swpackage.8 in one text file</a>
+<li><a href="#swinstall_002e8-in-one-text-file">swinstall.8 in one text file</a>
+<li><a href="#swcopy_002e8-in-one-text-file">swcopy.8 in one text file</a>
+<li><a href="#swverify_002e8-in-one-text-file">swverify.8 in one text file</a>
+<li><a href="#swign_002e1-in-one-text-file">swign.1 in one text file</a>
+<li><a href="#lxpsf_002e1-in-one-text-file">lxpsf.1 in one text file</a>
+<li><a href="#swpackage_002e5-in-one-text-file">swpackage.5 in one text file</a>
+<li><a href="#sw_002e5-in-one-text-file">sw.5 in one text file</a>
+</li></ul>
+<li><a name="toc_Glossary" href="#Glossary">Glossary</a>
+<li><a name="toc_Configuring-swbis" href="#Configuring-swbis">2 How to configure swbis</a>
+<ul>
+<li><a href="#swdefaults-configuration-file">swdefaults</a>
+<li><a href="#swbisdefaults-configuration-file">swbisdefaults</a>
+<li><a href="#Archive-Reading_002fWriting-Utility-Selection">Archive Reading/Writing Utility Selection</a>
+<li><a href="#Shell-Selection">Shell Selection</a>
+</li></ul>
+<li><a name="toc_Introduction" href="#Introduction">Introduction</a>
+<li><a name="toc_Introduction" href="#Introduction">3 Introduction</a>
+<li><a name="toc_About-This-Manual" href="#About-This-Manual">About This Manual</a>
+<li><a name="toc_Other-Resources" href="#Other-Resources">Other Resources</a>
+<li><a name="toc_Making-PSFs-for-Package-Creation" href="#Making-PSFs-for-Package-Creation">Making PSFs for Package Creation</a>
+<ul>
+<li><a href="#A-Minimal-PSF">PSF.minimal</a>
+<li><a href="#A-PSF-for-Source-Packages">A PSF for Source Packages</a>
+</li></ul>
+<li><a name="toc_Installing-POSIX-Distributions" href="#Installing-POSIX-Distributions">Installing POSIX Distributions</a>
+<li><a name="toc_Host-Requirements" href="#Host-Requirements">Host Requirements</a>
+<li><a name="toc_Installing-RPM-Packages" href="#Installing-RPM-Packages">Installing RPM Packages</a>
+<li><a name="toc_Translating-RPM-Format-Packages-to-a-POSIX-Distribution" href="#Translating-RPM-Format-Packages-to-a-POSIX-Distribution">Translating RPM Format Packages</a>
+<li><a name="toc_Remote-Host-Operations" href="#Remote-Host-Operations"></a>
+<li><a name="toc_GNU-Toolset-Orthogonality" href="#GNU-Toolset-Orthogonality"></a>
+<li><a name="toc_Package-Layout-and-Interchange-Format-Mimicry" href="#Package-Layout-and-Interchange-Format-Mimicry"></a>
+<li><a name="toc_Index" href="#Index">Index</a>
+</li></ul>
+</div>
+
+
+
+   <div class="shortcontents">
+<h2>Short Contents</h2>
+<ul>
+<li><a href="#toc_Top">swbis</a></li>
+<li><a href="#toc_Creating-Signed-Distributions">1 Creating Signed Distributions</a></li>
+<li><a href="#toc_Status">2 What features are working?</a></li>
+<li><a href="#toc_Invoking-swbis">3 How to invoke swbis</a></li>
+<li><a href="#toc_Copying-This-Manual">Appendix A Copying This Manual</a></li>
+<li><a href="#toc_Applicable-Standards">2 Applicable Standards</a></li>
+<li><a href="#toc_Command-Reference">Appendix A Command Reference</a></li>
+<li><a href="#toc_Glossary">Glossary</a></li>
+<li><a href="#toc_Configuring-swbis">2 How to configure swbis</a></li>
+<li><a href="#toc_Introduction">Introduction</a></li>
+<li><a href="#toc_Introduction">3 Introduction</a></li>
+<li><a href="#toc_About-This-Manual">About This Manual</a></li>
+<li><a href="#toc_Other-Resources">Other Resources</a></li>
+<li><a href="#toc_Making-PSFs-for-Package-Creation">Making PSFs for Package Creation</a></li>
+<li><a href="#toc_Installing-POSIX-Distributions">Installing POSIX Distributions</a></li>
+<li><a href="#toc_Host-Requirements">Host Requirements</a></li>
+<li><a href="#toc_Installing-RPM-Packages">Installing RPM Packages</a></li>
+<li><a href="#toc_Translating-RPM-Format-Packages-to-a-POSIX-Distribution">Translating RPM Format Packages</a></li>
+<li><a href="#toc_Remote-Host-Operations"></a></li>
+<li><a href="#toc_GNU-Toolset-Orthogonality"></a></li>
+<li><a href="#toc_Package-Layout-and-Interchange-Format-Mimicry"></a></li>
+<li><a href="#toc_Index">Index</a></li>
+</ul>
+</div>
 
 <!-- @contents -->
+<div class="node">
+<p><hr>
+<a name="Top"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Copying-This-Manual">Copying This Manual</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="#dir">(dir)</a>
+<br>
+</div>
+
 <h2 class="unnumbered">swbis</h2>
 
 <p>This manual is for swbis
-(version 0.483, 19 Feb 2006),
+(version 0.499, 03 Aug 2006),
 which is a implementation of the POSIX System Administration &ndash; Part 2: Software Administration
 conforming to IEEE Std 1387.2-1995 (ISO/IEC 15068-2) and Open Group CAE C701. 
 Currently, not all of the standard is implemented.  There are extensions for package authentication. 
@@ -138,12 +238,6 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <h2 class="chapter">1 Creating Signed Distributions</h2>
 
-<ul class="menu">
-<li><a accesskey="1" href="#Creating-a-signed-POSIX-archive-using-_003cspan-class_003d_0022command_0022_003eswign_003c_002fspan_003e">Creating a signed POSIX archive using <span class="command">swign</span></a>
-<li><a accesskey="2" href="#Creating-a-signed-directory-using-_003cspan-class_003d_0022command_0022_003eswign_003c_002fspan_003e">Creating a signed directory using <span class="command">swign</span></a>
-<li><a accesskey="3" href="#Providing-a-_003cspan-class_003d_0022file_0022_003echecksig_003c_002fspan_003e-script">Providing a <span class="file">checksig</span> script</a>
-</ul>
-
 <p>The first step in package signing is to obtain GNU Privacy Guard and its command line program
 <span class="command">gpg</span>.  The next step is to invoke it directly to test your gpg configuration. 
 The <span class="command">gpg</span> program is invoked by <span class="command">swpackage</span> with the following options:
@@ -209,6 +303,14 @@ data.
 Using a version other than these will produce a valid archive, but the signature
 may not be valid.
 
+<ul class="menu">
+<li><a accesskey="1" href="#Creating-a-signed-POSIX-archive-using-_003cspan-class_003d_0022command_0022_003eswign_003c_002fspan_003e">Creating a signed POSIX archive using <span class="command">swign</span></a>
+<li><a accesskey="2" href="#Creating-a-signed-directory-using-_003cspan-class_003d_0022command_0022_003eswign_003c_002fspan_003e">Creating a signed directory using <span class="command">swign</span></a>
+<li><a accesskey="3" href="#Environment-Variables-that-direct-_003cspan-class_003d_0022command_0022_003eswign_003c_002fspan_003e">Environment Variables that direct <span class="command">swign</span></a>
+<li><a accesskey="4" href="#Providing-a-_003cspan-class_003d_0022file_0022_003echeckdigest_003c_002fspan_003e-script">Providing a <span class="file">checkdigest</span> script</a>
+<li><a accesskey="5" href="#Using-_003cspan-class_003d_0022command_0022_003eswign_003c_002fspan_003e-in-an-Automake-target">Using <span class="command">swign</span> in an Automake target</a>
+</ul>
+
 <div class="node">
 <p><hr>
 <a name="Creating-a-signed-POSIX-archive-using-_003cspan-class_003d_0022command_0022_003eswign_003c_002fspan_003e"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Creating-a-signed-directory-using-_003cspan-class_003d_0022command_0022_003eswign_003c_002fspan_003e">Creating a signed directory using &lt;span class=&quot;command&quot;&gt;swign&lt;/span&gt;</a>,
@@ -264,13 +366,13 @@ You must redirect the archive to a more useful file.
 
 </pre>
 
-   <p>If a <span class="file">checksig</span> script is included then you should unpack the package at
+   <p>If a <span class="file">checkdigest</span> script is included then you should unpack the package at
 a new location and run  'swverify &ndash;checksig "."' in the new location. 
-See <a href="#Providing-a-_003cspan-class_003d_0022file_0022_003echecksig_003c_002fspan_003e-script">Providing a <span class="file">checksig</span> script</a>.
+See <a href="#Providing-a-_003cspan-class_003d_0022file_0022_003echeckdigest_003c_002fspan_003e-script">Providing a <span class="file">checkdigest</span> script</a>.
 
 <div class="node">
 <p><hr>
-<a name="Creating-a-signed-directory-using-_003cspan-class_003d_0022command_0022_003eswign_003c_002fspan_003e"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Providing-a-_003cspan-class_003d_0022file_0022_003echecksig_003c_002fspan_003e-script">Providing a &lt;span class=&quot;file&quot;&gt;checksig&lt;/span&gt; script</a>,
+<a name="Creating-a-signed-directory-using-_003cspan-class_003d_0022command_0022_003eswign_003c_002fspan_003e"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Environment-Variables-that-direct-_003cspan-class_003d_0022command_0022_003eswign_003c_002fspan_003e">Environment Variables that direct &lt;span class=&quot;command&quot;&gt;swign&lt;/span&gt;</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#Creating-a-signed-POSIX-archive-using-_003cspan-class_003d_0022command_0022_003eswign_003c_002fspan_003e">Creating a signed POSIX archive using &lt;span class=&quot;command&quot;&gt;swign&lt;/span&gt;</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Creating-Signed-Distributions">Creating Signed Distributions</a>
 <br>
@@ -301,11 +403,11 @@ the <span class="option">-S</span> simply causes <span class="command">swign</sp
     swpackage: Warning: exclude definition source [catalog] does not exist.
     Enter Password: 
     swverify: GPG signature verified.
-    swverify: checksig script not found
+    swverify: checkdigest script not found
     swverify: Package authenticity not confirmed.
 </pre>
 
-   <p>For more information about the 'checksig' script:
+   <p>For more information about the 'checkdigest' script:
    <pre class="sp">
 
 </pre>
@@ -313,36 +415,51 @@ See <a href="swverify.html#IMPLEMENTATION-EXTENSION-DISTRIBUTOR-SCRIPTS">(swbis_
    <pre class="sp">
 
 </pre>
-See <a href="swverify.html#Verifying-the-directory-_0028unpacked_0029-form-of-a-Distribution_002e">(swbis_swverify)Verifying the directory (unpacked) form of a Distribution.</a>.
+See <a href="swverify.html#Verifying-the-Directory-Form-of-a-Distribution">(swbis_swverify)Verifying the Directory Form of a Distribution</a>.
 
    <p>Swign can be used to sign any directory using the  file  ownerships  of
 the  source files.  The following commands act as a test of swpackage's
 ability to generate an archive identical to  GNU  tar. 
-(Note:  checksig.sh is found in ./bin of the source distribution.)
+(Note:  checkdigest.sh is found in ./bin of the source distribution.)
 
 <pre class="verbatim">
-      swign -D $HOME/checksig.sh -u "Test User" -o "" -g "" -S;
+      swign -D $HOME/checkdigest.sh -u "Test User" -o "" -g "" -S;
       swverify -d @.
 </pre>
 
 <div class="node">
 <p><hr>
-<a name="Providing-a-_003cspan-class_003d_0022file_0022_003echecksig_003c_002fspan_003e-script"></a>Previous:&nbsp;<a rel="previous" accesskey="p" href="#Creating-a-signed-directory-using-_003cspan-class_003d_0022command_0022_003eswign_003c_002fspan_003e">Creating a signed directory using &lt;span class=&quot;command&quot;&gt;swign&lt;/span&gt;</a>,
+<a name="Environment-Variables-that-direct-_003cspan-class_003d_0022command_0022_003eswign_003c_002fspan_003e"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Providing-a-_003cspan-class_003d_0022file_0022_003echeckdigest_003c_002fspan_003e-script">Providing a &lt;span class=&quot;file&quot;&gt;checkdigest&lt;/span&gt; script</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="#Creating-a-signed-directory-using-_003cspan-class_003d_0022command_0022_003eswign_003c_002fspan_003e">Creating a signed directory using &lt;span class=&quot;command&quot;&gt;swign&lt;/span&gt;</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Creating-Signed-Distributions">Creating Signed Distributions</a>
 <br>
 </div>
 
-<h3 class="unnumberedsec">Providing a <span class="file">checksig</span> script</h3>
+<h3 class="unnumberedsec">Environment Variables that direct <span class="command">swign</span></h3>
 
-<p>The <span class="file">checksig</span> script is a distributor extension script.  Only the swbis
+<p><span class="command">swverify</span> is affected by the following environment variables:
+SWPACKAGEPASSFD, SWPACKAGEPASSPHRASE, GNUPGHOME, and GNUPGNAME. 
+For more information: (See <a href="swpackage.html#ENVIRONMENT">(swbis_swpackage)ENVIRONMENT</a>.)
+
+<div class="node">
+<p><hr>
+<a name="Providing-a-_003cspan-class_003d_0022file_0022_003echeckdigest_003c_002fspan_003e-script"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Using-_003cspan-class_003d_0022command_0022_003eswign_003c_002fspan_003e-in-an-Automake-target">Using &lt;span class=&quot;command&quot;&gt;swign&lt;/span&gt; in an Automake target</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="#Environment-Variables-that-direct-_003cspan-class_003d_0022command_0022_003eswign_003c_002fspan_003e">Environment Variables that direct &lt;span class=&quot;command&quot;&gt;swign&lt;/span&gt;</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="#Creating-Signed-Distributions">Creating Signed Distributions</a>
+<br>
+</div>
+
+<h3 class="unnumberedsec">Providing a <span class="file">checkdigest</span> script</h3>
+
+<p>The <span class="file">checkdigest</span> script is a distributor extension script.  Only the swbis
 implementation of <span class="command">swverify</span> knows how to use it. 
 An example file is found in the swbis source package.
 
-   <p>You need to supply a checksig script only if you wish your customers to be
+   <p>You need to supply a checkdigest script only if you wish your customers to be
 able to verify the directory form (i.e. unpacked archive) of a POSIX package. 
 There are constraints on the usefulness of this script which are the
 same as when attempting to verify manually. 
-See <a href="swverify.html#Verifying-a-POSIX-distribution-Manually">(swbis_swverify)Verifying a POSIX distribution Manually</a>. 
+See <a href="swverify.html#Verifying-a-POSIX-Distribution-Directory-Manually">(swbis_swverify)Verifying a POSIX Distribution Directory Manually</a>. 
 It is not used when verifying the archive file form.  Also, since it
 should only use non-swbis standard GNU tools and is a shell script,
 it does not do anything that the end user could not do themselves.
@@ -351,10 +468,40 @@ it does not do anything that the end user could not do themselves.
 <span class="command">swign</span> command or by specifying in a PSF to be processed by <span class="command">swpackage</span>. 
 The syntax for referencing from a PSF is:
 <pre class="verbatim">
-      checksig &lt; /path/name/to/your/checksig.sh
+      checkdigest &lt; /path/name/to/your/checkdigest.sh
 </pre>
 
    <p>This line should be added in the distribution object of the PSF.
+
+<div class="node">
+<p><hr>
+<a name="Using-_003cspan-class_003d_0022command_0022_003eswign_003c_002fspan_003e-in-an-Automake-target"></a>Previous:&nbsp;<a rel="previous" accesskey="p" href="#Providing-a-_003cspan-class_003d_0022file_0022_003echeckdigest_003c_002fspan_003e-script">Providing a &lt;span class=&quot;file&quot;&gt;checkdigest&lt;/span&gt; script</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="#Creating-Signed-Distributions">Creating Signed Distributions</a>
+<br>
+</div>
+
+<h3 class="unnumberedsec">Using <span class="command">swign</span> in an Automake target</h3>
+
+<p>Here is a target to put in your Makefile.am (This example was tested with Automake version 1.9):
+<pre class="verbatim">
+# Provide am__remove_distdir ourselves since am__remove_distdir may be a
+# private automake variable.
+sw_am__remove_distdir = \
+  { test ! -d $(distdir) \
+      || { find $(distdir) -type d ! -perm -200 -exec chmod u+w {} ';' \
+               &amp;&amp; rm -fr $(distdir); }; }
+dist-swbis: distdir
+        (cd $(distdir) &amp;&amp; swign -s PSF.in --name-version=$(distdir) @-) | GZIP=$(GZIP_ENV) gzip -c >$(distdir).tar.gz
+        $(sw_am__remove_distdir)
+</pre>
+
+   <p>An example invocation using the environment controls:
+<pre class="verbatim">
+        (SWPACKAGEPASSFD="agent"; GNUPGNAME="Your Name"; make dist-swbis)
+</pre>
+
+   <p>The <span class="file">PSF.in</span> should employ the replacement strings '%__tag' and '%__revision' as
+in this example PSF.in (See <a href="swign.html#SAMPLE-SOURCE-PACKAGE-PSF">(swbis_swign)SAMPLE SOURCE PACKAGE PSF</a>).
 
 <!-- Copyright (C) 2004 Jim Lowe -->
 <!-- This is part of the swbis manual. -->
@@ -483,13 +630,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <h2 class="chapter">3 How to invoke swbis</h2>
 
 <p><a name="index-sample-1"></a><a name="index-invoking-_0040command_007bswbis_007d-2"></a>
-
-<ul class="menu">
-<li><a accesskey="1" href="#Target-Syntax">Target Syntax</a>
-<!-- * Configuration Files:: -->
-</ul>
-
-   <p>The utilities are invoked from the command line.
+The utilities are invoked from the command line.
 
    <p>The commands share a common syntax that is:
 <pre class="verbatim">
@@ -584,6 +725,11 @@ Alternatively, individual utilities can be invoked by themselves.
      <pre class="example">          swign -u "Your GPG Identity" @- | tar tvf -
      </pre>
      </ul>
+
+<ul class="menu">
+<li><a accesskey="1" href="#Target-Syntax">Target Syntax</a>
+<!-- * Configuration Files:: -->
+</ul>
 
 <div class="node">
 <p><hr>
@@ -1121,9 +1267,7 @@ documents match up line-for-line except for chapter ordering and where
 there are descriptions of C701's additional attributes.
 
    <p>(The IEEE standard is superseded by and identical to ISO/IEC
-15068-2:1999.  The Open Group specification CAE C701 is substantially
-equivalent to 1387.2 except for C701's additional attributes.  It can be
-viewed online at http://www.opengroup.org/publications/catalog/c701.htm).
+15068-2:1999).
 
 <!-- Copyright (C) 2004 Jim Lowe -->
 <!-- This is part of the swbis manual. -->
@@ -1567,32 +1711,71 @@ SIGNATURE VERIFICATION
 	The  symbolic link files must be verified manually by comparing to the
        INFO file information.
 
+SWPACKAGE OUTPUT FORMAT
+       The output format is either one of two  formats	specified  in  POSIX.1
+       (ISO/IEC  9945-1)  which  are  tar (header magic=ustar) or cpio (header
+       magic=070707).  The default  format  of	the  swbis  implementation  is
+       "ustar".   The  POSIX  spec under specifies definitions for some of the
+       ustar header fields.  The personality of the default swbis ustar format
+       mimics  GNU tar 1.15.1 and is designed to be compliant to POSIX.1.  The
+       personality of the "ustar0" format mimics, for pathnames less  than  99
+       octets,	 GNU  tar  1.13.25 using the "-b1 --posix" options.  This bit-
+       for-bit sameness does not exist for pathnames greater than 99 chars  as
+       swbis  follows  the  POSIX  spec  and  GNU  tar	1.13.25 does not.  The
+       "ustar0" ustar personality is deprecated.  It is only slightly  differ-
+       ent  from  'ustar' in how device number fields are filled (with spaces,
+       zeros or NULs) for non-device files.
 
-   SWPACKAGE INPUT FILE FORMAT
-       The input file is called a product specification file or PSF.  It  con-
-       tains  information  to direct swpackage and information that is package
-       meta-data [that is merely transferred unchanged into the  global  INDEX
+       In addition the swbis implementation supports several other  tar  vari-
+       ants  including bit-for-bit mimicry of GNU tar (1.13.25) default format
+       which uses a non-standard name split and file type  (type  'L').   This
+       format is known as '--format=oldgnu'.  Also supported is the gnu format
+       of GNU tar 1.15.1 specified by '--format=gnu'
+
+       The defacto cpio formats are also supported.   "new  ASCII"  (sometimes
+       called SVR4 cpio) and "crc" cpio formats with header magic "070701" and
+       "070702" respectively.
+
+       Support for "pax Interchange Format" (Extended header tar) described in
+       IEEE 1003.1-2001 under the "pax" manual page is planned.
+
+       The  entirety  of  the output byte stream is a single valid file of one
+       the formats mentioned above.
+
+       The swbis implementation writes its output to stdout.  The default out-
+       put block size is 10240 bytes.  The last block is not padded and there-
+       fore the last write(2) may be a short write.  The selected  block  size
+       does not affect the output file contents.
+
+       The  swbis implementation is biased, in terms of capability and default
+       settings, to the tar format.  Package signing is only supported in  tar
+       format.
+
+SWPACKAGE INPUT FILE FORMAT
+       The  input file is called a product specification file or PSF.  It con-
+       tains information to direct swpackage and information that  is  package
+       meta-data  [that  is merely transferred unchanged into the global INDEX
        file].
 
        A PSF may contain object keywords, attributes (keyword/value pairs) and
-       Extended Definitions (described below).	An object keyword  connotes  a
+       Extended  Definitions  (described below).  An object keyword connotes a
        logical object (i.e. software structure) supported by the standard.  An
-       object keyword does not have a value field after  it,  as  it  contains
-       Attributes  and	Extended Definitions.  An attribute keyword conotes an
+       object  keyword	does  not  have a value field after it, as it contains
+       Attributes and Extended Definitions.  An attribute keyword  conotes  an
        attribute which is always in the form of a keyword/value pair.
 
-       Attribute keywords not recognized by the standard are allowed  and  are
+       Attribute  keywords  not recognized by the standard are allowed and are
        transferred into the INDEX file.  Object keywords not recognized by the
-       standard are not allowed and will generate an error.  Extended  Defini-
-       tions  may  only  appear  in a PSF (never in a INDEX or INFO created by
-       swpackage).  Extended Definitions are translated  [by  swpackage]  into
+       standard  are not allowed and will generate an error.  Extended Defini-
+       tions may only appear in a PSF (never in a INDEX  or  INFO  created  by
+       swpackage).   Extended  Definitions  are translated [by swpackage] into
        object keywords (objects) and attributes recognized by the standard.
 
-       Comments  in a PSF are not transferred into the INDEX file by the swbis
+       Comments in a PSF are not transferred into the INDEX file by the  swbis
        implementation of swpackage.
 
-       The file syntax is the same as a INDEX, or INFO file.  A PSF  may  con-
-       tain  all  objects  defined by the standard as well as extended defini-
+       The  file  syntax is the same as a INDEX, or INFO file.	A PSF may con-
+       tain all objects defined by the standard as well  as  extended  defini-
        tions.
 
        For additional information see
@@ -1600,20 +1783,20 @@ SIGNATURE VERIFICATION
        sw manual page.
 
    EXTENDED DEFINITIONS
-       A Product Specification File (PSF) can contain Extended Definitions  in
-       the  fileset,  product or bundle software definitions.  They would have
-       the same level or containment relationship as a	file  or  control_file
+       A  Product Specification File (PSF) can contain Extended Definitions in
+       the fileset, product or bundle software definitions.  They  would  have
+       the  same  level  or containment relationship as a file or control_file
        definition in the same contaning object.
 
-       Extended  Definitions represent a minimal, expressive form for specify-
-       ing files and file attributes.  Their use in a PSF is optional in  that
+       Extended Definitions represent a minimal, expressive form for  specify-
+       ing  files and file attributes.	Their use in a PSF is optional in that
        an equivalent PSF can be constructed without using them, however, their
        use is encouraged for the sake of brevity and orthogonality.
 
-       The swbis implementation requires that no [ordinary] attributes	appear
+       The  swbis implementation requires that no [ordinary] attributes appear
        after Extended Definitions in the containing object, and, requires that
-       Extended Definitions appear before logically contained  objects.   That
-       is,  the  parser  uses the next object keyword to syntacticly and logi-
+       Extended  Definitions  appear before logically contained objects.  That
+       is, the parser uses the next object keyword to  syntacticly  and  logi-
        cally terminate the current object even if the current object has logi-
        cally contained objects.
 
@@ -1636,28 +1819,28 @@ SIGNATURE VERIFICATION
 
 
        The source attribute defines the location in distributors's development
-       system where the swpackage utility will find the script.   The  keyword
-       is  the value of the tag attribute and tells the utilities when to exe-
+       system  where  the swpackage utility will find the script.  The keyword
+       is the value of the tag attribute and tells the utilities when to  exe-
        cute the script.  The path attribute is optional and specifies the file
        name in the packages distribution relative to the control_directory for
-       software containing the script. If not given the tag value is  used  as
+       software  containing  the script. If not given the tag value is used as
        the filename.
 
    o  Directory Mapping
 	  directory  source  [destination]
 
 
-       Applies	the  source  attribute as the directory under which the subse-
+       Applies the source attribute as the directory under  which  the	subse-
        quently listed files are located.  If destination is defined it will be
        used as a prefix to the path (implied) file definition.	source is typ-
-       ically a temporary or build location and dest is its  unrealized  abso-
+       ically  a  temporary or build location and dest is its unrealized abso-
        lute pathname destination.
 
    o  Recursive File Definition
 	 file *
 
 
-       Specifies  every  file  in  current  source  directory.	 The directory
+       Specifies every	file  in  current  source  directory.	The  directory
        extended definition must be used before the recursive specification.
 
    o  Explicit File Definition
@@ -1668,42 +1851,42 @@ SIGNATURE VERIFICATION
 
 
 	      source defines the pathname of the file to be used as the source
-	      of  file data and/or attributes.	If it is a relative path, then
-	      swpackage searches for this file	relative  to  the  the	source
+	      of file data and/or attributes.  If it is a relative path,  then
+	      swpackage  searches  for	this  file  relative to the the source
 	      argument of the directory keyword, if set.  If directory keyword
-	      is not set then the search is relative to  the  current  working
+	      is  not  set  then the search is relative to the current working
 	      directory of the swpackage utility's invocation.
 
-	      All  attributes  for  the  destination  file  are taken from the
+	      All attributes for the  destination  file  are  taken  from  the
 	      source file, unless a file_permissions keyword is active, or the
-	      -m,  -o,	or -g options are also included in the file specifica-
+	      -m, -o, or -g options are also included in the  file  specifica-
 	      tion.
 
        path
 
 	      path defines the destination path where the file will be created
-	      or  installed.   If  it is a relative path, then the destination
-	      path of the of the directory keyword must be active and will  be
-	      used  as	the path prefix.  If path is not specified then source
-	      is used as the value of path and directory mapping  applied  (if
+	      or installed.  If it is a relative path,	then  the  destination
+	      path  of the of the directory keyword must be active and will be
+	      used as the path prefix.	If path is not specified  then	source
+	      is  used	as the value of path and directory mapping applied (if
 	      active).
 
        -t type
 
-	      type  may  one  of  'd' (directory), or  'h' (hard link), or 's'
+	      type may one of 'd' (directory), or  'h'	(hard  link),  or  's'
 	      (symbolic link).
 
 	      -t d  Create a directory.
 	      If path is not specified source is used as the path attribute.
 
 	      -t h  Create a hard link.
-	      path and source are specified.  source is used as the  value  of
-	      the  link_source	attribute,  and  path is the value of the path
+	      path  and  source are specified.	source is used as the value of
+	      the link_source attribute, and path is the  value  of  the  path
 	      attribute.
 
 	      -t s  Create a symbolic link.
-	      path and source are specified.  source is used as the  value  of
-	      the  link_source	attribute,  and  path is the value of the path
+	      path  and  source are specified.	source is used as the value of
+	      the link_source attribute, and path is the  value  of  the  path
 	      attribute.
 
        -m mode
@@ -1714,12 +1897,12 @@ SIGNATURE VERIFICATION
 	 file_permissions [-m mode] [-u umask] [-o [owner[,]][uid]] [-g [group[,]][gid]]
 
 
-       Applies to subsequently listed file definitions in  a  fileset.	 These
-       attributes  will  apply	where  the  file attributes were not specified
-       explicitly in a file definition.  Subsequent  file_permissions  defini-
-       tions  simply replace previous definitions (resetting all the options).
+       Applies	to  subsequently  listed file definitions in a fileset.  These
+       attributes will apply where the	file  attributes  were	not  specified
+       explicitly  in  a file definition.  Subsequent file_permissions defini-
+       tions simply replace previous definitions (resetting all the  options).
 
-       To reset the file_permission state (i.e. turn it off) use  one  of  the
+       To  reset  the  file_permission state (i.e. turn it off) use one of the
        following:
 	   file_permissions ""
 	    or the preferred way is
@@ -1738,58 +1921,59 @@ SIGNATURE VERIFICATION
        The contents of filename may be more definitions for files.  The syntax
        of the included file is PSF syntax.
 
+
    SWBIS PSF CONVENTIONS
-       This section describes attribute usage and conventions imposed  by  the
-       swbis  implementation.  Not all attributes are listed here.  Those that
+       This  section  describes attribute usage and conventions imposed by the
+       swbis implementation.  Not all attributes are listed here.  Those  that
        are have important effects or particular interest.
 
    o Distribution Attributes
-       The standard defines a limited set of attributes for  the  distribution
-       object.	 An expanded set is suggested by the informative annex however
-       a conforming implementation is not required act on  them.   The	reason
+       The  standard  defines a limited set of attributes for the distribution
+       object.	An expanded set is suggested by the informative annex  however
+       a  conforming  implementation  is not required act on them.  The reason
        for this is a distribution may be acted upon by a conforming utility in
-       such a way that attributes of the  distribution	become	invalid.   For
-       this  reason,  some  attributes	that  refer to an entire "package" [in
+       such  a	way  that  attributes of the distribution become invalid.  For
+       this reason, some attributes that refer	to  an	entire	"package"  [in
        other package managers] are referred from the product object and attain
-       their  broadened  scope by the distributor's convention that their dis-
+       their broadened scope by the distributor's convention that  their  dis-
        tribution contains just one product.
 
        For example, the package NAME and VERSION are referred from the product
-       tag  and  revision,  not  the distribution's.  This convention supports
-       multiple products in a distribution and is consistent  with  the  stan-
+       tag and revision, not the  distribution's.   This  convention  supports
+       multiple  products  in  a distribution and is consistent with the stan-
        dard.
 
        tag
 
-	      tag  is  the  short, file system friendly, name of the distribu-
-	      tion.  Providing a distribution  tag  is	optional.   The  swbis
+	      tag is the short, file system friendly, name  of	the  distribu-
+	      tion.   Providing  a  distribution  tag  is optional.  The swbis
 	      implementation will use this as the [single] path name prefix if
 	      there is no distribution.control_directory attribute.  A distri-
 	      bution tag attribute and swpackage's response to it is an imple-
-	      mentation extension.  The leading package path can also be  con-
+	      mentation  extension.  The leading package path can also be con-
 	      trolled with the ''-W dir'' option.
 
 
        control_directory
 
-	      control_directory,  in  a  distribution  object, is the constant
-	      leading package path.  Providing this attribute is optional.   A
+	      control_directory, in a distribution  object,  is  the  constant
+	      leading  package path.  Providing this attribute is optional.  A
 	      distribution   control_directory	 attribute   and   swpackage's
-	      response to it is  an  implementation  extension.   The  leading
-	      package  path can also be controlled with the ''-W dir'' option.
-	      This attribute will be generated by swpackage if not  set  in  a
+	      response	to  it	is  an	implementation extension.  The leading
+	      package path can also be controlled with the ''-W dir''  option.
+	      This  attribute  will  be generated by swpackage if not set in a
 	      PSF.
 
 
    o Bundle Attributes
-       A  bundle defines a collection of products whether or not the distribu-
+       A bundle defines a collection of products whether or not the  distribu-
        tion has all the products present.
 
        tag
 
-	      tag is the short, file system  friendly,	name  of  the  bundle.
-	      This  value  is  used by the swbis implementation as a path name
-	      component in the installed  software  catalog.   If  it  is  not
+	      tag  is  the  short,  file  system friendly, name of the bundle.
+	      This value is used by the swbis implementation as  a  path  name
+	      component  in  the  installed  software  catalog.   If it is not
 	      present the product tag is used.
 
 
@@ -1798,24 +1982,24 @@ SIGNATURE VERIFICATION
 
        tag
 
-	      tag  is  the  short,  file system friendly, name of the product.
-	      This value is used by the swbis implementation as  a  path  name
-	      component  in  the  installed software catalog.  It is required.
-	      The swbis implementation uses it in a way that is  analogous  to
+	      tag is the short, file system friendly,  name  of  the  product.
+	      This  value  is  used by the swbis implementation as a path name
+	      component in the installed software catalog.   It  is  required.
+	      The  swbis  implementation uses it in a way that is analogous to
 	      the RPMTAG_NAME attribute.
 
 
        control_directory
 
-	      Is  the directory name in the distribution under which the prod-
-	      uct contents are located.  This  value  has  no  affect  on  the
-	      installed  software  catalog.   If it is not given in a PSF then
+	      Is the directory name in the distribution under which the  prod-
+	      uct  contents  are  located.   This  value  has no affect on the
+	      installed software catalog.  If it is not given in  a  PSF  then
 	      the tag is used.
 
 
        revision
 
-	      Is the product revision.	It  should  not  contain  a  "RELEASE"
+	      Is  the  product	revision.   It	should not contain a "RELEASE"
 	      attribute part or other version suffix modifiers.  This value is
 	      used by the swbis implementation as a path name component in the
 	      installed software catalog.  It is required by swinstall.
@@ -1823,18 +2007,18 @@ SIGNATURE VERIFICATION
 
        vendor_tag
 
-	      This  is	a  short identifying name of the distributor that sup-
-	      plied the product and associates	the  vendor  object  from  the
-	      INDEX  file.   This attribute is optional.  This attribute value
+	      This is a short identifying name of the  distributor  that  sup-
+	      plied  the  product  and	associates  the vendor object from the
+	      INDEX file.  This attribute is optional.	This  attribute  value
 	      should strive to be unique among all distributors.  It is one of
-	      the  version distinguishing attributes of a product specified by
+	      the version distinguishing attributes of a product specified  by
 	      the standard.  It is transfered into the installed_software cat-
-	      alog  (not  as  a  path  name  component) by swinstall.  If this
+	      alog (not as a path  name  component)  by  swinstall.   If  this
 	      attribute exists there should also be a vendor object in the PSF
 	      in the distribution object that has this tag.  This attribute is
 	      assigned the value of RPMTAG_RELEASE by swpackage when translat-
-	      ing  an RPM.  In this capacity it serves to distinguish products
-	      with the same revision and tag from the same or  different  dis-
+	      ing an RPM.  In this capacity it serves to distinguish  products
+	      with  the  same revision and tag from the same or different dis-
 	      tributor.   It  most  closely  maps  to  the  RPMTAG_RELEASE  or
 	      "debian_revision" attributes.
 
@@ -1848,14 +2032,14 @@ SIGNATURE VERIFICATION
 
        control_directory
 
-	      Is  the  directory  name	in the product under which the fileset
+	      Is the directory name in the product  under  which  the  fileset
 	      contents are located.  This value has no affect on the installed
-	      software	catalog.   If it is not given in a PSF then the tag is
+	      software catalog.  If it is not given in a PSF then the  tag  is
 	      used.
 
    o Example Source Package PSF
-       This PSF packages every file is current directory. It uses nil  control
-       directories  so	the  package  structure  does not change relative to a
+       This  PSF packages every file is current directory. It uses nil control
+       directories so the package structure does  not  change  relative  to  a
        vanilla tarball.
 
 	distribution
@@ -1888,12 +2072,12 @@ SIGNATURE VERIFICATION
 
 
    o Example Runtime (Binary) Package PSF
-       This is a sample PSF for a runtime package.  It implies multiple  prod-
-       ucts  (e.g.  sub-packages)  using the bundle.contents attribute.  Since
-       the bundle and product tags exist in a un-regulated namespace  and  are
+       This  is a sample PSF for a runtime package.  It implies multiple prod-
+       ucts (e.g. sub-packages) using the  bundle.contents  attribute.	 Since
+       the  bundle  and product tags exist in a un-regulated namespace and are
        seen by end users they should be carefully chosen.   Note that the bun-
-       dle and product have the same tag which may force downstream  users  to
-       disambiguate  using  software  selection  syntax  such as fooit,bv=* or
+       dle  and  product have the same tag which may force downstream users to
+       disambiguate using software selection  syntax  such  as	fooit,bv=*  or
        fooit,pv=* .
 
 	distribution
@@ -1934,7 +2118,6 @@ SIGNATURE VERIFICATION
 
 
 
-
 SAMPLE PRODUCT SPEC FILES
        This section shows several example PSF files.
 
@@ -1952,8 +2135,8 @@ SAMPLE PRODUCT SPEC FILES
 
 
    o   A PSF that uses directory mapping.
-       This PSF creates a package with live system paths from source  that  is
-       installed  in  non-live temporary locations. It is modeled on the swbis
+       This  PSF  creates a package with live system paths from source that is
+       installed in non-live temporary locations. It is modeled on  the  swbis
        source package.
 
 	distribution
@@ -2018,46 +2201,6 @@ SAMPLE PRODUCT SPEC FILES
 
 
 
-SWPACKAGE OUTPUT FORMAT
-       The output format is either one of two  formats	specified  in  POSIX.1
-       (ISO/IEC  9945-1)  which  are  tar (header magic=ustar) or cpio (header
-       magic=070707).  The default  format  of	the  swbis  implementation  is
-       "ustar".   The  POSIX  spec under specifies definitions for some of the
-       ustar header fields.  The personality of the default swbis ustar format
-       mimics  GNU tar 1.15.1 and is designed to be compliant to POSIX.1.  The
-       personality of the "ustar0" format mimics, for pathnames less  than  99
-       octets,	 GNU  tar  1.13.25 using the "-b1 --posix" options.  This bit-
-       for-bit sameness does not exist for pathnames greater than 99 chars  as
-       swbis  follows  the  POSIX  spec  and  GNU  tar	1.13.25 does not.  The
-       "ustar0" ustar personality is deprecated.  It is only slightly  differ-
-       ent  from  'ustar' in how device number fields are filled (with spaces,
-       zeros or NULs) for non-device files.
-
-       In addition the swbis implementation supports several other  tar  vari-
-       ants  including bit-for-bit mimicry of GNU tar (1.13.25) default format
-       which uses a non-standard name split and file type  (type  'L').   This
-       format is known as '--format=oldgnu'.  Also supported is the gnu format
-       of GNU tar 1.15.1 specified by '--format=gnu'
-
-       The defacto cpio formats are also supported.   "new  ASCII"  (sometimes
-       called SVR4 cpio) and "crc" cpio formats with header magic "070701" and
-       "070702" respectively.
-
-       Support for "pax Interchange Format" (Extended header tar) described in
-       IEEE 1003.1-2001 under the "pax" manual page is planned.
-
-       The  entirety  of  the output byte stream is a single valid file of one
-       the formats mentioned above.
-
-       The swbis implementation writes its output to stdout.  The default out-
-       put block size is 10240 bytes.  The last block is not padded and there-
-       fore the last write(2) may be a short write.  The selected  block  size
-       does not affect the output file contents.
-
-       The  swbis implementation is biased, in terms of capability and default
-       settings, to the tar format.  Package signing is only supported in  tar
-       format.
-
 RETURN VALUE
        0  on success, 1 on error and target medium not modified, 2 on error if
        target medium modified.
@@ -2069,11 +2212,30 @@ SIDE EFFECTS
        may alter its keys when invoked for package signing.
 
 ENVIRONMENT
-       The  environment  variable  SWPACKAGEPASSFD  sets  the  passphrase file
-       descriptor (See option -Wpassphrase-fd).
+       SWPACKAGEPASSFD
+	      Sets  the --passphrase-fd option.  Set the option arg to a inte-
+	      ger value of the file  descriptor,  or  to  "env"  to  read  the
+	      passphrase from the environment variable SWPACKAGEPASSPHRASE, or
+	      to "agent" to cause gpg to use gpg-agent, or to "tty" to restore
+	      default behavoir to reading passphrase from the terminal.
+
+
+       SWPACKAGEPASSPHRASE
+	      Use  the	value  as  the passphrase if --passphrase-fd is set to
+	      "env"
+
+
+       GNUPGHOME
+	      Sets the --gpg-home option.
+
+
+       GNUPGNAME
+	      Sets the --gpg-name option, which is turn set  the  --local-user
+	      option of gpg.
+
 
 REQUISITE UTILITIES
-       Swpackage does not use any archive writing utilities, it  has  its  own
+       Swpackage  does	not  use any archive writing utilities, it has its own
        code to generate archives.
        Package signing uses one of the following:
 	/usr/bin/gpg
@@ -2101,15 +2263,15 @@ SEE ALSO
 IDENTIFICATION
 	swpackage(8): The packaging utility of the swbis project.
 	Author: Jim Lowe   Email: jhlowe at acm.org
-	Version: swbis 0.481
-	Date: 2006-02-15
+	Version: 0.499
+	Last Updated: 2006-07-01
 	Copying: GNU Free Documentation License
 
 BUGS
-       A  comment  after  an object keyword is wrongly not allowed by this PSF
+       A comment after an object keyword is wrongly not allowed  by  this  PSF
        parser.	The --dir="" does not do what one would expect sometimes.  The
-       output  stream content is unaffected by the blocksize, that is the last
-       write may be short write.  Signing is broken for cpio format  archives.
+       output stream content is unaffected by the blocksize, that is the  last
+       write  may be short write.  Signing is broken for cpio format archives.
 
 
 
@@ -2138,6 +2300,7 @@ SYNOPSIS
        [software_selections] [@target [target1...]]
 
        swinstall -s -	 # Minimum unambiguous invocation.
+
 
 DESCRIPTION
        As of 2004-04-03 swinstall is usable at an alpha release level.
@@ -2177,63 +2340,75 @@ DESCRIPTION
 
 OPTIONS
        -f FILE
+
 	      Reads software_selections from FILE. (Not implemented).
 
        -p
+
 	      Preview the operation.  Depending on the verbose level  informa-
 	      tion  is written to stdout.  The target is not modified although
 	      a remote connection is established.
 
 
        -r
+
 	      This option has no affect.
 
 
        -s SOURCE
-	      Specify the source file SOURCE,  "-"  is	standard  input.   The
-	      syntax  is  the  same as for a target.  SOURCE may be an archive
-	      file or stdin.
+
+	      Specify the source file SOURCE, "-" is standard input.  The syn-
+	      tax  is the same as for a target.  SOURCE may be an archive file
+	      or stdin.
 
        -t targetfile
+
 	      Specify a file containing a list of targets (one per line).
 
        -x option=value
+
 	      Specify the extended option overriding the defaults file	value.
 
        -X FILE
+
 	      Specify  the  extended  options  filename, FILE,	overriding the
 	      default filenames.  This option may be given more then once.  If
 	      the resulting specified value is an empty string then reading of
 	      any options file is disabled.
 
        -v
+
 	      Given one time it is identical to -x verbose=2.  This option can
 	      be given multiple times with increasing effect.  (Implementation
 	      extension option).
-	       -v  is level 2, -vv is level 3,... etc.
-		   level 0: silent on stdout and stderr.
-		   level 1: fatal and warning messages to stderr.
-	       -v  level 2: level 1 plus a progress bar.
-	       -vv level 3: level 2 plus script stderr.
-	       -vvv level 4: level 3 plus events.
-	       -vvvv level 5: level 4 plus events.
-	       -vvvvv level 6: level 5 plus set shell -vx option.
-	       -vvvvvv level 7 and higher: level 6 plus debugging messages.
+	      -v  is level 2, -vv is level 3,... etc.
+		  level 0: silent on stdout and stderr.
+		  level 1: fatal and warning messages to stderr.
+	      -v  level 2: level 1 plus a progress bar.
+	      -vv level 3: level 2 plus script stderr.
+	      -vvv level 4: level 3 plus events.
+	      -vvvv level 5: level 4 plus events.
+	      -vvvvv level 6: level 5 plus set shell -vx option.
+	      -vvvvvv level 7 and higher: level 6 plus debugging messages.
 
        --version, -V
+
 	      Show version (Implementation extension)
 
        --help
+
 	      Show help (Implementation extension)
 
        -W option[,option,...]
+
 	      Specify the implementation extension option.
-	       Syntax: -W option[=option_argument[,option...]
-	       Options may be separated by a comma.  The implementation exten-
+	      Syntax: -W option[=option_argument[,option...]
+	      Options may be separated by a comma.  The implementation	exten-
 	      sion  options  may also be given individually using the '--long-
 	      option[=option_arg]' syntax.
 
        -W preview-tar-file=FILE
+
 	      This  is	a  testing/development	option.   Writes  the  fileset
 	      archive  to  FILE.  This is the same data stream that would have
 	      been loaded on the target.  This option should only be used with
@@ -2241,6 +2416,8 @@ OPTIONS
 	      without trailer blocks.
 
        -W remote-shell=NAME
+
+
 	      Defaults File Option: swbis_remote_shell_client
 
 	      This is the remote connection client program on  the  management
@@ -2250,7 +2427,8 @@ OPTIONS
 	      "ssh".
 
        -W quiet-progress
-	      Defaults File Option:  swbis_quiet_progress_barDisable  progress
+
+	      Defaults File Option: swbis_quiet_progress_bar Disable  progress
 	      bar,  which is active for verbose levels 2 and higher (i.e. -v).
 
        -W show-options-files
@@ -2261,7 +2439,6 @@ OPTIONS
 	      line options.
 
        -W pax-command={tar|pax|star|gtar}
-
 	      Set  the	portable  archive  command  for  all  operations.  The
 	      default is "pax".
 
@@ -2281,12 +2458,10 @@ OPTIONS
 	      "pax".
 
        -W pax-write-command={tar|pax|star|gtar|swbistar}
-
 	      Set the write command for local and remote hosts.  This  is  the
 	      command that runs on the target (e.g. pax -w, tar cf -).
 
        -W remote-pax-write-command={tar|pax|star|gtar|swbistar}
-
 	      Defaults File Option: swbis_remote_pax_write_command
 	      Set the write command for remote hosts.
 
@@ -2359,7 +2534,16 @@ OPTIONS
 	      ssh client program options.  For example -W  ssh-options=1  sets
 	      the
 
+       -W source-script-name=NAME
+	      Write  the  script that is written into the remote shell's stdin
+	      to NAME.	This is useful for debugging.
+
+       -W target-script-name=NAME
+	      Write the script that is written into the remote	shell's  stdin
+	      to NAME.	This is useful for debugging.
+
        software_selections
+
 	      Refer  to  the software objects (products, filesets) on which to
 	      be operated.  (Not  implemented).   The  implementation  defined
 	      behavior for no selections is to operate on the entire distribu-
@@ -2367,6 +2551,7 @@ OPTIONS
 
 
        target
+
 	      Refers to the software_collection where the software  selections
 	      are  to  be  applied.  Allows specification of host and pathname
 	      where the software collection is to be located.  A  target  that
@@ -2457,6 +2642,7 @@ OPTIONS
 
 
 
+
 INSTALLED SOFTWARE CATALOG
        **  As  of  2004-02-12  the  form and features of the catalog are under
        active development. **
@@ -2470,7 +2656,7 @@ INSTALLED SOFTWARE CATALOG
        tories.
 
    CATALOG FILE LAYOUT
-	 &lt;path>/
+	&lt;path>/
 	&lt;path>/&lt;ISC>/
 	&lt;path>/&lt;ISC>/&lt;bundle>/
 	&lt;path>/&lt;ISC>/&lt;bundle>/&lt;product>/
@@ -2567,7 +2753,7 @@ INSTALLED SOFTWARE CATALOG
        tax.   Unlike  an  INDEX file, it may contain control_file definitions.
        The INSTALLED file stores the control script return codes  and  fileset
        installation  state.   It is updated several times during the operation
-       of 'swinstall'.	It can be parsed using	&lt;libexec>/swbisparse  and  the
+       of 'swinstall'.	It can be parsed  using   libexec/swbisparse  and  the
        '--installed' option.
 
        control.sh -- The master control script
@@ -2586,9 +2772,9 @@ INSTALLED SOFTWARE CATALOG
 
 
        This  file contains the extended options in a form that may be executed
-       by the shell '.' (dot)  command.   It  is  automatically  generated  by
-       swinstall.  The value of the SW_SESSION_OPTIONS environment variable is
-       the absolute pathname of the this file.
+       by the shell '.' (dot) command.	It is automatically generated by swin-
+       stall.  The value of the SW_SESSION_OPTIONS environment variable is the
+       absolute pathname of the this file.
 
    EXAMPLE CATALOG ENTRY
        Below is an example entry of  the  catalog  created  by	swbis  version
@@ -2625,6 +2811,7 @@ IMPLEMENTATION EXTENSIONS
        '.'.  If the source is a regular file then a regular file in  '.'  will
        be created with the same name.
 
+
    RPM Translation
        RPM  (RedHat  Package  Manager)	format packages are installed by first
        translating to an equivalent ISO/IEEE file layout in Posix  tar	format
@@ -2644,9 +2831,9 @@ IMPLEMENTATION EXTENSIONS
 
 
    Testing with RPM
-       To test the swbis components, a completely independent means to install
-       and verify a package is needed.	RPM provides this  means  and  can  be
-       used in the following way:
+	To  test  the  swbis  components,  a  completely  independent means to
+       install and verify a package is needed.	RPM provides  this  means  and
+       can be used in the following way:
 
 	  rpm -i --nodeps --force your-0.0-1.i386.rpm  # Install
 	  rpm --verify --nodeps your-0.0-1	       # Show that all is well
@@ -2714,36 +2901,34 @@ RETURN VALUE
        failed and some succeeded.
 
 NOTES
-       Multiple ssh-hops is an implementation extension.
-
+	Multiple ssh-hops is an implementation extension.
 
 REQUISITE UTILITIES
        swinstall requires a Posix shell accessible by the  remote  shell  com-
-       mand.   This  is  the  remote  command  run  by	ssh  (or  rsh) for all
-       operations.  This command can  be  controlled  by  the  --shell-command
-       option or the swbis_shell_command defaults file option.	Permitted val-
-       ues  are  "bash"  (/bin/bash  -s)  or  "sh"  (/bin/sh  -s)  or  "posix"
-       ('PATH=`getconf	PATH`  sh  -s').    The default is "posix".  swinstall
-       requires the Posix capability of reading commands on stdin according to
-       the  specification  described  in IEEE Std 1003.1, 2003 Ed.; sh -shell,
-       Section STDIN.  This requirement accommodates reading of shell  program
-       code  and  data	on  STDIN.  This capability may not be present in some
-       /bin/sh shells.	The "/bin/sh" on FreeBSD-5.1 may  be  broken  in  this
-       regard,	hence  ''--shell-command=bash''  should be used for BSD hosts.
-       The public domain Korn shell (pdksh-5.2.14) seems to work OK, that  is,
-       it complies by luck or intent with the Posix capability of reading data
-       and code on stdin.
+       mand.   This  is  the remote command run by ssh (or rsh) for all opera-
+       tions.  This command can be controlled by the --shell-command option or
+       the  swbis_shell_command  defaults  file  option.  Permitted values are
+       "bash" (/bin/bash -s) or "sh" (/bin/sh -s) or  "posix"  ('PATH=`getconf
+       PATH`  sh -s').	 The default is "posix".  swinstall requires the Posix
+       capability of reading commands on stdin according to the  specification
+       described in IEEE Std 1003.1, 2003 Ed.; sh -shell, Section STDIN.  This
+       requirement accommodates reading of shell  program  code  and  data  on
+       STDIN.  This capability may not be present in some /bin/sh shells.  The
+       "/bin/sh" on FreeBSD-5.1 may be broken in this regard, hence ''--shell-
+       command=bash''  should  be  used for BSD hosts.	The public domain Korn
+       shell (pdksh-5.2.14) seems to work OK, that is, it complies by luck  or
+       intent with the Posix capability of reading data and code on stdin.
 
-       If the --no-getconf option is  set  or  the  swinstall.swbis_no_getconf
+       If  the	--no-getconf  option  is set or the swinstall.swbis_no_getconf
        defaults option is "true" then the remote command is '/bin/sh -s'.  Use
        of the no-getconf option is needed for communication with user accounts
-       on  remote  machines whose login shell is not a Bourne shell (e.g. csh)
+       on remote machines whose login shell is not a Bourne shell  (e.g.  csh)
        such as root on some default BSD installations.	Other *nix systems may
-       require	use  of  getconf  because their /bin/sh is broken or not Posix
+       require use of getconf because their /bin/sh is	broken	or  not  Posix
        enough (e.g. Sun platforms).  Still other systems may not have getconf.
 
        Other utilities required to be in $PATH on the remote host are: dd, pax
-       (or tar|star|gtar), hostname, mkdir, expr, echo, test, sleep, read  (if
+       (or  tar|star|gtar), hostname, mkdir, expr, echo, test, sleep, read (if
        not builtin).
 
 FILES
@@ -2764,23 +2949,23 @@ SEE ALSO
 IDENTIFICATION
 	swinstall(8): The installation utility of the swbis project.
 	Author: Jim Lowe   Email: jhlowe at acm.org
-	Version: 0.481
-	Date: 2006-02-15
+	Version: 0.499
+	Last Updated: 2006-02-01
 	Copying: GNU Free Documentation License
 
 BUGS
        swinstall is subject to breakage if a user's account on an intermediate
-       (or terminal) host in a target spec is not configured to use  a	Bourne
-       compatible  shell. (This breakage may be eliminated by use of the --no-
+       (or  terminal)  host in a target spec is not configured to use a Bourne
+       compatible shell. (This breakage may be eliminated by use of the  --no-
        getconf option as explained above.)
 
-       A multiple ssh hop source spec  (more than 1 remote  host  involved  in
+       A  multiple  ssh  hop source spec  (more than 1 remote host involved in
        the source transfer) upon a SIGINT may result in sshd and ssh processes
-       being left on on the intermediate host(s),  this  despite,  swinstall's
+       being  left  on	on the intermediate host(s), this despite, swinstall's
        action of sending a SIGTERM to the remote script's parent process.
 
        swinstall does not currently implement Software Selections, not fileset
-       dependencies, and much more.  Only packages with one  product  and  one
+       dependencies,  and  much  more.	Only packages with one product and one
        fileset are supported.
 
 
@@ -3050,6 +3235,14 @@ OPTIONS
 
        -W unrpm
 	      Turns on options --allow-rpm and --audit.
+
+       -W source-script-name=NAME
+	      Write the script that is written into the remote	shell's  stdin
+	      to NAME.	This is useful for debugging.
+
+       -W target-script-name=NAME
+	      Write  the  script that is written into the remote shell's stdin
+	      to NAME.	This is useful for debugging.
 
        software_selections
 
@@ -3324,9 +3517,9 @@ REQUISITE UTILITIES
        code and data on STDIN.	This capability may not  be  present  in  some
        /bin/sh shells.	The "/bin/sh" on FreeBSD-5.1 is broken in this regard,
        hence ''--shell-command=bash'' should be used for BSD hosts.  The  pub-
-       lic  domain  Korn  shell  (pdksh-5.2.14)  seems to work OK, that is, it
-       complies by luck or intent with the POSIX capability  of  reading  data
-       and code on stdin.
+       lic domain Korn shell (pdksh-5.2.14) seems to work OK, that is, it com-
+       plies by luck or intent with the POSIX capability of reading  data  and
+       code on stdin.
 
        If  the	--no-getconf  option  is  set  or  the swcopy.swbis_no_getconf
        defaults option is "true" then the remote command is '/bin/sh -s'.  Use
@@ -3358,8 +3551,8 @@ SEE ALSO
 IDENTIFICATION
 	swcopy(8): The archive copying utility of the swbis project.
 	Author: Jim Lowe   Email: jhlowe at acm.org
-	Version: 0.481
-	Date: 2006-02-15
+	Version: 0.499
+	Last Updated: 2006-07
 	Copying: GNU Free Documentation License
 
 BUGS
@@ -3417,27 +3610,28 @@ SYNOPSIS
        [-x option=value]  [-X options_file]  [-W option] \
        [software_selections]  [@targets]
 
-       swverify
+       swverify  # Verify standard input
 
        swverify -r selection [@ target]
 
        swverify -d [@ target]
 
-       swverify -d @-	# Note: special meaning for dash as stdin
+       swverify -d @-	# dash means standard input
 
-       swverify -d @.	# Note: special meaning for . as current directory
+       swverify [--scm|--order-files] -d @.  # . means current directory
+
+       swverify [--scm|--order-files] -d @:package_directory
 
        Implementation Extension:
 
-       swverify --checksig [portable_archive_file]
-
-       swverify --checksig directory
+       swverify [-Wd] -Wemit-digest-file [portable_archive_file]
 
        swverify [-Wd] -Wemit-signed-file [portable_archive_file]
 
        swverify [-Wd] [-Wsha1] -Wemit-digest-file [portable_archive_file]
 
        swverify [-Wd] -Wget-sig-if=sigfilename [portable_archive_file]
+
 
 DESCRIPTION
        The  swverify  utility checks the accuracy of software in distributions
@@ -3449,112 +3643,198 @@ DESCRIPTION
        distributions.	The  built-in value of "installed_software_catalog" is
        "var/lib/swbis/catalog".
 
+
 OPTIONS
        -d
+
 	      Specify to operate on a distribution rather than installed soft-
 	      ware.
+
        -r
+
 	      Specify to operate on installed software at the target path.
 
 
+
        software_selections
+
 	      See other man pages.
 
 
        targets
+
 	      See  other  man  pages.	Currently,  only one (1) target can be
 	      specified.
 
 
        -x option=value
+
 	      Specify the extended option overriding the defaults file	value.
 	      This option not yet implemented.
 
        -X FILE
+
 	      Specify  the  extended  options  filename, FILE,	overriding the
 	      default filename.  This option not yet implemented.
 
        Other posix options not implemented.
 
+
 POSIX EXTENDED OPTIONS
        Not yet implemented.
 
+
 IMPLEMENTATION EXTENSION OPTIONS
        -W option[,option,...]
+
 	      Specify the implementation extension option.
-	       Syntax: -W option[=option_argument[,option...]
-	       Options may be separated by a comma.
+	      Syntax: -W option[=option_argument[,option...]
+	      Options may be separated by a comma.
 
        --checksig | -W checksig
-	      If target file is not a directory then verify  archive  md5  and
-	      sha1  and  gpg signature directly from the file.	If target file
-	      is a directory, attempt to verify the signature  using  GNU  tar
-	      and  gpg	and  if  successful  execute the distributor extension
-	      script checksig.	If checksig does  not  exist  then  exit  with
-	      failure.
-	       FILE may be "." (current directory) or "-" (standard input).  A
-	      serial archive file may be compressed with gzip, bzip2, or  Unix
+
+	      This is the default action and is the same as the  POSIX	syntax
+	      "-d  @target".   If  target  file is not a directory then verify
+	      archive md5 and sha1 and gpg signature directly from  the  file.
+	      If  target  file is a directory, attempt to verify the signature
+	      using GNU tar and gpg and if successful execute the  distributor
+	      extension script checksig.  If checksig does not exist then exit
+	      with failure.
+	      FILE may be "." (current directory) or "-" (standard input).   A
+	      serial  archive file may be compressed with gzip, bzip2, or Unix
 	      compress.
 
-       -W emit-signed-file | -W C
-	      Read  archive  file  FILE or standard input and write the signed
-	      file (i.e. gpg's signed stuff) to stdout.  This is  the  catalog
-	      section of the Posix package.
 
-       -W emit-digest-file | -W S
-	      Read  archive  file FILE or standard input and write the archive
-	      section of the file (that was used to make the md5 and sha1 mes-
-	      sage  digests)  to  stdout.   This is the storage section of the
-	      Posix package.
+       --order-catalog
+
+	      Use the order of files in catalog/dfiles/files to  recreate  the
+	      signed data when verifying the directory (unpacked tarball) form
+	      of the package.
+
+
+       --cvs
+
+	      Read and process information in  the  ./catalog  (before	it  is
+	      authenticated) to correct the file sytem meta-data in an attempt
+	      to verify the GPG signature.  It only  affects  verification  on
+	      the  directory (unpacked tarball), not tarball verification.  It
+	      is required when verifying an exported or  working  SCM  (Source
+	      Code Management, such as CVS) directory if the SCM does not pre-
+	      serve and restore  file  system  meta-data.   This  option  also
+	      emliminates  the dependency on the order of files in file system
+	      directories.
+
+
+       --scm
+
+	      Currently, same as the --cvs option.
+
+
+       --no-checkdigest
+
+	      When verifying the directory form, do not  run  the  checkdigest
+	      script  even  if	the  GPG  signed data contains the checkdigest
+	      script.
+
+
+       --signed-file  [FILE]
+
+	      Write the GPG signed portion of the package  to  stdout  without
+	      verifying  it.   Read  archive  file  FILE or standard input and
+	      write the signed file (i.e. gpg's signed stuff) to stdout.  This
+	      is  the  catalog	section  of the Posix package.	This option is
+	      supported for the tarball file and unpacked  tarball  directory.
+	      Use of the --scm option may be required for the unpacked tarball
+	      directory form.
+
+
+       --digest-file  [FILE]
+
+	      Write the payload portion of the package to stdout without veri-
+	      fying its digest matches the digest in the signed data.  This is
+	      the storage section of the Posix package.  This  option  is  not
+	      supported for the unpacked tarball form.
+
+
+       -W emit-signed-file | -W C
+
+	      Same as --signed-data.  Also the same as -WC
+
+
+       -W emit-digest-file [FILE]
+
+	      Same as --digest-data.  Also the same as -WS
+
 
        -W show-auth-files | -W d
-	      Writes the relevent security file to stderr.  Applies  to  emit-
+
+	      Writes  the  relevent security file to stderr.  Applies to emit-
 	      digest-file and emit-signed-file modes.
 
+
        -W sig-number=N
+
 	      Operates on the Nth signature, 0 is last, 1 is the first.
 
+
        -W get-sig-if=outputfile
-	      Verifies	the archive digests by comparing to the digests in the
-	      catalog and if they match write the sigfile  to  outputfile  and
+
+	      Verifies the archive digests by comparing to the digests in  the
+	      catalog  and  if	they match write the sigfile to outputfile and
 	      the signed data to stdout.
+
 
 DISTRIBUTOR SCRIPTS
        Not yet implemented.
 
+
 IMPLEMENTATION EXTENSION DISTRIBUTOR SCRIPTS
-   checksig &lt;path>/catalog/&lt;dfiles>/checksig
-       A  software  distributor  may choose to provide a checksig script.  The
-       checksig  script is part of the distribution object.   It  is  used  to
-       verify  the  directory  form  of a distribution	(as distinguished from
-       installed_software).  The verified attributes are  the  same  as  those
-       verified  from the archive file form with the addition of the distribu-
-       tion file list.	In  addition  the  script  may	chose  to  verify  the
-       adjunct_md5sum  and  file.md5  digests  and symbolic links.  Due to the
-       constraints of reproducing the archive message digests from the	direc-
-       tory,  which include tar utility dependence and file owner/group speci-
+   checkdigest &lt;path>/catalog/&lt;dfiles>/checkdigest
+       This script was named 'checksig'.  As of 2006-03-28, the name  of  this
+       script  should be 'checkdigest'.  The name 'checksig' should be consid-
+       ered deprecated for new packages.
+
+       A software distributor may choose to provide a checkdigest script.  The
+       checkdigest   script is part of the distribution object.  It is used to
+       verify the directory form of a  distribution   (as  distinguished  from
+       installed_software).   The  verified  attributes  are the same as those
+       verified from the archive file form with the addition of the  distribu-
+       tion  file  list.   In  addition  the  script  may  chose to verify the
+       adjunct_md5sum and file.md5 digests and symbolic  links.   Due  to  the
+       constraints  of reproducing the archive message digests from the direc-
+       tory, which include tar utility dependence and file owner/group	speci-
        fication, this script may not be useful to all distributors.
 
    Execution Environment
-       The script should require the SW_CONTROL_TAG  environment  variable  be
-       set to "checksig" and if not exit with failure.
+	The  script may require the SW_CONTROL_TAG environment variable be set
+       to "checkdigest" or "checkfile" and if not exit with failure.  swverify
+       will  set  this variable to "checkfile" if the --scm or --cvs option is
+       used, and otherwise to "checkdigest".  The script  may  take  different
+       action  based  on the value.  Currently, the checkdigest script used by
+       the swbis source package will omit the archive digests checks if set to
+       SW_CONTROL_TAG="checkfile"  since reproducing the archive digest is not
+       possible when the package is exported from CVS due to file system meta-
+       data  non-preservation.	In  this case the file list is checked and the
+       md5 and sha1 digests are verified for each regular file.
 
 VERIFYING SIGNATURES
-       The  design  separates the payload and catalog, therefore, verification
+       The design separates the payload and catalog,  therefore,  verification
        requires verifying the storage section md5 and sha1 message digests and
        then verifying the signature of the catalog.  Naturally, it is required
-       that the signed data include the storage section  message  digests  and
-       that  they match the storage sections.  The storage section digests are
+       that  the  signed  data include the storage section message digests and
+       that they match the storage sections.  The storage section digests  are
        stored as separate attribute files in the dfiles catalog directory.
 
-       The checksig mode checks all the security files in the package  and  is
-       the  preferred  way  to	authenticate a package.  The emit-signed-file,
+       The  checksig  (i.e.  swverify -d @-) mode verifies a tarballs embedded
+       signature.  This mode checks all the security files in the package  and
+       is  the preferred way to authenticate a package.  The emit-signed-file,
        emit-digest-file modes are useful for testing, sanity checks and custom
-       applications.  The get-sig-if is the function used by checksig.
+       applications.   The  get-sig-if	is  the function used when verifying a
+       tarball.
 
-   Verifying a POSIX distribution Archive Manually
-       The  design  of the authentication attributes supports manual verifica-
-       tion of the archive file (e.g. tarball) form of the distribution,  that
+   Verifying a POSIX Distribution Archive Manually
+       The design of the authentication attributes supports  manual  verifica-
+       tion  of the archive file (e.g. tarball) form of the distribution, that
        is verification take place on the uncompressed archive using 'gpg', GNU
        'tar'  and  the	swbis  utility	'swverify'  (or  the  library  utility
        'arf2arf').
@@ -3571,10 +3851,11 @@ VERIFYING SIGNATURES
        5) Compare the digest message generated in step 4 to the
 	  authenicated digest obtained in step 3.
 
-       1) Obtain the signature from the package.
+	1) Obtain the signature from the package.
 
 	 #!/bin/sh
 	 tar zxf - -O \*/catalog/dfiles/signature &lt; swbis-0.460.tar.gz
+
 
        2)  Recreate the signed data
 
@@ -3582,10 +3863,12 @@ VERIFYING SIGNATURES
 	 swverify -WC &lt; swbis-0.460.tar.gz | gpg --verify /dev/tty -
 	 # Cut and paste the signature file obtained in step 1
 
+
        3)  Obtain the message digest
 
 	 #!/bin/sh
 	 swverify -WC &lt; swbis-0.460.tar.gz | tar xf - -O \*/catalog/dfiles/md5sum
+
 
        4)  Create the digested byte stream
 
@@ -3593,12 +3876,14 @@ VERIFYING SIGNATURES
 	 swverify -WS &lt; swbis-0.460.tar.gz | md5sum
 
 
-   Verifying a POSIX distribution Directory Manually
-       The  design  of the authentication attributes supports manual verifica-
+   Verifying a POSIX Distribution Directory Manually
+       Verifying the unpacked tarball package form.
+
+       The design of the authentication attributes supports  manual  verifica-
        tion of the directory (unpacked) form of the distribution, that is ver-
-       ification  takes  place	on  the leading package directory and its con-
-       tents. It should be noted that it is left to the user  to  verify  that
-       the  archive installed no files outside of this directory as this would
+       ification takes place on the leading package  directory	and  its  con-
+       tents.  It  should  be noted that it is left to the user to verify that
+       the archive installed no files outside of this directory as this  would
        likely indicate a trojan'ed package.
 
        If authenticating on a GNU/Linux system using GNU tar it is possible to
@@ -3609,35 +3894,37 @@ VERIFYING SIGNATURES
        1) The package file is a tar archive.
        2) The installed version of GNU tar produces archives with
 	  bit-for-bit sameness relative to the swpackage(8) utility
-	  that generated the signature and message digests.
-       3) The package has a single leading package directory.
-       4) The package catalog contains the 'checksig' script.
+	  that generated the signature and message digests.  For packages
+	  made with swbis versions >= 0.474 and with format option "ustar"
+	  you will need GNU tar 1.14 or 1.15.*
+       3) The package has a single leading package directory, like a source
+	  package.
+       4) The package catalog contains the 'checkdigest' script.
        5) The package catalog contains the distribution file list.
        6) The ownership names are present and have the same uid's and gid's.
        7) The package was unpacked with a version of tar that
-	  preserves all file times.
+	  preserves all file times.  Use for example "tar xpf".
 
 
-       In this example, the package has a  single  path  name  prefix  called,
-       namedir	and  the  file	owner/group  are root.	These restrictions are
+       In  this  example,  the	package  has a single path name prefix called,
+       namedir and the file owner/group  are  root.   These  restrictions  are
        suited to source packages.
-
-       Verify the signature:
+	Verify the signature:
 
 	 #!/bin/sh
 	 tar cf - -b1 --owner=root --group=root \
 	 --exclude=namedir/catalog/dfiles/signature  \
 	 namedir/catalog | gpg --verify namedir/catalog/dfiles/signature -
 
-       If this fails try using GNU tar option --posix.	If  this  fails  then,
-       try  experimenting  with  the owner, group, and numeric-id options.  If
-       you are unable to verify a tar byte stream using gpg(1)	that  contains
+       If  this  fails	try using GNU tar option --posix.  If this fails then,
+       try experimenting with the owner, group, and  numeric-id  options.   If
+       you  are  unable to verify a tar byte stream using gpg(1) that contains
        the storage section message digests, then the package cannot be authen-
        ticated.
 
 
        Assuming you successfully verified the catalog as shown above, now gen-
-       erate  the  message  digest and compare it to the md5sum file attribute
+       erate the message digest and compare it to the  md5sum  file  attribute
        from the same byte stream that gpg(1) claims is authenticate.
 
 	 #!/bin/sh
@@ -3660,18 +3947,17 @@ VERIFYING SIGNATURES
 	 --files-from=- --no-recursion | md5sum
 	 cat namedir/catalog/dfiles/adjunct_md5sum
 
-       The symbolic link files must be verified manually by comparing  to  the
+       The  symbolic  link files must be verified manually by comparing to the
        INFO file information.
 
    Verifying a POSIX distribution in tar format
-       Below  is  output  from	successful authentication.  The authentication
+       Below is output from  successful  authentication.   The	authentication
        requires checking the archive md5 message digest (and sha1 if present).
-       All  present  message digests must succeed and if this is true then the
+       All present message digests must succeed and if this is true  then  the
        signed file is written and gpg proceeds to check the signature.	If the
-       sig_header  file is present then the requirement that its data be iden-
-       tical to the ustar header of every signature file is enforced.  If  any
+       sig_header file is present then the requirement that its data be  iden-
+       tical  to the ustar header of every signature file is enforced.	If any
        one of these checks fails, authentication fails.
-
 
 	  #!/bin/sh
 	  swverify --checksig mypackage-00.1.tar.gz
@@ -3690,21 +3976,23 @@ VERIFYING SIGNATURES
        Primary key fingerprint: 77BB A98E B3A2 ED4C 217E  8A25 2BF4 28AB 82D0 DDE4
 
 
-   Verifying the directory (unpacked) form of a Distribution.
-       Authenticating  using  'swverify' is subject to the same constraints as
-       verifying manually using GNU tools  because  swverify  implements  this
+   Verifying the Directory Form of a Distribution
+       Authenticating using 'swverify' is subject to the same  constraints  as
+       verifying  manually  using  GNU	tools because swverify implements this
        using GNU tools.
 
-       authenticate  the  exported  catalog  signature and if it is successful
-       executes the catalog.  If the 'checksig' script does not exist, authen-
-       tication fails. 'swverify' will only attempt to run 'checksig' if it is
-       found in the dfiles directory of an authenticated catalog.
+       authenticate the exported catalog signature.  If it  is	successful  it
+       executes  the 'checkdigest' script found in the 'catalog/dfiles' direc-
+       tory of the exported catalog.  If the  'checkdigest'  script  does  not
+       exist,  authentication  fails.  'swverify' will only attempt to run the
+       'checkdigest' script if it is found  in	the  dfiles  directory	of  an
+       authenticated catalog.
 
-       file storage structure) of a directory form POSIX distribution  besides
-       execution of the distributor extension script 'checksig'.
+       file  storage structure) of a directory (unpacked) form of a POSIX dis-
+       tribution.  It is the role of the checkdigest script to do this.
 
-       If  filemypackage-00.1 is a directory unpacked with a tar reading util-
-       ity that preserved file times then try,
+       For example, if filemypackage-00.1 is a directory unpacked with	a  tar
+       reading utility that preserved file times then try,
 
 
 	  #!/bin/sh
@@ -3758,16 +4046,17 @@ VERIFYING SIGNATURES
        checksig: /usr/bin/gpg exit status : 0
 
 
+
    Verifying Installed Software
-       (This capability is only partially implemented.)   Verifying  Installed
+       (This  capability  is only partially implemented.)  Verifying Installed
        Software involves comparing the package meta-data to the live file sys-
-       tem.  The validity of a successful comparison depends on  the  validity
-       of  the installed software catalog.  swverify makes no attempt to check
-       the validity of the entire catalog, however, it can use	the  distribu-
+       tem.   The  validity of a successful comparison depends on the validity
+       of the installed software catalog.  swverify makes no attempt to  check
+       the  validity  of the entire catalog, however, it can use the distribu-
        tion GPG signature, which is stored in the catalog, to authenticate the
        meta-data of the selected package.
 
-       Below is an example. Note, the package is selected on the basis of  its
+       Below  is an example. Note, the package is selected on the basis of its
        product or bundle tag.
 
        $ swverify -r your_product_tag @ /
@@ -3784,6 +4073,7 @@ VERIFYING SIGNATURES
        swverify: signature verification return status=0
 
 
+
    Create the digest byte stream -Wemit-digest-file mode:
        Here are some examples that verify the archive digests.
 
@@ -3792,14 +4082,13 @@ VERIFYING SIGNATURES
 	  cat your-tarball | swverify -Wd -WS | md5sum
 
 
-       Your  should  see a pair of identical digests. Use the -Wsha1 option to
+       Your should see a pair of identical digests. Use the -Wsha1  option  to
        check the sha1 digest in a similar manner.
 
        ** IMPORTANT **
-
-       This does not mean that the data is authenticate in the sense of  being
-       attributable  to  a  person,  merely  that the md5sum attribute and the
-       payload byte stream match.
+       This  does not mean that the data is authenticate in the sense of being
+       attributable to a person, merely that the md5sum attribute and the pay-
+       load byte stream match.
 
        To inspect the digested data, try:
 
@@ -3815,7 +4104,8 @@ VERIFYING SIGNATURES
 
 
    -Wget-sig-if mode:
-       This is the mode used by --checksig.  Here is an example.
+       This  is  the  mode  that  is used internally when verifying a tarball.
+       Below is an example of using this mode manually.
 
 
 	 #!/bin/sh
@@ -3839,6 +4129,10 @@ EXAMPLES
 	 swverify -d &lt; foo-1.1.tar.gz
 		  or
 	 swverify -d @`pwd`/foo-1.1.tar.gz
+		  or
+	 swverify -d @:foo-1.1.tar.gz
+		  or
+	 cat foo-1.1.tar.gz | swverify -d @-
 
 		 Note: --checksig and '-d' perform the same operations.
 
@@ -3847,9 +4141,16 @@ EXAMPLES
 
 	 swverify -d @`pwd`/foo-1.1
 		  or
-	 swverify -d @.
+	 cd foo-1.1; swverify -d @.
+		  or
+	 swverify -d @:foo-1.1
 
 		 Note: --checksig and '-d' perform the same operations.
+
+
+       * Verify an exported SCM Directory
+
+	 # This is the same as directory verification except the '--cvs' option is needed.
 
 
    Installed Software Verification
@@ -3882,12 +4183,14 @@ SEE ALSO
        sw(5), swign(1), swpackage(8), gpg(1), libexec/swbis/arf2arf
 
 
+
 IDENTIFICATION
 	swverify: The verification utility of the swbis project.
-	Author: J. Lowe jhlowe@acm.org
-	Version: 0.481
-	Date: 2006-02-14
+	Author: James Lowe, Jr.   Email: jhlowe at acm.org
+	Version: 0.499
+	Last Updated: 2006-08-03
 	Copying: GNU Free Documentation License
+
 
 BUGS
        The signature file's archive header (or data) is not part of the signed
@@ -3905,10 +4208,16 @@ BUGS
 
        Verification  of  the  directory  form  of  a  distribution  (i.e.  the
        installed  tarball  path  name prefix) such as running 'swverify -d @.'
-       after running 'swign -S' will fail if the order of directory entries is
-       not compatible with traditional Unix file system directory entry order-
-       ing.  This incompatibility may be present in the  Ext3,	reiserFS,  and
-       DarwinOS et.al file systems.
+       after running 'swign @.'  will fail if the order of  directory  entries
+       is  not	compatible  with  traditional Unix file system directory entry
+       ordering, which is the order of file creation.  This ordering is almost
+       always  apparent  on  Ext2  file  system for small directories (but not
+       always for big directories).  Ext3, reiserFS, and DarwinOS  et.al  file
+       systems	do not have this ordering, use of the '--order-catalog' option
+       is therefore required.  Use of the '--cvs' or '--order-catalog' options
+       is  theoretically problematic because it causes the use and interpreta-
+       tion of data in the verification of that same  data  therefore  opening
+       possible attack vectors.
 
 
 
@@ -3971,22 +4280,32 @@ DESCRIPTION
        directory contents, if any difference is found the archive is not writ-
        ten and error returned.
 
+
 OPTIONS
        --help
 	      show help.
 
+
        --show-psf
 	      show the PSF to stdout, and then exit.
+
 
        --no-psf-detect
 	      Disable automatic detection of the PSF's file ownerships policy.
 
+
+       --no-remove
+	      Don't remove the ./catalog directory before overwriting.
+
+
        -u, --local-user name
 	      Use name as the user ID to sign.
+
 
        --homedir=DIR
 	      Set the name of the home directory to  DIR.   If	not  specified
 	      then use "~/.gnupg".
+
 
        -s, --source=FILE
 	      Specify  a  PSF or '-' for stdin.  If this is not given then the
@@ -3996,48 +4315,57 @@ OPTIONS
 	      directory  name  have the form: 'tag-revision'.  The replacement
 	      string has the form '%__NAME' where NAME is 'tag' or 'revision'.
 
+
        -T, --show-names-only
 	      show some info (for help and debugging) and exit.
+
 
        -t, --run-sanity-check
 	      Instead  of  writing  stdout,  write  the  archive  to  ../pack-
 	      ageDirName.swigntest.tar.gz and run some sanity tests.
+
 
        -S, --sign-this
 	      Write the ./catalog/ file containing the	digest	and  signature
 	      into  "."  and  then exit without writing the archive to stdout.
 	      Same as using "." as the target such as 'swign @.'
 
-       -D, --with-checksig FILE
-	      Include the checksig control script sourced from FILE.  This  is
-	      only  needed when not supplying a PSF, that is this option modi-
-	      fies an internally generated PSF.
+
+       -D, --with-checkdigest FILE
+	      Include the checkdigest control script sourced from FILE.   This
+	      is  only	needed	when  not supplying a PSF, that is this option
+	      modifies an internally generated PSF.
+
 
        -o, --owner OWNER
 	      Specify owner.  Use an empty string ""  to  specify  the	source
 	      file owner.
 
+
        -g, --group GROUP
 	      Specify  group.	Use  an  empty string "" to specify the source
 	      file group.
+
 
        -x format
 	      Specify the archive format.  Must  be  one  of  the  formats  of
 	      swpackage.
 
+
        @-
 	      Target, only supported target is standard output.
 
+
 EXTERNAL EFFECTS
        The program will remove and replace a file in "." named ./catalog/.
-
        Nothing outside of './catalog/' is modified.
-	Standard output is the target for the tar archive.
-	When  using  the  '-t'	option	an archive file is written to ../pack-
+       Standard output is the target for the tar archive.
+       When  using  the  '-t'  option  an  archive file is written to ../pack-
        ageDirName.swigntest.tar.gz
 
        A copy of the PSF is made in /var/tmp/swign$$.  It is normally  created
        and erased by the program.
+
 
 EXAMPLES
        Show the internally generated PSF to stdout.  Change directory into the
@@ -4050,11 +4378,13 @@ EXAMPLES
 
 
 
+
        Generate the package (and verify it) using a PSF  that  you  supply  on
        standard  input.   Change directory into the directory to package, then
        type
 
 	  swign -o 0 -g 0 --show-psf | swign -s - -u "gpgName" @- | swverify -d @-
+
 
 
 
@@ -4077,33 +4407,31 @@ TESTING
 		 swign -u "your GPG Name" @- | swverify -d @-
 
 
-       If  a checksig script is included then you should unpack the package at
-       a new location and run  swverify -d @. in the new location.  The check-
-       sig  script  is a vendor extension control file that is part of the GPG
-       signed ./catalog directory.  As an  implementation  extension  behavior
-       the swverify program will execute this script after verification of the
-       signature.  The script may take any action at this point but the inten-
-       tion is that it be used to verify the contents of the package directory
-       using GNU tools such as md5sum, sha1sum, and tar.  It serves to	verify
-       'swbis'	utilities  and offers a way for the package consumer to verify
-       file integrity using non-swbis GNU utilities by parsing the  INFO  file
-       and  comparing  to the unpacked files, and re-creating the archive byte
-       stream digests and comparing to './catalog/dfiles/md5sum' and
+       If  a checkdigest script is included then you should unpack the package
+       at a new location and run  swverify -d @. in  the  new  location.   The
+       checkdigest  script  is a vendor extension control file that is part of
+       the GPG signed ./catalog directory.   As  an  implementation  extension
+       behavior  the swverify program will execute this script after verifica-
+       tion of the signature.  The script may take any action at  this	point,
+       but  the  intention  is	that  it be used to verify the contents of the
+       package directory using GNU tools such as md5sum, sha1sum, and tar.
 
-       If a checksig script is not included, then the package user  will  have
-       to  manually  execute the commands that would have been executed by the
-       script.	When verifying the unpacked directory form of a package,   the
-       swverify  program  will return an error if the checksig is not present,
-       though, it is not required for verification of  the  tar  archive  file
+       If a checkdigest script is not included, then  the  package  user  will
+       have  to manually execute the commands that would have been executed by
+       the script using the file meta-data  in	an  authenticated  INFO  file.
+       When  verifying the unpacked directory form of a package,  the swverify
+       program will return an error if the checkdigest script is not  present,
+       though,	it  is	not  required for verification of the tar archive file
        itself using swverify.
 
-       Swign  can  be  used to sign any directory using the file ownerships of
-       the source files.  The following commands act as a test of  swpackage's
+       Swign can be used to sign any directory using the  file	ownerships  of
+       the  source files.  The following commands act as a test of swpackage's
        ability to generate an archive identical to GNU tar.  (Note: the script
-       checksig.sh is found in ./bin of the source distribution.)
+       checkdigest.sh is found in ./bin of the source distribution.)
 
-	      swign -D $HOME/checksig.sh -u "Test User" -o "" -g "" -S;
+	      swign -D $HOME/checkdigest.sh -u "Test User" -o "" -g "" -S;
 	      swverify -d @.
+
 
 
 PSF ATTRIBUTE REPLACEMENT
@@ -4112,7 +4440,13 @@ PSF ATTRIBUTE REPLACEMENT
        sion'.  'tag' is replaced with the package name portion of the currrent
        directory.  'revision' is replaced with the version portion.
 
+
 SAMPLE SOURCE PACKAGE PSF
+       # PSF.in  -- INPUT file to swign
+       # This file contains the replacement macros %__tag and %__revision which
+       # are only processed by swign.
+
+       # The distribution object need not have any attributes.
        distribution
 
        # Attributes in the distribution are mostly ignored although
@@ -4123,19 +4457,24 @@ SAMPLE SOURCE PACKAGE PSF
 	 AUTHORS &lt; AUTHORS   # This places the file in ./catalog/dfiles
 	 COPYING &lt; COPYING   # This places the file in ./catalog/dfiles
 
-       # This places the checksig script in ./catalog/dfiles/checksig
-       # For a description of the checksig script see the info document for
-       # 'swbis', type: info swbis, and the swign and swverify man pages.
+       # This places the checkdigest script in ./catalog/dfiles/checkdigest
+       # For a description of the checkdigest script see the info document for
+       # 'swbis' or the swverify manual page.
+       # The checkdigest script is a verification hook for swverify used when
+       # verifying the unpacked tarball (i.e. the package path name
+       # prefix directory).
 
-	 checksig  &lt; bin/checksig.sh
+	 checkdigest  &lt; bin/checkdigest.sh
 
        # The vendor object provides attributes to describe
        # the distributor.  At this time, how these attributes
        # are used is not addressed.
 
+       # The Vendor object is optional
        vendor
 	  the_term_vendor_is_misleading True  # One of: True, False
-	  tag your@email
+	  tag shortName    # Other vendor tags could be the short name of your
+				# organization name, or  your initials, etc.
 	  title Your Name
 	  qualifier author
 	  description "Maintainer of somepackage"
@@ -4145,6 +4484,7 @@ SAMPLE SOURCE PACKAGE PSF
        # packages, it is an object that contains other bundles and
        # products whether included in this distribution tarball or not.
 
+       # The Bundle object is optional
        bundle
 	  tag somepackage
 
@@ -4156,7 +4496,7 @@ SAMPLE SOURCE PACKAGE PSF
        can be mult-line"
 	  tag %__tag			   # This is the package name
 	  revision %__revision		   # This is the package version
-	  vendor_tag your@email 	   # Match vendor.tar above
+	  vendor_tag shortName		   # Match vendor.tag above
 	  title "somepackage - software"
 	  control_directory ""		   # Empty string, Important
 
@@ -4196,22 +4536,51 @@ SAMPLE SOURCE PACKAGE PSF
 	   file *
 
        # You want to exclude the files in ./catalog because it
-       # should not be part of the paylaod section.
+       # should not be part of the paylaod section.  This is
+       # mandatory.
 
-	   exclude catalog
+	  exclude catalog
+
+       # You may also want other excludes
+
+	  exclude CVS
+	  exclude */CVS
+	  # exclude .svn
+	  # exclude */.svn
 
        # End of PSF
 
 
+
 ENVIRONMENT
-       The  environment  variable  SWPACKAGEPASSFD  sets  the  passphrase file
-       descriptor.
+       SWPACKAGEPASSFD
+	      Sets the swpackage --passphrase-fd option.  Set the  option  arg
+	      to  a  integer value of the file descriptor, or to "env" to read
+	      the   passphrase	 from	the   environment   variable   SWPACK-
+	      AGEPASSPHRASE,  or  to "agent" to cause gpg to use gpg-agent, or
+	      "tty" to read from the terminal.
+
+
+       SWPACKAGEPASSPHRASE
+	      Use the value as the passphrase if  swpackage's  --passphrase-fd
+	      is set to "env"
+
+
+       GNUPGHOME
+	      Sets the --gpg-home option of swpackage.
+
+
+       GNUPGNAME
+	      Sets  the  --gpg-name option of swpackage, which is turn set the
+	      --local-user option of gpg.
+
+
 
 RETURN VALUE
        0 on success, non-zero on failure.
 
 FILES
-	 &lt;path>/catalog/
+	&lt;path>/catalog/
 
 SEE ALSO
        info swbis
@@ -4221,8 +4590,8 @@ SEE ALSO
 IDENTIFICATION
 	swign(1): The source directory signing utility of the swbis project.
 	Author: J. Lowe jhlowe@acm.org
-	Version: 0.481
-	Date: 2006-02-14
+	Version: 0.499
+	Last Updated: 2006-08-03
 	Copying: GNU Free Documentation License
 
 
@@ -4243,10 +4612,10 @@ BUGS
        ing.   This  incompatibility  may be present in the Ext3, reiserFS, and
        DarwinOS et.al file systems.
 
-       The file ownership policy of the PSF, the checksig script (if any)  and
-       the  command line options must agree.  The default file ownership poli-
-       cies of this program are suited to packaged products  where  file  user
-       and group ownerships are not a critical feature.
+       The file ownership policy of the PSF, the checkdigest script  (if  any)
+       and  the  command  line options must agree.  The default file ownership
+       policies of this program are suited to  packaged  products  where  file
+       user and group ownerships are not a critical feature.
 
 
 
@@ -4409,8 +4778,7 @@ SWPACKAGE OUTPUT FORMAT
        settings,  to the tar format.  Package signing is only supported in tar
        format.
 
-
-   SWPACKAGE INPUT FILE FORMAT
+SWPACKAGE INPUT FILE FORMAT
        The input file is called a product specification file or PSF.  It  con-
        tains  information  to direct swpackage and information that is package
        meta-data [that is merely transferred unchanged into the  global  INDEX
@@ -4489,11 +4857,11 @@ SWPACKAGE OUTPUT FORMAT
 	  directory  source  [destination]
 
 
-       Applies	 the  source  attribute  as  the  directory  under  which  the
-       subsequently listed files are located.  If destination  is  defined  it
-       will be used as a prefix to the path (implied) file definition.	source
-       is typically a temporary or build location and dest is  its  unrealized
-       absolute pathname destination.
+       Applies	the  source  attribute as the directory under which the subse-
+       quently listed files are located.  If destination is defined it will be
+       used as a prefix to the path (implied) file definition.	source is typ-
+       ically a temporary or build location and dest is its  unrealized  abso-
+       lute pathname destination.
 
    o  Recursive File Definition
 	 file *
@@ -4579,6 +4947,7 @@ SWPACKAGE OUTPUT FORMAT
 
        The contents of filename may be more definitions for files.  The syntax
        of the included file is PSF syntax.
+
 
    SWBIS PSF CONVENTIONS
        This section describes attribute usage and conventions imposed  by  the
@@ -4776,7 +5145,6 @@ SWPACKAGE OUTPUT FORMAT
 
 
 
-
 APPLICABLE STANDARDS
        POSIX.1, IEEE Std 1387.2-1995 (Identical  to  ISO  15068-2:1999),  Open
        Group CAE C701.
@@ -4790,8 +5158,8 @@ SEE ALSO
 
 IDENTIFICATION
 	Copyright (C) 2004,2005 Jim Lowe
-	Version: swbis 0.481
-	Date: 2006-02-15
+	Version: 0.499
+	Last Updated: 2006-07-01
 	Copying Terms: GNU Free Documentation License
 
 BUGS
@@ -5012,7 +5380,7 @@ SOFTWARE DEFINITIONS
        and are stored as separate files in the dfiles directory. The  tar_for-
        mat_emulation_*	options  define the GNU tar version and format options
        that the archive file mimics, these attributes are used by the  'check-
-       sig' script.
+       digest' script.
 
    Installed_software Definition
 	installed_software
@@ -5045,6 +5413,7 @@ SOFTWARE DEFINITIONS
 	  description description   Empty string
 	  qualifier   qualifier     Empty string  # impl.
 	  url	      url	    Empty string  # impl.
+	  vendor_tag  tag	    Empty string  # impl.
 
 
        The  tag  attribute  is required.  The the_term_vendor_is_misleading is
@@ -5053,9 +5422,12 @@ SOFTWARE DEFINITIONS
        existing free software) to qualify themselves away  from  the  connota-
        tions of a "vendor" which has specific meaning not applicable to a free
        software distributor.  A INDEX and PSF files can contain vendor defini-
-       tions.	The  qualifier	attribute value may be one of: seller, author,
-       packager, maintainer.  A distribution may have  more  than  one	vendor
-       definition.
+       tions.	The  vendor_tag  attribute  contains  the  vendor.tag  of  the
+       upstream distributor.  The qualifier attribute value  may  be  one  of:
+       seller,	author,  packager,  maintainer.   A distribution may have more
+       than one vendor definition.  They may form a chain of  references  from
+       the  product.vendor_tag	to  the  last  vendor  referred to by the ven-
+       dor.vendor_tag attributes.
 
 
    Bundle Definition
@@ -5085,11 +5457,11 @@ SOFTWARE DEFINITIONS
 	  is_patch     is_patch        false		    # C701
 
 
-       The  tag  and  contents attributes are required in INDEX and PSF files.
-       The size attribute is not allowed in either file. The value of size  is
-       generated  dynamically.	 An  INDEX  file  will	contain  a instance_id
-       attribute.  Bundle  definitions	for  distributions  will  not  contain
-       either  the  location or qualifier, installed_software objects may con-
+       The tag and contents attributes are required in INDEX  and  PSF	files.
+       The  size attribute is not allowed in either file. The value of size is
+       generated dynamically.	An  INDEX  file  will  contain	a  instance_id
+       attribute.   Bundle  definitions  for  distributions  will  not contain
+       either the location or qualifier, installed_software objects  may  con-
        tain these attributes.
 
 
@@ -5132,11 +5504,18 @@ SOFTWARE DEFINITIONS
 	  change_log	    change_log	      None	 # impl.
 
 
-       The tag	and  control_directory	attributes  are  required.   The  size
+       The  tag  and  control_directory  attributes  are  required.   The size
        attribute is not allowed in either file. The value of size is generated
-       dynamically.  An INDEX file will contain a  instance_id	attribute.   A
-       product	object	can  contain control_files, files, and, subproducts in
+       dynamically.   An  INDEX  file will contain a instance_id attribute.  A
+       product object can contain control_files, files,  and,  subproducts  in
        the form of software definitions.
+
+       The  product.vendor_tag	refers	to  the  downstream distributor.  This
+       value is be the	analogous  to  the  RPMTAG_RELEASE  or	debian_release
+       attributes.  The original upstream author's package, for example, would
+       not use this attribute because that package would not  have  a  release
+       part  in its name, but could (or should) provide a vendor object in the
+       PSF.
 
 
    Category Definition
@@ -5476,8 +5855,8 @@ PACKAGE SECURITY
        lowed  by  one  or more NUL characters (0x00).  The total length of the
        file must match the file size  specified  in  the  size	field  of  the
        sig_header  file.   The	ustar header of every signature archive member
-       shall be  identical  to	the  sig_header  file.	 The  padded  size  is
-       predetermined [by swpackage] and currently set to be 1024 octets.  This
+       shall be identical to the sig_header file.  The padded size  is	prede-
+       termined  [by  swpackage]  and  currently  set to be 1024 octets.  This
        means the armored sig file has a length limitation of 1023 octets.
 
        If multiple signature  archive  members	exist  they  must  follow  one
@@ -5636,7 +6015,6 @@ EXAMPLE PACKAGE
 
    Hypothetical PSF file
 	distribution
-	  layout_version 1.0
 	  control_directory swm-1.0  #Implementation Extension.
 	  vendor
 	    the_term_vendor_is_misleading  false # True or False
@@ -5953,9 +6331,9 @@ SWBIS PSF CONVENTIONS
        This  is a sample PSF for a runtime package.  It implies multiple prod-
        ucts (e.g. sub-packages) using the  bundle.contents  attribute.	 Since
        the  bundle  and product tags exist in a un-regulated namespace and are
-       seen by end users they should be  carefully  chosen.    Note  that  the
-       bundle  and  product have the same tag which may force downstream users
-       to disambiguate using software selection syntax such as	fooit,bv=*  or
+       seen by end users they should be carefully chosen.   Note that the bun-
+       dle  and  product have the same tag which may force downstream users to
+       disambiguate using software selection  syntax  such  as	fooit,bv=*  or
        fooit,pv=* .
 
 	distribution
@@ -6011,8 +6389,8 @@ SEE ALSO
 
 IDENTIFICATION
 	Copyright (C) 2005 Jim Lowe
-	Version: 0.481
-	Date: 2006-02-15
+	Version: 0.499
+	Last Updated: 2006-01
 	Copying Terms: GNU Free Documentation License
 
 BUGS
@@ -6081,15 +6459,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <h2 class="chapter">2 How to configure swbis</h2>
 
 <p><a name="index-sample-4"></a><a name="index-invoking-_0040command_007bswbis_007d-5"></a>
-
-<ul class="menu">
-<li><a accesskey="1" href="#swdefaults-configuration-file">swdefaults configuration file</a>
-<li><a accesskey="2" href="#swbisdefaults-configuration-file">swbisdefaults configuration file</a>
-<li><a accesskey="3" href="#Archive-Reading_002fWriting-Utility-Selection">Archive Reading/Writing Utility Selection</a>
-<li><a accesskey="4" href="#Shell-Selection">Shell Selection</a>
-</ul>
-
-   <p>The configuration file is called a defaults file.  The defaults file contains
+The configuration file is called a defaults file.  The defaults file contains
 extended options which also can be specified using the '-x' option.
 
    <p>There are two (2) defaults files, the POSIX file named <span class="file">swdefaults</span> and the
@@ -6123,7 +6493,14 @@ swcopy.swbis_no_audit          = true # true or false
    <p>To show the compiled in defaults if no defaults files are read:
 <pre class="example">              swinstall --no-defaults --show-options
 </pre>
-   <div class="node">
+   <ul class="menu">
+<li><a accesskey="1" href="#swdefaults-configuration-file">swdefaults configuration file</a>
+<li><a accesskey="2" href="#swbisdefaults-configuration-file">swbisdefaults configuration file</a>
+<li><a accesskey="3" href="#Archive-Reading_002fWriting-Utility-Selection">Archive Reading/Writing Utility Selection</a>
+<li><a accesskey="4" href="#Shell-Selection">Shell Selection</a>
+</ul>
+
+<div class="node">
 <p><hr>
 <a name="swdefaults-configuration-file"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#swbisdefaults-configuration-file">swbisdefaults configuration file</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Configuring-swbis">Configuring swbis</a>
@@ -6326,6 +6703,16 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Configuring-swbis">Configuring swbis</
 #swpackage.swbis_format				= "ustar"
 #swpackage.swbis_signer_pgm			= "GPG"
 
+#swlist.swbis_no_getconf			= false # true or false, Deprecated.
+#swlist.swbis_shell_command			= posix # {sh|bash|posix}
+#swlist.swbis_no_remote_kill			= false # true or false
+#swlist.swbis_local_pax_write_command 		= pax  # {pax|tar|star|gtar|swbistar}
+#swlist.swbis_remote_pax_write_command 		= pax  # {pax|tar|star|gtar|swbistar}
+#swlist.swbis_local_pax_read_command 		= pax  # {pax|tar|star|gtar}
+#swlist.swbis_remote_pax_read_command 		= pax  # {pax|tar|star|gtar}
+#swlist.swbis_remote_shell_client		= ssh
+#swlist.swbis_any_format			= false # true or false
+
 # end of swbisdefaults file
 </pre>
 
@@ -6451,11 +6838,6 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <h2 class="unnumbered">Making PSFs for Package Creation</h2>
 
-<ul class="menu">
-<li><a accesskey="1" href="swpackage.html#SWPACKAGE-INPUT-FILE-FORMAT">PSF Description</a>: <li><a accesskey="2" href="swpackage.html#SAMPLE-PRODUCT-SPEC-FILES">PSF Examples</a>: <li><a accesskey="3" href="sw.html#SWBIS-PSF-CONVENTIONS">Swbis Packaging Conventions</a>: <li><a accesskey="4" href="sw.html#EXTENDED-DEFINITIONS">Extended Definitions</a>: <li><a accesskey="5" href="#A-Minimal-PSF">A Minimal PSF</a>
-<li><a accesskey="6" href="#A-PSF-for-Source-Packages">A PSF for Source Packages</a>
-</ul>
-
 <p>The input file to <span class="command">swpackage</span>is a called a Product Specification File
 or PSF. 
 It contains information to direct <span class="command">swpackage</span> and information that is
@@ -6498,6 +6880,11 @@ the 'dfiles' and 'pfiles' attributes (which are 'dfiles' and 'pfiles') must
 be used for minimal layout packages, i.e. packages that have the product and fileset
 control directories specified as empty strings (i.e have a minimal package layout).
 
+<ul class="menu">
+<li><a accesskey="1" href="swpackage.html#SWPACKAGE-INPUT-FILE-FORMAT">PSF Description</a>: <li><a accesskey="2" href="swpackage.html#SAMPLE-PRODUCT-SPEC-FILES">PSF Examples</a>: <li><a accesskey="3" href="sw.html#SWBIS-PSF-CONVENTIONS">Swbis Packaging Conventions</a>: <li><a accesskey="4" href="sw.html#EXTENDED-DEFINITIONS">Extended Definitions</a>: <li><a accesskey="5" href="#A-Minimal-PSF">A Minimal PSF</a>
+<li><a accesskey="6" href="#A-PSF-for-Source-Packages">A PSF for Source Packages</a>
+</ul>
+
 <div class="node">
 <p><hr>
 <a name="A-Minimal-PSF"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#A-PSF-for-Source-Packages">A PSF for Source Packages</a>,
@@ -6508,7 +6895,8 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Making-PSFs-for-Package-Creation">Maki
 
 <h3 class="unnumberedsec">PSF.minimal</h3>
 
-<pre class="verbatim"># This PSF packaged all files in the current
+<pre class="verbatim">
+# This PSF packaged all files in the current
 # directory.
 distribution
 dfiles dfiles
@@ -6526,6 +6914,7 @@ directory .
 file *
 exclude catalog
 </pre>
+
 <div class="node">
 <p><hr>
 <a name="A-PSF-for-Source-Packages"></a>Previous:&nbsp;<a rel="previous" accesskey="p" href="#A-Minimal-PSF">A Minimal PSF</a>,
@@ -6536,117 +6925,8 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Making-PSFs-for-Package-Creation">Maki
 <h3 class="unnumberedsec">A PSF for Source Packages</h3>
 
 <p>This PSF packages all the files in the directory where
-<span class="command">swpackage</span> is invoke.  It uses NUL control
+<span class="command">swpackage</span> is invoked.  It uses NUL control
 directory names which maintain the package directory structure.
-
-<pre class="verbatim">
-# File: PSF.in  -- Input for swign version 0.480 or later
-#  This file may be copied without restriction.
-#
-#  This file is intended to be processed by 'swign'.
-#  Example:
-#  swign -s PSF.in --show-psf
-#       -or-
-#  swign -s PSF.in -u "GPG Name" @- >../mysignedtarball
-#
-#  All instances of %__keyword PSF.in are replaced by the
-#  value of 'keyword' by the 'swign' program.  'swign'
-#  determines these values from the name of "."
-#  The replaceable keywords are 'revision' and 'tag'
-#  Replacement is called for when a 'sed' filter sees the
-#  special pattern %__keyword.  The replacement string should
-#  be used in the value field.
-
-distribution
- 
-# Attributes in the distribution are mostly ignored by the utilities
-# although distributor control files that pertain to the
-# distribution as a whole are properly placed here.  Two examples
-# of files that are useful here are:
-
-  AUTHORS < AUTHORS   # This places the file in ./catalog/dfiles
-  COPYING < COPYING   # This places the file in ./catalog/dfiles
-
-# This places the checksig script in ./catalog/dfiles/checksig
-# For a description of the checksig script see the info document for
-# 'swbis', type: info swbis, and the swign and swverify man pages.
-
-  checksig  < bin/checksig.sh
-
-# The vendor object provides attributes to describe
-# the distributor.  At this time, how these attributes
-# are used is not addressed.
-
-vendor
-   the_term_vendor_is_misleading True  # One of: True, False
-   tag your@email
-   title Your Name
-   qualifier author
-   description "Maintainer of somepackage"
-
-# Most packages do not need a bundle.  At this point in swbis'
-# development 'bundles' are mostly ignored.  Bundles are meta
-# packages, it is an object that contains other bundles and
-# products whether included in this distribution tarball or not.
-
-bundle
-   tag somepackage
-
-# The product object contains the attributes of common
-# interest such as the description, version and name.
-
-product
-   description "This is the 
-description of your
-package"
-   title "Short one line description"
-   tag %__tag                       # This is the package name
-   revision %__revision             # This is the package version
-   vendor_tag jhl@infionline.net
-   control_directory ""   # Empty string, Important
-
-# The fileset object contains the files.  The tag, revision,
-# and description attributes are mostly ignored.
-# At this time swbis supports only one (1) fileset.
-
-fileset
-    tag somepackage-sources
-    control_directory ""   # Empty string, Important
-    title somepackage source code
-    description "The source distribution of somepackage"
-
-# file_permissions:
-# Here is an important policy.  This will cause 'swpackage'
-# to create the tar achive with all files owned by uid and
-# gid zero (0), the user name 'root' will not be included
-# in the uname and gname tar header fields.  This is similar
-# to the effect of GNU tar options --numeric --owner=root
-# --group=root .
-# To use the name and ids of the source files delete the line
-# or reset the file_permissions adding after or changing to:
-#    file_permissions -u 000
-# 
-# NOTE:  Using "file_permissions -o 0 -g 0"  is preferred
-# because it will allow the end user to more easily verify
-# the directory (unpacked) form of the package using standard
-# non-swbis tools. 
-
-#   file_permissions -u 000  # To use ownerships of source files
-    file_permissions -o 0 -g 0
-
-# The following two (2) lines mean include every file in the current
-# directory.
-
-    directory .
-    file *
-
-# You want to exclude the files in ./catalog because it
-# should not be part of the payload section.
-
-    exclude catalog
-
-# End of PSF
-</pre>
 
 <div class="node">
 <p><hr>

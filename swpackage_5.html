@@ -13,8 +13,8 @@ i {color:#000080}
 <li><a href="#NAME">NAME</a>
 <li><a href="#SYNOPSIS">SYNOPSIS</a>
 <li><a href="#SWPACKAGE OUTPUT FORMAT">SWPACKAGE OUTPUT FORMAT</a>
-<ul><li><a href="#SWPACKAGE INPUT FILE FORMAT"><font size=-1>SWPACKAGE INPUT FILE FORMAT</font></a>
-<li><a href="#EXTENDED DEFINITIONS"><font size=-1>EXTENDED DEFINITIONS</font></a>
+<li><a href="#SWPACKAGE INPUT FILE FORMAT">SWPACKAGE INPUT FILE FORMAT</a>
+<ul><li><a href="#EXTENDED DEFINITIONS"><font size=-1>EXTENDED DEFINITIONS</font></a>
 <li><a href="#SWBIS PSF CONVENTIONS"><font size=-1>SWBIS PSF CONVENTIONS</font></a>
 </ul><li><a href="#APPLICABLE STANDARDS">APPLICABLE STANDARDS</a>
 <li><a href="#SEE ALSO">SEE ALSO</a>
@@ -62,10 +62,7 @@ i {color:#000080}
        The swbis implementation is biased, in terms of capability and  default
        settings,  to the tar format.  Package signing is only supported in tar
        format.
-
-
-   <a name="SWPACKAGE INPUT FILE FORMAT"><b>SWPACKAGE INPUT FILE FORMAT</b></a>
-       The input file is called a product specification file or PSF.  It  con-
+</pre><h3><a name="SWPACKAGE INPUT FILE FORMAT"><b>SWPACKAGE INPUT FILE FORMAT</b></a></h3><pre>       The input file is called a product specification file or PSF.  It  con-
        tains  information  to direct swpackage and information that is package
        meta-data [that is merely transferred unchanged into the  global  INDEX
        file].
@@ -143,11 +140,11 @@ i {color:#000080}
           directory  <i>source</i>  [<i>destination</i>]
 
 
-       Applies   the  <i>source</i>  attribute  as  the  directory  under  which  the
-       subsequently listed files are located.  If <i>destination</i>  is  defined  it
-       will be used as a prefix to the <i>path</i> (implied) file definition.  <i>source</i>
-       is typically a temporary or build location and <i>dest</i> is  its  unrealized
-       absolute pathname destination.
+       Applies  the  <i>source</i>  attribute as the directory under which the subse-
+       quently listed files are located.  If <i>destination</i> is defined it will be
+       used as a prefix to the <i>path</i> (implied) file definition.  <i>source</i> is typ-
+       ically a temporary or build location and <i>dest</i> is its  unrealized  abso-
+       lute pathname destination.
 
    <b>o</b>  <b>Recursive File Definition</b>
          file *
@@ -233,6 +230,7 @@ i {color:#000080}
 
        The contents of <i>filename</i> may be more definitions for files.  The syntax
        of the included file is PSF syntax.
+
 
    <a name="SWBIS PSF CONVENTIONS"><b>SWBIS PSF CONVENTIONS</b></a>
        This section describes attribute usage and conventions imposed  by  the
@@ -429,7 +427,6 @@ i {color:#000080}
                  file src/fooit /usr/bin/fooit
 
 
-
 </pre><h3><a name="APPLICABLE STANDARDS"><b>APPLICABLE STANDARDS</b></a></h3><pre>       POSIX.1, IEEE Std 1387.2-1995 (Identical  to  ISO  15068-2:1999),  Open
        Group CAE C701.
 </pre><h3><a name="SEE ALSO"><b>SEE ALSO</b></a></h3><pre>        XDSA C701 <a href="http://www.opengroup.org/publications/catalog/c701.htm">http://www.opengroup.org/publications/catalog/c701.htm</a>
@@ -438,8 +435,8 @@ i {color:#000080}
         <a href="swpackage_8.html">swpackage(8)</a>
         <a href="swbisparse_1.html">swbisparse(1)</a> -- An implementation extension parser utility.
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        Copyright (C) 2004,2005 Jim Lowe
-        Version: swbis 0.481
-        Date: 2006-02-15
+        Version: 0.499
+        Last Updated: 2006-07-01
         Copying Terms: GNU Free Documentation License
 </pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       None
 

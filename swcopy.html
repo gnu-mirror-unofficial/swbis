@@ -28,6 +28,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#dir">(dir)</a>
 
 <h2 class="chapter">1 swcopy" "8</h2>
 
+<!-- TROFF INPUT: .SH "NAME" -->
 <!-- DEBUG: print_menu("Top") -->
 <ul class="menu">
 <li><a accesskey="1" href="#NAME">NAME</a>
@@ -46,7 +47,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#dir">(dir)</a>
 <li><a href="#IDENTIFICATION">IDENTIFICATION</a>
 <li><a href="#BUGS">BUGS</a>
 </ul>
-<!-- TROFF INPUT: .SH "NAME" -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="NAME"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#SYNOPSIS">SYNOPSIS</a>,
@@ -57,9 +58,10 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <h3 class="section">1.1 NAME</h3>
 
-<!-- DEBUG: print_menu("NAME") -->
 <p>swcopy <span class="roman">&mdash;</span> Copy POSIX and RPM packages. 
 <!-- TROFF INPUT: .SH "SYNOPSIS" -->
+<!-- DEBUG: print_menu("NAME") -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="SYNOPSIS"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#DESCRIPTION">DESCRIPTION</a>,
@@ -70,7 +72,6 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <h3 class="section">1.2 SYNOPSIS</h3>
 
-<!-- DEBUG: print_menu("SYNOPSIS") -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
@@ -81,6 +82,8 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .SH "DESCRIPTION" -->
+<!-- DEBUG: print_menu("SYNOPSIS") -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="DESCRIPTION"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#OPTIONS">OPTIONS</a>,
@@ -91,7 +94,6 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <h3 class="section">1.3 DESCRIPTION</h3>
 
-<!-- DEBUG: print_menu("DESCRIPTION") -->
 <!-- TROFF INPUT: .PP -->
 <p><b>swcopy</b> copies a POSIX distribution from a source archive or directory to a target
 archive directory.  Neither swcopy nor any component of swbis is required
@@ -118,6 +120,8 @@ directories.  It will attempt to preserve the form (archive or directory) and
 compression state of the source object.  An exception is "." as a target
 (See Implementation Extensions below). 
 <!-- TROFF INPUT: .SH "OPTIONS" -->
+<!-- DEBUG: print_menu("DESCRIPTION") -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="OPTIONS"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#TARGET-COPYING-RULES">TARGET COPYING RULES</a>,
@@ -128,7 +132,6 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <h3 class="section">1.4 OPTIONS</h3>
 
-<!-- DEBUG: print_menu("OPTIONS") -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .RS -->
 <!--  -->
@@ -634,6 +637,26 @@ Turns on options &minus;&minus;allow-rpm and &minus;&minus;audit.
 </blockquote>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
+<b>-W source-script-name=NAME</b>
+<!-- TROFF INPUT: .RS -->
+<!--  -->
+<blockquote>
+Write the script that is written into the remote shell's stdin to NAME. 
+This is useful for debugging. 
+<!-- TROFF INPUT: .RE -->
+</blockquote>
+<!--  -->
+<!-- TROFF INPUT: .PP -->
+<b>-W target-script-name=NAME</b>
+<!-- TROFF INPUT: .RS -->
+<!--  -->
+<blockquote>
+Write the script that is written into the remote shell's stdin to NAME. 
+This is useful for debugging. 
+<!-- TROFF INPUT: .RE -->
+</blockquote>
+<!--  -->
+<!-- TROFF INPUT: .PP -->
 <b>software</b><tt>_</tt><b>selections</b>
 <!-- TROFF INPUT: .RS -->
 <!--  -->
@@ -716,6 +739,8 @@ To force interpretation as a path, use a absolute path or prefix with ':'.
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .SH "TARGET COPYING RULES" -->
+<!-- DEBUG: print_menu("OPTIONS") -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="TARGET-COPYING-RULES"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#IMPLEMENTATION-EXTENSIONS">IMPLEMENTATION EXTENSIONS</a>,
@@ -726,13 +751,8 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <h3 class="section">1.5 TARGET COPYING RULES</h3>
 
-<!-- DEBUG: print_menu("TARGET COPYING RULES") -->
-<ul class="menu">
-<li><a accesskey="1" href="#Rules">Rules</a>
-<li><a accesskey="2" href="#Examples">Examples</a>
-</ul>
 <!-- TROFF INPUT: .PP -->
-Currently, file permissions and ownerships are not copied. 'swcopy' is not
+<p>Currently, file permissions and ownerships are not copied. 'swcopy' is not
 intended to be used in the way of cp or scp, although it can be if forced. 
 Non-existing directories in a target are created.  A source
 directory cannot be renamed (although a regular file can be), that is
@@ -741,6 +761,13 @@ A single source file is specified for one or more targets.  The
 syntax does not support multiple source files.  A portable character string in the
 target spec is assumed to be a hostname unless it begins with a slash '/' or a colon ':'. 
 <!-- TROFF INPUT: .SS "Rules" -->
+<!-- DEBUG: print_menu("TARGET COPYING RULES") -->
+
+<ul class="menu">
+<li><a accesskey="1" href="#Rules">Rules</a>
+<li><a accesskey="2" href="#Examples">Examples</a>
+</ul>
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="Rules"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Examples">Examples</a>,
@@ -769,6 +796,7 @@ the target basename is the last path component of the target spec.
 The implementation option &minus;&minus;extract biases these rules to install using
 the archive reading command (e.g.  pax &minus;r). 
 <!-- TROFF INPUT: .SS "Examples" -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="Examples"></a>Previous:&nbsp;<a rel="previous" accesskey="p" href="#Rules">Rules</a>,
@@ -876,6 +904,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#TARGET-COPYING-RULES">TARGET COPYING R
 </blockquote>
 <!--  -->
 <!-- TROFF INPUT: .SH "IMPLEMENTATION EXTENSIONS" -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="IMPLEMENTATION-EXTENSIONS"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#EXTENDED-OPTIONS">EXTENDED OPTIONS</a>,
@@ -886,12 +915,13 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <h3 class="section">1.6 IMPLEMENTATION EXTENSIONS</h3>
 
+<!-- TROFF INPUT: .SS "Software Specification Targets" -->
 <!-- DEBUG: print_menu("IMPLEMENTATION EXTENSIONS") -->
 <ul class="menu">
 <li><a accesskey="1" href="#Software-Specification-Targets">Software Specification Targets</a>
 <li><a accesskey="2" href="#RPM-Translation">RPM Translation</a>
 </ul>
-<!-- TROFF INPUT: .SS "Software Specification Targets" -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="Software-Specification-Targets"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#RPM-Translation">RPM Translation</a>,
@@ -934,6 +964,7 @@ Thus,
 <!-- TROFF INPUT: .PP -->
 <p>will install it with the configured archive reading utility. 
 <!-- TROFF INPUT: .SS "RPM Translation" -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="RPM-Translation"></a>Previous:&nbsp;<a rel="previous" accesskey="p" href="#Software-Specification-Targets">Software Specification Targets</a>,
@@ -968,6 +999,7 @@ The translation is (internally) equivalent to :
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .SH "EXTENDED OPTIONS" -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="EXTENDED-OPTIONS"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#RETURN-VALUE">RETURN VALUE</a>,
@@ -978,16 +1010,18 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <h3 class="section">1.7 EXTENDED OPTIONS</h3>
 
+<!-- TROFF INPUT: .PP -->
+<p>Extended options can be specified on the command line using the &minus;x option
+or from the defaults file, swdefaults.  Shown below is an actual portion of
+a defaults file which show default values. 
+<!-- TROFF INPUT: .SS "Posix" -->
 <!-- DEBUG: print_menu("EXTENDED OPTIONS") -->
+
 <ul class="menu">
 <li><a accesskey="1" href="#Posix">Posix</a>
 <li><a accesskey="2" href="#Swbis-Implementation">Swbis Implementation</a>
 </ul>
-<!-- TROFF INPUT: .PP -->
-Extended options can be specified on the command line using the &minus;x option
-or from the defaults file, swdefaults.  Shown below is an actual portion of
-a defaults file which show default values. 
-<!-- TROFF INPUT: .SS "Posix" -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="Posix"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Swbis-Implementation">Swbis Implementation</a>,
@@ -1021,6 +1055,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#EXTENDED-OPTIONS">EXTENDED OPTIONS</a>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .SS "Swbis Implementation" -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="Swbis-Implementation"></a>Previous:&nbsp;<a rel="previous" accesskey="p" href="#Posix">Posix</a>,
@@ -1053,6 +1088,7 @@ file.
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .SH "RETURN VALUE" -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="RETURN-VALUE"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#NOTES">NOTES</a>,
@@ -1063,10 +1099,11 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <h3 class="section">1.8 RETURN VALUE</h3>
 
-<!-- DEBUG: print_menu("RETURN VALUE") -->
 <!-- TROFF INPUT: .PP -->
 <p>0 if all targets succeeded, 1 if all targets failed, 2 if some targets failed and some succeeded. 
 <!-- TROFF INPUT: .SH "NOTES" -->
+<!-- DEBUG: print_menu("RETURN VALUE") -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="NOTES"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#REQUISITE-UTILITIES">REQUISITE UTILITIES</a>,
@@ -1077,11 +1114,12 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <h3 class="section">1.9 NOTES</h3>
 
-<!-- DEBUG: print_menu("NOTES") -->
 <p>Multiple ssh-hops is an implementation extension. 
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
 <!-- TROFF INPUT: .SH "REQUISITE UTILITIES" -->
+<!-- DEBUG: print_menu("NOTES") -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="REQUISITE-UTILITIES"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#FILES">FILES</a>,
@@ -1092,7 +1130,6 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <h3 class="section">1.10 REQUISITE UTILITIES</h3>
 
-<!-- DEBUG: print_menu("REQUISITE UTILITIES") -->
 <!-- TROFF INPUT: .PP -->
 <p>Swcopy requires a Posix shell accessible by the remote shell command. 
 This is the remote command run by ssh (or rsh) for all operations. 
@@ -1123,6 +1160,8 @@ Still other systems may not have <b>getconf</b>.
 Other utilities required to be in $PATH on the remote host are:
 dd, pax (or tar|star|gtar), mkdir, echo, test, sleep, read (if not builtin). 
 <!-- TROFF INPUT: .SH "FILES" -->
+<!-- DEBUG: print_menu("REQUISITE UTILITIES") -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="FILES"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#APPLICABLE-STANDARDS">APPLICABLE STANDARDS</a>,
@@ -1133,7 +1172,6 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <h3 class="section">1.11 FILES</h3>
 
-<!-- DEBUG: print_menu("FILES") -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
@@ -1147,6 +1185,8 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .SH "APPLICABLE STANDARDS" -->
+<!-- DEBUG: print_menu("FILES") -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="APPLICABLE-STANDARDS"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#SEE-ALSO">SEE ALSO</a>,
@@ -1157,10 +1197,11 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <h3 class="section">1.12 APPLICABLE STANDARDS</h3>
 
-<!-- DEBUG: print_menu("APPLICABLE STANDARDS") -->
 <!-- TROFF INPUT: .PP -->
 <p>ISO/IEC 15068-2:1999, Open Group CAE C701
 <!-- TROFF INPUT: .SH "SEE ALSO" -->
+<!-- DEBUG: print_menu("APPLICABLE STANDARDS") -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="SEE-ALSO"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#IDENTIFICATION">IDENTIFICATION</a>,
@@ -1171,12 +1212,13 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <h3 class="section">1.13 SEE ALSO</h3>
 
-<!-- DEBUG: print_menu("SEE ALSO") -->
 <!-- TROFF INPUT: .PP -->
 <p>info swbis
 <!-- TROFF INPUT: .PP -->
 sw(5), swbisparse(1), swign(1), swverify(8)
 <!-- TROFF INPUT: .SH "IDENTIFICATION" -->
+<!-- DEBUG: print_menu("SEE ALSO") -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="IDENTIFICATION"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#BUGS">BUGS</a>,
@@ -1187,13 +1229,14 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <h3 class="section">1.14 IDENTIFICATION</h3>
 
-<!-- DEBUG: print_menu("IDENTIFICATION") -->
 <p>swcopy(8): The archive copying utility of the swbis project. 
  Author: Jim Lowe   Email: jhlowe at acm.org
- Version: 0.481
- Date: 2006-02-15
+ Version: 0.499
+ Last Updated: 2006-07
  Copying: GNU Free Documentation License
 <!-- TROFF INPUT: .SH "BUGS" -->
+<!-- DEBUG: print_menu("IDENTIFICATION") -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="BUGS"></a>Previous:&nbsp;<a rel="previous" accesskey="p" href="#IDENTIFICATION">IDENTIFICATION</a>,
@@ -1203,7 +1246,6 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <h3 class="section">1.15 BUGS</h3>
 
-<!-- DEBUG: print_menu("BUGS") -->
 <!-- TROFF INPUT: .PP -->
 <p>Swcopy is subject to breakage if a user's account on an intermediate
 (or terminal) host in a target spec is not configured to use a Bourne
@@ -1231,7 +1273,7 @@ recommended).
 Swcopy does not support using the cpio utility since its archive writing
 interface is unlike pax and tar, although, future support is possible for
 archive reading. 
-<!-- created by instant / docbook-to-man, Sun 19 Feb 2006, 20:52 -->
+<!-- created by instant / docbook-to-man, Thu 03 Aug 2006, 21:32 -->
 
 </body></html>
 

@@ -44,6 +44,7 @@ i {color:#000080}
        [software_selections] [@target [target1...]]
 
        <b>swinstall</b> -s -    # Minimum unambiguous invocation.
+
 </pre><h3><a name="DESCRIPTION"><b>DESCRIPTION</b></a></h3><pre>       As of 2004-04-03 swinstall is usable at an alpha release level.
 
        As  of  2005-05-03  swinstall  is usable at an alpha release level with
@@ -79,63 +80,75 @@ i {color:#000080}
        data transformations performed by swinstall, distributors encouraged to
        deliver products in tar format.
 </pre><h3><a name="OPTIONS"><b>OPTIONS</b></a></h3><pre>       <b>-f FILE</b>
+
               Reads software_selections from FILE. (Not implemented).
 
        <b>-p</b>
+
               Preview the operation.  Depending on the verbose level  informa-
               tion  is written to stdout.  The target is not modified although
               a remote connection is established.
 
 
        <b>-r</b>
+
               This option has no affect.
 
 
        <b>-s SOURCE</b>
-              Specify the source file SOURCE,  &quot;-&quot;  is  standard  input.   The
-              syntax  is  the  same as for a target.  SOURCE may be an archive
-              file or stdin.
+
+              Specify the source file SOURCE, &quot;-&quot; is standard input.  The syn-
+              tax  is the same as for a target.  SOURCE may be an archive file
+              or stdin.
 
        <b>-t targetfile</b>
+
               Specify a file containing a list of targets (one per line).
 
        <b>-x option=value</b>
+
               Specify the extended option overriding the defaults file  value.
 
        <b>-X FILE</b>
+
               Specify  the  extended  options  filename, FILE,  overriding the
               default filenames.  This option may be given more then once.  If
               the resulting specified value is an empty string then reading of
               any options file is disabled.
 
        <b>-v</b>
+
               Given one time it is identical to -x verbose=2.  This option can
               be given multiple times with increasing effect.  (Implementation
               extension option).
-               -v  is level 2, -vv is level 3,... etc.
-                   level 0: silent on stdout and stderr.
-                   level 1: fatal and warning messages to stderr.
-               -v  level 2: level 1 plus a progress bar.
-               -vv level 3: level 2 plus script stderr.
-               -vvv level 4: level 3 plus events.
-               -vvvv level 5: level 4 plus events.
-               -vvvvv level 6: level 5 plus set shell -vx option.
-               -vvvvvv level 7 and higher: level 6 plus debugging messages.
+              -v  is level 2, -vv is level 3,... etc.
+                  level 0: silent on stdout and stderr.
+                  level 1: fatal and warning messages to stderr.
+              -v  level 2: level 1 plus a progress bar.
+              -vv level 3: level 2 plus script stderr.
+              -vvv level 4: level 3 plus events.
+              -vvvv level 5: level 4 plus events.
+              -vvvvv level 6: level 5 plus set shell -vx option.
+              -vvvvvv level 7 and higher: level 6 plus debugging messages.
 
        <b>--version, -V</b>
+
               Show version (Implementation extension)
 
        <b>--help</b>
+
               Show help (Implementation extension)
 
        <b>-W option[,option,...]</b>
+
               Specify the implementation extension option.
-               Syntax: -W option[=option_argument[,option...]
-               Options may be separated by a comma.  The implementation exten-
+              Syntax: -W option[=option_argument[,option...]
+              Options may be separated by a comma.  The implementation  exten-
               sion  options  may also be given individually using the '--long-
               option[=option_arg]' syntax.
 
        <b>-W preview-tar-file=FILE</b>
+
               This  is  a  testing/development  option.   Writes  the  fileset
               archive  to  FILE.  This is the same data stream that would have
               been loaded on the target.  This option should only be used with
@@ -143,6 +156,8 @@ i {color:#000080}
               without trailer blocks.
 
        <b>-W remote-shell=NAME</b>
+
+
               Defaults File Option: <b>swbis_remote_shell_client</b>
 
               This is the remote connection client program on  the  management
@@ -152,7 +167,8 @@ i {color:#000080}
               &quot;ssh&quot;.
 
        <b>-W quiet-progress</b>
-              Defaults File Option:  <b>swbis_quiet_progress_bar</b>Disable  progress
+
+              Defaults File Option: <b>swbis_quiet_progress_bar</b> Disable  progress
               bar,  which is active for verbose levels 2 and higher (i.e. -v).
 
        <b>-W show-options-files</b>
@@ -163,7 +179,6 @@ i {color:#000080}
               line options.
 
        <b>-W pax-command={tar|pax|star|gtar}</b>
-
               Set  the  portable  archive  command  for  all  operations.  The
               default is &quot;pax&quot;.
 
@@ -183,12 +198,10 @@ i {color:#000080}
               &quot;pax&quot;.
 
        <b>-W pax-write-command={tar|pax|star|gtar|swbistar}</b>
-
               Set the write command for local and remote hosts.  This  is  the
               command that runs on the target (e.g. pax -w, tar cf -).
 
        <b>-W remote-pax-write-command={tar|pax|star|gtar|swbistar}</b>
-
               Defaults File Option: <b>swbis_remote_pax_write_command</b>
               Set the write command for remote hosts.
 
@@ -261,7 +274,16 @@ i {color:#000080}
               ssh client program options.  For example -W  ssh-options=1  sets
               the
 
+       <b>-W source-script-name=NAME</b>
+              Write  the  script that is written into the remote shell's stdin
+              to NAME.  This is useful for debugging.
+
+       <b>-W target-script-name=NAME</b>
+              Write the script that is written into the remote  shell's  stdin
+              to NAME.  This is useful for debugging.
+
        <b>software_selections</b>
+
               Refer  to  the software objects (products, filesets) on which to
               be operated.  (Not  implemented).   The  implementation  defined
               behavior for no selections is to operate on the entire distribu-
@@ -269,6 +291,7 @@ i {color:#000080}
 
 
        <b>target</b>
+
               Refers to the software_collection where the software  selections
               are  to  be  applied.  Allows specification of host and pathname
               where the software collection is to be located.  A  target  that
@@ -358,6 +381,7 @@ i {color:#000080}
                            ;
 
 
+
 </pre><h3><a name="INSTALLED SOFTWARE CATALOG"><b>INSTALLED SOFTWARE CATALOG</b></a></h3><pre>       **  As  of  2004-02-12  the  form and features of the catalog are under
        active development. **
 
@@ -370,7 +394,7 @@ i {color:#000080}
        tories.
 
    <a name="CATALOG FILE LAYOUT"><b>CATALOG FILE LAYOUT</b></a>
-         &lt;<i>path</i>&gt;/
+        &lt;<i>path</i>&gt;/
         &lt;<i>path</i>&gt;/&lt;<i>ISC</i>&gt;/
         &lt;<i>path</i>&gt;/&lt;<i>ISC</i>&gt;/&lt;<i>bundle</i>&gt;/
         &lt;<i>path</i>&gt;/&lt;<i>ISC</i>&gt;/&lt;<i>bundle</i>&gt;/&lt;<i>product</i>&gt;/
@@ -467,7 +491,7 @@ i {color:#000080}
        tax.   Unlike  an  INDEX file, it may contain control_file definitions.
        The INSTALLED file stores the control script return codes  and  fileset
        installation  state.   It is updated several times during the operation
-       of 'swinstall'.  It can be parsed using  &lt;libexec&gt;/swbisparse  and  the
+       of 'swinstall'.  It can be parsed  using   libexec/swbisparse  and  the
        '--installed' option.
 
        <b>control.sh -- The master control script</b>
@@ -486,9 +510,9 @@ i {color:#000080}
 
 
        This  file contains the extended options in a form that may be executed
-       by the shell '.' (dot)  command.   It  is  automatically  generated  by
-       swinstall.  The value of the SW_SESSION_OPTIONS environment variable is
-       the absolute pathname of the this file.
+       by the shell '.' (dot) command.  It is automatically generated by swin-
+       stall.  The value of the SW_SESSION_OPTIONS environment variable is the
+       absolute pathname of the this file.
 
    <a name="EXAMPLE CATALOG ENTRY"><b>EXAMPLE CATALOG ENTRY</b></a>
        Below is an example entry of  the  catalog  created  by  swbis  version
@@ -523,6 +547,7 @@ i {color:#000080}
        '.'.  If the source is a regular file then a regular file in  '.'  will
        be created with the same name.
 
+
    <a name="RPM Translation"><b>RPM Translation</b></a>
        RPM  (RedHat  Package  Manager)  format packages are installed by first
        translating to an equivalent ISO/IEEE file layout in Posix  tar  format
@@ -542,9 +567,9 @@ i {color:#000080}
 
 
    <a name="Testing with RPM"><b>Testing with RPM</b></a>
-       To test the swbis components, a completely independent means to install
-       and verify a package is needed.  RPM provides this  means  and  can  be
-       used in the following way:
+        To  test  the  swbis  components,  a  completely  independent means to
+       install and verify a package is needed.  RPM provides  this  means  and
+       can be used in the following way:
 
           rpm -i --nodeps --force your-0.0-1.i386.rpm  # Install
           rpm --verify --nodeps your-0.0-1             # Show that all is well
@@ -606,34 +631,32 @@ i {color:#000080}
 
 </pre><h3><a name="RETURN VALUE"><b>RETURN VALUE</b></a></h3><pre>       0  if all targets succeeded, 1 if all targets failed, 2 if some targets
        failed and some succeeded.
-</pre><h3><a name="NOTES"><b>NOTES</b></a></h3><pre>       Multiple ssh-hops is an implementation extension.
-
+</pre><h3><a name="NOTES"><b>NOTES</b></a></h3><pre>        Multiple ssh-hops is an implementation extension.
 </pre><h3><a name="REQUISITE UTILITIES"><b>REQUISITE UTILITIES</b></a></h3><pre>       swinstall requires a Posix shell accessible by the  remote  shell  com-
-       mand.   This  is  the  remote  command  run  by  ssh  (or  rsh) for all
-       operations.  This command can  be  controlled  by  the  --shell-command
-       option or the swbis_shell_command defaults file option.  Permitted val-
-       ues  are  &quot;bash&quot;  (/bin/bash  -s)  or  &quot;sh&quot;  (/bin/sh  -s)  or  &quot;posix&quot;
-       ('PATH=`getconf  PATH`  sh  -s').    The default is &quot;posix&quot;.  swinstall
-       requires the Posix capability of reading commands on stdin according to
-       the  specification  described  in IEEE Std 1003.1, 2003 Ed.; sh -shell,
-       Section STDIN.  This requirement accommodates reading of shell  program
-       code  and  data  on  STDIN.  This capability may not be present in some
-       /bin/sh shells.  The &quot;/bin/sh&quot; on FreeBSD-5.1 may  be  broken  in  this
-       regard,  hence  ''--shell-command=bash''  should be used for BSD hosts.
-       The public domain Korn shell (pdksh-5.2.14) seems to work OK, that  is,
-       it complies by luck or intent with the Posix capability of reading data
-       and code on stdin.
+       mand.   This  is  the remote command run by ssh (or rsh) for all opera-
+       tions.  This command can be controlled by the --shell-command option or
+       the  swbis_shell_command  defaults  file  option.  Permitted values are
+       &quot;bash&quot; (/bin/bash -s) or &quot;sh&quot; (/bin/sh -s) or  &quot;posix&quot;  ('PATH=`getconf
+       PATH`  sh -s').   The default is &quot;posix&quot;.  swinstall requires the Posix
+       capability of reading commands on stdin according to the  specification
+       described in IEEE Std 1003.1, 2003 Ed.; sh -shell, Section STDIN.  This
+       requirement accommodates reading of shell  program  code  and  data  on
+       STDIN.  This capability may not be present in some /bin/sh shells.  The
+       &quot;/bin/sh&quot; on FreeBSD-5.1 may be broken in this regard, hence ''--shell-
+       command=bash''  should  be  used for BSD hosts.  The public domain Korn
+       shell (pdksh-5.2.14) seems to work OK, that is, it complies by luck  or
+       intent with the Posix capability of reading data and code on stdin.
 
-       If the --no-getconf option is  set  or  the  swinstall.swbis_no_getconf
+       If  the  --no-getconf  option  is set or the swinstall.swbis_no_getconf
        defaults option is &quot;true&quot; then the remote command is '/bin/sh -s'.  Use
        of the no-getconf option is needed for communication with user accounts
-       on  remote  machines whose login shell is not a Bourne shell (e.g. csh)
+       on remote machines whose login shell is not a Bourne shell  (e.g.  csh)
        such as root on some default BSD installations.  Other *nix systems may
-       require  use  of  getconf  because their /bin/sh is broken or not Posix
+       require use of getconf because their /bin/sh is  broken  or  not  Posix
        enough (e.g. Sun platforms).  Still other systems may not have <b>getconf</b>.
 
        Other utilities required to be in $PATH on the remote host are: dd, pax
-       (or tar|star|gtar), hostname, mkdir, expr, echo, test, sleep, read  (if
+       (or  tar|star|gtar), hostname, mkdir, expr, echo, test, sleep, read (if
        not builtin).
 </pre><h3><a name="FILES"><b>FILES</b></a></h3><pre>        /usr/lib/swbis/swdefaults
         /usr/lib/swbis/swbisdefaults
@@ -646,21 +669,21 @@ i {color:#000080}
        <a href="swcopy_8.html">swcopy(8)</a>, <a href="sw_5.html">sw(5)</a>, <a href="swbisparse_1.html">swbisparse(1)</a>, <a href="swign_1.html">swign(1)</a>, <a href="swverify_8.html">swverify(8)</a>
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        <a href="swinstall_8.html">swinstall(8)</a>: The installation utility of the swbis project.
         Author: Jim Lowe   Email: jhlowe at acm.org
-        Version: 0.481
-        Date: 2006-02-15
+        Version: 0.499
+        Last Updated: 2006-02-01
         Copying: GNU Free Documentation License
 </pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       swinstall is subject to breakage if a user's account on an intermediate
-       (or terminal) host in a target spec is not configured to use  a  Bourne
-       compatible  shell. (This breakage may be eliminated by use of the --no-
+       (or  terminal)  host in a target spec is not configured to use a Bourne
+       compatible shell. (This breakage may be eliminated by use of the  --no-
        getconf option as explained above.)
 
-       A multiple ssh hop source spec  (more than 1 remote  host  involved  in
+       A  multiple  ssh  hop source spec  (more than 1 remote host involved in
        the source transfer) upon a SIGINT may result in sshd and ssh processes
-       being left on on the intermediate host(s),  this  despite,  swinstall's
+       being  left  on  on the intermediate host(s), this despite, swinstall's
        action of sending a SIGTERM to the remote script's parent process.
 
        swinstall does not currently implement Software Selections, not fileset
-       dependencies, and much more.  Only packages with one  product  and  one
+       dependencies,  and  much  more.  Only packages with one product and one
        fileset are supported.
 
 

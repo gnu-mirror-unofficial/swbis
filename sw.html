@@ -28,6 +28,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#dir">(dir)</a>
 
 <h2 class="chapter">1 sw" "5</h2>
 
+<!-- TROFF INPUT: .SH "NAME" -->
 <!-- DEBUG: print_menu("Top") -->
 <ul class="menu">
 <li><a accesskey="1" href="#NAME">NAME</a>
@@ -47,7 +48,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#dir">(dir)</a>
 
 </ul>
 
-<!-- TROFF INPUT: .SH "NAME" -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="NAME"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#SYNOPSIS">SYNOPSIS</a>,
@@ -58,9 +59,10 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <h3 class="section">1.1 NAME</h3>
 
-<!-- DEBUG: print_menu("NAME") -->
 <p>sw <span class="roman">&mdash;</span> POSIX Software Packaging
 <!-- TROFF INPUT: .SH "SYNOPSIS" -->
+<!-- DEBUG: print_menu("NAME") -->
+<!-- MAN2TEXI: EON -->
 
 <div class="node">
 <p><hr>
@@ -72,7 +74,6 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <h3 class="section">1.2 SYNOPSIS</h3>
 
-<!-- DEBUG: print_menu("SYNOPSIS") -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
@@ -88,6 +89,8 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .SH "SOFTWARE PACKAGING LAYOUT" -->
+<!-- DEBUG: print_menu("SYNOPSIS") -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="SOFTWARE-PACKAGING-LAYOUT"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#SOFTWARE-DEFINITIONS">SOFTWARE DEFINITIONS</a>,
@@ -97,17 +100,6 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 </div>
 
 <h3 class="section">1.3 SOFTWARE PACKAGING LAYOUT</h3>
-
-<!-- DEBUG: print_menu("SOFTWARE PACKAGING LAYOUT") -->
-<ul class="menu">
-<li><a accesskey="1" href="#Minimal-Package-Layout">Minimal Package Layout</a>
-<li><a accesskey="2" href="#Distribution-Files">Distribution Files</a>
-<li><a accesskey="3" href="#Product-Files">Product Files</a>
-<li><a accesskey="4" href="#Fileset-Files">Fileset Files</a>
-<li><a accesskey="5" href="#Control-Directory-Names">Control Directory Names</a>
-<li><a accesskey="6" href="#File-Storage">File Storage</a>
-
-</ul>
 
 <!-- TROFF INPUT: .PP -->
 <p>A package may exist in two forms: as a directory in a file system, or a serial access tar or cpio archive file. 
@@ -160,7 +152,19 @@ by the &lt;<i>dfiles</i>&gt; directory.  For each product, the &lt;<i>prod</i><t
 is followed immediately by the
 &lt;<i>prod</i><tt>_</tt><i>dir</i>&gt;/&lt;<i>pfiles</i>&gt; directory. 
 <!-- TROFF INPUT: .SS "Minimal Package Layout" -->
+<!-- DEBUG: print_menu("SOFTWARE PACKAGING LAYOUT") -->
 
+<ul class="menu">
+<li><a accesskey="1" href="#Minimal-Package-Layout">Minimal Package Layout</a>
+<li><a accesskey="2" href="#Distribution-Files">Distribution Files</a>
+<li><a accesskey="3" href="#Product-Files">Product Files</a>
+<li><a accesskey="4" href="#Fileset-Files">Fileset Files</a>
+<li><a accesskey="5" href="#Control-Directory-Names">Control Directory Names</a>
+<li><a accesskey="6" href="#File-Storage">File Storage</a>
+
+</ul>
+
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="Minimal-Package-Layout"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Distribution-Files">Distribution Files</a>,
@@ -201,6 +205,7 @@ is not attested to in the posix normative references.
 <!-- TROFF INPUT: .PP -->
 <p>In this layout a single product and fileset have <i>control</i><tt>_</tt><i>directory</i> attributes specified as an empty string. 
 <!-- TROFF INPUT: .SS "Distribution Files" -->
+<!-- MAN2TEXI: EON -->
 
 <div class="node">
 <p><hr>
@@ -227,6 +232,7 @@ This directory can store an INDEX file or INFO file pertaining to the distributi
 It can also store an attribute of
 the distribution as a separate file where file name is the name of the attribute and the file contents the value. 
 <!-- TROFF INPUT: .SS "Product Files" -->
+<!-- MAN2TEXI: EON -->
 
 <div class="node">
 <p><hr>
@@ -254,6 +260,7 @@ other distributor-defined control<tt>_</tt>files.
 It can also store an attribute of
 the product as a separate file. 
 <!-- TROFF INPUT: .SS "Fileset Files" -->
+<!-- MAN2TEXI: EON -->
 
 <div class="node">
 <p><hr>
@@ -277,6 +284,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#SOFTWARE-PACKAGING-LAYOUT">SOFTWARE PA
 <p>This directory contains information in the same form as does the
 <b>Product Files</b> although pertaining to the fileset. 
 <!-- TROFF INPUT: .SS "Control Directory Names" -->
+<!-- MAN2TEXI: EON -->
 
 <div class="node">
 <p><hr>
@@ -296,6 +304,7 @@ default value is the value of the <i>tag</i> attribute.
 &lt;<i>prod</i><tt>_</tt><i>dir</i>&gt; must be unique within a distribution and
 &lt;<i>fileset</i><tt>_</tt><i>dir</i>&gt; must be unique within a product. 
 <!-- TROFF INPUT: .SS "File Storage " -->
+<!-- MAN2TEXI: EON -->
 
 <div class="node">
 <p><hr>
@@ -321,6 +330,7 @@ distribution appear under these directories in a location determined by the meta
 
 <p>The standard does not require that files that are not regular files appear in the storage section. 
 <!-- TROFF INPUT: .SH "SOFTWARE DEFINITIONS" -->
+<!-- MAN2TEXI: EON -->
 
 <div class="node">
 <p><hr>
@@ -332,7 +342,15 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <h3 class="section">1.4 SOFTWARE DEFINITIONS</h3>
 
+<!-- TROFF INPUT: .PP -->
+<p>The Software Definitions are metadata representations of the objects and attributes
+recognized by the standard. 
+The right hand column in each definition shows the default attribute value.  The defining standard for each attribute is indicated as a
+comment (leading '#' sign) if it is not IEEE-1387.2,  other defining standards are XDSA C701 (<b>C701</b>), and, this
+implementation (<b>impl.</b>). 
+<!-- TROFF INPUT: .SS "Host Definition" -->
 <!-- DEBUG: print_menu("SOFTWARE DEFINITIONS") -->
+
 <ul class="menu">
 <li><a accesskey="1" href="#Host-Definition">Host Definition</a>
 <li><a accesskey="2" href="#Distribution-Definition">Distribution Definition</a>
@@ -349,14 +367,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 </ul>
 
-<!-- TROFF INPUT: .PP -->
-<p>The Software Definitions are metadata representations of the objects and attributes
-recognized by the standard. 
-The right hand column in each definition shows the default attribute value.  The defining standard for each attribute is indicated as a
-comment (leading '#' sign) if it is not IEEE-1387.2,  other defining standards are XDSA C701 (<b>C701</b>), and, this
-implementation (<b>impl.</b>). 
-<!-- TROFF INPUT: .SS "Host Definition" -->
-
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="Host-Definition"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Distribution-Definition">Distribution Definition</a>,
@@ -391,6 +402,7 @@ may chose to define this class.
 or <i>installed</i><tt>_</tt><i>software</i> object.
 
 <!-- TROFF INPUT: .SS "Distribution Definition" -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="Distribution-Definition"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Installed_003ctt_003e_005f_003c_002ftt_003esoftware-Definition">Installed&lt;tt&gt;_&lt;/tt&gt;software Definition</a>,
@@ -484,8 +496,9 @@ The <i>signature</i>,
 and <i>adjunct</i><tt>_</tt><i>md5sum</i> attributes are described below and are stored as separate files in the dfiles
 directory. The <i>tar</i><tt>_</tt><i>format</i><tt>_</tt><i>emulation</i><tt>_</tt><i>*</i> options define
 the GNU tar version and format options that the archive file mimics, these
-attributes are used by the 'checksig' script. 
+attributes are used by the 'checkdigest' script. 
 <!-- TROFF INPUT: .SS "Installed_software Definition" -->
+<!-- MAN2TEXI: EON -->
 
 <div class="node">
 <p><hr>
@@ -517,6 +530,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#SOFTWARE-DEFINITIONS">SOFTWARE DEFINIT
 file by the swlist utility.
 
 <!-- TROFF INPUT: .SS "Media Definition" -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="Media-Definition"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Vendor-Definition">Vendor Definition</a>,
@@ -542,6 +556,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#SOFTWARE-DEFINITIONS">SOFTWARE DEFINIT
 the distribution spans multiple media.
 
 <!-- TROFF INPUT: .SS "Vendor Definition" -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="Vendor-Definition"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Bundle-Definition">Bundle Definition</a>,
@@ -562,6 +577,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#SOFTWARE-DEFINITIONS">SOFTWARE DEFINIT
         description <i>description</i>   Empty string
         qualifier   <i>qualifier</i>     Empty string  # impl.
         url         <i>url</i>           Empty string  # impl.
+        vendor<tt>_</tt>tag  <i>tag</i>           Empty string  # impl.
      <!-- TROFF INPUT: .fi -->
      
 </pre>
@@ -574,14 +590,18 @@ file to avert a (harmless) warning, please use it.  It exists to allow persons, 
 who are distributors (of existing free software) to qualify themselves away from the connotations
 of a "vendor" which has specific meaning not applicable to a free software distributor. 
 A INDEX and PSF files can contain <b>vendor</b> definitions. 
+The <i>vendor</i><tt>_</tt><i>tag</i> attribute contains the vendor.<i>tag</i> of the upstream distributor. 
 The <b>qualifier</b> attribute value may be one of:
 <b>seller</b>,
 <b>author</b>,
 <b>packager</b>,
 <b>maintainer</b>. 
-A distribution may have more than one vendor definition.
+A distribution may have more than one vendor definition.  They may form a chain of references from
+the product.<i>vendor</i><tt>_</tt><i>tag</i> to the last vendor referred to by the
+vendor.<i>vendor</i><tt>_</tt><i>tag</i> attributes.
 
 <!-- TROFF INPUT: .SS "Bundle Definition" -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="Bundle-Definition"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Product-Definition">Product Definition</a>,
@@ -634,6 +654,7 @@ Bundle definitions for distributions will not contain either the
 <i>installed</i><tt>_</tt><i>software</i> objects may contain these attributes.
 
 <!-- TROFF INPUT: .SS "Product Definition" -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="Product-Definition"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Category-Definition">Category Definition</a>,
@@ -697,9 +718,16 @@ An INDEX file will contain a <i>instance</i><tt>_</tt><i>id</i> attribute.
 A product object can contain
 <i>control</i><tt>_</tt><i>files</i>,
 <i>files</i>, and,
-<i>subproducts</i> in the form of software definitions.
+<i>subproducts</i> in the form of software definitions. 
+<!-- TROFF INPUT: .PP -->
+
+<p>The product.<i>vendor</i><tt>_</tt><i>tag</i> refers to the downstream distributor.  This value is
+be the analogous to the RPMTAG<tt>_</tt>RELEASE or debian<tt>_</tt>release attributes.  The original upstream author's package, for example,
+would not use this attribute because that package would not have a release part in its name,
+but could (or should) provide a vendor object in the PSF.
 
 <!-- TROFF INPUT: .SS "Category Definition" -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="Category-Definition"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Subroduct-Definition">Subroduct Definition</a>,
@@ -729,6 +757,7 @@ to its category. If <i>is</i><tt>_</tt><i>patch</i> is "true" then category.tag
 must equal "patch".
 
 <!-- TROFF INPUT: .SS "Subroduct Definition" -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="Subroduct-Definition"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Fileset-Definition">Fileset Definition</a>,
@@ -761,6 +790,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#SOFTWARE-DEFINITIONS">SOFTWARE DEFINIT
 <p>The <i>tag</i> and <i>contents</i> attributes are required.
 
 <!-- TROFF INPUT: .SS "Fileset Definition" -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="Fileset-Definition"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#File-Definition">File Definition</a>,
@@ -820,6 +850,7 @@ A fileset object can contain
 in the form of software definitions.
 
 <!-- TROFF INPUT: .SS "File Definition" -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="File-Definition"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Control-File-Definition">Control File Definition</a>,
@@ -876,6 +907,7 @@ A PSF should not contain the
 <i>size</i> attributes.
 
 <!-- TROFF INPUT: .SS "Control File Definition" -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="Control-File-Definition"></a>Previous:&nbsp;<a rel="previous" accesskey="p" href="#File-Definition">File Definition</a>,
@@ -912,6 +944,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#SOFTWARE-DEFINITIONS">SOFTWARE DEFINIT
 <p>A control<tt>_</tt>file defines a control script such as those listed below (see Extended Control File Definitions)
 or an attribute stored as a file. 
 <!-- TROFF INPUT: .SH "EXTENDED DEFINITIONS" -->
+<!-- MAN2TEXI: EON -->
 
 <div class="node">
 <p><hr>
@@ -922,18 +955,6 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 </div>
 
 <h3 class="section">1.5 EXTENDED DEFINITIONS</h3>
-
-<!-- DEBUG: print_menu("EXTENDED DEFINITIONS") -->
-<ul class="menu">
-<li><a accesskey="1" href="#o-Extended-Control-File-Definitions">o Extended Control File Definitions</a>
-<li><a accesskey="2" href="#o-Directory-Mapping">o Directory Mapping</a>
-<li><a accesskey="3" href="#o-Recursive-File-Definition">o Recursive File Definition</a>
-<li><a accesskey="4" href="#o-Explicit-File-Definition">o Explicit File Definition</a>
-<li><a accesskey="5" href="#o-Default-Permission-Definition">o Default Permission Definition</a>
-<li><a accesskey="6" href="#o-Excluding-Files">o Excluding Files</a>
-<li><a accesskey="7" href="#o-Including-Files">o Including Files</a>
-
-</ul>
 
 <!-- TROFF INPUT: .PP -->
 <p>A Product Specification File (PSF) can contain Extended Definitions in the
@@ -953,7 +974,20 @@ in the containing object, and, requires that Extended Definitions appear before 
 That is, the parser uses the next object keyword to syntacticly and logically terminate the
 current object even if the current object has logically contained objects. 
 <!-- TROFF INPUT: .SS "o  Extended Control File Definitions" -->
+<!-- DEBUG: print_menu("EXTENDED DEFINITIONS") -->
 
+<ul class="menu">
+<li><a accesskey="1" href="#o-Extended-Control-File-Definitions">o Extended Control File Definitions</a>
+<li><a accesskey="2" href="#o-Directory-Mapping">o Directory Mapping</a>
+<li><a accesskey="3" href="#o-Recursive-File-Definition">o Recursive File Definition</a>
+<li><a accesskey="4" href="#o-Explicit-File-Definition">o Explicit File Definition</a>
+<li><a accesskey="5" href="#o-Default-Permission-Definition">o Default Permission Definition</a>
+<li><a accesskey="6" href="#o-Excluding-Files">o Excluding Files</a>
+<li><a accesskey="7" href="#o-Including-Files">o Including Files</a>
+
+</ul>
+
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="o-Extended-Control-File-Definitions"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#o-Directory-Mapping">o Directory Mapping</a>,
@@ -997,6 +1031,7 @@ The <i>path</i> attribute is optional and specifies the file name in the package
 relative to the control<tt>_</tt>directory for software containing the script. If not given the
 <i>tag</i> value is used as the filename. 
 <!-- TROFF INPUT: .SS "o  Directory Mapping" -->
+<!-- MAN2TEXI: EON -->
 
 <div class="node">
 <p><hr>
@@ -1030,6 +1065,7 @@ the subsequently listed files are located.  If
 location and
 <i>dest</i> is its unrealized absolute pathname destination. 
 <!-- TROFF INPUT: .SS "o  Recursive File Definition" -->
+<!-- MAN2TEXI: EON -->
 
 <div class="node">
 <p><hr>
@@ -1058,6 +1094,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#EXTENDED-DEFINITIONS">EXTENDED DEFINIT
 <p>Specifies every file in current source directory. 
 The <i>directory</i> extended definition must be used before the recursive specification. 
 <!-- TROFF INPUT: .SS "o  Explicit File Definition" -->
+<!-- MAN2TEXI: EON -->
 
 <div class="node">
 <p><hr>
@@ -1175,6 +1212,7 @@ If <i>path</i> is not specified
 
 <!--  -->
 <!-- TROFF INPUT: .SS "o  Default Permission Definition" -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="o-Default-Permission-Definition"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#o-Excluding-Files">o Excluding Files</a>,
@@ -1215,6 +1253,7 @@ simply replace previous definitions (resetting all the options).
 <!-- .br -->
     file<tt>_</tt>permissions &minus;u 000
 <!-- TROFF INPUT: .SS "o  Excluding Files" -->
+<!-- MAN2TEXI: EON -->
 
 <div class="node">
 <p><hr>
@@ -1244,6 +1283,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#EXTENDED-DEFINITIONS">EXTENDED DEFINIT
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
 <!-- TROFF INPUT: .SS "o  Including Files" -->
+<!-- MAN2TEXI: EON -->
 
 <div class="node">
 <p><hr>
@@ -1273,6 +1313,7 @@ The syntax of the included file is PSF syntax.
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
 <!-- TROFF INPUT: .SH "DISTRIBUTOR KEYWORDS" -->
+<!-- MAN2TEXI: EON -->
 
 <div class="node">
 <p><hr>
@@ -1284,12 +1325,13 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <h3 class="section">1.6 DISTRIBUTOR KEYWORDS</h3>
 
-<!-- DEBUG: print_menu("DISTRIBUTOR KEYWORDS") -->
 <!-- TROFF INPUT: .PP -->
 <p>A software definition file (INFO, INDEX or psf) may contain keywords not recognized by the standard. 
 Such keywords will be parsed as an attribute keyword, that is as an attribute of the
 containing object (keyword) software definition. 
 <!-- TROFF INPUT: .SH "PACKAGE SECURITY" -->
+<!-- DEBUG: print_menu("DISTRIBUTOR KEYWORDS") -->
+<!-- MAN2TEXI: EON -->
 
 <div class="node">
 <p><hr>
@@ -1301,6 +1343,12 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <h3 class="section">1.7 PACKAGE SECURITY</h3>
 
+<!-- TROFF INPUT: .PP -->
+<p>The Package Security Attributes are distribution attributes stored as separate files.  They are implementation extensions. 
+They consist of archive digests, catalog signature, catalog signature header, and individual file md5 digests. 
+<!-- TROFF INPUT: .PP -->
+
+<!-- TROFF INPUT: .SS "Archive Digests" -->
 <!-- DEBUG: print_menu("PACKAGE SECURITY") -->
 <ul class="menu">
 <li><a accesskey="1" href="#Archive-Digests">Archive Digests</a>
@@ -1311,12 +1359,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 </ul>
 
-<!-- TROFF INPUT: .PP -->
-<p>The Package Security Attributes are distribution attributes stored as separate files.  They are implementation extensions. 
-They consist of archive digests, catalog signature, catalog signature header, and individual file md5 digests. 
-<!-- TROFF INPUT: .PP -->
-
-<!-- TROFF INPUT: .SS "Archive Digests" -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="Archive-Digests"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Adjunct-Md5-Digest">Adjunct Md5 Digest</a>,
@@ -1345,6 +1388,7 @@ followed by the
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .SS "Adjunct Md5 Digest" -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="Adjunct-Md5-Digest"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Catalog-Signature-Header">Catalog Signature Header</a>,
@@ -1382,6 +1426,7 @@ The ability to verify even the <i>adjunct</i><tt>_</tt><i>md5sum</i> from
 the directory form of the package is dependent on the tar creating utility and
 other attributes of a POSIX.2 environment. 
 <!-- TROFF INPUT: .SS "Catalog Signature Header" -->
+<!-- MAN2TEXI: EON -->
 
 <div class="node">
 <p><hr>
@@ -1412,6 +1457,7 @@ file archive members.
 This is required because neither the signature file bytes nor the signature tar header are
 included in the signed data. 
 <!-- TROFF INPUT: .SS "Catalog Signature" -->
+<!-- MAN2TEXI: EON -->
 
 <div class="node">
 <p><hr>
@@ -1465,6 +1511,7 @@ archive members.
 A signature archive member, whether alone or one of many, is never
 part of the signed data stream. 
 <!-- TROFF INPUT: .SS "File Md5 Digest" -->
+<!-- MAN2TEXI: EON -->
 
 <div class="node">
 <p><hr>
@@ -1484,6 +1531,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#PACKAGE-SECURITY">PACKAGE SECURITY</a>
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
 <!-- TROFF INPUT: .SH "SOFTWARE DEFINITION FILES" -->
+<!-- MAN2TEXI: EON -->
 
 <div class="node">
 <p><hr>
@@ -1494,13 +1542,6 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 </div>
 
 <h3 class="section">1.8 SOFTWARE DEFINITION FILES</h3>
-
-<!-- DEBUG: print_menu("SOFTWARE DEFINITION FILES") -->
-<ul class="menu">
-<li><a accesskey="1" href="#Additional-Syntax-Rules">Additional Syntax Rules</a>
-<li><a accesskey="2" href="#Software-Definition-File-Grammar">Software Definition File Grammar</a>
-
-</ul>
 
 <!-- TROFF INPUT: .PP -->
 <p>The metadata files, INDEX, INFO and PSF, contain information about the
@@ -1542,7 +1583,15 @@ Extended keywords (meaning Extended Definitions) only appear in a PSF file.
 <p>The order  of objects (i.e <i>Software Definition</i>s) is significant and
 a containment  hierarchy is determined according to parser's grammar. 
 <!-- TROFF INPUT: .SS "Additional Syntax Rules" -->
+<!-- DEBUG: print_menu("SOFTWARE DEFINITION FILES") -->
 
+<ul class="menu">
+<li><a accesskey="1" href="#Additional-Syntax-Rules">Additional Syntax Rules</a>
+<li><a accesskey="2" href="#Software-Definition-File-Grammar">Software Definition File Grammar</a>
+
+</ul>
+
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="Additional-Syntax-Rules"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Software-Definition-File-Grammar">Software Definition File Grammar</a>,
@@ -1575,6 +1624,7 @@ will be in the form of a control file (i.e. a separate file in the control direc
 For INDEX files, the filename is relative to the control directory in which this attribute is contained. 
 For PSF files, the filename is a path on the host. 
 <!-- TROFF INPUT: .SS "Software Definition File Grammar" -->
+<!-- MAN2TEXI: EON -->
 
 <div class="node">
 <p><hr>
@@ -1656,6 +1706,7 @@ and
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .SH "EXAMPLE PACKAGE" -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="EXAMPLE-PACKAGE"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#SWBIS-PSF-CONVENTIONS">SWBIS PSF CONVENTIONS</a>,
@@ -1666,6 +1717,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <h3 class="section">1.9 EXAMPLE PACKAGE</h3>
 
+<!-- TROFF INPUT: .SS "Layout" -->
 <!-- DEBUG: print_menu("EXAMPLE PACKAGE") -->
 <ul class="menu">
 <li><a accesskey="1" href="#Layout">Layout</a>
@@ -1676,7 +1728,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 </ul>
 
-<!-- TROFF INPUT: .SS "Layout" -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="Layout"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Hypothetical-PSF-file">Hypothetical PSF file</a>,
@@ -1724,6 +1776,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#EXAMPLE-PACKAGE">EXAMPLE PACKAGE</a>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .SS "Hypothetical PSF file" -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="Hypothetical-PSF-file"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#INDEX-File-swm_002d1-0_002fcatalog_002fINDEX">INDEX File swm-1 0/catalog/INDEX</a>,
@@ -1741,7 +1794,6 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#EXAMPLE-PACKAGE">EXAMPLE PACKAGE</a>
      <!-- .br -->
      
       distribution
-        layout<tt>_</tt>version 1.0
         control<tt>_</tt>directory swm-1.0  #Implementation Extension.
         vendor
           the<tt>_</tt>term<tt>_</tt>vendor<tt>_</tt>is<tt>_</tt>misleading  false # True or False
@@ -1791,6 +1843,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#EXAMPLE-PACKAGE">EXAMPLE PACKAGE</a>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .SS "INDEX File swm-1.0/catalog/INDEX" -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="INDEX-File-swm_002d1-0_002fcatalog_002fINDEX"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#INFO-File-swm_002d1-0_002fcatalog_002fdfiles_002fINFO">INFO File swm-1 0/catalog/dfiles/INFO</a>,
@@ -1849,6 +1902,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#EXAMPLE-PACKAGE">EXAMPLE PACKAGE</a>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .SS "INFO File swm-1.0/catalog/dfiles/INFO" -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="INFO-File-swm_002d1-0_002fcatalog_002fdfiles_002fINFO"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#INFO-File-swm_002d1-0_002fcatalog_002fgsoft_003ctt_003e_005f_003c_002ftt_003eswm_002fbin_002fINFO">INFO File swm-1 0/catalog/gsoft&lt;tt&gt;_&lt;/tt&gt;swm/bin/INFO</a>,
@@ -1889,6 +1943,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#EXAMPLE-PACKAGE">EXAMPLE PACKAGE</a>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .SS "INFO File swm-1.0/catalog/gsoft_swm/bin/INFO" -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="INFO-File-swm_002d1-0_002fcatalog_002fgsoft_003ctt_003e_005f_003c_002ftt_003eswm_002fbin_002fINFO"></a>Previous:&nbsp;<a rel="previous" accesskey="p" href="#INFO-File-swm_002d1-0_002fcatalog_002fdfiles_002fINFO">INFO File swm-1 0/catalog/dfiles/INFO</a>,
@@ -1960,6 +2015,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#EXAMPLE-PACKAGE">EXAMPLE PACKAGE</a>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .SH "SWBIS PSF CONVENTIONS" -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="SWBIS-PSF-CONVENTIONS"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#APPLICABLE-STANDARDS">APPLICABLE STANDARDS</a>,
@@ -1970,7 +2026,13 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <h3 class="section">1.10 SWBIS PSF CONVENTIONS</h3>
 
+<!-- TROFF INPUT: .PP -->
+<p>This section describes attribute usage and conventions imposed by the swbis implementation. 
+Not all attributes are listed here.  Those that are have important effects or
+particular interest. 
+<!-- TROFF INPUT: .SS "o Distribution Attributes" -->
 <!-- DEBUG: print_menu("SWBIS PSF CONVENTIONS") -->
+
 <ul class="menu">
 <li><a accesskey="1" href="#o-Distribution-Attributes">o Distribution Attributes</a>
 <li><a accesskey="2" href="#o-Bundle-Attributes">o Bundle Attributes</a>
@@ -1981,12 +2043,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 </ul>
 
-<!-- TROFF INPUT: .PP -->
-<p>This section describes attribute usage and conventions imposed by the swbis implementation. 
-Not all attributes are listed here.  Those that are have important effects or
-particular interest. 
-<!-- TROFF INPUT: .SS "o Distribution Attributes" -->
-
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="o-Distribution-Attributes"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#o-Bundle-Attributes">o Bundle Attributes</a>,
@@ -2047,6 +2104,7 @@ generated by swpackage if not set in a PSF.
 
 <!--  -->
 <!-- TROFF INPUT: .SS "o Bundle Attributes" -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="o-Bundle-Attributes"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#o-Product-Attributes">o Product Attributes</a>,
@@ -2077,6 +2135,7 @@ installed software catalog.  If it is not present the product tag is used.
 
 <!--  -->
 <!-- TROFF INPUT: .SS "o Product Attributes" -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="o-Product-Attributes"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#o-Fileset-Attributes">o Fileset Attributes</a>,
@@ -2165,6 +2224,7 @@ different distributor.  It most closely maps to the RPMTAG<tt>_</tt>RELEASE or "
 
 <!--  -->
 <!-- TROFF INPUT: .SS "o Fileset Attributes" -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="o-Fileset-Attributes"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#o-Example-Source-Package-PSF">o Example Source Package PSF</a>,
@@ -2211,6 +2271,7 @@ then the
 
 <!--  -->
 <!-- TROFF INPUT: .SS "o Example Source Package PSF" -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="o-Example-Source-Package-PSF"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#o-Example-Runtime-_0028Binary_0029-Package-PSF">o Example Runtime (Binary) Package PSF</a>,
@@ -2262,6 +2323,7 @@ so the package structure does not change relative to a vanilla tarball.
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .SS "o Example Runtime (Binary) Package PSF" -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="o-Example-Runtime-_0028Binary_0029-Package-PSF"></a>Previous:&nbsp;<a rel="previous" accesskey="p" href="#o-Example-Source-Package-PSF">o Example Source Package PSF</a>,
@@ -2324,6 +2386,7 @@ selection syntax such as fooit,bv=* or fooit,pv=* .
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .SH "APPLICABLE STANDARDS" -->
+<!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
 <a name="APPLICABLE-STANDARDS"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#SEE-ALSO">SEE ALSO</a>,
@@ -2334,11 +2397,12 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <h3 class="section">1.11 APPLICABLE STANDARDS</h3>
 
-<!-- DEBUG: print_menu("APPLICABLE STANDARDS") -->
 <!-- TROFF INPUT: .PP -->
 <p>IEEE Std 1387.2-1995 (Identical to ISO 15068-2:1999),
 Open Group CAE C701. 
 <!-- TROFF INPUT: .SH "SEE ALSO" -->
+<!-- DEBUG: print_menu("APPLICABLE STANDARDS") -->
+<!-- MAN2TEXI: EON -->
 
 <div class="node">
 <p><hr>
@@ -2350,7 +2414,6 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <h3 class="section">1.12 SEE ALSO</h3>
 
-<!-- DEBUG: print_menu("SEE ALSO") -->
 <p>XDSA C701 http://www.opengroup.org/publications/catalog/c701.htm
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
@@ -2363,6 +2426,8 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
  swpackage(8)
  swverify(8)
 <!-- TROFF INPUT: .SH "IDENTIFICATION" -->
+<!-- DEBUG: print_menu("SEE ALSO") -->
+<!-- MAN2TEXI: EON -->
 
 <div class="node">
 <p><hr>
@@ -2374,12 +2439,13 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <h3 class="section">1.13 IDENTIFICATION</h3>
 
-<!-- DEBUG: print_menu("IDENTIFICATION") -->
 <p>Copyright (C) 2005 Jim Lowe
- Version: 0.481
- Date: 2006-02-15
+ Version: 0.499
+ Last Updated: 2006-01
  Copying Terms: GNU Free Documentation License
 <!-- TROFF INPUT: .SH "BUGS" -->
+<!-- DEBUG: print_menu("IDENTIFICATION") -->
+<!-- MAN2TEXI: EON -->
 
 <div class="node">
 <p><hr>
@@ -2390,10 +2456,9 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <h3 class="section">1.14 BUGS</h3>
 
-<!-- DEBUG: print_menu("BUGS") -->
 <!-- TROFF INPUT: .PP -->
 <p>None
-<!-- created by instant / docbook-to-man, Sun 19 Feb 2006, 20:52 -->
+<!-- created by instant / docbook-to-man, Thu 03 Aug 2006, 21:32 -->
 
 </body></html>
 

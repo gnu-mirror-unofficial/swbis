@@ -274,6 +274,14 @@ i {color:#000080}
        <b>-W unrpm</b>
               Turns on options --allow-rpm and --audit.
 
+       <b>-W source-script-name=NAME</b>
+              Write the script that is written into the remote  shell's  stdin
+              to NAME.  This is useful for debugging.
+
+       <b>-W target-script-name=NAME</b>
+              Write  the  script that is written into the remote shell's stdin
+              to NAME.  This is useful for debugging.
+
        <b>software_selections</b>
 
               Refer to the software objects (products, filesets) on  which  to
@@ -535,9 +543,9 @@ i {color:#000080}
        code and data on STDIN.  This capability may not  be  present  in  some
        /bin/sh shells.  The &quot;/bin/sh&quot; on FreeBSD-5.1 is broken in this regard,
        hence ''--shell-command=bash'' should be used for BSD hosts.  The  pub-
-       lic  domain  Korn  shell  (pdksh-5.2.14)  seems to work OK, that is, it
-       complies by luck or intent with the POSIX capability  of  reading  data
-       and code on stdin.
+       lic domain Korn shell (pdksh-5.2.14) seems to work OK, that is, it com-
+       plies by luck or intent with the POSIX capability of reading  data  and
+       code on stdin.
 
        If  the  --no-getconf  option  is  set  or  the swcopy.swbis_no_getconf
        defaults option is &quot;true&quot; then the remote command is '/bin/sh -s'.  Use
@@ -561,8 +569,8 @@ i {color:#000080}
        <a href="sw_5.html">sw(5)</a>, <a href="swbisparse_1.html">swbisparse(1)</a>, <a href="swign_1.html">swign(1)</a>, <a href="swverify_8.html">swverify(8)</a>
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        <a href="swcopy_8.html">swcopy(8)</a>: The archive copying utility of the swbis project.
         Author: Jim Lowe   Email: jhlowe at acm.org
-        Version: 0.481
-        Date: 2006-02-15
+        Version: 0.499
+        Last Updated: 2006-07
         Copying: GNU Free Documentation License
 </pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       Swcopy  is  subject  to breakage if a user's account on an intermediate
        (or terminal) host in a target spec is not configured to use  a  Bourne

@@ -241,7 +241,7 @@ i {color:#000080}
        and are stored as separate files in the dfiles directory. The  <i>tar</i><b>_</b><i>for-</i>
        <i>mat</i><b>_</b><i>emulation</i><b>_</b><i>*</i>  options  define the GNU tar version and format options
        that the archive file mimics, these attributes are used by the  'check-
-       sig' script.
+       digest' script.
 
    <a name="Installed_software Definition"><b>Installed_software Definition</b></a>
         installed_software
@@ -274,6 +274,7 @@ i {color:#000080}
           description <i>description</i>   Empty string
           qualifier   <i>qualifier</i>     Empty string  # impl.
           url         <i>url</i>           Empty string  # impl.
+          vendor_tag  <i>tag</i>           Empty string  # impl.
 
 
        The  <i>tag</i>  attribute  is required.  The <i>the</i><b>_</b><i>term</i><b>_</b><i>vendor</i><b>_</b><i>is</i><b>_</b><i>misleading</i> is
@@ -282,9 +283,12 @@ i {color:#000080}
        existing free software) to qualify themselves away  from  the  connota-
        tions of a &quot;vendor&quot; which has specific meaning not applicable to a free
        software distributor.  A INDEX and PSF files can contain <b>vendor</b> defini-
-       tions.   The  <b>qualifier</b>  attribute value may be one of: <b>seller</b>, <b>author</b>,
-       <b>packager</b>, <b>maintainer</b>.  A distribution may have  more  than  one  vendor
-       definition.
+       tions.   The  <i>vendor</i><b>_</b><i>tag</i>  attribute  contains  the  vendor.<i>tag</i>  of  the
+       upstream distributor.  The <b>qualifier</b> attribute value  may  be  one  of:
+       <b>seller</b>,  <b>author</b>,  <b>packager</b>,  <b>maintainer</b>.   A distribution may have more
+       than one vendor definition.  They may form a chain of  references  from
+       the  product.<i>vendor</i><b>_</b><i>tag</i>  to  the  last  vendor  referred to by the ven-
+       dor.<i>vendor</i><b>_</b><i>tag</i> attributes.
 
 
    <a name="Bundle Definition"><b>Bundle Definition</b></a>
@@ -314,11 +318,11 @@ i {color:#000080}
           is_patch     <i>is</i><b>_</b><i>patch</i>        false                # C701
 
 
-       The  <i>tag</i>  and  <i>contents</i> attributes are required in INDEX and PSF files.
-       The <i>size</i> attribute is not allowed in either file. The value of <i>size</i>  is
-       generated  dynamically.   An  INDEX  file  will  contain  a <i>instance</i><b>_</b><i>id</i>
-       attribute.  Bundle  definitions  for  distributions  will  not  contain
-       either  the  <i>location</i> or <i>qualifier</i>, <i>installed</i><b>_</b><i>software</i> objects may con-
+       The <i>tag</i> and <i>contents</i> attributes are required in INDEX  and  PSF  files.
+       The  <i>size</i> attribute is not allowed in either file. The value of <i>size</i> is
+       generated dynamically.   An  INDEX  file  will  contain  a  <i>instance</i><b>_</b><i>id</i>
+       attribute.   Bundle  definitions  for  distributions  will  not contain
+       either the <i>location</i> or <i>qualifier</i>, <i>installed</i><b>_</b><i>software</i> objects  may  con-
        tain these attributes.
 
 
@@ -361,11 +365,18 @@ i {color:#000080}
           change_log        <i>change</i><b>_</b><i>log</i>        None       # impl.
 
 
-       The <i>tag</i>  and  <i>control</i><b>_</b><i>directory</i>  attributes  are  required.   The  <i>size</i>
+       The  <i>tag</i>  and  <i>control</i><b>_</b><i>directory</i>  attributes  are  required.   The <i>size</i>
        attribute is not allowed in either file. The value of <i>size</i> is generated
-       dynamically.  An INDEX file will contain a  <i>instance</i><b>_</b><i>id</i>  attribute.   A
-       product  object  can  contain <i>control</i><b>_</b><i>files</i>, <i>files</i>, and, <i>subproducts</i> in
+       dynamically.   An  INDEX  file will contain a <i>instance</i><b>_</b><i>id</i> attribute.  A
+       product object can contain <i>control</i><b>_</b><i>files</i>, <i>files</i>,  and,  <i>subproducts</i>  in
        the form of software definitions.
+
+       The  product.<i>vendor</i><b>_</b><i>tag</i>  refers  to  the  downstream distributor.  This
+       value is be the  analogous  to  the  RPMTAG_RELEASE  or  debian_release
+       attributes.  The original upstream author's package, for example, would
+       not use this attribute because that package would not  have  a  release
+       part  in its name, but could (or should) provide a vendor object in the
+       PSF.
 
 
    <a name="Category Definition"><b>Category Definition</b></a>
@@ -699,8 +710,8 @@ i {color:#000080}
        lowed  by  one  or more NUL characters (0x00).  The total length of the
        file must match the file size  specified  in  the  size  field  of  the
        <b>sig_header</b>  file.   The  ustar header of every signature archive member
-       shall be  identical  to  the  <b>sig_header</b>  file.   The  padded  size  is
-       predetermined [by swpackage] and currently set to be 1024 octets.  This
+       shall be identical to the <b>sig_header</b> file.  The padded size  is  prede-
+       termined  [by  swpackage]  and  currently  set to be 1024 octets.  This
        means the armored sig file has a length limitation of 1023 octets.
 
        If multiple signature  archive  members  exist  they  must  follow  one
@@ -855,7 +866,6 @@ i {color:#000080}
 
    <a name="Hypothetical PSF file"><b>Hypothetical PSF file</b></a>
         distribution
-          layout_version 1.0
           control_directory swm-1.0  #Implementation Extension.
           vendor
             the_term_vendor_is_misleading  false # True or False
@@ -1170,9 +1180,9 @@ i {color:#000080}
        This  is a sample PSF for a runtime package.  It implies multiple prod-
        ucts (e.g. sub-packages) using the  bundle.contents  attribute.   Since
        the  bundle  and product tags exist in a un-regulated namespace and are
-       seen by end users they should be  carefully  chosen.    Note  that  the
-       bundle  and  product have the same tag which may force downstream users
-       to disambiguate using software selection syntax such as  fooit,bv=*  or
+       seen by end users they should be carefully chosen.   Note that the bun-
+       dle  and  product have the same tag which may force downstream users to
+       disambiguate using software selection  syntax  such  as  fooit,bv=*  or
        fooit,pv=* .
 
         distribution
@@ -1222,8 +1232,8 @@ i {color:#000080}
         <a href="swpackage_8.html">swpackage(8)</a>
         <a href="swverify_8.html">swverify(8)</a>
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        Copyright (C) 2005 Jim Lowe
-        Version: 0.481
-        Date: 2006-02-15
+        Version: 0.499
+        Last Updated: 2006-01
         Copying Terms: GNU Free Documentation License
 </pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       None
 

@@ -48,9 +48,9 @@ signatures.
 ***************
 
 In general, you need Unix-like shell and utilites, including awk.  A
-Posix shell is required, `bash' works fine.  You will also need GNU tar
-version 1.14, 1.15.1 or 1.15.91, and GNU Privacy Guard (`gpg').  The
-GnuPG passphrase agent, (`gpg-agent') is supported though optional.
+Posix shell is required, (`bash') works fine.  You will also need GNU
+tar version 1.14, 1.15.1 or 1.15.91, and GNU Privacy Guard (`gpg').
+The GnuPG passphrase agent, (`gpg-agent') is supported though optional.
 The features described in the last two chapters dealing with Automake
 and CVS require GNU swbis version 0.499.
 

@@ -93,8 +93,15 @@ See the
 <A HREF="/software/swbis/sourcesign-1.2/gendocs/manual/index.html">tutorial</A>
 for details of these new features.
 <p>
+The CVS Repository contains the 0.499 release that has been signed. To get it use:
+<pre>
+cvs -z3 -d:pserver:anonymous@cvs.savannah.gnu.org:/sources/swbis export -r release_0_499 swbis
+</pre>
+Then use swverify (version 0.499) to verify it.  A directory named <tt>swbis</tt> will have been created:
+<pre>
+swverify -d --scm @:swbis
+</pre>
 </dd>
-
 </dl>
 
 <H4><A HREF="#TOCdownloading" NAME="downloading">Downloading Swbis</A></H4>
@@ -147,7 +154,7 @@ permitted in any medium, provided this notice is preserved.
 
 <P>
 Updated:
-$Id: index.html,v 1.10 2006/08/06 01:51:57 jhlowe Exp $
+$Id: index.html,v 1.11 2006/08/06 02:04:44 jhlowe Exp $
 <HR>
 </BODY>
 </HTML>

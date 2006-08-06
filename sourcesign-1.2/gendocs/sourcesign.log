@@ -1,8 +1,8 @@
-This is pdfeTeXk, Version 3.14159-1.10b-2.1 (Web2C 7.4.5) (format=pdfetex 2005.9.4)  1 AUG 2006 22:24
+This is pdfeTeXk, Version 3.14159-1.10b-2.1 (Web2C 7.4.5) (format=pdfetex 2005.9.4)  5 AUG 2006 19:20
 entering extended mode
  file:line:error style messages enabled.
-**/tmp/t2d32269/xtr/sourcesign.texi
-(/tmp/t2d32269/xtr/sourcesign.texi{/usr/share/texmf/pdftex/config/pdftex.cfg}
+**/tmp/t2d4369/xtr/sourcesign.texi
+(/tmp/t2d4369/xtr/sourcesign.texi{/usr/share/texmf/pdftex/config/pdftex.cfg}
 (/usr/share/texmf/tex/texinfo/texinfo.tex
 Loading texinfo [version 2004-04-07.08]: Basics,
 \bindingoffset=\dimen16
@@ -162,7 +162,7 @@ localization,
 \openout0 = `sourcesign.toc'.
 
  Chapter 2 [1] Chapter 3 [2] [3]
-Underfull \hbox (badness 3439) in paragraph at lines 242--245
+Underfull \hbox (badness 3439) in paragraph at lines 246--249
 []/cmr10@10.95pt/The /cmsl10@10.95pt/Name /cmr10@10.95pt/be-comes the /cmsl10@1
 0.95pt/prod-uct/cmr10@10.95pt/./cmsl10@10.95pt/tag /cmr10@10.95pt/at-tribute. T
 he /cmsl10@10.95pt/Re-vi-sion /cmr10@10.95pt/be-comes the
@@ -176,7 +176,7 @@ he /cmsl10@10.95pt/Re-vi-sion /cmr10@10.95pt/be-comes the
 .etc.
 
 
-Underfull \hbox (badness 4072) in paragraph at lines 260--263
+Underfull \hbox (badness 4072) in paragraph at lines 264--267
 []/cmr10@10.95pt/sets the /cmsl10@10.95pt/dfiles /cmr10@10.95pt/at-tribute to i
 ts de-fault value of /cmtt10@10.95pt/"/cmr10@10.95pt/dfiles/cmtt10@10.95pt/"/cm
 r10@10.95pt/. The `/cmtt10@10.95pt/AUTHORS[]/cmr10@10.95pt/'[],
@@ -190,7 +190,7 @@ r10@10.95pt/. The `/cmtt10@10.95pt/AUTHORS[]/cmr10@10.95pt/'[],
 .etc.
 
 
-Underfull \hbox (badness 6510) in paragraph at lines 260--263
+Underfull \hbox (badness 6510) in paragraph at lines 264--267
 /cmr10@10.95pt/and `/cmtt10@10.95pt/COPYING[]/cmr10@10.95pt/'[] will be in-clud
 ed as in-di-vid-ual files in the pack-age di-rec-tory
 
@@ -203,7 +203,7 @@ ed as in-di-vid-ual files in the pack-age di-rec-tory
 .etc.
 
 
-Overfull \hbox (39.20389pt too wide) in paragraph at lines 272--272
+Overfull \hbox (39.20389pt too wide) in paragraph at lines 276--276
  []   /cmtt10@10.95pt/tag         /cmsltt10@10.95pt/tag                 /cmtt10
 @10.95pt/#  Short name, Globally unique if possible[] 
 
@@ -216,7 +216,7 @@ Overfull \hbox (39.20389pt too wide) in paragraph at lines 272--272
 .etc.
 
 [4]
-Underfull \hbox (badness 2443) in paragraph at lines 297--299
+Underfull \hbox (badness 2443) in paragraph at lines 301--303
 []/cmr10@10.95pt/The re-sult-ing own-er-ships are equiv-a-lent to the GNU /cmtt
 10@10.95pt/tar[] /cmr10@10.95pt/op-tions /cmtt10@10.95pt/--numeric
 
@@ -229,7 +229,7 @@ Underfull \hbox (badness 2443) in paragraph at lines 297--299
 .etc.
 
 [5] Chapter 4 [6] [7] Chapter 5 [8]
-Overfull \hbox (64.11118pt too wide) in paragraph at lines 517--521
+Overfull \hbox (64.11118pt too wide) in paragraph at lines 521--525
 []/cmr10@10.95pt/Hence, to make a new sig-na-ture mem-ber, take the data part o
 f `/cmtt10@10.95pt/</cmsltt10@10.95pt/path/cmtt10@10.95pt/>/catalog/dfiles/sig_
 header[]/cmr10@10.95pt/'[]
@@ -243,7 +243,7 @@ header[]/cmr10@10.95pt/'[]
 .etc.
 
 Chapter 6 [9]
-Underfull \hbox (badness 3068) in paragraph at lines 566--570
+Underfull \hbox (badness 3068) in paragraph at lines 570--574
  []/cmr10@10.95pt/Set the file own-er-ships in the pack-age to nu-meric root/ro
 ot. Us-ing the
 
@@ -261,7 +261,7 @@ ot. Us-ing the
 .etc.
 
 
-Overfull \hbox (60.93126pt too wide) in paragraph at lines 593--593
+Overfull \hbox (60.93126pt too wide) in paragraph at lines 597--597
  []/cmtt10@10.95pt/description "The GNU Project was launched in 1984 to develop
  a complete UNIX-like[] 
 
@@ -274,7 +274,7 @@ Overfull \hbox (60.93126pt too wide) in paragraph at lines 593--593
 .etc.
 
 [10]
-Overfull \hbox (26.43913pt too wide) in paragraph at lines 621--621
+Overfull \hbox (26.43913pt too wide) in paragraph at lines 625--625
  []/cmtt10@10.95pt/swign -s PSF.in  -u "Your GPG name" @- | gzip -9 >../somepac
 kage-1.0.tar.gz[] 
 
@@ -287,7 +287,7 @@ kage-1.0.tar.gz[]
 .etc.
 
 [11] Chapter 7 [12]
-Overfull \hbox (238.97647pt too wide) in paragraph at lines 678--678
+Overfull \hbox (238.97647pt too wide) in paragraph at lines 682--682
 [][] 
 
 @hbox(7.60416+2.43333)x433.62
@@ -304,7 +304,7 @@ Overfull \hbox (238.97647pt too wide) in paragraph at lines 678--678
 .@glue(@rightskip) 0.0
 
 
-Overfull \hbox (26.43913pt too wide) in paragraph at lines 683--683
+Overfull \hbox (26.43913pt too wide) in paragraph at lines 687--687
  []/cmtt10@10.95pt/export SWPACKAGEPASSFD=agent; export GNUPGNAME="Your Name"; 
 make dist-swbis[] 
 
@@ -317,7 +317,7 @@ make dist-swbis[]
 .etc.
 
 Chapter 8 [13]
-Overfull \hbox (49.43388pt too wide) in paragraph at lines 740--740
+Overfull \hbox (49.43388pt too wide) in paragraph at lines 744--744
  []/cmtt10@10.95pt/SWPACKAGEPASSFD=agent; GNUPGNAME="Your Name"  swign --name-v
 ersion=/cmsltt10@10.95pt/module_name-
 
@@ -332,12 +332,12 @@ ersion=/cmsltt10@10.95pt/module_name-
 [14] [15] ) 
 Here is how much of TeX's memory you used:
  1697 strings out of 97344
- 19267 string characters out of 1213142
- 41070 words of memory out of 1000001
+ 19264 string characters out of 1213142
+ 41074 words of memory out of 1000001
  2754 multiletter control sequences out of 10000+50000
  32127 words of font info for 112 fonts, out of 500000 for 1000
  51 hyphenation exceptions out of 1000
- 12i,6n,16p,255b,289s stack positions out of 1500i,500n,5000p,200000b,5000s
+ 12i,6n,16p,254b,289s stack positions out of 1500i,500n,5000p,200000b,5000s
  178 PDF objects out of 300000
  35 named destinations out of 131072
  133 words of extra memory for PDF output out of 65536
@@ -350,4 +350,4 @@ ts/pk/ljfour/public/cm/cmbx12.864pk> </var/cache/fonts/pk/ljfour/public/cm/cmsy
 10.657pk> </var/cache/fonts/pk/ljfour/public/cm/cmr10.600pk> </var/cache/fonts/
 pk/ljfour/public/cm/cmbx12.720pk> </var/cache/fonts/pk/ljfour/public/cm/cmr10.6
 57pk> </var/cache/fonts/pk/ljfour/public/cm/cmbx12.1037pk>
-Output written on sourcesign.pdf (17 pages, 187028 bytes).
+Output written on sourcesign.pdf (17 pages, 187340 bytes).

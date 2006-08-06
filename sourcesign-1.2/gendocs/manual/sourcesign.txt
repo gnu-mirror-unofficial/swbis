@@ -26,7 +26,7 @@ Swbis
 Swbis
 *****
 
-This manual is for the use of GNU Swbis (version 0.496) in the creation
+This manual is for the use of GNU Swbis (version 0.499) in the creation
 and verification of software releases containing embedded GPG
 signatures.
 
@@ -47,9 +47,12 @@ signatures.
 1 Prerequisites
 ***************
 
-You will need GNU Swbis version 0.483 and GNU tar version 1.13.25,
-1.14.x  or preferably 1.15.x.  You will also need GNU Privacy Guard
-(`gpg').
+In general, you need Unix-like shell and utilites, including awk.  A
+Posix shell is required, `bash' works fine.  You will also need GNU tar
+version 1.14, 1.15.1 or 1.15.91, and GNU Privacy Guard (`gpg').  The
+GnuPG passphrase agent, (`gpg-agent') is supported though optional.
+The features described in the last two chapters dealing with Automake
+and CVS require GNU swbis version 0.499.
 
 2 Introduction
 **************

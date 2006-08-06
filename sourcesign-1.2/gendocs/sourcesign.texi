@@ -2,11 +2,11 @@
 @comment %**start of header
 @setfilename sourcesign.info
 
-@set UPDATED 17 July 2006
-@set UPDATED-MONTH July 2006
+@set UPDATED 05 August 2006
+@set UPDATED-MONTH August 2006
 @set EDITION 1
-@set VERSION 1.1
-@set SWBIS_VERSION 0.496
+@set VERSION 1.2
+@set SWBIS_VERSION 0.499
 
 @settitle Creating and Verifying Tar Archives with Embedded GPG Signatures
 @c @setchapternewpage odd
@@ -97,8 +97,12 @@ Copies published by the Free Software Foundation raise funds for
 @node Prerequisites
 @chapter Prerequisites
 
-You will need GNU Swbis version 0.483 and GNU tar version 1.13.25, 1.14.x  or preferably 1.15.x.
-You will also need GNU Privacy Guard (@command{gpg}).
+In general, you need Unix-like shell and utilites, including awk.  A Posix shell
+is required, (@command{bash}) works fine.
+You will also need GNU tar version 1.14, 1.15.1 or 1.15.91, and
+GNU Privacy Guard (@command{gpg}).  The GnuPG passphrase agent, (@command{gpg-agent})
+is supported though optional.  The features described in the last two chapters
+dealing with Automake and CVS require GNU swbis version 0.499.
 
 @node Introduction
 @chapter Introduction

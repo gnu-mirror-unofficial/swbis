@@ -98,7 +98,7 @@ Copies published by the Free Software Foundation raise funds for
 @chapter Prerequisites
 
 In general, you need Unix-like shell and utilites, including awk.  A Posix shell
-is required, (@command{bash}) works fine.
+is required, @command{bash} works fine.
 You will also need GNU tar version 1.14, 1.15.1 or 1.15.91, and
 GNU Privacy Guard (@command{gpg}).  The GnuPG passphrase agent, (@command{gpg-agent})
 is supported though optional.  The features described in the last two chapters

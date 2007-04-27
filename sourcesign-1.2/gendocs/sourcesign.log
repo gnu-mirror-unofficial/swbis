@@ -1,8 +1,8 @@
-This is pdfeTeXk, Version 3.14159-1.10b-2.1 (Web2C 7.4.5) (format=pdfetex 2005.9.4)  5 AUG 2006 19:20
+This is pdfeTeXk, Version 3.14159-1.10b-2.1 (Web2C 7.4.5) (format=pdfetex 2005.9.4)  5 AUG 2006 21:04
 entering extended mode
  file:line:error style messages enabled.
-**/tmp/t2d4369/xtr/sourcesign.texi
-(/tmp/t2d4369/xtr/sourcesign.texi{/usr/share/texmf/pdftex/config/pdftex.cfg}
+**/tmp/t2d5100/xtr/sourcesign.texi
+(/tmp/t2d5100/xtr/sourcesign.texi{/usr/share/texmf/pdftex/config/pdftex.cfg}
 (/usr/share/texmf/tex/texinfo/texinfo.tex
 Loading texinfo [version 2004-04-07.08]: Basics,
 \bindingoffset=\dimen16
@@ -350,4 +350,4 @@ ts/pk/ljfour/public/cm/cmbx12.864pk> </var/cache/fonts/pk/ljfour/public/cm/cmsy
 10.657pk> </var/cache/fonts/pk/ljfour/public/cm/cmr10.600pk> </var/cache/fonts/
 pk/ljfour/public/cm/cmbx12.720pk> </var/cache/fonts/pk/ljfour/public/cm/cmr10.6
 57pk> </var/cache/fonts/pk/ljfour/public/cm/cmbx12.1037pk>
-Output written on sourcesign.pdf (17 pages, 187340 bytes).
+Output written on sourcesign.pdf (17 pages, 187336 bytes).

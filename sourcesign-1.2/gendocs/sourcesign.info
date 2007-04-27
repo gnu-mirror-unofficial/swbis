@@ -61,9 +61,9 @@ File: sourcesign.info,  Node: Prerequisites,  Next: Introduction,  Prev: Top,  U
 ***************
 
 In general, you need Unix-like shell and utilites, including awk.  A
-Posix shell is required, (`bash') works fine.  You will also need GNU
-tar version 1.14, 1.15.1 or 1.15.91, and GNU Privacy Guard (`gpg').
-The GnuPG passphrase agent, (`gpg-agent') is supported though optional.
+Posix shell is required, `bash' works fine.  You will also need GNU tar
+version 1.14, 1.15.1 or 1.15.91, and GNU Privacy Guard (`gpg').  The
+GnuPG passphrase agent, (`gpg-agent') is supported though optional.
 The features described in the last two chapters dealing with Automake
 and CVS require GNU swbis version 0.499.
 
@@ -754,23 +754,23 @@ version must be at least 0.496).
 Tag Table:
 Node: Top957
 Node: Prerequisites2109
-Node: Introduction2623
-Node: Making Distribution Tar Files3792
-Node: PSF Basics5762
-Node: Name-Version-Release7074
-Node: The Distribution Object7742
-Node: The Vendor Object8450
-Node: The vendor_tag Attribute9066
-Node: File Ownerships9490
-Node: PSFs for Source Packages10090
-Node: Verifying the Distribution11562
-Node: Verifying the Tar Archive File12323
-Node: Verifying the Unpacked Archive13019
-Node: The checkdigest script14738
-Node: Verifying Using Existing GNU Tools15532
-Node: Adding New Signatures17426
-Node: Guidelines for GNU Source Packages19706
-Node: Using Automake and Swbis23617
-Node: Using CVS and Swbis25480
+Node: Introduction2622
+Node: Making Distribution Tar Files3791
+Node: PSF Basics5761
+Node: Name-Version-Release7073
+Node: The Distribution Object7741
+Node: The Vendor Object8449
+Node: The vendor_tag Attribute9065
+Node: File Ownerships9489
+Node: PSFs for Source Packages10089
+Node: Verifying the Distribution11561
+Node: Verifying the Tar Archive File12322
+Node: Verifying the Unpacked Archive13018
+Node: The checkdigest script14737
+Node: Verifying Using Existing GNU Tools15531
+Node: Adding New Signatures17425
+Node: Guidelines for GNU Source Packages19705
+Node: Using Automake and Swbis23616
+Node: Using CVS and Swbis25479
 
 End Tag Table

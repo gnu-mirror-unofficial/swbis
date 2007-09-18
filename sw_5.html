@@ -32,6 +32,11 @@ i {color:#000080}
 <li><a href="#Fileset Definition"><font size=-1>Fileset Definition</font></a>
 <li><a href="#File Definition"><font size=-1>File Definition</font></a>
 <li><a href="#Control File Definition"><font size=-1>Control File Definition</font></a>
+</ul><li><a href="#SOFTWARE SELECTIONS">SOFTWARE SELECTIONS</a>
+<ul><li><a href="#Version Identifiers"><font size=-1>Version Identifiers</font></a>
+<li><a href="#Example Software Specs"><font size=-1>Example Software Specs</font></a>
+</ul><li><a href="#DEPENDENCY SPECS">DEPENDENCY SPECS</a>
+<ul><li><a href="#Dependency Spec Examples"><font size=-1>Dependency Spec Examples</font></a>
 </ul><li><a href="#EXTENDED DEFINITIONS">EXTENDED DEFINITIONS</a>
 <li><a href="#DISTRIBUTOR KEYWORDS">DISTRIBUTOR KEYWORDS</a>
 <li><a href="#PACKAGE SECURITY">PACKAGE SECURITY</a>
@@ -39,7 +44,7 @@ i {color:#000080}
 <li><a href="#Adjunct Md5 Digest"><font size=-1>Adjunct Md5 Digest</font></a>
 <li><a href="#Catalog Signature Header"><font size=-1>Catalog Signature Header</font></a>
 <li><a href="#Catalog Signature"><font size=-1>Catalog Signature</font></a>
-<li><a href="#File Md5 Digest"><font size=-1>File Md5 Digest</font></a>
+<li><a href="#File Digests"><font size=-1>File Digests</font></a>
 </ul><li><a href="#SOFTWARE DEFINITION FILES">SOFTWARE DEFINITION FILES</a>
 <ul><li><a href="#Additional Syntax Rules"><font size=-1>Additional Syntax Rules</font></a>
 <li><a href="#Software Definition File Grammar"><font size=-1>Software Definition File Grammar</font></a>
@@ -54,6 +59,7 @@ i {color:#000080}
 </pre><h3><a name="NAME"><b>NAME</b></a></h3><pre>       sw -- POSIX Software Packaging
 </pre><h3><a name="SYNOPSIS"><b>SYNOPSIS</b></a></h3><pre>       Software Packaging Layout
        Software Definitions
+       Software Selections
        Extended Definitions
        Distributor Keywords
        Package Security
@@ -65,7 +71,8 @@ i {color:#000080}
        <i>storage structure</i>.  Each section may contain path name components which
        serve to segregate distribution, product and fileset objects.
 
-       Shown below is an example with <a href="one_1.html">one (1)</a> product and <a href="one_1.html">one (1)</a> fileset.
+       Shown below is an example with <a href=one _1.html>one (1)</a> product and <a href=one _1.html>one (1)</a> fileset.
+
 
         &lt;<i>path</i>&gt;/
         &lt;<i>path</i>&gt;/<b>catalog</b>/
@@ -106,6 +113,7 @@ i {color:#000080}
        &lt;<i>path</i>&gt;/ is nil and, likewise to 'source' packages where &lt;<i>path</i>&gt; is typi-
        cally the package name and version.  The use of nil control directories
        is not attested to in the posix normative references.
+
 
         &lt;<i>path</i>&gt;/
         &lt;<i>path</i>&gt;/<b>catalog</b>/
@@ -219,6 +227,7 @@ i {color:#000080}
           signature          <b>&lt;</b> <i>pathname</i>  None   # impl.
           sig_header   <b>&lt;</b> <i>pathname</i>  None   # impl.
           sha1sum            <b>&lt;</b> <i>pathname</i>  None   # impl.
+          sha512sum           <b>&lt;</b> <i>pathname</i>  None   # impl.
           md5sum             <b>&lt;</b> <i>pathname</i>  None   # impl.
           adjunct_md5sum     <b>&lt;</b> <i>pathname</i>  None   # impl.
           files              <b>&lt;</b> <i>pathname</i>    None  # impl.
@@ -378,6 +387,11 @@ i {color:#000080}
        part  in its name, but could (or should) provide a vendor object in the
        PSF.
 
+       The <i>architecture</i> attribute  contains  an  implementation  defined  name
+       describing  the  architecture.   This  attribute may be a pattern.  The
+       swbis implementation  uses  the  output  of  GNU  <b>config.guess</b>  (times-
+       tamp=2007-01-15) as the string to be matched by this pattern.
+
 
    <a name="Category Definition"><b>Category Definition</b></a>
         category
@@ -387,8 +401,8 @@ i {color:#000080}
           revision      <i>revision</i>       Empty string     # C701
 
 
-       The Category definition describes attributes of  products  and  bundles
-       related  to  its category. If <i>is</i><b>_</b><i>patch</i> is &quot;true&quot; then category.tag must
+       The  Category  definition  describes attributes of products and bundles
+       related to its category. If <i>is</i><b>_</b><i>patch</i> is &quot;true&quot; then  category.tag  must
        equal &quot;patch&quot;.
 
 
@@ -440,9 +454,9 @@ i {color:#000080}
           superseded_by    <i>superseded</i><b>_</b><i>by</i>       None         # C701
 
 
-       The <i>tag</i> and <i>control</i><b>_</b><i>directory</i> attributes are required.   A  PSF  should
-       not   contain  the  <i>location</i>,  <i>media</i><b>_</b><i>sequence</i><b>_</b><i>number</i>,  <i>size</i>,  or  <i>state</i>
-       attributes.  A fileset object can contain <i>control</i><b>_</b><i>files</i>, <i>files</i>, in  the
+       The  <i>tag</i>  and  <i>control</i><b>_</b><i>directory</i> attributes are required.  A PSF should
+       not  contain  the  <i>location</i>,  <i>media</i><b>_</b><i>sequence</i><b>_</b><i>number</i>,  <i>size</i>,  or   <i>state</i>
+       attributes.   A fileset object can contain <i>control</i><b>_</b><i>files</i>, <i>files</i>, in the
        form of software definitions.
 
 
@@ -469,14 +483,16 @@ i {color:#000080}
           type               <i>type</i>               <b>f</b>
           uid                <i>uid</i>                undefined
           archive_path    <i>archive</i><b>_</b><i>path</i>    empty string    # C701
-          md5sum           <i>md5sum</i>      empty string    # impl.
+          md5sum          <i>md5sum</i>      empty string    # impl.
+          sha1sum         <i>sha1sum</i>      empty string    # impl.
+          sha512sum       <i>sha512sum</i>      empty string    # impl.
           rdev            <i>rdev</i>            empty string    # impl.
           rpm_fileflags   <i>rpm</i><b>_</b><i>fileflags</i>   empty string    # impl.
 
 
-       A  PSF  must  contain <i>source</i> attribute.  A <i>source</i>  attribute in an INFO
+       A PSF must contain <i>source</i> attribute.  A <i>source</i>  attribute  in  an  INFO
        will be ignored.  A PSF should not contain the <i>cksum</i>, <i>compressed</i><b>_</b><i>cksum</i>,
-       <i>compressed</i><b>_</b><i>size</i>,    <i>compression</i><b>_</b><i>state</i>,    <i>compression</i><b>_</b><i>type</i>,   or   <i>size</i>
+       <i>compressed</i><b>_</b><i>size</i>,   <i>compression</i><b>_</b><i>state</i>,   <i>compression</i><b>_</b><i>type</i>,    or    <i>size</i>
        attributes.
 
 
@@ -498,6 +514,80 @@ i {color:#000080}
 
        A control_file defines a control script such as those listed below (see
        Extended Control File Definitions) or an attribute stored as a file.
+
+</pre><h3><a name="SOFTWARE SELECTIONS"><b>SOFTWARE SELECTIONS</b></a></h3><pre>       The Software Selections provide a means to specify and select (possibly
+       with  a shell matching pattern) specific Software objects.  A selection
+       is made using a <b>software spec</b>.  A software spec may not  contain  white
+       space  (a  list  of  multiple  selections is white space delimited).  A
+       software spec consists of <i>tag</i> values and  <i>version</i><b>_</b><i>id</i>s.   Multiple  tags
+       are '.' (dot) delimited with the leftmost specifying the broadest (most
+       general) software object such as a bundle or product and the  rightmost
+       being  most specific (The swbis implementation does not support fileset
+       tags in a software spec). The tags may be followed  by  nothing,  or  a
+       comma  and  one  or more Version Identifiers which are ',' comma delim-
+       ited.
+
+       <b>Dependency Specs</b> are software specs.
+
+   <a name="Version Identifiers"><b>Version Identifiers</b></a>
+       <b>Version Identifiers</b> specify specific attributes of a  software  object.
+       There  are  five  (5) specified. They are signified by a single letter:
+       <b>r,a,v,l,q</b>.  An implementation may support additional ones and may  sup-
+       port  qualification to a specific object type by prefixing a 'p' or 'b'
+       or 'f' for bundle, product, or fileset respectively.  The value of  the
+       attribute  follows an equals sign '=', or in the case of a revision id,
+       a relational operator.
+
+        Letter     Attribute
+          r    <b>revision</b>   r&lt;<i>relop</i>&gt;<i>revsion</i>
+                                    # A relop may be ==,&lt;,&gt;,&lt;=,&gt;=
+          v    <b>vendor_tag</b>    v=<i>vendor</i><b>_</b><i>tag</i>
+          q    <b>qualifier</b>     q=<i>qualifier</i>
+          l    <b>location</b>      l=<i>location</i>
+          a    <b>architecture</b>  a=<i>arch</i>
+
+
+       Implementation Extension Version Ids are the following:
+
+        Letter     Attribute
+          i    <i>catalog</i><b>_</b><i>instance</i><b>_</b><i>id</i>   i=<i>number</i>
+
+        The catalog <i>instance</i><b>_</b><i>id</i> is a directory in the installed software cata-
+       log  that  distinguishes  installed instances of packages with the same
+       name and revision but at different locations.
+
+   <a name="Example Software Specs"><b>Example Software Specs</b></a>
+           emacs,r==21.2
+           kde.kdegames # This assumes that 'kde' was specified as the bundle
+                        # in the kdegames package
+           foobar,r&gt;1.0,v=tycoon003
+           somepackage,r&gt;1.0,r&lt;=1.3  # revision is the product revision by default
+           somepackage,pr&gt;1.0,pr&lt;=1.3  # explicitly specify revision is the product revision
+
+
+</pre><h3><a name="DEPENDENCY SPECS"><b>DEPENDENCY SPECS</b></a></h3><pre>       A dependency spec is a <b>software spec</b>.  There are three types: <i>prerequi-</i>
+       <i>sites</i>, <i>exrequisites</i>, <i>corequisites</i>.  These attributes apply to the file-
+       set and are placed in the fileset object in a PSF  file.   A  <i>prerequi-</i>
+       <i>sites</i>  is  something  that  must  be  installed,  and a <i>exrequisites</i> is
+       something that must not be installed.  A <i>corequisites</i> is something that
+       must  be  installed  with, <i>corequisites</i> are not supported at this time.
+       <i>prerequisites</i> map  to  RPMTAG_REQUIRENAME,  RPMTAG_REQUIREVERSION,  and
+       RPMTAG_REQUIREFLAGS attributes.
+
+   <a name="Dependency Spec Examples"><b>Dependency Spec Examples</b></a>
+          # Alternation  Require a package named foo1 or foo2
+          prerequisite   foo1|foo2
+
+          # Require a package named foo1 and foo2
+          prerequisite   foo1 foo2
+
+          # multiple prerequisite keywords can be used
+          prerequisite  foo1
+          prerequisite  foo2
+
+          # Require a revision range and a certain vendor_tag
+          prerequisite  foo1,r&gt;2,r&lt;3,v=mydist*
+
 </pre><h3><a name="EXTENDED DEFINITIONS"><b>EXTENDED DEFINITIONS</b></a></h3><pre>       A  Product Specification File (PSF) can contain Extended Definitions in
        the <b>fileset</b>, <b>product</b> or <b>bundle</b> software definitions.  They  would  have
        the  same  level  or containment relationship as a <b>file</b> or <b>control_file</b>
@@ -545,6 +635,7 @@ i {color:#000080}
           directory  <i>source</i>  [<i>destination</i>]
 
 
+
        Applies the <i>source</i> attribute as the directory under  which  the  subse-
        quently listed files are located.  If <i>destination</i> is defined it will be
        used as a prefix to the <i>path</i> (implied) file definition.  <i>source</i> is typ-
@@ -555,11 +646,13 @@ i {color:#000080}
          file *
 
 
+
        Specifies every  file  in  current  source  directory.   The  <i>directory</i>
        extended definition must be used before the recursive specification.
 
    <b>o</b>  <b>Explicit File Definition</b>
          file [-t <i>type</i>] [-m <i>mode</i>] [-o <i>owner</i>[,<i>uid</i>]] [-g <i>group</i>[,<i>gid</i>]] [-n] [-v] source [<i>path</i>]
+
 
 
        <b>source</b>
@@ -612,6 +705,7 @@ i {color:#000080}
          file_permissions [-m <i>mode</i>] [-u <i>umask</i>] [-o [<i>owner</i>[,]][<i>uid</i>]] [-g [<i>group</i>[,]][<i>gid</i>]]
 
 
+
        Applies  to  subsequently  listed file definitions in a fileset.  These
        attributes will apply where the  file  attributes  were  not  specified
        explicitly  in  a file definition.  Subsequent <b>file_permissions</b> defini-
@@ -627,10 +721,12 @@ i {color:#000080}
           exclude source
 
 
+
        Excludes a previously included file or an entire directory.
 
    <b>o</b>  <b>Including Files</b>
           include &lt;<i>filename</i>
+
 
 
        The contents of <i>filename</i> may be more definitions for files.  The syntax
@@ -642,18 +738,20 @@ i {color:#000080}
 </pre><h3><a name="PACKAGE SECURITY"><b>PACKAGE SECURITY</b></a></h3><pre>       The Package Security Attributes are distribution attributes  stored  as
        separate  files.   They are implementation extensions.  They consist of
        archive digests, catalog signature, catalog signature header, and indi-
-       vidual file md5 digests.
+       vidual file md5, sha1, and sha512 digests.
 
 
    <a name="Archive Digests"><b>Archive Digests</b></a>
-       <i>md5sum</i> and <i>sha1sum</i> are the md5 and sha1 digests (ascii representations)
-       of the leading package directories that do not have the  <b>catalog</b>  path-
-       name  component followed by the <i>software file storage structure</i> portion
-       of the uncompressed serial access package file  including  all  archive
-       format trailer blocks.
+       <i>md5sum</i>,  <i>sha1sum</i>, and <i>sha512sum</i> are the md5 and sha1 and sha512 digests
+       (ascii representations) of the leading package directories that do  not
+       have the <b>catalog</b> pathname component followed by the <i>software file stor-</i>
+       <i>age structure</i> portion of the uncompressed serial  access  package  file
+       including all archive format trailer blocks.
 
               &lt;<i>path</i>&gt;/<b>catalog</b>/&lt;<i>dfiles</i>&gt;/<b>md5sum</b>
               &lt;<i>path</i>&gt;/<b>catalog</b>/&lt;<i>dfiles</i>&gt;/<b>sha1sum</b>
+              &lt;<i>path</i>&gt;/<b>catalog</b>/&lt;<i>dfiles</i>&gt;/<b>sha512sum</b>
+
 
 
    <a name="Adjunct Md5 Digest"><b>Adjunct Md5 Digest</b></a>
@@ -665,9 +763,9 @@ i {color:#000080}
 
 
        Explanation:  This attribute is called 'adjunct' because it is a digest
-       of a subset of the files in the package.  It exists to facilitate veri-
-       fying  file integrity of the directory form of a package in an environ-
-       ment where the modification time of symbolic link files  are  not  pre-
+       of a subset of the files in  the  package.   It  exists  to  facilitate
+       verifying file integrity of the directory form of a package in an envi-
+       ronment where the modification time of symbolic link files are not pre-
        served  from the serial archive by the tar utility or operating system.
        The ability to verify even the <i>adjunct</i><b>_</b><i>md5sum</i> from the  directory  form
        of  the  package  is  dependent  on  the tar creating utility and other
@@ -699,7 +797,7 @@ i {color:#000080}
 
        The  signed  data is the <i>exported catalog structure</i> of the uncompressed
        serial archive package file up to but not including the first  byte  of
-       the  <i>software</i>  <i>file storage structure</i> followed by <a href="two_2.html">two (2)</a> 512 byte null
+       the  <i>software</i>  <i>file storage structure</i> followed by <a href=two _2.html>two (2)</a> 512 byte null
        blocks if tar format, and no trailer bytes if not tar format.  The sig-
        nature file archive member itself is not included in the signed stream,
        it is intended that the &lt;<i>path</i>&gt;/<b>catalog</b>/&lt;<i>dfiles</i>&gt;/<b>md5sum</b> file is included
@@ -720,21 +818,24 @@ i {color:#000080}
        bers.   A  signature  archive  member, whether alone or one of many, is
        never part of the signed data stream.
 
-   <a name="File Md5 Digest"><b>File Md5 Digest</b></a>
+   <a name="File Digests"><b>File Digests</b></a>
+              <i>file</i>.cksum
               <i>file</i>.md5sum
+              <i>file</i>.sha1sum
+              <i>file</i>.sha512sum
 
-       Each file has a md5 digest in the metadata.
+       Each file can have none or all of these digests.
 </pre><h3><a name="SOFTWARE DEFINITION FILES"><b>SOFTWARE DEFINITION FILES</b></a></h3><pre>       The metadata files, INDEX, INFO and PSF, contain information about  the
        software in the form of <i>software definitions</i>.  The INDEX and INFO files
        appear in a package directory structure.  They are automatically gener-
-       ated  by the 'swpackage' command.  The location in the directory struc-
-       ture indicates the higher level object to which  their  data  pertains.
-       The PSF file does not appear in the package.  It is created by a person
-       or program and it directs the action of the swpackage utility.   It  is
-       internal data unless released by the distributor.
+       ated  by  the  'swpackage'  command.   The  location  in  the directory
+       structure indicates the higher level object to which  their  data  per-
+       tains.   The PSF file does not appear in the package.  It is created by
+       a person or program and it directs the action of the swpackage utility.
+       It is internal data unless released by the distributor.
 
        The  files  contain  keywords  (and values) to represent the attributes
-       defined in the standard.  There are <a href="three_3.html">three (3)</a> different keyword  types:
+       defined in the standard.  There are <a href=three _3.html>three (3)</a> different keyword  types:
        object,  attribute, and, extended. The object keyword type has no value
        and there are eleven (11) of these corresponding to the Software  Defi-
        nitions defined above: <b>installed_software</b>, <b>distribution</b>, <b>media</b>, <b>bundle</b>,
@@ -753,22 +854,22 @@ i {color:#000080}
        containment  hierarchy is determined according to parser's grammar.
 
    <a name="Additional Syntax Rules"><b>Additional Syntax Rules</b></a>
-          �  A '#' (pound) character designates  a  comment.   A  comment  may
+          o  A '#' (pound) character designates  a  comment.   A  comment  may
              begin a line or appear at the end of a single line containing the
              keyword/value pair.
 
-          �  A value may be quoted by the '&quot;' (double quote)  character;  and,
+          o  A value may be quoted by the '&quot;' (double quote)  character;  and,
              multi-line  values  must be quoted.  Trailing white space from an
              unquoted value will be removed.
 
-          �  The order of attributes is not  significant  although  the  INDEX
+          o  The order of attributes is not  significant  although  the  INDEX
              file  grammar  requires the <i>layout</i><b>_</b><i>version</i> attribute appear first
              in distribution or installed software object.
 
-          �  The &quot;, #, and, \ characters must be escaped with a backslash  (\)
+          o  The &quot;, #, and, \ characters must be escaped with a backslash  (\)
              in a quoted value.
 
-          �  If  a value begins with a &lt; (less than), the value is interpreted
+          o  If  a value begins with a &lt; (less than), the value is interpreted
              as a filename whose contents will be treated as  a  quoted  value
              although  the  storage  of the attribute will be in the form of a
              control file (i.e. a separate file  in  the  control  directory).
@@ -780,6 +881,7 @@ i {color:#000080}
        A  PSF  may  contain  all <i>Software Definitions</i>.  An INDEX file does not
        contain <b>control_file</b>, or <b>file</b> definitions. An INFO file  contains  only
        <b>control_file</b>, and <b>file</b> definitions.
+
 
             software_definition_file : INDEX
                                      | INFO
@@ -1091,20 +1193,21 @@ i {color:#000080}
               This  value  is  used by the swbis implementation as a path name
               component in the installed software catalog.   It  is  required.
               The  swbis  implementation uses it in a way that is analogous to
-              the RPMTAG_NAME attribute.
+              the RPMTAG_NAME attribute, namely  as  the  public  recognizable
+              name of the package.
 
 
        <b>control_directory</b>
 
-              Is the directory name in the distribution under which the  prod-
-              uct  contents  are  located.   This  value  has no affect on the
-              installed software catalog.  If it is not given in  a  PSF  then
+              Is  the directory name in the distribution under which the prod-
+              uct contents are located.  This  value  has  no  affect  on  the
+              installed  software  catalog.   If it is not given in a PSF then
               the <i>tag</i> is used.
 
 
        <b>revision</b>
 
-              Is  the  product  revision.   It  should not contain a &quot;RELEASE&quot;
+              Is the product revision.  It  should  not  contain  a  &quot;RELEASE&quot;
               attribute part or other version suffix modifiers.  This value is
               used by the swbis implementation as a path name component in the
               installed software catalog.  It is required by swinstall.
@@ -1112,20 +1215,58 @@ i {color:#000080}
 
        <b>vendor_tag</b>
 
-              This is a short identifying name of the  distributor  that  sup-
-              plied  the  product  and  associates  the <b>vendor</b> object from the
-              INDEX file.  This attribute is optional.  This  attribute  value
-              should strive to be unique among all distributors.  It is one of
-              the version distinguishing attributes of a product specified  by
-              the standard.  It is transfered into the installed_software cat-
-              alog (not as a path  name  component)  by  swinstall.   If  this
-              attribute exists there should also be a <b>vendor</b> object in the PSF
-              in the distribution object that has this tag.  This attribute is
-              assigned the value of RPMTAG_RELEASE by swpackage when translat-
-              ing an RPM.  In this capacity it serves to distinguish  products
-              with  the  same revision and tag from the same or different dis-
-              tributor.   It  most  closely  maps  to  the  RPMTAG_RELEASE  or
-              &quot;debian_revision&quot; attributes.
+              This  is  a  short identifying name of the distributor that sup-
+              plied the product and may associate (refer to) a  <b>vendor</b>  object
+              from  the  INDEX  file  that has a matching tag attribute.  This
+              attribute is optional.  This attribute value should strive to be
+              unique among all distributors. The swbis implementation modifies
+              the intended usage slightly as a string that strives to be glob-
+              ally  unique  for  a given product.<b>tag</b> and product.<b>revision</b>.  In
+              this capacity it serves to distinguish products  with  the  same
+              revision  and  tag  from  the same or different distributor.  It
+              most closely maps to  the  RPMTAG_RELEASE  or  &quot;debian_revision&quot;
+              attributes.   It is one of the version distinguishing attributes
+              of a product specified by the standard.  It is  transfered  into
+              the installed_software catalog (not as a path name component) by
+              swinstall.  If this attribute exists there should also be a <b>ven-</b>
+              <b>dor</b>  object  in the PSF in the distribution object that has this
+              tag.  This attribute is assigned the value of RPMTAG_RELEASE  by
+              swpackage when translating an RPM.
+
+
+       <b>architecture</b>
+
+              This  string  is  one  of the version attributes.  It is used to
+              disambiguate products that have the same <b>tag</b>, <b>revision</b> and  <b>ven-</b>
+              <b>dor_tag</b>.   It is not used for determining a products compatibil-
+              ity with a host.  The form  is  implementation  defined.   swbis
+              uses the output of GNU <b>config.guess</b> as the value of this string.
+              A wildcard pattern should not  be  used.   The  canonical  swbis
+              architecture string can be listed with <b>swlist</b>. For example
+
+              swlist -a architecture @ localhost
+
+               Here are some example outputs from real systems.
+
+                  System      `uname -srm`              architecture
+              Red Hat 8.0:  Linux 2.4.18 i686        i686-pc-linux-gnu
+              OpenSolaris:  SunOS 5.11 i86pc         i386-pc-solaris2.11
+              NetBSD 3.1:   NetBSD 3.1 i386          i386-unknown-netbsdelf3.1
+              Red Hat 4.1:  Linux 2.0.36 i586        i586-pc-linux-gnulibc1
+              Debian 3.1:   Linux 2.6.8-2-386 i686   i686-pc-linux-gnu
+
+
+
+       <b>os_name os_release os_version machine_type</b>
+
+              These  attributes  are  used  to  determine compatibility with a
+              host.  They  correspond  to  the  <b>uname</b>  attributes  defined  by
+              POSIX.1.   If  an  value is nil or non-existent it is assumed to
+              match the host.  All attributes must match for there to be  com-
+              patibility.   Distributors may wish to make these values a shell
+              pattern in their PSF's so to match the  intended  collection  of
+              hosts.   swbis uses <b>fnmatch</b> (with FLAGS=0) to determine a match.
+
 
    <b>o Fileset Attributes</b>
        A <b>fileset</b> defines the fileset.
@@ -1133,19 +1274,22 @@ i {color:#000080}
        <b>tag</b>
 
               <i>tag</i> is the short, file system friendly, name of the fileset.  It
-              is required.
+              is required although selection of filesets is  not yet supported
+              therefore the end user will have little to do with  the  fileset
+              tag.
 
        <b>control_directory</b>
 
-              Is the directory name in the product  under  which  the  fileset
+              Is  the  directory  name  in the product under which the fileset
               contents are located.  This value has no affect on the installed
-              software catalog.  If it is not given in a PSF then the  <i>tag</i>  is
+              software  catalog.   If it is not given in a PSF then the <i>tag</i> is
               used.
 
    <b>o Example Source Package PSF</b>
-       This  PSF packages every file is current directory. It uses nil control
-       directories so the package structure does  not  change  relative  to  a
+       This PSF packages every file is current directory. It uses nil  control
+       directories  so  the  package  structure  does not change relative to a
        vanilla tarball.
+
 
         distribution
           description &quot;fooit - a program from fooware
@@ -1177,13 +1321,14 @@ i {color:#000080}
 
 
    <b>o Example Runtime (Binary) Package PSF</b>
-       This  is a sample PSF for a runtime package.  It implies multiple prod-
-       ucts (e.g. sub-packages) using the  bundle.contents  attribute.   Since
-       the  bundle  and product tags exist in a un-regulated namespace and are
+       This is a sample PSF for a runtime package.  It implies multiple  prod-
+       ucts  (e.g.  sub-packages)  using the bundle.contents attribute.  Since
+       the bundle and product tags exist in a un-regulated namespace  and  are
        seen by end users they should be carefully chosen.   Note that the bun-
-       dle  and  product have the same tag which may force downstream users to
-       disambiguate using software selection  syntax  such  as  fooit,bv=*  or
+       dle and product have the same tag which may force downstream  users  to
+       disambiguate  using  software  selection  syntax  such as fooit,bv=* or
        fooit,pv=* .
+
 
         distribution
           description &quot;fooit - a program from fooware
@@ -1222,22 +1367,22 @@ i {color:#000080}
                  file src/fooit /usr/bin/fooit
 
 
-</pre><h3><a name="APPLICABLE STANDARDS"><b>APPLICABLE STANDARDS</b></a></h3><pre>       IEEE  Std  1387.2-1995  (Identical to ISO 15068-2:1999), Open Group CAE
-       C701.
-</pre><h3><a name="SEE ALSO"><b>SEE ALSO</b></a></h3><pre>        XDSA C701 <a href="http://www.opengroup.org/publications/catalog/c701.htm">http://www.opengroup.org/publications/catalog/c701.htm</a>
-        <a href="swbisparse_1.html">swbisparse(1)</a> -- An implementation extension parser utility.
-        <a href="swcopy_8.html">swcopy(8)</a>
-        <a href="swinstall_8.html">swinstall(8)</a>
-        <a href="swpackage_5.html">swpackage(5)</a>
-        <a href="swpackage_8.html">swpackage(8)</a>
-        <a href="swverify_8.html">swverify(8)</a>
+</pre><h3><a name="APPLICABLE STANDARDS"><b>APPLICABLE STANDARDS</b></a></h3><pre>       IEEE Std 1387.2-1995 (Identical to ISO 15068-2:1999),  Open  Group  CAE
+       C701
+</pre><h3><a name="SEE ALSO"><b>SEE ALSO</b></a></h3><pre>        XDSA C701 <a href=http://www.opengroup.org/publications/catalog/c701.htm</a>.html>http://www.opengroup.org/publications/catalog/c701.htm</a>
+        <a href=swbisparse_1.html>swbisparse(1)</a> -- An implementation extension parser utility.
+        <a href=swcopy_8.html>swcopy(8)</a>
+        <a href=swinstall_8.html>swinstall(8)</a>
+        <a href=swpackage_5.html>swpackage(5)</a>
+        <a href=swpackage_8.html>swpackage(8)</a>
+        <a href=swverify_8.html>swverify(8)</a>
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        Copyright (C) 2005 Jim Lowe
-        Version: 0.499
+        Version: 0.721
         Last Updated: 2006-01
         Copying Terms: GNU Free Documentation License
 </pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       None
 
 
 
-                                                                         <a href="sw_5.html">sw(5)</a>
-</pre><hr><a href="../index.html">[ Index ]</a> <a href="javascript:history.back()"> [ Back ]</a></body></html>
+                                                                         <a href=sw_5.html>sw(5)</a>
+</pre><hr></body></html>

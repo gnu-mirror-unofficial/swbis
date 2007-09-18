@@ -91,7 +91,7 @@ i {color:#000080}
 
        <b>targets</b>
 
-              See  other  man  pages.   Currently,  only <a href="one_1.html">one (1)</a> target can be
+              See  other  man  pages.   Currently,  only <a href=one _1.html>one (1)</a> target can be
               specified.
 
 
@@ -311,7 +311,7 @@ i {color:#000080}
 
        1) The package file is a tar archive.
        2) The installed version of GNU tar produces archives with
-          bit-for-bit sameness relative to the <a href="swpackage_8.html">swpackage(8)</a> utility
+          bit-for-bit sameness relative to the <a href=swpackage_8.html>swpackage(8)</a> utility
           that generated the signature and message digests.  For packages
           made with swbis versions &gt;= 0.474 and with format option &quot;ustar&quot;
           you will need GNU tar 1.14 or 1.15.*
@@ -336,14 +336,14 @@ i {color:#000080}
 
        If  this  fails  try using GNU tar option --posix.  If this fails then,
        try experimenting with the owner, group, and  numeric-id  options.   If
-       you  are  unable to verify a tar byte stream using <a href="gpg_1.html">gpg(1)</a> that contains
+       you  are  unable to verify a tar byte stream using <a href=gpg_1.html>gpg(1)</a> that contains
        the storage section message digests, then the package cannot be authen-
        ticated.
 
 
        Assuming you successfully verified the catalog as shown above, now gen-
        erate the message digest and compare it to the  md5sum  file  attribute
-       from the same byte stream that <a href="gpg_1.html">gpg(1)</a> claims is authenticate.
+       from the same byte stream that <a href=gpg_1.html>gpg(1)</a> claims is authenticate.
 
          #!/bin/sh
          grep -v namedir/catalog  namedir/catalog/dfiles/files | \
@@ -386,7 +386,7 @@ i {color:#000080}
        gpg: /home/userx/.gnupg/options:82: deprecated option &quot;honor-http-proxy&quot;
        gpg: please use &quot;keyserver-options honor-http-proxy&quot; instead
        gpg: WARNING: using insecure memory!
-       gpg: please see <a href="http://www.gnupg.org/faq.html">http://www.gnupg.org/faq.html</a> for more information
+       gpg: please see <a href=http://www.gnupg.org/faq.html</a> for more information.html>http://www.gnupg.org/faq.html</a> for more information
        swbis: Archive digest: md5 OK (Good)
        swbis: Archive digest: sha1 OK (Good)
        gpg: Signature made Sun Mar 16 20:28:23 2003 EST using DSA key ID 82B0DBE4
@@ -399,17 +399,20 @@ i {color:#000080}
        verifying  manually  using  GNU  tools because swverify implements this
        using GNU tools.
 
-       authenticate the exported catalog signature.  If it  is  successful  it
-       executes  the 'checkdigest' script found in the 'catalog/dfiles' direc-
-       tory of the exported catalog.  If the  'checkdigest'  script  does  not
-       exist,  authentication  fails.  'swverify' will only attempt to run the
-       'checkdigest' script if it is found  in  the  dfiles  directory  of  an
+       'swverify' when verifying the directory form of a distribution attempts
+       to authenticate the exported catalog signature.  If it is successful it
+       executes the 'checkdigest' script found in the 'catalog/dfiles'  direc-
+       tory  of  the  exported  catalog.  If the 'checkdigest' script does not
+       exist, authentication fails. 'swverify' will only attempt  to  run  the
+       'checkdigest'  script  if  it  is  found  in the dfiles directory of an
        authenticated catalog.
 
-       file  storage structure) of a directory (unpacked) form of a POSIX dis-
-       tribution.  It is the role of the checkdigest script to do this.
+       'swverify' currently has no provision to  verify  the  archive  section
+       (i.e.  the  file storage structure) of a directory (unpacked) form of a
+       POSIX distribution.  It is the role of the  checkdigest  script  to  do
+       this.
 
-       For example, if filemypackage-00.1 is a directory unpacked with  a  tar
+       For  example,  if filemypackage-00.1 is a directory unpacked with a tar
        reading utility that preserved file times then try,
 
 
@@ -431,7 +434,7 @@ i {color:#000080}
        gpg: /home/userx/.gnupg/options:82: deprecated option &quot;honor-http-proxy&quot;
        gpg: please use &quot;keyserver-options honor-http-proxy&quot; instead
        gpg: WARNING: using insecure memory!
-       gpg: please see <a href="http://www.gnupg.org/faq.html">http://www.gnupg.org/faq.html</a> for more information
+       gpg: please see <a href=http://www.gnupg.org/faq.html</a> for more information.html>http://www.gnupg.org/faq.html</a> for more information
        gpg: Signature made Sun Mar 16 21:00:54 2003 EST using DSA key ID 82B0DBE4
        gpg: BAD signature from &quot;Test User (pass=Iforgot) localhost&gt;&quot;
        swverify: First attempt failed.
@@ -439,7 +442,7 @@ i {color:#000080}
        gpg: /home/jhl/.gnupg/options:82: deprecated option &quot;honor-http-proxy&quot;
        gpg: please use &quot;keyserver-options honor-http-proxy&quot; instead
        gpg: WARNING: using insecure memory!
-       gpg: please see <a href="http://www.gnupg.org/faq.html">http://www.gnupg.org/faq.html</a> for more information
+       gpg: please see <a href=http://www.gnupg.org/faq.html</a> for more information.html>http://www.gnupg.org/faq.html</a> for more information
        gpg: Signature made Sun Mar 16 21:00:54 2003 EST using DSA key ID 82B0DBE4
        gpg: Good signature from &quot;Test User (pass=Iforgot) localhost&gt;&quot;
        gpg: WARNING: This key is not certified with a trusted signature!
@@ -454,7 +457,7 @@ i {color:#000080}
        gpg: /home/userx/.gnupg/options:82: deprecated option &quot;honor-http-proxy&quot;
        gpg: please use &quot;keyserver-options honor-http-proxy&quot; instead
        gpg: WARNING: using insecure memory!
-       gpg: please see <a href="http://www.gnupg.org/faq.html">http://www.gnupg.org/faq.html</a> for more information
+       gpg: please see <a href=http://www.gnupg.org/faq.html</a> for more information.html>http://www.gnupg.org/faq.html</a> for more information
        gpg: Signature made Sun Mar 16 21:00:54 2003 EST using DSA key ID 82B0DBE4
        gpg: Good signature from &quot;Test User (pass=Iforgot) localhost&gt;&quot;
        gpg: WARNING: This key is not certified with a trusted signature!
@@ -466,15 +469,15 @@ i {color:#000080}
 
 
    <a name="Verifying Installed Software"><b>Verifying Installed Software</b></a>
-       (This  capability  is only partially implemented.)  Verifying Installed
+       (This capability is only partially implemented.)   Verifying  Installed
        Software involves comparing the package meta-data to the live file sys-
-       tem.   The  validity of a successful comparison depends on the validity
-       of the installed software catalog.  swverify makes no attempt to  check
-       the  validity  of the entire catalog, however, it can use the distribu-
+       tem.  The validity of a successful comparison depends on  the  validity
+       of  the installed software catalog.  swverify makes no attempt to check
+       the validity of the entire catalog, however, it can use  the  distribu-
        tion GPG signature, which is stored in the catalog, to authenticate the
        meta-data of the selected package.
 
-       Below  is an example. Note, the package is selected on the basis of its
+       Below is an example. Note, the package is selected on the basis of  its
        product or bundle tag.
 
        $ swverify -r your_product_tag @ /
@@ -500,11 +503,11 @@ i {color:#000080}
           cat your-tarball | swverify -Wd -WS | md5sum
 
 
-       Your should see a pair of identical digests. Use the -Wsha1  option  to
+       Your  should  see a pair of identical digests. Use the -Wsha1 option to
        check the sha1 digest in a similar manner.
 
        ** IMPORTANT **
-       This  does not mean that the data is authenticate in the sense of being
+       This does not mean that the data is authenticate in the sense of  being
        attributable to a person, merely that the md5sum attribute and the pay-
        load byte stream match.
 
@@ -522,7 +525,7 @@ i {color:#000080}
 
 
    <b>-Wget-sig-if mode:</b>
-       This  is  the  mode  that  is used internally when verifying a tarball.
+       This is the mode that is used  internally  when  verifying  a  tarball.
        Below is an example of using this mode manually.
 
 
@@ -531,11 +534,11 @@ i {color:#000080}
          gpg --verify  /dev/tty -
 
 
-       Now try to copy and paste the sigfile and gpg should attempt to  verify
+       Now  try to copy and paste the sigfile and gpg should attempt to verify
        the signature.
 
-              <b>Note:</b>   <b>This verifies the md5 or sha1 digests before writing the</b>
-              <b>signed data to stdout.</b>  <b>If the sha1 or md5 match fails</b>  <b>then</b>  <b>an</b>
+              <b>Note:</b>  <b>This verifies the md5 or sha1 digests before writing</b>  <b>the</b>
+              <b>signed</b>  <b>data</b>  <b>to stdout.</b>  <b>If the sha1 or md5 match fails then an</b>
               <b>empty file is written to stdout.</b>
 </pre><h3><a name="EXAMPLES"><b>EXAMPLES</b></a></h3><pre>       Examples of verifying distributions and installed software.
 
@@ -580,7 +583,7 @@ i {color:#000080}
                        The posix operations are not yet implemented.
 
 </pre><h3><a name="RETURN VALUE"><b>RETURN VALUE</b></a></h3><pre>       Exit status of the checksig script or gpg utility for --checksig direc-
-       tory operation.  0 if successful on all targets, 1  if  failed  on  all
+       tory  operation.   0  if  successful on all targets, 1 if failed on all
        targets, 2 if failed on some targets.
 </pre><h3><a name="FILES"><b>FILES</b></a></h3><pre>       None
 
@@ -588,42 +591,42 @@ i {color:#000080}
 </pre><h3><a name="SEE ALSO"><b>SEE ALSO</b></a></h3><pre>       info swbis
 
 
-       <a href="sw_5.html">sw(5)</a>, <a href="swign_1.html">swign(1)</a>, <a href="swpackage_8.html">swpackage(8)</a>, <a href="gpg_1.html">gpg(1)</a>, libexec/swbis/arf2arf
+       <a href=sw_5.html>sw(5)</a>, <a href=swign_1.html>swign(1)</a>, <a href=swpackage_8.html>swpackage(8)</a>, <a href=gpg_1.html>gpg(1)</a>, libexec/swbis/arf2arf
 
 
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        swverify: The verification utility of the swbis project.
         Author: James Lowe, Jr.   Email: jhlowe at acm.org
-        Version: 0.499
+        Version: 0.721
         Last Updated: 2006-08-03
         Copying: GNU Free Documentation License
 
 </pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       The signature file's archive header (or data) is not part of the signed
-       data therefore it may be subject to  undetectable  tampering,  however,
-       swverify  does  perform  sanity checks on the pathname, permissions and
-       filetype if the <b>sig_header</b> file (See <a href="sw_5.html">sw(5)</a> manual page.) is not present
-       [due  to being signed by a old swpackage version], and if <b>sig_header</b> is
-       present, swverify requires that it match  the  sig  file  header.   The
+       data  therefore  it  may be subject to undetectable tampering, however,
+       swverify does perform sanity checks on the  pathname,  permissions  and
+       filetype if the <b>sig_header</b> file (See <a href=sw_5.html>sw(5)</a> manual page.) is not present
+       [due to being signed by a old swpackage version], and if <b>sig_header</b>  is
+       present,  swverify  requires  that  it  match the sig file header.  The
        ability to verify the unpacked directory form of the package depends on
-       many factors not immediately obvious, among them  are  the  tar  header
+       many  factors  not  immediately  obvious, among them are the tar header
        uname and gname, and whether they are preserved by the reading utility,
-       and whether these names are in the system  database  files  /etc/passwd
-       and  /etc/group, and if so, whether they assign the same uid/gid as the
+       and  whether  these  names are in the system database files /etc/passwd
+       and /etc/group, and if so, whether they assign the same uid/gid as  the
        package.
 
        Verification  of  the  directory  form  of  a  distribution  (i.e.  the
-       installed  tarball  path  name prefix) such as running 'swverify -d @.'
-       after running 'swign @.'  will fail if the order of  directory  entries
-       is  not  compatible  with  traditional Unix file system directory entry
-       ordering, which is the order of file creation.  This ordering is almost
-       always  apparent  on  Ext2  file  system for small directories (but not
-       always for big directories).  Ext3, reiserFS, and DarwinOS  et.al  file
-       systems  do not have this ordering, use of the '--order-catalog' option
+       installed tarball path name prefix) such as running  'swverify  -d  @.'
+       after running 'swign @.' will fail if the order of directory entries is
+       not compatible with traditional Unix file system directory entry order-
+       ing,  which  is  the  order  of file creation.  This ordering is almost
+       always apparent on Ext2 file system  for  small  directories  (but  not
+       always  for  big directories).  Ext3, reiserFS, and DarwinOS et.al file
+       systems do not have this ordering, use of the '--order-catalog'  option
        is therefore required.  Use of the '--cvs' or '--order-catalog' options
-       is  theoretically problematic because it causes the use and interpreta-
-       tion of data in the verification of that same  data  therefore  opening
+       is theoretically problematic because it causes the use and  interpreta-
+       tion  of  data  in the verification of that same data therefore opening
        possible attack vectors.
 
 
 
-                                                                   <a href="swverify_8.html">swverify(8)</a>
-</pre><hr><a href="../index.html">[ Index ]</a> <a href="javascript:history.back()"> [ Back ]</a></body></html>
+                                                                   <a href=swverify_8.html>swverify(8)</a>
+</pre><hr></body></html>

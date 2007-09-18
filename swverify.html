@@ -19,6 +19,88 @@
 --></style>
 </head>
 <body>
+\. 
+<!-- TROFF INPUT: .fl			\" force out current output buffer -->
+<!-- .fl			\" force out current output buffer -->
+\\!%PB
+\\!/showpage{}def
+<!-- TROFF INPUT: ...\" the following is from Ken Flowers - it prevents dictionary overflows -->
+<!-- ...\" the following is from Ken Flowers - it prevents dictionary overflows -->
+\\!/tempdict 200 dict def tempdict begin
+<!-- TROFF INPUT: .fl			\" prolog -->
+<!-- .fl			\" prolog -->
+<!-- TROFF INPUT: .sy cat \\$1\" bring in postscript file -->
+<!-- .sy cat \\$1\" bring in postscript file -->
+<!-- TROFF INPUT: ...\" the following line matches the tempdict above -->
+<!-- ...\" the following line matches the tempdict above -->
+\\!end % tempdict %
+\\!PE
+\\!. 
+<!-- TROFF INPUT: .sp \\$2u	\" move below the image -->
+<!-- .sp \\$2u	\" move below the image -->
+<!-- TROFF INPUT: .. -->
+<!-- .. -->
+<!-- TROFF INPUT: .de pF -->
+<!-- .de pF -->
+<!-- TROFF INPUT: .ie     \\*(f1 .ds f1 \\n(.f -->
+<!-- .ie     \\*(f1 .ds f1 \\n(.f -->
+<!-- TROFF INPUT: .el .ie \\*(f2 .ds f2 \\n(.f -->
+<!-- .el .ie \\*(f2 .ds f2 \\n(.f -->
+<!-- TROFF INPUT: .el .ie \\*(f3 .ds f3 \\n(.f -->
+<!-- .el .ie \\*(f3 .ds f3 \\n(.f -->
+<!-- TROFF INPUT: .el .ie \\*(f4 .ds f4 \\n(.f -->
+<!-- .el .ie \\*(f4 .ds f4 \\n(.f -->
+<!-- TROFF INPUT: .el .tm ? font overflow -->
+<!-- .el .tm ? font overflow -->
+<!-- TROFF INPUT: .ft \\$1 -->
+<!-- .ft \\$1 -->
+<!-- TROFF INPUT: .. -->
+<!-- .. -->
+<!-- TROFF INPUT: .de fP -->
+<!-- .de fP -->
+<!-- TROFF INPUT: .ie     !\\*(f4 \{\ -->
+<!-- .ie     !\\*(f4 \@{\ -->
+<!-- TROFF INPUT: .	ft \\*(f4 -->
+<!-- .	ft \\*(f4 -->
+<!-- TROFF INPUT: .	ds f4\" -->
+<!-- .	ds f4\" -->
+'	br \}
+<!-- TROFF INPUT: .el .ie !\\*(f3 \{\ -->
+<!-- .el .ie !\\*(f3 \@{\ -->
+<!-- TROFF INPUT: .	ft \\*(f3 -->
+<!-- .	ft \\*(f3 -->
+<!-- TROFF INPUT: .	ds f3\" -->
+<!-- .	ds f3\" -->
+'	br \}
+<!-- TROFF INPUT: .el .ie !\\*(f2 \{\ -->
+<!-- .el .ie !\\*(f2 \@{\ -->
+<!-- TROFF INPUT: .	ft \\*(f2 -->
+<!-- .	ft \\*(f2 -->
+<!-- TROFF INPUT: .	ds f2\" -->
+<!-- .	ds f2\" -->
+'	br \}
+<!-- TROFF INPUT: .el .ie !\\*(f1 \{\ -->
+<!-- .el .ie !\\*(f1 \@{\ -->
+<!-- TROFF INPUT: .	ft \\*(f1 -->
+<!-- .	ft \\*(f1 -->
+<!-- TROFF INPUT: .	ds f1\" -->
+<!-- .	ds f1\" -->
+'	br \}
+<!-- TROFF INPUT: .el .tm ? font underflow -->
+<!-- .el .tm ? font underflow -->
+<!-- TROFF INPUT: .. -->
+<!-- .. -->
+<!-- TROFF INPUT: .ds f1\" -->
+<!-- WARNING: man/man8/swverify.8:49:%%unrecognized define-string command: [.ds f1\"] -->
+<!-- TROFF INPUT: .ds f2\" -->
+<!-- WARNING: man/man8/swverify.8:50:%%unrecognized define-string command: [.ds f2\"] -->
+<!-- TROFF INPUT: .ds f3\" -->
+<!-- WARNING: man/man8/swverify.8:51:%%unrecognized define-string command: [.ds f3\"] -->
+<!-- TROFF INPUT: .ds f4\" -->
+<!-- WARNING: man/man8/swverify.8:52:%%unrecognized define-string command: [.ds f4\"] -->
+<!-- TROFF INPUT: .ta 8n 16n 24n 32n 40n 48n 56n 64n 72n -->
+<!-- .ta 8n 16n 24n 32n 40n 48n 56n 64n 72n -->
+<!-- TROFF INPUT: .TH "swverify" "8" -->
 <div class="node">
 <p><hr>
 <a name="Top"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#NAME">NAME</a>,
@@ -83,8 +165,8 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">     <b>swverify</b>  [&minus;d|&minus;r]  [&minus;F]  [&minus;f <i>file</i>]  [&minus;t <i>targetfile</i>] \&nbsp;<!-- /@w -->
-     [&minus;x <i>option=value</i>]  [&minus;X <i>options</i><tt>_</tt><i>file</i>]  [&minus;W <i>option</i>] \&nbsp;<!-- /@w -->
+<pre class="display">     <b>swverify</b>  [-d|-r]  [-F]  [-f <i>file</i>]  [-t <i>targetfile</i>] \\
+     [-x <i>option=value</i>]  [-X <i>options</i><tt>_</tt><i>file</i>]  [-W <i>option</i>] \\
      [software<tt>_</tt>selections]  [@targets]
      <!-- TROFF INPUT: .fi -->
 </pre>
@@ -99,35 +181,35 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">     <b>swverify</b> &minus;r selection [@ target]
+<pre class="display">     <b>swverify</b> -r selection [@ target]
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">     <b>swverify</b> &minus;d [@ target]
+<pre class="display">     <b>swverify</b> -d [@ target]
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">     <b>swverify</b> &minus;d @&minus;   # dash means standard input
+<pre class="display">     <b>swverify</b> -d @-   # dash means standard input
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">     <b>swverify</b> [&minus;&minus;scm|&minus;&minus;order-files] &minus;d @.  # . means current directory
+<pre class="display">     <b>swverify</b> [&ndash;scm|&ndash;order-files] -d @.  # . means current directory
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">     <b>swverify</b> [&minus;&minus;scm|&minus;&minus;order-files] &minus;d @:package<tt>_</tt>directory
+<pre class="display">     <b>swverify</b> [&ndash;scm|&ndash;order-files] -d @:package<tt>_</tt>directory
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
@@ -141,28 +223,28 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">     <b>swverify</b> [&minus;Wd] &minus;Wemit-digest-file [portable<tt>_</tt>archive<tt>_</tt>file]
+<pre class="display">     <b>swverify</b> [-Wd] -Wemit-digest-file [portable<tt>_</tt>archive<tt>_</tt>file]
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">     <b>swverify</b> [&minus;Wd] &minus;Wemit-signed-file [portable<tt>_</tt>archive<tt>_</tt>file]
+<pre class="display">     <b>swverify</b> [-Wd] -Wemit-signed-file [portable<tt>_</tt>archive<tt>_</tt>file]
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">     <b>swverify</b> [&minus;Wd] [&minus;Wsha1] &minus;Wemit-digest-file [portable<tt>_</tt>archive<tt>_</tt>file]
+<pre class="display">     <b>swverify</b> [-Wd] [-Wsha1] -Wemit-digest-file [portable<tt>_</tt>archive<tt>_</tt>file]
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">     <b>swverify</b> [&minus;Wd] &minus;Wget-sig-if=sigfilename [portable<tt>_</tt>archive<tt>_</tt>file]
+<pre class="display">     <b>swverify</b> [-Wd] -Wget-sig-if=sigfilename [portable<tt>_</tt>archive<tt>_</tt>file]
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
@@ -298,7 +380,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 Specify the implementation extension option. 
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
-Syntax: &minus;W option[=option<tt>_</tt>argument[,option...] 
+Syntax: -W option[=option<tt>_</tt>argument[,option...] 
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
 Options may be separated by a comma. 
@@ -306,24 +388,24 @@ Options may be separated by a comma.
 </blockquote>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>&minus;&minus;checksig | &minus;W checksig </b>
+<b>&minus;&minus;checksig | -W checksig </b>
 <!-- TROFF INPUT: .RS -->
 <!--  -->
 <blockquote>
-This is the default action and is the same as the POSIX syntax "&minus;d @target". 
+This is the default action and is the same as the POSIX syntax "-d @target". 
 If target file is not a directory then verify archive md5 and sha1 and gpg signature directly from the file. 
 If target file is a directory, attempt to verify the signature using GNU tar and gpg and if successful
 execute the distributor extension script <b>checksig</b>.  If <b>checksig </b>
 does not exist then exit with failure. 
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
-FILE may be "." (current directory) or "&minus;" (standard input).  A serial archive file may be compressed
+FILE may be "." (current directory) or "-" (standard input).  A serial archive file may be compressed
 with gzip, bzip2, or Unix compress. 
 <!-- TROFF INPUT: .RE -->
 </blockquote>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>&minus;&minus;order-catalog</b>
+<b>&ndash;order-catalog</b>
 <!-- TROFF INPUT: .RS -->
 <!--  -->
 <blockquote>
@@ -333,7 +415,7 @@ the signed data when verifying the directory (unpacked tarball) form of the pack
 </blockquote>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>&minus;&minus;cvs</b>
+<b>&ndash;cvs</b>
 <!-- TROFF INPUT: .RS -->
 <!--  -->
 <blockquote>
@@ -347,16 +429,16 @@ This option also emliminates the dependency on the order of files in file system
 </blockquote>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>&minus;&minus;scm</b>
+<b>&ndash;scm</b>
 <!-- TROFF INPUT: .RS -->
 <!--  -->
 <blockquote>
-Currently, same as the <b>&minus;&minus;cvs</b> option. 
+Currently, same as the <b>&ndash;cvs</b> option. 
 <!-- TROFF INPUT: .RE -->
 </blockquote>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>&minus;&minus;no-checkdigest</b>
+<b>&ndash;no-checkdigest</b>
 <!-- TROFF INPUT: .RS -->
 <!--  -->
 <blockquote>
@@ -366,7 +448,7 @@ the checkdigest script.
 </blockquote>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>&minus;&minus;signed-file </b> [FILE]
+<b>&ndash;signed-file </b> [FILE]
 <!-- TROFF INPUT: .RS -->
 <!--  -->
 <blockquote>
@@ -374,12 +456,12 @@ Write the GPG signed portion of the package to stdout without verifying it.
 Read archive file FILE or standard input and write the signed file
 (i.e. gpg's signed stuff) to stdout.  This is the catalog section of the Posix package. 
 This option is supported for the tarball file and unpacked tarball directory. 
-Use of the &minus;&minus;scm option may be required for the unpacked tarball directory form. 
+Use of the &ndash;scm option may be required for the unpacked tarball directory form. 
 <!-- TROFF INPUT: .RE -->
 </blockquote>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>&minus;&minus;digest-file </b> [FILE]
+<b>&ndash;digest-file </b> [FILE]
 <!-- TROFF INPUT: .RS -->
 <!--  -->
 <blockquote>
@@ -391,11 +473,11 @@ This option is not supported for the unpacked tarball form.
 </blockquote>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>-W emit-signed-file | &minus;W C</b>
+<b>-W emit-signed-file | -W C</b>
 <!-- TROFF INPUT: .RS -->
 <!--  -->
 <blockquote>
-Same as <b>&minus;&minus;signed-data</b>.  Also the same as &minus;WC
+Same as <b>&ndash;signed-data</b>.  Also the same as -WC
 <!-- TROFF INPUT: .RE -->
 </blockquote>
 <!--  -->
@@ -404,12 +486,12 @@ Same as <b>&minus;&minus;signed-data</b>.  Also the same as &minus;WC
 <!-- TROFF INPUT: .RS -->
 <!--  -->
 <blockquote>
-Same as <b>&minus;&minus;digest-data</b>.  Also the same as &minus;WS
+Same as <b>&ndash;digest-data</b>.  Also the same as -WS
 <!-- TROFF INPUT: .RE -->
 </blockquote>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>-W show-auth-files | &minus;W d</b>
+<b>-W show-auth-files | -W d</b>
 <!-- TROFF INPUT: .RS -->
 <!--  -->
 <blockquote>
@@ -508,7 +590,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#IMPLEMENTATION-EXTENSION-DISTRIBUTOR-S
 
 <p>The script may require the SW<tt>_</tt>CONTROL<tt>_</tt>TAG environment variable be set to "checkdigest" or "checkfile"
 and if not exit with failure. 
-swverify will set this variable to "checkfile" if the &minus;&minus;scm or &minus;&minus;cvs option is
+swverify will set this variable to "checkfile" if the &ndash;scm or &ndash;cvs option is
 used, and otherwise to "checkdigest".  The script may take different action based on the value. 
 Currently, the checkdigest script used by the swbis source package will omit the archive digests
 checks if set to SW<tt>_</tt>CONTROL<tt>_</tt>TAG="checkfile" since reproducing the archive digest is not possible
@@ -536,7 +618,7 @@ The storage section digests are stored as separate attribute files
 in the dfiles catalog directory. 
 <!-- TROFF INPUT: .PP -->
 The
-<b>checksig</b> (i.e. swverify &minus;d @&minus;) mode verifies a tarballs embedded signature. 
+<b>checksig</b> (i.e. swverify -d @-) mode verifies a tarballs embedded signature. 
 This mode checks all the security files in the package and
 is the preferred way to authenticate a package. 
 The <b>emit-signed-file</b>,
@@ -552,9 +634,9 @@ The <b>get-sig-if</b> is the function used when verifying a tarball.
 <li><a accesskey="3" href="#Verifying-a-POSIX-distribution-in-tar-format">Verifying a POSIX distribution in tar format</a>
 <li><a accesskey="4" href="#Verifying-the-Directory-Form-of-a-Distribution">Verifying the Directory Form of a Distribution</a>
 <li><a accesskey="5" href="#Verifying-Installed-Software">Verifying Installed Software</a>
-<li><a accesskey="6" href="#Create-the-digest-byte-stream-_0026minus_003bWemit_002ddigest_002dfile-mode-_002d">Create the digest byte stream &minus;Wemit-digest-file mode - </a>
-<li><a accesskey="7" href="#Create-the-signed-byte-stream-_0026minus_003bWemit_002dsigned_002dfile-mode-_002d">Create the signed byte stream &minus;Wemit-signed-file mode - </a>
-<li><a accesskey="8" href="#_0026minus_003bWget_002dsig_002dif-mode-_002d">&minus;Wget-sig-if mode - </a>
+<li><a accesskey="6" href="#Create-the-digest-byte-stream-_002dWemit_002ddigest_002dfile-mode-_002d">Create the digest byte stream -Wemit-digest-file mode - </a>
+<li><a accesskey="7" href="#Create-the-signed-byte-stream-_002dWemit_002dsigned_002dfile-mode-_002d">Create the signed byte stream -Wemit-signed-file mode - </a>
+<li><a accesskey="8" href="#_002dWget_002dsig_002dif-mode-_002d">-Wget-sig-if mode - </a>
 </ul>
 <!-- MAN2TEXI: EON -->
 <div class="node">
@@ -584,7 +666,7 @@ The authentication requires the following steps:
      4) Recreate the digest byte stream and present to the appropriate
         hash generation program to generate the message digest.
      5) Compare the digest message generated in step 4 to the
-        authenicated digest obtained in step 3.
+        authenicated digest obtained in step 3.<span class="roman">
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
@@ -594,7 +676,8 @@ The authentication requires the following steps:
 <!-- TROFF INPUT: .nf -->
 <!--  -->
 <pre class="display">       #!/bin/sh
-       tar zxf &minus; &minus;O \\*/catalog/dfiles/signature &lt; swbis-0.460.tar.gz
+     <!-- WARNING: man/man8/swverify.8:368:%%new font R started without closing previous font R -->
+       tar zxf - -O \\*/catalog/dfiles/signature &lt; swbis-0.460.tar.gz</span>
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
@@ -604,8 +687,8 @@ The authentication requires the following steps:
 <!-- TROFF INPUT: .nf -->
 <!--  -->
 <pre class="display">       #!/bin/sh
-       swverify &minus;WC &lt; swbis-0.460.tar.gz | gpg &minus;&minus;verify /dev/tty &minus;
-       # Cut and paste the signature file obtained in step 1
+       swverify -WC &lt; swbis-0.460.tar.gz | gpg &ndash;verify /dev/tty -
+       # Cut and paste the signature file obtained in step 1<span class="roman">
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
@@ -615,7 +698,8 @@ The authentication requires the following steps:
 <!-- TROFF INPUT: .nf -->
 <!--  -->
 <pre class="display">       #!/bin/sh
-       swverify &minus;WC &lt; swbis-0.460.tar.gz | tar xf &minus; &minus;O \\*/catalog/dfiles/md5sum
+     <!-- WARNING: man/man8/swverify.8:385:%%new font R started without closing previous font R -->
+       swverify -WC &lt; swbis-0.460.tar.gz | tar xf - -O \\*/catalog/dfiles/md5sum</span>
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
@@ -625,14 +709,14 @@ The authentication requires the following steps:
 <!-- TROFF INPUT: .nf -->
 <!--  -->
 <pre class="display">       #!/bin/sh
-       swverify &minus;WS &lt; swbis-0.460.tar.gz | md5sum
+       swverify -WS &lt; swbis-0.460.tar.gz | md5sum<span class="roman">
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .SS "Verifying a POSIX Distribution Directory Manually" -->
 <!-- MAN2TEXI: EON -->
-<div class="node">
+<p></span><div class="node">
 <p><hr>
 <a name="Verifying-a-POSIX-Distribution-Directory-Manually"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Verifying-a-POSIX-distribution-in-tar-format">Verifying a POSIX distribution in tar format</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#Verifying-a-POSIX-Distribution-Archive-Manually">Verifying a POSIX Distribution Archive Manually</a>,
@@ -670,6 +754,7 @@ following are true:
      5) The package catalog contains the distribution file list.
      6) The ownership names are present and have the same uid's and gid's.
      7) The package was unpacked with a version of tar that
+     <!-- WARNING: man/man8/swverify.8:425:%%new font R started without closing previous font R -->
         preserves all file times.  Use for example "tar xpf".
      <!-- TROFF INPUT: .fi -->
 </pre>
@@ -686,14 +771,14 @@ source packages.
 <!-- TROFF INPUT: .nf -->
 <!--  -->
 <pre class="display">       #!/bin/sh
-       tar cf &minus; &minus;b1 &minus;&minus;owner=root &minus;&minus;group=root \&nbsp;<!-- /@w -->
-       &minus;&minus;exclude=namedir/catalog/dfiles/signature  \&nbsp;<!-- /@w -->
-       namedir/catalog | gpg &minus;&minus;verify namedir/catalog/dfiles/signature &minus;
+       tar cf - -b1 &ndash;owner=root &ndash;group=root \\
+       &ndash;exclude=namedir/catalog/dfiles/signature  \\
+       namedir/catalog | gpg &ndash;verify namedir/catalog/dfiles/signature -<span class="roman">
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<p>If this fails try using GNU tar option &minus;&minus;posix. 
+<p>If this fails try using GNU tar option &ndash;posix. 
 If this fails then, try experimenting with the owner, group, and
 numeric-id options. 
 If you are unable to verify a tar byte stream using gpg(1)
@@ -707,12 +792,13 @@ the same byte stream that gpg(1) claims is authenticate.
 <!-- TROFF INPUT: .nf -->
 <!--  -->
 <pre class="display">       #!/bin/sh
-       grep &minus;v namedir/catalog  namedir/catalog/dfiles/files | \&nbsp;<!-- /@w -->
-       tar cf &minus; &minus;b1 &minus;&minus;owner=root &minus;&minus;group=root \&nbsp;<!-- /@w -->
-       &minus;&minus;files-from=&minus; &minus;&minus;no-recursion | md5sum
-       tar cf &minus; &minus;b1 &minus;&minus;owner=root &minus;&minus;group=root \&nbsp;<!-- /@w -->
-       &minus;&minus;exclude=namedir/catalog/dfiles/signature  \&nbsp;<!-- /@w -->
-       namedir/catalog | tar xf &minus; &minus;O  namedir/catalog/dfiles/md5sum
+       grep -v namedir/catalog  namedir/catalog/dfiles/files | \\
+       tar cf - -b1 &ndash;owner=root &ndash;group=root \\
+       &ndash;files-from=- &ndash;no-recursion | md5sum
+       tar cf - -b1 &ndash;owner=root &ndash;group=root \\
+       &ndash;exclude=namedir/catalog/dfiles/signature  \\
+     <!-- WARNING: man/man8/swverify.8:462:%%new font R started without closing previous font R -->
+       namedir/catalog | tar xf - -O  namedir/catalog/dfiles/md5sum</span>
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
@@ -724,11 +810,11 @@ If the package has symbolic links, Verify the adjunct<tt>_</tt>md5sum:
 <!-- TROFF INPUT: .nf -->
 <!--  -->
 <pre class="display">       #!/bin/sh
-       grep &minus;v namedir/catalog  namedir/catalog/dfiles/files | \&nbsp;<!-- /@w -->
-       ( while read file; do if [ ! &minus;h $file ]; then echo $file; fi done; )|\&nbsp;<!-- /@w -->
-       tar cf &minus; &minus;b1 &minus;&minus;owner=root &minus;&minus;group=root \&nbsp;<!-- /@w -->
-       &minus;&minus;files-from=&minus; &minus;&minus;no-recursion | md5sum
-       cat namedir/catalog/dfiles/adjunct<tt>_</tt>md5sum
+       grep -v namedir/catalog  namedir/catalog/dfiles/files | \\
+       ( while read file; do if [ ! -h $file ]; then echo $file; fi done; )|\\
+       tar cf - -b1 &ndash;owner=root &ndash;group=root \\
+       &ndash;files-from=- &ndash;no-recursion | md5sum
+       cat namedir/catalog/dfiles/adjunct<tt>_</tt>md5sum<span class="roman">
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
@@ -737,7 +823,7 @@ If the package has symbolic links, Verify the adjunct<tt>_</tt>md5sum:
 information. 
 <!-- TROFF INPUT: .SS "Verifying a POSIX distribution in tar format" -->
 <!-- MAN2TEXI: EON -->
-<div class="node">
+</span><div class="node">
 <p><hr>
 <a name="Verifying-a-POSIX-distribution-in-tar-format"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Verifying-the-Directory-Form-of-a-Distribution">Verifying the Directory Form of a Distribution</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#Verifying-a-POSIX-Distribution-Directory-Manually">Verifying a POSIX Distribution Directory Manually</a>,
@@ -752,6 +838,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#VERIFYING-SIGNATURES">VERIFYING SIGNAT
 checking the archive md5 message digest (and sha1 if present). 
 All present message digests must succeed and if this is true then
 the signed file is written and gpg proceeds to check the signature. 
+<!-- WARNING: man/man8/swverify.8:486:%%new font B started without closing previous font R -->
 If the <b>sig</b><tt>_</tt><b>header</b> file is present then the requirement
 that its data be identical to the ustar header of every signature file is
 enforced. 
@@ -762,9 +849,9 @@ If any one of these checks fails, authentication fails.
 <!-- TROFF INPUT: .nf -->
 <!--  -->
 <pre class="display">        #!/bin/sh
-        swverify &minus;&minus;checksig mypackage-00.1.tar.gz
-             # &minus; or &minus;
-        swverify &minus;d @&minus; &lt; mypackage-00.1.tar.gz
+        swverify &ndash;checksig mypackage-00.1.tar.gz
+             # - or -
+        swverify -d @- &lt; mypackage-00.1.tar.gz<span class="roman">
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
@@ -782,7 +869,8 @@ If any one of these checks fails, authentication fails.
      swbis: Archive digest: sha1 OK (Good)
      gpg: Signature made Sun Mar 16 20:28:23 2003 EST using DSA key ID 82B0DBE4
      gpg: Good signature from "Test User (pass=Iforgot) localhost&gt;"
-     Primary key fingerprint: 77BB A98E B3A2 ED4C 217E  8A25 2BF4 28AB 82D0 DDE4
+     <!-- WARNING: man/man8/swverify.8:510:%%new font R started without closing previous font R -->
+     Primary key fingerprint: 77BB A98E B3A2 ED4C 217E  8A25 2BF4 28AB 82D0 DDE4</span>
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
@@ -817,7 +905,7 @@ that preserved file times then try,
 <!-- TROFF INPUT: .nf -->
 <!--  -->
 <pre class="display">        #!/bin/sh
-        swverify &minus;&minus;checksig mypackage-00.1
+        swverify &ndash;checksig mypackage-00.1<span class="roman">
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
@@ -827,7 +915,8 @@ and use the posix syntax:
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">        swverify &minus;d @.
+<pre class="display">     <!-- WARNING: man/man8/swverify.8:542:%%new font R started without closing previous font R -->
+        swverify -d @.</span>
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
@@ -835,7 +924,7 @@ and use the posix syntax:
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">        swverify &minus;d @`pwd`/mypackage-00.1
+<pre class="display">        swverify -d @`pwd`/mypackage-00.1<span class="roman">
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
@@ -846,7 +935,7 @@ and use the posix syntax:
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">     swverify: Attempting to verify using &minus;&minus;posix tar option.
+<pre class="display">     swverify: Attempting to verify using &ndash;posix tar option.
      gpg: /home/userx/.gnupg/options:82: deprecated option "honor-http-proxy"
      gpg: please use "keyserver-options honor-http-proxy" instead
      gpg: WARNING: using insecure memory!
@@ -854,7 +943,7 @@ and use the posix syntax:
      gpg: Signature made Sun Mar 16 21:00:54 2003 EST using DSA key ID 82B0DBE4
      gpg: BAD signature from "Test User (pass=Iforgot) localhost&gt;"
      swverify: First attempt failed.
-     swverify: Attempting to verify without using &minus;&minus;posix tar option.
+     swverify: Attempting to verify without using &ndash;posix tar option.
      gpg: /home/jhl/.gnupg/options:82: deprecated option "honor-http-proxy"
      gpg: please use "keyserver-options honor-http-proxy" instead
      gpg: WARNING: using insecure memory!
@@ -880,7 +969,8 @@ and use the posix syntax:
      gpg:          There is no indication that the signature belongs to the owner.
      Primary key fingerprint: 77BB A98E B3A2 ED4C 217E  8A25 2BF4 28AB 82D0 DDE4
      checksig: Signature proper OK (Good)
-     checksig: /usr/bin/gpg exit status : 0
+     <!-- WARNING: man/man8/swverify.8:590:%%new font R started without closing previous font R -->
+     checksig: /usr/bin/gpg exit status : 0</span>
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
@@ -889,7 +979,7 @@ and use the posix syntax:
 <!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
-<a name="Verifying-Installed-Software"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Create-the-digest-byte-stream-_0026minus_003bWemit_002ddigest_002dfile-mode-_002d">Create the digest byte stream &amp;minus;Wemit-digest-file mode -</a>,
+<a name="Verifying-Installed-Software"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Create-the-digest-byte-stream-_002dWemit_002ddigest_002dfile-mode-_002d">Create the digest byte stream -Wemit-digest-file mode -</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#Verifying-the-Directory-Form-of-a-Distribution">Verifying the Directory Form of a Distribution</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#VERIFYING-SIGNATURES">VERIFYING SIGNATURES</a>
 <br>
@@ -912,33 +1002,33 @@ product or bundle tag.
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">     $ swverify &minus;r your<tt>_</tt>product<tt>_</tt>tag @ /
+<pre class="display">     $ swverify -r your<tt>_</tt>product<tt>_</tt>tag @ /
      swverify: verifying installed software at:
      swverify: //var/lib/swbis/catalog/swbis/your<tt>_</tt>product<tt>_</tt>tag/0.000/0
-     gpg: WARNING: &minus;&minus;honor-http-proxy is a deprecated option.
-     gpg: please use "&minus;&minus;keyserver-options honor-http-proxy" instead
+     gpg: WARNING: &ndash;honor-http-proxy is a deprecated option.
+     gpg: please use "&ndash;keyserver-options honor-http-proxy" instead
      gpg: Signature made Fri Feb 20 00:21:00 2004 EST using DSA key ID 82B0DBE4
      gpg: Good signature from "Test User (pass=Iforgot) localhost&gt;"
      gpg: WARNING: This key is not certified with a trusted signature!
      gpg:          There is no indication that the signature belongs to the owner.
      Fingerprint: 77BB B98D A3A2 ED4C 217E  9A25 8BF4 05AB 82B0 DBE4
      swverify: Warning: file checks not implemented
-     swverify: signature verification return status=0
+     swverify: signature verification return status=0<span class="roman">
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<!-- TROFF INPUT: .SS "Create the digest byte stream \-Wemit-digest-file mode:" -->
+<!-- TROFF INPUT: .SS "Create the digest byte stream -Wemit-digest-file mode:" -->
 <!-- MAN2TEXI: EON -->
-<div class="node">
+<p></span><div class="node">
 <p><hr>
-<a name="Create-the-digest-byte-stream-_0026minus_003bWemit_002ddigest_002dfile-mode-_002d"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Create-the-signed-byte-stream-_0026minus_003bWemit_002dsigned_002dfile-mode-_002d">Create the signed byte stream &amp;minus;Wemit-signed-file mode -</a>,
+<a name="Create-the-digest-byte-stream-_002dWemit_002ddigest_002dfile-mode-_002d"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Create-the-signed-byte-stream-_002dWemit_002dsigned_002dfile-mode-_002d">Create the signed byte stream -Wemit-signed-file mode -</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#Verifying-Installed-Software">Verifying Installed Software</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#VERIFYING-SIGNATURES">VERIFYING SIGNATURES</a>
 <br>
 </div>
 
-<h4 class="subsection">1.9.6 Create the digest byte stream &minus;Wemit-digest-file mode:</h4>
+<h4 class="subsection">1.9.6 Create the digest byte stream -Wemit-digest-file mode:</h4>
 
 <!-- TROFF INPUT: .PP -->
 <p>Here are some examples that verify the archive digests. 
@@ -947,13 +1037,14 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#VERIFYING-SIGNATURES">VERIFYING SIGNAT
 <!-- TROFF INPUT: .nf -->
 <!--  -->
 <pre class="display">        #!/bin/sh
-        cat your-tarball | swverify &minus;Wd &minus;WS | md5sum
+     <!-- WARNING: man/man8/swverify.8:631:%%new font R started without closing previous font R -->
+        cat your-tarball | swverify -Wd -WS | md5sum
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .PP -->
-<p>Your should see a pair of identical digests. Use the &minus;Wsha1 option to check the
+<p>Your should see a pair of identical digests. Use the -Wsha1 option to check the
 sha1 digest in a similar manner. 
 <!-- TROFF INPUT: .PP -->
 ** IMPORTANT **
@@ -968,22 +1059,22 @@ To inspect the digested data, try:
 <!-- TROFF INPUT: .nf -->
 <!--  -->
 <pre class="display">       #!/bin/sh
-       cat your-tarball | swverify &minus;WS | tar tvf &minus;
+       cat your-tarball | swverify -WS | tar tvf -<span class="roman">
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<!-- TROFF INPUT: .SS "Create the signed byte stream \-Wemit-signed-file mode:" -->
+<!-- TROFF INPUT: .SS "Create the signed byte stream -Wemit-signed-file mode:" -->
 <!-- MAN2TEXI: EON -->
-<div class="node">
+<p></span><div class="node">
 <p><hr>
-<a name="Create-the-signed-byte-stream-_0026minus_003bWemit_002dsigned_002dfile-mode-_002d"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#_0026minus_003bWget_002dsig_002dif-mode-_002d">&amp;minus;Wget-sig-if mode -</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="#Create-the-digest-byte-stream-_0026minus_003bWemit_002ddigest_002dfile-mode-_002d">Create the digest byte stream &amp;minus;Wemit-digest-file mode -</a>,
+<a name="Create-the-signed-byte-stream-_002dWemit_002dsigned_002dfile-mode-_002d"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#_002dWget_002dsig_002dif-mode-_002d">-Wget-sig-if mode -</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="#Create-the-digest-byte-stream-_002dWemit_002ddigest_002dfile-mode-_002d">Create the digest byte stream -Wemit-digest-file mode -</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#VERIFYING-SIGNATURES">VERIFYING SIGNATURES</a>
 <br>
 </div>
 
-<h4 class="subsection">1.9.7 Create the signed byte stream &minus;Wemit-signed-file mode:</h4>
+<h4 class="subsection">1.9.7 Create the signed byte stream -Wemit-signed-file mode:</h4>
 
 <!-- TROFF INPUT: .PP -->
 <p>Here is an example which allows inspection of the signed file. 
@@ -991,21 +1082,22 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#VERIFYING-SIGNATURES">VERIFYING SIGNAT
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">       cat your-tarball | swverify &minus;WC | tar tvf &minus;
+<pre class="display">     <!-- WARNING: man/man8/swverify.8:657:%%new font R started without closing previous font R -->
+       cat your-tarball | swverify -WC | tar tvf -
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<!-- TROFF INPUT: .SS "\-Wget-sig-if mode:" -->
+<!-- TROFF INPUT: .SS "-Wget-sig-if mode:" -->
 <!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
-<a name="_0026minus_003bWget_002dsig_002dif-mode-_002d"></a>Previous:&nbsp;<a rel="previous" accesskey="p" href="#Create-the-signed-byte-stream-_0026minus_003bWemit_002dsigned_002dfile-mode-_002d">Create the signed byte stream &amp;minus;Wemit-signed-file mode -</a>,
+<a name="_002dWget_002dsig_002dif-mode-_002d"></a>Previous:&nbsp;<a rel="previous" accesskey="p" href="#Create-the-signed-byte-stream-_002dWemit_002dsigned_002dfile-mode-_002d">Create the signed byte stream -Wemit-signed-file mode -</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#VERIFYING-SIGNATURES">VERIFYING SIGNATURES</a>
 <br>
 </div>
 
-<h4 class="subsection">1.9.8 &minus;Wget-sig-if mode:</h4>
+<h4 class="subsection">1.9.8 -Wget-sig-if mode:</h4>
 
 <!-- TROFF INPUT: .PP -->
 <p>This is the mode that is used internally when verifying a tarball. 
@@ -1015,8 +1107,8 @@ Below is an example of using this mode manually.
 <!-- TROFF INPUT: .nf -->
 <!--  -->
 <pre class="display">       #!/bin/sh
-       cat your-tarball | swverify &minus;Wget-sig-if=/dev/tty | \&nbsp;<!-- /@w -->
-       gpg &minus;&minus;verify  /dev/tty &minus;
+       cat your-tarball | swverify -Wget-sig-if=/dev/tty | \\
+       gpg &ndash;verify  /dev/tty -<span class="roman">
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
@@ -1027,7 +1119,8 @@ Below is an example of using this mode manually.
 <!-- TROFF INPUT: .RS -->
 <!--  -->
 <blockquote>
-<b>Note:  This verifies the md5 or sha1 digests before writing the signed data to stdout. 
+<!-- WARNING: man/man8/swverify.8:676:%%new font B started without closing previous font R -->
+</span><b>Note:  This verifies the md5 or sha1 digests before writing the signed data to stdout. 
 If the sha1 or md5 match fails then an empty file is written to stdout. 
 <!-- TROFF INPUT: .RE -->
 </blockquote>
@@ -1068,14 +1161,15 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#EXAMPLES">EXAMPLES</a>
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">       swverify &minus;d &lt; foo-1.1.tar.gz
+<pre class="display">       swverify -d &lt; foo-1.1.tar.gz
                 or
-       swverify &minus;d @`pwd`/foo-1.1.tar.gz
+       swverify -d @`pwd`/foo-1.1.tar.gz
                 or
-       swverify &minus;d @:foo-1.1.tar.gz
+       swverify -d @:foo-1.1.tar.gz
                 or
-       cat foo-1.1.tar.gz | swverify &minus;d @&minus;
-               Note: &minus;&minus;checksig and '&minus;d' perform the same operations.
+       cat foo-1.1.tar.gz | swverify -d @-
+     <!-- WARNING: man/man8/swverify.8:695:%%new font R started without closing previous font B -->
+               Note: &ndash;checksig and '-d' perform the same operations.             
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
@@ -1085,12 +1179,12 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#EXAMPLES">EXAMPLES</a>
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">       swverify &minus;d @`pwd`/foo-1.1
+<pre class="display">       swverify -d @`pwd`/foo-1.1
                 or
-       cd foo-1.1; swverify &minus;d @.
+       cd foo-1.1; swverify -d @.
                 or
-       swverify &minus;d @:foo-1.1
-               Note: &minus;&minus;checksig and '&minus;d' perform the same operations.
+       swverify -d @:foo-1.1
+               Note: &ndash;checksig and '-d' perform the same operations.             <span class="roman">
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
@@ -1100,7 +1194,8 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#EXAMPLES">EXAMPLES</a>
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">       # This is the same as directory verification except the '&minus;&minus;cvs' option is needed.
+<pre class="display">     <!-- WARNING: man/man8/swverify.8:715:%%new font R started without closing previous font R -->
+       # This is the same as directory verification except the '&ndash;cvs' option is needed.</span>
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
@@ -1121,18 +1216,18 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#EXAMPLES">EXAMPLES</a>
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">       swverify &minus;r foo.foo @/tmp/test
+<pre class="display">       swverify -r foo.foo @/tmp/test
                 or
-       swverify &minus;r foo.foo
+       swverify -r foo.foo
                Note: This will attempt to verify the GPG signature.
-                     The posix operations are not yet implemented.
+                     The posix operations are not yet implemented.<span class="roman">
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .SH "RETURN VALUE" -->
 <!-- MAN2TEXI: EON -->
-<div class="node">
+<p></span><div class="node">
 <p><hr>
 <a name="RETURN-VALUE"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#FILES">FILES</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#EXAMPLES">EXAMPLES</a>,
@@ -1143,7 +1238,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <h3 class="section">1.11 RETURN VALUE</h3>
 
 <!-- TROFF INPUT: .PP -->
-<p>Exit status of the checksig script or gpg utility for &minus;&minus;checksig directory operation. 
+<p>Exit status of the checksig script or gpg utility for &ndash;checksig directory operation. 
 0 if successful on all targets, 1 if failed on all targets, 2 if failed on some targets. 
 <!-- TROFF INPUT: .SH "FILES" -->
 <!-- DEBUG: print_menu("RETURN VALUE") -->
@@ -1162,7 +1257,8 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">     None
+<pre class="display">     <!-- WARNING: man/man8/swverify.8:739:%%new font R started without closing previous font R -->
+     None
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
@@ -1201,7 +1297,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">     sw(5), swign(1), swpackage(8), gpg(1), libexec/swbis/arf2arf
+<pre class="display">     sw(5), swign(1), swpackage(8), gpg(1), libexec/swbis/arf2arf<span class="roman">
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
@@ -1209,7 +1305,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- TROFF INPUT: .SH "IDENTIFICATION" -->
 <!-- DEBUG: print_menu("SEE ALSO") -->
 <!-- MAN2TEXI: EON -->
-<div class="node">
+<p></span><div class="node">
 <p><hr>
 <a name="IDENTIFICATION"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#BUGS">BUGS</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#SEE-ALSO">SEE ALSO</a>,
@@ -1222,7 +1318,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- TROFF INPUT: .PP -->
 <p>swverify: The verification utility of the swbis project. 
  Author: James Lowe, Jr.   Email: jhlowe at acm.org
- Version: 0.499
+ Version: 0.721
  Last Updated: 2006-08-03
  Copying: GNU Free Documentation License
 <!-- TROFF INPUT: .SH "BUGS" -->
@@ -1241,7 +1337,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <p>The signature file's archive header (or data) is not part of the signed
 data therefore it may be subject to undetectable tampering, however, swverify
 does perform sanity checks on the pathname, permissions and filetype if
-<!-- WARNING: man/man8/swverify.8:715:%%new font B started without closing previous font B -->
+<!-- WARNING: man/man8/swverify.8:768:%%new font B started without closing previous font R -->
 the <b>sig</b><tt>_</tt><b>header</b> file (See sw(5) manual page.) is not present
 [due to being signed by a old swpackage version], and if <b>sig</b><tt>_</tt><b>header</b> is present, swverify requires that it match the sig file header. 
 The ability to verify the unpacked directory
@@ -1252,16 +1348,17 @@ and whether these names are in the system database files
 the package. 
 <!-- TROFF INPUT: .PP -->
 Verification of the directory form of a distribution (i.e. the installed tarball
-path name prefix) such as running 'swverify &minus;d @.' after running 'swign @.' 
+path name prefix) such as running 'swverify -d @.' after running 'swign @.' 
 will fail if the order of directory entries is not compatible with
 traditional Unix file system directory entry ordering, which is the order of file creation. 
 This ordering is almost always apparent on Ext2 file system for small directories (but not
 always for big directories).  Ext3, reiserFS, and DarwinOS et.al file systems do not have
-this ordering, use of the '&minus;&minus;order-catalog' option is therefore required. 
-Use of the '&minus;&minus;cvs' or '&minus;&minus;order-catalog' options is theoretically problematic
+this ordering, use of the '&ndash;order-catalog' option is therefore required. 
+Use of the '&ndash;cvs' or '&ndash;order-catalog' options is theoretically problematic
 because it causes the use and interpretation of data in the verification of that
 same data therefore opening possible attack vectors. 
-<!-- created by instant / docbook-to-man, Thu 03 Aug 2006, 21:32 -->
+<!-- TROFF INPUT: ...\" created by instant / docbook-to-man, Mon 17 Sep 2007, 21:50 -->
+<!-- ...\" created by instant / docbook-to-man, Mon 17 Sep 2007, 21:50 -->
 
 </body></html>
 

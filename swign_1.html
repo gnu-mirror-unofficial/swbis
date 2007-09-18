@@ -160,11 +160,15 @@ i {color:#000080}
 
 
 
+
+
        Generate the package (and verify it) using a PSF  that  you  supply  on
        standard  input.   Change directory into the directory to package, then
        type
 
           swign -o 0 -g 0 --show-psf | swign -s - -u &quot;gpgName&quot; @- | swverify -d @-
+
+
 
 
 
@@ -175,6 +179,8 @@ i {color:#000080}
                  swverify --checksig .   # Deprecated form
                      -or-
                  swverify -d @.     # Posix syntax
+
+
 
 
 
@@ -277,7 +283,7 @@ i {color:#000080}
 
        # The fileset object contains the files.  The tag, revision,
        # and description attributes are mostly ignored.
-       # At this time swbis supports only <a href="one_1.html">one (1)</a> fileset.
+       # At this time swbis supports only <a href=one _1.html>one (1)</a> fileset.
 
        fileset
            tag sources
@@ -288,7 +294,7 @@ i {color:#000080}
        # file_permissions:
        # Here is an important policy.  This will cause 'swpackage'
        # to create the tar achive with all files owned by uid and
-       # gid <a href="zero_0.html">zero (0)</a>, the user name 'root' will not be included
+       # gid <a href=zero .html>zero (0)</a>, the user name 'root' will not be included
        # in the uname and gname tar header fields.  This is similar
        # to the effect of GNU tar options --numeric --owner=root
        # --group=root .
@@ -304,7 +310,7 @@ i {color:#000080}
        #   file_permissions -u 000  # To use ownerships of source files
            file_permissions -o 0 -g 0
 
-       # The following <a href="two_2.html">two (2)</a> lines mean include every file in the current
+       # The following <a href=two _2.html>two (2)</a> lines mean include every file in the current
        # directory.
 
            directory .
@@ -329,9 +335,9 @@ i {color:#000080}
 </pre><h3><a name="ENVIRONMENT"><b>ENVIRONMENT</b></a></h3><pre>       <b>SWPACKAGEPASSFD</b>
               Sets the swpackage <i>--passphrase-fd</i> option.  Set the  option  arg
               to  a  integer value of the file descriptor, or to &quot;env&quot; to read
-              the   passphrase   from   the   environment   variable   SWPACK-
-              AGEPASSPHRASE,  or  to &quot;agent&quot; to cause gpg to use gpg-agent, or
-              &quot;tty&quot; to read from the terminal.
+              the     passphrase     from     the     environment     variable
+              SWPACKAGEPASSPHRASE,  or  to  &quot;agent&quot;  to  cause gpg to use gpg-
+              agent, or &quot;tty&quot; to read from the terminal.
 
 
        <a name="SWPACKAGEPASSPHRASE"><b>SWPACKAGEPASSPHRASE</b></a>
@@ -352,10 +358,10 @@ i {color:#000080}
 </pre><h3><a name="FILES"><b>FILES</b></a></h3><pre>        &lt;<i>path</i>&gt;/<b>catalog</b>/
 </pre><h3><a name="SEE ALSO"><b>SEE ALSO</b></a></h3><pre>       info swbis
 
-       <a href="swpackage_8.html">swpackage(8)</a>, gpg
-</pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        <a href="swign_1.html">swign(1)</a>: The source directory signing utility of the swbis project.
-        Author: J. Lowe <a href="mailto:jhlowe@acm.org">jhlowe@acm.org</a>
-        Version: 0.499
+       <a href=swpackage_8.html>swpackage(8)</a>, gpg
+</pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        <a href=swign_1.html>swign(1)</a>: The source directory signing utility of the swbis project.
+        Author: J. Lowe <a href=jhlowe@acm.org</a>.html>jhlowe@acm.org</a>
+        Version: 0.721
         Last Updated: 2006-08-03
         Copying: GNU Free Documentation License
 
@@ -382,5 +388,5 @@ i {color:#000080}
 
 
 
-                                                                      <a href="swign_1.html">swign(1)</a>
-</pre><hr><a href="../index.html">[ Index ]</a> <a href="javascript:history.back()"> [ Back ]</a></body></html>
+                                                                      <a href=swign_1.html>swign(1)</a>
+</pre><hr></body></html>

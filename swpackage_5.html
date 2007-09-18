@@ -56,7 +56,7 @@ i {color:#000080}
 
        The swbis implementation writes its output to stdout.  The default out-
        put block size is 10240 bytes.  The last block is not padded and there-
-       fore  the  last <a href="write_2.html">write(2)</a> may be a short write.  The selected block size
+       fore  the  last <a href=write_2.html>write(2)</a> may be a short write.  The selected block size
        does not affect the output file contents.
 
        The swbis implementation is biased, in terms of capability and  default
@@ -89,7 +89,7 @@ i {color:#000080}
        tions.
 
        For additional information see
-       XDSA C701 <a href="http://www.opengroup.org/publications/catalog/c701.htm">http://www.opengroup.org/publications/catalog/c701.htm</a>, or
+       XDSA C701 <a href=http://www.opengroup.org/publications/catalog/c701.htm</a>, or.html>http://www.opengroup.org/publications/catalog/c701.htm</a>, or
        sw manual page.
 
    <a name="EXTENDED DEFINITIONS"><b>EXTENDED DEFINITIONS</b></a>
@@ -140,14 +140,16 @@ i {color:#000080}
           directory  <i>source</i>  [<i>destination</i>]
 
 
-       Applies  the  <i>source</i>  attribute as the directory under which the subse-
-       quently listed files are located.  If <i>destination</i> is defined it will be
-       used as a prefix to the <i>path</i> (implied) file definition.  <i>source</i> is typ-
-       ically a temporary or build location and <i>dest</i> is its  unrealized  abso-
-       lute pathname destination.
+
+       Applies   the  <i>source</i>  attribute  as  the  directory  under  which  the
+       subsequently listed files are located.  If <i>destination</i>  is  defined  it
+       will be used as a prefix to the <i>path</i> (implied) file definition.  <i>source</i>
+       is typically a temporary or build location and <i>dest</i> is  its  unrealized
+       absolute pathname destination.
 
    <b>o</b>  <b>Recursive File Definition</b>
          file *
+
 
 
        Specifies  every  file  in  current  source  directory.   The <i>directory</i>
@@ -155,6 +157,7 @@ i {color:#000080}
 
    <b>o</b>  <b>Explicit File Definition</b>
          file [-t <i>type</i>] [-m <i>mode</i>] [-o <i>owner</i>[,<i>uid</i>]] [-g <i>group</i>[,<i>gid</i>]] [-n] [-v] source [<i>path</i>]
+
 
 
        <b>source</b>
@@ -207,6 +210,7 @@ i {color:#000080}
          file_permissions [-m <i>mode</i>] [-u <i>umask</i>] [-o [<i>owner</i>[,]][<i>uid</i>]] [-g [<i>group</i>[,]][<i>gid</i>]]
 
 
+
        Applies to subsequently listed file definitions in  a  fileset.   These
        attributes  will  apply  where  the  file attributes were not specified
        explicitly in a file definition.  Subsequent  <b>file_permissions</b>  defini-
@@ -222,10 +226,12 @@ i {color:#000080}
           exclude source
 
 
+
        Excludes a previously included file or an entire directory.
 
    <b>o</b>  <b>Including Files</b>
           include &lt;<i>filename</i>
+
 
 
        The contents of <i>filename</i> may be more definitions for files.  The syntax
@@ -296,20 +302,21 @@ i {color:#000080}
               This value is used by the swbis implementation as  a  path  name
               component  in  the  installed software catalog.  It is required.
               The swbis implementation uses it in a way that is  analogous  to
-              the RPMTAG_NAME attribute.
+              the  RPMTAG_NAME  attribute,  namely  as the public recognizable
+              name of the package.
 
 
        <b>control_directory</b>
 
-              Is  the directory name in the distribution under which the prod-
-              uct contents are located.  This  value  has  no  affect  on  the
-              installed  software  catalog.   If it is not given in a PSF then
+              Is the directory name in the distribution under which the  prod-
+              uct  contents  are  located.   This  value  has no affect on the
+              installed software catalog.  If it is not given in  a  PSF  then
               the <i>tag</i> is used.
 
 
        <b>revision</b>
 
-              Is the product revision.  It  should  not  contain  a  &quot;RELEASE&quot;
+              Is  the  product  revision.   It  should not contain a &quot;RELEASE&quot;
               attribute part or other version suffix modifiers.  This value is
               used by the swbis implementation as a path name component in the
               installed software catalog.  It is required by swinstall.
@@ -317,20 +324,58 @@ i {color:#000080}
 
        <b>vendor_tag</b>
 
-              This  is  a  short identifying name of the distributor that sup-
-              plied the product and associates  the  <b>vendor</b>  object  from  the
-              INDEX  file.   This attribute is optional.  This attribute value
-              should strive to be unique among all distributors.  It is one of
-              the  version distinguishing attributes of a product specified by
-              the standard.  It is transfered into the installed_software cat-
-              alog  (not  as  a  path  name  component) by swinstall.  If this
-              attribute exists there should also be a <b>vendor</b> object in the PSF
-              in the distribution object that has this tag.  This attribute is
-              assigned the value of RPMTAG_RELEASE by swpackage when translat-
-              ing  an RPM.  In this capacity it serves to distinguish products
-              with the same revision and tag from the same or  different  dis-
-              tributor.   It  most  closely  maps  to  the  RPMTAG_RELEASE  or
-              &quot;debian_revision&quot; attributes.
+              This is a short identifying name of the  distributor  that  sup-
+              plied  the  product and may associate (refer to) a <b>vendor</b> object
+              from the INDEX file that has a  matching  tag  attribute.   This
+              attribute is optional.  This attribute value should strive to be
+              unique among all distributors. The swbis implementation modifies
+              the intended usage slightly as a string that strives to be glob-
+              ally unique for a given product.<b>tag</b>  and  product.<b>revision</b>.   In
+              this  capacity  it  serves to distinguish products with the same
+              revision and tag from the same  or  different  distributor.   It
+              most  closely  maps  to  the RPMTAG_RELEASE or &quot;debian_revision&quot;
+              attributes.  It is one of the version distinguishing  attributes
+              of  a  product specified by the standard.  It is transfered into
+              the installed_software catalog (not as a path name component) by
+              swinstall.  If this attribute exists there should also be a <b>ven-</b>
+              <b>dor</b> object in the PSF in the distribution object that  has  this
+              tag.   This attribute is assigned the value of RPMTAG_RELEASE by
+              swpackage when translating an RPM.
+
+
+       <b>architecture</b>
+
+              This string is one of the version attributes.   It  is  used  to
+              disambiguate  products that have the same <b>tag</b>, <b>revision</b> and <b>ven-</b>
+              <b>dor_tag</b>.  It is not used for determining a products  compatibil-
+              ity  with  a  host.   The form is implementation defined.  swbis
+              uses the output of GNU <b>config.guess</b> as the value of this string.
+              A  wildcard  pattern  should  not  be used.  The canonical swbis
+              architecture string can be listed with <b>swlist</b>. For example
+
+              swlist -a architecture @ localhost
+
+               Here are some example outputs from real systems.
+
+                  System      `uname -srm`              architecture
+              Red Hat 8.0:  Linux 2.4.18 i686        i686-pc-linux-gnu
+              OpenSolaris:  SunOS 5.11 i86pc         i386-pc-solaris2.11
+              NetBSD 3.1:   NetBSD 3.1 i386          i386-unknown-netbsdelf3.1
+              Red Hat 4.1:  Linux 2.0.36 i586        i586-pc-linux-gnulibc1
+              Debian 3.1:   Linux 2.6.8-2-386 i686   i686-pc-linux-gnu
+
+
+
+       <b>os_name os_release os_version machine_type</b>
+
+              These attributes are used  to  determine  compatibility  with  a
+              host.   They  correspond  to  the  <b>uname</b>  attributes  defined by
+              POSIX.1.  If an value is nil or non-existent it  is  assumed  to
+              match  the host.  All attributes must match for there to be com-
+              patibility.  Distributors may wish to make these values a  shell
+              pattern  in  their  PSF's so to match the intended collection of
+              hosts.  swbis uses <b>fnmatch</b> (with FLAGS=0) to determine a  match.
+
 
    <b>o Fileset Attributes</b>
        A <b>fileset</b> defines the fileset.
@@ -338,19 +383,22 @@ i {color:#000080}
        <b>tag</b>
 
               <i>tag</i> is the short, file system friendly, name of the fileset.  It
-              is required.
+              is required although selection of filesets is  not yet supported
+              therefore  the  end user will have little to do with the fileset
+              tag.
 
        <b>control_directory</b>
 
-              Is  the  directory  name  in the product under which the fileset
+              Is the directory name in the product  under  which  the  fileset
               contents are located.  This value has no affect on the installed
-              software  catalog.   If it is not given in a PSF then the <i>tag</i> is
+              software catalog.  If it is not given in a PSF then the  <i>tag</i>  is
               used.
 
    <b>o Example Source Package PSF</b>
-       This PSF packages every file is current directory. It uses nil  control
-       directories  so  the  package  structure  does not change relative to a
+       This  PSF packages every file is current directory. It uses nil control
+       directories so the package structure does  not  change  relative  to  a
        vanilla tarball.
+
 
         distribution
           description &quot;fooit - a program from fooware
@@ -382,13 +430,14 @@ i {color:#000080}
 
 
    <b>o Example Runtime (Binary) Package PSF</b>
-       This is a sample PSF for a runtime package.  It implies multiple  prod-
-       ucts  (e.g.  sub-packages)  using the bundle.contents attribute.  Since
-       the bundle and product tags exist in a un-regulated namespace  and  are
+       This  is a sample PSF for a runtime package.  It implies multiple prod-
+       ucts (e.g. sub-packages) using the  bundle.contents  attribute.   Since
+       the  bundle  and product tags exist in a un-regulated namespace and are
        seen by end users they should be carefully chosen.   Note that the bun-
-       dle and product have the same tag which may force downstream  users  to
-       disambiguate  using  software  selection  syntax  such as fooit,bv=* or
+       dle  and  product have the same tag which may force downstream users to
+       disambiguate using software selection  syntax  such  as  fooit,bv=*  or
        fooit,pv=* .
+
 
         distribution
           description &quot;fooit - a program from fooware
@@ -427,20 +476,20 @@ i {color:#000080}
                  file src/fooit /usr/bin/fooit
 
 
-</pre><h3><a name="APPLICABLE STANDARDS"><b>APPLICABLE STANDARDS</b></a></h3><pre>       POSIX.1, IEEE Std 1387.2-1995 (Identical  to  ISO  15068-2:1999),  Open
+</pre><h3><a name="APPLICABLE STANDARDS"><b>APPLICABLE STANDARDS</b></a></h3><pre>       POSIX.1,  IEEE  Std  1387.2-1995  (Identical to ISO 15068-2:1999), Open
        Group CAE C701.
-</pre><h3><a name="SEE ALSO"><b>SEE ALSO</b></a></h3><pre>        XDSA C701 <a href="http://www.opengroup.org/publications/catalog/c701.htm">http://www.opengroup.org/publications/catalog/c701.htm</a>
+</pre><h3><a name="SEE ALSO"><b>SEE ALSO</b></a></h3><pre>        XDSA C701 <a href=http://www.opengroup.org/publications/catalog/c701.htm</a>.html>http://www.opengroup.org/publications/catalog/c701.htm</a>
         info swbis
-        <a href="sw_5.html">sw(5)</a>
-        <a href="swpackage_8.html">swpackage(8)</a>
-        <a href="swbisparse_1.html">swbisparse(1)</a> -- An implementation extension parser utility.
+        <a href=sw_5.html>sw(5)</a>
+        <a href=swpackage_8.html>swpackage(8)</a>
+        <a href=swbisparse_1.html>swbisparse(1)</a> -- An implementation extension parser utility.
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        Copyright (C) 2004,2005 Jim Lowe
-        Version: 0.499
+        Version: 0.721
         Last Updated: 2006-07-01
         Copying Terms: GNU Free Documentation License
 </pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       None
 
 
 
-                                                                  <a href="swpackage_5.html">swpackage(5)</a>
-</pre><hr><a href="../index.html">[ Index ]</a> <a href="javascript:history.back()"> [ Back ]</a></body></html>
+                                                                  <a href=swpackage_5.html>swpackage(5)</a>
+</pre><hr></body></html>

@@ -37,35 +37,34 @@ software packaging -- again
 <H4><A HREF="#TOCintroduction" NAME="introduction">Introduction to Swbis</A></H4>
 
 <P>
-The swbis project is a from-scratch implementation of the POSIX spec
-IEEE Std 1387.2-1995 which describes a format and utilities for
-software packaging.  The scope of the POSIX spec includes a package
-format, meta-data file format, and utilities for package creation,
-installation, query, listing, and verification.
+<b>swbis</b> is a software administration system for
+GNU/Linux systems and systems that are UNIX system-like. It implements the
+Open Group's CAE Spec C701 (XDSA) Distributed Software Administration.
+This spec closely follows ISO/IEC 15068-2:1999 (now withdrawn)
+which was identical to IEEE 1387.2:1995.
+The implementation relies on POSIX functionality as provided by a typical GNU system.
+It has security enhancement extensions that use GNU Privacy Guard.
+The scope of the spec includes a package format, meta-data file format,
+and utilities for package creation, installation, query, listing, and verification.
 
 <P>
-The swbis implementation has extensions for package authentication using
-GPG signatures and strong cryptographic digests which are contained in the
-package catalog as separate ascii text files.
-GNU Privacy Guard is used directly by swpackage and swverify for
-signature creation and verification.
+While the swbis system has features comparable with package managers, it has
+features that are of general purpose usefulness to system administrators and
+developers.  These include host-to-host copying of file system directories,
+advanced tarball creation methods, backward compatibility with uses of plain tarballs,
+and the ability to act as a directory content integrity checker.
 
 <P>
-Other features of the swbis implementation are: direct use of
-the ssh client for remote host operations, GNU tar format
-compatibility, and, no new utility or program requirements for remote
-installation beyond POSIX compatible GNU utilities that are probably
-already present on all GNU and GNU/Linux hosts.
+A notable feature of the swbis implementation is its Distributed Software Administration
+capability.  All utilties (except swpackage) are network transparent via direct
+use of the system Ssh client program.  In addition, no new programs or services are
+required on remote target hosts.  This is achieved by use of the ``bash -s'' invocation
+of a POSIX shell on the remote host which allows reading of script and data on standard input.
+File loading is performed by 'tar'.
 
 <P>
-The swbis implementation can install RPM packages, via multiple ssh-hops,
-to remote hosts that have neither swbis nor RPM installed.
-<P>
-The package installer, swinstall, supports checkinstall preinstall, and postinstall
-script execution.  It uses the tar utiliy for file loading.  It creates a de-facto installed
-software catalog in the file system using directories and text files
-that stores and preserves the package GPG signature in a form that can be later
-verified using the 'gpg' utility.
+As a bonus, swinstall can install RPM packages, via multiple ssh-hops,
+to remote hosts that don't have 'rpm' installed.
 
 <P>
 Some of the programs supplied with this package are:
@@ -80,6 +79,25 @@ Some of the programs supplied with this package are:
 </UL>
 
 <H4><A HREF="#TOCnews" NAME="news">News</A></H4>
+
+<dl>
+<dt>15 September 2007: <b>swlist and swremove now available</b></dt>
+<dd>
+<p> The latest version of Swbis available via anonymous CVS now includes new distributed utilties
+swremove and swlist.
+<p>
+To get the letest use:
+<pre>
+cvs -z3 -d:pserver:anonymous@cvs.savannah.gnu.org:/sources/swbis export -D 2037-01-01 swbis
+</pre>
+The resulting directory can be verified using swverify like this:
+<pre>
+swverify -d --scm @:swbis
+</pre>
+This should authenticate the GPG signature but some files may have different md5/sha1 digests
+because the ./catalog directory is not resigned for every CVS commit.
+</dd>
+</dl>
 
 <dl>
 <dt>05 August 2006: <b>Swbis 0.499 Released!</b></dt>
@@ -156,7 +174,7 @@ permitted in any medium, provided this notice is preserved.
 
 <P>
 Updated:
-$Id: index.html,v 1.14 2007/09/18 23:39:12 jhlowe Exp $
+$Id: index.html,v 1.15 2007/09/19 00:22:14 jhlowe Exp $
 <HR>
 </BODY>
 </HTML>

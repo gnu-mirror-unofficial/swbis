@@ -1,20 +1,38 @@
 
-    swbis - Software Administration
-    --------------------------------
+    swbis - Distributed Software Administration
+    --------------------------------------------
+              Version 0.732
 
     swbis is a GNU package
     The official home page is http://www.gnu.org/software/swbis
 
     Please send bug reports to <bug-swbis@gnu.org>
     
-    This version and prior versions are found at SourceForge
-    http://www.sourceforge.net/projects/swbis
-    
+    The latest version is found at
+    ftp://ftp.gnu.org/pub/gnu/swbis    
+ 
     The entry in the FSF/UNESCO Free Software Directory is
     http://directory.fsf.org/GNU/swbis.html
 
     Introduction
     ------------
+   'swbis' aims to implement the POSIX packaging standard with useful
+    extensions.  Working utilities include swpackage, swverify, swcopy,
+    swlist, and swinstall.  Package security is provided by embedded
+    control files containing md5, sha1, and sha512 digests, and GPG
+    signatures. swbis is back-compatible with free software source
+    tarballs because package meta-data is contained in-band in the
+    prescribed directory.  Since swbis supports nil control directory
+    names, the package layout need not change except for the addition
+    of this directory.  The swbis utilities are network transparent by
+    direct use of SSH, and do not have to be installed on the target
+    hosts. swbis run-time packages can be delivered, by swinstall, to
+    any GNU, BSD, or Unix-like host with no new provisioning
+    requirements for the remote host. Since run-time packages are POSIX
+    tar archives, they may be unpacked using the system tar utility.
+    The spec is available at
+    http://www.opengroup.org/publications/catalog/c701.htm. 
+
     GNU swbis is a free and from-scratch GPL'ed implementation of
     IEEE 1387.2-1995 Std (Part 2: Software Administration) which
     describes a format and utilities for software packaging.  The
@@ -57,7 +75,8 @@
              * Supports remote-source to remote-target copies.
     
        swpackage -  Packages files according to a PSF file.
-    
+   					(beta as of 2007-09-01)
+ 
              * Complete implementation of Extended Definitions.
              * Stand-alone operation, no use of temporary files.
              * Output format is bit-for-bit identical to GNU tar.
@@ -71,6 +90,7 @@
              * Authenticates the GPG signature in the installed software.
 
        swinstall  -  Install a posix package.  (alpha as of 2004-02-15)
+       					       (beta as of 2007-09-01)
                  
              * 'swinstall' does not have to be installed on the target host.
              * The target or source host may be any POSIX.2 conforming host.
@@ -81,7 +101,16 @@
              * Uses tar (or pax) to install the files.
              * Supports full error monitoring during control script execution
                and records exit status and installation states.
-    
+
+       swlist  -  List the catalog (alpha as of 2006-12-01)
+
+             * Supports listing and selection via the '-c -' to stdout.
+             * Supports listing files from a distribution.
+             * Supports listing product entries in the installed catalog.
+             * Supports asserting dependency specs against the installed catalog.
+       
+       swremove  -  Remove installed software (alpha as of 2007-09-01)
+ 
     * Non-ISO/Posix (Ad Hoc) Utilities:
 
         swign  -  Produces signed tar archives using GNU tar and
@@ -96,15 +125,52 @@
                      and digested byte streams.
     
 
-    Howto make your own signed tarballs For the really impatient
-    ------------------------------------------------------------
-    Type
-           swign @- | tar tvf -
-             
-    see the info document, type
-              info swbis 
-	         or
-	      info -f doc/info/swbis
+    How to make some tarballs For the really impatient
+    --------------------------------------------------
+
+    Here's an example of making a binary package using
+    the recipe file ./PSF.bin.in.  This shows how to use swign
+    to process replacement parameters %__revision.  (Generating
+    and re-writing PSFs are outside the scope of swbis (at the moment)
+    but a limited capability has been forced into swign).
+    This assumes the swbis source directory is the current directory
+    and is compiled.
+
+      cat PSF.bin.in |
+      swign -s - --show-psf --no-psf-detect --name-version=swbis-0.1 |
+      swpackage -pv  # -p is preview mode
+
+    Now, try with some options 
+
+      cat PSF.bin.in |
+      swign -s - --show-psf --no-psf-detect --name-version=swbis-0.1 |
+      SWPACKAGEPASSPHRASE=Iforgot swpackage -s - \
+		--files \
+		--file-digests \
+		--sign \
+		--gpg-name="Test User" \
+		--gpg-path=var/gnupg \
+		--passphrase-fd=env \
+		-pv \
+		@-
+
+    Now, just remove the '-pv' and pipe it into swverify,  This shows
+    how *not* to treat your passphrase, normally SWPACKAGEPASSPHRASE
+    would be unset and --passphrase-fd is set to "agent" to use
+    the GPG agent or "tty" to read from the terminal.
+
+      cat PSF.bin.in |
+      swign -s - --show-psf --no-psf-detect --name-version=swbis-0.1 |
+      SWPACKAGEPASSPHRASE=Iforgot swpackage -s - \
+		--files \
+		--archive-digests \
+		--file-digests \
+		--sign \
+		--gpg-name="Test User" \
+		--gpg-path=var/gnupg \
+		--passphrase-fd=env \
+		@- |
+	GNUPGHOME=var/gnupg swverify -d @-
 
     Documentation
     -------------
@@ -118,6 +184,43 @@
           For example:
 	    nroff -man <doc/man/man8/swpackage.8 | less -r
 
+    Known BUGS
+    ----------
+    The message (from swsupplib/shell_lib/shell_lib.sh)
+	sw<name>: Warning: XX NUL blocks at start of input for task <taskid>
+    may rarely appear indicating something bad tried to happen in the
+    internal plumbing of the executing shell script.  The message
+    appears once per invocation but intermittently among many
+    invocations, and more so for remote installs and almost never
+    for local installs.  The data integrity is not affected by this.
+    Severe breakages (which never happen) will be detected, and false
+    success or execution of arbitrary data is not possible.
+    A cause has not yet been determined.
+
+    The awk code in swsupplib/shell_lib/shell_lib.sh trips a bug in
+    /usr/xpg4/bin/awk on Solaris hosts (OpenSolaris build 54) when using
+    relops (applied to revision numbers) in selections. Replacement
+    of /usr/xpg4/bin/awk with gawk, mawk, or awk (the awk-book awk
+    from AT&T) fixes the problem. A work-around to allow all awks
+    to work has not been devised.
+    For example:
+        # swlist --products as1\*,r\>1.0 
+    lists nothing,
+    but replacing awk properly lists the catalog entry:
+        as10k1                  r=1.0.8         v=1mdk
+
+    If you hit ctrl-c during a remote install, stranded shell processes
+    and its sshd parent might be left running on the target host. (This
+    may be due to openSSH not transmitting signals to the remote program
+    or a design flaw in swbis).
+
+    During multi-hop installs, during the file loading phase, tar (or pax)
+    will just quit as if data input just stopped.  This may be related to
+    the intermediate hosts.  It is rare to extremely rare, it may be data 
+    dependent (timing issues) and is definitely network-path dependent, and
+    not reproducable.  The error is detected by swinstall, false success
+    has never been observed.
+
     How to install
     --------------
     See the file INSTALL.
@@ -130,9 +233,9 @@
         - Package metadata is contained in ascii text files.
     
         - The package generation spec file supports explicit
-          overriding of file attributes, ability to specify a
+          overriding of file attributes, the ability to specify a
           different source filename from the name appearing in the
-          package, the ability to specify all files in a directory,
+          package, and the ability to specify all files in a directory,
           among others.
    
         - Supports multiple products in a single distribution file.
@@ -181,14 +284,15 @@
           run-time package to have a form that is directly installable
           using tar [similar to slackware packages].
 
-        - Supports a md5sum attribute for storage files.
+        - Supports a md5sum, sha1sum and sha512sum  attributes for
+	  storage files and the package payload.
     
         - Supports cryptographic authentication (Package signing) by
           use of Vendor Defined attributes consisting of a control file 
-          containing a signature of the catalog section, and control files
-          containing a md5 and sha1 digest of the storage section.
+          containing a signature of the catalog section.
     
-        - Multiple signature control files are supported to accommodate
+        - Multiple signatures are supported as separate control files in
+	  the archive (all with the same name) to accommodate the concept of
           upstream and downstream signers.
     
         - All package signatures are transferred (by swinstall) into
@@ -218,6 +322,89 @@
 To make the autotools
 --------------------
  aclocal && autoconf && autoheader && automake
-    
+
+To make under a different revision
+----------------------------------
+	# This modifies the ./VERSION file
+	YOUR_VERSION=0.600.1 sh bin/reversion.sh $YOUR_VERSION
+	./configure && make && make distclean
+ 
+Internal Design of the sw<utilities> (except swpackage)
+--------------------------------------------------------
+
+,-------------------------------------
+| # Target Script read from stdin     |
+|   "(                                |
+|   bash -s # < Task_Script_1         |
+|   bash -s # < Task_Script_2         |
+|   bash -s # < Task_Script_3         |
+|   )"       ^                        |
+|           /|\  ,-----<< Data        |
+|            |   |    ,---<< Errors,  |
+|            |   |    |      Protocol |
+|           fd0 fd1  fd2              |
+`------------o---o----o---------------
+            /|\  |    |
+             |   |   \|/
+             |  \|/   |
+        ,----o---o----o---.
+        |   fd1  fd0  fd2 |
+        |                 |
+        |    (bash -s)    |           
+        |                 |
+        |   fd0  fd1  fd2 |
+        `----o----o---o---'
+             |    |   |
+             |    |   |
+        ,----o----o---o---.
+        |   fd0  fd1  fd2 |
+        |                 |
+        |      (sshd)     |           
+        `---------o-------'     TARGET HOST
+                  |            -------------
+                  |    
+      ,-----------o----------.
+      |   Public Network     |  1 or more "ssh hops"
+      `-----------o----------'
+                  |    
+                  |            -----------------
+        ,---------o-------.     MANAGEMENT HOST
+        |       (ssh)     |           
+        |                 |
+        |   fd0  fd1  fd2 |
+        `----o----o-------'
+             |    |    |
+            /|\   |   errors &
+             |    |  protocol events
+             |  data   |
+          script  |   \|/
+             &    |    | 
+           data  \|/   `------------------------,
+             |    |                             |
+        ,----o----o----o------------.           |
+        |  fdN   fdM   fdP (closed) |           |
+        |                           |          \|/
+        |     (Main Program)        |           |
+        |  sw<utility> [Parent]     |       ,---o-------------------,  
+        |                           |       |  fd E                 |
+        |                           |       |                       |
+        |                           |       |  (Logger Process)     |
+        |                           |       | sw<utility> [child]   |
+        |                           |       |                       |
+        | 1: Send Main Target Script|       | Process SWI_<events>  |
+	|                           |       |                       |
+        |                           |       | Monitor Remote stderr |
+        | 2: Send Task_Script_N     |       | Send Events to Parent |
+        |    Monitor SWI_<events>   | event | \ /                   |
+        |     (See swicol.c)        |  fd   |  |                    |
+        |    Wait for END event <---o---<---o--'                    |
+        |    Check exit status      |       |                       |
+        |        messages.          |       |       Write to stderr |
+        |                           |       |             \|/       |
+        |                           |       | Write Log    |        |
+        |                           |       |   \|/        |        |
+        `--o----------------o-------'       `----o---------o--------'
+           |                |                    |         |
+       STDIN_FILENO      STDOUT_FILENO          LOG    STDERR_FILENO
     
 End of README

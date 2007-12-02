@@ -234,15 +234,14 @@ i {color:#000080}
 
        <b>-W no-getconf</b>
               Defaults File Option: <b>swbis_no_getconf</b>
-              Makes  the remote command be '/bin/sh -s' instead of the default
-              'PATH=`getconf PATH` sh -s'.
+              Makes the remote command be '/bin/sh -s' instead of the default
 
        <b>-W shell-command=NAME</b>
               Defaults File Option: <b>swbis_shell_command</b>
-              This is the interactive shell on the target host.  NAME  may  be
-              one  of &quot;bash&quot;, &quot;sh&quot;, &quot;ksh&quot;  or &quot;posix&quot; and specifies the remote
-              command run by the  remote  shell.   &quot;posix&quot;  is  'PATH=`getconf
-              PATH`  sh  -s',  &quot;bash&quot; is &quot;/bin/bash -s&quot;, &quot;sh&quot; is &quot;/bin/sh -s&quot;,
+              This  is  the interactive shell on the target host.  NAME may be
+              one of &quot;bash&quot;, &quot;sh&quot;, &quot;ksh&quot;  or &quot;posix&quot; and specifies the  remote
+              command  run  by  the  remote  shell.  &quot;posix&quot; is 'PATH=`getconf
+              PATH` sh -s', &quot;bash&quot; is &quot;/bin/bash -s&quot;, &quot;sh&quot;  is  &quot;/bin/sh  -s&quot;,
               and &quot;ksh&quot; is &quot;ksh -s&quot;.  The default is &quot;posix&quot;.
 
        <b>-W use-getconf</b>
@@ -250,51 +249,51 @@ i {color:#000080}
 
        <b>-W allow-rpm</b>
               Defaults File Option: <b>swbis_allow_rpm</b>
-              Enable automatic detection, translation  to  Posix  format,  and
+              Enable  automatic  detection,  translation  to Posix format, and
               installation of RPMs.
 
        <b>-W pump-delay1=NANOSECONDS</b>
-              Adds  a  NANOSECONDS  delay  (999999999  nanoseconds ~ 1 second)
-              every ADJSIZE bytes in the file data  byte  pump.   A  delay  of
-              10111000  nanoseconds  (~1/100th  second)  is added for 2-hop or
+              Adds a NANOSECONDS delay  (999999999  nanoseconds  ~  1  second)
+              every  ADJSIZE  bytes  in  the  file data byte pump.  A delay of
+              10111000 nanoseconds (~1/100th second) is  added  for  2-hop  or
               greater target (i.e more than 1 remote host in the target spec).
-              This  is  a  work  around for a bug in OpenSSH [or Linux kernel]
-              that is seen for multi-hop installs where the intermediate  host
-              is  a  Linux  kernel.  If 2-hop install fails, try it again, you
-              may get lucky, or, increase this delay,  or,  use  ssh  protocol
-              version  1  by using ''--ssh-options=1'', or try a 2-hop install
-              where the middle host is BSD.  To disable  delay  for  multi-hop
-              targets  specify  zero.  For more information about this bug see
+              This is a work around for a bug in  OpenSSH  [or  Linux  kernel]
+              that  is seen for multi-hop installs where the intermediate host
+              is a Linux kernel.  If 2-hop install fails, try  it  again,  you
+              may  get  lucky,  or,  increase this delay, or, use ssh protocol
+              version 1 by using ''--ssh-options=1'', or try a  2-hop  install
+              where  the  middle  host is BSD.  To disable delay for multi-hop
+              targets specify zero.  For more information about this  bug  see
               the README file from the source distribution.
 
        <b>-W burst-adjust=ADJSIZE</b>
-              ADJSIZE is the pumped data size, in bytes, between the  NANOSEC-
-              ONDS  delays.  This is a work around for a bug in OpenSSH or the
-              Linux kernel that is  seen  for  multi-hop  installs  where  the
-              intermediate  host  is a Linux kernel.  The default is 72000 for
-              2-hops or  greater,  and  zero  for  single  hop  and  localhost
+              ADJSIZE  is the pumped data size, in bytes, between the NANOSEC-
+              ONDS delays.  This is a work around for a bug in OpenSSH or  the
+              Linux  kernel  that  is  seen  for  multi-hop installs where the
+              intermediate host is a Linux kernel.  The default is  72000  for
+              2-hops  or  greater,  and  zero  for  single  hop  and localhost
               installs.
 
        <b>-W ssh-options=OPTIONS</b>
-              ssh  client  program options.  For example -W ssh-options=1 sets
-              the '-1' ssh client option which specifies protocol version 1.
+              ssh client program options.  For example -W  ssh-options=1  sets
+              the
 
        <b>-W source-script-name=NAME</b>
-              Write the script that is written into the remote  shell's  stdin
+              Write  the  script that is written into the remote shell's stdin
               to NAME.  This is useful for debugging.
 
        <b>-W target-script-name=NAME</b>
-              Write  the  script that is written into the remote shell's stdin
+              Write the script that is written into the remote  shell's  stdin
               to NAME.  This is useful for debugging.
 
        <b>software_selections</b>
 
-              Refers to the software objects (products, filesets) on which  to
-              be  operated. This is not implemented, however, specification of
-              a <b>location</b> and <b>qualifier</b> are supported.  <b>location</b> allow specifi-
-              cation of a alternate relative root path within the target path,
-              and <b>qualifier</b> allows specification of  a  user-selectable  modi-
-              fier.  For example:
+              Refers  to the software objects (products, filesets) on which to
+              be operated. This is not implemented, however, specification  of
+              a   <b>location</b>   and  <b>qualifier</b>  are  supported.   <b>location</b>  allow
+              specification of a alternate relative root path within the  tar-
+              get   path,  and  <b>qualifier</b>  allows  specification  of  a  user-
+              selectable modifier.  For example:
 
               swinstall q=exp @ 192.168.1.1  # Tag the package as experimental
               swinstall l=/unionfs/somepackage-1.0 @ 192.168.1.1  # Allows multiple
@@ -306,11 +305,11 @@ i {color:#000080}
 
        <b>target</b>
 
-              Refers  to the software_collection where the software selections
-              are to be applied.  Allows specification of  host  and  pathname
-              where  the  software collection is to be located.  A target that
-              contains only one part is assumed to be a  hostname.   To  force
-              interpretation  as  a  path, use an absolute path or prefix with
+              Refers to the software_collection where the software  selections
+              are  to  be  applied.  Allows specification of host and pathname
+              where the software collection is to be located.  A  target  that
+              contains  only  one  part is assumed to be a hostname.  To force
+              interpretation as a path, use an absolute path  or  prefix  with
               ':'.  The default target path for 'swinstall' is always '/'.
 
                Source and Target Specification and Logic
@@ -397,13 +396,12 @@ i {color:#000080}
 
 
 </pre><h3><a name="INSTALLED SOFTWARE CATALOG"><b>INSTALLED SOFTWARE CATALOG</b></a></h3><pre>       The form or format of an installed software catalog is not specified by
-       the  ISO/IEC  spec  although  it  does specify an interface to it (e.g.
+       the ISO/IEC spec although it does specify  an  interface  to  it  (e.g.
        swlist utility) and operations on it.
 
-       This implementation  creates  a  de-facto  installed  software  catalog
-       rooted  at  the  file  system  path  specified  by  the  value  of  the
-       'installed_software_catalog' extended option.  The catalog  is  a  file
-       system hierarchy containing regular files and directories.
+       This  implementation  creates  a  de-facto  installed  software catalog
+       rooted at the file system path specified by the value of the and direc-
+       tories.
 
    <a name="CATALOG FILE LAYOUT"><b>CATALOG FILE LAYOUT</b></a>
         &lt;<i>path</i>&gt;/
@@ -687,7 +685,7 @@ i {color:#000080}
        <a href=swcopy_8.html>swcopy(8)</a>, <a href=sw_5.html>sw(5)</a>, <a href=swbisparse_1.html>swbisparse(1)</a>, <a href=swign_1.html>swign(1)</a>, <a href=swverify_8.html>swverify(8)</a>
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        <a href=swinstall_8.html>swinstall(8)</a>: The installation utility of the swbis project.
         Author: Jim Lowe   Email: jhlowe at acm.org
-        Version: 0.721
+        Version: 0.735
         Last Updated: 2006-02-01
         Copying: GNU Free Documentation License
 </pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       swinstall is subject to breakage if a user's account on an intermediate

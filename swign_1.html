@@ -160,15 +160,11 @@ i {color:#000080}
 
 
 
-
-
        Generate the package (and verify it) using a PSF  that  you  supply  on
        standard  input.   Change directory into the directory to package, then
        type
 
           swign -o 0 -g 0 --show-psf | swign -s - -u &quot;gpgName&quot; @- | swverify -d @-
-
-
 
 
 
@@ -179,8 +175,6 @@ i {color:#000080}
                  swverify --checksig .   # Deprecated form
                      -or-
                  swverify -d @.     # Posix syntax
-
-
 
 
 
@@ -335,9 +329,9 @@ i {color:#000080}
 </pre><h3><a name="ENVIRONMENT"><b>ENVIRONMENT</b></a></h3><pre>       <b>SWPACKAGEPASSFD</b>
               Sets the swpackage <i>--passphrase-fd</i> option.  Set the  option  arg
               to  a  integer value of the file descriptor, or to &quot;env&quot; to read
-              the     passphrase     from     the     environment     variable
-              SWPACKAGEPASSPHRASE,  or  to  &quot;agent&quot;  to  cause gpg to use gpg-
-              agent, or &quot;tty&quot; to read from the terminal.
+              the   passphrase   from   the   environment   variable   SWPACK-
+              AGEPASSPHRASE,  or  to &quot;agent&quot; to cause gpg to use gpg-agent, or
+              &quot;tty&quot; to read from the terminal.
 
 
        <a name="SWPACKAGEPASSPHRASE"><b>SWPACKAGEPASSPHRASE</b></a>
@@ -360,8 +354,8 @@ i {color:#000080}
 
        <a href=swpackage_8.html>swpackage(8)</a>, gpg
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        <a href=swign_1.html>swign(1)</a>: The source directory signing utility of the swbis project.
-        Author: J. Lowe <a href=jhlowe@acm.org</a>.html>jhlowe@acm.org</a>
-        Version: 0.721
+        Author: J. Lowe <a href="mailto:jhlowe@acm.org">jhlowe@acm.org</a>
+        Version: 0.735
         Last Updated: 2006-08-03
         Copying: GNU Free Documentation License
 

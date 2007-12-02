@@ -21,13 +21,9 @@ i {color:#000080}
 <li><a href="#BUGS">BUGS</a>
 </ul><pre>
 </pre><h3><a name="NAME"><b>NAME</b></a></h3><pre>       swbisparse -- Read and parse POSIX.7.2 metadata.
-
-
 </pre><h3><a name="SYNOPSIS"><b>SYNOPSIS</b></a></h3><pre>       <b>swbisparse</b> {--installed|-o,--info|-i,--index|-p,--psf} [-b] [-n] [-l <i>level</i>] [<i>file</i>]
 
        <b>swbisparse</b> {-d,--decode} [<i>package</i><b>_</b><i>file</i>]
-
-
 </pre><h3><a name="DESCRIPTION"><b>DESCRIPTION</b></a></h3><pre>       <b>swbisparse</b>  reads  and parses POSIX.7.2 metadata files: INDEX, INFO and
        psf files.
 
@@ -36,10 +32,10 @@ i {color:#000080}
        and, containment level.  Newlines in multi-line values  are  translated
        to '\n' and output on a single line.
 
+
        When  decoding  a package file, <i>package</i><b>_</b><i>file</i>, <b>swbisparse</b> emits a format
        that includes the length (in bytes) of the attribute value.  The format
        consists  of ASCII data.  Binary data in the input will cause an error.
-
 
 
        For Example, the following PSF file:
@@ -79,7 +75,6 @@ i {color:#000080}
        restriction may not exist in the SD-UX grammar because  the  object  is
        bracketed  by  the  nesting of <b>end</b> keywords and not by the existence of
        the first object or extended keyword.
-
 </pre><h3><a name="OPTIONS"><b>OPTIONS</b></a></h3><pre>       <b>--info-o</b>     Parse an INFO file.
 
        <b>--installed</b>     Parse the installed software catalog file INSTALLED.
@@ -91,27 +86,18 @@ i {color:#000080}
        <b>-b</b>     Beautify by indention and emit a file
               semantically identical to the input file.
 
-
        <b>-n</b>     Emit format that is marked up with the
               value's lengths in bytes.
 
-
        <b>-l</b> <i>level</i>     Set initial containment level
               to <i>level</i>.
-
-
-
 </pre><h3><a name="APPLICABLE STANDARDS"><b>APPLICABLE STANDARDS</b></a></h3><pre>       Conforming to POSIX.7.2, however, A stand-alone parser utility by  this
        (or any) name is not specified in ISO/IEC 15068-2:1999
-
 </pre><h3><a name="SEE ALSO"><b>SEE ALSO</b></a></h3><pre>       <a href=sw_5.html>sw(5)</a>
-
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        Author: Jim Lowe
         Version: 0.481
         Last Updated 2006-02-15
         Copying: GNU Free Documentation License v1.1
-
-
 </pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       This program is mainly a testing and development tool.
 
        Requirements  for  inclusion  (exclusion) of certain keywords in (from)

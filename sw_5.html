@@ -73,7 +73,6 @@ i {color:#000080}
 
        Shown below is an example with <a href=one _1.html>one (1)</a> product and <a href=one _1.html>one (1)</a> fileset.
 
-
         &lt;<i>path</i>&gt;/
         &lt;<i>path</i>&gt;/<b>catalog</b>/
         &lt;<i>path</i>&gt;/<b>catalog</b>/<b>INDEX</b>
@@ -113,7 +112,6 @@ i {color:#000080}
        &lt;<i>path</i>&gt;/ is nil and, likewise to 'source' packages where &lt;<i>path</i>&gt; is typi-
        cally the package name and version.  The use of nil control directories
        is not attested to in the posix normative references.
-
 
         &lt;<i>path</i>&gt;/
         &lt;<i>path</i>&gt;/<b>catalog</b>/
@@ -568,8 +566,8 @@ i {color:#000080}
 </pre><h3><a name="DEPENDENCY SPECS"><b>DEPENDENCY SPECS</b></a></h3><pre>       A dependency spec is a <b>software spec</b>.  There are three types: <i>prerequi-</i>
        <i>sites</i>, <i>exrequisites</i>, <i>corequisites</i>.  These attributes apply to the file-
        set and are placed in the fileset object in a PSF  file.   A  <i>prerequi-</i>
-       <i>sites</i>  is  something  that  must  be  installed,  and a <i>exrequisites</i> is
-       something that must not be installed.  A <i>corequisites</i> is something that
+       <i>sites</i>  is something that must be installed, and a <i>exrequisites</i> is some-
+       thing that must not be installed.  A  <i>corequisites</i>  is  something  that
        must  be  installed  with, <i>corequisites</i> are not supported at this time.
        <i>prerequisites</i> map  to  RPMTAG_REQUIRENAME,  RPMTAG_REQUIREVERSION,  and
        RPMTAG_REQUIREFLAGS attributes.
@@ -635,7 +633,6 @@ i {color:#000080}
           directory  <i>source</i>  [<i>destination</i>]
 
 
-
        Applies the <i>source</i> attribute as the directory under  which  the  subse-
        quently listed files are located.  If <i>destination</i> is defined it will be
        used as a prefix to the <i>path</i> (implied) file definition.  <i>source</i> is typ-
@@ -646,13 +643,11 @@ i {color:#000080}
          file *
 
 
-
        Specifies every  file  in  current  source  directory.   The  <i>directory</i>
        extended definition must be used before the recursive specification.
 
    <b>o</b>  <b>Explicit File Definition</b>
          file [-t <i>type</i>] [-m <i>mode</i>] [-o <i>owner</i>[,<i>uid</i>]] [-g <i>group</i>[,<i>gid</i>]] [-n] [-v] source [<i>path</i>]
-
 
 
        <b>source</b>
@@ -705,7 +700,6 @@ i {color:#000080}
          file_permissions [-m <i>mode</i>] [-u <i>umask</i>] [-o [<i>owner</i>[,]][<i>uid</i>]] [-g [<i>group</i>[,]][<i>gid</i>]]
 
 
-
        Applies  to  subsequently  listed file definitions in a fileset.  These
        attributes will apply where the  file  attributes  were  not  specified
        explicitly  in  a file definition.  Subsequent <b>file_permissions</b> defini-
@@ -721,12 +715,10 @@ i {color:#000080}
           exclude source
 
 
-
        Excludes a previously included file or an entire directory.
 
    <b>o</b>  <b>Including Files</b>
           include &lt;<i>filename</i>
-
 
 
        The contents of <i>filename</i> may be more definitions for files.  The syntax
@@ -753,7 +745,6 @@ i {color:#000080}
               &lt;<i>path</i>&gt;/<b>catalog</b>/&lt;<i>dfiles</i>&gt;/<b>sha512sum</b>
 
 
-
    <a name="Adjunct Md5 Digest"><b>Adjunct Md5 Digest</b></a>
        <i>adjunct</i><b>_</b><i>md5sum</i>  is the same as the <i>md5sum</i> excluding symbolic links.  If
        a package does not contain symbolic links the <i>md5sum</i> and <i>adjunct</i><b>_</b><i>md5sum</i>
@@ -763,9 +754,9 @@ i {color:#000080}
 
 
        Explanation:  This attribute is called 'adjunct' because it is a digest
-       of a subset of the files in  the  package.   It  exists  to  facilitate
-       verifying file integrity of the directory form of a package in an envi-
-       ronment where the modification time of symbolic link files are not pre-
+       of a subset of the files in the package.  It exists to facilitate veri-
+       fying  file integrity of the directory form of a package in an environ-
+       ment where the modification time of symbolic link files  are  not  pre-
        served  from the serial archive by the tar utility or operating system.
        The ability to verify even the <i>adjunct</i><b>_</b><i>md5sum</i> from the  directory  form
        of  the  package  is  dependent  on  the tar creating utility and other
@@ -828,11 +819,11 @@ i {color:#000080}
 </pre><h3><a name="SOFTWARE DEFINITION FILES"><b>SOFTWARE DEFINITION FILES</b></a></h3><pre>       The metadata files, INDEX, INFO and PSF, contain information about  the
        software in the form of <i>software definitions</i>.  The INDEX and INFO files
        appear in a package directory structure.  They are automatically gener-
-       ated  by  the  'swpackage'  command.   The  location  in  the directory
-       structure indicates the higher level object to which  their  data  per-
-       tains.   The PSF file does not appear in the package.  It is created by
-       a person or program and it directs the action of the swpackage utility.
-       It is internal data unless released by the distributor.
+       ated  by the 'swpackage' command.  The location in the directory struc-
+       ture indicates the higher level object to which  their  data  pertains.
+       The PSF file does not appear in the package.  It is created by a person
+       or program and it directs the action of the swpackage utility.   It  is
+       internal data unless released by the distributor.
 
        The  files  contain  keywords  (and values) to represent the attributes
        defined in the standard.  There are <a href=three _3.html>three (3)</a> different keyword  types:
@@ -881,7 +872,6 @@ i {color:#000080}
        A  PSF  may  contain  all <i>Software Definitions</i>.  An INDEX file does not
        contain <b>control_file</b>, or <b>file</b> definitions. An INFO file  contains  only
        <b>control_file</b>, and <b>file</b> definitions.
-
 
             software_definition_file : INDEX
                                      | INFO
@@ -1290,7 +1280,6 @@ i {color:#000080}
        directories  so  the  package  structure  does not change relative to a
        vanilla tarball.
 
-
         distribution
           description &quot;fooit - a program from fooware
        that does everything.&quot;
@@ -1328,7 +1317,6 @@ i {color:#000080}
        dle and product have the same tag which may force downstream  users  to
        disambiguate  using  software  selection  syntax  such as fooit,bv=* or
        fooit,pv=* .
-
 
         distribution
           description &quot;fooit - a program from fooware
@@ -1369,7 +1357,7 @@ i {color:#000080}
 
 </pre><h3><a name="APPLICABLE STANDARDS"><b>APPLICABLE STANDARDS</b></a></h3><pre>       IEEE Std 1387.2-1995 (Identical to ISO 15068-2:1999),  Open  Group  CAE
        C701
-</pre><h3><a name="SEE ALSO"><b>SEE ALSO</b></a></h3><pre>        XDSA C701 <a href=http://www.opengroup.org/publications/catalog/c701.htm</a>.html>http://www.opengroup.org/publications/catalog/c701.htm</a>
+</pre><h3><a name="SEE ALSO"><b>SEE ALSO</b></a></h3><pre>        XDSA C701 <a href="http://www.opengroup.org/publications/catalog/c701.htm">http://www.opengroup.org/publications/catalog/c701.htm</a>
         <a href=swbisparse_1.html>swbisparse(1)</a> -- An implementation extension parser utility.
         <a href=swcopy_8.html>swcopy(8)</a>
         <a href=swinstall_8.html>swinstall(8)</a>
@@ -1377,7 +1365,7 @@ i {color:#000080}
         <a href=swpackage_8.html>swpackage(8)</a>
         <a href=swverify_8.html>swverify(8)</a>
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        Copyright (C) 2005 Jim Lowe
-        Version: 0.721
+        Version: 0.735
         Last Updated: 2006-01
         Copying Terms: GNU Free Documentation License
 </pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       None

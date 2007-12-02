@@ -89,7 +89,7 @@ i {color:#000080}
        tions.
 
        For additional information see
-       XDSA C701 <a href=http://www.opengroup.org/publications/catalog/c701.htm</a>, or.html>http://www.opengroup.org/publications/catalog/c701.htm</a>, or
+       XDSA C701 <a href="http://www.opengroup.org/publications/catalog/c701.htm">http://www.opengroup.org/publications/catalog/c701.htm</a>, or
        sw manual page.
 
    <a name="EXTENDED DEFINITIONS"><b>EXTENDED DEFINITIONS</b></a>
@@ -140,16 +140,14 @@ i {color:#000080}
           directory  <i>source</i>  [<i>destination</i>]
 
 
-
-       Applies   the  <i>source</i>  attribute  as  the  directory  under  which  the
-       subsequently listed files are located.  If <i>destination</i>  is  defined  it
-       will be used as a prefix to the <i>path</i> (implied) file definition.  <i>source</i>
-       is typically a temporary or build location and <i>dest</i> is  its  unrealized
-       absolute pathname destination.
+       Applies  the  <i>source</i>  attribute as the directory under which the subse-
+       quently listed files are located.  If <i>destination</i> is defined it will be
+       used as a prefix to the <i>path</i> (implied) file definition.  <i>source</i> is typ-
+       ically a temporary or build location and <i>dest</i> is its  unrealized  abso-
+       lute pathname destination.
 
    <b>o</b>  <b>Recursive File Definition</b>
          file *
-
 
 
        Specifies  every  file  in  current  source  directory.   The <i>directory</i>
@@ -157,7 +155,6 @@ i {color:#000080}
 
    <b>o</b>  <b>Explicit File Definition</b>
          file [-t <i>type</i>] [-m <i>mode</i>] [-o <i>owner</i>[,<i>uid</i>]] [-g <i>group</i>[,<i>gid</i>]] [-n] [-v] source [<i>path</i>]
-
 
 
        <b>source</b>
@@ -210,7 +207,6 @@ i {color:#000080}
          file_permissions [-m <i>mode</i>] [-u <i>umask</i>] [-o [<i>owner</i>[,]][<i>uid</i>]] [-g [<i>group</i>[,]][<i>gid</i>]]
 
 
-
        Applies to subsequently listed file definitions in  a  fileset.   These
        attributes  will  apply  where  the  file attributes were not specified
        explicitly in a file definition.  Subsequent  <b>file_permissions</b>  defini-
@@ -226,12 +222,10 @@ i {color:#000080}
           exclude source
 
 
-
        Excludes a previously included file or an entire directory.
 
    <b>o</b>  <b>Including Files</b>
           include &lt;<i>filename</i>
-
 
 
        The contents of <i>filename</i> may be more definitions for files.  The syntax
@@ -399,7 +393,6 @@ i {color:#000080}
        directories so the package structure does  not  change  relative  to  a
        vanilla tarball.
 
-
         distribution
           description &quot;fooit - a program from fooware
        that does everything.&quot;
@@ -437,7 +430,6 @@ i {color:#000080}
        dle  and  product have the same tag which may force downstream users to
        disambiguate using software selection  syntax  such  as  fooit,bv=*  or
        fooit,pv=* .
-
 
         distribution
           description &quot;fooit - a program from fooware
@@ -478,13 +470,13 @@ i {color:#000080}
 
 </pre><h3><a name="APPLICABLE STANDARDS"><b>APPLICABLE STANDARDS</b></a></h3><pre>       POSIX.1,  IEEE  Std  1387.2-1995  (Identical to ISO 15068-2:1999), Open
        Group CAE C701.
-</pre><h3><a name="SEE ALSO"><b>SEE ALSO</b></a></h3><pre>        XDSA C701 <a href=http://www.opengroup.org/publications/catalog/c701.htm</a>.html>http://www.opengroup.org/publications/catalog/c701.htm</a>
+</pre><h3><a name="SEE ALSO"><b>SEE ALSO</b></a></h3><pre>        XDSA C701 <a href="http://www.opengroup.org/publications/catalog/c701.htm">http://www.opengroup.org/publications/catalog/c701.htm</a>
         info swbis
         <a href=sw_5.html>sw(5)</a>
         <a href=swpackage_8.html>swpackage(8)</a>
         <a href=swbisparse_1.html>swbisparse(1)</a> -- An implementation extension parser utility.
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        Copyright (C) 2004,2005 Jim Lowe
-        Version: 0.721
+        Version: 0.735
         Last Updated: 2006-07-01
         Copying Terms: GNU Free Documentation License
 </pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       None

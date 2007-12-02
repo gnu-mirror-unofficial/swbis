@@ -3,7 +3,7 @@
 <title>Untitled</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="Untitled">
-<meta name="generator" content="makeinfo 4.9">
+<meta name="generator" content="makeinfo 4.7">
 <link title="Top" rel="top" href="#Top">
 <link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
@@ -14,18 +14,99 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
 --></style>
 </head>
 <body>
+\. 
+<!-- TROFF INPUT: .fl			\" force out current output buffer -->
+<!-- .fl			\" force out current output buffer -->
+\\!%PB
+\\!/showpage{}def
+<!-- TROFF INPUT: ...\" the following is from Ken Flowers - it prevents dictionary overflows -->
+<!-- ...\" the following is from Ken Flowers - it prevents dictionary overflows -->
+\\!/tempdict 200 dict def tempdict begin
+<!-- TROFF INPUT: .fl			\" prolog -->
+<!-- .fl			\" prolog -->
+<!-- TROFF INPUT: .sy cat \\$1\" bring in postscript file -->
+<!-- .sy cat \\$1\" bring in postscript file -->
+<!-- TROFF INPUT: ...\" the following line matches the tempdict above -->
+<!-- ...\" the following line matches the tempdict above -->
+\\!end % tempdict %
+\\!PE
+\\!. 
+<!-- TROFF INPUT: .sp \\$2u	\" move below the image -->
+<!-- .sp \\$2u	\" move below the image -->
+<!-- TROFF INPUT: .. -->
+<!-- .. -->
+<!-- TROFF INPUT: .de pF -->
+<!-- .de pF -->
+<!-- TROFF INPUT: .ie     \\*(f1 .ds f1 \\n(.f -->
+<!-- .ie     \\*(f1 .ds f1 \\n(.f -->
+<!-- TROFF INPUT: .el .ie \\*(f2 .ds f2 \\n(.f -->
+<!-- .el .ie \\*(f2 .ds f2 \\n(.f -->
+<!-- TROFF INPUT: .el .ie \\*(f3 .ds f3 \\n(.f -->
+<!-- .el .ie \\*(f3 .ds f3 \\n(.f -->
+<!-- TROFF INPUT: .el .ie \\*(f4 .ds f4 \\n(.f -->
+<!-- .el .ie \\*(f4 .ds f4 \\n(.f -->
+<!-- TROFF INPUT: .el .tm ? font overflow -->
+<!-- .el .tm ? font overflow -->
+<!-- TROFF INPUT: .ft \\$1 -->
+<!-- .ft \\$1 -->
+<!-- TROFF INPUT: .. -->
+<!-- .. -->
+<!-- TROFF INPUT: .de fP -->
+<!-- .de fP -->
+<!-- TROFF INPUT: .ie     !\\*(f4 \{\ -->
+<!-- .ie     !\\*(f4 \@{\ -->
+<!-- TROFF INPUT: .	ft \\*(f4 -->
+<!-- .	ft \\*(f4 -->
+<!-- TROFF INPUT: .	ds f4\" -->
+<!-- .	ds f4\" -->
+'	br \}
+<!-- TROFF INPUT: .el .ie !\\*(f3 \{\ -->
+<!-- .el .ie !\\*(f3 \@{\ -->
+<!-- TROFF INPUT: .	ft \\*(f3 -->
+<!-- .	ft \\*(f3 -->
+<!-- TROFF INPUT: .	ds f3\" -->
+<!-- .	ds f3\" -->
+'	br \}
+<!-- TROFF INPUT: .el .ie !\\*(f2 \{\ -->
+<!-- .el .ie !\\*(f2 \@{\ -->
+<!-- TROFF INPUT: .	ft \\*(f2 -->
+<!-- .	ft \\*(f2 -->
+<!-- TROFF INPUT: .	ds f2\" -->
+<!-- .	ds f2\" -->
+'	br \}
+<!-- TROFF INPUT: .el .ie !\\*(f1 \{\ -->
+<!-- .el .ie !\\*(f1 \@{\ -->
+<!-- TROFF INPUT: .	ft \\*(f1 -->
+<!-- .	ft \\*(f1 -->
+<!-- TROFF INPUT: .	ds f1\" -->
+<!-- .	ds f1\" -->
+'	br \}
+<!-- TROFF INPUT: .el .tm ? font underflow -->
+<!-- .el .tm ? font underflow -->
+<!-- TROFF INPUT: .. -->
+<!-- .. -->
+<!-- TROFF INPUT: .ds f1\" -->
+
+<!-- WARNING: man/man7/swbis.7:49:%%unrecognized define-string command: [.ds f1\"] -->
+<!-- TROFF INPUT: .ds f2\" -->
+<!-- WARNING: man/man7/swbis.7:50:%%unrecognized define-string command: [.ds f2\"] -->
+<!-- TROFF INPUT: .ds f3\" -->
+<!-- WARNING: man/man7/swbis.7:51:%%unrecognized define-string command: [.ds f3\"] -->
+<!-- TROFF INPUT: .ds f4\" -->
+<!-- WARNING: man/man7/swbis.7:52:%%unrecognized define-string command: [.ds f4\"] -->
+<!-- TROFF INPUT: .ta 8n 16n 24n 32n 40n 48n 56n 64n 72n -->
+<!-- .ta 8n 16n 24n 32n 40n 48n 56n 64n 72n -->
+<!-- TROFF INPUT: .TH "SWBIS" "7" -->
 <div class="node">
 <p><hr>
-<a name="Top"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#NAME">NAME</a>,
+<a name="Top"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#NAME">NAME</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#dir">(dir)</a>
-
+<br>
 </div>
 
 <h2 class="chapter">1 SWBIS" "7</h2>
@@ -55,11 +136,10 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#dir">(dir)</a>
 <!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
-<a name="NAME"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#SYNOPSIS">SYNOPSIS</a>,
+<a name="NAME"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#SYNOPSIS">SYNOPSIS</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#Top">Top</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
-
+<br>
 </div>
 
 <h3 class="section">1.1 NAME</h3>
@@ -71,11 +151,10 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
-<a name="SYNOPSIS"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#DESCRIPTION">DESCRIPTION</a>,
+<a name="SYNOPSIS"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#DESCRIPTION">DESCRIPTION</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#NAME">NAME</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
-
+<br>
 </div>
 
 <h3 class="section">1.2 SYNOPSIS</h3>
@@ -94,11 +173,10 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
-<a name="DESCRIPTION"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#OPTIONS">OPTIONS</a>,
+<a name="DESCRIPTION"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#OPTIONS">OPTIONS</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#SYNOPSIS">SYNOPSIS</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
-
+<br>
 </div>
 
 <h3 class="section">1.3 DESCRIPTION</h3>
@@ -120,11 +198,10 @@ tar interchange format, hence, GNU tar is a special tool requirement for swbis.
 
 <div class="node">
 <p><hr>
-<a name="OPTIONS"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#EXAMPLES">EXAMPLES</a>,
+<a name="OPTIONS"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#EXAMPLES">EXAMPLES</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#DESCRIPTION">DESCRIPTION</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
-
+<br>
 </div>
 
 <h3 class="section">1.4 OPTIONS</h3>
@@ -151,10 +228,9 @@ destination.
 <!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
-<a name="Software-Selections"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#Targets">Targets</a>,
+<a name="Software-Selections"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Targets">Targets</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#OPTIONS">OPTIONS</a>
-
+<br>
 </div>
 
 <h4 class="subsection">1.4.1 Software Selections</h4>
@@ -183,30 +259,31 @@ These are specified in a software<tt>_</tt>selection by example thusly:
         somepackage                # all packages named 'somepackage'
         somepackage,r"&gt;"2          # and revision greater than 2
         somepackage,r"&gt;"2,r"&lt;"3    # and revision greater than 2 and less than 3
-        somepackage,r"&gt;"2,v=hal    # and by vendor 'hal'
+        somepackage,r"&gt;"2,v=hal    # and by vendor 'hal'<span class="roman">
      <!-- TROFF INPUT: .fi -->
      
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<p>Logical alternation or 'OR' is supported by using a second software<tt>_</tt>spec on the
-command line. software<tt>_</tt>specs are separated by whitespace. 
+<p>Logical alternation or 'OR' is supported by using a second software</span><tt>_</tt><span class="roman">spec on the
+command line. software</span><tt>_</tt><span class="roman">specs are separated by whitespace. 
 <!-- TROFF INPUT: .SS "Targets" -->
 <!-- MAN2TEXI: EON -->
 
-<div class="node">
+<p></span><div class="node">
 <p><hr>
-<a name="Targets"></a>
-Previous:&nbsp;<a rel="previous" accesskey="p" href="#Software-Selections">Software Selections</a>,
+<a name="Targets"></a>Previous:&nbsp;<a rel="previous" accesskey="p" href="#Software-Selections">Software Selections</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#OPTIONS">OPTIONS</a>
-
+<br>
 </div>
 
 <h4 class="subsection">1.4.2 Targets</h4>
 
 <!-- TROFF INPUT: .PP -->
 <p>Targets are hosts or files on a host.  The syntax follows the familiar
-<b>host:file</b> convention but differs in that an unadorned name is a host
+
+<!-- WARNING: man/man7/swbis.7:117:%%new font B started without closing previous font R -->
+<p><b>host:file</b> convention but differs in that an unadorned name is a host
 not a file. 
 To impose interpretation as a file prefix with a colon ':' or
 use an absolute path (i.e. prefix with '/'). 
@@ -264,7 +341,7 @@ use an absolute path (i.e. prefix with '/').
                            extension and means extract in current
                            directory.
      
-                     NOTE: A '&minus;' indicating stdout/stdin is an
+                     NOTE: A '-' indicating stdout/stdin is an
                            implementation extension.
      
                      NOTE: A ':' in the first character indicates a filename.
@@ -274,7 +351,7 @@ use an absolute path (i.e. prefix with '/').
      
          Examples:
             Copy the  distribution /var/tmp/foo.tar.gz at 192.168.1.10
-                   swcopy &minus;s /var/tmp/foo.tar.gz @192.168.1.10:/root
+                   swcopy -s /var/tmp/foo.tar.gz @192.168.1.10:/root
      
      
      Implementation Extension Syntax (multi ssh-hop) :
@@ -295,7 +372,7 @@ use an absolute path (i.e. prefix with '/').
          user     : PORTABLE<tt>_</tt>CHARACTER<tt>_</tt>STRING  # The user name
      
          DELIM    : ':'   # The multi-hop delimiter.
-                  ;
+                  ;  <span class="roman">
      <!-- TROFF INPUT: .fi -->
      
 </pre>
@@ -303,13 +380,12 @@ use an absolute path (i.e. prefix with '/').
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .SH "EXAMPLES" -->
 <!-- MAN2TEXI: EON -->
-<div class="node">
+<p></span><div class="node">
 <p><hr>
-<a name="EXAMPLES"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#COMMANDS-OVERVIEW">COMMANDS OVERVIEW</a>,
+<a name="EXAMPLES"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#COMMANDS-OVERVIEW">COMMANDS OVERVIEW</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#OPTIONS">OPTIONS</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
-
+<br>
 </div>
 
 <h3 class="section">1.5 EXAMPLES</h3>
@@ -320,7 +396,10 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">        swcopy &minus;s :somepackage-1.0.tar.gz &minus;&minus;extract @ host1 host2
+<pre class="display">     
+     <!-- WARNING: man/man7/swbis.7:213:%%new font R started without closing previous font R -->
+     
+        swcopy -s :somepackage-1.0.tar.gz &ndash;extract @ host1 host2
      <!-- TROFF INPUT: .fi -->
      
 </pre>
@@ -333,7 +412,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- TROFF INPUT: .nf -->
 <!--  -->
 <pre class="display">        swlist somepackage,"r&gt;2" @ host1:/ host2:/
-        swlist "kde*" @ 192.168.2.2
+        swlist "kde*" @ 192.168.2.2<span class="roman">
      <!-- TROFF INPUT: .fi -->
      
 </pre>
@@ -345,7 +424,10 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">        swlist &minus;x verbose=3 &minus;a architecture @ localhost 192.168.2.2 host1 host2
+<pre class="display">     
+     <!-- WARNING: man/man7/swbis.7:228:%%new font R started without closing previous font R -->
+     
+        swlist -x verbose=3 -a architecture @ localhost 192.168.2.2 host1 host2</span>
      <!-- TROFF INPUT: .fi -->
      
 </pre>
@@ -358,7 +440,7 @@ and a "exp" qualification:
 
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">         swinstall q=exp,l=/unionfs/foo-1.0 @ 192.168.2.2
+<pre class="display">         swinstall q=exp,l=/unionfs/foo-1.0 @ 192.168.2.2<span class="roman">
      <!-- TROFF INPUT: .fi -->
      
 </pre>
@@ -370,7 +452,10 @@ and a "exp" qualification:
 
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">         swremove somepackage @ 192.168.2.2:/
+<pre class="display">     
+     <!-- WARNING: man/man7/swbis.7:244:%%new font R started without closing previous font R -->
+     
+         swremove somepackage @ 192.168.2.2:/</span>
      <!-- TROFF INPUT: .fi -->
      
 </pre>
@@ -382,7 +467,7 @@ and a "exp" qualification:
 
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">         swpackage &minus;s myPSF @&minus; | tar tvf &minus;
+<pre class="display">         swpackage -s myPSF @- | tar tvf -<span class="roman">
      <!-- TROFF INPUT: .fi -->
      
 </pre>
@@ -391,13 +476,12 @@ and a "exp" qualification:
 <!-- TROFF INPUT: .SH "COMMANDS OVERVIEW" -->
 <!-- DEBUG: print_menu("EXAMPLES") -->
 <!-- MAN2TEXI: EON -->
-<div class="node">
+<p></span><div class="node">
 <p><hr>
-<a name="COMMANDS-OVERVIEW"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#RUNTIME-CONFIGURATION">RUNTIME CONFIGURATION</a>,
+<a name="COMMANDS-OVERVIEW"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#RUNTIME-CONFIGURATION">RUNTIME CONFIGURATION</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#EXAMPLES">EXAMPLES</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
-
+<br>
 </div>
 
 <h3 class="section">1.6 COMMANDS OVERVIEW</h3>
@@ -413,10 +497,9 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
-<a name="POSIX-Commands"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#Swbis-Specific-Commands">Swbis Specific Commands</a>,
+<a name="POSIX-Commands"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Swbis-Specific-Commands">Swbis Specific Commands</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#COMMANDS-OVERVIEW">COMMANDS OVERVIEW</a>
-
+<br>
 </div>
 
 <h4 class="subsection">1.6.1 POSIX Commands</h4>
@@ -425,6 +508,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#COMMANDS-OVERVIEW">COMMANDS OVERVIEW</
 <p>Utilities specified by C701 and ISO/IEC 15068-2:1999 include the following:
 <!-- TROFF INPUT: .IP "   \(bu" 6 -->
 
+<!-- WARNING: man/man7/swbis.7:260:%%new font B started without closing previous font R -->
 <p><b>swpackage</b>(8)
 <!-- TROFF INPUT: .IP "" 10 -->
 
@@ -464,10 +548,9 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#COMMANDS-OVERVIEW">COMMANDS OVERVIEW</
 
 <div class="node">
 <p><hr>
-<a name="Swbis-Specific-Commands"></a>
-Previous:&nbsp;<a rel="previous" accesskey="p" href="#POSIX-Commands">POSIX Commands</a>,
+<a name="Swbis-Specific-Commands"></a>Previous:&nbsp;<a rel="previous" accesskey="p" href="#POSIX-Commands">POSIX Commands</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#COMMANDS-OVERVIEW">COMMANDS OVERVIEW</a>
-
+<br>
 </div>
 
 <h4 class="subsection">1.6.2 Swbis Specific Commands</h4>
@@ -510,11 +593,10 @@ optionally write the entire directory, including the signed catalog as a tar arc
 
 <div class="node">
 <p><hr>
-<a name="RUNTIME-CONFIGURATION"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#HOST-REQUIREMENTS">HOST REQUIREMENTS</a>,
+<a name="RUNTIME-CONFIGURATION"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#HOST-REQUIREMENTS">HOST REQUIREMENTS</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#COMMANDS-OVERVIEW">COMMANDS OVERVIEW</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
-
+<br>
 </div>
 
 <h3 class="section">1.7 RUNTIME CONFIGURATION</h3>
@@ -529,9 +611,8 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
-<a name="Configuration-Files"></a>
-Up:&nbsp;<a rel="up" accesskey="u" href="#RUNTIME-CONFIGURATION">RUNTIME CONFIGURATION</a>
-
+<a name="Configuration-Files"></a>Up:&nbsp;<a rel="up" accesskey="u" href="#RUNTIME-CONFIGURATION">RUNTIME CONFIGURATION</a>
+<br>
 </div>
 
 <h4 class="subsection">1.7.1 Configuration Files</h4>
@@ -546,16 +627,17 @@ remote target host. Below are commands that give information about them.
 
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">         swcopy &minus;&minus;show-options-files
-         swcopy &minus;&minus;show-options
-         swcopy &minus;&minus;no-defaults &minus;&minus;show-options
+<pre class="display">         swcopy &ndash;show-options-files
+         swcopy &ndash;show-options
+         swcopy &ndash;no-defaults &ndash;show-options<span class="roman">
      <!-- TROFF INPUT: .fi -->
      
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .PP -->
-<p>Below is a subset of the <b>swbisdefaults</b> file showing
+<!-- WARNING: man/man7/swbis.7:323:%%new font B started without closing previous font R -->
+<p>Below is a subset of the </span><b>swbisdefaults</b> file showing
 important options and their builtin defaults. (as of version 0.540 c.FEB 2007)
 <!-- TROFF INPUT: .PP -->
 
@@ -575,13 +657,18 @@ important options and their builtin defaults. (as of version 0.540 c.FEB 2007)
      <!-- TROFF INPUT: .nf -->
      
      <!--  -->
-     <pre class="display">          <!-- TROFF INPUT: .fi -->
+     <pre class="display">          <span class="roman">
+          <!-- TROFF INPUT: .fi -->
           
      </pre>
      
      <!--  -->
      <!-- TROFF INPUT: .PP -->
      
+
+     <!-- WARNING: man/man7/swbis.7:341:%%new font R started without closing previous font R -->
+     
+     <p></span>
      <!-- TROFF INPUT: .fi -->
      
 </pre>
@@ -622,9 +709,9 @@ self-contained and does not use any file system tar-like utility.  <b>swign</b> 
 <p>Extended Option: <b>swbis</b><tt>_</tt><b>shell</b><tt>_</tt><b>command</b>
 <!-- TROFF INPUT: .IP "" 10 -->
 
-<p>This is the command <b>bash &minus;s</b>, or <b>ksh &minus;s</b>, etc. which
+<p>This is the command <b>bash -s</b>, or <b>ksh -s</b>, etc. which
 is run on the remote host.  If the value is <b>posix</b> then the command is
-<b>PATH=getconf PATH sh &minus;s</b> hence the need to interpret back quotes and
+<b>PATH=getconf PATH sh -s</b> hence the need to interpret back quotes and
 the need for <b>getconf</b>.  The <b>/bin/sh</b> on most systems,
 except GNU systems will not work with swbis.  The best solution, of course, is to put
 <b>bash</b> on all your hosts and disable use of <b>getconf</b>. 
@@ -638,7 +725,7 @@ the option to <b>ksh</b>, which for example, NetBSD does have.
 
 <p>The login shell may be any shell, however, if a host will ever be a intermediate
 host in a multi-hop target, then it should be a POSIX shell.  This requirement is
-due to the escapement of <b>PATH=`getconf PATH` sh &minus;s</b> which assumes
+due to the escapement of <b>PATH=`getconf PATH` sh -s</b> which assumes
 processing by a intermediate host. 
 <!-- TROFF INPUT: .IP "   \(bu" 6 -->
 
@@ -652,11 +739,10 @@ authentication agent.
 
 <div class="node">
 <p><hr>
-<a name="HOST-REQUIREMENTS"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#DISCUSSION">DISCUSSION</a>,
+<a name="HOST-REQUIREMENTS"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#DISCUSSION">DISCUSSION</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#RUNTIME-CONFIGURATION">RUNTIME CONFIGURATION</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
-
+<br>
 </div>
 
 <h3 class="section">1.8 HOST REQUIREMENTS</h3>
@@ -690,11 +776,10 @@ required.
 
 <div class="node">
 <p><hr>
-<a name="DISCUSSION"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#COPYING">COPYING</a>,
+<a name="DISCUSSION"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#COPYING">COPYING</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#HOST-REQUIREMENTS">HOST REQUIREMENTS</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
-
+<br>
 </div>
 
 <h3 class="section">1.9 DISCUSSION</h3>
@@ -714,10 +799,9 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
-<a name="Background"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#Distributed-Software-Administration">Distributed Software Administration</a>,
+<a name="Background"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Distributed-Software-Administration">Distributed Software Administration</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#DISCUSSION">DISCUSSION</a>
-
+<br>
 </div>
 
 <h4 class="subsection">1.9.1 Background</h4>
@@ -750,11 +834,10 @@ translate and install RPM format packages.
 
 <div class="node">
 <p><hr>
-<a name="Distributed-Software-Administration"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#A-Directory-Content-Checker">A Directory Content Checker</a>,
+<a name="Distributed-Software-Administration"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#A-Directory-Content-Checker">A Directory Content Checker</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#Background">Background</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#DISCUSSION">DISCUSSION</a>
-
+<br>
 </div>
 
 <h4 class="subsection">1.9.2 Distributed Software Administration</h4>
@@ -765,20 +848,19 @@ specify any implementation approach to the problem of remote command invocation.
 The approach taken by swbis is to require nothing that is not already present
 on all POSIX systems. To that end, swbis uses rsh (or ssh) for remote connections and
 uses bash (A POSIX shell) for command processing specifically using
-the 'bash &minus;s' invocation for all operations.  Using bash in this manner casts
+the 'bash -s' invocation for all operations.  Using bash in this manner casts
 all swbis utilties as programs that dynamically write and deliver shell program code
-to the remote 'bash &minus;s' through its standard input, which can be a secure ssh channel. 
+to the remote 'bash -s' through its standard input, which can be a secure ssh channel. 
 This eliminates the requirement that swbis be installed on the remote target host. 
 <!-- TROFF INPUT: .SS "A Directory Content Checker" -->
 <!-- MAN2TEXI: EON -->
 
 <div class="node">
 <p><hr>
-<a name="A-Directory-Content-Checker"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#Package-Security">Package Security</a>,
+<a name="A-Directory-Content-Checker"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Package-Security">Package Security</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#Distributed-Software-Administration">Distributed Software Administration</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#DISCUSSION">DISCUSSION</a>
-
+<br>
 </div>
 
 <h4 class="subsection">1.9.3 A Directory Content Checker</h4>
@@ -795,17 +877,18 @@ GNU tar's output bit-for-bit. For example:
 
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">        swign  &minus;D /usr/local/bin/checkdigest.sh  &minus;o "" &minus;g ""  &minus;u  "Test User" @.
-        swverify &minus;&minus;order-catalog &minus;d @.
-               # If your file system is Ext2, then &minus;&minus;order-catalog
-               # is not required.
+<pre class="display">        swign  -D /usr/local/bin/checkdigest.sh  -o "" -g ""  -u  "Test User" @.
+        swverify &ndash;order-catalog -d @.
+               # If your file system is Ext2, then &ndash;order-catalog
+               # is not required.<span class="roman">
      <!-- TROFF INPUT: .fi -->
      
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .PP -->
-<p>The  <b>checkdigest.sh</b> is a distributor specific shell
+<!-- WARNING: man/man7/swbis.7:464:%%new font B started without closing previous font R -->
+<p>The  </span><b>checkdigest.sh</b> is a distributor specific shell
 script that is run by swverify if it is present and part of the signed  stream. 
 <b>checkdigest.sh</b> then checks the archive MD5 and SHA1. 
 If this fails, it checks the individual files'  MD5 and SHA1 digests. 
@@ -825,23 +908,23 @@ The catalog directory is updated using the <b>swign</b> command.
           SWPACKAGEPASSFD=agent
           export GNUPGNAME
           GNUPGNAME="Your Name"
-          swign &minus;&minus;name-version=somepackage-1.1 &minus;s PSF.in &minus;&minus;no-remove @.
+          swign &ndash;name-version=somepackage-1.1 -s PSF.in &ndash;no-remove @.<span class="roman">
      <!-- TROFF INPUT: .fi -->
      
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<p>See the <b>swign</b> manual page for an example <b>PSF.in</b> file. 
+<!-- WARNING: man/man7/swbis.7:484:%%new font B started without closing previous font R -->
+<p>See the </span><b>swign</b> manual page for an example <b>PSF.in</b> file. 
 <!-- TROFF INPUT: .SS "Package Security" -->
 <!-- MAN2TEXI: EON -->
 
 <div class="node">
 <p><hr>
-<a name="Package-Security"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#Extensibility">Extensibility</a>,
+<a name="Package-Security"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Extensibility">Extensibility</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#A-Directory-Content-Checker">A Directory Content Checker</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#DISCUSSION">DISCUSSION</a>
-
+<br>
 </div>
 
 <h4 class="subsection">1.9.4 Package Security</h4>
@@ -859,11 +942,10 @@ catalog.
 
 <div class="node">
 <p><hr>
-<a name="Extensibility"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#Support-for-Unprivileged-Users">Support for Unprivileged Users</a>,
+<a name="Extensibility"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Support-for-Unprivileged-Users">Support for Unprivileged Users</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#Package-Security">Package Security</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#DISCUSSION">DISCUSSION</a>
-
+<br>
 </div>
 
 <h4 class="subsection">1.9.5 Extensibility</h4>
@@ -882,10 +964,9 @@ specified in later POSIX revisions.
 
 <div class="node">
 <p><hr>
-<a name="Support-for-Unprivileged-Users"></a>
-Previous:&nbsp;<a rel="previous" accesskey="p" href="#Extensibility">Extensibility</a>,
+<a name="Support-for-Unprivileged-Users"></a>Previous:&nbsp;<a rel="previous" accesskey="p" href="#Extensibility">Extensibility</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#DISCUSSION">DISCUSSION</a>
-
+<br>
 </div>
 
 <h4 class="subsection">1.9.6 Support for Unprivileged Users</h4>
@@ -903,11 +984,10 @@ via the catalog directory sticky bit per local administrative policy.
 
 <div class="node">
 <p><hr>
-<a name="COPYING"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#PRONUNCIATION">PRONUNCIATION</a>,
+<a name="COPYING"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#PRONUNCIATION">PRONUNCIATION</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#DISCUSSION">DISCUSSION</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
-
+<br>
 </div>
 
 <h3 class="section">1.10 COPYING</h3>
@@ -921,11 +1001,10 @@ Non-copyright holders may use and make copies under the terms of the GNU GPL
 
 <div class="node">
 <p><hr>
-<a name="PRONUNCIATION"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#APPLICABLE-STANDARDS">APPLICABLE STANDARDS</a>,
+<a name="PRONUNCIATION"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#APPLICABLE-STANDARDS">APPLICABLE STANDARDS</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#COPYING">COPYING</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
-
+<br>
 </div>
 
 <h3 class="section">1.11 PRONUNCIATION</h3>
@@ -940,8 +1019,8 @@ Italian suffix 'bis' meaning again, or one more time.
 <!-- TROFF INPUT: .nf -->
 <!--  -->
 <pre class="display">         Pronunciation: /es dub-u bis/
-                       sw &minus; bis
-          POSIX packaging &minus; Play it again, One more time
+                       sw - bis
+          POSIX packaging - Play it again, One more time<span class="roman">
      <!-- TROFF INPUT: .fi -->
      
 </pre>
@@ -950,13 +1029,12 @@ Italian suffix 'bis' meaning again, or one more time.
 <!-- TROFF INPUT: .SH "APPLICABLE STANDARDS" -->
 <!-- DEBUG: print_menu("PRONUNCIATION") -->
 <!-- MAN2TEXI: EON -->
-<div class="node">
+<p></span><div class="node">
 <p><hr>
-<a name="APPLICABLE-STANDARDS"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#SEE-ALSO">SEE ALSO</a>,
+<a name="APPLICABLE-STANDARDS"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#SEE-ALSO">SEE ALSO</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#PRONUNCIATION">PRONUNCIATION</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
-
+<br>
 </div>
 
 <h3 class="section">1.12 APPLICABLE STANDARDS</h3>
@@ -977,11 +1055,10 @@ http://www.opengroup.org/publications/catalog/c701.htm
 
 <div class="node">
 <p><hr>
-<a name="SEE-ALSO"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#FILES">FILES</a>,
+<a name="SEE-ALSO"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#FILES">FILES</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#APPLICABLE-STANDARDS">APPLICABLE STANDARDS</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
-
+<br>
 </div>
 
 <h3 class="section">1.13 SEE ALSO</h3>
@@ -1013,13 +1090,18 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
      <!-- TROFF INPUT: .nf -->
      
      <!--  -->
-     <pre class="display">          <!-- TROFF INPUT: .fi -->
+     <pre class="display">          
+          <!-- WARNING: man/man7/swbis.7:555:%%new font R started without closing previous font R -->
+          
+          
+          <!-- TROFF INPUT: .fi -->
           
      </pre>
      
      <!--  -->
      <!-- TROFF INPUT: .PP -->
      
+     <p><span class="roman">
      <!-- TROFF INPUT: .fi -->
      
 </pre>
@@ -1028,18 +1110,18 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- TROFF INPUT: .SH "FILES" -->
 <!-- DEBUG: print_menu("SEE ALSO") -->
 <!-- MAN2TEXI: EON -->
-<div class="node">
+<p></span><div class="node">
 <p><hr>
-<a name="FILES"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#IDENTIFICATION">IDENTIFICATION</a>,
+<a name="FILES"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#IDENTIFICATION">IDENTIFICATION</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#SEE-ALSO">SEE ALSO</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
-
+<br>
 </div>
 
 <h3 class="section">1.14 FILES</h3>
 
 <!-- TROFF INPUT: .PP -->
+<!-- WARNING: man/man7/swbis.7:563:%%new font B started without closing previous font R -->
 <p><b>catalog</b>/  # The meta-data directory
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
@@ -1053,11 +1135,10 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <div class="node">
 <p><hr>
-<a name="IDENTIFICATION"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#BUGS">BUGS</a>,
+<a name="IDENTIFICATION"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#BUGS">BUGS</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#FILES">FILES</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
-
+<br>
 </div>
 
 <h3 class="section">1.15 IDENTIFICATION</h3>
@@ -1073,17 +1154,17 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <div class="node">
 <p><hr>
-<a name="BUGS"></a>
-Previous:&nbsp;<a rel="previous" accesskey="p" href="#IDENTIFICATION">IDENTIFICATION</a>,
+<a name="BUGS"></a>Previous:&nbsp;<a rel="previous" accesskey="p" href="#IDENTIFICATION">IDENTIFICATION</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
-
+<br>
 </div>
 
 <h3 class="section">1.16 BUGS</h3>
 
 <!-- TROFF INPUT: .PP -->
 <p>Not everything is implemented yet. 
-<!-- created by instant / docbook-to-man, Sun 02 Dec 2007, 14:58 -->
+<!-- TROFF INPUT: ...\" created by instant / docbook-to-man, Sun 02 Dec 2007, 15:27 -->
+<!-- ...\" created by instant / docbook-to-man, Sun 02 Dec 2007, 15:27 -->
 
 </body></html>
 

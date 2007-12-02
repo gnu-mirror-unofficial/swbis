@@ -160,11 +160,15 @@ i {color:#000080}
 
 
 
+
+
        Generate the package (and verify it) using a PSF  that  you  supply  on
        standard  input.   Change directory into the directory to package, then
        type
 
           swign -o 0 -g 0 --show-psf | swign -s - -u &quot;gpgName&quot; @- | swverify -d @-
+
+
 
 
 
@@ -175,6 +179,8 @@ i {color:#000080}
                  swverify --checksig .   # Deprecated form
                      -or-
                  swverify -d @.     # Posix syntax
+
+
 
 
 
@@ -329,9 +335,9 @@ i {color:#000080}
 </pre><h3><a name="ENVIRONMENT"><b>ENVIRONMENT</b></a></h3><pre>       <b>SWPACKAGEPASSFD</b>
               Sets the swpackage <i>--passphrase-fd</i> option.  Set the  option  arg
               to  a  integer value of the file descriptor, or to &quot;env&quot; to read
-              the   passphrase   from   the   environment   variable   SWPACK-
-              AGEPASSPHRASE,  or  to &quot;agent&quot; to cause gpg to use gpg-agent, or
-              &quot;tty&quot; to read from the terminal.
+              the     passphrase     from     the     environment     variable
+              SWPACKAGEPASSPHRASE,  or  to  &quot;agent&quot;  to  cause gpg to use gpg-
+              agent, or &quot;tty&quot; to read from the terminal.
 
 
        <a name="SWPACKAGEPASSPHRASE"><b>SWPACKAGEPASSPHRASE</b></a>

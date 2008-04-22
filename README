@@ -1,7 +1,6 @@
-
     swbis - Distributed Software Administration
     --------------------------------------------
-              Version 0.732
+              Version 0.950
 
     swbis is a GNU package
     The official home page is http://www.gnu.org/software/swbis
@@ -14,8 +13,8 @@
     The entry in the FSF/UNESCO Free Software Directory is
     http://directory.fsf.org/GNU/swbis.html
 
-    Introduction
-    ------------
+Introduction
+------------
    'swbis' aims to implement the POSIX packaging standard with useful
     extensions.  Working utilities include swpackage, swverify, swcopy,
     swlist, and swinstall.  Package security is provided by embedded
@@ -86,8 +85,7 @@
        swverify -  Authenticates a signed package.
     
              * Authenticates packages signed by swpackage.
-             * Verifies installed software (partially implemented).
-             * Authenticates the GPG signature in the installed software.
+             * Verifies installed software using the GPG signed meta-data.
 
        swinstall  -  Install a posix package.  (alpha as of 2004-02-15)
        					       (beta as of 2007-09-01)
@@ -109,7 +107,7 @@
              * Supports listing product entries in the installed catalog.
              * Supports asserting dependency specs against the installed catalog.
        
-       swremove  -  Remove installed software (alpha as of 2007-09-01)
+       swremove  -  Remove installed software
  
     * Non-ISO/Posix (Ad Hoc) Utilities:
 
@@ -125,8 +123,8 @@
                      and digested byte streams.
     
 
-    How to make some tarballs For the really impatient
-    --------------------------------------------------
+How to make some tarballs For the really impatient
+--------------------------------------------------
 
     Here's an example of making a binary package using
     the recipe file ./PSF.bin.in.  This shows how to use swign
@@ -172,31 +170,95 @@
 		@- |
 	GNUPGHOME=var/gnupg swverify -d @-
 
-    Documentation
-    -------------
+Documentation
+-------------
     Info Document: type
           info swbis
               -or-
           info -f ./doc/info/swbis.info
 
     Manual pages:  sw(5), swcopy(8), swpackage(5), swpackage(8)
-    swverify(8), swign(1)
+    swverify(8), swign(1) 
           For example:
 	    nroff -man <doc/man/man8/swpackage.8 | less -r
 
-    Known BUGS
-    ----------
-    The message (from swsupplib/shell_lib/shell_lib.sh)
-	sw<name>: Warning: XX NUL blocks at start of input for task <taskid>
-    may rarely appear indicating something bad tried to happen in the
-    internal plumbing of the executing shell script.  The message
-    appears once per invocation but intermittently among many
-    invocations, and more so for remote installs and almost never
-    for local installs.  The data integrity is not affected by this.
-    Severe breakages (which never happen) will be detected, and false
-    success or execution of arbitrary data is not possible.
-    A cause has not yet been determined.
+KNOWN BUGS
+----------
+    SWINSTALL with a Linux kernel and OpenSSH sshd (Extremely Rare)
+    -------------------------------------------------------------- 
 
+    It seems that swinstall with certain packages when accessing
+    a Linux kernel host via OpenSSH sshd (using ssh protocol v2) will fail.
+    When the failure occurs the swinstall will give a message like:
+
+    swinstall: Warning: 30 NUL blocks at start of input for task Catalog directory removal
+    tar: Unexpected EOF in archive
+    tar: Error is not recoverable: exiting now
+    swinstall: SWI_TASK_ENDS on target host low20.lowland.com: load fileset: status=2
+    swinstall: SW_SOC_LOCK_REMOVED on target host low20.lowland.com: status=0
+    swinstall: SW_SESSION_ENDS on target host low20.lowland.com: status=1
+    swinstall: error loading fileset
+    swinstall: SWBIS_TARGET_ENDS for @localhost:/tmp/aabbxx: status=1
+
+    A subsequent (immediate) retry may succeed, in fact the failure
+    may be reproducable only 1 time out of 20 or 30 attempts but only for
+    that particular package.  Another package may never exibit the bug.  It
+    seems dependent on CPU and network speed, and I/O pattern, and CPU load.
+    The probablility of failure increases if a multi-hop ssh target is used
+    such as   swinstall [...] @ localhost:localhost:localhost:/tmp/xxtest
+    which chains together three sshd servers.
+
+        Work-Arounds
+        ------------
+        Try one of the following:
+        1)  Run the exact command again, it will probably work.
+        2) --burst-adjust=8000 --pump-delay=100000 # add a 100000 nanosec
+                                                   # delay every 8000 bytes
+        Investigators may try:
+        3) --ssh-options=1                # Use ssh protocol version 1
+        4) --remote-shell=rsh             # Use rsh
+           
+    It has *never* been seen on a BSD kernel, nor for local installs [that
+    do not use ssh], nor when using rsh instead of ssh.  It can be exibited
+    with a single host using localhost and and a ssh OpenSSH
+    server 4.x - 5.x versions.
+
+    This bug was first noticed in 2004 on a 2.4.x kernel, OpenSSH v3.9 may
+    mask the occurance.
+
+      [Update --- April 2008]
+      -----------------------
+      An investigation was launched into OpenSSH v4.7p1 and v5.0p1 using
+      2.6.9-34.ELsmp (WhiteBox RHEL3, respin4).  The client was excluded
+      as a cause.  The server's byte pumping machinery was instrumented
+      and observed during the actual failure.  Every indication was
+      the data was properly arriving at the terminal write() [at the
+      unix pipe out of the server] but not arriving properly at the
+      program.  It was observed that a time delay in the client
+      (data producer) via a usleep(), or in the program (data consumer) by
+      fronting the reader with 'dd ibs=2', or in the loop in serverloop.c
+      via a usleep() would mask the bug.
+
+      The write() nbyte parameter at terminal write in channels.c was
+      observered in real-time, it ranged in size from ~1k to 100k but could
+      not be correlated to the failure.  The legal limit for a write to a
+      pipe was researched, *there is no such limit*.  Nevertheless, a simple
+      patch to sshd was constructed to limit (i.e normalize) the size of this
+      write to PIPE_BUF (along the lines of atomicio()). The results were
+      positive, the failure disappeared while maintaining the full speed
+      throughput.
+
+      Conclusion:  The ability to fix this via a normalizing write() at
+      this point in sshd implicates something other than OpenSSH.
+      It occurs on 2.4.x thru 2.6.25 Linux kernels. It never occurs on
+      a BSD kernel running the same version of openssh, bash, dd, tar, etc.
+      It never appears when using rsh either.  All of this points to a bug in
+      the Linux kernel, or Intel CPUs (AMDs have not been tested), probably a
+      rare interaction with the varying and/or large writes to a pipe that
+      occur in ssh protocol version 2 in OpenSSH.
+
+    AWK
+    ---
     The awk code in swsupplib/shell_lib/shell_lib.sh trips a bug in
     /usr/xpg4/bin/awk on Solaris hosts (OpenSolaris build 54) when using
     relops (applied to revision numbers) in selections. Replacement
@@ -209,106 +271,108 @@
     but replacing awk properly lists the catalog entry:
         as10k1                  r=1.0.8         v=1mdk
 
+    All distributed SW<utilities>
+    -----------------------------   
     If you hit ctrl-c during a remote install, stranded shell processes
-    and its sshd parent might be left running on the target host. (This
-    may be due to openSSH not transmitting signals to the remote program
-    or a design flaw in swbis).
+    and its sshd parent might be left running on the target host.
+    To clean this up, do:
+         swremove --cleansh @ USER@HOST    # i.e. Same USER and HOST
 
-    During multi-hop installs, during the file loading phase, tar (or pax)
-    will just quit as if data input just stopped.  This may be related to
-    the intermediate hosts.  It is rare to extremely rare, it may be data 
-    dependent (timing issues) and is definitely network-path dependent, and
-    not reproducable.  The error is detected by swinstall, false success
-    has never been observed.
+    SSH Oddities and Observations
+    -----------------------------
+    Problems were observed when running swinstall on a SunOS host
+    (SunOS sparc-solaris1 5.9) using the Sun ssh client (Sun_SSH_1.0)
+    The problem only affected installs to remote hosts and seemed to
+    go away if an OpenSSH ssh client was used instead of Sun's.
 
-    How to install
-    --------------
+How to install
+--------------
     See the file INSTALL.
  
-    Features of the POSIX Standard
-    ------------------------------
+Features of the POSIX Standard
+------------------------------
     
-        - Uses existing data formats: tar and cpio.
+    - Uses existing data formats: tar and cpio.
     
-        - Package metadata is contained in ascii text files.
+    - Package metadata is contained in ascii text files.
     
-        - The package generation spec file supports explicit
-          overriding of file attributes, the ability to specify a
-          different source filename from the name appearing in the
-          package, and the ability to specify all files in a directory,
-          among others.
+    - The package generation spec file supports explicit
+      overriding of file attributes, the ability to specify a
+      different source filename from the name appearing in the
+      package, and the ability to specify all files in a directory,
+      among others.
    
-        - Supports multiple products in a single distribution file.
+    - Supports multiple products in a single distribution file.
     
-        - Supports selection of products based on based on architecture
-          and system identification attributes.
+    - Supports selection of products based on based on architecture
+      and system identification attributes.
     
-        - Allows run-time packages to have control directories and 
-          a leading package directory.  This can be useful for ISVs who
-          wish to support manual installation by unpacking with tar
-          and execution of a custom setup script.
+    - Allows run-time packages to have control directories and 
+      a leading package directory.  This can be useful for ISVs who
+      wish to support manual installation by unpacking with tar
+      and execution of a custom setup script.
   
-        - Supports a rich set of control scripts.
+    - Supports a rich set of control scripts.
  
-        - Explicitly allows for additional vendor attributes
-          and additional vendor specific control files.
+    - Explicitly allows for additional vendor attributes
+      and additional vendor specific control files.
 
-        - Specifies an interface for copying and installing to
-          remote hosts.
+    - Specifies an interface for copying and installing to
+      remote hosts.
     
-    Features of the swbis implementation
-    ------------------------------------
+Features of the swbis implementation
+------------------------------------
             
-        (All of these are implemented unless stated otherwise.)
+    (All of these are implemented unless stated otherwise.)
     
-        - Non-root users are able to invoke root installs on
-          remote hosts via ssh authentication.
+    - Non-root users are able to invoke root installs on
+      remote hosts via ssh authentication.
     
-        - Network transparent copying and installation.
-          (To swbis, local and remote installs are the same.)
+    - Network transparent copying and installation.
+      (To swbis, local and remote installs are the same.)
     
-        - No new target requirements.  Relies on a POSIX shell and
-          a minimal set of POSIX utilities. (swbis is not required
-          on the target remote host.)
+    - No new target requirements.  Relies on a POSIX shell and
+      a minimal set of POSIX utilities. (swbis is not required
+      on the target remote host.)
     
-        - Supports multiple host-to-host hops to a target host.
+    - Supports multiple host-to-host hops to a target host.
             
-        - Network connection is made by direct use of ssh or rsh.
+    - Network connection is made by direct use of ssh or rsh.
     
-        - 'swpackage' writes an archive to STDOUT, and makes no temporary
-          copy of the package.
+    - 'swpackage' writes an archive to STDOUT, and makes no temporary
+      copy of the package.
     
-        - 'swpackage' supports nil ("") control directories which
-          allows a traditional source tar archive to be cast as a POSIX
-          package with no change to existing file layout, and allows a
-          run-time package to have a form that is directly installable
-          using tar [similar to slackware packages].
+    - 'swpackage' supports nil ("") control directories which
+      allows a traditional source tar archive to be cast as a POSIX
+      package with no change to existing file layout, and allows a
+      run-time package to have a form that is directly installable
+      using tar [similar to slackware packages].
 
-        - Supports a md5sum, sha1sum and sha512sum  attributes for
-	  storage files and the package payload.
+    - Supports a md5sum, sha1sum and sha512sum  attributes for
+      storage files and the package payload.
     
-        - Supports cryptographic authentication (Package signing) by
-          use of Vendor Defined attributes consisting of a control file 
-          containing a signature of the catalog section.
+    - Supports cryptographic authentication (Package signing) by
+      use of Vendor Defined attributes consisting of a control file 
+      containing a signature of the catalog section.
     
-        - Multiple signatures are supported as separate control files in
-	  the archive (all with the same name) to accommodate the concept of
-          upstream and downstream signers.
+    - Multiple signatures are supported as separate control files in
+      the archive (all with the same name) to accommodate the concept of
+      upstream and downstream signers.
     
-        - All package signatures are transferred (by swinstall) into
-          the installed software catalog where they can be verified
-          directly by 'gpg' alone.  That is, the signature is valid
-          throughout the package life-cycle, and can be verified by
-          'gpg' at every point in the life-cycle.
+    - All package signatures are transferred (by swinstall) into
+      the installed software catalog where they can be verified
+      directly by 'gpg' alone.  That is, the signature is valid
+      throughout the package life-cycle, and can be verified by
+      'gpg' at every point in the life-cycle.
 
-        - swpackage mimics GNU tar formats bit-for-bit which forms a
-          basis for internal testing; and, allows verification of the GPG
-          signature and archive md5 digest (of the unpacked signed package)
-          using GNU tar and gpg [under some circumstances and with
-          constraints].
+    - swpackage mimics GNU tar formats bit-for-bit which forms a
+      basis for internal testing; and, allows verification of the GPG
+      signature and archive md5 digest (of the unpacked signed package)
+      using GNU tar and gpg [under some circumstances and with
+      constraints].
     
-    Development Language
-    --------------------
+Development Language
+--------------------
         swbis is written in ANSI C and C++.
         Some utilities are portable Posix shell and utilities.
         The swpackage utility is the only C++ program, all other
@@ -362,11 +426,11 @@ Internal Design of the sw<utilities> (except swpackage)
         |      (sshd)     |           
         `---------o-------'     TARGET HOST
                   |            -------------
-                  |    
+                  |                NETWORK 
       ,-----------o----------.
       |   Public Network     |  1 or more "ssh hops"
       `-----------o----------'
-                  |    
+                  |                NETWORK 
                   |            -----------------
         ,---------o-------.     MANAGEMENT HOST
         |       (ssh)     |           

@@ -82,6 +82,22 @@ Some of the programs supplied with this package are:
 <H4><A HREF="#TOCnews" NAME="news">News</A></H4>
 
 <dl>
+<dt>18 April 2008: <b>Swbis 0.951 Released!</b></dt>
+<dd>
+<p> <b>Version 0.951 is feature complete for upcoming 1.0 release</b>
+<p>
+Changes in this release include:
+<ul>
+<li>Support for translating dpkg and slackware binary packages.
+<li>Support translating plain source tarballs to an equivalent package
+    with meta-data and embedded signature.
+<li>Support for verifying installed software.
+<li>New distributed utilities <em>swlist</em> and <em>swremove</em>.
+<li>Support for sha512 digests.
+</dd>
+</dl>
+
+<dl>
 <dt>15 September 2007: <b>swlist and swremove now available</b></dt>
 <dd>
 <p> The latest version of Swbis available via anonymous CVS now includes new distributed utilties
@@ -135,10 +151,13 @@ There is only one package to download that contains all source and documentation
 <P>
 <H4><A HREF="#TOCdocumentation" NAME="documentation">Documentation</A></H4>
 <P>
-A system overview is provided in Section 7 manual page <A HREF="/software/swbis/swbis_7.html">here</A>.
-
+A short overview is here in <A HREF="/software/swbis/swbis_7.html">swbis</A>(7).<br>
+A short user manual is here in <A HREF="/software/swbis/swbis_1.html">swbis</A>(1).
 <P>
-The info manual is available online <A HREF="/software/swbis/manual.html">here</A><br>
+There is a fairly complete info manual, try
+<pre> info swbis  # after installing </pre>
+<pre> info -p doc/info/swbis.info  # from within the source package </pre>
+The manual is available online <A HREF="/software/swbis/manual.html">here</A><br>
 In addition, there is a 
 <A HREF="/software/swbis/sourcesign-1.2/gendocs/manual/index.html">tutorial</A>
 for using Swbis to create signed distribution tarballs and signed CVS releases.
@@ -177,7 +196,7 @@ permitted in any medium, provided this notice is preserved.
 
 <P>
 Updated:
-$Id: index.html,v 1.17 2007/09/29 18:06:28 jhlowe Exp $
+$Id: index.html,v 1.18 2008/04/22 01:37:53 jhlowe Exp $
 <HR>
 </BODY>
 </HTML>

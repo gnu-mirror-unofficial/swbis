@@ -15,7 +15,8 @@ i {color:#000080}
 <li><a href="#DESCRIPTION">DESCRIPTION</a>
 <li><a href="#OPTIONS">OPTIONS</a>
 <li><a href="#USAGE EXAMPLES">USAGE EXAMPLES</a>
-<ul><li><a href="#Show the options"><font size=-1>Show the options</font></a>
+<ul><li><a href="#Remove everything at 192.168.1.2 from the home directory of user"><font size=-1>Remove everything at 192.168.1.2 from the home directory of user</font></a>
+<li><a href="#Show the options"><font size=-1>Show the options</font></a>
 </ul><li><a href="#EXTENDED OPTIONS">EXTENDED OPTIONS</a>
 <ul><li><a href="#POSIX"><font size=-1>POSIX</font></a>
 <li><a href="#Swbis Implementation"><font size=-1>Swbis Implementation</font></a>
@@ -33,21 +34,23 @@ i {color:#000080}
        [-x <i>option=value</i>]  [-X <i>options</i><b>_</b><i>file</i>]  [-W <i>option</i>] \
        [software_selections]  [@targets]
 
-</pre><h3><a name="DESCRIPTION"><b>DESCRIPTION</b></a></h3><pre>       <b>swremove</b>  removes  installed software.  <b>swremove</b> is a distributed util-
-       ity.  Neither swremove nor any component of swbis is  required  on  the
-       target  host,  however, the target host must look like a Unix system at
-       the shell and command-line utility level.  Remote  network  connections
-       are  made by ssh.  Ssh is the default but rsh can be selected by a com-
-       mand line option.
+       <b>swremove</b> --cleansh [options] [@targets]
 
-       <b>swremove</b> operates on installed software identified by a <i>software selec-</i>
-       <i>tion</i> and <i>target</i>.
+</pre><h3><a name="DESCRIPTION"><b>DESCRIPTION</b></a></h3><pre>       <b>swremove</b> removes installed software.  <b>swremove</b> is a distributed
+       utility.  Neither swremove nor any component of swbis is required on
+       the target host, however, the target host must look like a Unix system
+       at the shell and command-line utility level.  Remote network
+       connections are made by ssh.  Ssh is the default but rsh can be
+       selected by a command line option.
+
+       <b>swremove</b> operates on installed software identified by a <i>software</i>
+       <i>selection</i> and <i>target</i>.
 </pre><h3><a name="OPTIONS"><b>OPTIONS</b></a></h3><pre>       <b>-d</b>
 
               Specify the target is a distribution.
 
-                     <b>Note:</b>   <b>This is currently not supported by this implemen-</b>
-                     <b>tation.</b>
+                     <b>Note:</b>  <b>This is currently not supported by this</b>
+                     <b>implementation.</b>
 
 
        <b>-f FILE</b>
@@ -57,14 +60,14 @@ i {color:#000080}
 
        <b>-p</b>
 
-              Preview mode, establish contact with target host, however,  mod-
-              ify nothing.
+              Preview mode, establish contact with target host, however,
+              modify nothing.
 
 
        <b>-r</b>
 
-              Indicates that the operation is on installed software at a loca-
-              tion indicated by the the target.
+              Indicates that the operation is on installed software at a
+              location indicated by the the target.
 
                      <b>Note:</b>  <b>This is the default mode among -d and -r</b>
 
@@ -81,13 +84,13 @@ i {color:#000080}
 
        <b>-x option=value</b>
 
-              Specify the extended option overriding the defaults file  value.
+              Specify the extended option overriding the defaults file value.
 
 
        <b>-X FILE</b>
 
-              Specify  the  extended  options  filename, FILE,  overriding the
-              default filenames.  This option may be given more then once.  If
+              Specify the extended options filename, FILE,  overriding the
+              default filenames.  This option may be given more then once. If
               the resulting specified value is an empty string then reading of
               any options file is disabled.
 
@@ -99,22 +102,29 @@ i {color:#000080}
 
               Specify the implementation extension option.
               Syntax: -W option[=option_argument[,option...]
-              Options may be separated by a comma.  The implementation  exten-
-              sion  options  may also be given individually using the '--long-
-              option[=option_arg]' syntax.
+              Options may be separated by a comma.  The implementation
+              extension options may also be given individually using the
+              '--long-option[=option_arg]' syntax.
 
 
        <b>--allow-ambig</b>
 
-              Allows swremove to act on all matching  entries.   Without  this
+              Allows swremove to act on all matching entries.  Without this
               option a software selection that matches more than one installed
               software entry is an error.
 
 
        <b>--sig-level=N</b>
 
-              Specify number of required GPG signatures, N equal  to  0  means
+              Specify number of required GPG signatures, N equal to 0 means
               don't require the catalog to be signed.
+
+
+       <b>--cleansh</b>
+
+              Kill stray or zombied processes that match the pattern ``sh
+              -s.*_swbis''.  These may be caused by a distributed utility
+              segfaulting or a signal handling defect in the swbis utility.
 
 
        <b>-W remote-shell=SHELL</b>
@@ -130,7 +140,7 @@ i {color:#000080}
               line options.
 
        <b>-W pax-command={tar|pax|star|gtar}</b>
-              Set the  portable  archive  command  for  all  operations.   The
+              Set the portable archive command for all operations.  The
               default is &quot;pax&quot;.
 
        <b>-W pax-read-command={tar|pax|star|gtar}</b>
@@ -139,17 +149,17 @@ i {color:#000080}
        <b>-W remote-pax-read-command={tar|pax|star|gtar}</b>
               Defaults File Option: <b>swbis_remote_pax_read_command</b>
               Set the read command for remote hosts.  This is the command that
-              runs on the target (e.g. pax -r, tar xpf  -).   The  default  is
+              runs on the target (e.g. pax -r, tar xpf -).  The default is
               &quot;pax&quot;.
 
        <b>-W local-pax-read-command={tar|pax|star|gtar}</b>
               Defaults File Option: <b>swbis_local_pax_read_command</b>
-              Set  the read command for local hosts.  This is the command that
-              runs on the target (e.g. pax -r, tar xpf  -).   The  default  is
+              Set the read command for local hosts.  This is the command that
+              runs on the target (e.g. pax -r, tar xpf -).  The default is
               &quot;pax&quot;.
 
        <b>-W pax-write-command={tar|pax|star|gtar|swbistar}</b>
-              Set  the  write command for local and remote hosts.  This is the
+              Set the write command for local and remote hosts.  This is the
               command that runs on the target (e.g. pax -w, tar cf -).
 
        <b>-W remote-pax-write-command={tar|pax|star|gtar|swbistar}</b>
@@ -158,56 +168,55 @@ i {color:#000080}
 
        <b>-W local-pax-write-command={tar|pax|star|gtar|swbistar}</b>
               Defaults File Option: <b>swbis_local_pax_write_command</b>
-              Set the portable archive write command  for  local  host  opera-
-              tions.   This  is  the command that runs on the source (e.g. pax
-              -w, tar cf -).  The default is &quot;pax&quot;.
+              Set the portable archive write command for local host
+              operations.  This is the command that runs on the source (e.g.
+              pax -w, tar cf -).  The default is &quot;pax&quot;.
 
        <b>-W remote-pax-write-command={tar|pax|star|gtar|swbistar}</b>
               Defaults File Option: <b>swbis_remote_pax_write_command</b>
-              Set the portable archive write command for  remote  host  opera-
-              tions.   This  is  the command that runs on the source (e.g. pax
-              -w, tar cf -).  The default is &quot;pax&quot;.
+              Set the portable archive write command for remote host
+              operations.  This is the command that runs on the source (e.g.
+              pax -w, tar cf -).  The default is &quot;pax&quot;.
 
        <b>-W no-defaults</b>
               Do not read any defaults files.
 
        <b>-W no-getconf</b>
               Defaults File Option: <b>swbis_no_getconf</b>
-              Makes the remote command be '/bin/sh -s' instead of the  default
-              'PATH=`getconf PATH` sh -s'.
+              Makes the remote command be '/bin/sh -s' instead of the default
 
        <b>-W shell-command=NAME</b>
               Defaults File Option: <b>swbis_shell_command</b>
-              NAME  may  be  one  of &quot;bash&quot;, &quot;sh&quot; or &quot;posix&quot; and specifies the
-              remote command run by the remote shell.  &quot;posix&quot; is  'PATH=`get-
-              conf  PATH`  sh  -s', &quot;bash&quot; is &quot;/bin/bash -s&quot;, &quot;sh&quot; is &quot;/bin/sh
-              -s&quot;, and &quot;ksh&quot; is &quot;ksh -s&quot;.  The default is &quot;posix&quot;.
+              NAME may be one of &quot;bash&quot;, &quot;sh&quot; or &quot;posix&quot; and specifies the
+              remote command run by the remote shell.  &quot;posix&quot; is
+              'PATH=`getconf PATH` sh -s', &quot;bash&quot; is &quot;/bin/bash -s&quot;, &quot;sh&quot; is
+              &quot;/bin/sh -s&quot;, and &quot;ksh&quot; is &quot;ksh -s&quot;.  The default is &quot;posix&quot;.
 
        <b>-W use-getconf</b>
               Opposite of --no-getconf.
 
 
        <b>-W source-script-name=NAME</b>
-              Write the script that is written into the remote  shell's  stdin
+              Write the script that is written into the remote shell's stdin
               to NAME.  This is useful for debugging.
 
        <b>-W target-script-name=NAME</b>
-              Write  the  script that is written into the remote shell's stdin
+              Write the script that is written into the remote shell's stdin
               to NAME.  This is useful for debugging.
 
        <b>software_selections</b>
 
-              Refer to the software objects (products, filesets)  using  soft-
-              ware spec syntax. (See <a href=sw_5.html>sw(5)</a> for syntax).
+              Refer to the software objects (products, filesets) using
+              software spec syntax. (See <a href=sw_5.html>sw(5)</a> for syntax).
 
 
        <b>target</b>
 
-              Refers  to the software_collection where the software selections
-              are to be applied.  Allows specification of  host  and  pathname
-              where  the  software  collection is located.  A target that con-
-              tains only one part is assumed  to  be  a  hostname.   To  force
-              interpretation  as  a  path,  use a absolute path or prefix with
+              Refers to the software_collection where the software selections
+              are to be applied.  Allows specification of host and pathname
+              where the software collection is located.  A target that
+              contains only one part is assumed to be a hostname.  To force
+              interpretation as a path, use a absolute path or prefix with
               ':'.
 
 
@@ -222,21 +231,25 @@ i {color:#000080}
 
                  Swbis Extension:
                       [user@]host[:path]
+                      [user@]host_port[:path]
                       :path
 
                  Swbis Multi-hop Target Extension:
-                      # ':' or '@@' is the target delimiter
-                      # Using '@@' (deprecated)
-                      host@@host[@@hostN...]
+                      # ':' is the target delimiter
+                   # '_' delimits a port number in the host field
+
                       [user@]host[@@[user@]host[@@...]][:file]
+                      [user@]host_port[@@[user@]host[@@...]][:file]
 
                       # Using ':', a trailing colon is used to
-                      # disambiguate.  For Example,
+                      # disambiguate between a host and file.
+                   # For Example,
                       :file
                       host:
                       host
                       host:file
                       host:host:
+                      host_port:host_port:
                       host:host:file
                       user@host:user@host:
                       user@host:user@host:host:
@@ -305,8 +318,8 @@ i {color:#000080}
 
 
 
-   <b>Remove everything at 192.168.1.2 from the home</b>  <b>directory</b>  <b>of</b>  <b>user</b>  <b>'jail-</b>
-       <b>bird'.</b>
+   <a name="Remove everything at 192.168.1.2 from the home directory of user"><b>Remove everything at 192.168.1.2 from the home directory of user</b></a>
+       <b>'jailbird'.</b>
          swremove --allow-ambig \* @ jailbird@192.168.1.2:.
 
 
@@ -322,14 +335,14 @@ i {color:#000080}
          swremove --show-options
 
 
-</pre><h3><a name="EXTENDED OPTIONS"><b>EXTENDED OPTIONS</b></a></h3><pre>       Extended  options  can  be  specified  on the command line using the -x
+</pre><h3><a name="EXTENDED OPTIONS"><b>EXTENDED OPTIONS</b></a></h3><pre>       Extended options can be specified on the command line using the -x
        option or from the defaults file, swdefaults.  Shown below is an actual
        portion of a defaults file which show default values.
 
    <a name="POSIX"><b>POSIX</b></a>
-       These  options are set in the /usr/lib/swbis/swdefaults or the ~/.swde-
-       faults on the local (management host, host where swremove is  invoked).
-       These files on the target host are not used.
+       These options are set in the /usr/lib/swbis/swdefaults or the
+       ~/.swdefaults on the local (management host, host where swremove is
+       invoked).  These files on the target host are not used.
 
 
          autoselect_dependencies       = false
@@ -344,7 +357,7 @@ i {color:#000080}
 
 
    <a name="Swbis Implementation"><b>Swbis Implementation</b></a>
-       These  options  are  set  in  the  /usr/lib/swbis/swbisdefaults  or the
+       These options are set in the /usr/lib/swbis/swbisdefaults or the
        ~/.swbis/swbisdefaults file.
 
 
@@ -362,7 +375,7 @@ i {color:#000080}
          swremove.swbis_sig_level=0
          swremove.swbis_enforce_all_signatures=false
 
-</pre><h3><a name="RETURN VALUE"><b>RETURN VALUE</b></a></h3><pre>       0 if all targets succeeded, 1 if all targets failed or internal  error,
+</pre><h3><a name="RETURN VALUE"><b>RETURN VALUE</b></a></h3><pre>       0 if all targets succeeded, 1 if all targets failed or internal error,
        2 if some targets failed and some succeeded.
 </pre><h3><a name="NOTES"><b>NOTES</b></a></h3><pre>        Multiple ssh-hops is an implementation extension.
 </pre><h3><a name="REQUISITE UTILITIES"><b>REQUISITE UTILITIES</b></a></h3><pre>       swremove uses rm and rmdir for file and directory removal.
@@ -381,13 +394,13 @@ i {color:#000080}
        <a href=swbis_7.html>swbis(7)</a>, <a href=sw_5.html>sw(5)</a>, <a href=swlist_8.html>swlist(8)</a>
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        <a href=swremove_8.html>swremove(8)</a>: The package removal utility of the swbis project.
         Author: Jim Lowe   Email: jhlowe at acm.org
-        Version: 0.735
-        Last Updated: Sep 2007
+        Version: 0.950
+        Last Updated: 2008-04-18
         Copying: GNU Free Documentation License
-</pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       swremove is subject to breakage if a user's account on an  intermediate
-       (or  terminal)  host in a target spec is not configured to use a Bourne
-       compatible shell. (This breakage may be eliminated by use of the  --no-
-       getconf  option as explained above.) swremove does not support rollback
+</pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       swremove is subject to breakage if a user's account on an intermediate
+       (or terminal) host in a target spec is not configured to use a Bourne
+       compatible shell. (This breakage may be eliminated by use of the --no-
+       getconf option as explained above.) swremove does not support rollback
        if an error occurs during processing.
 
 

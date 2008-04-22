@@ -36,26 +36,26 @@ i {color:#000080}
        [-x <i>option=value</i>] [-X <i>options</i><b>_</b><i>file</i>] [-W <i>option</i>] \
        [software_selections] [@target [target1...]]
 
-</pre><h3><a name="DESCRIPTION"><b>DESCRIPTION</b></a></h3><pre>       <b>swcopy</b>  copies  a POSIX distribution from a source archive or directory
-       to a target archive directory.  Neither swcopy  nor  any  component  of
-       swbis  is  required  on  the target host, however, the target host must
-       look like a Unix system at the shell and  command-line  utility  level.
+</pre><h3><a name="DESCRIPTION"><b>DESCRIPTION</b></a></h3><pre>       <b>swcopy</b> copies a POSIX distribution from a source archive or directory
+       to a target archive directory.  Neither swcopy nor any component of
+       swbis is required on the target host, however, the target host must
+       look like a Unix system at the shell and command-line utility level.
        Remote network connections are made by ssh.  Ssh is the default but rsh
        can be selected by a command line option.
 
-       Before and during data transfer to  the  target,  the  distribution  is
-       audited.   Package  auditing  includes parsing the INDEX and INFO meta-
-       data files.  The package pathnames are checked for consistency  with  a
-       valid  layout.   <b>swcopy</b>  can  be  made  to operate on arbitrary data or
-       archives not in POSIX  format  by  using  the  --no-audit  option.   By
-       default  and  with no external influences (i.e. swdefaults file) swcopy
-       will read a archive on stdin and write an audited  archive  on  stdout.
-       The  uncompressed  audited  output file will be identical to the uncom-
-       pressed input file unless an error occurs.   Compressed  archives  that
-       are  audited  will  be  re-compressed  in the same format, however, the
-       resulting file may not be identical to the input file (i.e. date, file-
-       name,  and  other  stored data in the compressed format will be differ-
-       ent).
+       Before and during data transfer to the target, the distribution is
+       audited.  Package auditing includes parsing the INDEX and INFO meta-
+       data files.  The package pathnames are checked for consistency with a
+       valid layout.  <b>swcopy</b> can be made to operate on arbitrary data or
+       archives not in POSIX format by using the --no-audit option.  By
+       default and with no external influences (i.e. swdefaults file) swcopy
+       will read a archive on stdin and write an audited archive on stdout.
+       The uncompressed audited output file will be identical to the
+       uncompressed input file unless an error occurs.  Compressed archives
+       that are audited will be re-compressed in the same format, however, the
+       resulting file may not be identical to the input file (i.e. date,
+       filename, and other stored data in the compressed format will be
+       different).
 
        <b>swcopy</b> operates on serial archives (e.g. compressed tar archives) or on
        file system directories.  It will attempt to preserve the form (archive
@@ -67,15 +67,15 @@ i {color:#000080}
 
        <b>-p</b>
 
-              Preview  the  operation.  Information is written to stdout.  The
+              Preview the operation. Information is written to stdout.  The
               target is not written and no remote connections are established.
 
 
        <b>-s SOURCE</b>
 
-              Specify the source file SOURCE, &quot;-&quot; is standard input.  The syn-
-              tax is the same as for a target.  SOURCE may be a  directory  or
-              archive file.
+              Specify the source file SOURCE, &quot;-&quot; is standard input.  The
+              syntax is the same as for a target.  SOURCE may be a directory
+              or archive file.
 
        <b>-t targetfile</b>
 
@@ -83,12 +83,12 @@ i {color:#000080}
 
        <b>-x option=value</b>
 
-              Specify  the extended option overriding the defaults file value.
+              Specify the extended option overriding the defaults file value.
 
        <b>-X FILE</b>
 
-              Specify the extended options  filename,  FILE,   overriding  the
-              default  filenames.  This option may be given more then once. If
+              Specify the extended options filename, FILE,  overriding the
+              default filenames.  This option may be given more then once. If
               the resulting specified value is an empty string then reading of
               any options file is disabled.
 
@@ -106,7 +106,7 @@ i {color:#000080}
               -vvvv level 5: level 4 plus events.
               -vvvvv level 6: level 5 plus set shell -vx option.
               -vvvvvv level 7 and higher: level 6 plus debugging messages.
-               The  progress meter is suppressed if swcopy is using stdout for
+               The progress meter is suppressed if swcopy is using stdout for
               data.
 
        <b>-b SIZE</b>
@@ -126,20 +126,20 @@ i {color:#000080}
 
               Specify the implementation extension option.
               Syntax: -W option[=option_argument[,option...]
-              Options  may be separated by a comma.  The implementation exten-
-              sion options may also be given individually using  the  '--long-
-              option[=option_arg]' syntax.
+              Options may be separated by a comma.  The implementation
+              extension options may also be given individually using the
+              '--long-option[=option_arg]' syntax.
 
        <b>-W no-audit</b>
 
               Defaults File Option: <b>swbis_no_audit</b>
-              Do not audit the transferred file.  This allows copying of arbi-
-              trary data.
+              Do not audit the transferred file.  This allows copying of
+              arbitrary data.
 
        <b>-W audit</b>
 
-              Do audit the transferred file.  Useful for  overriding  swbisde-
-              faults file.
+              Do audit the transferred file.  Useful for overriding
+              swbisdefaults file.
 
        <b>-W block-size=SIZE</b>
 
@@ -147,7 +147,7 @@ i {color:#000080}
 
        <b>-W login</b>
 
-              Establishes  a  interactive  shell  on the (remote) target host.
+              Establishes a interactive shell on the (remote) target host.
               Intended for debugging/verifying ssh operation.
 
        <b>-W gzip</b>
@@ -160,20 +160,20 @@ i {color:#000080}
 
        <b>-W extract</b>
 
-              Install the source using the archive reading utility at the tar-
-              get.
+              Install the source using the archive reading utility at the
+              target.
 
        <b>-W pty</b>
 
-              Do  use  pseudo-tty.   The  system  Ptys  are  only used for the
+              Do use pseudo-tty.  The system Ptys are only used for the
               --login feature.  A warning is emitted to stderr which says that
               the usage may be insecure.
 
        <b>-W no-pty</b>
 
               Do not use pseudo-tty.  The system Ptys are only used by default
-              for the --login feature, otherwise they are not  used  and  this
-              option  would  have  no  effect.   If ptys are used a warning is
+              for the --login feature, otherwise they are not used and this
+              option would have no effect.  If ptys are used a warning is
               emitted to stderr which says that the usage may be insecure.
 
        <b>-W uncompress</b>
@@ -188,7 +188,7 @@ i {color:#000080}
        <b>-W quiet-progress</b>
 
               Defaults File Option: <b>swbis_quiet_progress_bar</b>
-              Disable progress bar, which is active for verbose levels  2  and
+              Disable progress bar, which is active for verbose levels 2 and
               higher (i.e. -v).
 
        <b>-W show-progress</b>
@@ -203,7 +203,7 @@ i {color:#000080}
               line options.
 
        <b>-W pax-command={tar|pax|star|gtar}</b>
-              Set the  portable  archive  command  for  all  operations.   The
+              Set the portable archive command for all operations.  The
               default is &quot;pax&quot;.
 
        <b>-W pax-read-command={tar|pax|star|gtar}</b>
@@ -212,17 +212,17 @@ i {color:#000080}
        <b>-W remote-pax-read-command={tar|pax|star|gtar}</b>
               Defaults File Option: <b>swbis_remote_pax_read_command</b>
               Set the read command for remote hosts.  This is the command that
-              runs on the target (e.g. pax -r, tar xpf  -).   The  default  is
+              runs on the target (e.g. pax -r, tar xpf -).  The default is
               &quot;pax&quot;.
 
        <b>-W local-pax-read-command={tar|pax|star|gtar}</b>
               Defaults File Option: <b>swbis_local_pax_read_command</b>
-              Set  the read command for local hosts.  This is the command that
-              runs on the target (e.g. pax -r, tar xpf  -).   The  default  is
+              Set the read command for local hosts.  This is the command that
+              runs on the target (e.g. pax -r, tar xpf -).  The default is
               &quot;pax&quot;.
 
        <b>-W pax-write-command={tar|pax|star|gtar|swbistar}</b>
-              Set  the  write command for local and remote hosts.  This is the
+              Set the write command for local and remote hosts.  This is the
               command that runs on the target (e.g. pax -w, tar cf -).
 
        <b>-W remote-pax-write-command={tar|pax|star|gtar|swbistar}</b>
@@ -231,38 +231,37 @@ i {color:#000080}
 
        <b>-W local-pax-write-command={tar|pax|star|gtar|swbistar}</b>
               Defaults File Option: <b>swbis_local_pax_write_command</b>
-              Set the portable archive write command  for  local  host  opera-
-              tions.   This  is  the command that runs on the source (e.g. pax
-              -w, tar cf -).  The default is &quot;pax&quot;.
+              Set the portable archive write command for local host
+              operations.  This is the command that runs on the source (e.g.
+              pax -w, tar cf -).  The default is &quot;pax&quot;.
 
        <b>-W remote-pax-write-command={tar|pax|star|gtar|swbistar}</b>
               Defaults File Option: <b>swbis_remote_pax_write_command</b>
-              Set the portable archive write command for  remote  host  opera-
-              tions.   This  is  the command that runs on the source (e.g. pax
-              -w, tar cf -).  The default is &quot;pax&quot;.
+              Set the portable archive write command for remote host
+              operations.  This is the command that runs on the source (e.g.
+              pax -w, tar cf -).  The default is &quot;pax&quot;.
 
        <b>-W no-defaults</b>
               Do not read any defaults files.
 
        <b>-W no-remote-kill</b>
               Defaults File Option: <b>swbis_no_remote_kill</b>
-              Disables the use of a second remote connection to tear down  the
-              first  in  the  event of SIGINT or SIGTERM or SIGPIPE.  Only has
-              effect if the number of ssh hops is greater than  1.   A  single
-              host  remote connection (ssh hop = 1) never uses a second remote
+              Disables the use of a second remote connection to tear down the
+              first in the event of SIGINT or SIGTERM or SIGPIPE.  Only has
+              effect if the number of ssh hops is greater than 1.  A single
+              host remote connection (ssh hop = 1) never uses a second remote
               connection.
 
        <b>-W no-getconf</b>
               Defaults File Option: <b>swbis_no_getconf</b>
-              Makes the remote command be '/bin/sh -s' instead of the  default
-              'PATH=`getconf PATH` sh -s'.
+              Makes the remote command be '/bin/sh -s' instead of the default
 
        <b>-W shell-command=NAME</b>
               Defaults File Option: <b>swbis_shell_command</b>
-              NAME  may  be  one  of &quot;bash&quot;, &quot;sh&quot; or &quot;posix&quot; and specifies the
-              remote command run by the remote shell.  &quot;posix&quot; is  'PATH=`get-
-              conf  PATH`  sh  -s', &quot;bash&quot; is &quot;/bin/bash -s&quot;, &quot;sh&quot; is &quot;/bin/sh
-              -s&quot;, and &quot;ksh&quot; is &quot;ksh -s&quot;.  The default is &quot;posix&quot;.
+              NAME may be one of &quot;bash&quot;, &quot;sh&quot; or &quot;posix&quot; and specifies the
+              remote command run by the remote shell.  &quot;posix&quot; is
+              'PATH=`getconf PATH` sh -s', &quot;bash&quot; is &quot;/bin/bash -s&quot;, &quot;sh&quot; is
+              &quot;/bin/sh -s&quot;, and &quot;ksh&quot; is &quot;ksh -s&quot;.  The default is &quot;posix&quot;.
 
        <b>-W use-getconf</b>
               Opposite of --no-getconf.
@@ -276,28 +275,28 @@ i {color:#000080}
               Turns on options --allow-rpm and --audit.
 
        <b>-W source-script-name=NAME</b>
-              Write  the  script that is written into the remote shell's stdin
+              Write the script that is written into the remote shell's stdin
               to NAME.  This is useful for debugging.
 
        <b>-W target-script-name=NAME</b>
-              Write the script that is written into the remote  shell's  stdin
+              Write the script that is written into the remote shell's stdin
               to NAME.  This is useful for debugging.
 
        <b>software_selections</b>
 
-              Refer  to  the software objects (products, filesets) on which to
-              be operated.  (Not  implemented).   The  implementation  defined
-              behavior for no selections is to operate on the entire distribu-
-              tion.
+              Refer to the software objects (products, filesets) on which to
+              be operated. (Not implemented).  The implementation defined
+              behavior for no selections is to operate on the entire
+              distribution.
 
 
        <b>target</b>
 
-              Refers to the software_collection where the software  selections
-              are  to  be  applied.  Allows specification of host and pathname
-              where the software collection is located.  A  target  that  con-
-              tains  only  one  part  is  assumed  to be a hostname.  To force
-              interpretation as a path, use a absolute  path  or  prefix  with
+              Refers to the software_collection where the software selections
+              are to be applied.  Allows specification of host and pathname
+              where the software collection is located.  A target that
+              contains only one part is assumed to be a hostname.  To force
+              interpretation as a path, use a absolute path or prefix with
               ':'.
 
 
@@ -312,21 +311,25 @@ i {color:#000080}
 
                  Swbis Extension:
                       [user@]host[:path]
+                      [user@]host_port[:path]
                       :path
 
                  Swbis Multi-hop Target Extension:
-                      # ':' or '@@' is the target delimiter
-                      # Using '@@' (deprecated)
-                      host@@host[@@hostN...]
+                      # ':' is the target delimiter
+                   # '_' delimits a port number in the host field
+
                       [user@]host[@@[user@]host[@@...]][:file]
+                      [user@]host_port[@@[user@]host[@@...]][:file]
 
                       # Using ':', a trailing colon is used to
-                      # disambiguate.  For Example,
+                      # disambiguate between a host and file.
+                   # For Example,
                       :file
                       host:
                       host
                       host:file
                       host:host:
+                      host_port:host_port:
                       host:host:file
                       user@host:user@host:
                       user@host:user@host:host:
@@ -384,33 +387,33 @@ i {color:#000080}
                     ;
 
 
-</pre><h3><a name="TARGET COPYING RULES"><b>TARGET COPYING RULES</b></a></h3><pre>       Currently,  file permissions and ownerships are not copied. 'swcopy' is
-       not intended to be used in the way of cp or scp, although it can be  if
-       forced.   Non-existing  directories  in a target are created.  A source
-       directory cannot be renamed (although a regular file can be),  that  is
-       if  a  directory  is being copied, it will never be a different name on
+</pre><h3><a name="TARGET COPYING RULES"><b>TARGET COPYING RULES</b></a></h3><pre>       Currently, file permissions and ownerships are not copied. 'swcopy' is
+       not intended to be used in the way of cp or scp, although it can be if
+       forced.  Non-existing directories in a target are created.  A source
+       directory cannot be renamed (although a regular file can be), that is
+       if a directory is being copied, it will never be a different name on
        the target.  A single source file is specified for one or more targets.
-       The  syntax does not support multiple source files.  A portable charac-
-       ter string in the target spec is assumed to be  a  hostname  unless  it
-       begins with a slash '/' or a colon ':'.
+       The syntax does not support multiple source files.  A portable
+       character string in the target spec is assumed to be a hostname unless
+       it begins with a slash '/' or a colon ':'.
 
    <a name="Rules"><b>Rules</b></a>
-       If  a  target  directory  on the host does not exist it will be created
-       using mkdir -p using the file creation mask of the  originating  swcopy
-       process.   A  trailing slash in the target spec signifies that the last
-       path component should be a directory.  A source spec that is  a  direc-
-       tory will be created on the target as a directory with the same name in
-       the target directory.  If the source spec is stdin then  the  existence
-       of  directories  in  the target spec and a trailing slash in the target
-       spec path determines whether the created file will be a regular file or
-       directory, that is, stdin will be copied as a file unless the last tar-
-       get path component is a directory or ends  in  a  slash  '/'.   If  the
-       source  spec is a regular file, the source basename will be used as the
-       basename in the target if the last target path component is a directory
-       or ends in a slash '/', otherwise, the target basename is the last path
-       component of the target  spec.   The  implementation  option  --extract
-       biases  these  rules to install using the archive reading command (e.g.
-       pax -r).
+       If a target directory on the host does not exist it will be created
+       using mkdir -p using the file creation mask of the originating swcopy
+       process.  A trailing slash in the target spec signifies that the last
+       path component should be a directory.  A source spec that is a
+       directory will be created on the target as a directory with the same
+       name in the target directory.  If the source spec is stdin then the
+       existence of directories in the target spec and a trailing slash in the
+       target spec path determines whether the created file will be a regular
+       file or directory, that is, stdin will be copied as a file unless the
+       last target path component is a directory or ends in a slash '/'.  If
+       the source spec is a regular file, the source basename will be used as
+       the basename in the target if the last target path component is a
+       directory or ends in a slash '/', otherwise, the target basename is the
+       last path component of the target spec.  The implementation option
+       --extract biases these rules to install using the archive reading
+       command (e.g.  pax -r).
 
    <a name="Examples"><b>Examples</b></a>
                   Install a tarball in the current directory:
@@ -462,13 +465,13 @@ i {color:#000080}
                          swcopy -s /xx/yy @host1:/aa/bb/cc
 
 </pre><h3><a name="IMPLEMENTATION EXTENSIONS"><b>IMPLEMENTATION EXTENSIONS</b></a></h3><pre>   <b>Software Specification Targets</b>
-       A dash '-' is supported and means stdout  or  stdin.   Operations  with
+       A dash '-' is supported and means stdout or stdin.  Operations with
        stdout and stdin on a remote host is not supported.
 
-       A  decimal  '.'  is supported and means the current directory.  This is
+       A decimal '.' is supported and means the current directory.  This is
        supported for remote and non-remote targets.  If the source is standard
        input, the distribution will be unpacked (e.g. pax -r) in the directory
-       '.'.  If the source is a regular file then a regular file in  '.'  will
+       '.'.  If the source is a regular file then a regular file in '.' will
        be created with the same name.
 
        Thus,
@@ -486,16 +489,16 @@ i {color:#000080}
 
 
    <a name="RPM Translation"><b>RPM Translation</b></a>
-       RPM (RedHat Package Manager) format packages are copied by first trans-
-       lating to an equivalent ISO/IEEE file layout in POSIX  tar  format  and
-       then  copying  as  a  POSIX package.  The RPM detection and translation
-       occurs if the ''--allow-rpm'' option is on (either by the command  line
-       args  or  defaults  file)  and  the  ''--audit''  option is on.  If the
-       ''--allow-rpm'' option is not set an error occurs.  If the  ''--audit''
-       is  not  set,  the RPM is copied as arbitrary data and translation does
+       RPM (RedHat Package Manager) format packages are copied by first
+       translating to an equivalent ISO/IEEE file layout in POSIX tar format
+       and then copying as a POSIX package.  The RPM detection and translation
+       occurs if the ''--allow-rpm'' option is on (either by the command line
+       args or defaults file) and the ''--audit'' option is on.  If the
+       ''--allow-rpm'' option is not set an error occurs.  If the ''--audit''
+       is not set, the RPM is copied as arbitrary data and translation does
        not occur.
 
-       Since translation is done on the local (management) host,  RPM  is  not
+       Since translation is done on the local (management) host, RPM is not
        reqired on the remote (target) host.
 
        The translation is (internally) equivalent to :
@@ -504,13 +507,13 @@ i {color:#000080}
           /usr/lib/swbis/lxpsf --psf-form2 -H ustar |
           swpackage -Wsource=- -s@PSF
 
-</pre><h3><a name="EXTENDED OPTIONS"><b>EXTENDED OPTIONS</b></a></h3><pre>       Extended  options  can  be  specified  on the command line using the -x
+</pre><h3><a name="EXTENDED OPTIONS"><b>EXTENDED OPTIONS</b></a></h3><pre>       Extended options can be specified on the command line using the -x
        option or from the defaults file, swdefaults.  Shown below is an actual
        portion of a defaults file which show default values.
 
    <a name="Posix"><b>Posix</b></a>
-       These  options are set in the /usr/lib/swbis/swdefaults or the ~/.swde-
-       faults
+       These options are set in the /usr/lib/swbis/swdefaults or the
+       ~/.swdefaults
 
 
           autoselect_dependencies     = false      # Not Implemented
@@ -529,7 +532,7 @@ i {color:#000080}
 
 
    <a name="Swbis Implementation"><b>Swbis Implementation</b></a>
-       These options  are  set  in  the  /usr/lib/swbis/swbisdefaults  or  the
+       These options are set in the /usr/lib/swbis/swbisdefaults or the
        ~/.swbis/swbisdefaults file.
 
 
@@ -545,31 +548,31 @@ i {color:#000080}
          swcopy.swbis_allow_rpm = false  # true or false
          swcopy.swbis_remote_shell_client=ssh
 
-</pre><h3><a name="RETURN VALUE"><b>RETURN VALUE</b></a></h3><pre>       0  if all targets succeeded, 1 if all targets failed, 2 if some targets
+</pre><h3><a name="RETURN VALUE"><b>RETURN VALUE</b></a></h3><pre>       0 if all targets succeeded, 1 if all targets failed, 2 if some targets
        failed and some succeeded.
 </pre><h3><a name="NOTES"><b>NOTES</b></a></h3><pre>        Multiple ssh-hops is an implementation extension.
-</pre><h3><a name="REQUISITE UTILITIES"><b>REQUISITE UTILITIES</b></a></h3><pre>       Swcopy requires a Posix shell accessible by the remote  shell  command.
-       This  is  the  remote  command  run by ssh (or rsh) for all operations.
-       This command can be controlled by the  --shell-command  option  or  the
-       swbis_shell_command  defaults file option.  Permitted values are &quot;bash&quot;
-       (/bin/bash -s), &quot;sh&quot; (/bin/sh  -s),  &quot;ksh&quot;  (/bin/ksh  -s)  or  &quot;posix&quot;
-       ('PATH=`getconf  PATH`  sh  -s').   The  default  is  &quot;posix&quot;.   swcopy
+</pre><h3><a name="REQUISITE UTILITIES"><b>REQUISITE UTILITIES</b></a></h3><pre>       Swcopy requires a Posix shell accessible by the remote shell command.
+       This is the remote command run by ssh (or rsh) for all operations.
+       This command can be controlled by the --shell-command option or the
+       swbis_shell_command defaults file option.  Permitted values are &quot;bash&quot;
+       (/bin/bash -s), &quot;sh&quot; (/bin/sh -s), &quot;ksh&quot; (/bin/ksh -s) or &quot;posix&quot;
+       ('PATH=`getconf PATH` sh -s').  The default is &quot;posix&quot;.  swcopy
        requires the POSIX capability of reading commands on stdin according to
-       the  specification  described  in IEEE Std 1003.1, 2003 Ed.; sh -shell,
-       Section STDIN.  This requirement accommodates reading of shell  program
-       code  and  data  on  STDIN.  This capability may not be present in some
+       the specification described in IEEE Std 1003.1, 2003 Ed.; sh -shell,
+       Section STDIN.  This requirement accommodates reading of shell program
+       code and data on STDIN.  This capability may not be present in some
        /bin/sh shells.  The &quot;/bin/sh&quot; on FreeBSD-5.1 is broken in this regard,
-       hence  ''--shell-command=bash'' should be used for BSD hosts.  The pub-
-       lic domain Korn shell (pdksh-5.2.14) seems to work OK, that is, it com-
-       plies  by  luck or intent with the POSIX capability of reading data and
-       code on stdin.
+       hence ''--shell-command=bash'' should be used for BSD hosts.  The
+       public domain Korn shell (pdksh-5.2.14) seems to work OK, that is, it
+       complies by luck or intent with the POSIX capability of reading data
+       and code on stdin.
 
-       If the  --no-getconf  option  is  set  or  the  swcopy.swbis_no_getconf
+       If the --no-getconf option is set or the swcopy.swbis_no_getconf
        defaults option is &quot;true&quot; then the remote command is '/bin/sh -s'.  Use
        of the no-getconf option is needed for communication with user accounts
-       on  remote  machines whose login shell is not a Bourne shell (e.g. csh)
+       on remote machines whose login shell is not a Bourne shell (e.g. csh)
        such as root on some default BSD installations.  Other *nix systems may
-       require  use  of  getconf  because their /bin/sh is broken or not Posix
+       require use of getconf because their /bin/sh is broken or not Posix
        enough (e.g. Sun platforms).  Still other systems may not have <b>getconf</b>.
 
        Other utilities required to be in $PATH on the remote host are: dd, pax
@@ -586,34 +589,34 @@ i {color:#000080}
        <a href=sw_5.html>sw(5)</a>, <a href=swbisparse_1.html>swbisparse(1)</a>, <a href=swign_1.html>swign(1)</a>, <a href=swverify_8.html>swverify(8)</a>
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        <a href=swcopy_8.html>swcopy(8)</a>: The archive copying utility of the swbis project.
         Author: Jim Lowe   Email: jhlowe at acm.org
-        Version: 0.735
+        Version: 0.950
         Last Updated: 2006-07
         Copying: GNU Free Documentation License
-</pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       Swcopy is subject to breakage if a user's account  on  an  intermediate
-       (or  terminal)  host in a target spec is not configured to use a Bourne
-       compatible shell. (This breakage may be eliminated by use of the  --no-
+</pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       Swcopy is subject to breakage if a user's account on an intermediate
+       (or terminal) host in a target spec is not configured to use a Bourne
+       compatible shell. (This breakage may be eliminated by use of the --no-
        getconf option as explained above.)
 
-       A  multiple  ssh  hop source spec  (more than 1 remote host involved in
+       A multiple ssh hop source spec  (more than 1 remote host involved in
        the source transfer) upon a SIGINT may result in sshd and ssh processes
-       being  left  on  on  the  intermediate  host(s), this despite, swcopy's
+       being left on on the intermediate host(s), this despite, swcopy's
        action of sending a SIGTERM to the remote script's parent process.
 
-       Swcopy does not currently implement Software Selections nor the  events
+       Swcopy does not currently implement Software Selections nor the events
        of the Selection and Analysis Phases nor dependency copying nor fileset
        state transitions.  The Execution (copying) phase is done on the entire
-       distribution  by  the  utility  selected  in .../swbisdefaults which is
-       <a href=pax_1.html>pax(1)</a> by default.  Pax is not found on all GNU/Linux  systems.   Also,
+       distribution by the utility selected in .../swbisdefaults which is
+       <a href=pax_1.html>pax(1)</a> by default.  Pax is not found on all GNU/Linux systems.  Also,
        the pax version shipped with some (older) GNU/Linux systems mangles the
-       pathname of files whose pathname is exactly 100 octets  long.   Despite
-       this  pax  is  the  the  builtin  default.   GNU tar is widely used and
-       trusted but creates non-standard archives for long pathnames.   Perhaps
-       the  best  compromise is to use star (with -H ustar header option)  for
-       archive creation and (GNU) tar for archive reading.  If  your  environ-
-       ment is 100% GNU/Linux using GNU tar is safe (GNU tar 1.13.25 is recom-
-       mended).  Swcopy does not support using  the  cpio  utility  since  its
-       archive  writing interface is unlike pax and tar, although, future sup-
-       port is possible for archive reading.
+       pathname of files whose pathname is exactly 100 octets long.  Despite
+       this pax is the the builtin default.  GNU tar is widely used and
+       trusted but creates non-standard archives for long pathnames.  Perhaps
+       the best compromise is to use star (with -H ustar header option)  for
+       archive creation and (GNU) tar for archive reading.  If your
+       environment is 100% GNU/Linux using GNU tar is safe (GNU tar 1.13.25 is
+       recommended).  Swcopy does not support using the cpio utility since its
+       archive writing interface is unlike pax and tar, although, future
+       support is possible for archive reading.
 
 
 

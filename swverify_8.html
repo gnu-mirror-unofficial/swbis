@@ -44,7 +44,7 @@ i {color:#000080}
 
        <b>swverify</b>  # Verify standard input
 
-       <b>swverify</b> -r selection [@ target]
+       <b>swverify</b> selection [@ target] # Verify Installed Software
 
        <b>swverify</b> -d [@ target]
 
@@ -80,7 +80,8 @@ i {color:#000080}
 
        <b>-r</b>
 
-              Specify to operate on installed software at the target path.
+              Specify that target is an alternate root target. (Not currently
+              used)
 
 
 
@@ -285,7 +286,8 @@ i {color:#000080}
        3)  Obtain the message digest
 
          #!/bin/sh
-         swverify -WC &lt; swbis-0.460.tar.gz | tar xf - -O \*/catalog/dfiles/md5sum
+         swverify -WC &lt; swbis-0.460.tar.gz | \
+         tar xf - -O \*/catalog/dfiles/md5sum
 
 
        4)  Create the digested byte stream
@@ -399,15 +401,18 @@ i {color:#000080}
        verifying manually using GNU tools because swverify implements this
        using GNU tools.
 
-       authenticate the exported catalog signature.  If it is successful it
+       'swverify' when verifying the directory form of a distribution attempts
+       to authenticate the exported catalog signature.  If it is successful it
        executes the 'checkdigest' script found in the 'catalog/dfiles'
        directory of the exported catalog.  If the 'checkdigest' script does
        not exist, authentication fails. 'swverify' will only attempt to run
        the 'checkdigest' script if it is found in the dfiles directory of an
        authenticated catalog.
 
-       file storage structure) of a directory (unpacked) form of a POSIX
-       distribution.  It is the role of the checkdigest script to do this.
+       'swverify' currently has no provision to verify the archive section
+       (i.e. the file storage structure) of a directory (unpacked) form of a
+       POSIX distribution.  It is the role of the checkdigest script to do
+       this.
 
        For example, if filemypackage-00.1 is a directory unpacked with a tar
        reading utility that preserved file times then try,
@@ -484,8 +489,6 @@ i {color:#000080}
        gpg: please use &quot;--keyserver-options honor-http-proxy&quot; instead
        gpg: Signature made Fri Feb 20 00:21:00 2004 EST using DSA key ID 82B0DBE4
        gpg: Good signature from &quot;Test User (pass=Iforgot) localhost&gt;&quot;
-       gpg: WARNING: This key is not certified with a trusted signature!
-       gpg:          There is no indication that the signature belongs to the owner.
        Fingerprint: 77BB B98D A3A2 ED4C 217E  9A25 8BF4 05AB 82B0 DBE4
        swverify: Warning: file checks not implemented
        swverify: signature verification return status=0
@@ -572,12 +575,9 @@ i {color:#000080}
    <a name="Installed Software Verification"><b>Installed Software Verification</b></a>
        * Verify installed software
 
-         swverify -r foo.foo @/tmp/test
+         swverify foo.foo @/tmp/test
                   or
-         swverify -r foo.foo
-
-                 Note: This will attempt to verify the GPG signature.
-                       The POSIX operations are not yet implemented.
+         swverify foo.foo  # at default target
 
 </pre><h3><a name="RETURN VALUE"><b>RETURN VALUE</b></a></h3><pre>       Exit status of the checksig script or gpg utility for --checksig
        directory operation.  0 if successful on all targets, 1 if failed on
@@ -593,7 +593,7 @@ i {color:#000080}
 
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        swverify: The verification utility of the swbis project.
         Author: James Lowe, Jr.   Email: jhlowe at acm.org
-        Version: 0.950
+        Version: 1.0pre0
         Last Updated: 2008-04-18
         Copying: GNU Free Documentation License
 
@@ -612,8 +612,8 @@ i {color:#000080}
 
        Verification of the directory form of a distribution (i.e. the
        installed tarball path name prefix) such as running 'swverify -d @.'
-       after running 'swign @.'  will fail if the order of directory entries
-       is not compatible with traditional Unix file system directory entry
+       after running 'swign @.' will fail if the order of directory entries is
+       not compatible with traditional Unix file system directory entry
        ordering, which is the order of file creation.  This ordering is almost
        always apparent on Ext2 file system for small directories (but not
        always for big directories).  Ext3, reiserFS, and DarwinOS et.al file

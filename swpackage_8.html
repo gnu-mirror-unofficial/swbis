@@ -212,7 +212,8 @@ i {color:#000080}
        <b>-W create-time=TIME</b>
               Applies to catalog files and the create_time attribute.  TIME is
               the seconds since the Unix Epoch.  You must use this option to
-              make the catalog directory identical in subsequent invocations.
+              make the catalog directory identical in subsequent (back-to-
+              back) invocations.
 
        <b>-W list-psf</b>
               Write the PSF to stdout after having processed the extended
@@ -220,8 +221,9 @@ i {color:#000080}
 
        <b>-W to-swbis</b>
               Read a package on standard input and write a POSIX package on
-              standard output.  Requires the Supported formats are any
-              supported format of lxpsf.  Identical to:
+              standard output.  Requires the .../libexec/swbis/lxpsf program.
+              Supported formats are any supported format of lxpsf.  Identical
+              to:
               /swbis/lxpsf --psf-form3 -H ustar | swpackage -Wsource=- -s@PSF
 
        <b>-W passphrase-fd=N</b>
@@ -976,9 +978,7 @@ i {color:#000080}
         /usr/bin/pgp   (PGP 2.6.x)
         /usr/bin/pgps  (PGP 5)
 
-       Swpackage will use /usr/bin/uuidgen if present to create the uuid.  You
-       must use this option to make the catalog directory identical in
-       subsequent invocations.
+       Swpackage will use /usr/bin/uuidgen if present to create the uuid.
 </pre><h3><a name="FILES"><b>FILES</b></a></h3><pre>       libdir/swbis/swdefaults
        libbir/swbis/swbisdefaults
        $HOME/.swbis/swdefaults
@@ -991,7 +991,7 @@ i {color:#000080}
        <a href=sw_5.html>sw(5)</a>, <a href=swpackage_5.html>swpackage(5)</a>, <a href=swbisparse_1.html>swbisparse(1)</a>, <a href=swign_1.html>swign(1)</a>, <a href=swverify_8.html>swverify(8)</a>
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        <a href=swpackage_8.html>swpackage(8)</a>: The packaging utility of the swbis project.
         Author: Jim Lowe   Email: jhlowe at acm.org
-        Version: 0.950
+        Version: 1.0pre0
         Last Updated: 2006-07-01
         Copying: GNU Free Documentation License
 </pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       A comment after an object keyword is wrongly not allowed by this PSF

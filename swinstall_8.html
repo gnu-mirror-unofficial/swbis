@@ -14,7 +14,10 @@ i {color:#000080}
 <li><a href="#SYNOPSIS">SYNOPSIS</a>
 <li><a href="#DESCRIPTION">DESCRIPTION</a>
 <li><a href="#OPTIONS">OPTIONS</a>
-<li><a href="#INSTALLED SOFTWARE CATALOG">INSTALLED SOFTWARE CATALOG</a>
+<li><a href="#INSTALLATION">INSTALLATION</a>
+<ul><li><a href="#Analysis Phase"><font size=-1>Analysis Phase</font></a>
+<li><a href="#Execution Phase"><font size=-1>Execution Phase</font></a>
+</ul><li><a href="#INSTALLED SOFTWARE CATALOG">INSTALLED SOFTWARE CATALOG</a>
 <ul><li><a href="#CATALOG FILE LAYOUT"><font size=-1>CATALOG FILE LAYOUT</font></a>
 <li><a href="#CATALOG LOCATION"><font size=-1>CATALOG LOCATION</font></a>
 <li><a href="#PACKAGE CATALOG RELATIVE ROOT"><font size=-1>PACKAGE CATALOG RELATIVE ROOT</font></a>
@@ -222,14 +225,15 @@ i {color:#000080}
        <b>-W no-getconf</b>
               Defaults File Option: <b>swbis_no_getconf</b>
               Makes the remote command be '/bin/sh -s' instead of the default
+              'PATH=`getconf PATH` sh -s'.
 
        <b>-W shell-command=NAME</b>
               Defaults File Option: <b>swbis_shell_command</b>
               This is the interactive shell on the target host.  NAME may be
-              one of &quot;bash&quot;, &quot;sh&quot;, &quot;ksh&quot;  or &quot;posix&quot; and specifies the remote
-              command run by the remote shell.  &quot;posix&quot; is 'PATH=`getconf
-              PATH` sh -s', &quot;bash&quot; is &quot;/bin/bash -s&quot;, &quot;sh&quot; is &quot;/bin/sh -s&quot;,
-              and &quot;ksh&quot; is &quot;ksh -s&quot;.  The default is &quot;posix&quot;.
+              one of &quot;detect&quot; &quot;bash&quot;, &quot;sh&quot;, &quot;ksh&quot;  or &quot;posix&quot; and specifies
+              the remote command run by the remote shell.  &quot;posix&quot; is
+              'PATH=`getconf PATH` sh -s', &quot;bash&quot; is &quot;/bin/bash -s&quot;, &quot;sh&quot; is
+              &quot;/bin/sh -s&quot;, and &quot;ksh&quot; is &quot;ksh -s&quot;.  The default is &quot;detect&quot;.
 
        <b>-W use-getconf</b>
               Opposite of --no-getconf.
@@ -263,7 +267,7 @@ i {color:#000080}
 
        <b>-W ssh-options=OPTIONS</b>
               ssh client program options.  For example -W ssh-options=1 sets
-              the
+              the '-1' ssh client option which specifies protocol version 1.
 
        <b>-W source-script-name=NAME</b>
               Write the script that is written into the remote shell's stdin
@@ -388,6 +392,22 @@ i {color:#000080}
 
 
 
+</pre><h3><a name="INSTALLATION"><b>INSTALLATION</b></a></h3><pre>       Installation consists of an analysis phase and an execution phase.
+
+   <a name="Analysis Phase"><b>Analysis Phase</b></a>
+       The installed software catalog is queried and checks are made to detect
+       reinstallation, downdating (installing an older version).  Dependency
+       tests are made at this point.  If these checks pass or are overridden
+       by options, then the installed software catalog entry is created
+       (moving the old entry).  The <b>checkinstall</b> script is exectuted.  This
+       script should be non-interactive, idempotent, and read-only from the
+       system's perspective.  This script may exit with status of 0,1,2, or 3.
+       If the exit status is 3 (or 1) installation is rejected and the
+       installed catalog is restored.
+
+   <a name="Execution Phase"><b>Execution Phase</b></a>
+       The <b>preinstall</b> script is executed, the fileset files are loaded by the
+       system tar utility and <b>postinstall</b> is executed.
 </pre><h3><a name="INSTALLED SOFTWARE CATALOG"><b>INSTALLED SOFTWARE CATALOG</b></a></h3><pre>       The form or format of an installed software catalog is not specified by
        the ISO/IEC spec although it does specify an interface to it (e.g.
        swlist utility) and operations on it.
@@ -540,6 +560,10 @@ i {color:#000080}
        /mnt/test/var/lib/swbis/catalog/foobare/foobare-doc/0.902/0/qualifier
        /mnt/test/var/lib/swbis/catalog/foobare/foobare-doc/0.902/0/session_options
 
+        A deleted old catalog entry begin with '_', for example
+
+       /mnt/test/var/lib/swbis/catalog/foobare/foobare-doc/0.902/_0/...
+
 
        Although swinstall does not depend on the file name as this
        accommodates installing from standard input, a typical name for this
@@ -624,8 +648,8 @@ i {color:#000080}
        ${HOME}/.swbis/swbisdefaults file.
 
 
-         swinstall.swbis_no_getconf = false # true or false
-         swinstall.swbis_shell_command = posix # {sh|bash|posix}
+         swinstall.swbis_no_getconf = true # true or false
+         swinstall.swbis_shell_command = detect # {detect|sh|bash|ksh|posix}
          swinstall.swbis_no_remote_kill = false # true or false
          swinstall.swbis_no_audit = false # true or false
          swinstall.swbis_quiet_progress_bar = false # true or false
@@ -643,33 +667,16 @@ i {color:#000080}
 </pre><h3><a name="RETURN VALUE"><b>RETURN VALUE</b></a></h3><pre>       0 if all targets succeeded, 1 if all targets failed, 2 if some targets
        failed and some succeeded.
 </pre><h3><a name="NOTES"><b>NOTES</b></a></h3><pre>        Multiple ssh-hops is an implementation extension.
-</pre><h3><a name="REQUISITE UTILITIES"><b>REQUISITE UTILITIES</b></a></h3><pre>       swinstall requires a POSIX shell accessible by the remote shell
-       command.  This is the remote command run by ssh (or rsh) for all
-       operations.  This command can be controlled by the --shell-command
-       option or the swbis_shell_command defaults file option.  Permitted
-       values are &quot;bash&quot; (/bin/bash -s) or &quot;sh&quot; (/bin/sh -s) or &quot;posix&quot;
-       ('PATH=`getconf PATH` sh -s').   The default is &quot;posix&quot;.  swinstall
-       requires the POSIX capability of reading commands on stdin according to
-       the specification described in IEEE Std 1003.1, 2003 Ed.; sh -shell,
-       Section STDIN.  This requirement accommodates reading of shell program
-       code and data on STDIN.  This capability may not be present in some
-       /bin/sh shells.  The &quot;/bin/sh&quot; on FreeBSD-5.1 may be broken in this
-       regard, hence ''--shell-command=bash'' should be used for BSD hosts.
-       The public domain Korn shell (pdksh-5.2.14) seems to work OK, that is,
-       it complies by luck or intent with the POSIX capability of reading data
-       and code on stdin.
+</pre><h3><a name="REQUISITE UTILITIES"><b>REQUISITE UTILITIES</b></a></h3><pre>       The swbis distributed utilities require <b>bash</b>, public domain <b>ksh</b>, or
+       Sun's /usr/xpg4/bin/sh to be present on the target host.  If the
+       <b>swbis_shell_command</b> extended option is set to 'detect' you don't have
+       to know which one is present, otherwise you may specify one explicitly.
 
-       If the --no-getconf option is set or the swinstall.swbis_no_getconf
-       defaults option is &quot;true&quot; then the remote command is '/bin/sh -s'.  Use
-       of the no-getconf option is needed for communication with user accounts
-       on remote machines whose login shell is not a Bourne shell (e.g. csh)
-       such as root on some default BSD installations.  Other *nix systems may
-       require use of getconf because their /bin/sh is broken or not POSIX
-       enough (e.g. Sun platforms).  Still other systems may not have <b>getconf</b>.
-
-       Other utilities required to be in $PATH on the remote host are: dd, pax
-       (or tar|star|gtar), hostname, mkdir, expr, echo, test, sleep, read (if
-       not builtin).
+       A POSIX <b>awk</b> is required, and with the ability to specify several
+       thousand bytes of program text as a command argument.  GNU awk  works,
+       as does the ATT Awk book awk, and the awk on BSD systems.  See the
+       INSTALL file for further details regarding a small issue with the
+       OpenSolaris (c.2006) awk.
 </pre><h3><a name="FILES"><b>FILES</b></a></h3><pre>        /usr/lib/swbis/swdefaults
         /usr/lib/swbis/swbisdefaults
         $HOME/.swbis/swdefaults
@@ -681,7 +688,7 @@ i {color:#000080}
        <a href=swcopy_8.html>swcopy(8)</a>, <a href=sw_5.html>sw(5)</a>, <a href=swbisparse_1.html>swbisparse(1)</a>, <a href=swign_1.html>swign(1)</a>, <a href=swverify_8.html>swverify(8)</a>
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        <a href=swinstall_8.html>swinstall(8)</a>: The installation utility of the swbis project.
         Author: Jim Lowe   Email: jhlowe at acm.org
-        Version: 0.950
+        Version: 1.0pre0
         Last Updated: 2008-04-18
         Copying: GNU Free Documentation License
 </pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       swinstall is subject to breakage if a user's account on an intermediate

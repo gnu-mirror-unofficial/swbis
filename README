@@ -1,6 +1,6 @@
     swbis - Distributed Software Administration
     --------------------------------------------
-              Version 0.950
+              Version 0.986
 
     swbis is a GNU package
     The official home page is http://www.gnu.org/software/swbis
@@ -32,15 +32,6 @@ Introduction
     The spec is available at
     http://www.opengroup.org/publications/catalog/c701.htm. 
 
-    GNU swbis is a free and from-scratch GPL'ed implementation of
-    IEEE 1387.2-1995 Std (Part 2: Software Administration) which
-    describes a format and utilities for software packaging.  The
-    GNU implementation has extensions for including GPG signatures,
-    MD5 and SHA1 message digests of the files and archive payload
-    section.  [The IEEE standard is superseded by ISO 15068-2,1999,
-    and it is almost identical to the Open Group spec CAE C701 which
-    is available on the Internet at no monetary cost].
-
     The swbis project provides features similar to other packaging systems
     such as utilities for package creation, installation, and verification.
     The implementation of these features are, however, unique in that
@@ -56,7 +47,7 @@ Introduction
     Secondly, it is orthogonal with existing tools for verification and
     file loading, namely gpg and tar which swbis uses directly.  Thirdly,
     swbis can install and copy packages to all existing GNU/Linux, BSD,
-    and Unix hosts whether or not swbis is installed on that host.  Swbis
+    and UNIX hosts whether or not swbis is installed on that host.  Swbis
     achieves this by relying on the POSIX shell's capability to read
     commands and data on the same standard input stream.  Lastly, network
     transparency is achieved because the process interface is a Unix
@@ -121,54 +112,67 @@ Introduction
     
         arf2arf   -  Internal Library utility to extract and verify the signed
                      and digested byte streams.
+   
+Requirements
+------------
+    Compilation:
+    ------------
+
+    GNU make is required and zlib.a
+    With these satisfied swbis should compile on almost any
+    GNU/Linux or BSD host.
     
+    For Use (in general):
+    ---------------------
 
-How to make some tarballs For the really impatient
---------------------------------------------------
+    To support complete functionality of the utilities, /bin/bash (or
+    public domain ksh as /bin/ksh) and GNU tar as /bin/tar (or as
+    /bin/gtar with special options) are required.  For verification and
+    signing GNU gpg is required.   GNU tar is only required when using
+    the 'swign' utility, in other contexts 'pax' or 'tar' can be specified
+    for archive reading and writing.
 
-    Here's an example of making a binary package using
-    the recipe file ./PSF.bin.in.  This shows how to use swign
-    to process replacement parameters %__revision.  (Generating
-    and re-writing PSFs are outside the scope of swbis (at the moment)
-    but a limited capability has been forced into swign).
-    This assumes the swbis source directory is the current directory
-    and is compiled.
+    For further details on the shell requirement and a strategy for host
+    compatibility: 
 
-      cat PSF.bin.in |
-      swign -s - --show-psf --no-psf-detect --name-version=swbis-0.1 |
-      swpackage -pv  # -p is preview mode
+        see swbis(7) : LANG=C nroff -man <doc/man/man7/swbis.7 | less -r
 
-    Now, try with some options 
+    For use on BSD and UNIX systems:
+    --------------------------------
 
-      cat PSF.bin.in |
-      swign -s - --show-psf --no-psf-detect --name-version=swbis-0.1 |
-      SWPACKAGEPASSPHRASE=Iforgot swpackage -s - \
-		--files \
-		--file-digests \
-		--sign \
-		--gpg-name="Test User" \
-		--gpg-path=var/gnupg \
-		--passphrase-fd=env \
-		-pv \
-		@-
+    Out-of-the box BSD systems are supported.
+    Compile like this:  (you may need GNU make)
 
-    Now, just remove the '-pv' and pipe it into swverify,  This shows
-    how *not* to treat your passphrase, normally SWPACKAGEPASSPHRASE
-    would be unset and --passphrase-fd is set to "agent" to use
-    the GPG agent or "tty" to read from the terminal.
+         POSIXSHELL=/bin/ksh ./configure && gmake
 
-      cat PSF.bin.in |
-      swign -s - --show-psf --no-psf-detect --name-version=swbis-0.1 |
-      SWPACKAGEPASSPHRASE=Iforgot swpackage -s - \
-		--files \
-		--archive-digests \
-		--file-digests \
-		--sign \
-		--gpg-name="Test User" \
-		--gpg-path=var/gnupg \
-		--passphrase-fd=env \
-		@- |
-	GNUPGHOME=var/gnupg swverify -d @-
+    For the shell requirement, public domain ksh works fine and is probably
+    present on BSD systems, set the 'swbis_shell_command' option in 
+    $HOME/.swbis/swbisdefaults or /usr/lib/swbis/swbisdefaults.
+
+         swbis_shell_command = detect # {bash|ksh|sh|detect}
+
+   (Note: AT&T'93 ksh does not have the required POSIX feature and will not
+          work.  It will be detected and not used however).
+
+    This will auto detect bash or ksh or /bin/sh if suitable.  'detect' is
+    the builtin default setting for all the utilities and it will allows
+    universal operability to remote UNIX, BSD and GNU/Linux hosts.
+    
+          swbis_no_getconf = true
+          swbis_shell_command = detect
+
+    For swlist and swverify, set the 'write' pax command to 'detect'.  This
+    will cause 'pax' to be used instead of the system tar which on BSD does not
+    have the required special feature.  If GNU tar is present on all your hosts
+    specify it if you wish.
+
+          swlist.swbis_local_pax_write_command = detect
+          swverify.swbis_remote_pax_write_command = detect
+
+          swbis_local_pax_write_command = detect
+          swbis_remote_pax_write_command = detect
+          swbis_local_pax_read_command = tar # {tar|pax|gtar}
+          swbis_remote_pax_read_command = tar # {tar|pax|gtar}
 
 Documentation
 -------------
@@ -186,6 +190,7 @@ KNOWN BUGS
 ----------
     SWINSTALL with a Linux kernel and OpenSSH sshd (Extremely Rare)
     -------------------------------------------------------------- 
+         (August 2008:  This seems to be fixed by OpenSSH 5.1p1)
 
     It seems that swinstall with certain packages when accessing
     a Linux kernel host via OpenSSH sshd (using ssh protocol v2) will fail.
@@ -225,6 +230,10 @@ KNOWN BUGS
 
     This bug was first noticed in 2004 on a 2.4.x kernel, OpenSSH v3.9 may
     mask the occurance.
+
+      [Update --- August 2008]
+      -----------------------
+      OpenSSH 5.1p1 seems to make this problem disappear.
 
       [Update --- April 2008]
       -----------------------

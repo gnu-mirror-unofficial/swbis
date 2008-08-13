@@ -41,8 +41,8 @@ i {color:#000080}
 
        <b>swlist</b> --dir [software_selections] [@targets]
 
-       <b>swlist</b> --dependencies [--prerequisites <i>sw</i><b>_</b><i>spec</i>] [--exrequisites <i>sw</i><b>_</b><i>spec</i>] \
-       [@targets]
+       <b>swlist</b> --dependencies [--prerequisites <i>sw</i><b>_</b><i>spec</i>] \
+       [--exrequisites <i>sw</i><b>_</b><i>spec</i>] [@targets]
 
 </pre><h3><a name="DESCRIPTION"><b>DESCRIPTION</b></a></h3><pre>       <b>swlist</b> lists information about a distribution or installed software.
        Neither swlist nor any component of swbis is required on the target
@@ -224,13 +224,14 @@ i {color:#000080}
        <b>-W no-getconf</b>
               Defaults File Option: <b>swbis_no_getconf</b>
               Makes the remote command be '/bin/sh -s' instead of the default
+              'PATH=`getconf PATH` sh -s'.
 
        <b>-W shell-command=NAME</b>
               Defaults File Option: <b>swbis_shell_command</b>
-              NAME may be one of &quot;bash&quot;, &quot;sh&quot; or &quot;posix&quot; and specifies the
-              remote command run by the remote shell.  &quot;posix&quot; is
-              'PATH=`getconf PATH` sh -s', &quot;bash&quot; is &quot;/bin/bash -s&quot;, &quot;sh&quot; is
-              &quot;/bin/sh -s&quot;, and &quot;ksh&quot; is &quot;ksh -s&quot;.  The default is &quot;posix&quot;.
+              NAME may be one of &quot;detect&quot; &quot;bash&quot;, &quot;sh&quot; or &quot;posix&quot; and
+              specifies the remote command run by the remote shell.  &quot;posix&quot;
+              is 'PATH=`getconf PATH` sh -s', &quot;bash&quot; is &quot;/bin/bash -s&quot;, &quot;sh&quot;
+              is &quot;/bin/sh -s&quot;, and &quot;ksh&quot; is &quot;ksh -s&quot;.  The default is &quot;posix&quot;.
 
        <b>-W use-getconf</b>
               Opposite of --no-getconf.
@@ -410,13 +411,13 @@ i {color:#000080}
        ~/.swbis/swbisdefaults file.
 
 
-         swlist.swbis_no_getconf = false # true or false
-         swlist.swbis_shell_command = posix # {sh|bash|posix|ksh}
+         swlist.swbis_no_getconf = true # true or false
+         swlist.swbis_shell_command = detect # {detect|sh|bash|posix|ksh}
          swlist.swbis_no_remote_kill = false # true or false
-         swlist.swbis_local_pax_write_command=pax #{pax|tar|star|gtar|swbistar}
-         swlist.swbis_remote_pax_write_command=pax #{pax|tar|star|gtar|swbistar}
-         swlist.swbis_local_pax_read_command=pax #{pax|tar|gtar|star}
-         swlist.swbis_remote_pax_read_command=pax #{pax|tar|gtar|star}
+         swlist.swbis_local_pax_write_command=detect #{pax|tar|gtar|detect}
+         swlist.swbis_remote_pax_write_command=detect #{pax|tar|gtar|detect}
+         swlist.swbis_local_pax_read_command=tar #{pax|tar|gtar|star}
+         swlist.swbis_remote_pax_read_command=tar #{pax|tar|gtar|star}
          swlist.swbis_remote_shell_client=ssh
          swlist.swbis_forward_agent=True
 
@@ -425,22 +426,28 @@ i {color:#000080}
        dependencies, 3 if the given sw_specs failed as dependencies, 0 if
        succeeded.
 </pre><h3><a name="NOTES"><b>NOTES</b></a></h3><pre>        Multiple ssh-hops is an implementation extension.
-</pre><h3><a name="REQUISITE UTILITIES"><b>REQUISITE UTILITIES</b></a></h3><pre>       swlist requires a Posix shell accessible by the remote shell command.
-       This is the remote command run by ssh (or rsh) for all operations.
-       swlist makes use of the system 'awk' program for querying the installed
-       software catalog, it should work.  swlist is tested with gawk (GNU awk)
-       and the AT awkbook awk.
+</pre><h3><a name="REQUISITE UTILITIES"><b>REQUISITE UTILITIES</b></a></h3><pre>       The swbis distributed utilities require <b>bash</b>, public domain <b>ksh</b>, or
+       Sun's /usr/xpg4/bin/sh to be present on the target host.  If the
+       <b>swbis_shell_command</b> extended option is set to 'detect' you don't have
+       to know which one is present, otherwise you may specify one explicitly.
 
-       If the --no-getconf option is set or the swlist.swbis_no_getconf
-       defaults option is &quot;true&quot; then the remote command is '/bin/sh -s'.  Use
-       of the no-getconf option is needed for communication with user accounts
-       on remote machines whose login shell is not a Bourne shell (e.g. csh)
-       such as root on some default BSD installations.  Other *nix systems may
-       require use of getconf because their /bin/sh is broken or not Posix
-       enough (e.g. Sun platforms).  Still other systems may not have <b>getconf</b>.
+       A POSIX <b>awk</b> is required, and with the ability to specify several
+       thousand bytes of program text as a command argument.  GNU awk  works,
+       as does the ATT Awk book awk, and the awk on BSD systems.  See the
+       INSTALL file for further details regarding a small issue with the
+       OpenSolaris (c.2006) awk.
 
-       Other utilities required to be in $PATH on the remote host are: dd, pax
-       (or tar|star|gtar), mkdir, echo, test, sleep, read (if not builtin).
+       Tar or pax is used for internally for data transfer.  You may specify
+       which one.  <b>swlist</b> and <b>swverify</b> require either GNU tar or pax be
+       present on a host.  You may set auto detection for this requirement
+
+       swlist.swbis_local_pax_write_command=detect #{pax|tar|gtar|detect}
+       swlist.swbis_remote_pax_write_command=detect #{pax|tar|gtar|detect}
+
+
+
+       GNU Privacy Guard, gpg is required for verification of package
+       signatures.
 </pre><h3><a name="FILES"><b>FILES</b></a></h3><pre>       /usr/lib/swbis/swdefaults
        /usr/lib/swbis/swbisdefaults
        $HOME/.swbis/swdefaults
@@ -453,7 +460,7 @@ i {color:#000080}
        <a href=swbis_7.html>swbis(7)</a>, <a href=sw_5.html>sw(5)</a>, <a href=swbisparse_1.html>swbisparse(1)</a>, <a href=swign_1.html>swign(1)</a>, <a href=swverify_8.html>swverify(8)</a>
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        <a href=swlist_8.html>swlist(8)</a>: The query/listing utility of the swbis project.
         Author: Jim Lowe   Email: jhlowe at acm.org
-        Version: 0.950
+        Version: 1.0pre0
         Last Updated: 2006-07
         Copying: GNU Free Documentation License
 </pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       swlist is subject to breakage if a user's account on an intermediate

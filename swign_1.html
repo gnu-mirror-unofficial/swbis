@@ -31,11 +31,13 @@ i {color:#000080}
 </ul><pre>
 </pre><h3><a name="NAME"><b>NAME</b></a></h3><pre>       swign -- Create a tar archive of a directory with an embedded GPG
        signature.
-</pre><h3><a name="SYNOPSIS"><b>SYNOPSIS</b></a></h3><pre>       <b>swign</b> [options] [-u gpg-name] [--homedir=gpg-homedir] @-
+</pre><h3><a name="SYNOPSIS"><b>SYNOPSIS</b></a></h3><pre>       <b>swign</b> [options] [-u gpg-name] [--homedir=gpg-homedir] @- # Write to stdout
 
-       <b>swign</b> [options] [-u gpg-name] [--homedir=gpg-homedir] @.
+       <b>swign</b> [options] [-u gpg-name] [--homedir=gpg-homedir] @.  # Sign directory
 
        <b>swign</b> -S [options] [-u gpg-name] [--homedir=gpg-homedir]
+
+       <b>swign</b> -E [options] [-u gpg-name] [--homedir=gpg-homedir]
 </pre><h3><a name="DESCRIPTION"><b>DESCRIPTION</b></a></h3><pre>       <b>swign</b> reads a PSF (Product Specfication File) and writes the
        cooresponding archive to stdout or into the current directory.  The PSF
        is read from standard input by default.  To use an internally generated
@@ -49,14 +51,14 @@ i {color:#000080}
        'revision'.  The directory derived values can be overridden with the
        '--revision' or '--name-version' options.
 
-       <b>swign</b> does this by loading the './catalog/' meta-data directory into
-       the current directory and then, using GNU tar and the distribution file
-       list, writing the archive to stdout.  The result is a tar archive
-       written entirely with GNU tar that contains an embedded GPG signature
-       in the control file './catalog/dfiles/signature'.  The contents of
-       './catalog/' are consistent with the POSIX packaging standard ISO/IEC
-       15068-2:1999.  The package layout of the resulting archive is unchanged
-       except for the addition of the './catalog' directory.
+       <b>swign</b> by default will remove and re-create the ./catalog/ meta-data
+       directory, then use GNU tar to write the current directory as a tar
+       archive to stdout.  The result is a tar archive written entirely with
+       GNU tar that contains an embedded GPG signature in the control file
+       './catalog/dfiles/signature'.  The contents of './catalog/' are
+       consistent with the POSIX packaging standard ISO/IEC 15068-2:1999.  The
+       package layout of the resulting archive is unchanged except for the
+       addition of the './catalog' directory.
 
        The contents of the archive is the contents of the current directory
        &quot;.&quot;.  The pathnames in the archive are prefixed by the base name of
@@ -96,6 +98,11 @@ i {color:#000080}
               Don't remove the ./catalog directory before overwriting.
 
 
+       <b>--file-ownerships</b>
+              Use the file ownerships and permissions of the source files.
+
+
+
        <b>-u, --local-user name</b>
               Use name as the user ID to sign.
 
@@ -119,10 +126,16 @@ i {color:#000080}
               ../packageDirName.swigntest.tar.gz and run some sanity tests.
 
 
-       <b>-S, --sign-this</b>
+       <b>-S, --sign-only</b>
               Write the ./catalog/ file containing the digest and signature
               into &quot;.&quot; and then exit without writing the archive to stdout.
               Same as using &quot;.&quot; as the target such as 'swign @.'
+
+
+       <b>-E, --emit-only</b>
+              Do not write the ./catalog/ file containing the digest and
+              signature into &quot;.&quot; and then write the archive to stdout.  This
+              does not affect the directory contents.
 
 
        <b>-D, --with-checkdigest FILE</b>
@@ -191,6 +204,15 @@ i {color:#000080}
        type
 
           swign -o 0 -g 0 --show-psf | swign -s - -u &quot;gpgName&quot; @- | swverify -d @-
+
+
+
+
+       Example of directory signing and authentication.
+
+          swign -u YourGPGName -s. --file-ownerships -D /HOME/checkdigest.sh --sign-only
+          swverify -d @.
+          swign  --file-ownerships -emit-only | swverify -d @-
 
 
 
@@ -380,7 +402,7 @@ i {color:#000080}
        <a href=swpackage_8.html>swpackage(8)</a>, gpg
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        <a href=swign_1.html>swign(1)</a>: The source directory signing utility of the swbis project.
         Author: J. Lowe <a href="mailto:jhlowe@acm.org">jhlowe@acm.org</a>
-        Version: 0.950
+        Version: 1.0pre0
         Last Updated: 2008-01
         Copying: GNU Free Documentation License
 

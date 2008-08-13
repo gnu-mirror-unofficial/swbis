@@ -15,8 +15,7 @@ i {color:#000080}
 <li><a href="#DESCRIPTION">DESCRIPTION</a>
 <li><a href="#OPTIONS">OPTIONS</a>
 <li><a href="#TARGET COPYING RULES">TARGET COPYING RULES</a>
-<ul><li><a href="#Rules"><font size=-1>Rules</font></a>
-<li><a href="#Examples"><font size=-1>Examples</font></a>
+<ul><li><a href="#Examples"><font size=-1>Examples</font></a>
 </ul><li><a href="#IMPLEMENTATION EXTENSIONS">IMPLEMENTATION EXTENSIONS</a>
 <ul><li><a href="#RPM Translation"><font size=-1>RPM Translation</font></a>
 </ul><li><a href="#EXTENDED OPTIONS">EXTENDED OPTIONS</a>
@@ -163,6 +162,15 @@ i {color:#000080}
               Install the source using the archive reading utility at the
               target.
 
+       <b>-W create</b>
+
+              Force copy as a tar archive
+
+       <b>-W no-extract</b>
+
+              For installation to a file, not as a tar archive to be
+              extracted.
+
        <b>-W pty</b>
 
               Do use pseudo-tty.  The system Ptys are only used for the
@@ -255,13 +263,13 @@ i {color:#000080}
        <b>-W no-getconf</b>
               Defaults File Option: <b>swbis_no_getconf</b>
               Makes the remote command be '/bin/sh -s' instead of the default
+              'PATH=`getconf PATH` sh -s'.
 
        <b>-W shell-command=NAME</b>
               Defaults File Option: <b>swbis_shell_command</b>
-              NAME may be one of &quot;bash&quot;, &quot;sh&quot; or &quot;posix&quot; and specifies the
-              remote command run by the remote shell.  &quot;posix&quot; is
-              'PATH=`getconf PATH` sh -s', &quot;bash&quot; is &quot;/bin/bash -s&quot;, &quot;sh&quot; is
-              &quot;/bin/sh -s&quot;, and &quot;ksh&quot; is &quot;ksh -s&quot;.  The default is &quot;posix&quot;.
+              NAME may be one of &quot;detect&quot; &quot;bash&quot;, &quot;sh&quot; or &quot;posix&quot; and
+              specifies the command run by the remote shell.  The default is
+              &quot;detect&quot;.
 
        <b>-W use-getconf</b>
               Opposite of --no-getconf.
@@ -387,17 +395,7 @@ i {color:#000080}
                     ;
 
 
-</pre><h3><a name="TARGET COPYING RULES"><b>TARGET COPYING RULES</b></a></h3><pre>       Currently, file permissions and ownerships are not copied. 'swcopy' is
-       not intended to be used in the way of cp or scp, although it can be if
-       forced.  Non-existing directories in a target are created.  A source
-       directory cannot be renamed (although a regular file can be), that is
-       if a directory is being copied, it will never be a different name on
-       the target.  A single source file is specified for one or more targets.
-       The syntax does not support multiple source files.  A portable
-       character string in the target spec is assumed to be a hostname unless
-       it begins with a slash '/' or a colon ':'.
-
-   <a name="Rules"><b>Rules</b></a>
+</pre><h3><a name="TARGET COPYING RULES"><b>TARGET COPYING RULES</b></a></h3><pre>   <b>Rules</b>
        If a target directory on the host does not exist it will be created
        using mkdir -p using the file creation mask of the originating swcopy
        process.  A trailing slash in the target spec signifies that the last
@@ -416,26 +414,42 @@ i {color:#000080}
        command (e.g.  pax -r).
 
    <a name="Examples"><b>Examples</b></a>
-                  Install a tarball in the current directory:
-                    Note: Must use stdin as source and &quot;.&quot; as the target.
+              Copy a regular file via tar archive creation and extraction.
+              This will preserve the permissions of the file to the extent tar
+              can preserve them.
 
-                          swcopy --no-audit -s - @. &lt; foo.tar.gz
+                swcopy --no-audit --create --extract -s :README @ HostA
 
-                   Copy thru a firewall:
+               Copy a directory to another host
+
+                swcopy --no-audit  -s /usr @ HostA:/usr/local/tmp/HostA/
+
+               Copy several directories to another host as a compressed
+              archive file.
+
+                  swcopy --no-audit --no-extract \
+                           -s /usr -s /etc @ HostA:/tmp/usr-etc.tar.bz2
+
+               Install a tarball in the current directory: Note: Must use
+              stdin as source and &quot;.&quot; as the target.
+
+                   swcopy --no-audit -s - @. &lt; foo.tar.gz
+
+               Copy thru a firewall:
 
                           swcopy -s /var/tmp/foo.tar.gz \
-                               @root@host1@@root@host2:/var/tmp
+                               @root@host1:root@host2:/var/tmp
 
-                   Copy Stdin to a remote host:
+               Copy Stdin to a remote host:
 
-                     Unpack the archive on stdin in the directory
-                     /a/b/c if 'c' is a directory, otherwise copy
-                     the archive file to a file named 'c' in
-                     directory /a/b creating it if possible and
-                     overwriting if required.
-                         swcopy -s - @host1:/a/b/c
+                  Unpack the archive on stdin in the directory
+                  /a/b/c if 'c' is a directory, otherwise copy
+                  the archive file to a file named 'c' in
+                  directory /a/b creating it if possible and
+                  overwriting if required.
+                      swcopy -s - @host1:/a/b/c
 
-                   Copy Stdin to a remote host:
+               Copy Stdin to a remote host:
 
                      Unpack the serial archive on stdin in the
                      directory /a/b/c if 'c' is a directory,
@@ -444,20 +458,20 @@ i {color:#000080}
                          swcopy -s - @host1:/a/b/c/
                                    # Note trailing slash.
 
-                   Copy a regular file:
+               Copy a regular file:
 
-                     Copy file yy to directory /aa/bb/cc/ on the
-                     remote host, creating it if required and possible.
-                     If cc is a regular file then fail.
-                         swcopy -s /xx/yy @host1:/aa/bb/cc/
+                 Copy file yy to directory /aa/bb/cc/ on the
+                 remote host, creating it if required and possible.
+                 If cc is a regular file then fail.
+                    swcopy -s /xx/yy @host1:/aa/bb/cc/
 
-                   Copy a regular file thru intermediate host 'fw':
+               Copy a regular file thru intermediate host 'fw':
 
                      Copy file yy to home directory of user1 on host1
                      thru a an intermediate host fw,
-                         swcopy -s /xx/yy @fw@@user1@host1:.
+                         swcopy -s /xx/yy @ fw:user1@host1:.
 
-                   Copy a directory from one host to another
+               Copy a directory from one host to another
 
                      Copy directory yy into directory cc if cc exists,
                      otherwise create cc and copy yy into it. If cc
@@ -536,13 +550,13 @@ i {color:#000080}
        ~/.swbis/swbisdefaults file.
 
 
-         swcopy.swbis_no_getconf = false # true or false
-         swcopy.swbis_shell_command = posix # {sh|bash|posix|ksh}
+         swcopy.swbis_no_getconf = true # true or false
+         swcopy.swbis_shell_command = detect # {detect|sh|bash|posix|ksh}
          swcopy.swbis_no_remote_kill = false # true or false
          swcopy.swbis_no_audit = false # true or false
          swcopy.swbis_quiet_progress_bar = false # true or false
-         swcopy.swbis_local_pax_write_command=pax #{pax|tar|star|gtar|swbistar}
-         swcopy.swbis_remote_pax_write_command=pax #{pax|tar|star|gtar|swbistar}
+         swcopy.swbis_local_pax_write_command=pax #{pax|tar|star|gtar}
+         swcopy.swbis_remote_pax_write_command=pax #{pax|tar|star|gtar}
          swcopy.swbis_local_pax_read_command=pax #{pax|tar|gtar|star}
          swcopy.swbis_remote_pax_read_command=pax #{pax|tar|gtar|star}
          swcopy.swbis_allow_rpm = false  # true or false
@@ -551,32 +565,22 @@ i {color:#000080}
 </pre><h3><a name="RETURN VALUE"><b>RETURN VALUE</b></a></h3><pre>       0 if all targets succeeded, 1 if all targets failed, 2 if some targets
        failed and some succeeded.
 </pre><h3><a name="NOTES"><b>NOTES</b></a></h3><pre>        Multiple ssh-hops is an implementation extension.
-</pre><h3><a name="REQUISITE UTILITIES"><b>REQUISITE UTILITIES</b></a></h3><pre>       Swcopy requires a Posix shell accessible by the remote shell command.
-       This is the remote command run by ssh (or rsh) for all operations.
-       This command can be controlled by the --shell-command option or the
-       swbis_shell_command defaults file option.  Permitted values are &quot;bash&quot;
-       (/bin/bash -s), &quot;sh&quot; (/bin/sh -s), &quot;ksh&quot; (/bin/ksh -s) or &quot;posix&quot;
-       ('PATH=`getconf PATH` sh -s').  The default is &quot;posix&quot;.  swcopy
-       requires the POSIX capability of reading commands on stdin according to
-       the specification described in IEEE Std 1003.1, 2003 Ed.; sh -shell,
-       Section STDIN.  This requirement accommodates reading of shell program
-       code and data on STDIN.  This capability may not be present in some
-       /bin/sh shells.  The &quot;/bin/sh&quot; on FreeBSD-5.1 is broken in this regard,
-       hence ''--shell-command=bash'' should be used for BSD hosts.  The
-       public domain Korn shell (pdksh-5.2.14) seems to work OK, that is, it
-       complies by luck or intent with the POSIX capability of reading data
-       and code on stdin.
+</pre><h3><a name="REQUISITE UTILITIES"><b>REQUISITE UTILITIES</b></a></h3><pre>       The swbis distributed utilities require <b>bash</b>, public domain <b>ksh</b>, or
+       Sun's /usr/xpg4/bin/sh to be present on the target host.  If the
+       <b>swbis_shell_command</b> extended option is set to 'detect' you don't have
+       to know which one is present, otherwise you may specify one explicitly.
 
-       If the --no-getconf option is set or the swcopy.swbis_no_getconf
-       defaults option is &quot;true&quot; then the remote command is '/bin/sh -s'.  Use
-       of the no-getconf option is needed for communication with user accounts
-       on remote machines whose login shell is not a Bourne shell (e.g. csh)
-       such as root on some default BSD installations.  Other *nix systems may
-       require use of getconf because their /bin/sh is broken or not Posix
-       enough (e.g. Sun platforms).  Still other systems may not have <b>getconf</b>.
+       A POSIX <b>awk</b> is required, and with the ability to specify several
+       thousand bytes of program text as a command argument.  GNU awk  works,
+       as does the ATT Awk book awk, and the awk on BSD systems.  See the
+       INSTALL file for further details regarding a small issue with the
+       OpenSolaris (c.2006) awk.
 
-       Other utilities required to be in $PATH on the remote host are: dd, pax
-       (or tar|star|gtar), mkdir, echo, test, sleep, read (if not builtin).
+       Tar or pax is used for archive transfer.  You may specify which one.
+
+       swcopy.swbis_local_pax_write_command=tar #{pax|tar|gtar}
+       swcopy.swbis_remote_pax_write_command=tar #{pax|tar|gtar}
+
 </pre><h3><a name="FILES"><b>FILES</b></a></h3><pre>       /usr/lib/swbis/swdefaults
        /usr/lib/swbis/swbisdefaults
        $HOME/.swbis/swdefaults
@@ -589,7 +593,7 @@ i {color:#000080}
        <a href=sw_5.html>sw(5)</a>, <a href=swbisparse_1.html>swbisparse(1)</a>, <a href=swign_1.html>swign(1)</a>, <a href=swverify_8.html>swverify(8)</a>
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        <a href=swcopy_8.html>swcopy(8)</a>: The archive copying utility of the swbis project.
         Author: Jim Lowe   Email: jhlowe at acm.org
-        Version: 0.950
+        Version: 1.0pre0
         Last Updated: 2006-07
         Copying: GNU Free Documentation License
 </pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       Swcopy is subject to breakage if a user's account on an intermediate

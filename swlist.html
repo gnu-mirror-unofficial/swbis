@@ -3,7 +3,7 @@
 <title>Untitled</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="Untitled">
-<meta name="generator" content="makeinfo 4.9">
+<meta name="generator" content="makeinfo 4.7">
 <link title="Top" rel="top" href="#Top">
 <link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
@@ -14,18 +14,96 @@
   pre.smallformat  { font-family:inherit; font-size:smaller }
   pre.smallexample { font-size:smaller }
   pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+  span.sc { font-variant:small-caps }
+  span.roman { font-family: serif; font-weight: normal; } 
 --></style>
 </head>
 <body>
+\. 
+<!-- TROFF INPUT: .fl			\" force out current output buffer -->
+<!-- .fl			\" force out current output buffer -->
+\\!%PB
+\\!/showpage{}def
+<!-- TROFF INPUT: ...\" the following is from Ken Flowers - it prevents dictionary overflows -->
+<!-- ...\" the following is from Ken Flowers - it prevents dictionary overflows -->
+\\!/tempdict 200 dict def tempdict begin
+<!-- TROFF INPUT: .fl			\" prolog -->
+<!-- .fl			\" prolog -->
+<!-- TROFF INPUT: .sy cat \\$1\" bring in postscript file -->
+<!-- .sy cat \\$1\" bring in postscript file -->
+<!-- TROFF INPUT: ...\" the following line matches the tempdict above -->
+<!-- ...\" the following line matches the tempdict above -->
+\\!end % tempdict %
+\\!PE
+\\!. 
+<!-- TROFF INPUT: .sp \\$2u	\" move below the image -->
+<!-- .sp \\$2u	\" move below the image -->
+<!-- TROFF INPUT: .. -->
+<!-- .. -->
+<!-- TROFF INPUT: .de pF -->
+<!-- .de pF -->
+<!-- TROFF INPUT: .ie     \\*(f1 .ds f1 \\n(.f -->
+<!-- .ie     \\*(f1 .ds f1 \\n(.f -->
+<!-- TROFF INPUT: .el .ie \\*(f2 .ds f2 \\n(.f -->
+<!-- .el .ie \\*(f2 .ds f2 \\n(.f -->
+<!-- TROFF INPUT: .el .ie \\*(f3 .ds f3 \\n(.f -->
+<!-- .el .ie \\*(f3 .ds f3 \\n(.f -->
+<!-- TROFF INPUT: .el .ie \\*(f4 .ds f4 \\n(.f -->
+<!-- .el .ie \\*(f4 .ds f4 \\n(.f -->
+<!-- TROFF INPUT: .el .tm ? font overflow -->
+<!-- .el .tm ? font overflow -->
+<!-- TROFF INPUT: .ft \\$1 -->
+<!-- .ft \\$1 -->
+<!-- TROFF INPUT: .. -->
+<!-- .. -->
+<!-- TROFF INPUT: .de fP -->
+<!-- .de fP -->
+<!-- TROFF INPUT: .ie     !\\*(f4 \{\ -->
+<!-- .ie     !\\*(f4 \@{\ -->
+<!-- TROFF INPUT: .	ft \\*(f4 -->
+<!-- .	ft \\*(f4 -->
+<!-- TROFF INPUT: .	ds f4\" -->
+<!-- .	ds f4\" -->
+'	br \}
+<!-- TROFF INPUT: .el .ie !\\*(f3 \{\ -->
+<!-- .el .ie !\\*(f3 \@{\ -->
+<!-- TROFF INPUT: .	ft \\*(f3 -->
+<!-- .	ft \\*(f3 -->
+<!-- TROFF INPUT: .	ds f3\" -->
+<!-- .	ds f3\" -->
+'	br \}
+<!-- TROFF INPUT: .el .ie !\\*(f2 \{\ -->
+<!-- .el .ie !\\*(f2 \@{\ -->
+<!-- TROFF INPUT: .	ft \\*(f2 -->
+<!-- .	ft \\*(f2 -->
+<!-- TROFF INPUT: .	ds f2\" -->
+<!-- .	ds f2\" -->
+'	br \}
+<!-- TROFF INPUT: .el .ie !\\*(f1 \{\ -->
+<!-- .el .ie !\\*(f1 \@{\ -->
+<!-- TROFF INPUT: .	ft \\*(f1 -->
+<!-- .	ft \\*(f1 -->
+<!-- TROFF INPUT: .	ds f1\" -->
+<!-- .	ds f1\" -->
+'	br \}
+<!-- TROFF INPUT: .el .tm ? font underflow -->
+<!-- .el .tm ? font underflow -->
+<!-- TROFF INPUT: .. -->
+<!-- .. -->
+<!-- TROFF INPUT: .ds f1\" -->
+<!-- WARNING: man/man8/swlist.8:49:%%unrecognized define-string command: [.ds f1\"] -->
+<!-- TROFF INPUT: .ds f2\" -->
+<!-- WARNING: man/man8/swlist.8:50:%%unrecognized define-string command: [.ds f2\"] -->
+<!-- TROFF INPUT: .ds f3\" -->
+<!-- WARNING: man/man8/swlist.8:51:%%unrecognized define-string command: [.ds f3\"] -->
+<!-- TROFF INPUT: .ds f4\" -->
+<!-- WARNING: man/man8/swlist.8:52:%%unrecognized define-string command: [.ds f4\"] -->
+<!-- TROFF INPUT: .TH "swlist" "8" -->
 <div class="node">
 <p><hr>
-<a name="Top"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#NAME">NAME</a>,
+<a name="Top"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#NAME">NAME</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#dir">(dir)</a>
-
+<br>
 </div>
 
 <h2 class="chapter">1 swlist" "8</h2>
@@ -56,11 +134,10 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#dir">(dir)</a>
 <!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
-<a name="NAME"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#SYNOPSIS">SYNOPSIS</a>,
+<a name="NAME"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#SYNOPSIS">SYNOPSIS</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#Top">Top</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
-
+<br>
 </div>
 
 <h3 class="section">1.1 NAME</h3>
@@ -71,11 +148,10 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
-<a name="SYNOPSIS"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#DESCRIPTION">DESCRIPTION</a>,
+<a name="SYNOPSIS"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#DESCRIPTION">DESCRIPTION</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#NAME">NAME</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
-
+<br>
 </div>
 
 <h3 class="section">1.2 SYNOPSIS</h3>
@@ -83,8 +159,8 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">     <b>swlist</b>  [&minus;d|&minus;r] [&minus;v] [&minus;a <i>attribute</i>] [&minus;l <i>level</i>]  [&minus;t <i>targetfile</i>] \&nbsp;<!-- /@w -->
-     [&minus;c <i>file</i>] [&minus;x <i>option=value</i>]  [&minus;X <i>options</i><tt>_</tt><i>file</i>]  [&minus;W <i>option</i>] \&nbsp;<!-- /@w -->
+<pre class="display">     <b>swlist</b>  [-d|-r] [-v] [-a <i>attribute</i>] [-l <i>level</i>]  [-t <i>targetfile</i>] \\
+     [-c <i>file</i>] [-x <i>option=value</i>]  [-X <i>options</i><tt>_</tt><i>file</i>]  [-W <i>option</i>] \\
      [software<tt>_</tt>selections]  [@targets]
      <!-- TROFF INPUT: .fi -->
 </pre>
@@ -92,29 +168,29 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">     <b>swlist</b> &minus;&minus;products [software<tt>_</tt>selections]  [@targets]
+<pre class="display">     <b>swlist</b> &ndash;products [software<tt>_</tt>selections]  [@targets]
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">     <b>swlist</b> &minus;&minus;files  [@targets]
+<pre class="display">     <b>swlist</b> &ndash;files  [@targets]
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">     <b>swlist</b> &minus;&minus;dir [software<tt>_</tt>selections] [@targets]
+<pre class="display">     <b>swlist</b> &ndash;dir [software<tt>_</tt>selections] [@targets]
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">     <b>swlist</b> &minus;&minus;dependencies [&minus;&minus;prerequisites <i>sw</i><tt>_</tt><i>spec</i>] [&minus;&minus;exrequisites <i>sw</i><tt>_</tt><i>spec</i>] \&nbsp;<!-- /@w -->
-     [@targets]
+<pre class="display">     <b>swlist</b> &ndash;dependencies [&ndash;prerequisites <i>sw</i><tt>_</tt><i>spec</i>] \\
+     [&ndash;exrequisites <i>sw</i><tt>_</tt><i>spec</i>] [@targets]
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
@@ -123,11 +199,10 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
-<a name="DESCRIPTION"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#OPTIONS">OPTIONS</a>,
+<a name="DESCRIPTION"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#OPTIONS">OPTIONS</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#SYNOPSIS">SYNOPSIS</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
-
+<br>
 </div>
 
 <h3 class="section">1.3 DESCRIPTION</h3>
@@ -148,11 +223,10 @@ default is subject to user configuration.
 <!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
-<a name="OPTIONS"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#IMPLEMENTATION-EXTENSIONS">IMPLEMENTATION EXTENSIONS</a>,
+<a name="OPTIONS"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#IMPLEMENTATION-EXTENSIONS">IMPLEMENTATION EXTENSIONS</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#DESCRIPTION">DESCRIPTION</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
-
+<br>
 </div>
 
 <h3 class="section">1.4 OPTIONS</h3>
@@ -181,7 +255,7 @@ GNU <b>config.guess</b> on the target host.
 <!--  -->
 <blockquote>
 Write the catalog to FILE. Software selections are applied. 
-The only supported FILE is '&minus;' causing a dump of the catalog
+The only supported FILE is '-' causing a dump of the catalog
 to stdout in tar format. 
 <!-- TROFF INPUT: .RE -->
 </blockquote>
@@ -238,8 +312,8 @@ Specify a file containing a list of targets (one per line).
 <!--  -->
 <blockquote>
 List attribute value pairs in INDEX file format according to
-attibutes specified by the &minus;a option, list all attributes if
-&minus;a not used; or, increment the verbose level. 
+attibutes specified by the -a option, list all attributes if
+-a not used; or, increment the verbose level. 
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .RS -->
 <!--  -->
@@ -254,7 +328,7 @@ increment verbosity, otherwise it means list in INDEX file format.
 </blockquote>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<!-- WARNING: man/man8/swlist.8:120:%%new font B started without closing previous font B -->
+<!-- WARNING: man/man8/swlist.8:172:%%new font B started without closing previous font B -->
 </b><b>-x option=value</b>
 <!-- TROFF INPUT: .RS -->
 <!--  -->
@@ -291,7 +365,7 @@ Show help (Implementation extension)
 Specify the implementation extension option. 
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
-Syntax: &minus;W option[=option<tt>_</tt>argument[,option...] 
+Syntax: -W option[=option<tt>_</tt>argument[,option...] 
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
 Options may be separated by a comma.  The implementation extension
@@ -300,7 +374,7 @@ options may also be given individually using the '&minus;&minus;long-option[=opt
 </blockquote>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>&minus;&minus;products</b>
+<b>&ndash;products</b>
 <!-- TROFF INPUT: .RS -->
 <!--  -->
 <blockquote>
@@ -309,7 +383,7 @@ List the product's tag, revision, vendor<tt>_</tt>tag and location.
 </blockquote>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>&minus;&minus;directory</b>
+<b>&ndash;directory</b>
 <!-- TROFF INPUT: .RS -->
 <!--  -->
 <blockquote>
@@ -318,7 +392,7 @@ List the catalog directory entries.
 </blockquote>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>&minus;&minus;files</b>
+<b>&ndash;files</b>
 <!-- TROFF INPUT: .RS -->
 <!--  -->
 <blockquote>
@@ -327,7 +401,7 @@ List files as defined in the installed catalog
 </blockquote>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>&minus;&minus;sys</b>
+<b>&ndash;sys</b>
 <!-- TROFF INPUT: .RS -->
 <!--  -->
 <blockquote>
@@ -336,18 +410,18 @@ List files as exists in the file system
 </blockquote>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>&minus;&minus;dependencies</b>
+<b>&ndash;dependencies</b>
 <!-- TROFF INPUT: .RS -->
 <!--  -->
 <blockquote>
 Run in check dependency mode. 
 Assert dependencies against installed software catalog. Dependencies are
-software specs given by the &minus;&minus;prerequisites and &minus;&minus;extrequisites options
+software specs given by the &ndash;prerequisites and &ndash;extrequisites options
 <!-- TROFF INPUT: .RE -->
 </blockquote>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>&minus;&minus;prerequisites=SW</b><tt>_</tt><b>SPEC</b>
+<b>&ndash;prerequisites=SW</b><tt>_</tt><b>SPEC</b>
 <!-- TROFF INPUT: .RS -->
 <!--  -->
 <blockquote>
@@ -357,7 +431,7 @@ Prerequisites packages are required to be installed.
 </blockquote>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>&minus;&minus;exrequisites=SW</b><tt>_</tt><b>SPEC</b>
+<b>&ndash;exrequisites=SW</b><tt>_</tt><b>SPEC</b>
 <!-- TROFF INPUT: .RS -->
 <!--  -->
 <blockquote>
@@ -430,7 +504,7 @@ Defaults File Option: <b>swbis</b><tt>_</tt><b>remote</b><tt>_</tt><b>pax</b><tt
 <!--  -->
 <blockquote>
 Set the read command for remote hosts. 
-This is the command that runs on the target (e.g. pax &minus;r, tar xpf &minus;). 
+This is the command that runs on the target (e.g. pax -r, tar xpf -). 
 The default is "pax". 
 <!-- TROFF INPUT: .RE -->
 </blockquote>
@@ -448,7 +522,7 @@ Defaults File Option: <b>swbis</b><tt>_</tt><b>local</b><tt>_</tt><b>pax</b><tt>
 <!--  -->
 <blockquote>
 Set the read command for local hosts. 
-This is the command that runs on the target (e.g. pax &minus;r, tar xpf &minus;). 
+This is the command that runs on the target (e.g. pax -r, tar xpf -). 
 The default is "pax". 
 <!-- TROFF INPUT: .RE -->
 </blockquote>
@@ -461,7 +535,7 @@ The default is "pax".
 <!--  -->
 <blockquote>
 Set the write command for local and remote hosts. 
-This is the command that runs on the target (e.g. pax &minus;w, tar cf &minus;). 
+This is the command that runs on the target (e.g. pax -w, tar cf -). 
 <!-- TROFF INPUT: .RE -->
 </blockquote>
 <!--  -->
@@ -496,7 +570,7 @@ Defaults File Option: <b>swbis</b><tt>_</tt><b>local</b><tt>_</tt><b>pax</b><tt>
 <!--  -->
 <blockquote>
 Set the portable archive write command for local host operations. 
-This is the command that runs on the source (e.g. pax &minus;w, tar cf &minus;). 
+This is the command that runs on the source (e.g. pax -w, tar cf -). 
 The default is "pax". 
 <!-- TROFF INPUT: .RE -->
 </blockquote>
@@ -514,7 +588,7 @@ Defaults File Option: <b>swbis</b><tt>_</tt><b>remote</b><tt>_</tt><b>pax</b><tt
 <!--  -->
 <blockquote>
 Set the portable archive write command for remote host operations. 
-This is the command that runs on the source (e.g. pax &minus;w, tar cf &minus;). 
+This is the command that runs on the source (e.g. pax -w, tar cf -). 
 The default is "pax". 
 <!-- TROFF INPUT: .RE -->
 </blockquote>
@@ -536,8 +610,8 @@ Do not read any defaults files.
 Defaults File Option: <b>swbis</b><tt>_</tt><b>no</b><tt>_</tt><b>getconf</b>
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
-Makes the remote command be '/bin/sh &minus;s' instead of the default
-'PATH=`getconf PATH` sh &minus;s'. 
+Makes the remote command be '/bin/sh -s' instead of the default
+'PATH=`getconf PATH` sh -s'. 
 <!-- TROFF INPUT: .RE -->
 </blockquote>
 <!--  -->
@@ -549,10 +623,10 @@ Makes the remote command be '/bin/sh &minus;s' instead of the default
 Defaults File Option: <b>swbis</b><tt>_</tt><b>shell</b><tt>_</tt><b>command</b>
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
-NAME may be one of "bash", "sh" or "posix" and specifies the
+NAME may be one of "detect" "bash", "sh" or "posix" and specifies the
 remote command run by the remote shell. 
-"posix" is 'PATH=`getconf PATH` sh &minus;s', "bash" is "/bin/bash &minus;s",
-"sh" is "/bin/sh &minus;s", and "ksh" is "ksh &minus;s". 
+"posix" is 'PATH=`getconf PATH` sh -s', "bash" is "/bin/bash -s",
+"sh" is "/bin/sh -s", and "ksh" is "ksh -s". 
 The default is "posix". 
 <!-- TROFF INPUT: .RE -->
 </blockquote>
@@ -655,14 +729,14 @@ To force interpretation as a path, use a absolute path or prefix with ':'.
                      NOTE: A '.' as a target is an implementation
                            extension and means extract in current
                            directory.
-                     NOTE: A '&minus;' indicating stdout/stdin is an
+                     NOTE: A '-' indicating stdout/stdin is an
                            implementation extension.
                      NOTE: A ':' in the first character indicates a filename.
                            This is an implementation extension.
             HOST<tt>_</tt>CHARACTER<tt>_</tt>STRING is an IP or hostname.
          Examples:
             Copy the  distribution /var/tmp/foo.tar.gz at 192.168.1.10
-                   swcopy &minus;s /var/tmp/foo.tar.gz @192.168.1.10:/root
+                   swcopy -s /var/tmp/foo.tar.gz @192.168.1.10:/root
      Implementation Extension Syntax (multi ssh-hop) :
          Syntax:
          %start   wtarget    # the Implementation Extension Target
@@ -690,35 +764,33 @@ To force interpretation as a path, use a absolute path or prefix with ':'.
 <!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
-<a name="IMPLEMENTATION-EXTENSIONS"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#USAGE-EXAMPLES">USAGE EXAMPLES</a>,
+<a name="IMPLEMENTATION-EXTENSIONS"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#USAGE-EXAMPLES">USAGE EXAMPLES</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#OPTIONS">OPTIONS</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
-
+<br>
 </div>
 
 <h3 class="section">1.5 IMPLEMENTATION EXTENSIONS</h3>
 
 <!-- TROFF INPUT: .PP -->
 <p>The
-<b>&minus;&minus;dependencies</b>,
-<b>&minus;&minus;products</b>, and
-<b>&minus;&minus;files</b> are implementation extension modes. 
+<b>&ndash;dependencies</b>,
+<b>&ndash;products</b>, and
+<b>&ndash;files</b> are implementation extension modes. 
 <!-- TROFF INPUT: .SH "USAGE EXAMPLES" -->
 <!-- DEBUG: print_menu("IMPLEMENTATION EXTENSIONS") -->
 <!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
-<a name="USAGE-EXAMPLES"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#EXTENDED-OPTIONS">EXTENDED OPTIONS</a>,
+<a name="USAGE-EXAMPLES"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#EXTENDED-OPTIONS">EXTENDED OPTIONS</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#IMPLEMENTATION-EXTENSIONS">IMPLEMENTATION EXTENSIONS</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
-
+<br>
 </div>
 
 <h3 class="section">1.6 USAGE EXAMPLES</h3>
 
-<!-- TROFF INPUT: .SS "Show the path of the installed software catalog." -->
+<!-- TROFF INPUT: .SS "Show the path of the installed software catalog\&." -->
 <!-- DEBUG: print_menu("USAGE EXAMPLES") -->
 <ul class="menu">
 <li><a accesskey="1" href="#Show-the-path-of-the-installed-software-catalog">Show the path of the installed software catalog </a>
@@ -728,10 +800,9 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
-<a name="Show-the-path-of-the-installed-software-catalog"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#List-Products">List Products</a>,
+<a name="Show-the-path-of-the-installed-software-catalog"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#List-Products">List Products</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#USAGE-EXAMPLES">USAGE EXAMPLES</a>
-
+<br>
 </div>
 
 <h4 class="subsection">1.6.1 Show the path of the installed software catalog.</h4>
@@ -739,7 +810,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#USAGE-EXAMPLES">USAGE EXAMPLES</a>
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">       swlist &minus;&minus;show-options | grep installed<tt>_</tt>
+<pre class="display">       swlist &ndash;show-options | grep installed<tt>_</tt>
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
@@ -748,11 +819,10 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#USAGE-EXAMPLES">USAGE EXAMPLES</a>
 <!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
-<a name="List-Products"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#Test-Dependencies">Test Dependencies</a>,
+<a name="List-Products"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Test-Dependencies">Test Dependencies</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#Show-the-path-of-the-installed-software-catalog">Show the path of the installed software catalog</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#USAGE-EXAMPLES">USAGE EXAMPLES</a>
-
+<br>
 </div>
 
 <h4 class="subsection">1.6.2 List Products</h4>
@@ -804,10 +874,9 @@ in their distributions.
 <!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
-<a name="Test-Dependencies"></a>
-Previous:&nbsp;<a rel="previous" accesskey="p" href="#List-Products">List Products</a>,
+<a name="Test-Dependencies"></a>Previous:&nbsp;<a rel="previous" accesskey="p" href="#List-Products">List Products</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#USAGE-EXAMPLES">USAGE EXAMPLES</a>
-
+<br>
 </div>
 
 <h4 class="subsection">1.6.3 Test Dependencies</h4>
@@ -818,7 +887,7 @@ installed catalog on a host
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">       swlist &minus;x verbose=3 &minus;&minus;depend &minus;&minus;pre="foo*,r&gt;=1.0,r&lt;2" @192.168.3.1:/; echo $?
+<pre class="display">       swlist -x verbose=3 &ndash;depend &ndash;pre="foo*,r&gt;=1.0,r&lt;2" @192.168.3.1:/; echo $?
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
@@ -827,17 +896,16 @@ installed catalog on a host
 <!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
-<a name="EXTENDED-OPTIONS"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#RETURN-VALUE">RETURN VALUE</a>,
+<a name="EXTENDED-OPTIONS"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#RETURN-VALUE">RETURN VALUE</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#USAGE-EXAMPLES">USAGE EXAMPLES</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
-
+<br>
 </div>
 
 <h3 class="section">1.7 EXTENDED OPTIONS</h3>
 
 <!-- TROFF INPUT: .PP -->
-<p>Extended options can be specified on the command line using the &minus;x option
+<p>Extended options can be specified on the command line using the -x option
 or from the defaults file, swdefaults.  Shown below is an actual portion of
 a defaults file which show default values. 
 <!-- TROFF INPUT: .SS "POSIX" -->
@@ -850,10 +918,9 @@ a defaults file which show default values.
 <!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
-<a name="POSIX"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#Swbis-Implementation">Swbis Implementation</a>,
+<a name="POSIX"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#Swbis-Implementation">Swbis Implementation</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#EXTENDED-OPTIONS">EXTENDED OPTIONS</a>
-
+<br>
 </div>
 
 <h4 class="subsection">1.7.1 POSIX</h4>
@@ -868,7 +935,7 @@ These files on the target host are not used.
 <!--  -->
 <pre class="display">        distribution<tt>_</tt>target<tt>_</tt>directory  = /
         installed<tt>_</tt>software<tt>_</tt>catalog  = var/lib/swbis/catalog/
-        one<tt>_</tt>liner                   = files|products   # Mode when &minus;v not given
+        one<tt>_</tt>liner                   = files|products   # Mode when -v not given
         select<tt>_</tt>local                = false      # Not Implemented
         verbose                     = 1
      <!-- TROFF INPUT: .fi -->
@@ -879,10 +946,9 @@ These files on the target host are not used.
 <!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
-<a name="Swbis-Implementation"></a>
-Previous:&nbsp;<a rel="previous" accesskey="p" href="#POSIX">POSIX</a>,
+<a name="Swbis-Implementation"></a>Previous:&nbsp;<a rel="previous" accesskey="p" href="#POSIX">POSIX</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#EXTENDED-OPTIONS">EXTENDED OPTIONS</a>
-
+<br>
 </div>
 
 <h4 class="subsection">1.7.2 Swbis Implementation</h4>
@@ -894,13 +960,13 @@ file.
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">       swlist.swbis<tt>_</tt>no<tt>_</tt>getconf = false # true or false
-       swlist.swbis<tt>_</tt>shell<tt>_</tt>command = posix # {sh|bash|posix|ksh}
+<pre class="display">       swlist.swbis<tt>_</tt>no<tt>_</tt>getconf = true # true or false
+       swlist.swbis<tt>_</tt>shell<tt>_</tt>command = detect # {detect|sh|bash|posix|ksh}
        swlist.swbis<tt>_</tt>no<tt>_</tt>remote<tt>_</tt>kill = false # true or false
-       swlist.swbis<tt>_</tt>local<tt>_</tt>pax<tt>_</tt>write<tt>_</tt>command=pax #{pax|tar|star|gtar|swbistar}
-       swlist.swbis<tt>_</tt>remote<tt>_</tt>pax<tt>_</tt>write<tt>_</tt>command=pax #{pax|tar|star|gtar|swbistar}
-       swlist.swbis<tt>_</tt>local<tt>_</tt>pax<tt>_</tt>read<tt>_</tt>command=pax #{pax|tar|gtar|star}
-       swlist.swbis<tt>_</tt>remote<tt>_</tt>pax<tt>_</tt>read<tt>_</tt>command=pax #{pax|tar|gtar|star}
+       swlist.swbis<tt>_</tt>local<tt>_</tt>pax<tt>_</tt>write<tt>_</tt>command=detect #{pax|tar|gtar|detect}
+       swlist.swbis<tt>_</tt>remote<tt>_</tt>pax<tt>_</tt>write<tt>_</tt>command=detect #{pax|tar|gtar|detect}
+       swlist.swbis<tt>_</tt>local<tt>_</tt>pax<tt>_</tt>read<tt>_</tt>command=tar #{pax|tar|gtar|star}
+       swlist.swbis<tt>_</tt>remote<tt>_</tt>pax<tt>_</tt>read<tt>_</tt>command=tar #{pax|tar|gtar|star}
        swlist.swbis<tt>_</tt>remote<tt>_</tt>shell<tt>_</tt>client=ssh
        swlist.swbis<tt>_</tt>forward<tt>_</tt>agent=True
      <!-- TROFF INPUT: .fi -->
@@ -911,11 +977,10 @@ file.
 <!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
-<a name="RETURN-VALUE"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#NOTES">NOTES</a>,
+<a name="RETURN-VALUE"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#NOTES">NOTES</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#EXTENDED-OPTIONS">EXTENDED OPTIONS</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
-
+<br>
 </div>
 
 <h3 class="section">1.8 RETURN VALUE</h3>
@@ -929,11 +994,10 @@ When checking dependencies, 3 if the given sw<tt>_</tt>specs failed as dependenc
 <!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
-<a name="NOTES"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#REQUISITE-UTILITIES">REQUISITE UTILITIES</a>,
+<a name="NOTES"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#REQUISITE-UTILITIES">REQUISITE UTILITIES</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#RETURN-VALUE">RETURN VALUE</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
-
+<br>
 </div>
 
 <h3 class="section">1.9 NOTES</h3>
@@ -946,44 +1010,51 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
-<a name="REQUISITE-UTILITIES"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#FILES">FILES</a>,
+<a name="REQUISITE-UTILITIES"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#FILES">FILES</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#NOTES">NOTES</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
-
+<br>
 </div>
 
 <h3 class="section">1.10 REQUISITE UTILITIES</h3>
 
 <!-- TROFF INPUT: .PP -->
-<p>swlist requires a Posix shell accessible by the remote shell command. 
-This is the remote command run by ssh (or rsh) for all operations. 
-swlist makes use of the system 'awk' program for querying the
-installed software catalog, it should work.  swlist is tested
-with gawk (GNU awk) and the AT awkbook awk. 
+<p>The swbis distributed utilities require
+<b>bash</b>, public domain <b>ksh</b>, or
+Sun's /usr/xpg4/bin/sh to be present on the target host.  If the
+<b>swbis</b><tt>_</tt><b>shell</b><tt>_</tt><b>command</b> extended option is set to 'detect'
+you don't have to know which one is present, otherwise you may specify one explicitly. 
 <!-- TROFF INPUT: .PP -->
-If the &minus;&minus;no-getconf option is set or
-the swlist.swbis<tt>_</tt>no<tt>_</tt>getconf defaults option is "true" then the
-remote command is '/bin/sh &minus;s'. 
-Use of the no-getconf option is needed for communication with
-user accounts on remote machines whose login shell is not a Bourne shell
-(e.g. csh) such as root on some default BSD installations. 
-Other *nix systems may require use of getconf because their /bin/sh is
-broken or not Posix enough (e.g. Sun platforms). 
-Still other systems may not have <b>getconf</b>. 
+A POSIX <b>awk</b> is required, and with the ability to
+specify several thousand bytes of program text as a command argument. 
+GNU awk  works, as does the ATT Awk book awk, and the awk on BSD systems. 
+See the INSTALL file for further details regarding a small issue with the
+OpenSolaris (c.2006) awk. 
 <!-- TROFF INPUT: .PP -->
-Other utilities required to be in $PATH on the remote host are:
-dd, pax (or tar|star|gtar), mkdir, echo, test, sleep, read (if not builtin). 
+Tar or pax is used for internally for data transfer.  You may specify which one. 
+<b>swlist</b> and <b>swverify</b> require
+either GNU tar or pax be present on a host.  You may set auto detection
+for this requirement
+<!-- TROFF INPUT: .PP -->
+<!-- TROFF INPUT: .nf -->
+<!--  -->
+<pre class="display">     swlist.swbis<tt>_</tt>local<tt>_</tt>pax<tt>_</tt>write<tt>_</tt>command=detect #{pax|tar|gtar|detect}
+     swlist.swbis<tt>_</tt>remote<tt>_</tt>pax<tt>_</tt>write<tt>_</tt>command=detect #{pax|tar|gtar|detect}
+     <!-- TROFF INPUT: .fi -->
+</pre>
+<!--  -->
+<!-- TROFF INPUT: .PP -->
+<!-- TROFF INPUT: .PP -->
+<p>GNU Privacy Guard, gpg is required for verification of package signatures. 
 <!-- TROFF INPUT: .SH "FILES" -->
 <!-- DEBUG: print_menu("REQUISITE UTILITIES") -->
 <!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
-<a name="FILES"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#APPLICABLE-STANDARDS">APPLICABLE STANDARDS</a>,
+<a name="FILES"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#APPLICABLE-STANDARDS">APPLICABLE STANDARDS</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#REQUISITE-UTILITIES">REQUISITE UTILITIES</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
-
+<br>
 </div>
 
 <h3 class="section">1.11 FILES</h3>
@@ -1005,11 +1076,10 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
-<a name="APPLICABLE-STANDARDS"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#SEE-ALSO">SEE ALSO</a>,
+<a name="APPLICABLE-STANDARDS"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#SEE-ALSO">SEE ALSO</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#FILES">FILES</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
-
+<br>
 </div>
 
 <h3 class="section">1.12 APPLICABLE STANDARDS</h3>
@@ -1021,11 +1091,10 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
-<a name="SEE-ALSO"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#IDENTIFICATION">IDENTIFICATION</a>,
+<a name="SEE-ALSO"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#IDENTIFICATION">IDENTIFICATION</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#APPLICABLE-STANDARDS">APPLICABLE STANDARDS</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
-
+<br>
 </div>
 
 <h3 class="section">1.13 SEE ALSO</h3>
@@ -1039,18 +1108,17 @@ swbis(7), sw(5), swbisparse(1), swign(1), swverify(8)
 <!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
-<a name="IDENTIFICATION"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#BUGS">BUGS</a>,
+<a name="IDENTIFICATION"></a>Next:&nbsp;<a rel="next" accesskey="n" href="#BUGS">BUGS</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#SEE-ALSO">SEE ALSO</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
-
+<br>
 </div>
 
 <h3 class="section">1.14 IDENTIFICATION</h3>
 
 <p>swlist(8): The query/listing utility of the swbis project. 
  Author: Jim Lowe   Email: jhlowe at acm.org
- Version: 0.950
+ Version: 1.0pre0
  Last Updated: 2006-07
  Copying: GNU Free Documentation License
 <!-- TROFF INPUT: .SH "BUGS" -->
@@ -1058,10 +1126,9 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- MAN2TEXI: EON -->
 <div class="node">
 <p><hr>
-<a name="BUGS"></a>
-Previous:&nbsp;<a rel="previous" accesskey="p" href="#IDENTIFICATION">IDENTIFICATION</a>,
+<a name="BUGS"></a>Previous:&nbsp;<a rel="previous" accesskey="p" href="#IDENTIFICATION">IDENTIFICATION</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
-
+<br>
 </div>
 
 <h3 class="section">1.15 BUGS</h3>
@@ -1070,13 +1137,13 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <p>swlist is subject to breakage if a user's account on an intermediate
 (or terminal) host in a target spec is not configured to use a Bourne
 compatible shell. (This breakage may be eliminated by use of the
-&minus;&minus;no-getconf option as explained above.) 
+&ndash;no-getconf option as explained above.) 
 <!-- TROFF INPUT: .PP -->
-swlist does not currently implement the &minus;v,&minus;a options.  Listing products
+swlist does not currently implement the -v,-a options.  Listing products
 in a distribution is not supported.  Operating on a distribution in
 directory form is not supported.  The catalog query funtions are
 implemented in awk and subject to its bugs. 
-<!-- created by instant / docbook-to-man, Sun 20 Apr 2008, 20:00 -->
+<!-- created by instant / docbook-to-man, Sun 10 Aug 2008, 19:47 -->
 
 </body></html>
 

@@ -797,13 +797,13 @@ i {color:#000080}
        included in the signed stream.
 
        The signature file is ASCII armored.  The last printable character of
-       the signature is followed by one or more newline characters (0x0A)
-       followed by one or more NUL characters (0x00).  The total length of the
-       file must match the file size specified in the size field of the
-       <b>sig_header</b> file.  The ustar header of every signature archive member
-       shall be identical to the <b>sig_header</b> file.  The padded size is
-       predetermined [by swpackage] and currently set to be 1024 octets.  This
-       means the armored sig file has a length limitation of 1023 octets.
+       the signature is followed by one or more newline characters (0x0A).
+       The total length of the file must match the file size specified in the
+       size field of the <b>sig_header</b> file.  The ustar header of every signature
+       archive member shall be identical to the <b>sig_header</b> file.  The padded
+       size is predetermined [by swpackage] and currently set to be 1024
+       octets.  This means the armored sig file has a length limitation of
+       1023 octets.
 
        If multiple signature archive members exist they must follow one
        another in the archive with no other intervening files; and, the same
@@ -848,22 +848,22 @@ i {color:#000080}
        containment  hierarchy is determined according to parser's grammar.
 
    <a name="Additional Syntax Rules"><b>Additional Syntax Rules</b></a>
-          o  A '#' (pound) character designates a comment.  A comment may
+          *  A '#' (pound) character designates a comment.  A comment may
              begin a line or appear at the end of a single line containing the
              keyword/value pair.
 
-          o  A value may be quoted by the '&quot;' (double quote) character; and,
+          *  A value may be quoted by the '&quot;' (double quote) character; and,
              multi-line values must be quoted.  Trailing white space from an
              unquoted value will be removed.
 
-          o  The order of attributes is not significant although the INDEX
+          *  The order of attributes is not significant although the INDEX
              file grammar requires the <i>layout</i><b>_</b><i>version</i> attribute appear first
              in distribution or installed software object.
 
-          o  The &quot;, #, and, \ characters must be escaped with a backslash (\)
+          *  The &quot;, #, and, \ characters must be escaped with a backslash (\)
              in a quoted value.
 
-          o  If a value begins with a &lt; (less than), the value is interpreted
+          *  If a value begins with a &lt; (less than), the value is interpreted
              as a filename whose contents will be treated as a quoted value
              although the storage of the attribute will be in the form of a
              control file (i.e. a separate file in the control directory).
@@ -1369,7 +1369,7 @@ i {color:#000080}
         <a href=swpackage_8.html>swpackage(8)</a>
         <a href=swverify_8.html>swverify(8)</a>
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        Copyright (C) 2005 Jim Lowe
-        Version: 0.950
+        Version: 1.0pre0
         Last Updated: 2006-01
         Copying Terms: GNU Free Documentation License
 </pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       None

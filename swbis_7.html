@@ -19,7 +19,7 @@ i {color:#000080}
 </ul><li><a href="#EXAMPLES">EXAMPLES</a>
 <li><a href="#COMMANDS OVERVIEW">COMMANDS OVERVIEW</a>
 <ul><li><a href="#Swbis Specific Commands"><font size=-1>Swbis Specific Commands</font></a>
-</ul><li><a href="#CONFIGURATION">CONFIGURATION</a>
+</ul><li><a href="#RUNTIME CONFIGURATION">RUNTIME CONFIGURATION</a>
 <ul><li><a href="#Strategy for Compatibility with Existing Hosts"><font size=-1>Strategy for Compatibility with Existing Hosts</font></a>
 </ul><li><a href="#HOST REQUIREMENTS">HOST REQUIREMENTS</a>
 <li><a href="#DISCUSSION">DISCUSSION</a>
@@ -216,58 +216,58 @@ i {color:#000080}
        Utilities specified by C701 and ISO/IEC 15068-2:1999 include the
        following:
 
-          o  <a href=swpackage_8.html>swpackage(8)</a>
+          *  <a href=swpackage_8.html>swpackage(8)</a>
 
                  Create a tarball according to a recipe file.
 
-          o  <a href=swcopy_8.html>swcopy(8)</a>
+          *  <a href=swcopy_8.html>swcopy(8)</a>
 
                  Copy a distribution from host to host.
 
-          o  <a href=swverify_8.html>swverify(8)</a>
+          *  <a href=swverify_8.html>swverify(8)</a>
 
                  Verify a software distribution signature.
 
-          o  <a href=swinstall_8.html>swinstall(8)</a>
+          *  <a href=swinstall_8.html>swinstall(8)</a>
 
                  Install a software distribution.
 
-          o  <a href=swlist_8.html>swlist(8)</a>
+          *  <a href=swlist_8.html>swlist(8)</a>
 
                  List software information.
 
-          o  <a href=swremove_8.html>swremove(8)</a>
+          *  <a href=swremove_8.html>swremove(8)</a>
 
                  Remove packages
 
    <a name="Swbis Specific Commands"><b>Swbis Specific Commands</b></a>
        Utilities unique to swbis.
 
-          o  <a href=swign_1.html>swign(1)</a>
+          *  <a href=swign_1.html>swign(1)</a>
 
                  Create the signed meta-data directory, <b>catalog</b>/, of the
                  contents of the current directory and optionally write the
                  entire directory, including the signed catalog as a tar
                  archive.
 
-          o  &lt;<i>libexecdir</i>&gt;<b>/swbis/swbistar</b>
+          *  &lt;<i>libexecdir</i>&gt;<b>/swbis/swbistar</b>
 
                  Archive writing (creation) utility, useful for testing.
 
-          o  &lt;<i>libexecdir</i>&gt;<b>/swbis/swbisparse</b>
+          *  &lt;<i>libexecdir</i>&gt;<b>/swbis/swbisparse</b>
 
-                 Stand-alone parser of Posix Metadata files, useful for
+                 Stand-alone parser of POSIX Metadata files, useful for
                  testing.
 
-          o  &lt;<i>libexecdir</i>&gt;<b>/swbis/arf2arf</b>
+          *  &lt;<i>libexecdir</i>&gt;<b>/swbis/arf2arf</b>
 
                  Archive decoder/checker, Used by swverify.
 
-          o  &lt;<i>libexecdir</i>&gt;<b>/swbis/lxpsf</b>
+          *  &lt;<i>libexecdir</i>&gt;<b>/swbis/lxpsf</b>
 
                  Archive translator, used by <b>swpackage</b> to translate RPM
                  packages.
-</pre><h3><a name="CONFIGURATION"><b>CONFIGURATION</b></a></h3><pre>   <b>Configuration Files</b>
+</pre><h3><a name="RUNTIME CONFIGURATION"><b>RUNTIME CONFIGURATION</b></a></h3><pre>   <b>Configuration Files</b>
        All of the utilities share the same configuration files: <b>swdefaults</b> and
        <b>swbisdefaults</b>.  The files are sourced on the local management host and
        ignored (if present) on the remote target host. Below are commands that
@@ -305,34 +305,39 @@ i {color:#000080}
        GNU/Linux systems linked /bin/sh to bash however this is not always the
        case.
 
-       Therefore, the most reliable and least intrusive strategy is to install
-       GNU Bash as /bin/bash all on host that must interoperate with swbis and
-       set the appropriate defaults described below.
+       Therefore, the most reliable and least intrusive strategy is use the
+       auto-detection option.  If a host does not contain bash or a suitable
+       ksh or sh the distributed utility will fail.
 
        swbis_no_getconf               = true # true or false, false=use getconf
-       swbis_shell_command            = bash # {sh|bash|posix|ash|ksh}
+       swbis_shell_command            = detect # {detect|sh|bash|posix|ksh}
 
+
+       NOTE: The shell requirement does not apply to the user's account shell
+       (specified in /etc/passwd), although there are reasons this shell
+       should be a Bourne compatible shell.  See Acount Login Shell below
 
        Regarding tar, it is used for file loading (installation) and also
        during verfication of installed software (as a means to copy and
        inspect the installed files state).  For installation, any tar will
-       work as no non-traditional options are specified.  For verification of
-       installed software, GNU tar is required due to the use of reading a
-       list of files to archive.
+       work as no non-traditional options are specified.
 
        The configuration options, in <b>swbisdefaults</b> allow some flexibilty here
 
-       # swbis_local_pax_write_command  = tar  # {pax|tar|star|gtar}
-       # swbis_remote_pax_write_command = tar  # {pax|tar|star|gtar}
-       # swbis_local_pax_read_command   = tar  # {pax|tar|star|gtar}
-       # swbis_remote_pax_read_command  = tar  # {pax|tar|star|gtar}
-       #    tar is the built-in default
-       swverify.swbis_local_pax_read_command   = gtar  # {pax|tar|star|gtar}
-       swverify.swbis_remote_pax_read_command  = gtar  # {pax|tar|star|gtar}
+       swbis_local_pax_write_command  = tar  # {pax|tar|star|gtar}
+       swbis_remote_pax_write_command = tar  # {pax|tar|star|gtar}
+       swbis_local_pax_read_command   = tar  # {pax|tar|star|gtar}
+       swbis_remote_pax_read_command  = tar  # {pax|tar|star|gtar}
+
+
+       swverify.swbis_local_pax_write_command   = detect # {pax|tar|star|gtar}
+       swverify.swbis_remote_pax_write_command  = detect # {pax|tar|star|gtar}
+       swlist.swbis_local_pax_write_command   =   detect  # {pax|tar|star|gtar}
+       swlist.swbis_remote_pax_write_command  =   detect  # {pax|tar|star|gtar}
 
 
        This allows keeping and using the system '/bin/tar', and only using GNU
-       tar installed as <b>/bin/gtar</b> for verification.
+       tar or pax for verification and listing.
 
        Other important options are:
 
@@ -346,7 +351,7 @@ i {color:#000080}
 
         Here is a incomplete explanation of each option
 
-          o  Extended Option: <b>swbis_local_pax_read_command</b>
+          *  Extended Option: <b>swbis_local_pax_read_command</b>
              Extended Option: <b>swbis_remote_pax_read_command</b>
 
                  If installing on a system, any <b>tar</b> will work.  GNU <b>tar</b> is
@@ -357,46 +362,79 @@ i {color:#000080}
                  contained files with different ownerships than the current
                  user).
 
-          o  Extended Option: <b>swbis_local_pax_write_command</b>
+       swbis_local_pax_read_command = tar #{pax|tar|gtar}
+       swbis_remote_pax_read_command= tar #{pax|tar|gtar}
+
+
+          *  Extended Option: <b>swbis_local_pax_write_command</b>
              Extended Option: <b>swbis_remote_pax_write_command</b>
 
-                 These are relevant to <b>swcopy</b>.  <b>swpackage</b> is self-contained
-                 and does not use any file system tar-like utility.  <b>swign</b>
-                 does not read the options files and assumes that <b>tar</b> is GNU
-                 tar.
+                 <b>swcopy</b> and <b>swinstall</b> may use the system tar (which may not be
+                 GNU tar or pax).  <b>swpackage</b> is self-contained and does not
+                 use any file system tar-like utility.  <b>swign</b> does not read
+                 the options files and assumes and requires that <b>tar</b> is GNU
+                 tar.  <b>swlist</b> and <b>swverify</b> requires either GNU tar or pax and
+                 can be set to detect a suitable tar or pax.
 
-          o  Extended Option: <b>swbis_shell_command</b>
+       swlist.swbis_local_pax_write_command=detect #{pax|tar|gtar|detect}
+       swlist.swbis_remote_pax_write_command=detect #{pax|tar|gtar|detect}
+       swverify.swbis_local_pax_write_command=detect #{pax|tar|gtar|detect}
+       swverify.swbis_remote_pax_write_command=detect #{pax|tar|gtar|detect}
+       swbis_local_pax_write_command = tar #{pax|tar|gtar}
+       swbis_remote_pax_write_command= tar #{pax|tar|gtar}
 
-                 This is the command <b>bash -s</b>, or <b>ksh -s</b>, etc. which is run on
-                 the remote host.  If the value is <b>posix</b> then the command is
-                 <b>PATH=getconf PATH sh -s</b> hence the need to interpret back
-                 quotes and the need for <b>getconf</b>.  The <b>/bin/sh</b> on most
-                 systems, except GNU systems will not work with swbis.  The
-                 best solution, of course, is to put <b>bash</b> on all your hosts
-                 and disable use of <b>getconf</b>.  Some systems such as NetBSD have
-                 neither <b>bash</b> nor <b>getconf</b>. On these systems set the option to
-                 <b>ksh</b>, which for example, NetBSD does have.
 
-          o  <b>Account Login Shell</b>
+
+          *  Extended Option: <b>swbis_shell_command</b>
+
+                 This may be one of <b>detect</b>, <b>bash</b>, <b>ksh</b>, <b>sh</b>, or <b>posix</b>.  <b>detect</b>
+                 is the best choice.  ksh must be public domain ksh.  ATT
+                 ksh93 does not have the required POSIX feature.
+
+          *  <b>Account Login Shell</b>
 
                  The login shell may be any shell, however, if a host will
                  ever be a intermediate host in a multi-hop target, then it
-                 should be a POSIX shell.  This requirement is due to the
-                 escapement of <b>PATH=`getconf PATH` sh -s</b> which assumes
-                 processing by a intermediate host.
+                 should be a Bourne compatible or POSIX conforming shell.
+                 This requirement is due to the escapement and processing of
+                 shell special characters which are performed by the login
+                 shell of the intermediate host account.
 
-          o  Extended Option: <b>swbis_forward_agent</b>
+          *  Extended Option: <b>swbis_forward_agent</b>
 
                  The default value is True.  This sets the <b>-A</b> in the <b>ssh</b>
                  client for multi-hop targets.  There are security
                  considerations when forwarding the authentication agent.
-</pre><h3><a name="HOST REQUIREMENTS"><b>HOST REQUIREMENTS</b></a></h3><pre>       Requirements are: a POSIX shell (either GNU bash or public domain ksh)
-       and tar.  Swbis may be configure to use pax or GNU tar installed as
-       gtar.  GNU tar is required by <b>swign</b> when making signed archives or
-       directories.  Neither tar nor pax is required by <b>swpackage</b> which itself
-       is a self-contained tar writing utility.  Swbis can be configure to
-       find the POSIX shell via getconf such as <b>/usr/xpg4/bin/sh</b> on Solaris
-       hosts.
+</pre><h3><a name="HOST REQUIREMENTS"><b>HOST REQUIREMENTS</b></a></h3><pre>       The swbis distributed utilties have no special requirements in order to
+       operate on any full size OpenSolaris, BSD or GNU/Linux host.  You may
+       immediately and remotely distribute and manage packages on these hosts
+       with nothing more than a login account and a ssh connection.  Below are
+       the technical details.  The configuration file options to allow this
+       are the built-in defaults,  certain values in historic versions of the
+       defaults file, <b>swbisdefaults</b>, may break this functionality.
+
+       The swbis distributed utilities require <b>bash</b>, public domain <b>ksh</b>, or
+       Sun's /usr/xpg4/bin/sh to be present on the target host.  If the
+       <b>swbis_shell_command</b> extended option is set to 'detect' you don't have
+       to know which one is present, otherwise you may specify one explicitly.
+
+       swbis_shell_command=detect #{posix|sh|bash|ksh|detect}
+
+
+       Tar or pax is used for file loading (installation) and internally for
+       data transfer.  You may specify which one.  <b>swlist</b> and <b>swverify</b> require
+       either GNU tar or pax be present on a host.  You may set auto detection
+       for this requirement.
+
+       swlist.swbis_local_pax_write_command=detect #{pax|tar|gtar|detect}
+       swlist.swbis_remote_pax_write_command=detect #{pax|tar|gtar|detect}
+       swverify.swbis_local_pax_write_command=detect #{pax|tar|gtar|detect}
+       swverify.swbis_remote_pax_write_command=detect #{pax|tar|gtar|detect}
+       swinstall.swbis_local_pax_write_command = tar #{pax|tar|gtar}
+       swinstall.swbis_remote_pax_write_command= tar #{pax|tar|gtar}
+       swinstall.swbis_local_pax_read_command  = tar #{pax|tar|gtar}
+       swinstall.swbis_remote_pax_read_command = tar #{pax|tar|gtar}
+
 
        A POSIX <b>awk</b> is required, and with the ability to specify several
        thousand bytes of program text as a command argument.  GNU awk  works,
@@ -408,6 +446,8 @@ i {color:#000080}
        of the passphrase agent <b>gpg-agent</b> is supported so as to avoid telling
        swpackage your passphrase.  When swverify uses gpg, a FIFO  is
        constructed and deleted.  /dev/null and /dev/zero are required.
+       Verification takes place on the management host. It would not be used
+       on the (remote) target host.
 
        For verifying package tarballs, only <b>swverify</b> and <b>gpg</b> is required.  For
        verifying the unpacked tarball (i.e. as a signed directory) GNU  tar,
@@ -542,7 +582,7 @@ i {color:#000080}
        <b>swbisdefaults</b>  # Options configuration file
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        <a href=swbis_7.html>swbis(7)</a>
         Author: Jim Lowe   Email: jhlowe at acm.org
-        Version: 0.950
+        Version: 1.0pre0
         Last Updated: 2008-04-18
         Copying: GNU Free Documentation License
 </pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       Not everything is implemented yet.

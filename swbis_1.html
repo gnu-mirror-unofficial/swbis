@@ -94,31 +94,30 @@ i {color:#000080}
 
        Simple PSF's can be generated with <b>swign</b>.
 
-          # Generate some sample PSFs
-          swign --show-psf -s.
-          swign --show-psf -s. --revision 1.1
-          swign --show-psf -s. -o root -g root
-          swign --show-psf -s. -o &quot;&quot; -g &quot;&quot;
-          swign --show-psf -s. -o 0 -g 0
+       # Generate some generic sample PSFs
+       swign --show-psf -s.
+       swign --show-psf -s. --revision 1.1
+       swign --show-psf -s. -o root -g root
+       swign --show-psf -s. -o &quot;&quot; -g &quot;&quot;
+       swign --show-psf -s. -o 0 -g 0
 
-        To test your PSF, do this
+        Perform a test process on your PSF using the preview option
 
-          swpackage -s yourPSF -p -vv  # -or-
-          cat yourPSF | swpackage -p -s - -vv
+       swign --show-psf -s.  | swpackage -p -v -s -
 
 
    <a name="PSFs By Example"><b>PSFs By Example</b></a>
-       Here are examples that preview only using the -p option
+       To test or preview the following examples use swpackage as follows:
 
-            # Example commands that read a PSF from stdin
-            swpackage -p -v  # -or-
-            swpackage -p -vv  # -or-
-            swpackage -p --files -vv  # -or-
-            swpackage -p --files --dir=pathPrefix -vv
+       # Example commands that read a PSF from stdin
+       swpackage -p -v  # -or-
+       swpackage -p -vv  # -or-
+       swpackage -p --files -vv  # -or-
+       swpackage -p --files --dir=pathPrefix -vv
 
        then to make the package for real, remove the '-p' option, such as:
 
-            swpackage | tar tvf -
+            cat yourPSF | swpackage -s - @-  | tar tvf -
 
 
    <b>o</b>  <b>Package an entire directory</b>
@@ -456,17 +455,17 @@ i {color:#000080}
 
        # swinstall -x reinstall=y --no-scripts -vv @ localhost:/tmp/aabb
        swinstall: SWBIS_TARGET_BEGINS for @localhost:/tmp/aabb
-       swinstall: SW_SESSION_BEGINS on target host low20.lowland.com:
+       swinstall: SW_SESSION_BEGINS on target host Host20:
        swinstall: SW_NOT_LOCATABLE: xorg-x11-Xnest.xorg-x11-Xnest: status=2
-       swinstall: SW_ANALYSIS_BEGINS on target host low20.lowland.com:
+       swinstall: SW_ANALYSIS_BEGINS on target host Host20:
        swinstall: SW_SAME_REVISION_INSTALLED at @localhost:/tmp/aabb: status=0: var/...
        swinstall: SW_DEPENDENCY_NOT_MET: prerequisite xorg-x11,pr==6.8.2: status=2
-       swinstall: SW_SOC_LOCK_CREATED on target host low20.lowland.com: lockpath=var/...
-       swinstall: SW_ANALYSIS_ENDS on target host low20.lowland.com: status=0
-       swinstall: SW_EXECUTION_BEGINS on target host low20.lowland.com:
-       swinstall: SW_SOC_LOCK_REMOVED on target host low20.lowland.com: status=0
-       swinstall: SW_EXECUTION_ENDS on target host low20.lowland.com: status=0
-       swinstall: SW_SESSION_ENDS on target host low20.lowland.com: status=0
+       swinstall: SW_SOC_LOCK_CREATED on target host Host20: lockpath=var/...
+       swinstall: SW_ANALYSIS_ENDS on target host Host20: status=0
+       swinstall: SW_EXECUTION_BEGINS on target host Host20:
+       swinstall: SW_SOC_LOCK_REMOVED on target host Host20: status=0
+       swinstall: SW_EXECUTION_ENDS on target host Host20: status=0
+       swinstall: SW_SESSION_ENDS on target host Host20: status=0
        swinstall: SWBIS_TARGET_ENDS for @localhost:/tmp/aabb: status=0
 
         Events have their own status, 0, 1, or 2.  <a href=Zero .html>Zero (0)</a> is always sucess,
@@ -580,7 +579,7 @@ i {color:#000080}
        <b>swbisdefaults</b>  # Options configuration file
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        <a href=swbis_1.html>swbis(1)</a>
         Author: Jim Lowe   Email: jhlowe at acm.org
-        Version: 0.950
+        Version: 1.0pre0
         Last Updated: 2008-04-18
         Copying: GNU Free Documentation License
 </pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       (This section left intensionally blank)

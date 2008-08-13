@@ -184,6 +184,7 @@ i {color:#000080}
        <b>-W no-getconf</b>
               Defaults File Option: <b>swbis_no_getconf</b>
               Makes the remote command be '/bin/sh -s' instead of the default
+              'PATH=`getconf PATH` sh -s'.
 
        <b>-W shell-command=NAME</b>
               Defaults File Option: <b>swbis_shell_command</b>
@@ -361,13 +362,13 @@ i {color:#000080}
        ~/.swbis/swbisdefaults file.
 
 
-          swremove.swbis_no_getconf = false # true or false
+          swremove.swbis_no_getconf = true # true or false
          swremove.swbis_shell_command = posix # {sh|bash|posix|ksh}
          swremove.swbis_no_remote_kill = false # true or false
-         swremove.swbis_local_pax_write_command=pax #{pax|tar|star|gtar|swbistar}
-         swremove.swbis_remote_pax_write_command=pax #{pax|tar|star|gtar|swbistar}
-         swremove.swbis_local_pax_read_command=pax #{pax|tar|gtar|star}
-         swremove.swbis_remote_pax_read_command=pax #{pax|tar|gtar|star}
+         swremove.swbis_local_pax_write_command=tar #{pax|tar|star|gtar}
+         swremove.swbis_remote_pax_write_command=tar #{pax|tar|star|gtar}
+         swremove.swbis_local_pax_read_command=tar #{pax|tar|gtar|star}
+         swremove.swbis_remote_pax_read_command=tar #{pax|tar|gtar|star}
          swremove.swbis_local_pax_remove_command=tar
          swremove.swbis_remote_pax_remove_command=tar
          swremove.swbis_remote_shell_client=ssh
@@ -378,7 +379,21 @@ i {color:#000080}
 </pre><h3><a name="RETURN VALUE"><b>RETURN VALUE</b></a></h3><pre>       0 if all targets succeeded, 1 if all targets failed or internal error,
        2 if some targets failed and some succeeded.
 </pre><h3><a name="NOTES"><b>NOTES</b></a></h3><pre>        Multiple ssh-hops is an implementation extension.
-</pre><h3><a name="REQUISITE UTILITIES"><b>REQUISITE UTILITIES</b></a></h3><pre>       swremove uses rm and rmdir for file and directory removal.
+</pre><h3><a name="REQUISITE UTILITIES"><b>REQUISITE UTILITIES</b></a></h3><pre>       The swbis distributed utilities require <b>bash</b>, public domain <b>ksh</b>, or
+       Sun's /usr/xpg4/bin/sh to be present on the target host.  If the
+       <b>swbis_shell_command</b> extended option is set to 'detect' you don't have
+       to know which one is present, otherwise you may specify one explicitly.
+
+       A POSIX <b>awk</b> is required, and with the ability to specify several
+       thousand bytes of program text as a command argument.  GNU awk  works,
+       as does the ATT Awk book awk, and the awk on BSD systems.  See the
+       INSTALL file for further details regarding a small issue with the
+       OpenSolaris (c.2006) awk.
+
+       GNU Privacy Guard, gpg is required for verification of package
+       signatures.
+
+       swremove uses rm and rmdir for file and directory removal.
 
        Other utilities required to be in $PATH on the remote host are: dd, pax
        (or tar|star|gtar), mkdir, echo, test, sleep, read (if not builtin).
@@ -394,7 +409,7 @@ i {color:#000080}
        <a href=swbis_7.html>swbis(7)</a>, <a href=sw_5.html>sw(5)</a>, <a href=swlist_8.html>swlist(8)</a>
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        <a href=swremove_8.html>swremove(8)</a>: The package removal utility of the swbis project.
         Author: Jim Lowe   Email: jhlowe at acm.org
-        Version: 0.950
+        Version: 1.0pre0
         Last Updated: 2008-04-18
         Copying: GNU Free Documentation License
 </pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       swremove is subject to breakage if a user's account on an intermediate

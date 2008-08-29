@@ -1,0 +1,299 @@
+<html lang="en">
+<head>
+<title>Simple Examples - Untitled</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Untitled">
+<meta name="generator" content="makeinfo 4.8">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Introduction.html#Introduction" title="Introduction">
+<link rel="prev" href="Running-Octave.html#Running-Octave" title="Running Octave">
+<link rel="next" href="Conventions.html#Conventions" title="Conventions">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+td,p {
+font-family: arial,sans-serif;
+color: #000000;
+}
+
+body {
+  background: white;
+  color: #000000;
+  font-family: arial,sans-serif;
+  font-weight: normal;
+  font-size: medium;
+  min-width: 500px;
+  max-width: 950px;
+  margin-left: 3%;
+  margin-right: 12%;
+}
+
+a:link {
+color: #0050fa;
+}
+
+a:visited {
+color: #1188ff;
+}
+
+.code {
+margin-left: 30px;
+margin-right: 30px;
+background-color: #d0d0d0;
+color: #000000;
+}
+
+/* the navigation choices at the bottom of the page. */
+
+div#nav {
+color: #000000;
+float: left;
+font-family: arial,sans-serif;
+font-size: 0.75em;
+margin: 1em 0 0 1em;
+padding: 0;
+position: fixed;
+text-align: left;
+width: 10em;
+}
+
+div#nav a {
+background-color: #dde4ff;
+border: 1px solid;
+border-color: #10a0ff;
+display: block;
+padding: 0.2em 0.5em 0.2em 0.5em ;
+text-decoration: none;
+color: #1155dd;
+}
+
+div#nav a:hover {
+background-color: #f5f5ff;
+}
+
+div#nav div#currentnav {
+background-color: #ccccdd;
+border: solid;
+border-left-width: 1px;
+border-top-width: 1px;
+border-bottom-width: 1px;
+border-right-width: 0px;
+border-color: #10a0ff;
+display: block;
+padding: 0.2em 0.5em 0.2em 0.5em ;
+text-align: right;
+}
+
+/* the page content */
+
+div#content {
+  position: relative;
+  left: 11em;
+  width: 80%;
+}
+
+div.section {
+  clear: both;
+}
+
+/* For all page footers */
+div#footer {
+clear: both;
+font-size: x-small;
+text-align: center;
+color: #606060;
+}
+
+/* the title bar */
+
+
+/* For the download page */
+
+/* descriptions of versions available */
+dt {
+font-weight: bold;
+}
+
+dd {
+font-family: arial,sans-serif;
+}
+
+/* Highlighting the code download sections */
+.download {
+background-color: #d0e0ff;
+}
+
+caption {
+display: none;
+}
+
+th {
+text-align: left;
+}
+
+h1 a {
+color: #ffffff;
+}
+
+#im {
+float: right;
+margin: 10px;
+border: 2px solid #000000;
+}
+
+#iml {
+margin: 10px;
+float: right;
+border: 2px solid #000000;
+clear: right;
+}
+
+img.left { float:left; margin:1em; }
+img.right { float:right; margin:1em; }
+img.middle { text-align:center; margin:1em; }
+
+img.logo { float: right; clear: right; border-style:none; }
+
+pre {
+border: #777777 1px solid;
+padding: 0.5em;
+margin-left: 1em;
+margin-right: 2em;
+white-space: pre;
+background-color: #e6e6e6;
+color: black;
+}
+
+blockquote.note {
+border: #777777 1px solid;
+padding: 0.5em;
+margin-left: 1em;
+margin-right: 2em;
+background-color: #e6e6e6;
+color: black;
+}
+--></style>
+</head>
+<body>
+<div class="node">
+<p>
+<a name="Simple-Examples"></a>
+<hr>
+</div>
+
+<h3 class="section">1.0 Working Examples</h3>
+
+<p>The following are working examples for those too impatient to read the manual.
+
+<h4 class="subsection">1.1 Creating a signed tarball from a directory</h4>
+
+<p>These example shows how to sign directories and create a tarball from a directory.
+
+<p>First set up the GNU Privacy Guard Settings.  You can use the environment variable or
+command line options for this.
+
+<pre class="example">
+export GNUPGNAME
+export SWPACKAGEPASSFD
+GNUPGNAME="Your NameId"
+SWPACKAGEPASSFD=agent  # Use the GPG agent, which must be running 
+echo $GPG_AGENT_INFO   # Must point to the running agent
+
+# The GPG agent is optional, unsetting SWPACKAGEPASSFD will cause
+# swpackage to ask for your passphrase from the terminal.
+</pre>
+
+
+<p class="noindent">
+Create a tarball from the current directory.
+</p>
+
+<pre class="example">
+swign -s. --file-ownerships  @- | tar tvf -
+</pre>
+
+<p class="noindent">
+A tar archive will be written to standard output. <br>
+This is tar archive with an embedded GPG signature and able to be verified with swverify
+</p>
+
+<pre class="example">
+swign -s. --file-ownerships @- | swverify -d @-
+</pre>
+
+<p class="noindent">
+Now, for packaging up source code and other information where file ownerships are
+not important you can specify the file owners.
+</p>
+
+<pre class="example">
+swign -s. -o 0 -g 0 @- | swverify -d @-
+</pre>
+
+<p class="noindent">
+The first step in creating an archive is loading the GPG signed meta-data, hence we simply
+short circuit the operation to sign a directory.
+The directory can then be verified against the GPG signed information.
+For this you need the <b>checkdigest.sh</b> script.
+</p>
+
+<pre class="example">
+cd /your/directory/
+swign -s. --file-ownerships -D $HOME/checkdigest.sh --sign-only
+</pre>
+
+<p class="noindent">
+Now verify the contents.
+</p>
+
+<pre class="example">
+swverify -d @.
+# If this fails try
+swverify --order-catalog -d @.
+</pre>
+
+<p class="noindent">
+Now pull the contents as is since you are satisfied nothing has changed and
+verify it again or copy the archive whereever you want.
+</p>
+
+<pre class="example">
+swign --file-ownerships --emit-only | swverify -d @-
+swign --file-ownerships --emit-only | swcopy -s - @ root@192.168.1.9:/usr/local/store/your/directory/
+</pre>
+
+
+<h4 class="subsection">1.2 Copying arbitrary Data</h4>
+
+<p>Octave has a convenient operator notation for performing matrix
+arithmetic.  For example, to multiply the matrix <code>a</code> by a scalar
+value, type the command
+
+<pre class="example">     octave:4&gt; 2 * A
+</pre>
+   <p class="noindent">To multiply the two matrices <code>a</code> and <code>b</code>, type the command
+
+<pre class="example">     octave:5&gt; A * B
+</pre>
+   <p class="noindent">and to form the matrix product
+<code>transpose (A) * A</code>,
+type the command
+
+<pre class="example">     octave:6&gt; A' * A
+</pre>
+
+<h4 class="subsection">1.3 Package Management Cycle</h4>
+
+
+
+</body></html>
+

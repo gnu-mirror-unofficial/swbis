@@ -274,24 +274,106 @@ swign --file-ownerships --emit-only | swcopy -s - @ root@192.168.1.9:/usr/local/
 
 <h4 class="subsection">1.2 Copying arbitrary Data</h4>
 
-<p>Octave has a convenient operator notation for performing matrix
-arithmetic.  For example, to multiply the matrix <code>a</code> by a scalar
-value, type the command
+<p>The program <b>swcopy</b> can be used to copy directories (as tar archives) or arbitrary
+data streams from one host to another.
 
-<pre class="example">     octave:4&gt; 2 * A
+<p>Here are examples of copying a data stream. </p>
+<pre class="example">
+swcopy --no-audit --show-progress -s /dev/zero @ /dev/null
 </pre>
-   <p class="noindent">To multiply the two matrices <code>a</code> and <code>b</code>, type the command
 
-<pre class="example">     octave:5&gt; A * B
+<p>Now run the data through ssh </p>
+
+<pre class="example">
+swcopy --no-audit --show-progress -s /dev/zero @ localhost:/dev/null
 </pre>
-   <p class="noindent">and to form the matrix product
-<code>transpose (A) * A</code>,
-type the command
 
-<pre class="example">     octave:6&gt; A' * A
+<p>And out to another host as another user.</p>
+<pre class="example">
+swcopy --no-audit --show-progress -s /dev/zero @ root@192.168.1.9:/dev/null
+</pre>
+
+<p>Now copy a directory from another host.</p>
+<pre class="example">
+swcopy --no-audit --show-progress -s root@192.168.1.9:/etc @ - | tar tvf -
 </pre>
 
 <h4 class="subsection">1.3 Package Management Cycle</h4>
+
+
+<p> First, create a sample binary package
+</p>
+
+<pre class="example">
+# PSF (swpackage input file) for sample package
+distribution
+
+# And whitespace doesn't matter
+product
+        tag somepackage
+        # control_directory ""  # For nil control directory
+        revision 10.1
+fileset
+        tag bin
+        # control_directory ""  # For nil control directory
+        directory /etc /tmp  # Example of directory mapping
+	file_permissions -o root,0 -g root,0
+        file /etc/hosts
+        file /etc/issue
+        file /etc/resolv.conf
+</pre>
+
+<p> Now, use this file as input to swpackage
+</p>
+
+<pre class="example">
+swpackage -s PSF -p -v       # Preview only
+swpackage -s PSF | tar tvf - # Make and view the archive listing
+</pre>
+
+<p> Now, install this package, in this example to a altername root
+</p>
+
+<pre class="example">
+swpackage -s PSF | swinstall -vv -s - @ /tmp/newloc
+</pre>
+
+<p>
+Now, list the installed packages
+</p>
+
+<pre class="example">
+# swlist @ /tmp/newloc
+sys   somepackage               r=10.1          i=0
+</pre>
+
+<p>
+Now, list the files of the installed package
+</p>
+
+<pre class="example">
+swlist --files somepackage @ /tmp/newloc
+</pre>
+
+<p>
+Now, verify the installed package.  To get this to work, you must have signed the package when it
+was created using the ''--sign'' option of swpackage. 
+</p>
+
+<p>
+Recreate and reinstall the package.  For this particular PSF, you must install as ''root'' to
+preserve the ownerships specified in the package.
+Privlidge escalation is accomplished via SSH.
+</p>
+
+<pre class="example">
+swpackage --no-defaults --gpg-name='YourNameID" --sign --file-digests -s PSF |
+swinstall -vv -x reinstall=y -s - @ root@localhost:/tmp/newloc
+</pre>
+
+<pre class="example">
+swverify somepackage @ /tmp/newloc
+</pre>
 
 
 

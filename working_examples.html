@@ -298,8 +298,12 @@ swcopy --no-audit --show-progress -s /dev/zero @ root@192.168.1.9:/dev/null
 swcopy --no-audit --show-progress -s root@192.168.1.9:/etc @ - | tar tvf -
 </pre>
 
-<h4 class="subsection">1.3 Package Management Cycle</h4>
+<p>copy several files to a new location</p>
+<pre class="example">
+swcopy --no-audit -s /etc/rc.d /etc/resolv.conf @ /tmp/new_etc/
+</pre>
 
+<h4 class="subsection">1.3 Package Management Cycle</h4>
 
 <p> First, create a sample binary package
 </p>

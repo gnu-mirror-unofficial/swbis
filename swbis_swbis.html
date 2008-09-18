@@ -664,11 +664,11 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#RUNTIME-CONFIGURATION">RUNTIME CONFIGU
 <h4 class="subsection">1.7.2 Strategy for Compatibility with Existing Hosts</h4>
 
 <!-- TROFF INPUT: .PP -->
-<p>The most important utiltities on which swbis relies is a POSIX shell, <b>/bin/sh</b>, and
-the system tar utility, usually <b>/bin/tar</b>. 
+<p>The most important utiltities on which swbis relies is a POSIX shell, the system <b>/bin/sh</b>, and
+the system tar utility, usually <b>/bin/tar</b>.  The POSIX shell need not be <b>/bin/sh</b>. 
 <!-- TROFF INPUT: .PP -->
 
-<p>The shell must have specific compliance to
+<p>The POSIX shell must have specific compliance to
 POSIX described the POSIX sh(1) manual page (IEEE Std 1003.1, 2004 Edition, Section STDIN) regarding
 its use of stdin when it invokes a command that also uses stdin.  GNU Bash, public-domain Korn shell (pdksh), and
 OpenSolaris <b>/usr/xpg4/bin/sh</b> have this feature.  Other shells including ash, dash, ATT ksh93,
@@ -676,14 +676,26 @@ and <b>/bin/sh</b> on BSD and UNIX(tm) system do not.  Most GNU/Linux systems li
 however this is not always the case. 
 <!-- TROFF INPUT: .PP -->
 
-<p>Therefore, the most reliable and least intrusive strategy is use the auto-detection option.  If a host does not
-contain bash or a suitable ksh or sh the distributed utility will fail. 
+<p>Therefore, the most reliable and least intrusive strategy is use the auto-detection option. 
+If a host does not contain bash or a suitable ksh or sh the distributed utility will fail. 
 <!-- TROFF INPUT: .PP -->
 
 <!-- TROFF INPUT: .nf -->
 <!--  -->
 <pre class="display">     swbis<tt>_</tt>no<tt>_</tt>getconf               = true # true or false, false=use getconf
      swbis<tt>_</tt>shell<tt>_</tt>command            = detect # {detect|sh|bash|posix|ksh}
+     <!-- TROFF INPUT: .fi -->
+     
+</pre>
+<!--  -->
+<!-- TROFF INPUT: .PP -->
+<p>Alternatively, simply make <b>/bin/bash</b> a requirement on all hosts and set
+<!-- TROFF INPUT: .PP -->
+
+<!-- TROFF INPUT: .nf -->
+<!--  -->
+<pre class="display">     swbis<tt>_</tt>no<tt>_</tt>getconf               = true # true or false, false=use getconf
+     swbis<tt>_</tt>shell<tt>_</tt>command            = bash # {detect|sh|bash|posix|ksh}
      <!-- TROFF INPUT: .fi -->
      
 </pre>
@@ -853,8 +865,8 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <h3 class="section">1.8 HOST REQUIREMENTS</h3>
 
 <!-- TROFF INPUT: .PP -->
-<p>The swbis distributed utilties have no special requirements in order to operate
-on any full size OpenSolaris, BSD or GNU/Linux host.  You may immediately and remotely
+<p>The swbis distributed utilties have no special requirements and will operate
+on any full-size OpenSolaris, BSD or GNU/Linux host.  You may immediately and remotely
 distribute and manage packages on these hosts with nothing more than a login account
 and a ssh connection.  Below are the technical details.  The configuration file options
 to allow this are the built-in defaults,  certain values in historic versions of the defaults file,
@@ -923,7 +935,15 @@ required.
 <p>When a host is participating in remote connections via ssh/rsh, either as
 the terminal target host or intermediate host, the login shell for the user
 must be a Bourne compatible shell, for example <b>/bin/sh</b>. 
-Note: this need not be the system POSIX shell. 
+Most traditional Bourne shell's are acceptable as /bin/sh, one notable exception
+is <b>/bin/ash</b> when operating on the terminal host (due to its read block size). 
+However, <b>/bin/dash</b>, BSD <b>/bin/sh</b>, and Sun's /bin/sh
+are all acceptable.  Note that /bin/sh need not be the system POSIX shell. 
+<!-- TROFF INPUT: .PP -->
+
+<p>As stated above, a POSIX shell is required and the only suitable implementations (as of Sep 2008) are
+<b>/bin/bash</b>, <b>/bin/ksh</b> (Public Domain not KSH93), and Sun's
+<b>/usr/xpg4/bin/sh</b> all assumed to be in these locations. 
 <!-- TROFF INPUT: .SH "DISCUSSION" -->
 <!-- DEBUG: print_menu("HOST REQUIREMENTS") -->
 <!-- MAN2TEXI: EON -->
@@ -1309,7 +1329,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <!-- TROFF INPUT: .PP -->
 <p>Not everything is implemented yet. 
-<!-- created by instant / docbook-to-man, Sun 10 Aug 2008, 19:47 -->
+<!-- created by instant / docbook-to-man, Wed 17 Sep 2008, 20:05 -->
 
 </body></html>
 

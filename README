@@ -1,6 +1,6 @@
     swbis - Distributed Software Administration
     --------------------------------------------
-              Version 0.986
+              Version 1.0
 
     swbis is a GNU package
     The official home page is http://www.gnu.org/software/swbis
@@ -234,37 +234,14 @@ KNOWN BUGS
       [Update --- August 2008]
       -----------------------
       OpenSSH 5.1p1 seems to make this problem disappear.
-
-      [Update --- April 2008]
-      -----------------------
-      An investigation was launched into OpenSSH v4.7p1 and v5.0p1 using
-      2.6.9-34.ELsmp (WhiteBox RHEL3, respin4).  The client was excluded
-      as a cause.  The server's byte pumping machinery was instrumented
-      and observed during the actual failure.  Every indication was
-      the data was properly arriving at the terminal write() [at the
-      unix pipe out of the server] but not arriving properly at the
-      program.  It was observed that a time delay in the client
-      (data producer) via a usleep(), or in the program (data consumer) by
-      fronting the reader with 'dd ibs=2', or in the loop in serverloop.c
-      via a usleep() would mask the bug.
-
-      The write() nbyte parameter at terminal write in channels.c was
-      observered in real-time, it ranged in size from ~1k to 100k but could
-      not be correlated to the failure.  The legal limit for a write to a
-      pipe was researched, *there is no such limit*.  Nevertheless, a simple
-      patch to sshd was constructed to limit (i.e normalize) the size of this
-      write to PIPE_BUF (along the lines of atomicio()). The results were
-      positive, the failure disappeared while maintaining the full speed
-      throughput.
-
-      Conclusion:  The ability to fix this via a normalizing write() at
-      this point in sshd implicates something other than OpenSSH.
-      It occurs on 2.4.x thru 2.6.25 Linux kernels. It never occurs on
-      a BSD kernel running the same version of openssh, bash, dd, tar, etc.
-      It never appears when using rsh either.  All of this points to a bug in
-      the Linux kernel, or Intel CPUs (AMDs have not been tested), probably a
-      rare interaction with the varying and/or large writes to a pipe that
-      occur in ssh protocol version 2 in OpenSSH.
+      The issue probably involved the "error fd race" which
+      was claimed to be fixed in this release.  This makes sense
+      since swinstall (and all swbis utilities) make unusual heavy
+      use of stdout, stdin, and stderr at the same time.  Also in
+      SSH protocol v2, the stderr fd was relegated to a separate
+      internal mechanism whereas in protocol v1 they were implemented
+      symmetrically.  This might explain why the BUG does not appear
+      when using protocol v1.
 
     AWK
     ---

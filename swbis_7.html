@@ -294,10 +294,11 @@ i {color:#000080}
 
    <a name="Strategy for Compatibility with Existing Hosts"><b>Strategy for Compatibility with Existing Hosts</b></a>
        The most important utiltities on which swbis relies is a POSIX shell,
-       <b>/bin/sh</b>, and the system tar utility, usually <b>/bin/tar</b>.
+       the system <b>/bin/sh</b>, and the system tar utility, usually <b>/bin/tar</b>.  The
+       POSIX shell need not be <b>/bin/sh</b>.
 
-       The shell must have specific compliance to POSIX described the POSIX
-       <a href=sh_1.html>sh(1)</a> manual page (IEEE Std 1003.1, 2004 Edition, Section STDIN)
+       The POSIX shell must have specific compliance to POSIX described the
+       POSIX <a href=sh_1.html>sh(1)</a> manual page (IEEE Std 1003.1, 2004 Edition, Section STDIN)
        regarding its use of stdin when it invokes a command that also uses
        stdin.  GNU Bash, public-domain Korn shell (pdksh), and OpenSolaris
        <b>/usr/xpg4/bin/sh</b> have this feature.  Other shells including ash, dash,
@@ -311,6 +312,12 @@ i {color:#000080}
 
        swbis_no_getconf               = true # true or false, false=use getconf
        swbis_shell_command            = detect # {detect|sh|bash|posix|ksh}
+
+        Alternatively, simply make <b>/bin/bash</b> a requirement on all hosts and
+       set
+
+       swbis_no_getconf               = true # true or false, false=use getconf
+       swbis_shell_command            = bash # {detect|sh|bash|posix|ksh}
 
 
        NOTE: The shell requirement does not apply to the user's account shell
@@ -405,8 +412,8 @@ i {color:#000080}
                  The default value is True.  This sets the <b>-A</b> in the <b>ssh</b>
                  client for multi-hop targets.  There are security
                  considerations when forwarding the authentication agent.
-</pre><h3><a name="HOST REQUIREMENTS"><b>HOST REQUIREMENTS</b></a></h3><pre>       The swbis distributed utilties have no special requirements in order to
-       operate on any full size OpenSolaris, BSD or GNU/Linux host.  You may
+</pre><h3><a name="HOST REQUIREMENTS"><b>HOST REQUIREMENTS</b></a></h3><pre>       The swbis distributed utilties have no special requirements and will
+       operate on any full-size OpenSolaris, BSD or GNU/Linux host.  You may
        immediately and remotely distribute and manage packages on these hosts
        with nothing more than a login account and a ssh connection.  Below are
        the technical details.  The configuration file options to allow this
@@ -456,8 +463,17 @@ i {color:#000080}
 
        When a host is participating in remote connections via ssh/rsh, either
        as the terminal target host or intermediate host, the login shell for
-       the user must be a Bourne compatible shell, for example <b>/bin/sh</b>.  Note:
-       this need not be the system POSIX shell.
+       the user must be a Bourne compatible shell, for example <b>/bin/sh</b>.  Most
+       traditional Bourne shell's are acceptable as /bin/sh, one notable
+       exception is <b>/bin/ash</b> when operating on the terminal host (due to its
+       read block size).  However, <b>/bin/dash</b>, BSD <b>/bin/sh</b>, and Sun's /bin/sh
+       are all acceptable.  Note that /bin/sh need not be the system POSIX
+       shell.
+
+       As stated above, a POSIX shell is required and the only suitable
+       implementations (as of Sep 2008) are <b>/bin/bash</b>, <b>/bin/ksh</b> (Public Domain
+       not KSH93), and Sun's <b>/usr/xpg4/bin/sh</b> all assumed to be in these
+       locations.
 </pre><h3><a name="DISCUSSION"><b>DISCUSSION</b></a></h3><pre>   <b>Background</b>
        The spec describes a format for storing package meta-data in a software
        distribution and a set of utilities.  The meta-data is stored in-band

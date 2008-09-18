@@ -408,7 +408,7 @@ dist-swbis: distdir
 </pre>
 
    <p>The <span class="file">PSF.in</span> should employ the replacement strings '%__tag' and '%__revision' as
-in this example PSF.in (See <a href="swign.html#SAMPLE-SOURCE-PACKAGE-PSF">(swbis_swign)SAMPLE SOURCE PACKAGE PSF</a>).
+in this example PSF.in (See <a href="swign.html#SAMPLE-SOURCE-PACKAGE-PSF">(swbis_swign)SAMPLE SOURCE PACKAGE PSF</a>.)
 
 <!-- Copyright (C) 2004 Jim Lowe -->
 <!-- This is part of the swbis manual. -->
@@ -423,7 +423,11 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <h2 class="chapter">2 What features are working?</h2>
 
-<p>In summary, alot is working and alot is not.
+<p>In summary, the swbis supports network-transparent package management
+but is restricted to packages with a single fileset and product.  It has
+utilities for stand-alone creation of tarballs with meta-data including
+embedded GPG signatures.  There exists also the ability to translate dpkg, rpm, and
+slackware directly into POSIX format
 
    <p><span class="command">swpackage</span> is the most complete utility. It implements all
 of the ISO/IEC 15068-2 features of the Product Specification File,
@@ -442,22 +446,6 @@ the ./catalog/ directory which contains the package metadata,
 GPG signature and digests which are stored as separate regular files,
 and as ascii text of course.
 
-   <p><span class="command">swinstall</span> is usable though missing some Posix features.  Control script
-execution is implemented for checkinstall, preinstall, and postinstall. 
-Dependency checks are not implemented.  Only packages with one product and one fileset
-are supported.  <span class="command">swinstall</span> can install RPM packages on/to hosts that have neither
-<span class="command">rpm</span> nor <span class="command">swinstall</span>.
-
-   <p><span class="command">swcopy</span> is usable though missing lots of POSIX capability. 
-It can be used to translate an RPM to a POSIX package with a single path name prefix. 
-It can unpack and copy archives from host to host.
-
-   <p><span class="command">swverify</span> is usable though missing lots of POSIX capability. 
-It most stable feature is verifying signed tar archives (i.e. packages
-signed according to how GNU swpackage does it).  The ability to
-verify the GPG signature and file metadata of installed software (as opposed to
-the compressed tarball) is a work in progress.
-
    <p>Below is more detail about current capabilities.
 
      <ul>
@@ -466,10 +454,8 @@ the compressed tarball) is a work in progress.
      <p>Command: <span class="command">swinstall</span>
 
      <p><span class="command">swinstall</span> is missing many features but it is useful
-for packages with a single fileset and product and if control
-script execution is not required.  It can install RPMs to the
-local or a remote host (but the postinst script will not be
-executed.)
+for packages with a single fileset and product. 
+It can install RPMs to a local or a remote host.
 
      <li>Copying POSIX packages
 
@@ -5222,11 +5208,12 @@ SYNOPSIS
        swign -E [options] [-u gpg-name] [--homedir=gpg-homedir]
 
 DESCRIPTION
-       swign reads a PSF (Product Specfication File) and writes the
-       cooresponding archive to stdout or into the current directory.  The
-       PSF is read from standard input by default.  To use an internally
-       generated PSF with name and revision attributes determined from the
-       name of the current directory use ’-s.’.
+       swign reads a PSF (Product Specfication File) to generate and load the
+       package catalog into the current directory and then writes the
+       cooresponding archive to stdout.	 The PSF is read from standard input
+       by default.  To use an internally generated PSF with name and revision
+       attributes determined from the name of the current directory use
+       ’-s.’.
 
        The PSF is scanned for replacement tokens for tag and revision
        attributes determined from the current directoy name.  It is expected
@@ -8403,7 +8390,7 @@ that swbis archives installed with tar can be repackaged with GNU tar with no
 bit-wise change relative to the original.
 
    <p>Together, these layers of mimicry are put to practical application
-in the <span class="command">swign</span> program (See <a href="swign_1.html">(swbis_swign)</a>) which
+in the <span class="command">swign</span> program See <a href="swign_1.html">(swbis_swign)</a>, which
 creates GPG signed POSIX packages without any data copying except by GNU tar. 
 <div class="node">
 <p><hr>

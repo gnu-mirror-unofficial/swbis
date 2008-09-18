@@ -38,11 +38,11 @@ i {color:#000080}
        <b>swign</b> -S [options] [-u gpg-name] [--homedir=gpg-homedir]
 
        <b>swign</b> -E [options] [-u gpg-name] [--homedir=gpg-homedir]
-</pre><h3><a name="DESCRIPTION"><b>DESCRIPTION</b></a></h3><pre>       <b>swign</b> reads a PSF (Product Specfication File) and writes the
-       cooresponding archive to stdout or into the current directory.  The PSF
-       is read from standard input by default.  To use an internally generated
-       PSF with name and revision attributes determined from the name of the
-       current directory use '-s.'.
+</pre><h3><a name="DESCRIPTION"><b>DESCRIPTION</b></a></h3><pre>       <b>swign</b> reads a PSF (Product Specfication File) to generate and load the
+       package catalog into the current directory and then writes the
+       cooresponding archive to stdout.  The PSF is read from standard input
+       by default.  To use an internally generated PSF with name and revision
+       attributes determined from the name of the current directory use '-s.'.
 
        The PSF is scanned for replacement tokens for tag and revision
        attributes determined from the current directoy name.  It is expected

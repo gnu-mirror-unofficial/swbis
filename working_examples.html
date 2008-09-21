@@ -277,6 +277,19 @@ swign --file-ownerships --emit-only | swcopy -s - @ root@192.168.1.9:/usr/local/
 <p>The program <b>swcopy</b> can be used to copy directories (as tar archives) or arbitrary
 data streams from one host to another.
 
+<p>Unpack a compressed tarball </p>
+<pre class="example">
+swcopy -s - @. <somepackage-1.0.tar.bz2
+</pre>
+
+<p>Translate and Unpack at a new location </p>
+<pre class="example">
+swcopy -s - @/tmp/myname/xx/ <somepackage-1.0.tar.bz2
+# Note; a trailing slash determines the target is a directory
+#       or interpretation as a directory can be forced
+#       with the --extract option
+</pre>
+
 <p>Here are examples of copying a data stream. </p>
 <pre class="example">
 swcopy --no-audit --show-progress -s /dev/zero @ /dev/null

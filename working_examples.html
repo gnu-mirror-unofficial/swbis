@@ -285,7 +285,7 @@ swcopy -s - @. <somepackage-1.0.tar.bz2
 <p>Translate and Unpack at a new location </p>
 <pre class="example">
 swcopy -s - @/tmp/myname/xx/ &lt;somepackage-1.0.tar.bz2
-# Note; a trailing slash determines the target is a directory
+# Note: a trailing slash determines the target is a directory
 #       or interpretation as a directory can be forced
 #       with the --extract option
 </pre>
@@ -295,13 +295,13 @@ swcopy -s - @/tmp/myname/xx/ &lt;somepackage-1.0.tar.bz2
 swcopy --no-audit --show-progress -s /dev/zero @ /dev/null
 </pre>
 
-<p>Now run the data through ssh </p>
+<p>Now run the data through localhost  </p>
 
 <pre class="example">
 swcopy --no-audit --show-progress -s /dev/zero @ localhost:/dev/null
 </pre>
 
-<p>And out to another host as another user.</p>
+<p>And now copy the data out to remote host as another user.</p>
 <pre class="example">
 swcopy --no-audit --show-progress -s /dev/zero @ root@192.168.1.9:/dev/null
 </pre>

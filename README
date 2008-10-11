@@ -13,105 +13,55 @@
     The entry in the FSF/UNESCO Free Software Directory is
     http://directory.fsf.org/GNU/swbis.html
 
+    The maintainer is Jim Lowe  http://savannah.gnu.org/users/jhlowe
+    Please see the AUTHORS file
+
 Introduction
 ------------
-   'swbis' aims to implement the POSIX packaging standard with useful
-    extensions.  Working utilities include swpackage, swverify, swcopy,
-    swlist, and swinstall.  Package security is provided by embedded
-    control files containing md5, sha1, and sha512 digests, and GPG
-    signatures. swbis is back-compatible with free software source
-    tarballs because package meta-data is contained in-band in the
-    prescribed directory.  Since swbis supports nil control directory
-    names, the package layout need not change except for the addition
-    of this directory.  The swbis utilities are network transparent by
-    direct use of SSH, and do not have to be installed on the target
-    hosts. swbis run-time packages can be delivered, by swinstall, to
-    any GNU, BSD, or Unix-like host with no new provisioning
-    requirements for the remote host. Since run-time packages are POSIX
-    tar archives, they may be unpacked using the system tar utility.
-    The spec is available at
-    http://www.opengroup.org/publications/catalog/c701.htm. 
+  swbis is a software administration system for GNU/Linux systems and
+  systems that are UNIX system-like. It implements the Open Group's CAE
+  Spec C701 (XDSA) Distributed Software Administration.  This spec
+  closely follows ISO/IEC 15068-2:1999 (now withdrawn) which was
+  identical to IEEE 1387.2:1995.  The implementation relies on POSIX
+  functionality as provided by a typical GNU system.  It has security
+  enhancement extensions that use GNU Privacy Guard.  Although swpackage
+  is a self-contained tar writing utility and swinstall will use generic
+  tar for file loading, several features are based on bit-for-bit
+  sameness with the GNU tar POSIX tar interchange format, hence, GNU tar
+  is a special tool requirement for swbis.
+ 
+  Its package management feartures are unique. It is network transparent,
+  and requires no new programs, services, or configuration on the remote
+  target host. It connects to remote hosts using the stock system ssh
+  client program.  It is back compatible with the tar archive format and
+  typical file layouts for source and run-time packages.  Its security
+  features include multiple embedded package signatures and MD5, SHA-1,
+  and SHA-2 digests for the payload and individual files.  The package
+  management utilities can operate locally or from a central host to a
+  heterogeneous collection of U*IX hosts with supported checks for
+  reinstall, downdate, compatibility and prerequisites.
 
-    The swbis project provides features similar to other packaging systems
-    such as utilities for package creation, installation, and verification.
-    The implementation of these features are, however, unique in that
-    swbis is 1) non-intrusive to current packaging practice, 2) completely
-    orthogonal to the GNU toolset, 3) makes no new requirements on system
-    provisioning, and 4) is completely network transparent.
-    
-    It achieves the first because a POSIX package is a tar archive, and,
-    swbis is general and flexible enough so that a swbis package can look
-    just like a free software source tarball.  When packaging a directory,
-    such as a source directory, swbis provides a tool to generate a GPG
-    signed tar archive using GNU tar, avoiding use of new tools.
-    Secondly, it is orthogonal with existing tools for verification and
-    file loading, namely gpg and tar which swbis uses directly.  Thirdly,
-    swbis can install and copy packages to all existing GNU/Linux, BSD,
-    and UNIX hosts whether or not swbis is installed on that host.  Swbis
-    achieves this by relying on the POSIX shell's capability to read
-    commands and data on the same standard input stream.  Lastly, network
-    transparency is achieved because the process interface is a Unix
-    pipe, namely standard input, whose location can easily be generalized
-    by a remote shell client program such as ssh.
-    
+  In addition to package management, there are several other applications
+  of the package management utilities:  Format translation of RPM and
+  dpkg packages, data copying from host to host, creation of tar archive
+  distributions from a detailed recipe file, and the ability to act as a
+  directory content integrity checker.
+  
     * ISO/Posix Utilities:
 
        swcopy - Distribution copying utility.
-    
-             * Supports multiple ssh-hops to remote target or source.       
-             * Uses ssh, sh, dd, and choice of pax, tar, star, or gtar.
-             * Does not have to be installed on the target host.
-             * target or source host may be any POSIX.2 conforming host.
-             * Supports remote-source to remote-target copies.
-    
        swpackage -  Packages files according to a PSF file.
-   					(beta as of 2007-09-01)
- 
-             * Complete implementation of Extended Definitions.
-             * Stand-alone operation, no use of temporary files.
-             * Output format is bit-for-bit identical to GNU tar.
-             * Supports creation of GPG embedded signature, and sha1,
-               md5sum digests of the package payload section.
-            
        swverify -  Authenticates a signed package.
-    
-             * Authenticates packages signed by swpackage.
-             * Verifies installed software using the GPG signed meta-data.
-
-       swinstall  -  Install a posix package.  (alpha as of 2004-02-15)
-       					       (beta as of 2007-09-01)
-                 
-             * 'swinstall' does not have to be installed on the target host.
-             * The target or source host may be any POSIX.2 conforming host.
-             * creates an installed software catalog where the GPG signature
-               can be verified using 'gpg'
-             * Uses ssh for remote connections.
-             * Supports multiple ssh-hops to remote target or source.
-             * Uses tar (or pax) to install the files.
-             * Supports full error monitoring during control script execution
-               and records exit status and installation states.
-
-       swlist  -  List the catalog (alpha as of 2006-12-01)
-
-             * Supports listing and selection via the '-c -' to stdout.
-             * Supports listing files from a distribution.
-             * Supports listing product entries in the installed catalog.
-             * Supports asserting dependency specs against the installed catalog.
-       
+       swinstall  -  Install a posix package
+       swlist  -  List the catalog
        swremove  -  Remove installed software
  
     * Non-ISO/Posix (Ad Hoc) Utilities:
 
-        swign  -  Produces signed tar archives using GNU tar and
-                  swpackage and gpg as supporting tools.  This utility is
-                  useful for creating signed source tarballs.
-            
-        lxpsf  -  The first step translator for RPM packages.  It translates
-                  an RPM into a tar archive containing a PSF file which
-                  further directs translation to a Posix package by 'swpackage'.
-    
-        arf2arf   -  Internal Library utility to extract and verify the signed
-                     and digested byte streams.
+        swign   -  Produces signed tar archives using GNU tar and
+        lxpsf   -  The first step translator for RPM packages
+        arf2arf - Internal Library interface utility to extract and
+		  verify the signed and digested byte streams.
    
 Requirements
 ------------
@@ -275,108 +225,14 @@ How to install
 --------------
     See the file INSTALL.
  
-Features of the POSIX Standard
-------------------------------
-    
-    - Uses existing data formats: tar and cpio.
-    
-    - Package metadata is contained in ascii text files.
-    
-    - The package generation spec file supports explicit
-      overriding of file attributes, the ability to specify a
-      different source filename from the name appearing in the
-      package, and the ability to specify all files in a directory,
-      among others.
-   
-    - Supports multiple products in a single distribution file.
-    
-    - Supports selection of products based on based on architecture
-      and system identification attributes.
-    
-    - Allows run-time packages to have control directories and 
-      a leading package directory.  This can be useful for ISVs who
-      wish to support manual installation by unpacking with tar
-      and execution of a custom setup script.
-  
-    - Supports a rich set of control scripts.
- 
-    - Explicitly allows for additional vendor attributes
-      and additional vendor specific control files.
-
-    - Specifies an interface for copying and installing to
-      remote hosts.
-    
-Features of the swbis implementation
-------------------------------------
-            
-    (All of these are implemented unless stated otherwise.)
-    
-    - Non-root users are able to invoke root installs on
-      remote hosts via ssh authentication.
-    
-    - Network transparent copying and installation.
-      (To swbis, local and remote installs are the same.)
-    
-    - No new target requirements.  Relies on a POSIX shell and
-      a minimal set of POSIX utilities. (swbis is not required
-      on the target remote host.)
-    
-    - Supports multiple host-to-host hops to a target host.
-            
-    - Network connection is made by direct use of ssh or rsh.
-    
-    - 'swpackage' writes an archive to STDOUT, and makes no temporary
-      copy of the package.
-    
-    - 'swpackage' supports nil ("") control directories which
-      allows a traditional source tar archive to be cast as a POSIX
-      package with no change to existing file layout, and allows a
-      run-time package to have a form that is directly installable
-      using tar [similar to slackware packages].
-
-    - Supports a md5sum, sha1sum and sha512sum  attributes for
-      storage files and the package payload.
-    
-    - Supports cryptographic authentication (Package signing) by
-      use of Vendor Defined attributes consisting of a control file 
-      containing a signature of the catalog section.
-    
-    - Multiple signatures are supported as separate control files in
-      the archive (all with the same name) to accommodate the concept of
-      upstream and downstream signers.
-    
-    - All package signatures are transferred (by swinstall) into
-      the installed software catalog where they can be verified
-      directly by 'gpg' alone.  That is, the signature is valid
-      throughout the package life-cycle, and can be verified by
-      'gpg' at every point in the life-cycle.
-
-    - swpackage mimics GNU tar formats bit-for-bit which forms a
-      basis for internal testing; and, allows verification of the GPG
-      signature and archive md5 digest (of the unpacked signed package)
-      using GNU tar and gpg [under some circumstances and with
-      constraints].
-    
-Development Language
---------------------
-        swbis is written in ANSI C and C++.
-        Some utilities are portable Posix shell and utilities.
-        The swpackage utility is the only C++ program, all other
-        programs should not use C++.  The parts of swpackage that are
-        written in object-oriented (late dispatch of virtual functions)
-        C++ are limited to the package compiler section.  Many of the
-        C++ opjects are wrappers around C objects and do not employ
-        polymorphism. Since swpackage is complete, no new C++ is
-        needed for this project.
-
 To make the autotools
 --------------------
  aclocal && autoconf && autoheader && automake
 
 To make under a different revision
 ----------------------------------
-	# This modifies the ./VERSION file
-	YOUR_VERSION=0.600.1 sh bin/reversion.sh $YOUR_VERSION
+	# Example
+	sh bin/reversion.sh 1.0.10a
 	./configure && make && make distclean
  
 Internal Design of the sw<utilities> (except swpackage)

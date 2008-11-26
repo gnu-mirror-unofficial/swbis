@@ -35,8 +35,8 @@ software packaging -- again
 <H4><A HREF="#TOCintroduction" NAME="introduction">Introduction to Swbis</A></H4>
 
 <P>
-<b>swbis</b> is a software administration system for GNU/Linux systems and systems that are UNIX system-like. It implements the
-Open Group's CAE Spec C701 (XDSA) Distributed Software Administration.
+<b>swbis</b> is a software administration system for GNU/Linux systems and systems that are UNIX system-like.
+It implements the Open Group's CAE Spec C701 (XDSA) Distributed Software Administration.
 This spec closely follows ISO/IEC 15068-2:1999 (now withdrawn)
 which was identical to IEEE 1387.2:1995.
 The implementation relies on POSIX functionality as provided by a typical GNU system.
@@ -60,9 +60,10 @@ of a POSIX shell on the remote host which allows reading of script and data on s
 File loading is performed by 'tar'.
 
 <P>
-As a bonus, swinstall can install RPM packages, via multiple ssh-hops,
-to remote hosts that don't have 'rpm' installed.
-
+In addition, the swbis swpackage utility is able to translate other package formats into
+into a swbis package with metadata and embedded GPG signature.  Translation is
+done in memory without using temporary files.
+Currently .rpm, .deb, and slackware runtime packages and plain tarballs are supported.
 
 <P>
 Some of the programs supplied with this package are:
@@ -78,16 +79,21 @@ Some of the programs supplied with this package are:
 
 <H4><A HREF="#TOCnews" NAME="news">News</A></H4>
 <P>
-Here is the <A HREF="/software/swbis/ChangeLog">ChangeLog</A>
+The current version is 1.2
+<P>
+Here is the <A HREF="/software/swbis/ChangeLog">ChangeLog</A> and <A HREF="/software/swbis/NEWS">NEWS</A>
+<dl>
+<dt>22 November 2008: <b>Swbis 1.2 Released</b></dt>
+</dl>
 <dl>
 <dt>26 October 2008: <b>Swbis 1.1 Released</b></dt>
 </dl>
 <dl>
-<dt>09 October 2008: <b>Swbis 1.0 Released!!</b></dt>
+<dt>09 October 2008: <b>Swbis 1.0 Released</b></dt>
 </dl>
 
 <dl>
-<dt>12 August 2008: <b>Swbis 0.986 Released!</b></dt>
+<dt>12 August 2008: <b>Swbis 0.986 Released</b></dt>
 <dd>
 <p> <b>Version 0.986 is feature complete for upcoming 1.0 release</b>
 <p>
@@ -221,7 +227,7 @@ permitted in any medium, provided this notice is preserved.
 
 <P>
 Updated:
-$Id: index.html,v 1.37 2008/11/24 01:33:54 jhlowe Exp $
+$Id: index.html,v 1.38 2008/11/26 02:33:18 jhlowe Exp $
 <HR>
 </BODY>
 </HTML>

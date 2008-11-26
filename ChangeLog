@@ -1,3 +1,117 @@
+2008-11-22 Jim Lowe <jhlowe@acm.org>
+* VERSION: now 1.2
+
+2008-11-22 Jim Lowe <jhlowe@acm.org>
+* swprogs/swproglib.c (swpl_make_verify_command_script_fragment) <swverify>
+fixed handling of volatile files according to the --check-voaltile option.
+
+2008-11-17 Jim Lowe <jhlowe@acm.org>
+* swstructlib/src/swmetadata/swdefinition.cxx (list_replace_if_not_explicitly_set) <swpackage>: added 
+to fix preservation of file attributes set in a PSF file definition.
+* swstructlib/src/swmetadata/swpackagefile.cxx (apply_file_stats) <swpackage>:
+use list_replace_if_not_explicitly_set()
+    
+2008-11-15 Jim Lowe <jhlowe@acm.org>
+* swstructlib/src/swmetadata/swdefinitionfile.h (swdeffile_linki_write_fd):
+now merge attributes from duplicate files, and don't write the duplicate entry.
+* swstructlib/src/swmetadata/swdefinition.h (merge): added parameter
+to control replacement
+* swprogs/swinstall_lib.c (sanity_compare): now mismatch of size attribute
+is fatal
+* swprogs/swlist.c (main) <swlist>: fix hang when listing catalog as tar
+archive when SIGPIPE is received.
+* swprogs/swproglib.c (swpl_ls_fileset_from_iscat) <swverify>: fix false
+verification failure of installed software.
+* swprogs/swverify_lib.c (remove_duplicate_files) <swverify>: added
+* swstructlib/src/misc/switer.h <swpackage>: warning fix
+* swstructlib/src/swexport/swexbundle.cxx <swpackage>: cleanup
+* swstructlib/src/swexport/swexcat.h <swpackage>: cleanup
+* swstructlib/src/swexport/swexcat_debug.cxx <swpackage>: cleanup
+* swstructlib/src/swexport/swexcategory.cxx <swpackage>: cleanup
+* swstructlib/src/swexport/swexdistribution.cxx <swpackage>: cleanup
+* swstructlib/src/swexport/swexdistribution_debug.cxx <swpackage>: cleanup
+* swstructlib/src/swexport/swexfileset.h (emitStorageStructure) <swpackage>:
+Now properly handle duplicate file definitions in a PSF
+* swstructlib/src/swexport/swexfileset.h (find_last_swdef) <swpackage>: deleted
+* swstructlib/src/swexport/swexfileset_debug.cxx <swpackage>: cleanup
+* swstructlib/src/swexport/swexhost.cxx <swpackage>: cleanup
+* swstructlib/src/swexport/swexhost_debug.cxx <swpackage>: cleanup
+* swstructlib/src/swexport/swexproduct.h <swpackage>: cleanup
+* swstructlib/src/swexport/swexproduct_debug.cxx <swpackage>: cleanup
+* swstructlib/src/swexport/swexpsf.h <swpackage>: cleanup
+* swstructlib/src/swexport/swexstruct.cxx <swpackage>: cleanup
+* swstructlib/src/swexport/swexstruct_i.h <swpackage>: cleanup
+* swstructlib/src/swexport/swexstruct_i_debug.cxx <swpackage>: cleanup
+* swstructlib/src/swexport/swexsubproduct.cxx <swpackage>: cleanup
+* swstructlib/src/swexport/swexvendor.cxx <swpackage>: cleanup
+* swstructlib/src/swexport/swixcat.cxx <swpackage>: cleanup
+* swstructlib/src/swexport/swobjfiles.cxx <swpackage>: cleanup
+* swstructlib/src/swexport/swobjfiles_i.cxx <swpackage>: cleanup
+* swstructlib/src/swexport/swobjfiles_i.h <swpackage>: cleanup
+* swstructlib/src/swexport/swobjfiles_i.h (check_for_storage_section_duplicates) <swpackage>:
+fix handling of multiple file defintiions in a PSF.
+* swstructlib/src/swexport/swobjfiles_i_debug.cxx <swpackage>: cleanup
+* swstructlib/src/swmetadata/swattribute.cxx (generate_attribute_list) <swpackage>:
+now set set_is_explicit() as fix for multiple defintiions in a PSF.
+* swstructlib/src/swmetadata/swdefcontrolfile.cxx <swpackage>: cleanup
+* swstructlib/src/swmetadata/swdeffileset.cxx <swpackage>: cleanup
+* swstructlib/src/swmetadata/swdefinition.cxx <swpackage>: cleanup
+* swstructlib/src/swmetadata/swdefinition.cxx (merge) <swpackage>: added function 
+control parameter
+* swstructlib/src/swmetadata/swdefinitionfile.cxx (swdeffile_linki_write_fd) <swpackage>:
+respect duplicate file status flags when writing.
+* swstructlib/src/swmetadata/swdefinitionfile.cxx (determine_status_for_writing) <swpackage>: added
+* swstructlib/src/swmetadata/swdefinitionfile.cxx (merge_duplicates) <swpackage>: added
+* swstructlib/src/swmetadata/swdefproduct.cxx <swpackage>: cleanup 
+* swstructlib/src/swmetadata/swextendeddef.h <swpackage>: cleanup 
+* swstructlib/src/swmetadata/swinfo.h <swpackage>: cleanup
+* swstructlib/src/swmetadata/swmetadata.h <swpackage>: cleanup
+* swstructlib/src/swmetadata/swpackagefile.cxx (apply_file_stats) <swpackage>:
+respect duplicate file status flags.
+* swstructlib/src/swmetadata/swpackagefile.h (xFormat_apply_swdef_stats) <swpackage>:
+respect duplicate file status flags.
+* swstructlib/src/swmetadata/swpsf.cxx <swpackage>: cleanup
+* swstructlib/src/swmetadata/swpsf.h <swpackage>: cleanup
+* swstructlib/src/swstruct/swscontrolfile.h <swpackage>: cleanup
+* swstructlib/src/swstruct/swsfile.h <swpackage>: cleanup
+* swstructlib/src/swstruct/swstruct_i.cxx <swpackage>: cleanup
+* swsupplib/misc/strar.c (strar_remove_index) : added
+* swsupplib/misc/swheader.c: cleanup
+* swsupplib/misc/topsf.c (slack_write_psf_buf) <swpackage> <lxpsf>: support tagging
+volatile files for slackware packages when translating
+
+2008-11-12 Jim Lowe <jhlowe@acm.org>
+* swsupplib/misc/topsf.c (parse_src_pkg_name) <lxpsf>:
+fixed slackware package translation
+* swsupplib/misc/topsf.c (slack_write_psf_buf) <lxpsf>:
+fixed slackware package translation
+
+2008-11-11 Jim Lowe <jhlowe@acm.org>
+* swprogs/swinstall.c (main): add --justdb option
+* swprogs/swremove.c (main): add --justdb option
+* swprogs/swverify.sh.in: added --dereference and --ignore-slack-install options
+* swprogs/swverify_lib.c (compare_diff): added support for --ignore-slack-install
+* swprogs/swproglib.c (swpl_make_verify_command_script_fragment): support
+new --dereference option for swverify
+
+2008-11-02 Jim Lowe <jhlowe@acm.org>
+* swprogs/swverify.sh.in: now --catalog-info is --catalog-info-file (same
+for --system-info)
+* swprogs/iswverify.c (main) <swverify>: now require at least one software spec
+
+2008-11-01 Jim Lowe <jhlowe@acm.org>
+* swprogs/spwroglib.c (swpl_get_catalog_perms): added
+* swprogs/swproglib.c (swpl_set_detected_catalog_perms): added
+* swprogs/swcommon0.h (SWBIS_TS_get_catalog_perms): added
+* swprogs/swinstall.c (main) <swintall>: now obtain and use the
+permissions and ownerships for the the installed software
+catalog directory as a mask when creating new files in the catalog.
+* swprogs/swinstall_lib.c (swpl_set_detected_catalog_perms): use
+* swprogs/swinstall.c (main): make default pump delay be 0
+* swsupplib/taru/filemode.c (swlib_filestring_to_mode): added
+* swsupplib/misc/swlib.c (swlib_i_digs_copy): fix pump delay default
+* swsupplib/misc/swlib.c (swlib_i_pipe_pump): fix pump delay default
+
 2008-10-26 Jim Lowe <jhlowe@acm.org>
 * VERSION: now 1.1
 

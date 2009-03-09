@@ -1,6 +1,6 @@
     swbis - Distributed Software Administration
     --------------------------------------------
-              Version 1.0
+              Version 1.3
 
     swbis is a GNU package
     The official home page is http://www.gnu.org/software/swbis
@@ -47,7 +47,7 @@ Introduction
   distributions from a detailed recipe file, and the ability to act as a
   directory content integrity checker.
   
-    * ISO/Posix Utilities:
+    * ISO/POSIX Utilities:
 
        swcopy - Distribution copying utility.
        swpackage -  Packages files according to a PSF file.
@@ -56,7 +56,7 @@ Introduction
        swlist  -  List the catalog
        swremove  -  Remove installed software
  
-    * Non-ISO/Posix (Ad Hoc) Utilities:
+    * Non-POSIX (Ad Hoc) Utilities:
 
         swign   -  Produces signed tar archives using GNU tar and
         lxpsf   -  The first step translator for RPM packages
@@ -238,7 +238,7 @@ To make under a different revision
 Internal Design of the sw<utilities> (except swpackage)
 --------------------------------------------------------
 
-,-------------------------------------
+,-------------------------------------.
 | # Target Script read from stdin     |
 |   "(                                |
 |   bash -s # < Task_Script_1         |
@@ -249,14 +249,14 @@ Internal Design of the sw<utilities> (except swpackage)
 |            |   |    ,---<< Errors,  |
 |            |   |    |      Protocol |
 |           fd0 fd1  fd2              |
-`------------o---o----o---------------
+`------------o---o----o---------------'
             /|\  |    |
              |   |   \|/
              |  \|/   |
         ,----o---o----o---.
         |   fd1  fd0  fd2 |
         |                 |
-        |    (bash -s)    |           
+        |    (bash -s)    |
         |                 |
         |   fd0  fd1  fd2 |
         `----o----o---o---'
@@ -265,7 +265,7 @@ Internal Design of the sw<utilities> (except swpackage)
         ,----o----o---o---.
         |   fd0  fd1  fd2 |
         |                 |
-        |      (sshd)     |           
+        |      (sshd)     |
         `---------o-------'     TARGET HOST
                   |            -------------
                   |                NETWORK 
@@ -275,7 +275,7 @@ Internal Design of the sw<utilities> (except swpackage)
                   |                NETWORK 
                   |            -----------------
         ,---------o-------.     MANAGEMENT HOST
-        |       (ssh)     |           
+        |       (ssh)     |
         |                 |
         |   fd0  fd1  fd2 |
         `----o----o-------'
@@ -291,7 +291,7 @@ Internal Design of the sw<utilities> (except swpackage)
         |  fdN   fdM   fdP (closed) |           |
         |                           |          \|/
         |     (Main Program)        |           |
-        |  sw<utility> [Parent]     |       ,---o-------------------,  
+        |  sw<utility> [Parent]     |       ,---o-------------------,
         |                           |       |  fd E                 |
         |                           |       |                       |
         |                           |       |  (Logger Process)     |

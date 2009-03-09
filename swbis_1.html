@@ -494,26 +494,26 @@ i {color:#000080}
        Examples
 
          # Install at /
-           swinstall -s somepackage-1.1.bin.sw.tar.gz
+           swinstall -s :somepackage-1.1.bin.sw.tar.gz
 
          # Install to a alternate root, not running control scripts
            swinstall --no-scripts -vv -s:somepackage-1.1.i386.rpm @ /tmp/foo1
 
          # Install to a alternate root
-           swinstall -s somepackage-1.1.bin.sw.tar.gz @ /tmp/xx2
+           swinstall -s :somepackage-1.1.bin.sw.tar.gz @ /tmp/xx2
 
          # Install at /, gaining privilege via ssh
-           swinstall -s somepackage-1.1.bin.sw.tar.gz @ root@localhost
+           swinstall -s :somepackage-1.1.bin.sw.tar.gz @ root@localhost
 
          # Install from standard input to /
            swinstall       # if default source directory is stdin or
            swinstall -s -  # independent of defaults file
 
          # Install at a remote host
-           swinstall -s somepackage-1.1.bin.sw.tar.gz @ 192.168.1.1
+           swinstall -s :somepackage-1.1.bin.sw.tar.gz @ 192.168.1.1
 
          # Install to multiple targets, based on a list of one target per line
-           echo 192.168.2.2 | swinstall -t - -s somepackage-1.1.bin.sw.tar.gz
+           echo 192.168.2.2 | swinstall -t - -s :somepackage-1.1.bin.sw.tar.gz
 
 
    <a name="Removal"><b>Removal</b></a>
@@ -579,7 +579,7 @@ i {color:#000080}
        <b>swbisdefaults</b>  # Options configuration file
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        <a href=swbis_1.html>swbis(1)</a>
         Author: Jim Lowe   Email: jhlowe at acm.org
-        Version: 1.0pre0
+        Version: 1.3
         Last Updated: 2008-04-18
         Copying: GNU Free Documentation License
 </pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       (This section left intensionally blank)

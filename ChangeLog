@@ -1,3 +1,31 @@
+2009-04-08 Jim Lowe <jhlowe@acm.org>
+* swprogs/swlist.c <swlist>: cleanups
+* swprogs/swcopy.c <swcopy>: initial development steps toward supporting
+software selections in a source spec.
+* swprogs/swcommon.c (swc_validate_targetpath): now has context
+arg for better error messages.
+* swsupplib/uinfile/uinfile.c (uinfile_i_open): support LZMA
+copression.
+
+2009-03-08 Jim Lowe <jhlowe@acm.org>
+* VERSION: now 1.3
+
+2009-03-08 Jim Lowe <jhlowe@acm.org>
+* swprogs/swproglib.c (swpl_make_verify_command_script_fragment):
+query 'check_volatile' option only for swverify.
+
+2009-03-07 Jim Lowe <jhlowe@acm.org>
+* doc/: Documentation updates, now built on Slackware 12.1.0 system
+
+2008-11-26 Jim Lowe <jhlowe@acm.org>
+* swprogs/swproglib.c (swpl_set_detected_catalog_perms): turn off sticky bit
+for regular files.
+* swprogs/swproglib.c (swpl_write_out_signature_member) <swinstall>: now set
+the mode of the signatures according to the catalog policy set by the top
+directory.
+* swprogs/swinstall_lib.c (construct_directory_ownership_script) <swinstall>: added,
+fixes ownerships of created directories in the catalog
+
 2008-11-22 Jim Lowe <jhlowe@acm.org>
 * VERSION: now 1.2
 

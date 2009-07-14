@@ -1,6 +1,6 @@
     swbis - Distributed Software Administration
     --------------------------------------------
-              Version 1.3
+              Version 1.4
 
     swbis is a GNU package
     The official home page is http://www.gnu.org/software/swbis
@@ -58,9 +58,9 @@ Introduction
  
     * Non-POSIX (Ad Hoc) Utilities:
 
-        swign   -  Produces signed tar archives using GNU tar and
-        lxpsf   -  The first step translator for RPM packages
-        arf2arf - Internal Library interface utility to extract and
+       swign   -  Produces signed tar archives using GNU tar and
+       lxpsf   -  The first step translator for RPM packages
+       arf2arf - Internal Library interface utility to extract and
 		  verify the signed and digested byte streams.
    
 Requirements
@@ -79,8 +79,10 @@ Requirements
     public domain ksh as /bin/ksh) and GNU tar as /bin/tar (or as
     /bin/gtar with special options) are required.  For verification and
     signing GNU gpg is required.   GNU tar is only required when using
-    the 'swign' utility, in other contexts 'pax' or 'tar' can be specified
-    for archive reading and writing.
+    the 'swign' utility or certain features of swlist, in other contexts
+    'pax' or 'tar' can be specified for archive reading and writing.
+    GNU tar can be installed as /bin/gtar with appropriate changes to
+    the 'swbisdefaults' configuration file.
 
     For further details on the shell requirement and a strategy for host
     compatibility: 
@@ -278,7 +280,7 @@ Internal Design of the sw<utilities> (except swpackage)
         |       (ssh)     |
         |                 |
         |   fd0  fd1  fd2 |
-        `----o----o-------'
+        `----o----o----o--'
              |    |    |
             /|\   |   errors &
              |    |  protocol events

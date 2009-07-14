@@ -1,3 +1,142 @@
+2009-07-12 Jim Lowe <jhlowe@acm.org>
+* version 1.4 distribution tarball created
+
+2009-07-12 Jim Lowe <jhlowe@acm.org>
+* swprogs/swign.sh.in <swign>: set some extened options of swpackage
+explicitly to prevent a user's swbisdefaults from breaking swign
+
+2009-07-11 Jim Lowe <jhlowe@acm.org>
+* swsupplib/sw_parse/Makefile: added precompiled files with 20090711 path
+suffix.
+
+2009-07-10 Jim Lowe <jhlowe@acm.org>
+* swsupplib/misc/swextopt.c (swextopt_is_value_true): give warning if boolean value is
+neither true nor false
+
+2009-07-09 Jim Lowe <jhlowe@acm.org>
+* swprogs/iswverify.c (main) <swverify>: fixed option processing
+* swprogs/swlist.c (main) (swlist): fixed option processing
+* swprogs/swremove.c (main) (swremove): fixed option processing
+* swprogs/swpackage.cxx (main) (swpackage): fixed option processing
+* swprogs/swcopy.c (main) (swcopy): fixed option processing
+
+2009-07-04 Jim Lowe <jhlowe@acm.org>
+* swprogs/swverify.sh.in <swverify>: fixed i.e.eliminated requirement for '@-' to
+be given on command line.
+* swprogs/swpackage.cxx (do_unrpm) <swpackage>: fixed --to-swbis
+operation when the -s- option is given.
+
+2009-07-03 Jim Lowe <jhlowe@acm.org>
+* swsupplib/misc/topsf.c: add group and owner support
+* swprogs/swpackage.cxx (do_unrpm) <swpackage>: set owner and group
+in invocation of 'lxpsf' program.
+* swsupplib/progs/lxpsf.c (main) <lxpsf>: add --owner and --group option
+
+2009-07-02 Jim Lowe <jhlowe@acm.org>
+* swprogs/swpackage.cxx (check_name_to_convert) <swpackage>: added
+* swstructlib/src/swmetadata/swdefinition.cxx (squash_duplicates): added
+* swstructlib/src/swmetadata/swdefdistribution.h (write_fd): now calls
+squash_duplicates.
+
+2009-06-29 Jim Lowe <jhlowe@acm.org>
+* swsupplib/sw_parse/swlex.l (swlex_input): now support Definition Files
+using \r\n for line termination files by stripping the cr (carriage return) 
+
+2009-06-28 Jim Lowe <jhlowe@acm.org>
+* swprogs/swinstall_lib.c: remove unneeded swheader_set_current_offset() calls.
+* swsupplib/misc/swheader.c (swheader_get_attribute): now call free() on list
+* swsupplib/misc/swheader.c: call store_state() and restore_state() where needed.
+
+2009-06-25 Jim Lowe <jhlowe@acm.org>
+* swprogs/swpackage.cxx <swpackage> (main): added --regfiles-only option
+
+2009-06-24 Jim Lowe <jhlowe@acm.org>
+* swprogs/swinstall_lib.c (send_files_with_no_storage): added
+
+2009-06-21 Jim Lowe <jhlowe@acm.org>
+* swsupplib/taru/xformat.c (common_setup_write_header): remove parameter p_lt1 
+
+2009-06-20 Jim Lowe <jhlowe@acm.org>
+* swstructlib/src/swexport/swexfileset.h (emitStorageStructure) <swpackage>:
+check device files device numbers and skip if too large.
+* swsupplib/taru/taru.c (taru_check_devno_for_tar): added
+* swsupplib/taru/taru.c (taru_check_devno_for_system): added
+* swsupplib/taru/xformat.c (common_setup_write_header): deprecate
+use  of (struct stat*) p_lt1, always set to NULL.
+* swsupplib/taru/copyout.c (taru_write_archive_member_header): deprecate
+use of (struct stat*)file_stat and assert that it should be NUL.
+
+2009-06-18 Jim Lowe <jhlowe@acm.org>
+* swsupplib/taru/to_oct.c: fixed program names error messages
+
+2009-06-16 Jim Lowe <jhlowe@acm.org>
+* swstructlib/src/swexport/swpackagefile.h (xFormat_apply_swdef_stats) <swpackage>:
+check return status of taru_datoul().
+* swstructlib/src/swexport/swpackagefile.h (xFormat_write_file) <swpackage>:
+check return status of xFormat_apply_swdef_stats().
+* swstructlib/src/swexport/swobjfiles_i.h (check_device_files_file_stats): added
+* swstructlib/src/swexport/swobjfiles_i.h (addFileStatsToFileDefinitions):
+handle device files better, set no_stat() flag if all
+the file stats for the device file are present in the PSF.
+
+2009-06-14 Jim Lowe <jhlowe@acm.org>
+* swprogs/swinstall_lib.c (construct_execution_phase_script) <swinstall>
+add umask 077 in the shell where 'tar' loads the fileset.
+* swprogs/swinstall_lib.c (sanity_compare) <swinstall>
+made messages for attribute mismatch require an elevated verbosity.
+
+2009-06-04 Jim Lowe <jhlowe@acm.org>
+* swprogs/swpackage.cxx <swpackage> (main): added --symmetric option
+* swprogs/swpackage.cxx <swpackage> (main): added 
+-encrypt-for-recipient=NAME option
+* swprogs/swpackage.cxx <swpackage> (main): now supports layers of
+encryption/compression
+* swsupplib/misc/shcmd.c (shcmd_get_last_command): added
+
+2009-06-04 Jim Lowe <jhlowe@acm.org>
+* swsupplib/uinfile/uinfile.c: now detects and decrypts packages
+encrypted with gpg using gpg.
+
+2009-05-29 Jim Lowe <jhlowe@acm.org>
+* swprogs/swinstall.c (main) <swinstall>: option processing fixes.
+* VERSION: now 1.4
+
+2009-05-25 Jim Lowe <jhlowe@acm.org>
+* swstructlib/src/swexport/swobjfiles_i.h (process_files_step1) <swpackage>:
+Now support file definitions that only have the 'source' attribute when merging
+duplicate file definitions.
+* swstructlib/src/swmetadata/swdefinitionfile.cxx (merge_duplicates) <swpackage>:
+Now use swlib_dir_compare() instead of strcmp().
+
+2009-05-24 Jim Lowe <jhlowe@acm.org>
+* swsupplib/misc/debpsf.c (debpsf_write_psf_buf) <lxpsf>: initial support for
+setting the is_volatile attribute for pathnames listed in the 'conffiles' file
+of a .deb package. (requires fixing swpackage's merging of duplicate file
+definitions).
+
+2009-05-02 Jim Lowe <jhlowe@acm.org>
+* swprogs/swlist.c (main) <swinstall>: option processing fixes.
+
+2009-04-26 Jim Lowe <jhlowe@acm.org>
+* swprogs/swpackage.cxx (main) <swpackage>: fixed extended option
+processsing for options given on the command line.
+* swsupplib/misc/swextopt.c (getEnumFromName):  now swaps '_' and '-' in 
+the option name and returns success based on either form.
+* swprogs/swign.sh.in <swign>: added -W swbis-gzip=n and -W swbis-bzip2=n
+to swpackage invocation.
+
+2009-04-13 Jim Lowe <jhlowe@acm.org>
+* version 1.3 released
+
+2009-04-08 Jim Lowe <jhlowe@acm.org>
+* swprogs/swlist.c <swlist>: cleanups
+* swprogs/swcopy.c <swcopy>: initial development steps toward supporting
+software selections in a source spec.
+* swprogs/swcommon.c (swc_validate_targetpath): now has context
+arg for better error messages.
+* swsupplib/uinfile/uinfile.c (uinfile_i_open): support LZMA
+copression.
+
 2009-03-08 Jim Lowe <jhlowe@acm.org>
 * VERSION: now 1.3
 
@@ -18,6 +157,7 @@ directory.
 fixes ownerships of created directories in the catalog
 
 2008-11-22 Jim Lowe <jhlowe@acm.org>
+* version 1.2 released
 * VERSION: now 1.2
 
 2008-11-22 Jim Lowe <jhlowe@acm.org>

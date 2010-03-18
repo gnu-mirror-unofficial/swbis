@@ -1,5 +1,43 @@
-GNU swbis NEWS - User visible changes. 2008-10-08
+GNU swbis NEWS - User visible changes. 2010-01-18
 Please send GNU swbis bug reports to <bug-swbis@gnu.org>
+
+version 1.5 - Jim Lowe,  2010-03-15
+
+* <swverify>: Now has a verification summary for installed software.
+
+* the utilities now support an absolute path location for
+the installed software catalog that is outside the target path.
+This is specified by the file URL syntax: file:///absolute/path/name
+
+* <swconfig>: swconfig is completed and enters Beta testing. 
+
+* <swpackage>: Improvements to the ''exclude'' directive in a PSF file
+
+* Many other fixes
+
+version 1.4 - Jim Lowe,  2009-07-06
+
+* Added swpackage --regfiles-only option
+
+* Fixed specification of extended options on the command line.
+
+* Added support for decrypting/encrypting via gpg command
+
+* Added support for LZMA compression.
+
+* Fixed <swpackage> Now software_definitions in a PSF
+are properly merged.
+
+* Fixed <lxpsf> Now the contents of ./conffiles in .deb format package
+are used to set the 'is_volatile' attribute.
+
+version 1.3 - Jim Lowe,  2009-03-11
+
+* Fixed <swverify>
+
+* Fixed <swinstall>
+Now permissions and ownerships of all created files are
+determined from values of of the installed_software_catalog
 
 version 1.2 - Jim Lowe,  2008-11-22
 
@@ -293,5 +331,3 @@ Control script execution for swinstall is not yet implemented.
 Minor fixes to swpackage were made.  There were changes to the
 RPM conversion policy relating to attribute mapping.  swverify(8)
 now supports (limited) verification of installed software meta-data.
-
-Copyright (C) 2006 Jim Lowe

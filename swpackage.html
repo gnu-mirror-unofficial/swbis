@@ -174,6 +174,20 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
+<pre class="display">     <b>swpackage -s- @-</b>  # Absolutely explicit, same as above
+     <!-- TROFF INPUT: .fi -->
+</pre>
+<!--  -->
+<!-- TROFF INPUT: .PP -->
+<!-- TROFF INPUT: .nf -->
+<!--  -->
+<pre class="display">     <b>swpackage @/dev/null </b>  # Useful for debugging
+     <!-- TROFF INPUT: .fi -->
+</pre>
+<!--  -->
+<!-- TROFF INPUT: .PP -->
+<!-- TROFF INPUT: .nf -->
+<!--  -->
 <pre class="display">     <b>swpackage</b>  [-p]  [-s <i>psf</i><tt>_</tt><i>file</i>]  [-f <i>file</i>] [-x <i>option=value</i>] \\
      [-X <i>options</i><tt>_</tt><i>file</i>] [-W <i>option</i>] [software<tt>_</tt>selections] [@targets]
      <!-- TROFF INPUT: .fi -->
@@ -503,6 +517,30 @@ compress output with file system gzip utilty
 <!--  -->
 <blockquote>
 compress output with file system bzip2 utility
+<!-- TROFF INPUT: .RE -->
+</blockquote>
+<!--  -->
+<b>-W lzma</b>
+<!-- TROFF INPUT: .RS -->
+<!--  -->
+<blockquote>
+compress output with file system lzma utility
+<!-- TROFF INPUT: .RE -->
+</blockquote>
+<!--  -->
+<b>-W symmetric</b>
+<!-- TROFF INPUT: .RS -->
+<!--  -->
+<blockquote>
+encrypt output with file system gpg utility
+<!-- TROFF INPUT: .RE -->
+</blockquote>
+<!--  -->
+<b>-W encrypt-for-recipient=NAME</b>
+<!-- TROFF INPUT: .RS -->
+<!--  -->
+<blockquote>
+encrypt with NAME's public key using file system gpg utility
 <!-- TROFF INPUT: .RE -->
 </blockquote>
 <!--  -->
@@ -2212,7 +2250,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <p>swpackage(8): The packaging utility of the swbis project. 
  Author: Jim Lowe   Email: jhlowe at acm.org
- Version: 1.3
+ Version: 1.5
  Last Updated: 2006-07-01
  Copying: GNU Free Documentation License
 <!-- TROFF INPUT: .SH "BUGS" -->
@@ -2234,7 +2272,7 @@ The &ndash;dir="" does not do what one would expect sometimes.
 The output stream content is unaffected by the blocksize, that is the last write
 may be short write. 
 Signing is broken for cpio format archives. 
-<!-- created by instant / docbook-to-man, Sat 07 Mar 2009, 20:59 -->
+<!-- created by instant / docbook-to-man, Thu 25 Feb 2010, 08:10 -->
 
 </body></html>
 

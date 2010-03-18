@@ -1273,7 +1273,11 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">     None
+<pre class="display">     /var/lib/swbis/catalog # Location of installed catalog
+     /usr/lib/swbis/swdefaults
+     /usr/lib/swbis/swbisdefaults
+     $HOME/.swbis/swdefaults
+     $HOME/.swbis/swbisdefaults
      <!-- TROFF INPUT: .fi -->
 </pre>
 <!--  -->
@@ -1336,8 +1340,8 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- TROFF INPUT: .PP -->
 <p>swverify: The verification utility of the swbis project. 
  Author: James Lowe, Jr.   Email: jhlowe at acm.org
- Version: 1.3
- Last Updated: 2008-04-18
+ Version: 1.5
+ Last Updated: 2010-02-04
  Copying: GNU Free Documentation License
 <!-- TROFF INPUT: .SH "BUGS" -->
 <!-- DEBUG: print_menu("IDENTIFICATION") -->
@@ -1356,7 +1360,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <p>The signature file's archive header (or data) is not part of the signed
 data therefore it may be subject to undetectable tampering, however, swverify
 does perform sanity checks on the pathname, permissions and filetype if
-<!-- WARNING: man/man8/swverify.8:766:%%new font B started without closing previous font B -->
+<!-- WARNING: man/man8/swverify.8:770:%%new font B started without closing previous font B -->
 the <b>sig</b><tt>_</tt><b>header</b> file (See sw(5) manual page.) is not present
 [due to being signed by a old swpackage version], and if <b>sig</b><tt>_</tt><b>header</b> is present, swverify requires that it match the sig file header. 
 The ability to verify the unpacked directory
@@ -1376,7 +1380,7 @@ this ordering, use of the '&ndash;order-catalog' option is therefore required.
 Use of the '&ndash;cvs' or '&ndash;order-catalog' options is theoretically problematic
 because it causes the use and interpretation of data in the verification of that
 same data therefore opening possible attack vectors. 
-<!-- created by instant / docbook-to-man, Sat 07 Mar 2009, 20:59 -->
+<!-- created by instant / docbook-to-man, Thu 25 Feb 2010, 08:10 -->
 
 </body></html>
 

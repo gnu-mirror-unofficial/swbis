@@ -1,6 +1,6 @@
     swbis - Distributed Software Administration
     --------------------------------------------
-              Version 1.4
+              Version 1.5
 
     swbis is a GNU package
     The official home page is http://www.gnu.org/software/swbis
@@ -30,7 +30,7 @@ Introduction
   sameness with the GNU tar POSIX tar interchange format, hence, GNU tar
   is a special tool requirement for swbis.
  
-  Its package management feartures are unique. It is network transparent,
+  Its package management features are unique. It is network transparent,
   and requires no new programs, services, or configuration on the remote
   target host. It connects to remote hosts using the stock system ssh
   client program.  It is back compatible with the tar archive format and
@@ -55,6 +55,7 @@ Introduction
        swinstall  -  Install a posix package
        swlist  -  List the catalog
        swremove  -  Remove installed software
+       swconfig -  Configure installed software
  
     * Non-POSIX (Ad Hoc) Utilities:
 
@@ -93,9 +94,12 @@ Requirements
     --------------------------------
 
     Out-of-the box BSD systems are supported.
-    Compile like this:  (you may need GNU make)
+    Compile like this:  (you need GNU make)
 
          POSIXSHELL=/bin/ksh ./configure && gmake
+
+         Note: The POSIX shell need not be /bin/sh, /bin/sh on BSD
+               systems works fine.
 
     For the shell requirement, public domain ksh works fine and is probably
     present on BSD systems, set the 'swbis_shell_command' option in 
@@ -225,7 +229,11 @@ KNOWN BUGS
 
 How to install
 --------------
-    See the file INSTALL.
+    Simply,
+
+	./configure && make
+
+    See the file INSTALL for more details.
  
 To make the autotools
 --------------------
@@ -283,8 +291,8 @@ Internal Design of the sw<utilities> (except swpackage)
         `----o----o----o--'
              |    |    |
             /|\   |   errors &
-             |    |  protocol events
-             |  data   |
+             |    |  protocol events &
+             |  data   |    control script output
           script  |   \|/
              &    |    | 
            data  \|/   `------------------------,
@@ -314,5 +322,68 @@ Internal Design of the sw<utilities> (except swpackage)
         `--o----------------o-------'       `----o---------o--------'
            |                |                    |         |
        STDIN_FILENO      STDOUT_FILENO          LOG    STDERR_FILENO
-    
+   
+
+Debugging and Hacking
+---------------------
+
+   Make program execution verbose:
+   -------------------------------
+
+   Add verbose switches, up to ten (10)
+   may have increasing effect, for example
+                 swcopy  -vvvvvv
+   -x verbose=8  , same as -vvvvvvvvv
+   -v
+   --debug-verbose 
+   --debug-events  Show the internal events listing to stderr
+   --swi-debug-name=NAME  write a ascii dump of the the internal package object
+
+
+   Inspect the scripts that are generated
+   --------------------------------------
+
+   Try these options:
+
+   --debug-task-scripts   write the individual task scripts to files in /tmp
+   --source-script-name=NAME  write the main script to NAME.
+   --target-script-name=NAME  write the main script to NAME.
+                              NAME may be a number, for example 2 meaning stderr
+
+   The --debug-task-scripts option fills /tmp with files like:
+        /tmp/swbis_task_load_control.sh
+        /tmp/swbis_task_Remove_catalog_entry
+        /tmp/swbis_task_Make_catalog_entry_directory
+        /tmp/swbis_task_Lock_Session
+
+   To run a task script manually from the command line for testing,
+   you must provide input it expects, scripts which do not receive input
+   always will read one block of data.
+
+      For example:
+
+       (cat  /tmp/swbis_task_Remove_files; dd if=/dev/zero count=1) |
+       (cd / && bash -s -vx ) 1>/tmp/xxout 2>&1
+
+
+   Turn on Debugging statements
+   ----------------------------
+   
+   Define this at the top of every file .c or .cxx on a
+   file-by-file basis:
+
+       #define FILENEEDDEBUG 1
+
+   Then recompile.  This turns on E_DEBUG statements that appear
+   in source code as:
+
+       E_DEBUG("msg");
+       E_DEBUG2(format, arg1);   /* like sprintf, fprintf, etc */
+       E_DEBUG3(format, arg1, arg2);
+
+
+   Turn on older (deprecated, maybe broken) debugging statements
+   ----------------------------------------------------------------
+        See  include/debug_config.h
+
 End of README

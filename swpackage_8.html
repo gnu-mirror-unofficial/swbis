@@ -46,6 +46,10 @@ i {color:#000080}
 </pre><h3><a name="NAME"><b>NAME</b></a></h3><pre>       swpackage -- Package a software distribution.
 </pre><h3><a name="SYNOPSIS"><b>SYNOPSIS</b></a></h3><pre>       <b>swpackage</b>    # Filter: read PSF on stdin, write a tar archive to stdout
 
+       <b>swpackage -s- @-</b>  # Absolutely explicit, same as above
+
+       <b>swpackage @/dev/null</b>   # Useful for debugging
+
        <b>swpackage</b>  [-p]  [-s <i>psf</i><b>_</b><i>file</i>]  [-f <i>file</i>] [-x <i>option=value</i>] \
        [-X <i>options</i><b>_</b><i>file</i>] [-W <i>option</i>] [software_selections] [@targets]
 
@@ -172,6 +176,15 @@ i {color:#000080}
 
        <b>-W bzip2</b>
               compress output with file system bzip2 utility
+       <b>-W lzma</b>
+              compress output with file system lzma utility
+
+       <b>-W symmetric</b>
+              encrypt output with file system gpg utility
+
+       <b>-W encrypt-for-recipient=NAME</b>
+              encrypt with NAME's public key using file system gpg utility
+
 
        <b>-W source=FILE</b>
               Use serial archive located at FILE as the source instead of the
@@ -991,7 +1004,7 @@ i {color:#000080}
        <a href=sw_5.html>sw(5)</a>, <a href=swpackage_5.html>swpackage(5)</a>, <a href=swbisparse_1.html>swbisparse(1)</a>, <a href=swign_1.html>swign(1)</a>, <a href=swverify_8.html>swverify(8)</a>
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        <a href=swpackage_8.html>swpackage(8)</a>: The packaging utility of the swbis project.
         Author: Jim Lowe   Email: jhlowe at acm.org
-        Version: 1.3
+        Version: 1.5
         Last Updated: 2006-07-01
         Copying: GNU Free Documentation License
 </pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       A comment after an object keyword is wrongly not allowed by this PSF

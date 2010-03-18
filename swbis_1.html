@@ -62,7 +62,11 @@ i {color:#000080}
        closely follows ISO/IEC 15068-2:1999 (now withdrawn) which was
        identical to IEEE 1387.2:1995.  The scope of the implementation
        includes a package format, meta-data file format, and utilities for
-       package creation, installation, query, listing, and verification.
+       package creation, installation, query, listing, and verification.  The
+       package management utilities are network transparent via direct use of
+       <a href=ssh_1.html>ssh(1)</a>.  They provide remote package management functions to any UNIX-
+       like remote host with a zero footprint regardless if swbis is installed
+       on the remote host.
 
        While the swbis system has features comparable with package managers,
        it has features that are of general purpose usefulness to system
@@ -565,7 +569,8 @@ i {color:#000080}
        Open Group CAE C701,
        <a href="http://www.opengroup.org/publications/catalog/c701.htm">http://www.opengroup.org/publications/catalog/c701.htm</a>
 </pre><h3><a name="SEE ALSO"><b>SEE ALSO</b></a></h3><pre>        info swbis
-        <a href=sw_5.html>sw(5)</a>, <a href=swpackage_8.html>swpackage(8)</a>, <a href=swbisparse_1.html>swbisparse(1)</a>, <a href=swign_1.html>swign(1)</a>, <a href=swverify_8.html>swverify(8)</a>, <a href=swcopy_8.html>swcopy(8)</a>, <a href=swbis_7.html>swbis(7)</a>
+        <a href=sw_5.html>sw(5)</a>, <a href=swbis_7.html>swbis(7)</a>, <a href=swpackage_8.html>swpackage(8)</a>, <a href=swpackage_5.html>swpackage(5)</a>, <a href=swbisparse_1.html>swbisparse(1)</a>, <a href=swign_1.html>swign(1)</a>, <a href=swverify_8.html>swverify(8)</a>,
+        <a href=swcopy_8.html>swcopy(8)</a>, <a href=swconfig_8.html>swconfig(8)</a>, <a href=swlist_8.html>swlist(8)</a>, <a href=swremove_8.html>swremove(8)</a>
         .../libexec/swbis/lxpsf
         .../libexec/swbis/arf2arf
         .../libexec/swbis/swbisparse
@@ -574,13 +579,14 @@ i {color:#000080}
 
 
 
-</pre><h3><a name="FILES"><b>FILES</b></a></h3><pre>       <b>catalog</b>/  # The meta-data directory
+</pre><h3><a name="FILES"><b>FILES</b></a></h3><pre>       <b>/var/lib/swbis/catalog</b>/  # The installed software catalog
+       <b>catalog</b>/  # The package meta-data directory
        <b>swdefaults</b>     # Options configuration file
        <b>swbisdefaults</b>  # Options configuration file
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        <a href=swbis_1.html>swbis(1)</a>
         Author: Jim Lowe   Email: jhlowe at acm.org
-        Version: 1.3
-        Last Updated: 2008-04-18
+        Version: 1.5
+        Last Updated: 2010-02-04
         Copying: GNU Free Documentation License
 </pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       (This section left intensionally blank)
 

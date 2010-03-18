@@ -417,6 +417,28 @@ i {color:#000080}
        installed_software_catalog extended option.  The catalog is a file
        system hierarchy containing regular files and directories.
 
+       The catalog is typically located relative to the target path.  As of
+       swbis version 1.5, the catalog location may be specified using the file
+       URL syntax to indicate an absolute path.  Any other form, such as an
+       unadorned absolute UNIX path will be treated as a path relative to the
+       target path.
+
+       For Example:
+       Below are example values of the <i>installed</i><b>_</b><i>software</i><b>_</b><i>catalog</i> extended
+       option found in the <b>swdefaults</b> file usually located in
+       $HOME/.swbis/swdefaults
+
+
+          var/lib/swbis/catalog   # Default, relative to target path
+
+          /var/lib/swbis/catalog  # Same, leading slash not respected
+
+          file://localhost/var/lib/swbis/catalog  # Really absolute
+
+          file:///var/lib/swbis/catalog           # Note triple leading slash
+
+
+
    <a name="CATALOG FILE LAYOUT"><b>CATALOG FILE LAYOUT</b></a>
         &lt;<i>path</i>&gt;/
         &lt;<i>path</i>&gt;/&lt;<i>ISC</i>&gt;/
@@ -677,7 +699,8 @@ i {color:#000080}
        as does the ATT Awk book awk, and the awk on BSD systems.  See the
        INSTALL file for further details regarding a small issue with the
        OpenSolaris (c.2006) awk.
-</pre><h3><a name="FILES"><b>FILES</b></a></h3><pre>        /usr/lib/swbis/swdefaults
+</pre><h3><a name="FILES"><b>FILES</b></a></h3><pre>        /var/lib/swbis/catalog # Location of installed catalog
+        /usr/lib/swbis/swdefaults
         /usr/lib/swbis/swbisdefaults
         $HOME/.swbis/swdefaults
         $HOME/.swbis/swbisdefaults
@@ -688,8 +711,8 @@ i {color:#000080}
        <a href=swcopy_8.html>swcopy(8)</a>, <a href=sw_5.html>sw(5)</a>, <a href=swbisparse_1.html>swbisparse(1)</a>, <a href=swign_1.html>swign(1)</a>, <a href=swverify_8.html>swverify(8)</a>
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        <a href=swinstall_8.html>swinstall(8)</a>: The installation utility of the swbis project.
         Author: Jim Lowe   Email: jhlowe at acm.org
-        Version: 1.3
-        Last Updated: 2008-04-18
+        Version: 1.5
+        Last Updated: 2010-02-05
         Copying: GNU Free Documentation License
 </pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       swinstall is subject to breakage if a user's account on an intermediate
        (or terminal) host in a target spec is not configured to use a Bourne

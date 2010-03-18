@@ -1,3 +1,347 @@
+2010-03-16 Jim Lowe <jhlowe@acm.org>
+* VERSION now 1.5
+
+2010-03-16 Jim Lowe <jhlowe@acm.org>
+* upgraded release autotools to 1.11.1, 2.65, m4-1.4.14
+
+2010-03-12 Jim Lowe <jhlowe@acm.org>
+* swprogs/swproglib.c (swpl_get_catalog_perms): added redirect 2>/dev/null
+
+2010-03-11 Jim Lowe <jhlowe@acm.org>
+* swprogs/swproglib.c (swpl_set_detected_catalog_perms): turn
+off setuid and setgid for regular files in the catalog
+
+2010-03-10 Jim Lowe <jhlowe@acm.org>
+* swprogs/swproglib.c (swpl_write_single_file_tar_archive): now use ahs
+object, if given, to set the file owners and permissions.
+
+2010-03-07 Jim Lowe <jhlowe@acm.org>
+* swprogs/swproglib.c (swpl2_normalize_configure_script_results): added
+* swprogs/swconfig_lib.c (swconfig_looper_sr_payload) <swconfig>: use
+swpl2_normalize_configure_script_results(). 
+
+2010-03-04 Jim Lowe <jhlowe@acm.org>
+* swsupplib/sw_parse/swlex.l: now allow dot-delimited keywords
+* swsupplib/sw_parse/swlex.l: now emit warning for unmatched input
+* swsupplib/sw_parse/swlex.c.20100304: added
+* swsupplib/sw_parse/swparse.tab.h.20100304: added
+* swsupplib/sw_parse/swparse.tab.c.20100304: added
+
+2010-02-27 Jim Lowe <jhlowe@acm.org>
+* swsupplib/misc/swverid.c (parse_swspec_string): fix use of NUL pointer
+
+2010-02-23 Jim Lowe <jhlowe@acm.org>
+* swsupplib/progs/lxpsf.c (main) <lxpsf>: make --psf-form3 the
+default form
+
+2010-02-23 Jim Lowe <jhlowe@acm.org>
+* swsupplib/misc/topsf.c (parse_slack_desc): now expand escapes
+* swstructlib/src/swmetadata/swextendeddef.h (processExcludes) <swpackage>
+added special case fixes for excluding ".", ie. the root directory
+entry but not its contents.
+
+2010-02-22 Jim Lowe <jhlowe@acm.org>
+* VERSION now 1.5rc2
+
+2010-02-21 Jim Lowe <jhlowe@acm.org>
+* VERSION now 1.5rc1
+
+2010-02-22 Jim Lowe <jhlowe@acm.org>
+* swsupplib/uinfile/uinfile.c (uinfile_i_open): protect lseek() calls
+from using uxfio descriptor.
+
+2010-02-21 Jim Lowe <jhlowe@acm.org>
+* VERSION now 1.4.133
+
+2010-02-20 Jim Lowe <jhlowe@acm.org>
+* swsupplib/uxfio/uxfio.c (uxfio_devnull_open): added
+* swsupplib/uxfio/uxfio.c (uxfio_devnull_close): added
+* Changes to common files to consolidate open() calls on "/dev/null"
+(potentially affects all utilities)
+
+2010-02-20 Jim Lowe <jhlowe@acm.org>
+* swsupplib/taru/otar.c (l_cache_getuidbyname): added, to reduce
+the number of opens on /etc/passwd, etc
+* swsupplib/taru/otar.c (l_cache_getgidbyname): added, to reduce
+the number of opens on /etc/group, etc
+
+2010-02-20 Jim Lowe <jhlowe@acm.org>
+* VERSION now 1.4.131
+
+2010-02-20 Jim Lowe <jhlowe@acm.org>
+* swsupplib/misc/swlib.c (swlib_is_option_true): fixed
+
+2010-02-20 Jim Lowe <jhlowe@acm.org>
+* VERSION now 1.4.130
+
+2010-02-20 Jim Lowe <jhlowe@acm.org>
+* swprogs/iswverify.c (main): fix errror reporting issue
+that does (may) hide a failed verification when verifying multiple
+selections on a host such as ``swverify --allow-ambig \* @ /''
+* swprogs/swproglib.c (swpl_load_single_status_value): added
+* swprogs/swproglib.c: support sig_level of -1 meaning don't even
+run gpg
+* swprogs/swinstall.c (main) <swinstall>: added --slackware option
+to support detection and installation of slackware binary packages.
+* swprogs/swlist.c (main) <swlist>: support negative --sig-level meaning
+do not run gpg
+* swprogs/iswverify.c (main) <swverify>: support negative --sig-level meaning
+do not run gpg
+* swsupplib/misc/swutillib.c (swutil_setup_xformat): support
+slacware binary package translation.
+* swsupplib/misc/swvarfs.c (swvarfs_opendup_with_name): added
+* swsupplib/misc/topsf.c (topsf_parse_slack_pkg_name): support
+target host syntax when parsing name for NAME, VERSION, RELEASE info.
+* swsupplib/progs/lxpsf.c (main) <lxpsf>: add --slackware-pkg-name=NAME 
+to support reading slackware runtime tarballs on stdin.
+* swsupplib/taru/xformat.c (xformat_open_archive_by_fd_and_name): added
+* swsupplib/uinfile/uinfile.c (uinfile_i_open): added slack_name parameter
+
+2010-02-18 Jim Lowe <jhlowe@acm.org>
+* VERSION 1.4.128
+added support for slackware translation from swinstall
+
+2010-02-14 Jim Lowe <jhlowe@acm.org>
+* swprogs/swverify_lib.c (compare_diff) <swverify>: fix --no-slack option,
+add --no-summary-report option
+* swprogs/swverify.sh.in <swverify>: add --no-summary-report option
+* swprogs/iswverify.c (main) <swverify>: add --no-summary-report option
+
+2010-02-13 Jim Lowe <jhlowe@acm.org>
+* swsupplib/misc/swpath.c (swpath_close): fix memory leak
+* swsupplib/misc/swvarfs.c: fix memory leak
+* swsupplib/taru/xformat.c (internal_open_archive_file): fix memory leak
+* swsupplib/uinfile/uinfile.c (uinfile_detect_ieee): fix memory leak
+* swsupplib/misc/swverid.c (swverid_copy): fix memory leak
+* swsupplib/misc/swgpg.c: fix memory leak
+* swsupplib/misc/swicat_e.c: fix memory leak
+* swsupplib/misc/swlib.c (swlib_md5_copy): fix memory leak
+* swsupplib/misc/swlib.c (swlib_digests): fix memory leak
+* swsupplib/misc/swheader.c (swheader_close): fix memory leak
+* swstructlib/src/swmetadata/swdefcontrolfile.cxx <swpackage>
+(apply_file_stat_specialization): fix sha512 for files
+* swstructlib/src/swmetadata/swpackagefile.cxx <swpackage>
+(apply_file_stats): fix sha512 for files
+(apply_file_stat_specialization): fix sha512
+* swprogs/swconfig.c <swconfig>: fix memory leak
+* swprogs/swlist.c <swlist>: fix memory leak
+* swprogs/swremove.c <swlist>: fix memory leak
+* swprogs/swlist_lib.c <swlist>: fix memory leak
+* swprogs/swproglib.c: fix memory leak
+* swprogs/swproglib.c: fix file descriptor leak
+
+2010-02-06 Jim Lowe <jhlowe@acm.org>
+* swstructlib/src/swmetadata/swpackagefile (initialize_file_stats_array) <swpackage>:
+fix for sha512 digest
+* swstructlib/src/swmetadata/swpackagefile (apply_file_stats_array) <swpackage>:
+fix for sha512 digest
+
+2010-02-06 Jim Lowe <jhlowe@acm.org>
+* swsupplib/swi/swi.c (swi_find_fileset_by_swsel):
+broadened sanity assertion to include pfiles type
+
+2010-02-06 Jim Lowe <jhlowe@acm.org>
+* swprogs/swremove.c (main) <swremove>: now issue
+error message if no selections are given on command line.
+* swprogs/swlist.c (main) <swlist>: Per spec, now select all
+software when no selections are given on command line.
+
+2010-02-05 Jim Lowe <jhlowe@acm.org>
+* VERSION: now 1.4.113
+
+2010-02-03 Jim Lowe <jhlowe@acm.org>
+* VERSION: now 1.4.113
+Has major changes to support installed software location
+outside of target path.
+
+2010-02-03 Jim Lowe <jhlowe@acm.org>
+* swprogs/swverify_lib.c (compare_diff) <swverify>: test for null
+parameter to swverify_inl_parse() at line 840
+
+2010-02-02 Jim Lowe <jhlowe@acm.org>
+* developtment to support installed catalog
+outside of target path is complete, testing is still required.
+
+2010-02-02 Jim Lowe <jhlowe@acm.org>
+* swsupplib/misc/swicat.c (swicat_env):
+support absolute path for installed_software_catalog
+* swsupplib/swi/swi_afile.c (swi_afile_write_script_cases):
+support absolute path for installed_software_catalog
+* swprogs/swproglib.c (swpl_write_session_options_filename): removed
+* swprogs/swproglib.c (swpl_load_single_file_tar_archive): Now use 
+catalog_path parameter
+* swprogs/swproglib.c (swpl_write_tar_installed_software_index_file):
+support absolute path for installed_software_catalog
+
+2010-02-01 Jim Lowe <jhlowe@acm.org>
+* swprogs/swproglib.c (swpl_get_catalog_entries): support absolute path
+for installed_software_catalog
+
+2010-01-31 Jim Lowe <jhlowe@acm.org>
+* swsupplib/misc/swextopt.c (get_opta_isc): added
+* swprogs/swproglib.c: development toward support for installed
+catalog at different root path.
+* swprogs/swinstall_lib.c: development toward support for installed
+catalog at different root path.
+* swprogs/swinstall.c <swinstall>: development toward support for installed
+catalog at different root path.
+* swprogs/swproglib.c (swpl_common_catalog_tarfile_operation): don not force
+installed catalog path relative to support catalog at different root than
+target.
+
+2010-01-27 Jim Lowe <jhlowe@acm.org>
+* swprogs/swlist.c <main>: handle error from swpl_get_utsname_attributes()
+
+2010-01-24 Jim Lowe <jhlowe@acm.org>
+* swprogs/swinstall_lib.c (arfinstall_tar) <swinstall>: elimintate
+time limit for execution phase, now set to 1 day (86400 Sec).
+* swsupplib/misc/swicol.c (task_wait_for): respect swicol->master_alarmM
+* swprogs/swinstall.c (safe_sig_handle) <swinstall>:  call
+swicol_set_master_alarm().
+* swprogs/swconfig.c (safe_sig_handle) <swconfig>:  call
+swicol_set_master_alarm().
+* swprogs/swremove.c (safe_sig_handle) <swremove>:  call
+swicol_set_master_alarm().
+* swprogs/swlist.c (safe_sig_handle) <swlist>:  call
+swicol_set_master_alarm().
+* swprogs/iswverify.c (safe_sig_handle) <swverify>:  call
+swicol_set_master_alarm().
+* doc/Makefile.in: added swconfig entries
+* doc/source/swconfig_8.sgml: added
+* doc/: Documentation regenerated
+
+2010-01-23 Jim Lowe <jhlowe@acm.org>
+* swprogs/swproglib.c (swpl2_update_execution_script_results):
+set the return status of un-unscript to 'none' when, for example,
+running the unconfigure script
+* swprogs/swproglib.c (swconfig_looper_sr_payload) <swconfig>:
+added SWBIS_TS_Load_INSTALLED_transient task
+* swprogs/swproglib.c (swpl_load_single_file_tar_archive):
+verbosity adjustments
+* swprogs/swproglib.c (swpl_write_tar_installed_software_index_file)
+added function parameter for name of INSTALLED file
+
+2010-01-19 Jim Lowe <jhlowe@acm.org>
+* swsupplib/ls_list/gen_subs.c (print_mode_owners) <swverify>:
+fixed alter mode rendering.
+
+2010-01-18 Jim Lowe <jhlowe@acm.org>
+* swsupplib/misc/swevents.c (swevent_shell_echo): disable test
+based on verbose_threshholdM, now always true.
+* swsupplib/misc/swevents.h : changes to verbose_threshholdM
+* swsupplib/misc/swlib.c (swlib_test_verbose): now test
+using the verbose_threshholdM of (struct swEvents*) as one
+of the tests of verbosity.
+* swprogs/swproglib.c (swpl_cisf_product_create): now
+makes no restriction on number of times called based on
+static variable.
+
+2010-01-16 Jim Lowe <jhlowe@acm.org>
+* swprogs/swconfig_lib.c <swconfig>: more development
+* swprogs/swproglib.c (swpl_run_make_installed_live): added
+* swprogs/swinstall_lib.c (arfinstall_tar) <swinstall>: now use
+swpl_run_make_installed_live
+
+2010-01-16 Jim Lowe <jhlowe@acm.org>
+* swprogs/swconfig.c (main) <swconfig>: add --send-environment option
+* swsupplib/misc/swicat.c (swicat_write_script_cases) <swinstall>:
+correctly set SW_SOFTWARE_SPEC
+* swsupplib/misc/swicat.c (swicat_env) <swinstall>:
+correctly set SW_SOFTWARE_SPEC
+
+2010-01-12 Jim Lowe <jhlowe@acm.org>
+* swprogs/swconfig_lib.c <swconfig>: more development
+* swstructlib/src/swmetadata/swextendeddef.h (processExcludes) <swpackage>
+more fixes.  Now /DIR/* excludes the contents of DIR, but not DIR.
+/DIR/ excludes everthing, /DIR excludes the directory entry but not its
+lower level contents.
+*swsupplib/misc/swicol.c: support for "status=preview" and swconfig
+*swsupplib/swi/swi_afile.c (swi_control_script_get_return_code): added
+
+2010-01-12 Jim Lowe <jhlowe@acm.org>
+* swprogs/swproglib.c (swpl_write_control_script_code_fragment): support special
+"status=preview" response for swconfig
+
+2010-01-05 Jim Lowe <jhlowe@acm.org>
+* swprogs/swinstall.c <swinstall>: added --enable-agent-forwarding option
+
+2009-12-29 Jim Lowe <jhlowe@acm.org>
+* swprogs/swverify.sh.in <swverify>: add --check-owners option
+
+2009-12-27 Jim Lowe <jhlowe@acm.org>
+* swprogs/swverify_lib.c <swverify>: development and
+refactoring to support new fine grained verification
+report.
+* swsupplib/ls_list/gen_subs.c (print_mode_owners) <swverify>:
+now support controls printing or omitting file permissions.
+Fixes --check-permissions=no
+
+2009-12-19 Jim Lowe <jhlowe@acm.org>
+* swsupplib/ls_list/gen_subs.c <swverify>: changed internal
+alternate (alt_) listing form to support deterministic parsing
+of individual verification fields.
+* swprogs/swverify_lib.c (get_name_len) <swverify>: improved
+* swprogs/swverify_lib.c <swverify>: added inl_get_<*> routines
+to support fine grained reporting of verification.
+* swsupplib/strob/strob.c (strob_snprintf): added
+
+2009-12-12 Jim Lowe <jhlowe@acm.org>
+* swprogs/swpackage.cxx  <swpackage>: add --xz compression
+option
+* swprogs/swcopy.c <swcopy>: clean up compression/decompression.
+Now support lzma and xz, and gpg encryption.
+* swsupplib/uinfile/uinfile.c (uinfile_i_open): Now support opening
+a file of arbitrary data less than 3 bytes in length without error.
+
+2009-12-09 Jim Lowe <jhlowe@acm.org>
+* swsupplib/uinfile/uinfile.c (uinfile_i_open): support XZ
+copression.
+
+2009-09-12 Jim Lowe <jhlowe@acm.org>
+* swprogs/swconfig_lib.c <swconfig>: more development
+* swsupplib/mis/swgpg.c (make_dir): now use mkdtemp()
+* swprog/swproglib.c (swpl_write_control_script_code_fragment): write
+script tag in SW_CONTROL_SCRIPT_ENDS event message
+
+2009-08-09 Jim Lowe <jhlowe@acm.org>
+* swprogs/swconfig.c <swconfig>: added
+* swprogs/swconfig_lib.c <swconfig>: added
+* swprogs/Makefile.in: added swconfig
+* swprogs/swremove.c (main) <swremove>: improve option checks
+* swprogs/iswverify.c (main) <swverify>: improve option checks
+
+2009-08-08 Jim Lowe <jhlowe@acm.org>
+* swprogs/swremove_lib.c (swremove_looper_sr_payload) <swremove>:
+add support for checkremove script.
+* swsupplib/misc/swicol.c (swicol_rpsh_task_expect): set 
+return value to -4 for all errors from swicol_rpsh_task_wait
+* swprogs/swremove_lib.c (make_remove_command_script_fragment) <swremove>
+now squash embedded dot-slash in name
+* swprogs/swremove_lib.c (make_remove_glob_list_for) <swremove>: added,
+now fixes failure to remove directories.
+
+2009-08-06 Jim Lowe <jhlowe@acm.org>
+* swprogs/swproglib.c (swpl_run_check_script): new, factored
+from run_analysis_script in swinstall
+
+2009-08-03 Jim Lowe <jhlowe@acm.org>
+* swprogs/swproglib.c (swpl_make_environ_transfer_image): added
+
+2009-08-02 Jim Lowe <jhlowe@acm.org>
+* swsupplib/misc/swicat_s.c (sr_construct_swverid): added
+* swsupplib/misc/swicat_s.c (swicat_sr_parse): modified, now create
+and set the version Id of the response, sr->swspecM.
+* swprogs/iswverify.c (main): added --swbis-check-owners option
+* swsupplib/misc/swextopt.h (swverify): added swbis_check_owners extended option
+
+2009-07-18 Jim Lowe <jhlowe@acm.org>
+* swsupplib/taru/xformat.c (xformat_write_by_name) <swbistar>: fixed
+brokenness caused by deprecation of (struct stat*) argument in 2009-06-20
+change.
+
+2009-07-14 Jim Lowe <jhlowe@acm.org>
+* swbis-1.4 released.
+
 2009-07-12 Jim Lowe <jhlowe@acm.org>
 * version 1.4 distribution tarball created
 

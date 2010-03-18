@@ -189,7 +189,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <h3 class="section">1.3 DESCRIPTION</h3>
 
 <!-- TROFF INPUT: .PP -->
-<p><b>swbis</b> is a software administration system for
+<p><b>swbis</b> is a network transparent software administration system for
 GNU/Linux systems and systems that are UNIX system-like. It implements the
 Open Group's CAE Spec C701 (XDSA) Distributed Software Administration. 
 This spec closely follows ISO/IEC 15068-2:1999 (now withdrawn)
@@ -1271,6 +1271,9 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
       sw(5), swpackage(8), swbisparse(1), swign(1), swverify(8), swcopy(8)
      <!-- TROFF INPUT: .br -->
      <!-- .br -->
+      swbis(1), swconfig(8), swlist(8), swremove(8)
+     <!-- TROFF INPUT: .br -->
+     <!-- .br -->
       .../libexec/swbis/lxpsf
      <!-- TROFF INPUT: .br -->
      <!-- .br -->
@@ -1316,7 +1319,10 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <h3 class="section">1.14 FILES</h3>
 
 <!-- TROFF INPUT: .PP -->
-<p><b>catalog</b>/  # The meta-data directory
+<p><b>/var/lib/swbis/catalog</b>/  # The installed software catalog
+<!-- TROFF INPUT: .br -->
+<!-- .br -->
+<b>catalog</b>/  # The package meta-data directory
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
 <b>swdefaults</b>     # Options configuration file
@@ -1340,7 +1346,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <p>swbis(7)
  Author: Jim Lowe   Email: jhlowe at acm.org
- Version: 1.3
+ Version: 1.5
  Last Updated: 2008-04-18
  Copying: GNU Free Documentation License
 <!-- TROFF INPUT: .SH "BUGS" -->
@@ -1359,7 +1365,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <!-- TROFF INPUT: .PP -->
 <p>Not everything is implemented yet. 
-<!-- created by instant / docbook-to-man, Sat 07 Mar 2009, 20:59 -->
+<!-- created by instant / docbook-to-man, Thu 25 Feb 2010, 08:10 -->
 
 </body></html>
 

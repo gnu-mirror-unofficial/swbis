@@ -907,9 +907,33 @@ an interface to it (e.g. swlist utility) and operations on it.
 This implementation creates a de-facto installed software catalog rooted at the file system path specified by the value of the
 installed<tt>_</tt>software<tt>_</tt>catalog extended option.  The catalog is a file system hierarchy containing regular files
 and directories. 
+<!-- TROFF INPUT: .PP -->
+The catalog is typically located relative to the target path.  As of swbis version 1.5, the catalog location
+may be specified using the file URL syntax to indicate an absolute path.  Any other form, such as an unadorned
+absolute UNIX path will be treated as a path relative to the target path. 
+<!-- TROFF INPUT: .PP -->
+For Example:
+<!-- TROFF INPUT: .br -->
+<!-- .br -->
+Below are example values of the
+<i>installed</i><tt>_</tt><i>software</i><tt>_</tt><i>catalog</i> extended option found in
+the <b>swdefaults</b> file usually located in
+$HOME/.swbis/swdefaults
+<!-- TROFF INPUT: .PP -->
+<!-- TROFF INPUT: .nf -->
+<!--  -->
+<pre class="display">     <!-- TROFF INPUT: .br -->
+     <!-- .br -->
+        var/lib/swbis/catalog   # Default, relative to target path
+        /var/lib/swbis/catalog  # Same, leading slash not respected
+        file://localhost/var/lib/swbis/catalog  # Really absolute
+        file:///var/lib/swbis/catalog           # Note triple leading slash
+     <!-- TROFF INPUT: .fi -->
+</pre>
+<!--  -->
+<!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .SS "CATALOG FILE LAYOUT" -->
 <!-- DEBUG: print_menu("INSTALLED SOFTWARE CATALOG") -->
-
 <ul class="menu">
 <li><a accesskey="1" href="#CATALOG-FILE-LAYOUT">CATALOG FILE LAYOUT</a>
 <li><a accesskey="2" href="#CATALOG-LOCATION">CATALOG LOCATION</a>
@@ -1603,7 +1627,8 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">      /usr/lib/swbis/swdefaults
+<pre class="display">      /var/lib/swbis/catalog # Location of installed catalog
+      /usr/lib/swbis/swdefaults
       /usr/lib/swbis/swbisdefaults
       $HOME/.swbis/swdefaults
       $HOME/.swbis/swbisdefaults
@@ -1661,8 +1686,8 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <p>swinstall(8): The installation utility of the swbis project. 
  Author: Jim Lowe   Email: jhlowe at acm.org
- Version: 1.3
- Last Updated: 2008-04-18
+ Version: 1.5
+ Last Updated: 2010-02-05
  Copying: GNU Free Documentation License
 <!-- TROFF INPUT: .SH "BUGS" -->
 <!-- DEBUG: print_menu("IDENTIFICATION") -->
@@ -1690,7 +1715,7 @@ sending a SIGTERM to the remote script's parent process.
 <!-- TROFF INPUT: .PP -->
 swinstall does not currently implement Software Selections, not fileset dependencies, and much more. 
 Only packages with one product and one fileset are supported. 
-<!-- created by instant / docbook-to-man, Sat 07 Mar 2009, 20:59 -->
+<!-- created by instant / docbook-to-man, Thu 25 Feb 2010, 08:10 -->
 
 </body></html>
 

@@ -210,7 +210,9 @@ For configuration help and host compatibility issues see swbis(7).
 It implements the Open Group's CAE Spec C701 (XDSA) Distributed Software Administration. 
 This spec closely follows ISO/IEC 15068-2:1999 (now withdrawn) which was identical to IEEE 1387.2:1995. 
 The scope of the implementation includes a package format, meta-data file format, and utilities
-for package creation, installation, query, listing, and verification. 
+for package creation, installation, query, listing, and verification.  The package management utilities
+are network transparent via direct use of ssh(1).  They provide remote package management functions
+to any UNIX-like remote host with a zero footprint regardless if swbis is installed on the remote host. 
 <!-- TROFF INPUT: .PP -->
 
 <p>While the swbis system has features comparable with package managers, it has features that are of
@@ -1317,7 +1319,10 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <pre class="display">      info swbis
      <!-- TROFF INPUT: .br -->
      <!-- .br -->
-      sw(5), swpackage(8), swbisparse(1), swign(1), swverify(8), swcopy(8), swbis(7)
+      sw(5), swbis(7), swpackage(8), swpackage(5), swbisparse(1), swign(1), swverify(8),
+     <!-- TROFF INPUT: .br -->
+     <!-- .br -->
+      swcopy(8), swconfig(8), swlist(8), swremove(8)
      <!-- TROFF INPUT: .br -->
      <!-- .br -->
       .../libexec/swbis/lxpsf
@@ -1369,7 +1374,10 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <h3 class="section">1.15 FILES</h3>
 
 <!-- TROFF INPUT: .PP -->
-<p><b>catalog</b>/  # The meta-data directory
+<p><b>/var/lib/swbis/catalog</b>/  # The installed software catalog
+<!-- TROFF INPUT: .br -->
+<!-- .br -->
+<b>catalog</b>/  # The package meta-data directory
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
 <b>swdefaults</b>     # Options configuration file
@@ -1393,8 +1401,8 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <p>swbis(1)
  Author: Jim Lowe   Email: jhlowe at acm.org
- Version: 1.3
- Last Updated: 2008-04-18
+ Version: 1.5
+ Last Updated: 2010-02-04
  Copying: GNU Free Documentation License
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
@@ -1414,7 +1422,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <!-- TROFF INPUT: .PP -->
 <p>(This section left intensionally blank)
-<!-- created by instant / docbook-to-man, Sat 07 Mar 2009, 20:59 -->
+<!-- created by instant / docbook-to-man, Thu 25 Feb 2010, 08:10 -->
 
 </body></html>
 

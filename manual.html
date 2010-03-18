@@ -8,7 +8,7 @@
 <link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <!--
 This manual is for swbis
-(version 1.3, 07 Mar 2009),
+(version 1.5, 22 Feb 2010),
 which is a implementation of the POSIX System Administration -- Part 2: Software Administration
 conforming to IEEE Std 1387.2-1995 (ISO/IEC 15068-2) and Open Group CAE C701.
 Currently, not all of the standard is implemented.  There are extensions for package authentication.
@@ -54,7 +54,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#dir">(dir)</a>
 <h2 class="unnumbered">swbis</h2>
 
 <p>This manual is for swbis
-(version 1.3, 07 Mar 2009),
+(version 1.5, 22 Feb 2010),
 which is a implementation of the POSIX System Administration &ndash; Part 2: Software Administration
 conforming to IEEE Std 1387.2-1995 (ISO/IEC 15068-2) and Open Group CAE C701. 
 Currently, not all of the standard is implemented.  There are extensions for package authentication. 
@@ -104,9 +104,10 @@ Using swbis
 </pre>
 <li><a href="#Making-PSFs-for-Package-Creation">Making PSFs for Package Creation</a>
 <li><a href="#Creating-Signed-Distributions">Creating Signed Distributions</a>
+<li><a href="#Signing-File-System-Directories">Signing File System Directories</a>
+<li><a href="#Creating-a-Catalog-of-Installed-Packages">Creating a Catalog of Installed Packages</a>
 <li><a href="swverify.html#VERIFYING-SIGNATURES">Authenticating Software</a>: <li><a href="#Installing-POSIX-Distributions">Installing POSIX Distributions</a>
-<li><a href="#Installing-RPM-Packages">Installing RPM Packages</a>
-<li><a href="#Translating-Other-Formats">Translating Other Formats</a>
+<li><a href="#Translating-and-Installing-Other-Formats">Translating and Installing Other Formats</a>
 <pre class="sp">
 
 </pre>
@@ -140,7 +141,7 @@ Reference
 <div class="node">
 <p><hr>
 <a name="Creating-Signed-Distributions"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="swverify.html#VERIFYING-SIGNATURES">(swbis_swverify)VERIFYING SIGNATURES</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="#Signing-File-System-Directories">Signing File System Directories</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#Making-PSFs-for-Package-Creation">Making PSFs for Package Creation</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
@@ -467,10 +468,6 @@ and as ascii text of course.
 
      <p>Command: <samp><span class="command">swinstall</span></samp>
 
-     <p><samp><span class="command">swinstall</span></samp> is missing many features but it is useful
-for packages with a single fileset and product. 
-It can install RPMs to a local or a remote host.
-
      <li>Copying POSIX packages
 
      <p>Command: <samp><span class="command">swcopy</span></samp>
@@ -506,8 +503,26 @@ all Product Specification File (PSF) features in the IEEE spec.
 
      <p><samp><span class="command">swverify</span></samp> is used to verify the payload digests and
 GPG signature (if any) of a POSIX package (i.e. tar archive in POSIX format). 
-Currently, <samp><span class="command">swverify</span></samp> does not completely
-implement verification of installed software.
+<samp><span class="command">swverify</span></samp> also is used for verification of installed software.
+
+     <li>Package Removal
+
+     <p>Command: <samp><span class="command">swremove</span></samp>
+
+     <p><samp><span class="command">swremove</span></samp> is used to remove installed software.
+
+     <li>Package Listing
+
+     <p>Command: <samp><span class="command">swlist</span></samp>
+
+     <p><samp><span class="command">swlist</span></samp> is used to list information about the installed software.
+
+     <li>Package Configuration
+
+     <p>Command: <samp><span class="command">swconfig</span></samp>
+
+     <p><samp><span class="command">swconfig</span></samp> is used to configure installed software.  It
+provides a stand-alone execution interface to the package configure scripts.
 
      <li>Creating GPG Signed Source Packages.
 
@@ -1237,6 +1252,9 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <li><a href="swverify_8.html">swverify</a>
 <li><a href="#swverify_002e8-in-one-text-file">swverify.8 in one text file</a>
 
+<li><a href="swconfig.html#">swconfig</a>
+<li><a href="#swconfig_002e8-in-one-text-file">swconfig.8 in one text file</a>
+
 <li><a href="swign_1.html">swign</a>
 <li><a href="#swign_002e1-in-one-text-file">swign.1 in one text file</a>
 
@@ -1275,6 +1293,10 @@ NAME
 
 SYNOPSIS
        swpackage    # Filter: read PSF on stdin, write a tar archive to stdout
+
+       swpackage -s- @-	 # Absolutely explicit, same as above
+
+       swpackage @/dev/null   # Useful for debugging
 
        swpackage  [-p]	[-s psf_file]  [-f file] [-x option=value] \
        [-X options_file] [-W option] [software_selections] [@targets]
@@ -1406,6 +1428,15 @@ OPTIONS
 
        -W bzip2
 	      compress output with file system bzip2 utility
+       -W lzma
+	      compress output with file system lzma utility
+
+       -W symmetric
+	      encrypt output with file system gpg utility
+
+       -W encrypt-for-recipient=NAME
+	      encrypt with NAME's public key using file system gpg utility
+
 
        -W source=FILE
 	      Use serial archive located at FILE as the source instead of the
@@ -2253,7 +2284,7 @@ SEE ALSO
 IDENTIFICATION
 	swpackage(8): The packaging utility of the swbis project.
 	Author: Jim Lowe   Email: jhlowe at acm.org
-	Version: 1.3
+	Version: 1.5
 	Last Updated: 2006-07-01
 	Copying: GNU Free Documentation License
 
@@ -2670,6 +2701,28 @@ INSTALLED SOFTWARE CATALOG
        installed_software_catalog extended option.  The catalog is a file
        system hierarchy containing regular files and directories.
 
+       The catalog is typically located relative to the target path.  As of
+       swbis version 1.5, the catalog location may be specified using the file
+       URL syntax to indicate an absolute path.	 Any other form, such as an
+       unadorned absolute UNIX path will be treated as a path relative to the
+       target path.
+
+       For Example:
+       Below are example values of the installed_software_catalog extended
+       option found in the swdefaults file usually located in
+       $HOME/.swbis/swdefaults
+
+
+	  var/lib/swbis/catalog	  # Default, relative to target path
+
+	  /var/lib/swbis/catalog  # Same, leading slash not respected
+
+	  file://localhost/var/lib/swbis/catalog  # Really absolute
+
+	  file:///var/lib/swbis/catalog		  # Note triple leading slash
+
+
+
    CATALOG FILE LAYOUT
 	&lt;path>/
 	&lt;path>/&lt;ISC>/
@@ -2942,6 +2995,7 @@ REQUISITE UTILITIES
        OpenSolaris (c.2006) awk.
 
 FILES
+	/var/lib/swbis/catalog # Location of installed catalog
 	/usr/lib/swbis/swdefaults
 	/usr/lib/swbis/swbisdefaults
 	$HOME/.swbis/swdefaults
@@ -2959,8 +3013,8 @@ SEE ALSO
 IDENTIFICATION
 	swinstall(8): The installation utility of the swbis project.
 	Author: Jim Lowe   Email: jhlowe at acm.org
-	Version: 1.3
-	Last Updated: 2008-04-18
+	Version: 1.5
+	Last Updated: 2010-02-05
 	Copying: GNU Free Documentation License
 
 BUGS
@@ -3385,6 +3439,7 @@ REQUISITE UTILITIES
        (or tar|star|gtar), mkdir, echo, test, sleep, read (if not builtin).
 
 FILES
+       /var/lib/swbis/catalog # Location of installed catalog
        /usr/lib/swbis/swdefaults
        /usr/lib/swbis/swbisdefaults
        $HOME/.swbis/swdefaults
@@ -3403,7 +3458,7 @@ SEE ALSO
 IDENTIFICATION
 	swremove(8): The package removal utility of the swbis project.
 	Author: Jim Lowe   Email: jhlowe at acm.org
-	Version: 1.3
+	Version: 1.5
 	Last Updated: 2008-04-18
 	Copying: GNU Free Documentation License
 
@@ -4024,7 +4079,7 @@ SEE ALSO
 IDENTIFICATION
 	swcopy(8): The archive copying utility of the swbis project.
 	Author: Jim Lowe   Email: jhlowe at acm.org
-	Version: 1.3
+	Version: 1.5
 	Last Updated: 2006-07
 	Copying: GNU Free Documentation License
 
@@ -4514,6 +4569,7 @@ REQUISITE UTILITIES
        signatures.
 
 FILES
+       /var/lib/swbis/catalog # Location of installed catalog
        /usr/lib/swbis/swdefaults
        /usr/lib/swbis/swbisdefaults
        $HOME/.swbis/swdefaults
@@ -4532,7 +4588,7 @@ SEE ALSO
 IDENTIFICATION
 	swlist(8): The query/listing utility of the swbis project.
 	Author: Jim Lowe   Email: jhlowe at acm.org
-	Version: 1.3
+	Version: 1.5
 	Last Updated: 2006-07
 	Copying: GNU Free Documentation License
 
@@ -4555,7 +4611,7 @@ BUGS
 <p><hr>
 <a name="swverify.8-in-one-text-file"></a>
 <a name="swverify_002e8-in-one-text-file"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="swign_1.html">(swbis_swign)</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="swconfig.html#">(swbis_swconfig)</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="swverify_8.html">(swbis_swverify)</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Command-Reference">Command Reference</a>
 
@@ -5137,7 +5193,11 @@ RETURN VALUE
        all targets, 2 if failed on some targets.
 
 FILES
-       None
+       /var/lib/swbis/catalog # Location of installed catalog
+       /usr/lib/swbis/swdefaults
+       /usr/lib/swbis/swbisdefaults
+       $HOME/.swbis/swdefaults
+       $HOME/.swbis/swbisdefaults
 
 
 APPLICABLE STANDARDS
@@ -5154,8 +5214,8 @@ SEE ALSO
 IDENTIFICATION
 	swverify: The verification utility of the swbis project.
 	Author: James Lowe, Jr.	  Email: jhlowe at acm.org
-	Version: 1.3
-	Last Updated: 2008-04-18
+	Version: 1.5
+	Last Updated: 2010-02-04
 	Copying: GNU Free Documentation License
 
 
@@ -5189,6 +5249,429 @@ BUGS
 
 
 								   swverify(8)
+</pre>
+<div class="node">
+<p><hr>
+<a name="swconfig.8-in-one-text-file"></a>
+<a name="swconfig_002e8-in-one-text-file"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="swign_1.html">(swbis_swign)</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="swconfig.html#">(swbis_swconfig)</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="#Command-Reference">Command Reference</a>
+
+</div>
+
+<h3 class="unnumberedsec">swconfig.8 in one text file</h3>
+
+<pre class="verbatim">swconfig(8)							   swconfig(8)
+
+
+
+NAME
+       swconfig -- Configure installed software
+
+SYNOPSIS
+       swconfig	 [-p] [-u]  [-c catalog] [-f file] [-t targetfile] \
+       [-x option=value]  [-X options_file]  [-W option] \
+       [software_selections]  [@targets]
+
+
+DESCRIPTION
+       swconfig configures, unconfigures, and reconfigures installed software
+       on a host.  swconfig is a distributed utility.  Neither swconfig nor
+       any component of swbis is required on the target host, however, the
+       target host must look like a Unix system at the shell and command-line
+       utility level.  Remote network connections are made by ssh.  Ssh is the
+       default but rsh can be selected by a command line option.
+
+       swconfig operates on installed software and performs configuration
+       primarily by executing the configure or unconfigure control scirpts.
+       If these scripts do not exists for an installed package, then swconfig
+       takes no action.
+
+OPTIONS
+       -f FILE
+
+	      Read the list of software selections from FILE.
+
+
+       -p
+
+	      Preview mode, establish contact with target host, however,
+	      modify nothing.
+
+
+       -u
+
+	      Undo, run the unconfigure script.
+
+
+       -c catalog
+
+	      Specify a file of PSF or INDEX syntax or a directory containing
+	      the exported catalog.
+
+		     Note:  This option is not yet implemented.
+
+
+       -t targetfile
+
+	      Specify a file containing a list of targets (one per line).
+
+
+       -v
+
+	      Increment the verbose level.
+
+
+       -x option=value
+
+	      Specify the extended option overriding the defaults file value.
+
+
+       -X FILE
+
+	      Specify the extended options filename, FILE,  overriding the
+	      default filenames.  This option may be given more then once. If
+	      the resulting specified value is an empty string then reading of
+	      any options file is disabled.
+
+       --help
+
+	      Show help (Implementation extension)
+
+       -W option[,option,...]
+
+	      Specify the implementation extension option.
+	      Syntax: -W option[=option_argument[,option...]
+	      Options may be separated by a comma.  The implementation
+	      extension options may also be given individually using the
+	      '--long-option[=option_arg]' syntax.
+
+
+       --postinstall
+
+	      run the postinstall or unpostinstall script
+
+
+       --force-locks
+
+	      override locking and delete existing lock
+
+
+       --send-environment
+
+	      Include existing environment variables in the remote host's
+	      execution environment.  System and common varaiables are
+	      excluded and checks are made for tainted values.
+
+
+       --allow-ambig
+
+	      Allows swconfig to act on all matching entries.  Without this
+	      option a software selection that matches more than one installed
+	      software entry is an error.
+
+
+       --sig-level=N
+
+	      Specify number of required GPG signatures, N equal to 0 means
+	      don't require the catalog to be signed.
+
+
+       -W remote-shell=SHELL
+
+	      Defaults File Option: swbis_remote_shell_client
+	      Supported shells are "ssh" and "rsh", ssh is the default.
+
+       -W show-options-files
+	      Show the complete list of options files and if they are found.
+
+       -W show-options
+	      Show the options after reading the files and parsing the command
+	      line options.
+
+       -W pax-command={tar|pax|star|gtar}
+	      Set the portable archive command for all operations.  The
+	      default is "pax".
+
+       -W pax-read-command={tar|pax|star|gtar}
+	      Set the read command for local and remote hosts.
+
+       -W remote-pax-read-command={tar|pax|star|gtar}
+	      Defaults File Option: swbis_remote_pax_read_command
+	      Set the read command for remote hosts.  This is the command that
+	      runs on the target (e.g. pax -r, tar xpf -).  The default is
+	      "pax".
+
+       -W local-pax-read-command={tar|pax|star|gtar}
+	      Defaults File Option: swbis_local_pax_read_command
+	      Set the read command for local hosts.  This is the command that
+	      runs on the target (e.g. pax -r, tar xpf -).  The default is
+	      "pax".
+
+       -W pax-write-command={tar|pax|star|gtar|swbistar}
+	      Set the write command for local and remote hosts.	 This is the
+	      command that runs on the target (e.g. pax -w, tar cf -).
+
+       -W remote-pax-write-command={tar|pax|star|gtar|swbistar}
+	      Defaults File Option: swbis_remote_pax_write_command
+	      Set the write command for remote hosts.
+
+       -W local-pax-write-command={tar|pax|star|gtar|swbistar}
+	      Defaults File Option: swbis_local_pax_write_command
+	      Set the portable archive write command for local host
+	      operations.  This is the command that runs on the source (e.g.
+	      pax -w, tar cf -).  The default is "pax".
+
+       -W remote-pax-write-command={tar|pax|star|gtar|swbistar}
+	      Defaults File Option: swbis_remote_pax_write_command
+	      Set the portable archive write command for remote host
+	      operations.  This is the command that runs on the source (e.g.
+	      pax -w, tar cf -).  The default is "pax".
+
+       -W no-defaults
+	      Do not read any defaults files.
+
+       -W no-getconf
+	      Defaults File Option: swbis_no_getconf
+	      Makes the remote command be '/bin/sh -s' instead of the default
+	      'PATH=`getconf PATH` sh -s'.
+
+       -W shell-command=NAME
+	      Defaults File Option: swbis_shell_command
+	      NAME may be one of "bash", "sh" or "posix" and specifies the
+	      remote command run by the remote shell.  "posix" is
+	      'PATH=`getconf PATH` sh -s', "bash" is "/bin/bash -s", "sh" is
+	      "/bin/sh -s", and "ksh" is "ksh -s".  The default is "posix".
+
+       -W use-getconf
+	      Opposite of --no-getconf.
+
+
+       -W source-script-name=NAME
+	      Write the script that is written into the remote shell's stdin
+	      to NAME.	This is useful for debugging.
+
+       -W target-script-name=NAME
+	      Write the script that is written into the remote shell's stdin
+	      to NAME.	This is useful for debugging.
+
+       software_selections
+
+	      Refer to the software objects (products, filesets) using
+	      software spec syntax. (See sw(5) for syntax).
+
+
+       target
+
+	      Refers to the software_collection where the software selections
+	      are to be applied.  Allows specification of host and pathname
+	      where the software collection is located.	 A target that
+	      contains only one part is assumed to be a hostname.  To force
+	      interpretation as a path, use a absolute path or prefix with
+	      ':'.
+
+
+       Source and Target Specification and Logic
+
+	    Synopsis:
+		 Posix:
+		      host[:path]
+		      host
+		      host:
+		      /path  # Absolute path
+
+		 Swbis Extension:
+		      [user@]host[:path]
+		      [user@]host_port[:path]
+		      :path
+
+		 Swbis Multi-hop Target Extension:
+		      # ':' is the target delimiter
+		   # '_' delimits a port number in the host field
+
+		      [user@]host[@@[user@]host[@@...]][:file]
+		      [user@]host_port[@@[user@]host[@@...]][:file]
+
+		      # Using ':', a trailing colon is used to
+		      # disambiguate between a host and file.
+		   # For Example,
+		      :file
+		      host:
+		      host
+		      host:file
+		      host:host:
+		      host_port:host_port:
+		      host:host:file
+		      user@host:user@host:
+		      user@host:user@host:host:
+		      user@host:user@host:file
+
+	    A more formal description:
+
+	    target : HOST_CHARACTER_STRING ':' PATHNAME_CHARACTER_STRING
+		   | HOST_CHARACTER_STRING ':'
+		   | HOST_CHARACTER_STRING
+		   | PATHNAME_CHARACTER_STRING
+		   | ':' PATHNAME_CHARACTER_STRING   # Impl extension
+		   ;
+
+	      PATHNAME_CHARACTER_STRING must be an absolute path unless
+			      a HOST_CHARACTER_STRING is given.	 Allowing
+			      a relative path is a feature of the swbis
+			      implementation.
+
+		       NOTE: A '.' as a target is an implementation
+			     extension and means extract in current
+			     directory.
+
+		       NOTE: A '-' indicating stdout/stdin is an
+			     implementation extension.
+
+		       NOTE: A ':' in the first character indicates a filename.
+			     This is an implementation extension.
+
+	      HOST_CHARACTER_STRING is an IP or hostname.
+
+	   Examples:
+	      Copy the	distribution /var/tmp/foo.tar.gz at 192.168.1.10
+		     swcopy -s /var/tmp/foo.tar.gz @192.168.1.10:/root
+
+
+       Implementation Extension Syntax (multi ssh-hop) :
+	   Syntax:
+	   %start   wtarget    # the Implementation Extension Target
+			       # Note: a trailing ':' forces interpretation
+			       # as a host, not a file.
+	   wtarget   : wtarget DELIM sshtarget
+		     | sshtarget
+		     | sshtarget DELIM
+		     ;
+	   sshtarget : user '@' target # Note: only the last target
+		     | target	       # may have a PATHNAME, and only a host
+		     ;		       * may have a user
+	   target   : HOST_CHARACTER_STRING
+		    | PATHNAME_CHARACTER_STRING
+		    ;
+	   user	    : PORTABLE_CHARACTER_STRING	 # The user name
+
+	   DELIM    : ':'   # The multi-hop delimiter.
+		    ;
+
+
+
+
+USAGE EXAMPLES
+   Run the configure script for package foo on 192.168.1.2:/
+	 swconfig foo @ root@192.168.1.2:/
+
+
+
+   Show the options
+	 swconfig --show-options
+
+
+
+EXTENDED OPTIONS
+       Extended options can be specified on the command line using the -x
+       option or from the defaults file, swdefaults.  Shown below is an actual
+       portion of a defaults file which show default values.
+
+   POSIX
+       These options are set in the /usr/lib/swbis/swdefaults or the
+       ~/.swdefaults on the local (management host, host where swconfig is
+       invoked).  These files on the target host are not used.
+
+
+	 allow_incompatible	       = false # Not implemented
+	 allow_multiple_versions       = false # Not implemented
+	 ask			       = false # Not implemented
+	 autoselect_dependencies       = true # Not implemented
+	 autoselect_dependents	       = true # Not implemented
+	 enforce_dependencies	       = true # Not implemented
+	 installed_software_catalog    = var/lib/swbis/catalog/
+	 logfile		       = /var/log/sw.log
+	 loglevel		       = 1
+	 select_local		       = true # Not implemented
+	 reconfigure		       = false
+	 verbose		       = 1
+
+
+   Swbis Implementation
+       These options are set in the /usr/lib/swbis/swbisdefaults or the
+       ~/.swbis/swbisdefaults file.
+
+
+	  swconfig.swbis_no_getconf = true # true or false
+	 swconfig.swbis_shell_command = posix # {sh|bash|posix|ksh}
+	 swconfig.swbis_no_remote_kill = false # true or false
+	 swconfig.swbis_local_pax_write_command=tar #{pax|tar|star|gtar}
+	 swconfig.swbis_remote_pax_write_command=tar #{pax|tar|star|gtar}
+	 swconfig.swbis_local_pax_read_command=tar #{pax|tar|gtar|star}
+	 swconfig.swbis_remote_pax_read_command=tar #{pax|tar|gtar|star}
+	 swconfig.swbis_local_pax_remove_command=tar
+	 swconfig.swbis_remote_pax_remove_command=tar
+	 swconfig.swbis_remote_shell_client=ssh
+	 swconfig.swbis_forward_agent=True
+	 swconfig.swbis_sig_level=0
+	 swconfig.swbis_enforce_all_signatures=false
+
+
+RETURN VALUE
+       0 if all targets succeeded, 1 if all targets failed or internal error,
+       2 if some targets failed and some succeeded.
+
+NOTES
+	Multiple ssh-hops is an implementation extension.
+
+REQUISITE UTILITIES
+       The swbis distributed utilities require bash, public domain ksh, or
+       Sun's /usr/xpg4/bin/sh to be present on the target host.	 If the
+       swbis_shell_command extended option is set to 'detect' you don't have
+       to know which one is present, otherwise you may specify one explicitly.
+
+       A POSIX awk is required, and with the ability to specify several
+       thousand bytes of program text as a command argument.  GNU awk  works,
+       as does the ATT Awk book awk, and the awk on BSD systems.  See the
+       INSTALL file for further details regarding a small issue with the
+       OpenSolaris (c.2006) awk.
+
+       GNU Privacy Guard, gpg is required for verification of package
+       signatures.
+
+       Other utilities required to be in $PATH on the remote host are: dd, pax
+       (or tar|star|gtar), mkdir, echo, test, sleep, read (if not builtin).
+
+FILES
+       /var/lib/swbis/catalog # Location of installed catalog
+       /usr/lib/swbis/swdefaults
+       /usr/lib/swbis/swbisdefaults
+       $HOME/.swbis/swdefaults
+       $HOME/.swbis/swbisdefaults
+
+
+
+APPLICABLE STANDARDS
+       ISO/IEC 15068-2:1999, Open Group CAE C701
+
+SEE ALSO
+       info swbis
+
+       swbis(7), sw(5), swlist(8)
+
+IDENTIFICATION
+	swconfig(8): The package configuration utility of the swbis project.
+	Author: Jim Lowe   Email: jhlowe at acm.org
+	Version: 1.5
+	Last Updated: 2010-01-22
+	Copying: GNU Free Documentation License
+
+BUGS
+       This section is left intentionally black
+
+
+
+								   swconfig(8)
 </pre>
 <div class="node">
 <p><hr>
@@ -5606,7 +6089,7 @@ SEE ALSO
 IDENTIFICATION
 	swign(1): The source directory signing utility of the swbis project.
 	Author: J. Lowe jhlowe@acm.org
-	Version: 1.3
+	Version: 1.5
 	Last Updated: 2008-01
 	Copying: GNU Free Documentation License
 
@@ -5654,7 +6137,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Command-Reference">Command Reference</
 
 
 NAME
-       lxpsf - Translate package to a portable Unix format with a PSF.
+       lxpsf - Translate packages to a tar archive with a PSF.
 
 SYNOPSIS
        lxpsf [options] [package_file]
@@ -5671,7 +6154,9 @@ DESCRIPTION
        files  of  the  distribution.   The output is designed so the swpackage
        utility is able to form a Posix package from the installed output.
 
-       Currently, only RPM format is supported.
+       Currently,  RPM format v3 (both source and binary), Debian Package for-
+       mat,  Slackware	runtime	 packages  and	plain vanilla tarballs (with a
+       leading directory path) are supported for translation.
 
 
    Options
@@ -5679,10 +6164,13 @@ DESCRIPTION
 	      Write only the psf file to stdout.
 
        -A ,--psf-form1
-	      A PSF form for RPM translation.
+	      A PSF form for RPM translation (deprecated).
 
        -A ,--psf-form2
-	      A second PSF form for RPM translation.
+	      A second PSF form for RPM translation (deprecated).
+
+       -A ,--psf-form3
+	      A third PSF form for RPM translation (current).
 
 
        -H format
@@ -5707,12 +6195,12 @@ HOWTO Use with swpackage
        GNU swpackage.
 
 	 cat your_rpm.rpm |
-	 lxpsf --format=ustar --psf-form2 |
+	 lxpsf --format=ustar --psf-form3 |
 	 (mkdir /tmp/swbis; cd /tmp/swbis &amp;&amp; tar xpf -; exit $?) &amp;&amp;
 	 (cd /tmp/swbis &amp;&amp; swpackage -s PSF @- ) | tar tvf -
 
 	 cat your_rpm.rpm |
-	 lxpsf --format=ustar --psf-form2 |
+	 lxpsf --format=ustar --psf-form3 |
 	 swpackage -W source=- -s@PSF @- | tar tvf -
 
 FILES
@@ -5721,8 +6209,8 @@ RELATED STANDARDS
 
 IDENTIFICATION
 	The RPM translation program of the swbis project.
-	DATE: 2005-10-22
-	Revision: 0.470
+	DATE: 2010-02-22
+	Revision: 1.5
 
 SEE ALSO
        swbisparse(1), swpackage(8)
@@ -6222,7 +6710,7 @@ SEE ALSO
 
 IDENTIFICATION
 	Copyright (C) 2004,2005 Jim Lowe
-	Version: 1.3
+	Version: 1.5
 	Last Updated: 2006-07-01
 	Copying Terms: GNU Free Documentation License
 
@@ -7591,7 +8079,7 @@ SEE ALSO
 
 IDENTIFICATION
 	Copyright (C) 2005 Jim Lowe
-	Version: 1.3
+	Version: 1.5
 	Last Updated: 2006-01
 	Copying Terms: GNU Free Documentation License
 
@@ -8193,7 +8681,7 @@ directory names which maintain the package directory structure.
 <div class="node">
 <p><hr>
 <a name="Installing-POSIX-Distributions"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#Installing-RPM-Packages">Installing RPM Packages</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="#Translating-and-Installing-Other-Formats">Translating and Installing Other Formats</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="swverify.html#VERIFYING-SIGNATURES">(swbis_swverify)VERIFYING SIGNATURES</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
@@ -8260,47 +8748,137 @@ which performs auto-detection of a sutable shell.
 
 <div class="node">
 <p><hr>
-<a name="Installing-RPM-Packages"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#Translating-Other-Formats">Translating Other Formats</a>,
+<a name="Signing-File-System-Directories"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="#Creating-a-Catalog-of-Installed-Packages">Creating a Catalog of Installed Packages</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="#Creating-Signed-Distributions">Creating Signed Distributions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
+
+</div>
+
+<h2 class="unnumbered">Signing File System Directories</h2>
+
+<p>To swbis, a signed directory is any directory that contains
+the GPG signed distribution catalog directory <samp><span class="file">./catalog/</span></samp>.  The signature
+protects the signed bytes which is a tar archive representation
+of <samp><span class="file">./catalog/</span></samp>.  The contents of directory <samp><span class="file">./catalog/</span></samp> contain
+meta data about the contents of the current directory <samp><span class="file">./</span></samp>.
+
+   <p>Used is this way, the distribution catalog directory, <samp><span class="file">./catalog/</span></samp>, is
+a GPG signed directory manifest.
+
+   <p>The <samp><span class="file">./catalog/</span></samp> directory is created by <samp><span class="command">swpackage</span></samp>.  A separate
+ad-hoc utility, <samp><span class="command">swign</span></samp> makes signing a directory much easier.
+
+<ul class="menu">
+<li><a accesskey="1" href="#Creating-a-signed-directory-using-_003csamp_003e_003cspan-class_003d_0022command_0022_003eswign_003c_002fspan_003e_003c_002fsamp_003e">Creating a signed directory using <samp><span class="command">swign</span></samp></a>
+</ul>
+
+<div class="node">
+<p><hr>
+<a name="Creating-a-Catalog-of-Installed-Packages"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="swverify.html#VERIFYING-SIGNATURES">(swbis_swverify)VERIFYING SIGNATURES</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="#Signing-File-System-Directories">Signing File System Directories</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
+
+</div>
+
+<h2 class="unnumbered">Creating a Catalog of Installed Packages</h2>
+
+<p>Suppose your distribution uses a packaging format that does not
+provide an installed software catalog.  Using swbis you can
+create your own provided you have the original package files.
+
+   <p>To do this you translate the orignal package (that is already installed)
+to swbis format and install just the catalog.  Like this:
+
+<pre class="verbatim">
+      swinstall --justdb -s- @/
+</pre>
+
+   <p>which writes that catalog at <samp><span class="file">/var/lib/swbis/catalog</span></samp>.  You can control
+the location of the catalog via the command line option.
+
+<pre class="verbatim">
+      swinstall --justdb -x installed_software_catalog=/$HOME/my_catalog
+</pre>
+
+   <p>Translation is done by the <samp><span class="command">lxpsf</span></samp> utility.  It can be invoked transparently
+using <samp><span class="command">swpackage</span></samp> and sent via a pipe to swinstall:
+
+<pre class="verbatim">
+        swpackage --to-swbis -s /Your/system/somepackage-1.0.type |
+        swinstall --justdb
+</pre>
+
+   <p>Then the catalog can be queried and used for verification purposes.
+
+<pre class="verbatim">
+     swlist somepackage;  # list the package 
+     swlist;   # list all the installed software
+     swverify --sig-level=0 -vv somepackage @ / ;  # Use sig-level=1 if you
+                                                      # signed the package
+</pre>
+
+   <p>This works really well for RPM distributions.  Users of Debian and Slackware
+may want to take more detailed control to exclude extraneous system directories
+that hamper clean verification.  Like this:
+
+<pre class="verbatim">
+     lxpsf --psf-form3  --exclude-system-dirs somepackage-1.0.tar.xz |
+     swpackage -Wsource=- -s @PSF @- | # Use special options to swpackage
+     swinstall --justdb
+</pre>
+
+   <p>Then verify.  Slackware users may use the specific option to ignore the
+<samp><span class="file">./install</span></samp> directory and its files.
+
+<pre class="verbatim">
+     swlist;
+     swverify --ignore-slack -x check_volatile=no somepackage @ /
+</pre>
+
+   <p>All of package signing and security options are available when using
+swpackage as shown above.  In fact it was assumed that they were all
+on by default.  Creating a catalog without signatures or file
+digests or file list is of little use.  Here is a last example
+showing some of these options.
+
+   <p>The <samp><span class="command">lxpsf</span></samp> is located in the LIBEXEC directory, for example
+<samp><span class="file">/usr/lib/swbis/lxpsf</span></samp>.
+
+<pre class="verbatim">
+    lxpsf --psf-form3  --exclude-system-dirs somepackage-1.0.tar.xz |
+    swpackage \
+       --files \
+       --sha2  \
+       --sha1  \
+       --sign  \
+       --passphrase=fd=agent \
+       --gpg-name=NAME \
+       -Wsource=- -s @PSF @- |
+     swinstall --justdb
+</pre>
+
+<div class="node">
+<p><hr>
+<a name="Translating-and-Installing-Other-Formats"></a>
+Next:&nbsp;<a rel="next" accesskey="n" href="#Remote-Host-Operations">Remote Host Operations</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#Installing-POSIX-Distributions">Installing POSIX Distributions</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 </div>
 
-<h2 class="unnumbered">Installing RPM Packages</h2>
+<h2 class="unnumbered">Translating and Installing Other Formats</h2>
 
-<p>Installing RPMs results in the RPM first being translated to a
-POSIX archive in tar format, See <a href="#Translating-Other-Formats">Translating Other Formats</a>,
-then installation by swinstall proceeds normally.
-<pre class="verbatim">
-     swinstall --allow-rpm -s - @ host1:/mnt/test/root1 &lt; your-0.1.arch.rpm
-</pre>
-
-   <p>In this example, a remote host and target path is specified.  No files will
-be installed outside of the target path. 
-The <samp><span class="option">allow-rpm</span></samp> may be turned on in the <samp><span class="file">swbisdefaults</span></samp> file or
-by command line option.
-
-<div class="node">
-<p><hr>
-<a name="Translating-Other-Formats"></a>
-Next:&nbsp;<a rel="next" accesskey="n" href="#Remote-Host-Operations">Remote Host Operations</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="#Installing-RPM-Packages">Installing RPM Packages</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
-
-</div>
-
-<h2 class="unnumbered">Translating Other Formats</h2>
-
-<p>Translation of RPMs is done in memory. No temporary files are
+<p>Translation of supported formats are done in memory. No temporary files are
 created.  Large RPMs or RPMs with many small files may take many seconds
 or several minutes to translate.
 
    <p>Translation is performed by the swbis library executable <samp><span class="command">lxpsf</span></samp> and
 <samp><span class="command">swpackage</span></samp>.  Internally, this is
 <pre class="verbatim">
-     /usr/lib/swbis/lxpsf --psf-form2 -H ustar |
-     swpackage -Wsource=- -s@PSF
+     /usr/lib/swbis/lxpsf --psf-form3 -H ustar |
+     swpackage -Wsource=- -s@PSF @-
 </pre>
 
    <p>The <samp><span class="command">lxpsf</span></samp> is the only swbis program with RPM library dependencies, and
@@ -8328,7 +8906,7 @@ this is the program that does the actual meta-data translation.
 <p><hr>
 <a name="Remote-Host-Operations"></a>
 Next:&nbsp;<a rel="next" accesskey="n" href="#GNU-Toolset-Orthogonality">GNU Toolset Orthogonality</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="#Translating-Other-Formats">Translating Other Formats</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="#Translating-and-Installing-Other-Formats">Translating and Installing Other Formats</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 </div>

@@ -582,7 +582,11 @@ i {color:#000080}
 </pre><h3><a name="RETURN VALUE"><b>RETURN VALUE</b></a></h3><pre>       Exit status of the checksig script or gpg utility for --checksig
        directory operation.  0 if successful on all targets, 1 if failed on
        all targets, 2 if failed on some targets.
-</pre><h3><a name="FILES"><b>FILES</b></a></h3><pre>       None
+</pre><h3><a name="FILES"><b>FILES</b></a></h3><pre>       /var/lib/swbis/catalog # Location of installed catalog
+       /usr/lib/swbis/swdefaults
+       /usr/lib/swbis/swbisdefaults
+       $HOME/.swbis/swdefaults
+       $HOME/.swbis/swbisdefaults
 
 </pre><h3><a name="APPLICABLE STANDARDS"><b>APPLICABLE STANDARDS</b></a></h3><pre>       IEEE Std 1387.2-1995 (ISO/IEC 15068-2:1999), Open Group CAE C701.
 </pre><h3><a name="SEE ALSO"><b>SEE ALSO</b></a></h3><pre>       info swbis
@@ -593,8 +597,8 @@ i {color:#000080}
 
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        swverify: The verification utility of the swbis project.
         Author: James Lowe, Jr.   Email: jhlowe at acm.org
-        Version: 1.3
-        Last Updated: 2008-04-18
+        Version: 1.5
+        Last Updated: 2010-02-04
         Copying: GNU Free Documentation License
 
 </pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       The signature file's archive header (or data) is not part of the signed

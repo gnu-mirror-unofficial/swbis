@@ -300,11 +300,10 @@ i {color:#000080}
        The POSIX shell must have specific compliance to POSIX described the
        POSIX <a href=sh_1.html>sh(1)</a> manual page (IEEE Std 1003.1, 2004 Edition, Section STDIN)
        regarding its use of stdin when it invokes a command that also uses
-       stdin.  GNU Bash, public-domain Korn shell (pdksh), and OpenSolaris
-       <b>/usr/xpg4/bin/sh</b> have this feature.  Other shells including ash, dash,
-       ATT ksh93, and <b>/bin/sh</b> on BSD and UNIX(tm) system do not.  Most
-       GNU/Linux systems linked /bin/sh to bash however this is not always the
-       case.
+       stdin.  GNU Bash, public-domain ksh (pdksh), OpenSolaris
+       <b>/usr/xpg4/bin/sh</b>,  ATT ksh (latest version such as 93t+ 2010-03-05)
+       have this feature.  Other shells including ash, dash, and <b>/bin/sh</b> on
+       BSD, UNIX(tm), BusyBox systems do not.
 
        Therefore, the most reliable and least intrusive strategy is use the
        auto-detection option.  If a host does not contain bash or a suitable
@@ -395,8 +394,9 @@ i {color:#000080}
           *  Extended Option: <b>swbis_shell_command</b>
 
                  This may be one of <b>detect</b>, <b>bash</b>, <b>ksh</b>, <b>sh</b>, or <b>posix</b>.  <b>detect</b>
-                 is the best choice.  ksh must be public domain ksh.  ATT
-                 ksh93 does not have the required POSIX feature.
+                 is the best choice.  ksh must be public domain ksh or ATT
+                 ksh93 (version 2009-05-05 or newer). Older versions of ksh93
+                 do not have the required POSIX feature.
 
           *  <b>Account Login Shell</b>
 
@@ -471,9 +471,9 @@ i {color:#000080}
        shell.
 
        As stated above, a POSIX shell is required and the only suitable
-       implementations (as of Sep 2008) are <b>/bin/bash</b>, <b>/bin/ksh</b> (Public Domain
-       not KSH93), and Sun's <b>/usr/xpg4/bin/sh</b> all assumed to be in these
-       locations.
+       implementations (as of Sep 2010) are <b>/bin/bash</b>, <b>/bin/ksh</b> (Public Domain
+       or ksh93 v.2009-05-05 or newer), Sun's <b>/usr/xpg4/bin/sh</b>, and MirBSD
+       Korn Shell (<b>/bin/mksh</b>) all assumed to be in these locations.
 </pre><h3><a name="DISCUSSION"><b>DISCUSSION</b></a></h3><pre>   <b>Background</b>
        The spec describes a format for storing package meta-data in a software
        distribution and a set of utilities.  The meta-data is stored in-band
@@ -600,7 +600,7 @@ i {color:#000080}
        <b>swbisdefaults</b>  # Options configuration file
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        <a href=swbis_7.html>swbis(7)</a>
         Author: Jim Lowe   Email: jhlowe at acm.org
-        Version: 1.5
+        Version: 1.6
         Last Updated: 2008-04-18
         Copying: GNU Free Documentation License
 </pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       Not everything is implemented yet.

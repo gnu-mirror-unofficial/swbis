@@ -690,9 +690,10 @@ i {color:#000080}
        failed and some succeeded.
 </pre><h3><a name="NOTES"><b>NOTES</b></a></h3><pre>        Multiple ssh-hops is an implementation extension.
 </pre><h3><a name="REQUISITE UTILITIES"><b>REQUISITE UTILITIES</b></a></h3><pre>       The swbis distributed utilities require <b>bash</b>, public domain <b>ksh</b>, or
-       Sun's /usr/xpg4/bin/sh to be present on the target host.  If the
-       <b>swbis_shell_command</b> extended option is set to 'detect' you don't have
-       to know which one is present, otherwise you may specify one explicitly.
+       ksh93 (version 2009-05-05), or Sun's /usr/xpg4/bin/sh to be present on
+       the target host.  If the <b>swbis_shell_command</b> extended option is set to
+       'detect' you don't have to know which one is present, otherwise you may
+       specify one explicitly.
 
        A POSIX <b>awk</b> is required, and with the ability to specify several
        thousand bytes of program text as a command argument.  GNU awk  works,
@@ -711,7 +712,7 @@ i {color:#000080}
        <a href=swcopy_8.html>swcopy(8)</a>, <a href=sw_5.html>sw(5)</a>, <a href=swbisparse_1.html>swbisparse(1)</a>, <a href=swign_1.html>swign(1)</a>, <a href=swverify_8.html>swverify(8)</a>
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        <a href=swinstall_8.html>swinstall(8)</a>: The installation utility of the swbis project.
         Author: Jim Lowe   Email: jhlowe at acm.org
-        Version: 1.5
+        Version: 1.6
         Last Updated: 2010-02-05
         Copying: GNU Free Documentation License
 </pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       swinstall is subject to breakage if a user's account on an intermediate

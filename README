@@ -1,6 +1,6 @@
     swbis - Distributed Software Administration
     --------------------------------------------
-              Version 1.5
+              Version 1.6
 
     swbis is a GNU package
     The official home page is http://www.gnu.org/software/swbis
@@ -27,27 +27,37 @@ Introduction
   enhancement extensions that use GNU Privacy Guard.  Although swpackage
   is a self-contained tar writing utility and swinstall will use generic
   tar for file loading, several features are based on bit-for-bit
-  sameness with the GNU tar POSIX tar interchange format, hence, GNU tar
-  is a special tool requirement for swbis.
+  sameness with the GNU tar POSIX tar interchange format and other GNU
+  tar features, hence, GNU tar is a special tool requirement to access
+  the full features of swbis.
  
   Its package management features are unique. It is network transparent,
   and requires no new programs, services, or configuration on the remote
   target host. It connects to remote hosts using the stock system ssh
-  client program.  It is back compatible with the tar archive format and
-  typical file layouts for source and run-time packages.  Its security
-  features include multiple embedded package signatures and MD5, SHA-1,
-  and SHA-2 digests for the payload and individual files.  The package
-  management utilities can operate locally or from a central host to a
-  heterogeneous collection of U*IX hosts with supported checks for
-  reinstall, downdate, compatibility and prerequisites.
+  client program and executes the POSIX shell which must be one of
+  /bin/bash, /bin/ksh (public domain, recent AT&T ksh93, or mksh), or
+  OpenSolaris /usr/xpg4/bin/sh.  It connects to POSIX shell via its
+  standard input using its unique ability to read shell program code
+  and data on stdin.  File loading (for installation) is performed by
+  the system tar (/bin/tar) command.
+  
+  It is back compatible with the tar archive format and typical file
+  layouts for source and run-time packages.  Its security features include
+  multiple embedded package signatures and MD5, SHA-1, and SHA-2 digests
+  for the payload and individual files.  The package management utilities
+  can operate locally or from a central host to a heterogeneous collection
+  of remote U*IX-Like hosts with supported checks for reinstall, downdate,
+  compatibility and prerequisites.
 
   In addition to package management, there are several other applications
   of the package management utilities:  Format translation of RPM and
-  dpkg packages, data copying from host to host, creation of tar archive
-  distributions from a detailed recipe file, and the ability to act as a
-  directory content integrity checker.
+  dpkg packages (swpackage), data copying from host to host (swcopy),
+  creation of tar archive distributions from a detailed recipe file
+  (swpackage and swign), and the ability to sign a directory and verify
+  it thus to act as a directory content integrity checker (swign and
+  swverify).
   
-    * ISO/POSIX Utilities:
+    * ISO/POSIX Utilities (location: <prefix>/bin) :
 
        swcopy - Distribution copying utility.
        swpackage -  Packages files according to a PSF file.
@@ -57,13 +67,25 @@ Introduction
        swremove  -  Remove installed software
        swconfig -  Configure installed software
  
-    * Non-POSIX (Ad Hoc) Utilities:
+    * Non-POSIX (Ad Hoc) Utilities (location: <prefix>/bin) :
 
-       swign   -  Produces signed tar archives using GNU tar and
-       lxpsf   -  The first step translator for RPM packages
+       swign   -  Signs a directory by loading the ./catalog/ directory
+                  into the current directory.
+
+    * Non-POSIX Library Utilities (location: <libexecdir>/swbis) :
+           (et.al., others not mentioned)
+
+       swbistar - write a tar archive (not used by any utility)
+       swbisparse - parse INFO, INDEX, and PSF files (not used by
+                  any utility)
+       lxpsf   -  The first step translator for RPM,deb packages
+                  (used by swpackage when translating).
        arf2arf - Internal Library interface utility to extract and
-		  verify the signed and digested byte streams.
-   
+		  verify the signed and digested byte streams. (used
+                  by swverify)
+       iswverify - swverify helper, used by swverify  
+
+ 
 Requirements
 ------------
     Compilation:

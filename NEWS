@@ -1,6 +1,20 @@
 GNU swbis NEWS - User visible changes. 2010-01-18
 Please send GNU swbis bug reports to <bug-swbis@gnu.org>
 
+version 1.6 - Jim Lowe,  2010-09-08
+* All utilities fixed to operate on relative path target (such as the
+  login landing directory of a remote target).
+* <swlist>: added features. support -v mode more support for lising
+attributes
+* <swinstall>: FIXED swinstall preview mode for non-existent target directory
+* <swinstall>: FIXED preview ''swinstall -p'' deleting catalog entry.
+* <swinstall>: ADDED checks for existing files.  --replacefiles and --keepfiles
+option added
+* <swpackage>: ADDED implements the extended option -x follow_symlinks=true
+* <swpackage>: FIXED uid/gid handling for case of `-o owner,' in a explicit
+file definition in a PSF.  Now, finally, hopefully full arbitrary
+specification of uids and unames now work
+
 version 1.5 - Jim Lowe,  2010-03-15
 
 * <swverify>: Now has a verification summary for installed software.

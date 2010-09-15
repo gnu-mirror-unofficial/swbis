@@ -685,10 +685,9 @@ the system tar utility, usually <b>/bin/tar</b>.  The POSIX shell need not be <b
 
 <p>The POSIX shell must have specific compliance to
 POSIX described the POSIX sh(1) manual page (IEEE Std 1003.1, 2004 Edition, Section STDIN) regarding
-its use of stdin when it invokes a command that also uses stdin.  GNU Bash, public-domain Korn shell (pdksh), and
-OpenSolaris <b>/usr/xpg4/bin/sh</b> have this feature.  Other shells including ash, dash, ATT ksh93,
-and <b>/bin/sh</b> on BSD and UNIX(tm) system do not.  Most GNU/Linux systems linked /bin/sh to bash
-however this is not always the case. 
+its use of stdin when it invokes a command that also uses stdin.  GNU Bash, public-domain ksh (pdksh),
+OpenSolaris <b>/usr/xpg4/bin/sh</b>,  ATT ksh (latest version such as 93t+ 2010-03-05) have this feature. 
+Other shells including ash, dash, and <b>/bin/sh</b> on BSD, UNIX(tm), BusyBox systems do not. 
 <!-- TROFF INPUT: .PP -->
 
 <p>Therefore, the most reliable and least intrusive strategy is use the auto-detection option. 
@@ -849,7 +848,8 @@ detect a suitable tar or pax.
 <b>ksh</b>,
 <b>sh</b>, or
 <b>posix</b>.  <b>detect</b> is the best choice. 
-ksh must be public domain ksh.  ATT ksh93 does not have the required POSIX feature. 
+ksh must be public domain ksh or ATT ksh93 (version 2009-05-05 or newer). Older versions of
+ksh93 do not have the required POSIX feature. 
 <!-- TROFF INPUT: .IP "   *" 6 -->
 
 <p><b>Account Login Shell</b>
@@ -957,9 +957,10 @@ However, <b>/bin/dash</b>, BSD <b>/bin/sh</b>, and Sun's /bin/sh
 are all acceptable.  Note that /bin/sh need not be the system POSIX shell. 
 <!-- TROFF INPUT: .PP -->
 
-<p>As stated above, a POSIX shell is required and the only suitable implementations (as of Sep 2008) are
-<b>/bin/bash</b>, <b>/bin/ksh</b> (Public Domain not KSH93), and Sun's
-<b>/usr/xpg4/bin/sh</b> all assumed to be in these locations. 
+<p>As stated above, a POSIX shell is required and the only suitable implementations (as of Sep 2010) are
+<b>/bin/bash</b>, <b>/bin/ksh</b> (Public Domain or ksh93 v.2009-05-05 or newer),
+Sun's <b>/usr/xpg4/bin/sh</b>, and MirBSD Korn Shell (<b>/bin/mksh</b>) all assumed
+to be in these locations. 
 <!-- TROFF INPUT: .SH "DISCUSSION" -->
 <!-- DEBUG: print_menu("HOST REQUIREMENTS") -->
 <!-- MAN2TEXI: EON -->
@@ -1346,7 +1347,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <p>swbis(7)
  Author: Jim Lowe   Email: jhlowe at acm.org
- Version: 1.5
+ Version: 1.6
  Last Updated: 2008-04-18
  Copying: GNU Free Documentation License
 <!-- TROFF INPUT: .SH "BUGS" -->
@@ -1365,7 +1366,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <!-- TROFF INPUT: .PP -->
 <p>Not everything is implemented yet. 
-<!-- created by instant / docbook-to-man, Thu 25 Feb 2010, 08:10 -->
+<!-- created by instant / docbook-to-man, Tue 07 Sep 2010, 20:25 -->
 
 </body></html>
 

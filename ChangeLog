@@ -1,3 +1,170 @@
+2010-09-07 Jim Lowe <jhlowe@acm.org>
+* VERSION now 1.6
+
+2010-09-07 Jim Lowe <jhlowe@acm.org>
+* swprogs/swlist.c (safe_sig_handler) <swlist>: limit SIGPIPE
+stderr message to one.
+
+2010-09-06 Jim Lowe <jhlowe@acm.org>
+* VERSION now 1.6pre5
+
+2010-09-06 Jim Lowe <jhlowe@acm.org>
+* swsupplib/shell_lib/shell_lib.sh (shls_apply_socspec):
+add SW_SELECTION_NOT_FOUND message
+* swsupplib/misc/swicat.c (write_query_blob):
+support addition of SW_SELECTION_NOT_FOUND message to
+shls_apply_socspec
+
+2010-09-04 Jim Lowe <jhlowe@acm.org>
+* VERSION now 1.6pre4
+
+2010-09-04 Jim Lowe <jhlowe@acm.org>
+* VERSION now 1.6pre2
+
+2010-09-04 Jim Lowe <jhlowe@acm.org>
+* swprogs/swcommon.c (swc_make_absolute_path): added
+* swsupplib/shell_lib/shell_lib.sh (shls_make_dir_absolute): added
+* swprogs/swinstall_lib.c (write_target_install_script) <swinstall>: use shls_make_dir_absolute
+* swprogs/swinstall.c (main) <swinstall>: use swc_make_absolute_path
+* swprogs/swlist_lib.c (swlist_write_source_copy_script2) <swlist>:
+support relative target path
+* swprogs/swlist.c (main) <swlist>: support relative paths
+* swprogs/swremove_lib.c (remove_files) <swremove>: set target_path
+in call to swicol_rpsh_task_send_script2
+* swprogs/swremove_lib.c (swremove_write_source_copy_script2): support
+relative target path
+* swprogs/swremove.c (main) <swremove>: support relative target path
+* swprogs/iswverify.c (main) <swverify>: support relative target path
+* swprogs/swverify_lib.c (swverify_write_source_copy_script2) <swverify>:
+support relative target path
+
+2010-09-04 Jim Lowe <jhlowe@acm.org>
+* VERSION now 1.6pre1
+
+2010-09-03 Jim Lowe <jhlowe@acm.org>
+* swsupplib/misc/swicat.c (swicat_write_isc_script): now
+chdir (cd) to the installed_software_catalog path and
+check for success.
+* swprogs/swproglib.c (swpl_get_catalog_entries): now
+set target_path as swicol directory, instead of combination
+of target_path and installed_software_catalog path.
+
+2010-08-22 Jim Lowe <jhlowe@acm.org>
+* swprogs/swinstall.c (main) <swinstall>: fixed seg fault
+(use of null pointer) for multiple targets with non-existent
+source archive.
+
+2010-08-08 Jim Lowe <jhlowe@acm.org>
+* swprogs/swlist_lib.c (swlist_looper_sr_payload) <swlist>:
+only retrieve the files archive for the mode PMODE_FILE.
+
+2010-08-06 Jim Lowe <jhlowe@acm.org>
+* swprogs/swlist_lib.c (write_annex_date_attribute) <swlist>: added
+* swprogs/swlist_lib.c (write_annex_attributes) <swlist>: added
+
+2010-08-04 Jim Lowe <jhlowe@acm.org>
+* swprogs/swlist_lib.c (swlist_blist_get_next_attr) <swlist>: added
+* swprogs/swlist_lib.c (swlist_blist_attr_add) <swlist>: added
+
+2010-08-01 Jim Lowe <jhlowe@acm.org>
+* swprogs/swlist.c (main) <swlist>: development of new features for
+listing attributes
+* swprogs/swlist_lib.c <swlist>: development of new features
+
+2010-08-01 Jim Lowe <jhlowe@acm.org>
+* swsupplib/strob/strob.c (strob_chr_index): fixed for binary strings.
+
+2010-07-29 Jim Lowe <jhlowe@acm.org>
+* swsupplib/misc/swheader.c (swheader_get_attribute_in_object):
+renamed to swheader_get_attribute_in_current_object
+
+2010-07-28 Jim Lowe <jhlowe@acm.org>
+* swsupplib/sw_parse/Makefile.in: Now UXDATE=20100728 for
+pre-compiled parser/lexer files.
+* swsupplib/sw_parse/swlex.l (swlex_get_input_policy): added
+* swsupplib/sw_parse/swlex.l (swlex_set_input_policy): added
+
+2010-07-26 Jim Lowe <jhlowe@acm.org>
+* swprogs/swlist_lib.c (write_index_format_from_iscat): added
+* swprogs/swlist.c (main) <swlist>: add suppport for INDEX
+format listing (-v mode).
+
+2010-07-25 Jim Lowe <jhlowe@acm.org>
+* swprogs/swpackage.cxx (main) <swpackage>: FIXED --signer-pgm
+option
+
+2010-07-23 Jim Lowe <jhlowe@acm.org>
+* VERSION now 1.5.0.111
+
+2010-07-21 Jim Lowe <jhlowe@acm.org>
+* swprogs/swinstall.c (main): fixes for preview mode
+* swprogs/swinstall_lib.c (main): fixes for preview mode
+
+2010-07-20 Jim Lowe <jhlowe@acm.org>
+* swsupplib/misc/swicol.c (print_task_script): fixed printf() format
+inconsistency (%d for %s) for the error-and-exit case
+
+2010-07-19 Jim Lowe <jhlowe@acm.org>
+* VERSION now 1.5.0.107
+
+2010-07-17 Jim Lowe <jhlowe@acm.org>
+* swprogs/swinstall_lib.c (report_file_conflicts): added
+* swprogs/swinstall_lib.c (swinstall_analyze_overwrites): added
+* swprogs/swinstall_lib.c (write_target_install_script): added
+SWBIS_TS_check_OVERWRITE
+* swprogs/swinstall.c (main): now check for file that will overwrite
+files in the file system
+* swprogs/swinstall.c (main): --replacefiles option added
+* swprogs/swinstall.c (main): --keepfiles option added
+* swprogs/swinstall.c (main): swbis_replacefiles extended option added
+
+2010-07-13 Jim Lowe <jhlowe@acm.org>
+* swprogs/swproglib.c <swinstall> (swpl_run_check_overwrite): added
+
+2010-07-13 Jim Lowe <jhlowe@acm.org>
+* swprogs/swinstall.c <swinstall> (main): prevent use preview
+such as 'swinstall -p -s foo.tar @ /' from remove the catalog
+entry.
+
+2010-06-27 Jim Lowe <jhlowe@acm.org>
+* swstructlib/src/swmetadata/swpackagefile.h (xFormat_apply_swdef_stats) <swpackage>
+Fix ability to specify arbitrary uname/uid pairs in a PSF
+* swprogs/swcommon.c (swc_get_pax_read_command): fixed wrt --keep-old-files
+
+2010-06-27 Jim Lowe <jhlowe@acm.org>
+* swstructlib/src/swmetadata/swextendeddef.h (parse_name_id_string) <swpackage>
+Fixed long standing inability to set arbitrary ownership names and ids in
+a tar archive.
+
+2010-06-25 Jim Lowe <jhlowe@acm.org>
+* swstructlib/src/swmetadata/swextendeddef.h (bound_value) <swpackage>
+handle case of -o owner, meaning look up the uid in the system db.
+* swstructlib/src/swmetadata/swextendeddef.h (parse_FileOpts) <swpackage>
+handle case of -o owner, meaning look up the uid in the system db.
+
+2010-06-21 Jim Lowe <jhlowe@acm.org>
+* swsupplib/misc/swvarfs.c (stat_node): improved to handle
+multiple levels of symbolic links.
+
+2010-06-19 Jim Lowe <jhlowe@acm.org>
+* swprogs/swpackage.cxx (main) <swpackage>: Now support
+follow_symlinks extended option.
+* swstructlib/src/swexport/swobjfiles_i.h (processCatalogFile):
+use swvarfs_get_stat_syscall
+* swsupplib/misc/swvarfs.c (swvarfs_get_stat_syscall): added
+* swstructlib/src/swmetadata/swextendeddef.h (processRecursiveFile) <swpackage>
+respect follow_symlinks extended option
+
+2010-04-02 Jim Lowe <jhlowe@acm.org>
+* swsupplib/swi/swi.c (swi_decode_catalog): guard against use of NULL
+pointer for the case of a malformed package.
+
+2010-03-18 Jim Lowe <jhlowe@acm.org>
+* swsupplib/misc/: remove unused variables
+* swsupplib/swi/: remove unused variables
+* swsupplib/taru/: remove unused variables
+* swproglib/: remove unused variables
+
 2010-03-16 Jim Lowe <jhlowe@acm.org>
 * VERSION now 1.5
 

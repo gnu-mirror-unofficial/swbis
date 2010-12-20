@@ -1,3 +1,48 @@
+2010-12-18 Jim Lowe <jhlowe@acm.org>
+* VERSION now 1.7
+
+2010-12-18 Jim Lowe <jhlowe@acm.org>
+* swsupplib/swi/swi.c (swi_make_file_list): remove fatal error
+in case of no compatible product found, now just warn.
+* PSF.bin.in: add swconfig binary to /usr/bin/
+* swsupplib/shell_lib/shell_lib.sh (shls__cleansh): add 2>/dev/null
+
+2010-12-17 Jim Lowe <jhlowe@acm.org>
+* swprogs/swproglib.c (parse_ls_ld_output): Support 'bsdtar' ls listing
+(bsdtar from libarchive-2.8.4)
+* swprogs/swproglib.c (swpl_get_catalog_perms): now set default
+values if parse_ls_ld_output() fails.
+
+2010-12-15 Jim Lowe <jhlowe@acm.org>
+* swsupplib/taru/etar.c (etar_emit_data_from_buffer):
+fixed calculation of file block padding.
+* swsupplib/taru/etar.c (etar_emit_data_from_fd):
+fixed calculation of file block padding.
+* swprogs/swproglib.c (swpl_get_whole_block_size): corrected
+* swsupplib/shell_lib/shell_lib.sh (shls_write_cat_ar): now support
+systems that have neither GNU tar nor pax by adding fall back code
+using traditional tar capabilities.
+* swprogs/swproglib.c (parse_ls_ld_output): Support 'star' ls listing
+format which places the file at the beginning of the line.
+
+2010-12-06 Jim Lowe <jhlowe@acm.org>
+* swsupplib/misc/swverid.c (get_object_by_swverid): optimization fix
+
+2010-12-05 Jim Lowe <jhlowe@acm.org>
+* swprogs/swlist.c: Feature development
+* swsupplib/misc/swlib.c (swlib_synct_read): FIXED,
+affects all utilities except swpackage
+* swsupplib/misc/swlib.c (swlib_append_synct_eof): added 'ibs=%s'
+
+2010-11-27 Jim Lowe <jhlowe@acm.org>
+* swsupplib/shell_lib/shell_lib.sh (shls_apply_socspec): emit
+corrupt package info on stderr instead of silently not listing
+* swprogs/swlist_lib.c (swlist_looper_sr_payload): adjusted calculation
+of ls_verbose variable as function of command line verbosity (-v option).
+
+2010-10-31 Jim Lowe <jhlowe@acm.org>
+* swsupplib/misc/swlib.c: (swlib_pad_amount): improved error message
+
 2010-09-07 Jim Lowe <jhlowe@acm.org>
 * VERSION now 1.6
 

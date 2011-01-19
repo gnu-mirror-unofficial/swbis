@@ -1,3 +1,74 @@
+2011-01-16 Jim Lowe <jhlowe@acm.org>
+* VERSION now 1.8
+
+2011-01-16 Jim Lowe <jhlowe@acm.org>
+* swprogs/swpackage.cxx (get_package_signature) <swpackage>: set verbosity to 1 in
+child process to stop double listing to stderr the packaged files
+
+2011-01-15 Jim Lowe <jhlowe@acm.org>
+* swprogs/swproglib.c (swpl_unpack_catalog_tarfile): adjusted
+verbosity threshold.
+
+2011-01-15 Jim Lowe <jhlowe@acm.org>
+* VERSION now 1.8pre3
+
+2011-01-15 Jim Lowe <jhlowe@acm.org>
+* swsupplib/swi/swi.c (swi_find_compatible_product): fixed for
+case of no compatible found.
+* swsupplib/swi/swi.c (swi_audit_all_compatible_products): added (factored
+from swi_find_compatible_product)
+* swprogs/swinstall.c (main) <swinstall>: use swi_audit_all_compatible_products as
+replacement for swi_find_compatible_product
+
+2011-01-15 Jim Lowe <jhlowe@acm.org>
+* VERSION now 1.8pre2
+
+2011-01-15 Jim Lowe <jhlowe@acm.org>
+* swsupplib/misc/swlib.c (swlib_append_synct_eof): more fixes
+to prevent hang and odd number of blocks being written
+
+2011-01-14 Jim Lowe <jhlowe@acm.org>
+* VERSION now 1.8pre1
+
+2011-01-09 Jim Lowe <jhlowe@acm.org>
+* swprogs/iswverify.c (main) <swverify>: error handling fixes
+* swprogs/swverify_lib.c (swverify): error path fixes
+
+2011-01-08 Jim Lowe <jhlowe@acm.org>
+* swprogs/swlist.c (main) <swlist>: error handling fixes
+* swprogs/swlist_lib.c (swlist_looper_sr_payload) <swlist>: error handling fixes
+* swprogs/swconfig_lib.c (swlist_looper_sr_payload) <swconfig>: error handling and
+error path fixes
+* swprogs/swconfig_lib.c (looper_locked_region) <swconfig>: added 'sleep 2'
+to the error path of the last event.
+* swprogs/swlist_lib.c (looper_locked_region) <swlist>: added 'sleep 2' to
+the error path of the the last event.
+* swprogs/swremove_lib.c (looper_locked_region) <swremove>: added 'sleep 2' to
+the error path of the the last event.
+* swprogs/swremove_lib.c (swlist_looper_sr_payload) <swremove>: error handling fixes
+
+2011-01-07 Jim Lowe <jhlowe@acm.org>
+* swsupplib/misc/swlib.c (swlist_wait_on_all_pids_with_timeout): added
+
+2011-01-02 Jim Lowe <jhlowe@acm.org>
+* swprogs/swconfig.c <swconfig>: fix error handling to avoid segfault
+* swprogs/swconfig_lib.c <swconfig>: fix error handling to avoid segfault
+* swsupplib/misc/swicat_e.c: fix error handling to avoid segfault
+
+2011-01-02 Jim Lowe <jhlowe@acm.org>
+* swprogs/iswverify.c (swverify): added dummy guard events
+* swprogs/swlist.c <swlist>:  added dummy guard events
+* swprogs/swinstall_lib.c <swinstall>:  added dummy guard events
+* swprogs/swconfig_lib.c <swconfig>:  added dummy guard events
+* swprogs/swremove_lib.c <swremove>:  added dummy guard events
+* swsupplib/shell_lib/shell_lib.sh (shls__cleansh): add 2>/dev/null
+
+2011-01-01 Jim Lowe <jhlowe@acm.org>
+* swsupplib/misc/swlib.c (swlist_synct_suck): re-wrote 
+* swsupplib/misc/swlib.h: new SYNCT struct
+* swsupplib/misc/swicol.c (print_task_script): syntax fix
+for new version of swlib_synct_suck().
+
 2010-12-18 Jim Lowe <jhlowe@acm.org>
 * VERSION now 1.7
 

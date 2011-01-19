@@ -1,5 +1,15 @@
-GNU swbis NEWS - User visible changes. 2010-12-18
+GNU swbis NEWS - User visible changes. 2010-01-18
 Please send GNU swbis bug reports to <bug-swbis@gnu.org>
+
+version 1.8 - Jim Lowe,  2011-01-16
+
+Fixed defects in the error code paths of all the utilities
+that occur when file system permissions deny success to an
+installed catalog operation.
+
+Re-wrote (and fixed) the synct_* routines used for reading installed
+catalog data with an in-band EOF.  These routines could fail due to
+certain data contents.
 
 version 1.7 - Jim Lowe,  2010-12-18
 * <swinstall>: FIXED a broken speed optimization

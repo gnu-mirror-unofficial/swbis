@@ -1,6 +1,9 @@
 GNU swbis NEWS - User visible changes. 2010-01-18
 Please send GNU swbis bug reports to <bug-swbis@gnu.org>
 
+version 1.9 - Jim Lowe,  2011-01-20
+* <swinstall>: FIXED the to-stdout mode 'swinstall @-'
+
 version 1.8 - Jim Lowe,  2011-01-16
 
 Fixed defects in the error code paths of all the utilities

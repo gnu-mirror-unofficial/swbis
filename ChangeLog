@@ -1,3 +1,14 @@
+2011-01-19 Jim Lowe <jhlowe@acm.org>
+* VERSION now 1.9
+
+2011-01-19 Jim Lowe <jhlowe@acm.org>
+* swprogs/swpackage.cxx (main) <swpackage>: prevent use of
+tty passphrase entry when using the '--to-swbis' tranlation mode.
+
+2011-01-19 Jim Lowe <jhlowe@acm.org>
+* swprogs/swinstall.c (main) <swinstall>: FIX to-stdout  (i.e. `swinstall @-')
+operation which was busted by version 1.8
+
 2011-01-16 Jim Lowe <jhlowe@acm.org>
 * VERSION now 1.8
 

@@ -1,3 +1,25 @@
+2011-04-23 Jim Lowe <jhlowe@acm.org>
+* VERSION now 1.11
+
+2011-04-22 Jim Lowe <jhlowe@acm.org>
+* swprogs/swpackage.cxx (main) <swpackage>: FIX use
+of swlib_wait_on_all_pids() 
+* swsupplib/misc/debpsf.c (debpsf_write_psf_buf) <swpackage>: FIX segfault
+(use of null pointer) for .deb packages without release attribute.
+* swsupplib/uinfile/uinfile.c (uinfile_i_open): add support for
+lzma compressed data file in a .deb package
+
+2011-04-15 Jim Lowe <jhlowe@acm.org>
+* VERSION now 1.10
+
+2011-04-15 Jim Lowe <jhlowe@acm.org>
+* swprogs/swpackage.cxx (main) <swpackage>: fix translation
+mode which was busted by v1.9 (change 2011-01-19).
+
+2011-02-12 Jim Lowe <jhlowe@acm.org>
+* swprogs/swpackage.cxx (main) <swpackage>: fix the verbosity
+setting's (-v) interaction with swdefaults file specification.
+
 2011-01-19 Jim Lowe <jhlowe@acm.org>
 * VERSION now 1.9
 

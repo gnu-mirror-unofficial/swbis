@@ -1,6 +1,15 @@
 GNU swbis NEWS - User visible changes. 2010-01-18
 Please send GNU swbis bug reports to <bug-swbis@gnu.org>
 
+version 1.11 - Jim Lowe,  2011-04-23
+* <swpackage>: FIXED a race condition resulting in a signing failure
+* <lxpsf>: FIXED segfault when translating some .deb file
+* <lxpsf>: added support .lzma compressed data files in a .deb file
+
+version 1.10 - Jim Lowe,  2011-04-15
+* <swpackage>: FIXED the translation mode busted in the 1.9
+release.
+
 version 1.9 - Jim Lowe,  2011-01-20
 * <swinstall>: FIXED the to-stdout mode 'swinstall @-'
 

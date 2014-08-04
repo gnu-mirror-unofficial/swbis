@@ -109,7 +109,6 @@ i {color:#000080}
 
        swign --show-psf -s.  | swpackage -p -v -s -
 
-
    <a name="PSFs By Example"><b>PSFs By Example</b></a>
        To test or preview the following examples use swpackage as follows:
 
@@ -122,7 +121,6 @@ i {color:#000080}
        then to make the package for real, remove the '-p' option, such as:
 
             cat yourPSF | swpackage -s - @-  | tar tvf -
-
 
    <b>o</b>  <b>Package an entire directory</b>
        distribution
@@ -139,7 +137,6 @@ i {color:#000080}
        # exclude fileName2
        # exclude fileName2 # ...
 
-
    <b>o</b>   <b>Package Explicit Files</b>
        distribution
        # owner root  # ownership of catalog
@@ -154,7 +151,6 @@ i {color:#000080}
        file -m 755 -o 0 -g 0 /etc/passwd /mypasswd
        file -m 666 -o 0 -g 0 /dev/null  /mynull
 
-
    <b>o</b>   <b>Package A Directory that does not already exist</b>
        distribution
        product
@@ -165,12 +161,10 @@ i {color:#000080}
        directory / /
        file -o root -g bin -m 700 -t d /BB
 
-
        As a point of instruction, show the actual payload of this package with
        the following command:
 
           swpackage  | swinstall @- | tar tvf -
-
 </pre><h3><a name="MAKING ARCHIVES"><b>MAKING ARCHIVES</b></a></h3><pre>       swbis provide two programs to make a package: <b>swpackage</b> and <b>swign</b> To
        make a package, take your PSF that you created and use it as input to
        these programs.  Be aware that both write to standard output by
@@ -198,7 +192,6 @@ i {color:#000080}
           swpackage -s - --archive-sha512 --archive-digests \
             --file-digests --file-sha512 --files @-
 
-
        To sign the package, that is, include an embedded GPG signature just
        add the '--sign' option, along with other options.  '--sign' turns on
        '--archive-digest'
@@ -206,7 +199,6 @@ i {color:#000080}
           swpackage \
              --archive-digests --file-digests --files \
              --gpg-name=yourId --gpg-path=~/.gnupg --sign
-
 
        When swpackage asks for a passphrase it is really swpackage.  Although
        care is taken to handle the passphrase correctly, you can avoid having
@@ -258,7 +250,6 @@ i {color:#000080}
          ...
        somepackage-1.1/ ..
 
-
        When making a package with swign, it is beneficial to include the
        <b>checkdigest</b> control script using this option:
 
@@ -278,7 +269,6 @@ i {color:#000080}
 
           # This example verifies standard input
           swverify -d @-
-
 
        In addition, packages that have a single path prefix (like source
        packages) and that have ownerships reproducible on the local host can
@@ -306,8 +296,6 @@ i {color:#000080}
           swpackage --to-swbis -s somesourcepackage-1.0.tar.gz  # Plain Source Package
             # or for slackware packages
           swpackage -s somepackage-1.0-i386.tgz --to-swbis
-
-
 </pre><h3><a name="SECURING FILE SYSTEM DIRECTORIES"><b>SECURING FILE SYSTEM DIRECTORIES</b></a></h3><pre>       The <b>swign</b> utility can be used as a directory content integrity tool.
        After processing the current directory with swign, the directory can be
        verified against changes to file contents, ownerships and permissions.
@@ -317,12 +305,9 @@ i {color:#000080}
 
            swign -D $HOME/checkdigest.sh -s. -u yourIdName -o &quot;&quot; -g &quot;&quot; @.
 
-
        Verification is simply:
 
            swverify -d @.
-
-
 </pre><h3><a name="SECURING CVS REPOSITORIES"><b>SECURING CVS REPOSITORIES</b></a></h3><pre>       Securing CVS (or any Source Code Management repository) is similar to
        securing a directory with the additional step that the <b>./catalog/</b>
        directory is checked-in or committed to the repository just like other
@@ -340,7 +325,6 @@ i {color:#000080}
        preserved, use a special option to swverify, --scm.
 
             swverify --scm -d @.
-
 
        The PSF.in for this usage is specialized.  Note the special exclude
        directives and the replacement macros <i>%</i><b>__</b><i>tag</i> and <i>%</i><b>__</b><i>revision</i> which
@@ -367,7 +351,6 @@ i {color:#000080}
           exclude */CVS
           # exclude .svn
           # exclude */.svn
-
 </pre><h3><a name="COPYING FILES"><b>COPYING FILES</b></a></h3><pre>       <b>swcopy</b> can be used to copy arbitrary files or data streams from host to
        host.  Here are a few examples.  See the manual page <a href=swcopy_8.html>swcopy(8)</a> for
        more.
@@ -383,7 +366,6 @@ i {color:#000080}
 
        # Read the entire file system on a remote host
           swcopy --no-audit -s 192.168.1.1:/ @- | tar tvf -
-
 </pre><h3><a name="PACKAGE MANAGEMENT FUNCTIONS"><b>PACKAGE MANAGEMENT FUNCTIONS</b></a></h3><pre>       swbis supports typical package management functions for creation,
        installation, listing/query, verification, and removal in a network
        transparent fashion with zero new requirements for the remote host.
@@ -406,7 +388,6 @@ i {color:#000080}
            sw&lt;<i>utillity</i>&gt; [<i>PKG</i><b>_</b><i>NAME</i><b>_</b><i>SPEC</i>] @ :<i>FILENAME</i>
            sw&lt;<i>utillity</i>&gt; [<i>PKG</i><b>_</b><i>NAME</i><b>_</b><i>SPEC</i>] @ /<i>FILENAME</i>
 
-
    <b>Internal operation,</b>  <b>Events, and Errors</b>
        Operation of the distributed utilites consists of a shell script
        running on the target host and the actual utility running on the
@@ -426,8 +407,6 @@ i {color:#000080}
 
            sw&lt;<i>utillity</i>&gt; @ root@localhost
 
-
-
        The shell script is a list of tasks where each task becomes an
        additional shell reading from stdin.  Before the additional task shell
        is executed, a Task Identification Header is read and compared with the
@@ -445,8 +424,6 @@ i {color:#000080}
        14454 14453  0 20:35  dd bs 512 count 6870
        14455 14453  0 20:35  /bin/bash -s /_swbis /_swinstall load fileset
        14460 14455  0 20:35  tar xpvf -
-
-
 
        During operation events are generated.  They may be shown by increasing
        the verbosity level
@@ -519,7 +496,6 @@ i {color:#000080}
          # Install to multiple targets, based on a list of one target per line
            echo 192.168.2.2 | swinstall -t - -s :somepackage-1.1.bin.sw.tar.gz
 
-
    <a name="Removal"><b>Removal</b></a>
           # Remove a package named 'somepackage'
            swremove somepackage @/
@@ -532,7 +508,6 @@ i {color:#000080}
 
           # Preview what would be removed and do nothing
            swremove -p -v somepackage @ /
-
 
    <a name="Query"><b>Query</b></a>
           # List all installed packages
@@ -562,7 +537,6 @@ i {color:#000080}
 
           # List the payload of a package
            swinstall @- &lt; somepackage-1.0.tar.gz | tar tvf -
-
 </pre><h3><a name="CONFIGURATION"><b>CONFIGURATION</b></a></h3><pre>       See <a href=swbis_7.html>swbis(7)</a> for detailed information on configuration and host
        compatibility strategies.
 </pre><h3><a name="APPLICABLE STANDARDS"><b>APPLICABLE STANDARDS</b></a></h3><pre>       IEEE Std 1387.2-1995 (ISO/IEC 15068-2:1999),
@@ -578,14 +552,13 @@ i {color:#000080}
        <a href="http://www.gnu.org/software/swbis/sourcesign-1.2/gendocs/manual/index.html">http://www.gnu.org/software/swbis/sourcesign-1.2/gendocs/manual/index.html</a>
 
 
-
 </pre><h3><a name="FILES"><b>FILES</b></a></h3><pre>       <b>/var/lib/swbis/catalog</b>/  # The installed software catalog
        <b>catalog</b>/  # The package meta-data directory
        <b>swdefaults</b>     # Options configuration file
        <b>swbisdefaults</b>  # Options configuration file
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        <a href=swbis_1.html>swbis(1)</a>
         Author: Jim Lowe   Email: jhlowe at acm.org
-        Version: 1.6
+        Version: 1.12
         Last Updated: 2010-02-04
         Copying: GNU Free Documentation License
 </pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       (This section left intensionally blank)

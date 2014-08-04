@@ -190,12 +190,10 @@ i {color:#000080}
 
 
 
-
        Create a signed metadata (i.e. catalog/) directory of a live directory,
        for example /bin
 
               swign -D $HOME/checkdigest.sh -u &quot;YourGPGNAME&quot; -o &quot;&quot; -g &quot;&quot; @.
-
 
 
 
@@ -207,13 +205,11 @@ i {color:#000080}
 
 
 
-
        Example of directory signing and authentication.
 
           swign -u YourGPGName -s. --file-ownerships -D /HOME/checkdigest.sh --sign-only
           swverify -d @.
           swign  --file-ownerships -emit-only | swverify -d @-
-
 
 
 </pre><h3><a name="TESTING"><b>TESTING</b></a></h3><pre>       After running successfully with options <b>-S</b>  and <b>-D FILE</b>  the following
@@ -225,13 +221,11 @@ i {color:#000080}
 
 
 
-
        Similarly,
 
                  swign -u &quot;your GPG Name&quot; @- | swverify --checksig -
                      -or-
                  swign -u &quot;your GPG Name&quot; @- | swverify -d @-
-
 
        If a checkdigest script is included then you should unpack the package
        at a new location and run  swverify -d @. in the new location.  The
@@ -257,8 +251,6 @@ i {color:#000080}
 
               swign -D $HOME/checkdigest.sh -u &quot;Test User&quot; -o &quot;&quot; -g &quot;&quot; -S;
               swverify -d @.
-
-
 </pre><h3><a name="PSF ATTRIBUTE REPLACEMENT"><b>PSF ATTRIBUTE REPLACEMENT</b></a></h3><pre>       A PSF that is provided using the '-s' option will be scanned for a
        special character sequence '%__NAME'  where NAME is either 'tag' or
        'revision'.  'tag' is replaced with the package name portion of the
@@ -371,8 +363,6 @@ i {color:#000080}
           # exclude */.svn
 
        # End of PSF
-
-
 </pre><h3><a name="ENVIRONMENT"><b>ENVIRONMENT</b></a></h3><pre>       <b>SWPACKAGEPASSFD</b>
               Sets the swpackage <i>--passphrase-fd</i> option.  Set the option arg
               to a integer value of the file descriptor, or to &quot;env&quot; to read
@@ -402,10 +392,9 @@ i {color:#000080}
        <a href=swpackage_8.html>swpackage(8)</a>, gpg
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        <a href=swign_1.html>swign(1)</a>: The source directory signing utility of the swbis project.
         Author: J. Lowe <a href="mailto:jhlowe@acm.org">jhlowe@acm.org</a>
-        Version: 1.6
+        Version: 1.12
         Last Updated: 2008-01
         Copying: GNU Free Documentation License
-
 </pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       Symbolic links in a package are problematic for verifying the unpacked
        form of a package since the modification time is not preserved.  They
        have no affect on verification of the tar archive file using

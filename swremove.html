@@ -3,7 +3,7 @@
 <title>Untitled</title>
 <meta http-equiv="Content-Type" content="text/html">
 <meta name="description" content="Untitled">
-<meta name="generator" content="makeinfo 4.8">
+<meta name="generator" content="makeinfo 4.13">
 <link title="Top" rel="top" href="#Top">
 <link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <meta http-equiv="Content-Style-Type" content="text/css">
@@ -92,6 +92,7 @@
 <!-- TROFF INPUT: .. -->
 <!-- .. -->
 <!-- TROFF INPUT: .ds f1\" -->
+
 <!-- WARNING: man/man8/swremove.8:49:%%unrecognized define-string command: [.ds f1\"] -->
 <!-- TROFF INPUT: .ds f2\" -->
 <!-- WARNING: man/man8/swremove.8:50:%%unrecognized define-string command: [.ds f2\"] -->
@@ -99,10 +100,12 @@
 <!-- WARNING: man/man8/swremove.8:51:%%unrecognized define-string command: [.ds f3\"] -->
 <!-- TROFF INPUT: .ds f4\" -->
 <!-- WARNING: man/man8/swremove.8:52:%%unrecognized define-string command: [.ds f4\"] -->
+<!-- TROFF INPUT: .ta 8n 16n 24n 32n 40n 48n 56n 64n 72n -->
+<!-- .ta 8n 16n 24n 32n 40n 48n 56n 64n 72n -->
 <!-- TROFF INPUT: .TH "swremove" "8" -->
 <div class="node">
-<p><hr>
 <a name="Top"></a>
+<p><hr>
 Next:&nbsp;<a rel="next" accesskey="n" href="#NAME">NAME</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#dir">(dir)</a>
 
@@ -131,11 +134,13 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#dir">(dir)</a>
 <li><a href="#SEE-ALSO">SEE ALSO</a>
 <li><a href="#IDENTIFICATION">IDENTIFICATION</a>
 <li><a href="#BUGS">BUGS</a>
+
 </ul>
+
 <!-- MAN2TEXI: EON -->
 <div class="node">
-<p><hr>
 <a name="NAME"></a>
+<p><hr>
 Next:&nbsp;<a rel="next" accesskey="n" href="#SYNOPSIS">SYNOPSIS</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#Top">Top</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
@@ -148,9 +153,10 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- TROFF INPUT: .SH "SYNOPSIS" -->
 <!-- DEBUG: print_menu("NAME") -->
 <!-- MAN2TEXI: EON -->
+
 <div class="node">
-<p><hr>
 <a name="SYNOPSIS"></a>
+<p><hr>
 Next:&nbsp;<a rel="next" accesskey="n" href="#DESCRIPTION">DESCRIPTION</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#NAME">NAME</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
@@ -166,6 +172,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
      [-x <i>option=value</i>]  [-X <i>options</i><tt>_</tt><i>file</i>]  [-W <i>option</i>] \\
      [software<tt>_</tt>selections]  [@targets]
      <!-- TROFF INPUT: .fi -->
+     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
@@ -173,14 +180,15 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!--  -->
 <pre class="display">     <b>swremove</b> &ndash;cleansh [options] [@targets]
      <!-- TROFF INPUT: .fi -->
+     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .SH "DESCRIPTION" -->
 <!-- DEBUG: print_menu("SYNOPSIS") -->
 <!-- MAN2TEXI: EON -->
 <div class="node">
-<p><hr>
 <a name="DESCRIPTION"></a>
+<p><hr>
 Next:&nbsp;<a rel="next" accesskey="n" href="#OPTIONS">OPTIONS</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#SYNOPSIS">SYNOPSIS</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
@@ -198,13 +206,15 @@ the shell and command-line utility level.  Remote network connections are made
 by ssh.  Ssh is the default but rsh can be selected by a command line
 option. 
 <!-- TROFF INPUT: .PP -->
-<b>swremove</b> operates on installed software identified by a <i>software selection</i> and <i>target</i>. 
+
+<p><b>swremove</b> operates on installed software identified by a <i>software selection</i> and <i>target</i>. 
 <!-- TROFF INPUT: .SH "OPTIONS" -->
 <!-- DEBUG: print_menu("DESCRIPTION") -->
 <!-- MAN2TEXI: EON -->
+
 <div class="node">
-<p><hr>
 <a name="OPTIONS"></a>
+<p><hr>
 Next:&nbsp;<a rel="next" accesskey="n" href="#USAGE-EXAMPLES">USAGE EXAMPLES</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#DESCRIPTION">DESCRIPTION</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
@@ -217,116 +227,160 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- TROFF INPUT: .RS -->
 <!--  -->
 <blockquote>
+
 <!-- TROFF INPUT: .RE -->
 </blockquote>
+
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>-d</b>
+<p><b>-d</b>
 <!-- TROFF INPUT: .RS -->
+
 <!--  -->
 <blockquote>
-Specify the target is a distribution. 
+
+<p>Specify the target is a distribution. 
 <!-- TROFF INPUT: .PP -->
+
 <!-- TROFF INPUT: .RS -->
 <!--  -->
 <blockquote>
 <b>Note:  This is currently not supported by this implementation. 
 <!-- TROFF INPUT: .RE -->
+
 </blockquote>
-     <!--  -->
+
+<!--  -->
 <!-- TROFF INPUT: .RE -->
 </blockquote>
+
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<!-- WARNING: man/man8/swremove.8:100:%%new font B started without closing previous font B -->
-</b><b>-f FILE</b>
+<!-- WARNING: man/man8/swremove.8:101:%%new font B started without closing previous font B -->
+<p></b><b>-f FILE</b>
 <!-- TROFF INPUT: .RS -->
+
 <!--  -->
 <blockquote>
-Read the list of software selections from FILE. 
+
+<p>Read the list of software selections from FILE. 
 <!-- TROFF INPUT: .RE -->
+
 </blockquote>
+
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>-p</b>
+<p><b>-p</b>
 <!-- TROFF INPUT: .RS -->
+
 <!--  -->
 <blockquote>
-Preview mode, establish contact with target host, however, modify nothing. 
+
+<p>Preview mode, establish contact with target host, however, modify nothing. 
 <!-- TROFF INPUT: .RE -->
+
 </blockquote>
+
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>-r</b>
+<p><b>-r</b>
 <!-- TROFF INPUT: .RS -->
+
 <!--  -->
 <blockquote>
-Indicates that the operation is on installed software at a location indicated by the the target. 
+
+<p>Indicates that the operation is on installed software at a location indicated by the the target. 
 <!-- TROFF INPUT: .PP -->
+
 <!-- TROFF INPUT: .RS -->
 <!--  -->
 <blockquote>
 <b>Note:  This is the default mode among -d and -r
 <!-- TROFF INPUT: .RE -->
+
 </blockquote>
-     <!--  -->
+
+<!--  -->
 <!-- TROFF INPUT: .RE -->
 </blockquote>
+
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<!-- WARNING: man/man8/swremove.8:125:%%new font B started without closing previous font B -->
-</b><b>-t targetfile</b>
+<!-- WARNING: man/man8/swremove.8:126:%%new font B started without closing previous font B -->
+<p></b><b>-t targetfile</b>
 <!-- TROFF INPUT: .RS -->
+
 <!--  -->
 <blockquote>
-Specify a file containing a list of targets (one per line). 
+
+<p>Specify a file containing a list of targets (one per line). 
 <!-- TROFF INPUT: .RE -->
+
 </blockquote>
+
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>-v</b>
+<p><b>-v</b>
 <!-- TROFF INPUT: .RS -->
+
 <!--  -->
 <blockquote>
-Increment the verbose level. 
+
+<p>Increment the verbose level. 
 <!-- TROFF INPUT: .RE -->
+
 </blockquote>
+
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>-x option=value</b>
+<p><b>-x option=value</b>
 <!-- TROFF INPUT: .RS -->
+
 <!--  -->
 <blockquote>
-Specify the extended option overriding the defaults file value. 
+
+<p>Specify the extended option overriding the defaults file value. 
 <!-- TROFF INPUT: .RE -->
+
 </blockquote>
+
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>-X FILE</b>
+<p><b>-X FILE</b>
 <!-- TROFF INPUT: .RS -->
+
 <!--  -->
 <blockquote>
-Specify the extended options filename, FILE,  overriding the default filenames. 
+
+<p>Specify the extended options filename, FILE,  overriding the default filenames. 
 This option may be given more then once. If the resulting specified value is an empty string
 then reading of any options file is disabled. 
 <!-- TROFF INPUT: .RE -->
+
 </blockquote>
+
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>&minus;&minus;help</b>
+<p><b>&minus;&minus;help</b>
 <!-- TROFF INPUT: .RS -->
+
 <!--  -->
 <blockquote>
-Show help (Implementation extension)
+
+<p>Show help (Implementation extension)
 <!-- TROFF INPUT: .RE -->
+
 </blockquote>
+
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>-W option[,option,...]</b>
+<p><b>-W option[,option,...]</b>
 <!-- TROFF INPUT: .RS -->
+
 <!--  -->
 <blockquote>
-Specify the implementation extension option. 
+
+<p>Specify the implementation extension option. 
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
 Syntax: -W option[=option<tt>_</tt>argument[,option...] 
@@ -335,99 +389,132 @@ Syntax: -W option[=option<tt>_</tt>argument[,option...]
 Options may be separated by a comma.  The implementation extension
 options may also be given individually using the '&minus;&minus;long-option[=option<tt>_</tt>arg]' syntax. 
 <!-- TROFF INPUT: .RE -->
+
 </blockquote>
+
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>&ndash;allow-ambig</b>
+<p><b>&ndash;allow-ambig</b>
 <!-- TROFF INPUT: .RS -->
+
 <!--  -->
 <blockquote>
-Allows swremove to act on all matching entries.  Without this option
+
+<p>Allows swremove to act on all matching entries.  Without this option
 a software selection that matches more than one installed software entry
 is an error. 
 <!-- TROFF INPUT: .RE -->
+
 </blockquote>
+
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>&ndash;sig-level=N</b>
+<p><b>&ndash;sig-level=N</b>
 <!-- TROFF INPUT: .RS -->
+
 <!--  -->
 <blockquote>
-Specify number of required GPG signatures, N equal to 0 means don't
+
+<p>Specify number of required GPG signatures, N equal to 0 means don't
 require the catalog to be signed. 
 <!-- TROFF INPUT: .RE -->
+
 </blockquote>
+
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>&ndash;cleansh</b>
+<p><b>&ndash;cleansh</b>
 <!-- TROFF INPUT: .RS -->
+
 <!--  -->
 <blockquote>
-Kill stray or zombied processes that match the pattern &ldquo;sh -s.*<tt>_</tt>swbis&rdquo;.  These
+
+<p>Kill stray or zombied processes that match the pattern &ldquo;sh -s.*<tt>_</tt>swbis&rdquo;.  These
 may be caused by a distributed utility segfaulting or a signal handling defect in the
 swbis utility. 
 <!-- TROFF INPUT: .RE -->
+
 </blockquote>
+
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>-W remote-shell=SHELL</b>
+<p><b>-W remote-shell=SHELL</b>
 <!-- TROFF INPUT: .RS -->
+
 <!--  -->
 <blockquote>
-Defaults File Option: <b>swbis</b><tt>_</tt><b>remote</b><tt>_</tt><b>shell</b><tt>_</tt><b>client</b>
+
+<p>Defaults File Option: <b>swbis</b><tt>_</tt><b>remote</b><tt>_</tt><b>shell</b><tt>_</tt><b>client</b>
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
 Supported shells are "ssh" and "rsh", ssh is the default. 
 <!-- TROFF INPUT: .RE -->
+
 </blockquote>
+
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>-W show-options-files</b>
+<p><b>-W show-options-files</b>
 <!-- TROFF INPUT: .RS -->
+
 <!--  -->
 <blockquote>
 Show the complete list of options files and if they are found. 
 <!-- TROFF INPUT: .RE -->
+
 </blockquote>
+
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>-W show-options</b>
+<p><b>-W show-options</b>
 <!-- TROFF INPUT: .RS -->
+
 <!--  -->
 <blockquote>
 Show the options after reading the files and parsing the command line options. 
 <!-- TROFF INPUT: .RE -->
+
 </blockquote>
+
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>-W pax-command={tar|pax|star|gtar}</b>
+<p><b>-W pax-command={tar|pax|star|gtar}</b>
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
 <!-- TROFF INPUT: .RS -->
+
 <!--  -->
 <blockquote>
 Set the portable archive command for all operations. 
 The default is "pax". 
 <!-- TROFF INPUT: .RE -->
+
 </blockquote>
+
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>-W pax-read-command={tar|pax|star|gtar}</b>
+<p><b>-W pax-read-command={tar|pax|star|gtar}</b>
 <!-- TROFF INPUT: .RS -->
+
 <!--  -->
 <blockquote>
 Set the read command for local and remote hosts. 
 <!-- TROFF INPUT: .RE -->
+
 </blockquote>
+
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>-W remote-pax-read-command={tar|pax|star|gtar}</b>
+<p><b>-W remote-pax-read-command={tar|pax|star|gtar}</b>
 <!-- TROFF INPUT: .RS -->
+
 <!--  -->
 <blockquote>
 Defaults File Option: <b>swbis</b><tt>_</tt><b>remote</b><tt>_</tt><b>pax</b><tt>_</tt><b>read</b><tt>_</tt><b>command</b>
 <!-- TROFF INPUT: .RE -->
+
 </blockquote>
+
 <!--  -->
 <!-- TROFF INPUT: .RS -->
 <!--  -->
@@ -436,16 +523,21 @@ Set the read command for remote hosts.
 This is the command that runs on the target (e.g. pax -r, tar xpf -). 
 The default is "pax". 
 <!-- TROFF INPUT: .RE -->
+
 </blockquote>
+
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>-W local-pax-read-command={tar|pax|star|gtar}</b>
+<p><b>-W local-pax-read-command={tar|pax|star|gtar}</b>
 <!-- TROFF INPUT: .RS -->
+
 <!--  -->
 <blockquote>
 Defaults File Option: <b>swbis</b><tt>_</tt><b>local</b><tt>_</tt><b>pax</b><tt>_</tt><b>read</b><tt>_</tt><b>command</b>
 <!-- TROFF INPUT: .RE -->
+
 </blockquote>
+
 <!--  -->
 <!-- TROFF INPUT: .RS -->
 <!--  -->
@@ -454,46 +546,59 @@ Set the read command for local hosts.
 This is the command that runs on the target (e.g. pax -r, tar xpf -). 
 The default is "pax". 
 <!-- TROFF INPUT: .RE -->
+
 </blockquote>
+
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>-W pax-write-command={tar|pax|star|gtar|swbistar}</b>
+<p><b>-W pax-write-command={tar|pax|star|gtar|swbistar}</b>
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
 <!-- TROFF INPUT: .RS -->
+
 <!--  -->
 <blockquote>
 Set the write command for local and remote hosts. 
 This is the command that runs on the target (e.g. pax -w, tar cf -). 
 <!-- TROFF INPUT: .RE -->
+
 </blockquote>
+
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>-W remote-pax-write-command={tar|pax|star|gtar|swbistar}</b>
+<p><b>-W remote-pax-write-command={tar|pax|star|gtar|swbistar}</b>
 <!-- TROFF INPUT: .br -->
 <!-- .br -->
 <!-- TROFF INPUT: .RS -->
+
 <!--  -->
 <blockquote>
 Defaults File Option: <b>swbis</b><tt>_</tt><b>remote</b><tt>_</tt><b>pax</b><tt>_</tt><b>write</b><tt>_</tt><b>command</b>
 <!-- TROFF INPUT: .RE -->
+
 </blockquote>
+
 <!--  -->
 <!-- TROFF INPUT: .RS -->
 <!--  -->
 <blockquote>
 Set the write command for remote hosts. 
 <!-- TROFF INPUT: .RE -->
+
 </blockquote>
+
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>-W local-pax-write-command={tar|pax|star|gtar|swbistar}</b>
+<p><b>-W local-pax-write-command={tar|pax|star|gtar|swbistar}</b>
 <!-- TROFF INPUT: .RS -->
+
 <!--  -->
 <blockquote>
 Defaults File Option: <b>swbis</b><tt>_</tt><b>local</b><tt>_</tt><b>pax</b><tt>_</tt><b>write</b><tt>_</tt><b>command</b>
 <!-- TROFF INPUT: .RE -->
+
 </blockquote>
+
 <!--  -->
 <!-- TROFF INPUT: .RS -->
 <!--  -->
@@ -502,16 +607,21 @@ Set the portable archive write command for local host operations.
 This is the command that runs on the source (e.g. pax -w, tar cf -). 
 The default is "pax". 
 <!-- TROFF INPUT: .RE -->
+
 </blockquote>
+
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>-W remote-pax-write-command={tar|pax|star|gtar|swbistar}</b>
+<p><b>-W remote-pax-write-command={tar|pax|star|gtar|swbistar}</b>
 <!-- TROFF INPUT: .RS -->
+
 <!--  -->
 <blockquote>
 Defaults File Option: <b>swbis</b><tt>_</tt><b>remote</b><tt>_</tt><b>pax</b><tt>_</tt><b>write</b><tt>_</tt><b>command</b>
 <!-- TROFF INPUT: .RE -->
+
 </blockquote>
+
 <!--  -->
 <!-- TROFF INPUT: .RS -->
 <!--  -->
@@ -520,20 +630,26 @@ Set the portable archive write command for remote host operations.
 This is the command that runs on the source (e.g. pax -w, tar cf -). 
 The default is "pax". 
 <!-- TROFF INPUT: .RE -->
+
 </blockquote>
+
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>-W no-defaults</b>
+<p><b>-W no-defaults</b>
 <!-- TROFF INPUT: .RS -->
+
 <!--  -->
 <blockquote>
 Do not read any defaults files. 
 <!-- TROFF INPUT: .RE -->
+
 </blockquote>
+
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>-W no-getconf</b>
+<p><b>-W no-getconf</b>
 <!-- TROFF INPUT: .RS -->
+
 <!--  -->
 <blockquote>
 Defaults File Option: <b>swbis</b><tt>_</tt><b>no</b><tt>_</tt><b>getconf</b>
@@ -542,11 +658,14 @@ Defaults File Option: <b>swbis</b><tt>_</tt><b>no</b><tt>_</tt><b>getconf</b>
 Makes the remote command be '/bin/sh -s' instead of the default
 'PATH=`getconf PATH` sh -s'. 
 <!-- TROFF INPUT: .RE -->
+
 </blockquote>
+
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>-W shell-command=NAME</b>
+<p><b>-W shell-command=NAME</b>
 <!-- TROFF INPUT: .RS -->
+
 <!--  -->
 <blockquote>
 Defaults File Option: <b>swbis</b><tt>_</tt><b>shell</b><tt>_</tt><b>command</b>
@@ -558,79 +677,103 @@ remote command run by the remote shell.
 "sh" is "/bin/sh -s", and "ksh" is "ksh -s". 
 The default is "posix". 
 <!-- TROFF INPUT: .RE -->
+
 </blockquote>
+
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>-W use-getconf</b>
+<p><b>-W use-getconf</b>
 <!-- TROFF INPUT: .RS -->
+
 <!--  -->
 <blockquote>
 Opposite of &minus;&minus;no-getconf. 
 <!-- TROFF INPUT: .RE -->
+
 </blockquote>
+
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>-W source-script-name=NAME</b>
+<p><b>-W source-script-name=NAME</b>
 <!-- TROFF INPUT: .RS -->
+
 <!--  -->
 <blockquote>
 Write the script that is written into the remote shell's stdin to NAME. 
 This is useful for debugging. 
 <!-- TROFF INPUT: .RE -->
+
 </blockquote>
+
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>-W target-script-name=NAME</b>
+<p><b>-W target-script-name=NAME</b>
 <!-- TROFF INPUT: .RS -->
+
 <!--  -->
 <blockquote>
 Write the script that is written into the remote shell's stdin to NAME. 
 This is useful for debugging. 
 <!-- TROFF INPUT: .RE -->
+
 </blockquote>
+
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>software</b><tt>_</tt><b>selections</b>
+<p><b>software</b><tt>_</tt><b>selections</b>
 <!-- TROFF INPUT: .RS -->
+
 <!--  -->
 <blockquote>
-Refer to the software objects (products, filesets)
+
+<p>Refer to the software objects (products, filesets)
 using software spec syntax. (See sw(5) for syntax). 
 <!-- TROFF INPUT: .RE -->
+
 </blockquote>
+
 <!--  -->
 <!-- TROFF INPUT: .PP -->
-<b>target</b>
+<p><b>target</b>
 <!-- TROFF INPUT: .RS -->
+
 <!--  -->
 <blockquote>
-Refers to the software<tt>_</tt>collection where the software
+
+<p>Refers to the software<tt>_</tt>collection where the software
 selections are to be applied. 
 Allows specification of host and pathname where the software collection is located. 
 A target that contains only one part is assumed to be a hostname. 
 To force interpretation as a path, use a absolute path or prefix with ':'. 
 <!-- TROFF INPUT: .RE -->
+
 </blockquote>
+
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
 <pre class="display">     Source and Target Specification and Logic
+     
           Synopsis:
                Posix:
                     host[:path]
                     host
                     host:
                     /path  # Absolute path
+     
                Swbis Extension:
                     [user@]host[:path]
                     [user@]host<tt>_</tt>port[:path]
                     :path
+     
                Swbis Multi-hop Target Extension:
                     # ':' is the target delimiter
      	       # '<tt>_</tt>' delimits a port number in the host field
+     
                     [user@]host[@@[user@]host[@@...]][:file]
                     [user@]host<tt>_</tt>port[@@[user@]host[@@...]][:file]
+     
                     # Using ':', a trailing colon is used to
                     # disambiguate between a host and file.
      	       # For Example,
@@ -644,28 +787,38 @@ To force interpretation as a path, use a absolute path or prefix with ':'.
                     user@host:user@host:
                     user@host:user@host:host:
                     user@host:user@host:file
+     
           A more formal description:
+     
           target : HOST<tt>_</tt>CHARACTER<tt>_</tt>STRING ':' PATHNAME<tt>_</tt>CHARACTER<tt>_</tt>STRING
                  | HOST<tt>_</tt>CHARACTER<tt>_</tt>STRING ':'
                  | HOST<tt>_</tt>CHARACTER<tt>_</tt>STRING
                  | PATHNAME<tt>_</tt>CHARACTER<tt>_</tt>STRING
                  | ':' PATHNAME<tt>_</tt>CHARACTER<tt>_</tt>STRING   # Impl extension
                  ;
+     
             PATHNAME<tt>_</tt>CHARACTER<tt>_</tt>STRING must be an absolute path unless
                             a HOST<tt>_</tt>CHARACTER<tt>_</tt>STRING is given.  Allowing
                             a relative path is a feature of the swbis
                             implementation.
+     
                      NOTE: A '.' as a target is an implementation
                            extension and means extract in current
                            directory.
+     
                      NOTE: A '-' indicating stdout/stdin is an
                            implementation extension.
+     
                      NOTE: A ':' in the first character indicates a filename.
                            This is an implementation extension.
+     
             HOST<tt>_</tt>CHARACTER<tt>_</tt>STRING is an IP or hostname.
+     
          Examples:
             Copy the  distribution /var/tmp/foo.tar.gz at 192.168.1.10
                    swcopy -s /var/tmp/foo.tar.gz @192.168.1.10:/root
+     
+     
      Implementation Extension Syntax (multi ssh-hop) :
          Syntax:
          %start   wtarget    # the Implementation Extension Target
@@ -682,18 +835,20 @@ To force interpretation as a path, use a absolute path or prefix with ':'.
                   | PATHNAME<tt>_</tt>CHARACTER<tt>_</tt>STRING
                   ;
          user     : PORTABLE<tt>_</tt>CHARACTER<tt>_</tt>STRING  # The user name
+     
          DELIM    : ':'   # The multi-hop delimiter.
-                  ;
+                  ;  <span class="roman">
      <!-- TROFF INPUT: .fi -->
+     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .SH "USAGE EXAMPLES" -->
 <!-- DEBUG: print_menu("OPTIONS") -->
 <!-- MAN2TEXI: EON -->
-<div class="node">
-<p><hr>
+<p></span><div class="node">
 <a name="USAGE-EXAMPLES"></a>
+<p><hr>
 Next:&nbsp;<a rel="next" accesskey="n" href="#EXTENDED-OPTIONS">EXTENDED OPTIONS</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#OPTIONS">OPTIONS</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
@@ -710,11 +865,13 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <li><a accesskey="3" href="#Remove-everything-at-192-168-1-2-from-the-home-directory-of-user-_0027jailbird_0027">Remove everything at 192 168 1 2 from the home directory of user 'jailbird' </a>
 <li><a accesskey="4" href="#Remove-package-foo-from-the-root-_0027_002f_0027-or-elevate-your-credentials-via-ssh">Remove package foo from the root '/' or elevate your credentials via ssh</a>
 <li><a accesskey="5" href="#Show-the-options">Show the options</a>
+
 </ul>
+
 <!-- MAN2TEXI: EON -->
 <div class="node">
-<p><hr>
 <a name="Remove-everything-at-192-168-1-2-from-the-root-directory"></a>
+<p><hr>
 Next:&nbsp;<a rel="next" accesskey="n" href="#Preview-removal-of-every-package-listing-every-file-but-modify-nothing">Preview removal of every package listing every file but modify nothing</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#USAGE-EXAMPLES">USAGE EXAMPLES</a>
 
@@ -725,16 +882,20 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#USAGE-EXAMPLES">USAGE EXAMPLES</a>
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">       swremove &ndash;allow-ambig \\* @ root@192.168.1.2:/
+<pre class="display">     
+     <!-- WARNING: man/man8/swremove.8:440:%%new font R started without closing previous font R -->
+     
+       swremove &ndash;allow-ambig \\* @ root@192.168.1.2:/
      <!-- TROFF INPUT: .fi -->
+     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .SS "Preview removal of every package listing every file, but modify nothing" -->
 <!-- MAN2TEXI: EON -->
 <div class="node">
-<p><hr>
 <a name="Preview-removal-of-every-package-listing-every-file-but-modify-nothing"></a>
+<p><hr>
 Next:&nbsp;<a rel="next" accesskey="n" href="#Remove-everything-at-192-168-1-2-from-the-home-directory-of-user-_0027jailbird_0027">Remove everything at 192 168 1 2 from the home directory of user 'jailbird'</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#Remove-everything-at-192-168-1-2-from-the-root-directory">Remove everything at 192 168 1 2 from the root directory</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#USAGE-EXAMPLES">USAGE EXAMPLES</a>
@@ -746,17 +907,18 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#USAGE-EXAMPLES">USAGE EXAMPLES</a>
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">       swremove -vv -p &ndash;allow-ambig \\* @ root@192.168.1.2:/
+<pre class="display">       swremove -vv -p &ndash;allow-ambig \\* @ root@192.168.1.2:/<span class="roman">
      <!-- TROFF INPUT: .fi -->
+     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .SS "Remove everything at 192\&.168\&.1\&.2 from the home directory of user \&'jailbird\&'\&." -->
 <!-- MAN2TEXI: EON -->
-<div class="node">
-<p><hr>
+<p></span><div class="node">
 <a name="Remove-everything-at-192-168-1-2-from-the-home-directory-of-user-'jailbird'"></a>
 <a name="Remove-everything-at-192-168-1-2-from-the-home-directory-of-user-_0027jailbird_0027"></a>
+<p><hr>
 Next:&nbsp;<a rel="next" accesskey="n" href="#Remove-package-foo-from-the-root-_0027_002f_0027-or-elevate-your-credentials-via-ssh">Remove package foo from the root '/' or elevate your credentials via ssh</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#Preview-removal-of-every-package-listing-every-file-but-modify-nothing">Preview removal of every package listing every file but modify nothing</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#USAGE-EXAMPLES">USAGE EXAMPLES</a>
@@ -768,17 +930,21 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#USAGE-EXAMPLES">USAGE EXAMPLES</a>
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">       swremove &ndash;allow-ambig \\* @ jailbird@192.168.1.2:.
+<pre class="display">     
+     <!-- WARNING: man/man8/swremove.8:454:%%new font R started without closing previous font R -->
+     
+       swremove &ndash;allow-ambig \\* @ jailbird@192.168.1.2:.
      <!-- TROFF INPUT: .fi -->
+     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .SS "Remove package foo from the root \&'/\&', or elevate your credentials via ssh" -->
 <!-- MAN2TEXI: EON -->
 <div class="node">
-<p><hr>
 <a name="Remove-package-foo-from-the-root-'%2f'-or-elevate-your-credentials-via-ssh"></a>
 <a name="Remove-package-foo-from-the-root-_0027_002f_0027-or-elevate-your-credentials-via-ssh"></a>
+<p><hr>
 Next:&nbsp;<a rel="next" accesskey="n" href="#Show-the-options">Show the options</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#Remove-everything-at-192-168-1-2-from-the-home-directory-of-user-_0027jailbird_0027">Remove everything at 192 168 1 2 from the home directory of user 'jailbird'</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#USAGE-EXAMPLES">USAGE EXAMPLES</a>
@@ -791,16 +957,17 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#USAGE-EXAMPLES">USAGE EXAMPLES</a>
 <!-- TROFF INPUT: .nf -->
 <!--  -->
 <pre class="display">       swremove foo @ /
-       swremove foo @ root@localhost:/
+       swremove foo @ root@localhost:/<span class="roman">
      <!-- TROFF INPUT: .fi -->
+     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .SS "Show the options" -->
 <!-- MAN2TEXI: EON -->
-<div class="node">
-<p><hr>
+<p></span><div class="node">
 <a name="Show-the-options"></a>
+<p><hr>
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#Remove-package-foo-from-the-root-_0027_002f_0027-or-elevate-your-credentials-via-ssh">Remove package foo from the root '/' or elevate your credentials via ssh</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#USAGE-EXAMPLES">USAGE EXAMPLES</a>
 
@@ -811,16 +978,20 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#USAGE-EXAMPLES">USAGE EXAMPLES</a>
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
-<pre class="display">       swremove &ndash;show-options
+<pre class="display">     
+     <!-- WARNING: man/man8/swremove.8:470:%%new font R started without closing previous font R -->
+     
+       swremove &ndash;show-options
      <!-- TROFF INPUT: .fi -->
+     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .SH "EXTENDED OPTIONS" -->
 <!-- MAN2TEXI: EON -->
 <div class="node">
-<p><hr>
 <a name="EXTENDED-OPTIONS"></a>
+<p><hr>
 Next:&nbsp;<a rel="next" accesskey="n" href="#RETURN-VALUE">RETURN VALUE</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#USAGE-EXAMPLES">USAGE EXAMPLES</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
@@ -839,11 +1010,13 @@ a defaults file which show default values.
 <ul class="menu">
 <li><a accesskey="1" href="#POSIX">POSIX</a>
 <li><a accesskey="2" href="#Swbis-Implementation">Swbis Implementation</a>
+
 </ul>
+
 <!-- MAN2TEXI: EON -->
 <div class="node">
-<p><hr>
 <a name="POSIX"></a>
+<p><hr>
 Next:&nbsp;<a rel="next" accesskey="n" href="#Swbis-Implementation">Swbis Implementation</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#EXTENDED-OPTIONS">EXTENDED OPTIONS</a>
 
@@ -856,6 +1029,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#EXTENDED-OPTIONS">EXTENDED OPTIONS</a>
 the local (management host, host where swremove is invoked). 
 These files on the target host are not used. 
 <!-- TROFF INPUT: .PP -->
+
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
@@ -867,16 +1041,17 @@ These files on the target host are not used.
        logfile                       = /var/log/sw.log
        loglevel                      = 1
        select<tt>_</tt>local                  = true
-       verbose                       = 1
+       verbose                       = 1<span class="roman">
      <!-- TROFF INPUT: .fi -->
+     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .SS "Swbis Implementation" -->
 <!-- MAN2TEXI: EON -->
-<div class="node">
-<p><hr>
+<p></span><div class="node">
 <a name="Swbis-Implementation"></a>
+<p><hr>
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#POSIX">POSIX</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#EXTENDED-OPTIONS">EXTENDED OPTIONS</a>
 
@@ -888,6 +1063,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#EXTENDED-OPTIONS">EXTENDED OPTIONS</a>
 <p>These options are set in the /usr/lib/swbis/swbisdefaults or the ~/.swbis/swbisdefaults
 file. 
 <!-- TROFF INPUT: .PP -->
+
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .nf -->
 <!--  -->
@@ -903,16 +1079,20 @@ file.
        swremove.swbis<tt>_</tt>remote<tt>_</tt>shell<tt>_</tt>client=ssh
        swremove.swbis<tt>_</tt>forward<tt>_</tt>agent=True
        swremove.swbis<tt>_</tt>sig<tt>_</tt>level=0
+     
+     <!-- WARNING: man/man8/swremove.8:517:%%new font R started without closing previous font R -->
+     
        swremove.swbis<tt>_</tt>enforce<tt>_</tt>all<tt>_</tt>signatures=false
      <!-- TROFF INPUT: .fi -->
+     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .SH "RETURN VALUE" -->
 <!-- MAN2TEXI: EON -->
 <div class="node">
-<p><hr>
 <a name="RETURN-VALUE"></a>
+<p><hr>
 Next:&nbsp;<a rel="next" accesskey="n" href="#NOTES">NOTES</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#EXTENDED-OPTIONS">EXTENDED OPTIONS</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
@@ -927,9 +1107,10 @@ and some succeeded.
 <!-- TROFF INPUT: .SH "NOTES" -->
 <!-- DEBUG: print_menu("RETURN VALUE") -->
 <!-- MAN2TEXI: EON -->
+
 <div class="node">
-<p><hr>
 <a name="NOTES"></a>
+<p><hr>
 Next:&nbsp;<a rel="next" accesskey="n" href="#REQUISITE-UTILITIES">REQUISITE UTILITIES</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#RETURN-VALUE">RETURN VALUE</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
@@ -944,9 +1125,10 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- TROFF INPUT: .SH "REQUISITE UTILITIES" -->
 <!-- DEBUG: print_menu("NOTES") -->
 <!-- MAN2TEXI: EON -->
+
 <div class="node">
-<p><hr>
 <a name="REQUISITE-UTILITIES"></a>
+<p><hr>
 Next:&nbsp;<a rel="next" accesskey="n" href="#FILES">FILES</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#NOTES">NOTES</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
@@ -962,24 +1144,29 @@ Sun's /usr/xpg4/bin/sh to be present on the target host.  If the
 <b>swbis</b><tt>_</tt><b>shell</b><tt>_</tt><b>command</b> extended option is set to 'detect'
 you don't have to know which one is present, otherwise you may specify one explicitly. 
 <!-- TROFF INPUT: .PP -->
-A POSIX <b>awk</b> is required, and with the ability to
+
+<p>A POSIX <b>awk</b> is required, and with the ability to
 specify several thousand bytes of program text as a command argument. 
 GNU awk  works, as does the ATT Awk book awk, and the awk on BSD systems. 
 See the INSTALL file for further details regarding a small issue with the
 OpenSolaris (c.2006) awk. 
 <!-- TROFF INPUT: .PP -->
-GNU Privacy Guard, gpg is required for verification of package signatures. 
+
+<p>GNU Privacy Guard, gpg is required for verification of package signatures. 
 <!-- TROFF INPUT: .PP -->
-swremove uses rm and rmdir for file and directory removal. 
+
+<p>swremove uses rm and rmdir for file and directory removal. 
 <!-- TROFF INPUT: .PP -->
-Other utilities required to be in $PATH on the remote host are:
+
+<p>Other utilities required to be in $PATH on the remote host are:
 dd, pax (or tar|star|gtar), mkdir, echo, test, sleep, read (if not builtin). 
 <!-- TROFF INPUT: .SH "FILES" -->
 <!-- DEBUG: print_menu("REQUISITE UTILITIES") -->
 <!-- MAN2TEXI: EON -->
+
 <div class="node">
-<p><hr>
 <a name="FILES"></a>
+<p><hr>
 Next:&nbsp;<a rel="next" accesskey="n" href="#APPLICABLE-STANDARDS">APPLICABLE STANDARDS</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#REQUISITE-UTILITIES">REQUISITE UTILITIES</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
@@ -996,17 +1183,18 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
      /usr/lib/swbis/swdefaults
      /usr/lib/swbis/swbisdefaults
      $HOME/.swbis/swdefaults
-     $HOME/.swbis/swbisdefaults
+     $HOME/.swbis/swbisdefaults<span class="roman">
      <!-- TROFF INPUT: .fi -->
+     
 </pre>
 <!--  -->
 <!-- TROFF INPUT: .PP -->
 <!-- TROFF INPUT: .SH "APPLICABLE STANDARDS" -->
 <!-- DEBUG: print_menu("FILES") -->
 <!-- MAN2TEXI: EON -->
-<div class="node">
-<p><hr>
+<p></span><div class="node">
 <a name="APPLICABLE-STANDARDS"></a>
+<p><hr>
 Next:&nbsp;<a rel="next" accesskey="n" href="#SEE-ALSO">SEE ALSO</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#FILES">FILES</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
@@ -1020,9 +1208,10 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- TROFF INPUT: .SH "SEE ALSO" -->
 <!-- DEBUG: print_menu("APPLICABLE STANDARDS") -->
 <!-- MAN2TEXI: EON -->
+
 <div class="node">
-<p><hr>
 <a name="SEE-ALSO"></a>
+<p><hr>
 Next:&nbsp;<a rel="next" accesskey="n" href="#IDENTIFICATION">IDENTIFICATION</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#APPLICABLE-STANDARDS">APPLICABLE STANDARDS</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
@@ -1034,13 +1223,15 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- TROFF INPUT: .PP -->
 <p>info swbis
 <!-- TROFF INPUT: .PP -->
-swbis(7), sw(5), swlist(8)
+
+<p>swbis(7), sw(5), swlist(8)
 <!-- TROFF INPUT: .SH "IDENTIFICATION" -->
 <!-- DEBUG: print_menu("SEE ALSO") -->
 <!-- MAN2TEXI: EON -->
+
 <div class="node">
-<p><hr>
 <a name="IDENTIFICATION"></a>
+<p><hr>
 Next:&nbsp;<a rel="next" accesskey="n" href="#BUGS">BUGS</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#SEE-ALSO">SEE ALSO</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
@@ -1051,15 +1242,16 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 <p>swremove(8): The package removal utility of the swbis project. 
  Author: Jim Lowe   Email: jhlowe at acm.org
- Version: 1.6
+ Version: 1.12
  Last Updated: 2008-04-18
  Copying: GNU Free Documentation License
 <!-- TROFF INPUT: .SH "BUGS" -->
 <!-- DEBUG: print_menu("IDENTIFICATION") -->
 <!-- MAN2TEXI: EON -->
+
 <div class="node">
-<p><hr>
 <a name="BUGS"></a>
+<p><hr>
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#IDENTIFICATION">IDENTIFICATION</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
@@ -1072,7 +1264,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 (or terminal) host in a target spec is not configured to use a Bourne
 compatible shell. (This breakage may be eliminated by use of the
 &ndash;no-getconf option as explained above.) swremove does not support rollback if an error occurs during processing. 
-<!-- created by instant / docbook-to-man, Tue 07 Sep 2010, 20:25 -->
+<!-- created by instant / docbook-to-man, Sun 27 Jul 2014, 20:44 -->
 
 </body></html>
 

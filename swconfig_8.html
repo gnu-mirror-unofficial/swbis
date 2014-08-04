@@ -312,18 +312,11 @@ i {color:#000080}
 
            DELIM    : ':'   # The multi-hop delimiter.
                     ;
-
-
-
 </pre><h3><a name="USAGE EXAMPLES"><b>USAGE EXAMPLES</b></a></h3><pre>   <b>Run the configure script for package foo on 192.168.1.2:/</b>
          swconfig foo @ root@192.168.1.2:/
 
-
-
    <a name="Show the options"><b>Show the options</b></a>
          swconfig --show-options
-
-
 </pre><h3><a name="EXTENDED OPTIONS"><b>EXTENDED OPTIONS</b></a></h3><pre>       Extended options can be specified on the command line using the -x
        option or from the defaults file, swdefaults.  Shown below is an actual
        portion of a defaults file which show default values.
@@ -332,7 +325,6 @@ i {color:#000080}
        These options are set in the /usr/lib/swbis/swdefaults or the
        ~/.swdefaults on the local (management host, host where swconfig is
        invoked).  These files on the target host are not used.
-
 
          allow_incompatible            = false # Not implemented
          allow_multiple_versions       = false # Not implemented
@@ -347,11 +339,9 @@ i {color:#000080}
          reconfigure                   = false
          verbose                       = 1
 
-
    <a name="Swbis Implementation"><b>Swbis Implementation</b></a>
        These options are set in the /usr/lib/swbis/swbisdefaults or the
        ~/.swbis/swbisdefaults file.
-
 
           swconfig.swbis_no_getconf = true # true or false
          swconfig.swbis_shell_command = posix # {sh|bash|posix|ksh}
@@ -366,7 +356,6 @@ i {color:#000080}
          swconfig.swbis_forward_agent=True
          swconfig.swbis_sig_level=0
          swconfig.swbis_enforce_all_signatures=false
-
 </pre><h3><a name="RETURN VALUE"><b>RETURN VALUE</b></a></h3><pre>       0 if all targets succeeded, 1 if all targets failed or internal error,
        2 if some targets failed and some succeeded.
 </pre><h3><a name="NOTES"><b>NOTES</b></a></h3><pre>        Multiple ssh-hops is an implementation extension.
@@ -391,15 +380,13 @@ i {color:#000080}
        /usr/lib/swbis/swbisdefaults
        $HOME/.swbis/swdefaults
        $HOME/.swbis/swbisdefaults
-
-
 </pre><h3><a name="APPLICABLE STANDARDS"><b>APPLICABLE STANDARDS</b></a></h3><pre>       ISO/IEC 15068-2:1999, Open Group CAE C701
 </pre><h3><a name="SEE ALSO"><b>SEE ALSO</b></a></h3><pre>       info swbis
 
        <a href=swbis_7.html>swbis(7)</a>, <a href=sw_5.html>sw(5)</a>, <a href=swlist_8.html>swlist(8)</a>
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        <a href=swconfig_8.html>swconfig(8)</a>: The package configuration utility of the swbis project.
         Author: Jim Lowe   Email: jhlowe at acm.org
-        Version: 1.6
+        Version: 1.12
         Last Updated: 2010-01-22
         Copying: GNU Free Documentation License
 </pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       This section is left intentionally black

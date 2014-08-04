@@ -49,7 +49,11 @@ i {color:#000080}
        &quot;070702&quot; respectively.
 
        Support for &quot;pax Interchange Format&quot; (Extended header tar) described in
-       IEEE 1003.1-2001 under the &quot;pax&quot; manual page is planned.
+       IEEE 1003.1-2001 under the &quot;pax&quot; manual page has been implemented for
+       POSIX file attributes as of release 1.12 (c Aug2014).  The 'swpackage'
+       utility will generate extended headers on an as needed basis when the
+       --format=pax is used.  Support for POSIX ACL and SELinux attributes is
+       planned.
 
        The entirety of the output byte stream is a single valid file of one
        the formats mentioned above.
@@ -128,7 +132,6 @@ i {color:#000080}
             space         <i>source</i>  [<i>path</i>]
             control_file  <i>source</i>  [<i>path</i>]
 
-
        The <i>source</i> attribute defines the location in distributors's development
        system where the swpackage utility will find the script.  The keyword
        is the value of the <i>tag</i> attribute and tells the utilities when to
@@ -140,7 +143,6 @@ i {color:#000080}
    <b>o</b>  <b>Directory Mapping</b>
           directory  <i>source</i>  [<i>destination</i>]
 
-
        Applies the <i>source</i> attribute as the directory under which the
        subsequently listed files are located.  If <i>destination</i> is defined it
        will be used as a prefix to the <i>path</i> (implied) file definition.  <i>source</i>
@@ -150,13 +152,11 @@ i {color:#000080}
    <b>o</b>  <b>Recursive File Definition</b>
          file *
 
-
        Specifies every file in current source directory.  The <i>directory</i>
        extended definition must be used before the recursive specification.
 
    <b>o</b>  <b>Explicit File Definition</b>
          file [-t <i>type</i>] [-m <i>mode</i>] [-o <i>owner</i>[,<i>uid</i>]] [-g <i>group</i>[,<i>gid</i>]] [-n] [-v] source [<i>path</i>]
-
 
        <b>source</b>
 
@@ -207,7 +207,6 @@ i {color:#000080}
    <b>o</b>  <b>Default Permission Definition</b>
          file_permissions [-m <i>mode</i>] [-u <i>umask</i>] [-o [<i>owner</i>[,]][<i>uid</i>]] [-g [<i>group</i>[,]][<i>gid</i>]]
 
-
        Applies to subsequently listed file definitions in a fileset.  These
        attributes will apply where the file attributes were not specified
        explicitly in a file definition.  Subsequent <b>file_permissions</b>
@@ -223,12 +222,10 @@ i {color:#000080}
    <b>o</b>  <b>Excluding Files</b>
           exclude source
 
-
        Excludes a previously included file or an entire directory.
 
    <b>o</b>  <b>Including Files</b>
           include &lt;<i>filename</i>
-
 
        The contents of <i>filename</i> may be more definitions for files.  The syntax
        of the included file is PSF syntax.
@@ -360,8 +357,6 @@ i {color:#000080}
               Red Hat 4.1:  Linux 2.0.36 i586        i586-pc-linux-gnulibc1
               Debian 3.1:   Linux 2.6.8-2-386 i686   i686-pc-linux-gnu
 
-
-
        <b>os_name os_release os_version machine_type</b>
 
               These attributes are used to determine compatibility with a
@@ -423,8 +418,6 @@ i {color:#000080}
            file *
            exclude catalog
 
-
-
    <b>o Example Runtime (Binary) Package PSF</b>
        This is a sample PSF for a runtime package.  It implies multiple
        products (e.g. sub-packages) using the bundle.contents attribute.
@@ -469,8 +462,6 @@ i {color:#000080}
                  tag fooit-RUN
                  file doc/man/man1/fooit.1 /usr/man/man1/fooit.1
                  file src/fooit /usr/bin/fooit
-
-
 </pre><h3><a name="APPLICABLE STANDARDS"><b>APPLICABLE STANDARDS</b></a></h3><pre>       POSIX.1, IEEE Std 1387.2-1995 (Identical to ISO 15068-2:1999), Open
        Group CAE C701.
 </pre><h3><a name="SEE ALSO"><b>SEE ALSO</b></a></h3><pre>        XDSA C701 <a href="http://www.opengroup.org/publications/catalog/c701.htm">http://www.opengroup.org/publications/catalog/c701.htm</a>
@@ -479,7 +470,7 @@ i {color:#000080}
         <a href=swpackage_8.html>swpackage(8)</a>
         <a href=swbisparse_1.html>swbisparse(1)</a> -- An implementation extension parser utility.
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        Copyright (C) 2004,2005 Jim Lowe
-        Version: 1.6
+        Version: 1.12
         Last Updated: 2006-07-01
         Copying Terms: GNU Free Documentation License
 </pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       None

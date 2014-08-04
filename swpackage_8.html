@@ -17,6 +17,13 @@ i {color:#000080}
 <li><a href="#EXTENDED OPTIONS">EXTENDED OPTIONS</a>
 <ul><li><a href="#Posix"><font size=-1>Posix</font></a>
 <li><a href="#Swbis Implementation"><font size=-1>Swbis Implementation</font></a>
+</ul><li><a href="#USAGE EXAMPLES">USAGE EXAMPLES</a>
+<ul><li><a href="#Options and Option Files"><font size=-1>Options and Option Files</font></a>
+<li><a href="#Preview the output"><font size=-1>Preview the output</font></a>
+<li><a href="#Create a signed package"><font size=-1>Create a signed package</font></a>
+<li><a href="#Resign a package"><font size=-1>Resign a package</font></a>
+<li><a href="#Idempotent Invocation"><font size=-1>Idempotent Invocation</font></a>
+<li><a href="#ALternative Format Translation"><font size=-1>ALternative Format Translation</font></a>
 </ul><li><a href="#PACKAGE SIGNING">PACKAGE SIGNING</a>
 <ul><li><a href="#Description"><font size=-1>Description</font></a>
 <li><a href="#Signature Generation"><font size=-1>Signature Generation</font></a>
@@ -48,18 +55,25 @@ i {color:#000080}
 
        <b>swpackage -s- @-</b>  # Absolutely explicit, same as above
 
-       <b>swpackage @/dev/null</b>   # Useful for debugging
+       <b>swpackage @FILE</b>
 
        <b>swpackage</b>  [-p]  [-s <i>psf</i><b>_</b><i>file</i>]  [-f <i>file</i>] [-x <i>option=value</i>] \
        [-X <i>options</i><b>_</b><i>file</i>] [-W <i>option</i>] [software_selections] [@targets]
 
+       <b>swpackage --help</b> # more authoritative documentation
+
        <b>swpackage</b>  [options] --to-swbis [-s package_file]   # format translator
+
+       <b>swpackage</b>  [options] --resign [-s package_file]   # modify signatures
+       <b>swpackage</b>  [options] --remove-signature=N [-s package_file]
+       <b>swpackage</b>  [options] --replace-signature=N [-s package_file]
+
+
 </pre><h3><a name="DESCRIPTION"><b>DESCRIPTION</b></a></h3><pre>       <b>swpackage</b> reads a Product Specification File (PSF) and writes a
        distribution to the specified target.  If no options are given a PSF is
        read on stdin and a distribution is written to the default target
        either a directory, device, or standard output.  To specify standard
-       output use a dash '-' as the target.  This implementation only supports
-       writing to stdout.
+       output use a dash '-' as the target.
 </pre><h3><a name="OPTIONS"><b>OPTIONS</b></a></h3><pre>       <b>software_selections</b>
               Refer to the software objects (products, filesets) on which to
               be operated. (Not yet implemented)
@@ -68,8 +82,7 @@ i {color:#000080}
               Refers to the software_collection where the software selections
               are to be applied.  To specify standard output use a  dash '-',
               this overrides media_type setting to 'serial'.  Target may be a
-              file system directory, or device file or '-' Currently this
-              implementation only supports a serial archive written to stdout.
+              file, or device file or '-'
 
        <b>-f FILE</b>
               Reads software_selections from FILE. (Not implemented).
@@ -109,10 +122,10 @@ i {color:#000080}
               10240.  (implementation extension)
 
        <b>--version, -V</b>
-              Show version. (Implementation extension)
+              <b>Alternate Mode</b>: Show version. (Implementation extension)
 
        <b>--help</b>
-              Show help (Implementation extension)
+              <b>Alternate Mode</b>: Show help (Implementation extension)
 
        <b>-W option[,option,...]</b>
               Specify the implementation extension option.
@@ -199,13 +212,12 @@ i {color:#000080}
               unless this option is given.
 
        <b>-W format=FORMAT</b>
-              FORMAT is one of:
+              The default format is 'pax'.  The pax format will only generate
+              extended headers if needed.  FORMAT is one of:
 
                ustar   is the POSIX.1 tar format capable of storing
                        pathnames up to 255 characters in length.
                        Identical to GNU tar 1.15.1 --format=ustar
-                       This is the default format but may be changed by
-                       the options files.
                ustar0  is a different POSIX.1 tar personality.
                        Identical to GNU tar 1.13.25 --posix -b1 for 99 char pathnames
                        Has different rendering of device numbers for non-device files,
@@ -215,12 +227,21 @@ i {color:#000080}
                            block size set to 1. i.e. with option -b1.
                        Also identical to GNU tar 1.15.1 --format=oldgnu
                gnutar  same as oldgnu, oldgnu preferred.
-               pax     Extended header tar (Not implemented).
+               pax     Extended header tar (Default)
                odc     Posix.1 cpio (magic 070707).
                newc    cpio format (magic 070701).
                crc     cpio format (magic 070702).
                bsdpax3 Identical to pax v3.0, ustar format with option -b 512.
 
+       <b>-W pax-header-pid=NUMBER</b>
+              Sets the number used in any pax header naming scheme to NUMBER.
+              You must use this option to make archive identical in subsequent
+              (back-to-back) invocations.
+
+       <b>-W uuid=STRING</b>
+              Sets the uuid string to STRING instead of calling <a href=uuid_1.html>uuid(1)</a> You
+              must use this option to make the catalog directory identical in
+              subsequent (back-to-back) invocations.
 
        <b>-W create-time=TIME</b>
               Applies to catalog files and the create_time attribute.  TIME is
@@ -233,10 +254,10 @@ i {color:#000080}
               definitions.
 
        <b>-W to-swbis</b>
-              Read a package on standard input and write a POSIX package on
-              standard output.  Requires the .../libexec/swbis/lxpsf program.
-              Supported formats are any supported format of lxpsf.  Identical
-              to:
+              <b>Alternate Mode</b>: Read a package on standard input and write a
+              POSIX package on standard output.  Requires the
+              .../libexec/swbis/lxpsf program.  Supported formats are any
+              supported format of lxpsf.  Identical to:
               /swbis/lxpsf --psf-form3 -H ustar | swpackage -Wsource=- -s@PSF
 
        <b>-W passphrase-fd=N</b>
@@ -272,11 +293,12 @@ i {color:#000080}
               descended recursively.
 
        <b>-W show-options-files</b>
-              Show the complete list of options files and if they are found.
+              <b>Alternate Mode</b>: Show the complete list of options files and if
+              they are found.
 
        <b>-W show-options</b>
-              Show the options after reading the files and parsing the command
-              line options.
+              <b>Alternate Mode</b>: Show the options after reading the files and
+              parsing the command line options.
 
        <b>-W no-catalog</b>
               Do not write the catalog section.
@@ -284,6 +306,46 @@ i {color:#000080}
        <b>-W no-front-dir</b>
               Do not write the directory archive members that preceed the
               catalog section.
+
+       Signature Modification Options.  The source file via '-s' option is a
+       previously signed archive file.
+
+       <b>--addsign</b>
+              <b>Alternate Mode</b>: Same as --add-signature-first
+
+       <b>--delsign</b>
+              <b>Alternate Mode</b>: Opposite of --addsign,  Same as --remove-
+              signature=1
+
+       <b>--add-signature-first</b>
+              <b>Alternate Mode</b>: Add signature first in the list of package
+              signatures.  The last signature, by convention, is the primary
+              signature.
+
+       <b>--add-signature-last</b>
+              <b>Alternate Mode</b>: Add signature last in the list of package
+              signatures.  The last signature, by convention, is the primary
+              signature.
+       <b>--replace-signature=N</b>
+              <b>Alternate Mode</b>: Replace Nth signature, 0 means last signature.
+       <b>--remove-signature=N</b>
+              <b>Alternate Mode</b>: Remove Nth signature, 0 means last signature.
+       <b>--resign</b>
+              <b>Alternate Mode</b>: Same as --replace-signature=0
+       <b>--resign-test, --zfilter</b>
+              <b>Alternate Mode</b>: Copy from source to target without altering.
+              Does not generate a signature.  The output should be identical
+              to the input.   Also has unintended use of accessing the
+              compression pipiline function of swpackage.
+
+       <b>--recompress</b>
+              <b>Modifier to alternate Mode</b>: Applies when modifying signature.
+              The compression methods of the input file are detected and the
+              output is compressed to match.
+
+       <b>--overwrite</b>
+              <b>Modifier to alternate Mode</b>: Overwrites file specified as the
+              source name (by the -s FILE option).  Will likely do so safely.
 </pre><h3><a name="EXTENDED OPTIONS"><b>EXTENDED OPTIONS</b></a></h3><pre>       These extended options can be specified on the command line using the
        -x option or from the defaults file, swdefaults.
 
@@ -291,7 +353,6 @@ i {color:#000080}
        Shown below is an actual portion of a defaults file which show default
        values.  These options are set in the /usr/lib/swbis/swdefaults or the
        ~/.swdefaults file.
-
 
        swpackage.distribution_target_directory  = /var/spool/sw   # Not used
        swpackage.distribution_target_serial     = -        # Not used
@@ -305,14 +366,12 @@ i {color:#000080}
        swpackage.software                       =           # Not used
        swpackage.verbose                        = 1         # May be 1 2 or 3
 
-
    <a name="Swbis Implementation"><b>Swbis Implementation</b></a>
        These extended options can be specified on the command line using
        -Woption=optionarg or --option=optionarg syntax.
 
        These options are set in the /usr/lib/swbis/swbisdefaults or the
        ~/.swbis/swbisdefaults file.
-
 
        swpackage.swbis_cksum                    = &quot;false&quot;   # true or false
        swpackage.swbis_file_digests             = &quot;false&quot;   # true or false
@@ -329,8 +388,52 @@ i {color:#000080}
        swpackage.swbis_absolute_names           = &quot;false&quot;   # true or false
        swpackage.swbis_format                   = &quot;ustar&quot;  # gnutar or ustar
        swpackage.swbis_signer_pgm               = &quot;GPG&quot; # GPG or PGP5 or PGP2.6
+</pre><h3><a name="USAGE EXAMPLES"><b>USAGE EXAMPLES</b></a></h3><pre>       Here are some commonly used options.
 
-</pre><h3><a name="PACKAGE SIGNING"><b>PACKAGE SIGNING</b></a></h3><pre>       Support for embedded cryptographic signature.
+   <a name="Options and Option Files"><b>Options and Option Files</b></a>
+       Show the option file options and the option files that determine the
+       default values.
+
+            swpackage --show-options
+                 # and
+            swpackage --show-options-files
+
+   <a name="Preview the output"><b>Preview the output</b></a>
+       Show a verbose tar-like file listing on stdout
+
+            swpackage -pv
+                  # or
+            swpackage -pvv
+
+   <a name="Create a signed package"><b>Create a signed package</b></a>
+       Read the PSF on standard input, sign using 'admin' key using the gpg-
+       agent.  Include sha2 digests for the files and archive. Include the
+       file list, compress the output using xz writing to standard output.
+
+            swpackage -s - --sign --use-agent --gpg-name=admin --files \
+                 --sha1 --sha2 --xz @-
+
+   <a name="Resign a package"><b>Resign a package</b></a>
+       Resign a previously signed package, overwriting the original file
+
+            swpackage --resign -s foo.tar.gz --overwrite --recompress
+
+   <a name="Idempotent Invocation"><b>Idempotent Invocation</b></a>
+       Use special options to obtain an identical package two or more times
+
+            swpackage --create-time=1406254892 \
+                 --uuid=ed3b9432-3ba1-4c01-a125-e22fb94588e2 \
+                 --pax-header-pid=1001
+
+   <a name="ALternative Format Translation"><b>ALternative Format Translation</b></a>
+       Execute the internally generated pipeline for format translation
+       manually
+
+            # the following is equivalent to  'swpackage --to-swbis'
+
+                 /usr/local/libexec/swbis/lxpsf --psf-form3 \
+                        -H ustar | swpackage -Wsource=- -s@PSF
+</pre><h3><a name="PACKAGE SIGNING"><b>PACKAGE SIGNING</b></a></h3><pre>       Support for embedded cryptographic signature
 
    <a name="Description"><b>Description</b></a>
        Package signing is accomplished by including, as a package attribute, a
@@ -454,7 +557,11 @@ i {color:#000080}
        &quot;070702&quot; respectively.
 
        Support for &quot;pax Interchange Format&quot; (Extended header tar) described in
-       IEEE 1003.1-2001 under the &quot;pax&quot; manual page is planned.
+       IEEE 1003.1-2001 under the &quot;pax&quot; manual page has been implemented for
+       POSIX file attributes as of release 1.12 (c Aug2014).  The 'swpackage'
+       utility will generate extended headers on an as needed basis when the
+       --format=pax is used.  Support for POSIX ACL and SELinux attributes is
+       planned.
 
        The entirety of the output byte stream is a single valid file of one
        the formats mentioned above.
@@ -533,7 +640,6 @@ i {color:#000080}
             space         <i>source</i>  [<i>path</i>]
             control_file  <i>source</i>  [<i>path</i>]
 
-
        The <i>source</i> attribute defines the location in distributors's development
        system where the swpackage utility will find the script.  The keyword
        is the value of the <i>tag</i> attribute and tells the utilities when to
@@ -545,7 +651,6 @@ i {color:#000080}
    <b>o</b>  <b>Directory Mapping</b>
           directory  <i>source</i>  [<i>destination</i>]
 
-
        Applies the <i>source</i> attribute as the directory under which the
        subsequently listed files are located.  If <i>destination</i> is defined it
        will be used as a prefix to the <i>path</i> (implied) file definition.  <i>source</i>
@@ -555,13 +660,11 @@ i {color:#000080}
    <b>o</b>  <b>Recursive File Definition</b>
          file *
 
-
        Specifies every file in current source directory.  The <i>directory</i>
        extended definition must be used before the recursive specification.
 
    <b>o</b>  <b>Explicit File Definition</b>
          file [-t <i>type</i>] [-m <i>mode</i>] [-o <i>owner</i>[,<i>uid</i>]] [-g <i>group</i>[,<i>gid</i>]] [-n] [-v] source [<i>path</i>]
-
 
        <b>source</b>
 
@@ -612,7 +715,6 @@ i {color:#000080}
    <b>o</b>  <b>Default Permission Definition</b>
          file_permissions [-m <i>mode</i>] [-u <i>umask</i>] [-o [<i>owner</i>[,]][<i>uid</i>]] [-g [<i>group</i>[,]][<i>gid</i>]]
 
-
        Applies to subsequently listed file definitions in a fileset.  These
        attributes will apply where the file attributes were not specified
        explicitly in a file definition.  Subsequent <b>file_permissions</b>
@@ -628,12 +730,10 @@ i {color:#000080}
    <b>o</b>  <b>Excluding Files</b>
           exclude source
 
-
        Excludes a previously included file or an entire directory.
 
    <b>o</b>  <b>Including Files</b>
           include &lt;<i>filename</i>
-
 
        The contents of <i>filename</i> may be more definitions for files.  The syntax
        of the included file is PSF syntax.
@@ -765,8 +865,6 @@ i {color:#000080}
               Red Hat 4.1:  Linux 2.0.36 i586        i586-pc-linux-gnulibc1
               Debian 3.1:   Linux 2.6.8-2-386 i686   i686-pc-linux-gnu
 
-
-
        <b>os_name os_release os_version machine_type</b>
 
               These attributes are used to determine compatibility with a
@@ -828,8 +926,6 @@ i {color:#000080}
            file *
            exclude catalog
 
-
-
    <b>o Example Runtime (Binary) Package PSF</b>
        This is a sample PSF for a runtime package.  It implies multiple
        products (e.g. sub-packages) using the bundle.contents attribute.
@@ -874,8 +970,6 @@ i {color:#000080}
                  tag fooit-RUN
                  file doc/man/man1/fooit.1 /usr/man/man1/fooit.1
                  file src/fooit /usr/bin/fooit
-
-
 </pre><h3><a name="SAMPLE PRODUCT SPEC FILES"><b>SAMPLE PRODUCT SPEC FILES</b></a></h3><pre>       This section shows several example PSF files.
 
    <b>o</b>   <b>A minimal PSF to package all files in current directory.</b>
@@ -889,7 +983,6 @@ i {color:#000080}
            control_directory &quot;&quot;
            directory .
            file *
-
 
    <b>o</b>   <b>A PSF that uses directory mapping.</b>
        This PSF creates a package with live system paths from source that is
@@ -952,11 +1045,8 @@ i {color:#000080}
         -r--r--r-- root/root   8654 2003-05-27 ... usr/share/doc/swbis/README
         -r--r--r-- root/root  10952 2003-06-03 ... usr/share/doc/swbis/CHANGES
 
-
    <b>o</b>   <b>Create a PSF from a list of files.</b>
                   find . -print |  swpackage -Wfiles-from=- -Wlist-psf
-
-
 </pre><h3><a name="RETURN VALUE"><b>RETURN VALUE</b></a></h3><pre>       0 on success, 1 on error and target medium not modified, 2 on error if
        target medium modified.
 </pre><h3><a name="SIDE EFFECTS"><b>SIDE EFFECTS</b></a></h3><pre>        No temporary files are used in the package generation process.  When
@@ -996,16 +1086,14 @@ i {color:#000080}
        libbir/swbis/swbisdefaults
        $HOME/.swbis/swdefaults
        $HOME/.swbis/swbisdefaults
-
-
 </pre><h3><a name="APPLICABLE STANDARDS"><b>APPLICABLE STANDARDS</b></a></h3><pre>       ISO/IEC 15068-2:1999, Open Group CAE C701.
 </pre><h3><a name="SEE ALSO"><b>SEE ALSO</b></a></h3><pre>       info swbis
 
        <a href=sw_5.html>sw(5)</a>, <a href=swpackage_5.html>swpackage(5)</a>, <a href=swbisparse_1.html>swbisparse(1)</a>, <a href=swign_1.html>swign(1)</a>, <a href=swverify_8.html>swverify(8)</a>
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        <a href=swpackage_8.html>swpackage(8)</a>: The packaging utility of the swbis project.
         Author: Jim Lowe   Email: jhlowe at acm.org
-        Version: 1.6
-        Last Updated: 2006-07-01
+        Version: 1.12
+        Last Updated: 2014-07-15
         Copying: GNU Free Documentation License
 </pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       A comment after an object keyword is wrongly not allowed by this PSF
        parser.  The --dir=&quot;&quot; does not do what one would expect sometimes.  The

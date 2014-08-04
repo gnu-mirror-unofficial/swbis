@@ -1,5 +1,62 @@
-GNU swbis NEWS - User visible changes. 2010-01-18
-Please send GNU swbis bug reports to <bug-swbis@gnu.org>
+GNU swbis NEWS  Noteworthy changes. August 2014 (2014-08)
+
+version 1.12 - Jim Lowe,  2014-08-02
+
+   NEW FEATURES:
+
+     * pax extended headers are now supported for name and file
+       attributes too long for traditional tar.
+
+     * The '-H pax' option of GNU tar is specified for all uses
+       of the system tar utility.  A runtime check is made to support
+       generic tar as much as possible.
+     
+     * Now multiple signatures are supported both in a package archive
+       and in installed software.
+
+     * 'swpackage' now has capability to resign, add and delete
+        signatures of a previously signed package.
+
+   NEW FIXES, among many others (See ./ChangeLog).
+
+     * <all utilities except swpackage>
+       A rare hang when accessing the installed software catalog is
+       probably fixed.
+
+     * <swverify>
+       Now the package catalog is not decoded if the package signature
+       fails.
+
+     * <swverify>
+       Fixed hang on non-Linux kernels.
+
+     * <swverify>
+       Added a new feature to verify prelink'ed binaries
+       using prelink(8) on systems that use prelink.
+
+     * <swverify>
+       Added new reporting form (--report-format=FORM) that
+       very similar to rpm's output format for verification.
+
+     * <swlist, swremove,>
+       FIXED operation with mksh or pdksh as the shell command
+
+     * <swinstall>
+       FIXED support for catalog at location outside installed 
+       root dir.  The starting current working directory for control
+       scripts is now SW_ROOT
+
+     * <lxpsf> (rpm translation>
+       Fixed support of RPMTAG_DEFAULTPREFIX.
+     
+     * <lxpsf> (deb translation)
+       Added support for xz compressed archives.
+
+     * <lxpsf> (rpm translation>
+       Many corner cases in RPM translation are now fixed. Translation,
+       installation, and cross verification have been tested on many
+       hundreds of packages (on CentOS release 6.5)
+
 
 version 1.11 - Jim Lowe,  2011-04-23
 * <swpackage>: FIXED a race condition resulting in a signing failure

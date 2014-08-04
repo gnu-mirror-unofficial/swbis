@@ -1,3 +1,516 @@
+2014-08-02 Jim Lowe <jhlowe@acm.org>
+* VERSION now 1.12
+
+2014-08-02 Jim Lowe <jhlowe@acm.org>
+* swprogs/swverify.sh.in: export some shell variables explicitly using 'export'
+
+2014-07-31 Jim Lowe <jhlowe@acm.org>
+* swprogs/swcommon.c (swc_write_source_copy_script):
+test for pax-write-command equalling 'tar' so as to preserve 
+meaning of '--pax-write-command=tar' to mean generic tar usage
+compatibility.
+
+2014-07-30 Jim Lowe <jhlowe@acm.org>
+* swprogs/pax_command.h g_pax_read_commands[]: now
+gtar selection uses --format=pax
+
+2014-07-27 Jim Lowe <jhlowe@acm.org>
+* swprogs/swinstall.c (main) <swinstall>: fix -A option
+* swprogs/swlist.c (main) <swlist>: fix -A option
+* swprogs/swremove.c (main) <swremove>: fix -A option
+* swprogs/iswverify.c (main) <swverify>: fix -A option
+* swprogs/swconfig.c (main) <swconfig>: fix -A option-
+
+2014-07-27 Jim Lowe <jhlowe@acm.org>
+* swsupplib/misc/swlib.c (swlib_wait_on_all_pids_with_timeout): now
+return return value of last waitpid invocation, was returning the status
+of the last waitpid invocation.
+* swsupplib/misc/swlib.c (swlib_wait_on_pid_with_timeout): added
+
+2014-07-27 Jim Lowe <jhlowe@acm.org>
+* swprogs/swpackage.cxx (main) <swpackage>: removed --no-construct-missing
+option, added --construct-missing option.  Maintain default behavior to be
+same as version 1.11
+
+2014-07-25 Jim Lowe <jhlowe@acm.org>
+* doc/README: updated
+* doc/fixdirentry.sh (doc/info/swbis_swpackage.info):
+fix empty lines (newlines only) from being dropped.
+* Documentation updated, regened on Slackware 14.1
+
+2014-07-20 Jim Lowe <jhlowe@acm.org>
+* swprogs/swproglib.c (swpl_bashin_posixsh): added
+* swprogs/swproglib.c (swpl_bashin_testsh): added
+Now a specified shell is tested for POSIX suitability.
+* swprogs/swinstall_lib.c <swinstall>: use swpl_bashin_testsh 
+* swprogs/swlist_lib.c <swlist> : use swpl_bashin_testsh
+* swprogs/swremove_lib.c <swremove>: use swpl_bashin_testsh
+* swprogs/swverify_lib.c <swverify>: use swpl_bashin_testsh
+* swprogs/swcopy.c <swcopy>: use swpl_bashin_testsh
+
+2014-07-20 Jim Lowe <jhlowe@acm.org>
+* swprogs/swproglib.c (swpl_bashin_detect):
+Improved code for detecting suitable shell
+* swprogs/swproglib.c (swpl_agent_fail_message):
+standardize error messages among utilities
+
+2014-07-18 Jim Lowe <jhlowe@acm.org>
+* swsupplib/misc/swfork.c (swlib_pty_fork2) <swcopy>:
+used in the testing --login mode, updated to use ptmx.
+* swsupplib/configure.ac: now test for posix_openpt
+
+2014-07-12 Jim Lowe <jhlowe@acm.org>
+* swsupplib/uinfile/uinfile.c (uinfile_i_open): fixed
+detection of gpg encrypted data
+* swpackage.cxx (main) <swpackage>: now resigning can
+be done in place using --overwrite option.
+
+2014-07-11 Jim Lowe <jhlowe@acm.org>
+* swsupplib/misc/swheader.h: added F_GOTO_NEXT function pointer typedef.
+* swsupplib/misc/swheader.c (swheader_get_iter_function):
+fixed compiler warning about function pointer declaration type cast.
+* swsupplib/misc/swheaderline.c (swheaderline_strdup): fixed warning
+about uninitialized variable.
+
+2014-07-08 Jim Lowe <jhlowe@acm.org>
+* swsupplib/misc/swlib.c (swlib_apply_location): fixed for
+case of absolute path
+* swprogs/swproglib.c (swpl_ls_fileset_from_iscat) <swverify>:
+apply directory attribute when transforming the located path
+based on the ''location'' attribute.
+* swprogs/swinstall.c (main) <swinstall>: fixed use of NULL
+pointer at taru_set_tar_header_policy() after call to 
+swi_do_decode (introduced c.May 2014).
+
+2014-07-04 Jim Lowe <jhlowe@acm.org>
+* swprogs/swinstall_lib.c (arfinstall_tar) <swinstall>:
+if linksource is relative path, then do not apply 'location'
+(and 'directory') attribute modification.
+
+2014-07-01 Jim Lowe <jhlowe@acm.org>
+* swprogs/swcommon0.c (swc_write_source_copy_script) <swcopy>
+added test for GNU tar and if true use add --format=pax option
+to tar invocation.
+
+2014-06-21 Jim Lowe <jhlowe@acm.org>
+* swsupplib/taru/to_oct.h: conditionally define TSVTX which
+is now conditionally defined in /usr/include/tar.h in at least
+one recent GNU/Linux distro [Slackware 14.1].
+
+2014-06-19 Jim Lowe <jhlowe@acm.org>
+* swsupplib/ls_list/gensubs.c (prepend_dotslash) <swverify>:
+fixed case for leading slash
+
+2014-06-18 Jim Lowe <jhlowe@acm.org>
+* swsupplib/ls_list/gensubs.c (alt_ls_list_to_string) <swverify>:
+added LS_LIST_VERBOSE_LINKNAME_PLAIN to fix hard link verification
+error
+* swprogs/swproglib.c (swpl_make_verify_command_script_fragment)
+<swverify>:  support use --hard-derefernce option, check for 
+required version of GNU tar.
+* swsupplib/ls_list/gensubs.c (print_linkname) <swverify, swlist>:
+added case for unadorned rendering of name
+* swsupplib/shell_lib/shell_lib.sh (shls_check_for_recent_gnu_gtar): added
+* -H pax tar option added just about everywhere
+
+2014-06-16 Jim Lowe <jhlowe@acm.org>
+* swstructlib/src/swmetadata/swpackagefile.cxx (apply_file_stats)
+<swpackage>: add hard links as a type available for no-stat 
+optimization.
+* <all files> : replaced ahsStaticSetTarLinkname with
+ahsStaticSetPaxLinkname except where reading from tar header field
+directory
+
+2014-06-15 Jim Lowe <jhlowe@acm.org>
+* swprogs/swpackage.cxx (main) <swpackage>: added -H as the single
+letter option for format (same as --format format).
+* swsupplib/progs/lxpsf.c (main) <lxpsf>: now default format is pax
+when converting to tar format (from RPM cpio archive).
+
+2014-06-14 Jim Lowe <jhlowe@acm.org>
+* swprogs/swinstall.c (main) <swinstall>: default format now "pax"
+* swprogs/swpackage.cxx (main) <swpackage>: default format now "pax"
+* swsupplib/progs/lxpsf.cxx (main) <lxpsf>: respect format by setting
+tarheaderflags approprately.
+* swsupplib/taru/pcopyin.c (taru_process_copy_in): now invoke
+taru_write_archive_member_header instead of taru_write_out_tar_header2
+(which has the effect of running through the extended header generator).
+
+2014-06-12 Jim Lowe <jhlowe@acm.org>
+* swprogs/swverify_lib.c (swpl_make_verify_command_script_fragment) <swverify>:
+support GNU tar named as 'gtar' transparently even though pax_read_command
+is set to 'tar'.
+* swsupplib/shell_lib/shell_lib.sh (shls_check_for_gnu_gtar): added
+* swsupplib/shell_lib/shell_lib.sh (shls_check_for_gnu_tar): added -H pax
+as requirement for tar to be recognized as GNU tar
+
+2014-06-08 Jim Lowe <jhlowe@acm.org>
+* swsupplib/misc/swpath.c (swpath_parse_path): remove arbitrary length
+restriction.
+
+2014-06-08 Jim Lowe <jhlowe@acm.org>
+* swsupplib/taru/ahs.c (ahsStaticSetTarname_i): protect from copying itself
+onto itself.
+
+2014-06-06 Jim Lowe <jhlowe@acm.org>
+* swsupplib/taru/copyout.c (write_exthdrs_xattr_records): added
+
+2014-06-05 Jim Lowe <jhlowe@acm.org>
+* swsupplib/taru/otar.c (taru_exatt_override_ustar): added
+* swsupplib/taru/taru.c (taru_exatt_init): added
+* swsupplib/taru/taru.c (taru_exatt_get_free): added
+* swsupplib/taru/taru.c (taru_exattlist_init): added
+
+2014-06-02 Jim Lowe <jhlowe@acm.org>
+swsupplib/taru/readinheader.c (taru_read_all_ext_header_records): added
+swsupplib/taru/readinheader.c (taru_read_ext_header_record): added
+
+
+2014-05-26 Jim Lowe <jhlowe@acm.org>
+* swsupplib/taru/copyout.c (write_exthdrs_records): truncate values to fit
+in plain ustar header. swpackage can now write archives with extended headers.
+
+2014-05-23 Jim Lowe <jhlowe@acm.org>
+* swprogs/swcommon0.c (swc0_set_arf_format): support "pax" and "posix" format names
+* swsupplib/taru/mtar.c (taru_is_tar_linkname_too_long): support pax headers
+* swsupplib/taru/mtar.c (taru_is_tar_filename_too_long): support pax headers
+* swsupplib/taru/copyout.c (taru_write_archive_member_header): fix pax headers
+* swprogs/swpackage.cxx (main): support "pax" as format name
+
+2014-05-13 Jim Lowe <jhlowe@acm.org>
+* swsupplib/taru/otar.c (taru_get_pax_group_by_gid): added
+* swsupplib/taru/otar.c (taru_get_pax_user_by_uid): added
+* swsupplib/taru/otar.c (taru_set_sysdb_nameid_by_policy): added
+* swsupplib/taru/copyout.c (taru_fill_exthdr_usage_mask): added
+* swsupplib/taru/copyout.c (write_exthdrs_records): added
+* swsupplib/taru/copyout.c (construct_exthdr_record): added
+* swsupplib/taru/copyout.c (taru_write_archive_member_header):
+support writing PAX extended headers.
+
+
+2014-05-11 Jim Lowe <jhlowe@acm.org>
+* swsupplib/taru/etar.c: extricate dependence on TARU object.
+* swsupplib/taru/otar.c (taru_split_name_ustar): remove TARU
+from parameter to function 
+* swsupplib/taru/taru.c (taru_set_tar_header_policy); added
+support for format "posix", "pax".
+
+
+2014-04-27 Jim Lowe <jhlowe@acm.org>
+* swprogs/swinstall.c (main) <swinstall>: added option --format,H
+* swprogs/swinstall_lib.c <swinstall> (send_files_with_no_storage):
+support hard links with long link name;
+* swsupplib/taru/copyout.c  (taru_write_archive_member_header):
+support hard links with long link name;
+* swsupplib/taru/ahs.c (void ahs_set_linkname): squash warning message
+* swsupplib/taru/mtar.c (taru_is_tar_linkname_too_long): added
+* swsupplib/taru/otar.c (taru_write_out_tar_header2): support hard links
+with long names
+* swsupplib/taru/taru.h (TARU_HE_LINKNAME_4): added special case return value
+
+2014-04-21 Jim Lowe <jhlowe@acm.org>
+* swprogs/swverify_lib.c (write_summary_report> <swverify>: formatting
+changes
+
+2014-04-18 Jim Lowe <jhlowe@acm.org>
+* swprogs/swverify_lib.c (write_rpmv_output_line> <swverify>: added
+* swprogs/swverify_lib.c (compare_diff) <swverify>: now support
+rpm-like eight character string report form
+* swprogs/iswverify.c (main) <swverify>: option --report-format=FORM added
+* swprogs/iswverify.c (main) <swverify>: option --no-prelink added
+
+
+2014-04-16 Jim Lowe <jhlowe@acm.org>
+* swprogs/swcommon0.h: added SWBIS_TS_Get_prelink_filelist
+* swprogs/swproglib.c (swpl_run_get_prelink_filelist) <swverify>: added
+* swsupplib/shell_lib/shell_lib.sh (shls_v_looper): added
+* swsupplib/progs/lxpsf.c (main) <lxpsf>: support writing to disk file,
+instead of just stdout.
+* swprogs/swverify_lib.c (swverify_v_looper_prelink_md5_func) <swverify>: added.
+
+2014-04-16 Jim Lowe <jhlowe@acm.org>
+* swsupplib/misc/rpmpsf.c (rpmpsf_write_file_psf) <lxpsf>:
+(Re: RPM translation) Fixed sticky bit being dropped in file mode
+
+2014-04-11 Jim Lowe <jhlowe@acm.org>
+* swsupplib/taru/copyout.c  (taru_write_archive_member_header):
+re-worked to better support GNU longlink type tar headers.
+* swsupplib/taru/copyout.c  (taru_write_archive_member):
+re-worked to better support GNU longlink type tar headers.
+* swsupplib/taru/copyout.c (taru_process_copy_out):
+re-worked to better support GNU longlink type tar headers.
+* swsupplib/taru/otar.c (taru_read_in_tar_header2):
+re-worked to better support GNU longlink type tar headers.
+* swsupplib/taru/taru.c (taru_read_pax_data_blocks): addded
+
+2014-04-04 Jim Lowe <jhlowe@acm.org>
+* swsupplib/taru/ahs.c (ahsStaticSetTarLinkname): now doesn't assume NUL
+terminated string.
+
+2014-04-02 Jim Lowe <jhlowe@acm.org>
+* swprogs/swlist.c (main) <swlist>: Conditionally shutdown logger only if it
+was forked; This fixed an exit 137 error when listing a distribuion tarball.
+
+2014-04-02 Jim Lowe <jhlowe@acm.org>
+* swprogs/swlist.c (main) <swlist>: fixed error path that never terminated
+for case of listing a directory with ''-d'' option (i.e. as a  distribution).
+
+2014-04-02 Jim Lowe <jhlowe@acm.org>
+* swprogs/iswverify.c (main) <swverify>: display package identifying
+information when processing many packages from selecion wildcard
+for verbose level 1.
+
+2014-03-31 Jim Lowe <jhlowe@acm.org>
+* swsupplib/misc/swicat_e.c (swicat_e_open_catalog_tarball):
+Now check for TRAILER!!! indicating end of archive.  Fixes
+hang when taru_read_in_tar_header2 read two NUL EOA blocks.
+* swsupplib/taru/otar.c (taru_read_in_tar_header2): Revert part
+of 2014-03-28 changes.  Now two null blocks are definitely read,
+extra null blocks remain (un-read) as historically were.
+
+2014-03-30 Jim Lowe <jhlowe@acm.org>
+* swsupplib/misc/topsf.c (topsf_search_list) <lxpsf>:
+support special case of comparing "./" to "/" and treat as same
+* swsupplib/misc/swlib.c (swlib_toggle_leading_dotslash):
+test to avoid squashing the string to zero length
+* swstructlib/src/swmetadata/swmetadata.cxx (getModeFromFileType) <swpackage>: added
+* swstructlib/src/swmetadata/swmetadata.cxx (fileStats2statbuf) <swpackage>: added
+* swstructlib/src/swmetadata/swmetadata.cxx (getModeFromFileType) <swpackage>: added
+swstructlib/src/swmetadata/swpackagefile.cxx (check_no_stat_optimization) <swpackage>: added
+* swstructlib/src/swmetadata/swpackagefile.cxx (apply_file_stats) <swpackage>:
+modified, now check if sufficient file attributes are
+provided in the PSF to avoid calling stat().
+* swstructlib/src/swmetadata/swmetadata.cxx (getModeFromFileType) <swpackage>: added
+* swstructlib/src/swmetadata/swmetadata.cxx (fileStats2statbuf) <swpackage>: added
+* swstructlib/src/swmetadata/swmetadata.cxx (swmetadata_decode_file_stats) <swpackage>:
+Now conditionally call readlink to obtain the linksource attribute only if it is not
+given in the PSF.
+
+2014-03-28 Jim Lowe <jhlowe@acm.org>
+* swsupplib/swi/swi.c (swi_decode_catalog): Fix reporting of
+file position and EOA blocks for packages with empty fileset,
+i.e. no files in storage section.
+* swsupplib/taru/otar.c (taru_read_in_tar_header2): Now correctly
+read and record End-of-archive blocks, still require only
+one (1) nul block but report subsequent blocks that are non-nul.
+
+* swsupplib/taru/xformat.c (xformat_get_next_dirent): transfer
+value of swvarfs->oeaM to xformat->eoaM.
+
+2014-03-27 Jim Lowe <jhlowe@acm.org>
+* swstructlib/src/swexport/swobjfiles_i.h (processCatalogFile) <swpackage>:
+Fixed possible use of free'd memory
+
+2014-03-23 Jim Lowe <jhlowe@acm.org>
+* bin/testforgnupg.sh: added support for gnupg version 2.0
+and higher
+* swprogs/swinstall.c (main) <swinstall>: added options
+ --nodeps --nosignature  --enforce-all-signatures 
+* swprogs/swproglib.c (swpl_signature_policy_accept) <all utilites>
+added support for a --sig-level=-1 meaning all signatures and the
+new option --enforce-all-signatures
+* swsupplib/misc/rpmpsf.c (rpmpsf_write_psf_files) <lxpsf>: fixed
+special case for a RPM with no files.
+
+2014-03-22 Jim Lowe <jhlowe@acm.org>
+* swprogs/swinstall.c (main) <swinstall>: removed the
+'f_retval++' line from the NOT_COMPATIBLE case to fix
+a bash process from being left alive after program end.
+
+2014-03-21 Jim Lowe <jhlowe@acm.org>
+* swprogs/iswverify.c (main) <swverify>: added line 
+swlex_set_input_policy(SWLEX_INPUT_UTF_TR) to prevent
+hard exit when reading non-UTF-8 input in a INFO or INDEX
+file in installed software.
+
+2014-03-18 Jim Lowe <jhlowe@acm.org>
+* swprogs/swinstall_lib.c <swinstall> (arfinstall):
+Now the linksource is made to respect location (verison ID l=location)
+version id.
+
+2014-03-17 Jim Lowe <jhlowe@acm.org>
+* swprogs/swverify.sh.inh <swverify>: fix --shell-command option
+* swprogs/swverify.sh.inh <swverify>: fix --remote-shell option
+
+2014-03-17 Jim Lowe <jhlowe@acm.org>
+* swsupplib/shell_lib/shell_lib.sh <swremove> (shls__cleansh):
+changed ''ps -awx'' to ''ps awx'' for broader OS coverage.
+
+2014-03-15 Jim Lowe <jhlowe@acm.org>
+* Tested on Oracle Solaris 11.1
+
+2014-03-15 Jim Lowe <jhlowe@acm.org>
+* bin/checkdigest.sh <swverify>: Added check for use of GNU diff
+on Oracle Solaris (11.1) as work-around for broken non-gnu diff
+(which seemed to care if one of its file arguments is a FIFO)
+
+2014-03-12 Jim Lowe <jhlowe@acm.org>
+* swsupplib/uinfile/uinfile.c (uinfile_i_open): added support for
+xz compression in a .deb file
+
+2014-03-12 Jim Lowe <jhlowe@acm.org>
+* swsupplib/misc/rpmpsf.c (rpmpsf_write_file_psf) <lxpsf>: regarding
+RPM translation, now files that are not in the archive are marked as
+volatile (is_volatile true) in the PSF file constructed by lxpsf.
+* swsupplib/misc/rpmpsf.c (rpmpsf_write_file_psf) <lxpsf>: fix handling
+of RPMTAG_DEFAULTPREFIX (1056).
+
+2014-03-11 Jim Lowe <jhlowe@acm.org>
+* swprogs/swpackage.cxx (main) <swpackage>: --no-construct-missing added
+for back-compatibility with version 1.11 regarding RPM translation.
+* swprogs/swpackage.cxx (main) <swpackage>: [RPM Translation] Now
+applies --construct-missing-files to invocation of lxpsf
+* swsupplib/progs/lxpsf.c (main) <lxpsf>: --construct-missing-files added
+* swsupplib/misc/topsf.c <lxpsf>:  improvement to RPM translation to create
+files that are in the Header but missing from archive.
+* swsupplib/misc/rpmpsf.c <lxpsf>: improvement to RPM translation
+* swsupplib/strob/strob.c <[all programs]>: improved character array
+implementation used in topsf.c.
+
+2014-03-09 Jim Lowe <jhlowe@acm.org>
+* swsupplib/taru/taruib.h: error code clean-up
+* swsupplib/taru/taruib_i.c (taruib_write_signedfile_if) <swverify>:
+swlib_wait_on_all_pids() was improperly invoked with flags=WNOHANG.
+This fixes random hang (which probably was rare on Linux kernels).
+
+2014-03-06 Jim Lowe <jhlowe@acm.org>
+* swsupplib/misc/swcommon_options.h (struct extendedOptions optionsArray):
+Fixed ''swbis_any_format'' option to work with more utilities
+* swprogs/swinstall.c (main) <swinstall>: --help fixes
+* swprogs/swlist.c (main) <swlist>: --help fixes
+* swprogs/swremove.c (main) <swremove>: --help fixes
+* swprogs/iswverify.c (main) <swverify>: --help fixes
+* swprogs/swconfig.c (main) <swconfig>: --help fixes
+
+2014-03-03 Jim Lowe <jhlowe@acm.org>
+* swsupplib/progressmeter/atomicio.c (timed_atomic_read5): added
+* swsupplib/progressmeter/atomicio.c (timed_atomicio): modified,
+and now used in one location
+* swsupplib/misc/swlib.c (swlib_synct_read): added code to handle
+cause of program (swlinstall, swlist, et.al) hanging when accessing
+the catalog.
+* swsupplib/misc/swlib.c (synct_check_for_possible_eof): Now handles
+case of mangled TRAILER string
+
+2014-03-03 Jim Lowe <jhlowe@acm.org>
+* swprogs/swinstall_lib.c (arfinstall_tar) <swinstall>:
+improve warning messages pertaining to missing files.
+* swprogs/swinstall.c (main) <swinstall>: added
+--allow-missing-files option
+
+2014-02-18 Jim Lowe <jhlowe@acm.org>
+* swprogs/swinstall.c (main) <swinstall>: option --no-chdir-for-scripts
+added as a compatibility option with version 1.11 and prior.
+
+2014-02-17 Jim Lowe <jhlowe@acm.org>
+* swprogs/swproglib.c (form_entry_names) <all utilities
+except swpackage>: fix support for absolute path for installed
+software location.
+* swsupplib/misc/swicat_e.c (swicat_e_form_catalog_path)  <all utilities
+except swpackage>: fix support for absolute path for installed
+sofware location.
+* swprogs/swproglib.c (swpl_unpack_catalog_tarfile): now check
+error status of "cd export\n"
+* swprogs/swproglib.c (swpl_remove_catalog_directory): now check
+error status of "cd export\n"
+
+2014-02-16 Jim Lowe <jhlowe@acm.org>
+* doc/source/swinstall_8.sgml: updated
+* doc/source/swpackage_8.sgml: updated
+* Documentation rebuilt on Slackware 14.0 box. 
+
+2014-02-10 Jim Lowe <jhlowe@acm.org>
+* swprogs/swinstall.c (main) <swinstall> added --reinstall option
+* swprogs/swinstall.c (main) <swinstall> added --enforce-scripts option
+* swprogs/swinstall_lib.c (contruct_controlsh_script) <swinstall> support
+setting the interpreter attribute in a control_script in a PSF.
+* swprogs/swinstall_lib.c (contruct_controlsh_script) <swinstall> Now
+export SW_CONTROL_DIRECTORY, also fixed the value of SW_CATALOG.
+* swprogs/swproglib.c (contruct_script_cases) <swinstall> Fixed use of
+enforce_scripts attribute. Now a script error shows up as exit status.
+* swsupplib/swi/swi.c (find_swdef_in_INFO) <swinstall>: NEW
+* swsupplib/swi/swi_afile.c (get_attribute_from_INFO_object) <swinstall>: NEW
+
+2014-01-22 Jim Lowe <jhlowe@acm.org>
+* swprogs/swpackage.cxx (main) <swpackage> Now support
+a regular file as an output target.
+
+2014-01-01 Jim Lowe <jhlowe@acm.org>
+* swsupplib/misc/swlib.c (swlib_append_synct_eof) <swlist et.al>
+Now render ''TRAILER!!!\r\n\r\n'' with a single printf command.
+This fixes brokeness (in swlist) when shell-command is pdksh or mksh;
+bash and ksh(att93) worked OK. (Don't know who is right or wrong or if
+behavior is undefined).
+
+2014-01-01 Jim Lowe <jhlowe@acm.org>
+* swprogs/swlist.c (main) <swlist>
+Improved completeness of --help output.
+
+2014-01-01 Jim Lowe <jhlowe@acm.org>
+* PSF.bin.in
+Added missing documentation files
+
+2013-04-13 Jim Lowe <jhlowe@acm.org>
+* doc/: documentation generated on a Slackware14 box.
+
+2013-04-03 Jim Lowe <jhlowe@acm.org>
+* swsupplib/uinfile/uinfile.c (uinfile_i_open): fixed support for old
+  Unix compress (i.e. the .Z suffix).
+* swsupplib/uinfile/uinfile.h: removed zcat_cmdM structure member.
+* swprogs/swpackage.cxx (main) <swpackage>: add --recompress option
+
+2013-03-27 Jim Lowe <jhlowe@acm.org>
+* bin/checkdigest.sh <checkdigest.sh>: fix support for latest version
+of openssl
+* swprogs/iswverify.c <swverify>: support verifying all signatures
+* swprogs/swinstall.c: support sig-level with value
+of ``-1'' meaning check all signatures.
+* swprogs/swpackage.cxx (main) <swpackage>: add options
+to support re-signing, adding a signature and removing
+a signature.
+* swprogs/swproglib.c (swpl_check_package_signatures):
+fully support multiple signatures where -1 means all, 0
+means last, N means Nth.
+* swprogs/swverify.sh.in <swverify>: fully support
+multiple signatures.
+* swprogs/swverify_lib.c (swverify_looper_sr_payload) <swverify>:
+SECURITY FIX: Only decode catalog if signature checks pass.
+* swsupplib/misc/swgpg.c (swgpg_determine_signature_status):
+support multiple signatures.
+* swsupplib/progs/arf2arf.c (main) <arf2arf>: add option -N
+* swsupplib/misc/swutillib.c (swutil_setup_xformat): allow
+NULL parameter ``opta'' for use in contexts where there is no
+opta.
+* swsupplib/progs/swbistar.c (main) <swbistar>: allow opening
+a regular file.
+* swsupplib/swi/swi.c: protect use of NULL pointer that was
+never NULL.
+* swsupplib/taru/taru.h <TARU_BUFSIZ>: now set to 8192
+instead of pulling from system value in ''BUFSIZ''
+* swsupplib/taru/to_oct.h: removed pre-processor definitions
+that were causing compiler warnings.
+* swsupplib/tests/testdig2.sh <testdig2.sh>: now support
+new version of openssl (which changed its adornment style when
+reporting ascii digests).
+* swsupplib/uinfile/uinfile.c: added support for contruction
+of a "re-compress it" command based on its un-compressing 
+of a compressed stream.
+
+2013-02-22 Jim Lowe <jhlowe@acm.org>
+* swprogs/intsizes.c (main): Fixed reporting of ULONG_MAX
+and LONG_MAX (This program is only a test program and has
+no effect on other programs.
+
+2012-05-21 Jim Lowe <jhlowe@acm.org>
+* swsupplib/misc/swicat.c (swicat_write_isc_script):
+FIX a generated syntax error when nil (empty) query specs
+are used such a ``swremove -p @ /''.  This generated a
+bash syntax error, now fixed.
+
+2012-04-09 Jim Lowe <jhlowe@acm.org>
+* swsupplib/taru/xformat.c (xformat_copy_pass_md5): FIX
+potential (never realized) use of uninitialized pointer.
+
 2011-04-23 Jim Lowe <jhlowe@acm.org>
 * VERSION now 1.11
 

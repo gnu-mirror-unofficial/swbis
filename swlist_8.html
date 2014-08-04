@@ -16,7 +16,9 @@ i {color:#000080}
 <li><a href="#OPTIONS">OPTIONS</a>
 <li><a href="#IMPLEMENTATION EXTENSIONS">IMPLEMENTATION EXTENSIONS</a>
 <li><a href="#USAGE EXAMPLES">USAGE EXAMPLES</a>
-<ul><li><a href="#List Products"><font size=-1>List Products</font></a>
+<ul><li><a href="#List Product from a certain distributor"><font size=-1>List Product from a certain distributor</font></a>
+<li><a href="#List all products"><font size=-1>List all products</font></a>
+<li><a href="#List the files of package foo as they exist in the file system"><font size=-1>List the files of package foo as they exist in the file system</font></a>
 <li><a href="#Test Dependencies"><font size=-1>Test Dependencies</font></a>
 </ul><li><a href="#EXTENDED OPTIONS">EXTENDED OPTIONS</a>
 <ul><li><a href="#POSIX"><font size=-1>POSIX</font></a>
@@ -346,49 +348,37 @@ i {color:#000080}
 
            DELIM    : ':'   # The multi-hop delimiter.
                     ;
-
-
-
 </pre><h3><a name="IMPLEMENTATION EXTENSIONS"><b>IMPLEMENTATION EXTENSIONS</b></a></h3><pre>       The <b>--dependencies</b>, <b>--products</b>, and <b>--files</b> are implementation
        extension modes.
 
 </pre><h3><a name="USAGE EXAMPLES"><b>USAGE EXAMPLES</b></a></h3><pre>   <b>Show the path of the installed software catalog.</b>
          swlist --show-options | grep installed_
 
-
-   <a name="List Products"><b>List Products</b></a>
-       * List products from a certain distributor, foo (Note:  this requires
+   <a name="List Product from a certain distributor"><b>List Product from a certain distributor</b></a>
+        List products from a certain distributor, foo (Note:  this requires
        that the <i>foo</i> vendor uses foo_something_ as the product vendor_tag in
        their distributions.
 
          swlist v=&quot;foo*&quot;
 
-
-       * List all products
-
+   <a name="List all products"><b>List all products</b></a>
          swlist @/   # If distribution_target_directory=/ then &quot;swlist&quot; alone
                      # will suffice.
 
-
-       * List products installed at alternate root
-
+   <b>List products installed at alternate root</b>  <b>/mnt/test</b>
          swlist @/mnt/test
 
+   <a name="List the files of package foo as they exist in the file system"><b>List the files of package foo as they exist in the file system</b></a>
+       swlist -vv --files --sys foo @ root@localhost
 
-       * List products according to a name pattern and revision, and
-       distributor
-
+   <b>List products according to a name pattern and revision, and distributor</b>
          swlist emacs&quot;*&quot;,&quot;r&gt;20&quot;,v=rh&quot;*&quot; @/
 
-
-
    <a name="Test Dependencies"><b>Test Dependencies</b></a>
-       * Check if a given dependency passes against a given installed catalog
-       on a host
+       Check if a given dependency passes against a given installed catalog on
+       a host
 
          swlist -x verbose=3 --depend --pre=&quot;foo*,r&gt;=1.0,r&lt;2&quot; @192.168.3.1:/; echo $?
-
-
 </pre><h3><a name="EXTENDED OPTIONS"><b>EXTENDED OPTIONS</b></a></h3><pre>       Extended options can be specified on the command line using the -x
        option or from the defaults file, swdefaults.  Shown below is an actual
        portion of a defaults file which show default values.
@@ -398,18 +388,15 @@ i {color:#000080}
        ~/.swdefaults on the local (management host, host where swlist
        invoked).  These files on the target host are not used.
 
-
           distribution_target_directory  = /
           installed_software_catalog  = var/lib/swbis/catalog/
           one_liner                   = files|products   # Mode when -v not given
           select_local                = false      # Not Implemented
           verbose                     = 1
 
-
    <a name="Swbis Implementation"><b>Swbis Implementation</b></a>
        These options are set in the /usr/lib/swbis/swbisdefaults or the
        ~/.swbis/swbisdefaults file.
-
 
          swlist.swbis_no_getconf = true # true or false
          swlist.swbis_shell_command = detect # {detect|sh|bash|posix|ksh}
@@ -420,7 +407,6 @@ i {color:#000080}
          swlist.swbis_remote_pax_read_command=tar #{pax|tar|gtar|star}
          swlist.swbis_remote_shell_client=ssh
          swlist.swbis_forward_agent=True
-
 </pre><h3><a name="RETURN VALUE"><b>RETURN VALUE</b></a></h3><pre>       0 if all targets succeeded, 1 if all targets failed or internal error,
        2 if some targets failed and some succeeded.  When checking
        dependencies, 3 if the given sw_specs failed as dependencies, 0 if
@@ -444,8 +430,6 @@ i {color:#000080}
        swlist.swbis_local_pax_write_command=detect #{pax|tar|gtar|detect}
        swlist.swbis_remote_pax_write_command=detect #{pax|tar|gtar|detect}
 
-
-
        GNU Privacy Guard, gpg is required for verification of package
        signatures.
 </pre><h3><a name="FILES"><b>FILES</b></a></h3><pre>       /var/lib/swbis/catalog # Location of installed catalog
@@ -453,15 +437,13 @@ i {color:#000080}
        /usr/lib/swbis/swbisdefaults
        $HOME/.swbis/swdefaults
        $HOME/.swbis/swbisdefaults
-
-
 </pre><h3><a name="APPLICABLE STANDARDS"><b>APPLICABLE STANDARDS</b></a></h3><pre>       ISO/IEC 15068-2:1999, Open Group CAE C701
 </pre><h3><a name="SEE ALSO"><b>SEE ALSO</b></a></h3><pre>       info swbis
 
        <a href=swbis_7.html>swbis(7)</a>, <a href=sw_5.html>sw(5)</a>, <a href=swbisparse_1.html>swbisparse(1)</a>, <a href=swign_1.html>swign(1)</a>, <a href=swverify_8.html>swverify(8)</a>
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        <a href=swlist_8.html>swlist(8)</a>: The query/listing utility of the swbis project.
         Author: Jim Lowe   Email: jhlowe at acm.org
-        Version: 1.6
+        Version: 1.12
         Last Updated: 2006-07
         Copying: GNU Free Documentation License
 </pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       swlist is subject to breakage if a user's account on an intermediate

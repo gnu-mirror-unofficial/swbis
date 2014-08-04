@@ -393,8 +393,6 @@ i {color:#000080}
 
            DELIM    : ':'   # The multi-hop delimiter.
                     ;
-
-
 </pre><h3><a name="TARGET COPYING RULES"><b>TARGET COPYING RULES</b></a></h3><pre>   <b>Rules</b>
        If a target directory on the host does not exist it will be created
        using mkdir -p using the file creation mask of the originating swcopy
@@ -477,7 +475,6 @@ i {color:#000080}
                      otherwise create cc and copy yy into it. If cc
                      is and copy as yy.
                          swcopy -s /xx/yy @host1:/aa/bb/cc
-
 </pre><h3><a name="IMPLEMENTATION EXTENSIONS"><b>IMPLEMENTATION EXTENSIONS</b></a></h3><pre>   <b>Software Specification Targets</b>
        A dash '-' is supported and means stdout or stdin.  Operations with
        stdout and stdin on a remote host is not supported.
@@ -520,7 +517,6 @@ i {color:#000080}
           cat your-poor-poor-0.0.bin.rpm |
           /usr/lib/swbis/lxpsf --psf-form2 -H ustar |
           swpackage -Wsource=- -s@PSF
-
 </pre><h3><a name="EXTENDED OPTIONS"><b>EXTENDED OPTIONS</b></a></h3><pre>       Extended options can be specified on the command line using the -x
        option or from the defaults file, swdefaults.  Shown below is an actual
        portion of a defaults file which show default values.
@@ -528,7 +524,6 @@ i {color:#000080}
    <a name="Posix"><b>Posix</b></a>
        These options are set in the /usr/lib/swbis/swdefaults or the
        ~/.swdefaults
-
 
           autoselect_dependencies     = false      # Not Implemented
           compress_files              = false      # Not Implemented
@@ -544,11 +539,9 @@ i {color:#000080}
           uncompress_files             = false     # Not Implemented
           verbose                      = 1
 
-
    <a name="Swbis Implementation"><b>Swbis Implementation</b></a>
        These options are set in the /usr/lib/swbis/swbisdefaults or the
        ~/.swbis/swbisdefaults file.
-
 
          swcopy.swbis_no_getconf = true # true or false
          swcopy.swbis_shell_command = detect # {detect|sh|bash|posix|ksh}
@@ -561,7 +554,6 @@ i {color:#000080}
          swcopy.swbis_remote_pax_read_command=pax #{pax|tar|gtar|star}
          swcopy.swbis_allow_rpm = false  # true or false
          swcopy.swbis_remote_shell_client=ssh
-
 </pre><h3><a name="RETURN VALUE"><b>RETURN VALUE</b></a></h3><pre>       0 if all targets succeeded, 1 if all targets failed, 2 if some targets
        failed and some succeeded.
 </pre><h3><a name="NOTES"><b>NOTES</b></a></h3><pre>        Multiple ssh-hops is an implementation extension.
@@ -580,20 +572,17 @@ i {color:#000080}
 
        swcopy.swbis_local_pax_write_command=tar #{pax|tar|gtar}
        swcopy.swbis_remote_pax_write_command=tar #{pax|tar|gtar}
-
 </pre><h3><a name="FILES"><b>FILES</b></a></h3><pre>       /usr/lib/swbis/swdefaults
        /usr/lib/swbis/swbisdefaults
        $HOME/.swbis/swdefaults
        $HOME/.swbis/swbisdefaults
-
-
 </pre><h3><a name="APPLICABLE STANDARDS"><b>APPLICABLE STANDARDS</b></a></h3><pre>       ISO/IEC 15068-2:1999, Open Group CAE C701
 </pre><h3><a name="SEE ALSO"><b>SEE ALSO</b></a></h3><pre>       info swbis
 
        <a href=sw_5.html>sw(5)</a>, <a href=swbisparse_1.html>swbisparse(1)</a>, <a href=swign_1.html>swign(1)</a>, <a href=swverify_8.html>swverify(8)</a>
 </pre><h3><a name="IDENTIFICATION"><b>IDENTIFICATION</b></a></h3><pre>        <a href=swcopy_8.html>swcopy(8)</a>: The archive copying utility of the swbis project.
         Author: Jim Lowe   Email: jhlowe at acm.org
-        Version: 1.6
+        Version: 1.12
         Last Updated: 2006-07
         Copying: GNU Free Documentation License
 </pre><h3><a name="BUGS"><b>BUGS</b></a></h3><pre>       Swcopy is subject to breakage if a user's account on an intermediate

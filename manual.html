@@ -8,7 +8,7 @@
 <link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
 <!--
 This manual is for swbis
-(version 1.12, 24 Jul 2014),
+(version 1.13, 24 Jul 2014),
 which is an implementation of the POSIX System Administration Standard --
 Part 2: Software Administration IEEE Std 1387.2-1995 (ISO/IEC 15068-2)
 (both now withdrawn) and the Open Group Specification CAE C701.
@@ -57,7 +57,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#dir">(dir)</a>
 <h2 class="unnumbered">swbis</h2>
 
 <p>This manual is for swbis
-(version 1.12, 24 Jul 2014),
+(version 1.13, 24 Jul 2014),
 which is an implementation of the POSIX System Administration Standard &ndash;
 Part 2: Software Administration IEEE Std 1387.2-1995 (ISO/IEC 15068-2)
 (both now withdrawn) and the Open Group Specification CAE C701. 
@@ -1259,6 +1259,14 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <li><a href="#sw_002e5-in-one-text-file">sw.5 in one text file</a>
 <li><a href="#swpackage_002e5-in-one-text-file">swpackage.5 in one text file</a>
 
+</li></ul>
+<p>Conventions, User Manual
+
+</p>
+<ul class="menu">
+<li><a href="user.html#">swbis(1)</a>
+<li><a href="swbis_swbis.html#">swbis(7)</a>
+
 </ul>
 
 <div class="node">
@@ -1570,7 +1578,7 @@ OPTIONS
 	      Alternate Mode: Copy from source to target without altering.
 	      Does not generate a signature.  The output should be identical
 	      to the input.   Also has unintended use of accessing the
-	      compression pipiline function of swpackage.
+	      compression pipeline function of swpackage.
 
        --recompress
 	      Modifier to alternate Mode: Applies when modifying signature.
@@ -2351,12 +2359,12 @@ APPLICABLE STANDARDS
 SEE ALSO
        info swbis
 
-       sw(5), swpackage(5), swbisparse(1), swign(1), swverify(8)
+       sw(5), swbis(1), swpackage(5), swbisparse(1), swign(1), swverify(8)
 
 IDENTIFICATION
 	swpackage(8): The packaging utility of the swbis project.
 	Author: Jim Lowe   Email: jhlowe at acm.org
-	Version: 1.12
+	Version: 1.13
 	Last Updated: 2014-07-15
 	Copying: GNU Free Documentation License
 
@@ -3106,12 +3114,13 @@ APPLICABLE STANDARDS
 SEE ALSO
        info swbis
 
-       swcopy(8), sw(5), swbisparse(1), swign(1), swverify(8)
+       swcopy(8), sw(5), swbisparse(1), swign(1), swverify(8), swbis(1),
+       swbis(7)
 
 IDENTIFICATION
 	swinstall(8): The installation utility of the swbis project.
 	Author: Jim Lowe   Email: jhlowe at acm.org
-	Version: 1.12
+	Version: 1.13
 	Last Updated: 2014-02-12
 	Copying: GNU Free Documentation License
 
@@ -3536,7 +3545,7 @@ SEE ALSO
 IDENTIFICATION
 	swremove(8): The package removal utility of the swbis project.
 	Author: Jim Lowe   Email: jhlowe at acm.org
-	Version: 1.12
+	Version: 1.13
 	Last Updated: 2008-04-18
 	Copying: GNU Free Documentation License
 
@@ -4141,12 +4150,12 @@ APPLICABLE STANDARDS
 SEE ALSO
        info swbis
 
-       sw(5), swbisparse(1), swign(1), swverify(8)
+       sw(5), swbis(7), swbisparse(1), swign(1), swverify(8)
 
 IDENTIFICATION
 	swcopy(8): The archive copying utility of the swbis project.
 	Author: Jim Lowe   Email: jhlowe at acm.org
-	Version: 1.12
+	Version: 1.13
 	Last Updated: 2006-07
 	Copying: GNU Free Documentation License
 
@@ -4635,7 +4644,7 @@ SEE ALSO
 IDENTIFICATION
 	swlist(8): The query/listing utility of the swbis project.
 	Author: Jim Lowe   Email: jhlowe at acm.org
-	Version: 1.12
+	Version: 1.13
 	Last Updated: 2006-07
 	Copying: GNU Free Documentation License
 
@@ -5227,12 +5236,12 @@ APPLICABLE STANDARDS
 SEE ALSO
        info swbis
 
-       sw(5), swign(1), swpackage(8), gpg(1), libexec/swbis/arf2arf
+       sw(5), swbis(1), swign(1), swpackage(8), gpg(1), libexec/swbis/arf2arf
 
 IDENTIFICATION
 	swverify: The verification utility of the swbis project.
 	Author: Jim Lowe   Email: jhlowe at acm.org
-	Version: 1.12
+	Version: 1.13
 	Last Updated: 2010-02-04
 	Copying: GNU Free Documentation License
 
@@ -5667,7 +5676,7 @@ SEE ALSO
 IDENTIFICATION
 	swconfig(8): The package configuration utility of the swbis project.
 	Author: Jim Lowe   Email: jhlowe at acm.org
-	Version: 1.12
+	Version: 1.13
 	Last Updated: 2010-01-22
 	Copying: GNU Free Documentation License
 
@@ -6084,7 +6093,7 @@ SEE ALSO
 IDENTIFICATION
 	swign(1): The source directory signing utility of the swbis project.
 	Author: J. Lowe jhlowe@acm.org
-	Version: 1.12
+	Version: 1.13
 	Last Updated: 2008-01
 	Copying: GNU Free Documentation License
 
@@ -6221,6 +6230,7 @@ BUGS
 <a name="swpackage.5-in-one-text-file"></a>
 <a name="swpackage_002e5-in-one-text-file"></a>
 <p><hr>
+Next:&nbsp;<a rel="next" accesskey="n" href="user.html#">(swbis_user)</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#sw_002e5-in-one-text-file">sw.5 in one text file</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Command-Reference">Command Reference</a>
 
@@ -6694,7 +6704,7 @@ SEE ALSO
 
 IDENTIFICATION
 	Copyright (C) 2004,2005 Jim Lowe
-	Version: 1.12
+	Version: 1.13
 	Last Updated: 2006-07-01
 	Copying Terms: GNU Free Documentation License
 
@@ -8013,13 +8023,15 @@ SEE ALSO
 	swbisparse(1) -- An implementation extension parser utility.
 	swcopy(8)
 	swinstall(8)
+	swbis(7)
+	swbis(1)
 	swpackage(5)
 	swpackage(8)
 	swverify(8)
 
 IDENTIFICATION
 	Copyright (C) 2005 Jim Lowe
-	Version: 1.12
+	Version: 1.13
 	Last Updated: 2006-01
 	Copying Terms: GNU Free Documentation License
 
@@ -8505,7 +8517,8 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <p>Other sources of documentation include ISO/IEC or IEEE printed standard,
 the online version of the Open Group Specification CAE C701.
 
-   <p>The swbis man pages are maintained and may be considered authoritative.
+   <p>The swbis man pages are maintained and may be considered authoritative. 
+See also swbis(1) and swbis(7) (via man 7 swbis  or,  man 1 swbis)
 
    <p>Documentation from other implementations based on the Standard likely
 describe features that are a superset of the POSIX spec, whereas, the

@@ -1,3 +1,34 @@
+2016-05-14 Jim Lowe <jhlowe@acm.org>
+* VERSION now 1.13
+
+2016-05-11 Jim Lowe <jhlowe@acm.org>
+* ./doc/source/*: Documentation updated, regenerated (on Slackware 14.1)
+
+2016-04-18 Jim Lowe <jhlowe@acm.org>
+* swsupplib/uinfile/uinfile.c (uinfile_i_open) <lxpsf>: fix package translation
+for slackware packages (support either ./ or "" as file name prefix).
+
+2014-10-16 Jim Lowe <jhlowe@acm.org>
+* VERSION now 1.12.904
+* bin/checkdigest.sh (check_files_by_md5): fixed failure on systems whose
+md5sum utility adorns its output with ''(stdin)''.
+
+2014-10-14 Jim Lowe <jhlowe@acm.org>
+* swprogs/swcopy.c (swc_write_target_copy_script) <swcopy>:
+added code to test the shell found in getconf(PATH) for required posix feature suitability.
+* swprogs/swproglib.c (swpl_bashin_posixsh): added quoting of variables to
+some places where is was missing.
+
+2014-10-12 Jim Lowe <jhlowe@acm.org>
+* swsupplib/misc/rpmpsf.c (rpmpsf_get_rpmtagvalue) <lxpsf, RPM translation>
+Removed broken sanity check which became unmasked on a NETBSD 6.1.5 system.
+
+2014-10-04 Jim Lowe <jhlowe@acm.org>
+* swprogs/swverify_lib.c (determine_inl_field_condition) <swverify>:
+Fixed summary_info falsely reporting PASSED for case of missing file.
+(exit status and other error messages were correctly reporting error).
+* swprogs/swverify_lib.c (set_inl_field_status_conditionally): added
+
 2014-08-02 Jim Lowe <jhlowe@acm.org>
 * VERSION now 1.12
 

@@ -1,4 +1,24 @@
-GNU swbis NEWS  Noteworthy changes. May 2016 (2016-05)
+GNU swbis NEWS  Noteworthy changes. Nov 2018 (2018-11)
+
+version 1.13.1 - Jim Lowe,  2018-11-03
+    NEW FIXES:
+      * <swpackage>
+        - fixed coredump (segfault) when processing PSFs having
+         an attribute value with a length larger than 99999 bytes
+         (e.g. happens when translating some Linux kernel RPMs).
+
+      * <swign, swinstall, swlist, et.al.>
+        - reorder options in the invocation of GNU tar (to support
+          latest version).
+
+
+    NEW FEATURES:
+      * <swpackage> - added support for translating Debian packages
+          (deb format) that use xz compression internally.
+
+      * <swpackage> - added option to exclude system directories from
+           a package (for use when translating Deb format packages).
+
 
 version 1.13 - Jim Lowe,  2016-05-14
     * Minor fixes, see ./ChangeLog

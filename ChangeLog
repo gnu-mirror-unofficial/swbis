@@ -1,3 +1,45 @@
+2018-11-02 Jim Lowe <jhlowe@acm.org>
+* VERSION: now 1.13.1
+* swprogs/swpackage.cxx (main): added option: --undebian option
+* swprogs/swpackage.cxx (main): added option: --exclude-system-dirs
+* swsupplib/progs/lxpdf.c (main): added --exclude-system-dirs
+* swsupplib/sw_parse/swparse_supp.c (swparse_construct_attribute): insure
+pointer ptr is current before use when setting memlen. (probably defensive
+only).
+* swsupplib/misc/swheaderline.c (swheaderline_get_value_length): FIXED stepping
+past end of static array and subsequent segfault.  Only occurs for PSFs
+with attributes longer than 99999 bytes. (e.g. Seen when translating linux kernel RPMs)
+* swstructlib/src/swmetadata/swextendeddef.h (processExcludes): support
+extension meaning of trailing '//' double slash to mean exclude dir entry
+but not the contents of directory.
+* swstructlib/src/swmetadata/swextendeddef.h (process_fnmatch_list): support
+trailing double slash '//' in a pattern.
+* swsupplib/misc/swlib.c (swlib_toggle_all_trailing_slash): added
+* swsupplib/uinfile/uinfile.c (uinfile_i_open): support xz compression in a
+deb file
+* bin/checkdigest.sh: fix order of GNU tar options --no-recursion (support GNU tar 1.30)
+* bin/checksig-nosym.sh: fix order of GNU tar options --no-recursion (support GNU tar 1.30)
+* swprogs/swign.sh.in <swign>: fix order of GNU tar options --no-recursion (support GNU tar 1.30)
+* swprogs/pax_commands.h: fix order of GNU tar options --no-recursion (support GNU tar 1.30)
+
+2017-07-07 Jim Lowe <jhlowe@acm.org>
+* swsupplib/taru/taru.h : lift arbitrary limit, TARU_SYSDBNAME_LEN was 40
+
+2017-07-02 Jim Lowe <jhlowe@acm.org>
+* swsupplib/taru/taru.c (taru_fill_exthdr_needs_mask): now gives verbose messages
+* swsupplib/taru/xformat.c (xformat_write_file_by_fd): improve error messages
+* swprogs/swpackage.cxx (main): --no-overflow-header option added
+
+2017-06-27 Jim Lowe <jhlowe@acm.org>
+* swprogs/swverify.sh.in <swverify>: reverse the GNU tar options --files-from=- and
+--no-recursion in the invocation.  This is a compatibility fix for GNU tar
+version 1.29.  (The regression tests are broken with GNU tar 1.29 without this
+change).
+* swprogs/swign.sh.in <swign>: reverse the GNU tar options --files-from=- and
+--no-recursion in the invocation.  This is a compatibility fix for GNU tar
+version 1.29.  (The regression tests are broken with GNU tar 1.29 without this
+change).
+
 2016-05-14 Jim Lowe <jhlowe@acm.org>
 * VERSION now 1.13
 

@@ -1,4 +1,11 @@
-GNU swbis NEWS  Noteworthy changes. Nov 2018 (2018-11)
+GNU swbis NEWS  Noteworthy changes. Mar. 2020 (2020-03)
+
+version 1.13.2 - Jim Lowe,  2020-03-10
+      * <swpackage>
+	- Now add "state available" attribute to the fileset
+
+      * Building, compilation
+	- Fix conditional inclusion for sys/sysmacros.h
 
 version 1.13.1 - Jim Lowe,  2018-11-03
     NEW FIXES:

@@ -1,3 +1,10 @@
+2020-02-28 Jim Lowe <jhlowe@acm.org>
+* swsupplib/config.h.in: fix HAVE_SYS_SYSMACROS test for
+inclusion of sys/sysmacros.h
+* swsupplib/taru/taru.h: conditionally include sys/sysmacros.h
+* swprogs/swpackage.cxx <swpackage>: added "state available" to
+fileset
+
 2018-11-02 Jim Lowe <jhlowe@acm.org>
 * VERSION: now 1.13.1
 * swprogs/swpackage.cxx (main): added option: --undebian option
